@@ -1,2 +1,11 @@
-# opticable-website
-OptiCable corporate website source. Static site for surveillance systems, access control, commercial WiFi, and structured cabling solutions deployed via Cloudflare Pages.
+# Opti-Plex Website
+
+Official website for Opti-Plex.
+
+Services:
+- Surveillance systems
+- Access control
+- Commercial WiFi
+- Structured cabling
+
+Deployed via Cloudflare Pages.
