@@ -12,8 +12,9 @@ LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
 LEGACY_ROOT_BUILD_FILES = ('index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'script.js')
 STATIC_ASSET_FILES = ('logo-mark.svg', 'opticable-logo.png')
 ROOT_GENERATED_ASSET_FILES = (
+    'logo-ui.webp',
     'home-building.webp',
-    'home-rack.jpg',
+    'home-rack.webp',
     'about-panel.webp',
     'service-camera.avif',
     'service-intercom.webp',
@@ -29,6 +30,7 @@ ROOT_GENERATED_ASSET_FILES = (
 SITE_URL = 'https://opticable.ca'
 ASSET_VER = '20260312m'
 LOGO_LOCKUP_URL = f'/assets/opticable-logo.png?v={ASSET_VER}'
+LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_MARK_URL = f'/assets/logo-mark.svg?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
@@ -46,7 +48,7 @@ ZOHO_FORM_CONFIG = {
 }
 COOKIE_BANNER_ACCEPT_KEY = 'opticable-cookie-banner-accepted'
 HOME_BUILDING_URL = f'/assets/home-building.webp?v={ASSET_VER}'
-HOME_RACK_URL = f'/assets/home-rack.jpg?v={ASSET_VER}'
+HOME_RACK_URL = f'/assets/home-rack.webp?v={ASSET_VER}'
 ABOUT_PANEL_URL = f'/assets/about-panel.webp?v={ASSET_VER}'
 SERVICE_CAMERA_URL = f'/assets/service-camera.avif?v={ASSET_VER}'
 SERVICE_INTERCOM_URL = f'/assets/service-intercom.webp?v={ASSET_VER}'
@@ -58,6 +60,8 @@ SERVICE_WIFI_URL = f'/assets/service-wifi.webp?v={ASSET_VER}'
 SERVICE_VOIP_URL = f'/assets/service-voip.webp?v={ASSET_VER}'
 LOGO_LOCKUP_WIDTH = 1600
 LOGO_LOCKUP_HEIGHT = 687
+LOGO_UI_WIDTH = 1200
+LOGO_UI_HEIGHT = 515
 HOME_BUILDING_WIDTH = 1800
 HOME_BUILDING_HEIGHT = 1025
 HOME_RACK_WIDTH = 1800
@@ -128,18 +132,25 @@ IMAGE_RESAMPLING = getattr(Image, 'Resampling', Image)
 HOME_SOURCE_DIR = root / 'Images' / 'home-sources'
 HOME_IMAGE_EXPORTS = (
     {
-        'source': root / 'Images' / 'source-library' / 'ai-generated' / 'gemini-building.png',
-        'target': DEPLOY_ASSET_ROOT / 'home-building.webp',
-        'resize': (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
+        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'target': DEPLOY_ASSET_ROOT / 'logo-ui.webp',
+        'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
     },
     {
+        'source': root / 'Images' / 'source-library' / 'ai-generated' / 'gemini-building.png',
+        'target': DEPLOY_ASSET_ROOT / 'home-building.webp',
+        'resize': (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
+        'format': 'WEBP',
+        'quality': 84,
+    },
+    {
         'source': HOME_SOURCE_DIR / 'network-rack.png',
-        'target': DEPLOY_ASSET_ROOT / 'home-rack.jpg',
+        'target': DEPLOY_ASSET_ROOT / 'home-rack.webp',
         'resize': (HOME_RACK_WIDTH, HOME_RACK_HEIGHT),
-        'format': 'JPEG',
-        'quality': 90,
+        'format': 'WEBP',
+        'quality': 84,
     },
     {
         'source': root / 'Images' / 'source-library' / 'Gemini_Generated_Image_fipiq6fipiq6fipi.png',
@@ -1099,17 +1110,6 @@ document.querySelectorAll('[data-service-carousel]').forEach((carousel) => {
   window.addEventListener('resize', updateButtons);
   updateButtons();
 });
-document.querySelectorAll('[data-demo-form]').forEach((form) => {
-  const note = form.querySelector('[data-form-note]');
-  if (!note) return;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const name = data.get('name')?.toString().trim();
-    note.textContent = name ? form.dataset.success.replace('{name}', name) : form.dataset.successGeneric;
-    form.reset();
-  });
-});
 '''
 css += '''
 .hero-panel,.page-hero-panel,.cta-band{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(245,250,246,.96)),radial-gradient(circle at top right,rgba(47,138,88,.12),transparent 32%)}.hero-panel h2,.page-hero-panel h2,.contact-panel h2{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;font-size:clamp(1.7rem,2.6vw,2.6rem);line-height:1.08}.chip-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{display:inline-flex;align-items:center;padding:10px 14px;border:1px solid rgba(47,138,88,.16);border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);font-size:.78rem;font-weight:700}.section-heading{display:grid;gap:12px;margin-bottom:24px}.grid-3,.grid-4,.timeline,.faq-list,.detail-list,.input-grid,.checkbox-group,.footer-grid,.language-cards{display:grid;gap:18px}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{padding:22px;border-radius:24px;background:rgba(247,250,247,.92)}.card h3{margin:0 0 10px;font-size:1.16rem}.card p{margin:0;color:var(--muted);line-height:1.68}.card .more{display:inline-block;margin-top:14px;color:var(--primary-dark);font-weight:700}.breadcrumb{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;color:var(--muted);font-size:.96rem}.breadcrumb span[aria-current="page"]{color:var(--text)}.timeline{grid-template-columns:repeat(4,minmax(0,1fr))}.timeline-step{padding:24px;border-radius:24px}.timeline-step span{display:inline-block;margin-bottom:18px;color:var(--primary-dark);font-size:.78rem;font-weight:800}.timeline-step h3{margin:0 0 10px;font-size:1.16rem}.timeline-step p{margin:0;color:var(--muted);line-height:1.68}.faq-list{grid-template-columns:repeat(2,minmax(0,1fr))}.faq-item{border-radius:24px;overflow:hidden}.faq-item summary{padding:22px 24px;cursor:pointer;font-weight:700;list-style:none}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+";float:right;color:var(--primary-dark);font-size:1.3rem;line-height:1}.faq-item[open] summary::after{content:"-"}.faq-item p{margin:0;padding:0 24px 24px;color:var(--muted);line-height:1.68}.contact-panel .note{padding:16px 18px;border-radius:18px;background:var(--primary-soft);color:var(--primary-dark);line-height:1.6}.detail-item{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}.detail-item strong{display:block;margin-bottom:8px}form{display:grid;gap:18px}.input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.field{display:grid;gap:10px;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:14px 16px;border:1px solid var(--line-strong);border-radius:16px;background:#fff;color:var(--text)}.field textarea{min-height:160px;resize:vertical}.checkbox-group{grid-template-columns:repeat(2,minmax(0,1fr));margin:0;padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}.checkbox-group legend{padding:0 8px;font-weight:700}.checkbox-group label{display:flex;align-items:center;gap:10px;font-weight:600}.checkbox-group input{width:18px;height:18px;accent-color:var(--primary)}.form-note{margin:0;color:var(--muted);line-height:1.6}.zoho-form-shell{display:grid;gap:0;align-content:stretch;padding-top:0;padding-bottom:0}.zoho-form-shell .footer-note{margin:0}.zoho-form-embed{width:100%}.zoho-form-embed iframe{display:block;width:100%;min-height:1120px;border:0;border-radius:20px;background:#fff}.site-footer{margin-top:44px;padding-top:26px;border-top:1px solid var(--line-strong)}.footer-grid{grid-template-columns:1.2fr .8fr 1fr;align-items:start}.footer-title{margin:0 0 14px;font-size:.92rem;letter-spacing:.16em;text-transform:uppercase;color:var(--primary-dark)}.footer-links,.footer-services{display:grid;gap:10px}.footer-bottom{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted)}.language-card{padding:24px;border:1px solid var(--line);border-radius:24px;background:rgba(247,250,247,.92)}.language-card h2{margin:0 0 10px;font-size:1.28rem}.language-card p{margin:0 0 18px;color:var(--muted);line-height:1.62}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid rgba(47,138,88,.28);outline-offset:2px}@media (max-width:1100px){.hero,.page-hero,.cta-band,.contact-layout,.gateway-panel,.two-col,.footer-grid{grid-template-columns:1fr}.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:920px){.site-header{position:static}.header-inner{display:grid;justify-items:start;border-radius:30px}.nav-toggle{display:inline-flex}.site-nav{display:none;width:100%;flex-direction:column;align-items:flex-start;padding-top:10px}.site-nav.is-open{display:flex}.header-actions{width:100%;flex-wrap:wrap}.grid-3,.timeline,.input-grid,.checkbox-group{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:740px){.site-shell,.gateway-shell{width:min(calc(100% - 24px),var(--max))}.hero-copy,.hero-panel,.page-hero-copy,.page-hero-panel,.contact-panel,.form-panel,.cta-band,.gateway-panel{padding:24px}.hero-copy h1{font-size:clamp(2rem,11vw,3rem)}.page-hero-copy h1,.section-heading h2,.cta-band h2,.gateway-panel h1{font-size:clamp(1.85rem,8vw,2.6rem)}.grid-3,.grid-4,.faq-list,.timeline,.input-grid,.checkbox-group{grid-template-columns:1fr}.contact-layout{padding:24px}.zoho-form-shell{padding-top:0;padding-bottom:0}}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -1825,10 +1825,10 @@ def default_route(page_key):
 
 def logo_img(context):
     attrs = [
-        f'src="{LOGO_LOCKUP_URL}"',
+        f'src="{LOGO_UI_URL}"',
         'alt="Opticable logo"',
-        f'width="{LOGO_LOCKUP_WIDTH}"',
-        f'height="{LOGO_LOCKUP_HEIGHT}"',
+        f'width="{LOGO_UI_WIDTH}"',
+        f'height="{LOGO_UI_HEIGHT}"',
         'decoding="async"',
     ]
     if context == 'footer':
@@ -1871,6 +1871,16 @@ def content_img(src, alt, width, height, cls='', eager=False, zoomable=False, la
         f'aria-label="{esc(trigger_label)}"',
     ]
     return f'<a {" ".join(trigger_attrs)}>{img_html}</a>'
+
+
+def resource_hints(page_key):
+    hints = []
+    if page_key == 'home':
+        hints.append(f'<link rel="preload" as="image" href="{HOME_BUILDING_URL}" />')
+    if page_key == 'contact':
+        hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
+        hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
+    return ''.join(hints)
 
 
 def tel_href(phone):
@@ -2075,8 +2085,36 @@ def home_visual_panel(lang):
     )
 
 
+def offer_catalog_schema(lang):
+    catalog_id = absolute_url(routes[lang]['services']) + '#catalog'
+    items = []
+    for key in order:
+        service_name = services[key][lang]['name']
+        service_url = absolute_url(routes[lang][key])
+        items.append({
+            '@type': 'Offer',
+            'url': service_url,
+            'itemOffered': {
+                '@type': 'Service',
+                'name': service_name,
+                'serviceType': service_name,
+                'description': services[key][lang]['summary'],
+                'url': service_url,
+                'provider': {'@id': BUSINESS_ID},
+                'areaServed': AREA_SERVED_SCHEMA,
+            },
+        })
+    return {
+        '@type': 'OfferCatalog',
+        '@id': catalog_id,
+        'name': T[lang]['services'],
+        'itemListElement': items,
+    }
+
+
 def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None):
     page_url = absolute_url(routes[lang][page_key])
+    catalog = offer_catalog_schema(lang)
     business = {
         '@type': 'ProfessionalService',
         '@id': BUSINESS_ID,
@@ -2089,6 +2127,7 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         'areaServed': AREA_SERVED_SCHEMA,
         'availableLanguage': [language_tag('en'), language_tag('fr')],
         'openingHoursSpecification': OPENING_HOURS_SPEC,
+        'hasOfferCatalog': {'@id': catalog['@id']},
     }
     contact = contact_details(lang)
     if contact.get('general_email'):
@@ -2119,9 +2158,12 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         'isPartOf': {'@id': WEBSITE_ID},
         'about': {'@id': BUSINESS_ID},
     }
+    if page_key == 'services':
+        page['mainEntity'] = {'@id': catalog['@id']}
     graph = [
         {'@type': 'WebSite', '@id': WEBSITE_ID, 'url': absolute_url('/'), 'name': 'Opticable', 'inLanguage': [language_tag('en'), language_tag('fr')]},
         business,
+        catalog,
     ]
     if breadcrumb_items:
         crumb = breadcrumb_schema(breadcrumb_items, page_url)
@@ -2192,7 +2234,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
     canonical_url = absolute_url(routes[lang][key])
     default_url = absolute_url(default_route(key))
     og_image_url = absolute_url(LOGO_LOCKUP_URL)
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" /><link rel="canonical" href="{canonical_url}" /><link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"][key])}" /><link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][key])}" /><link rel="alternate" hreflang="x-default" href="{default_url}" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(title)}" /><meta property="og:description" content="{esc(desc)}" /><meta property="og:url" content="{canonical_url}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:alt" content="Opticable logo" /><meta property="og:image:width" content="{LOGO_LOCKUP_WIDTH}" /><meta property="og:image:height" content="{LOGO_LOCKUP_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(title)}" /><meta name="twitter:description" content="{esc(desc)}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable logo" /><link rel="icon" type="image/svg+xml" href="{LOGO_MARK_URL}" /><link rel="stylesheet" href="{STYLES_URL}" /><script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" /><link rel="canonical" href="{canonical_url}" /><link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"][key])}" /><link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][key])}" /><link rel="alternate" hreflang="x-default" href="{default_url}" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(title)}" /><meta property="og:description" content="{esc(desc)}" /><meta property="og:url" content="{canonical_url}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:alt" content="Opticable logo" /><meta property="og:image:width" content="{LOGO_LOCKUP_WIDTH}" /><meta property="og:image:height" content="{LOGO_LOCKUP_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(title)}" /><meta name="twitter:description" content="{esc(desc)}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable logo" /><link rel="icon" type="image/svg+xml" href="{LOGO_MARK_URL}" />{resource_hints(key)}<link rel="stylesheet" href="{STYLES_URL}" /><script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 
 
 def legacy_redirect_html(target, title, desc, lang='fr'):

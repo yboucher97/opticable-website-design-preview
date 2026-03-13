@@ -122,14 +122,3 @@ document.querySelectorAll('[data-service-carousel]').forEach((carousel) => {
   window.addEventListener('resize', updateButtons);
   updateButtons();
 });
-document.querySelectorAll('[data-demo-form]').forEach((form) => {
-  const note = form.querySelector('[data-form-note]');
-  if (!note) return;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const name = data.get('name')?.toString().trim();
-    note.textContent = name ? form.dataset.success.replace('{name}', name) : form.dataset.successGeneric;
-    form.reset();
-  });
-});
