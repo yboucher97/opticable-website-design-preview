@@ -29,6 +29,9 @@ ROOT_GENERATED_ASSET_FILES = (
 )
 SITE_URL = 'https://opticable.ca'
 ASSET_VER = '20260312m'
+LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
+RBQ_LICENSE_LABEL = 'License RBQ : 5864-1648-01'
+RBQ_LICENSE_NUMBER = '5864-1648-01'
 LOGO_LOCKUP_URL = f'/assets/opticable-logo.png?v={ASSET_VER}'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_MARK_URL = f'/assets/logo-mark.svg?v={ASSET_VER}'
@@ -1524,6 +1527,12 @@ main section+section{
   display:grid;
   gap:4px;
 }
+.footer-legal{
+  margin:16px 0 0;
+  color:var(--muted);
+  font-size:.94rem;
+  line-height:1.65;
+}
 .footer-contact-list strong{
   font-size:.94rem;
   color:var(--text);
@@ -2119,6 +2128,7 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         '@type': 'ProfessionalService',
         '@id': BUSINESS_ID,
         'name': 'Opticable',
+        'legalName': LEGAL_BUSINESS_NAME,
         'url': absolute_url(default_route('home')),
         'logo': absolute_url(LOGO_LOCKUP_URL),
         'image': absolute_url(LOGO_LOCKUP_URL),
@@ -2128,6 +2138,7 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         'availableLanguage': [language_tag('en'), language_tag('fr')],
         'openingHoursSpecification': OPENING_HOURS_SPEC,
         'hasOfferCatalog': {'@id': catalog['@id']},
+        'identifier': [{'@type': 'PropertyValue', 'name': 'RBQ License', 'value': RBQ_LICENSE_NUMBER}],
     }
     contact = contact_details(lang)
     if contact.get('general_email'):
@@ -2221,7 +2232,8 @@ def footer(lang):
     quick = ''.join(f'<li><a href="{routes[lang][k]}">{esc(t[k])}</a></li>' for k in ('home', 'services', 'about', 'contact', 'privacy'))
     feat = ''.join(f'<li><a href="{routes[lang][k]}">{esc(services[k][lang]["name"])}</a></li>' for k in order[:4])
     contact_items = footer_contact_items(lang)
-    return f'<footer class="site-footer"><div class="footer-grid"><div><div class="footer-brand">{logo_img("footer")}</div><p class="footer-note">{esc(t["footer"])}</p></div><div><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div><div><p class="footer-title">{esc(t["contact"])}</p><ul class="footer-links">{quick}</ul></div><div><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div></div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></footer>'
+    legal = f'<p class="footer-legal">{esc(LEGAL_BUSINESS_NAME)}<br />{esc(RBQ_LICENSE_LABEL)}</p>'
+    return f'<footer class="site-footer"><div class="footer-grid"><div><div class="footer-brand">{logo_img("footer")}</div><p class="footer-note">{esc(t["footer"])}</p>{legal}</div><div><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div><div><p class="footer-title">{esc(t["contact"])}</p><ul class="footer-links">{quick}</ul></div><div><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div></div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></footer>'
 
 
 def cta(lang):

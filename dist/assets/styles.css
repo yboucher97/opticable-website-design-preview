@@ -410,6 +410,12 @@ main section+section{
   display:grid;
   gap:4px;
 }
+.footer-legal{
+  margin:16px 0 0;
+  color:var(--muted);
+  font-size:.94rem;
+  line-height:1.65;
+}
 .footer-contact-list strong{
   font-size:.94rem;
   color:var(--text);
