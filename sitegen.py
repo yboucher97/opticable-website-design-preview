@@ -142,7 +142,7 @@ IMAGE_RESAMPLING = getattr(Image, 'Resampling', Image)
 HOME_SOURCE_DIR = root / 'Images' / 'home-sources'
 HOME_IMAGE_EXPORTS = (
     {
-        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'source': SOURCE_ASSET_ROOT / 'logo-ui-source.png',
         'target': DEPLOY_ASSET_ROOT / 'logo-ui.webp',
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
