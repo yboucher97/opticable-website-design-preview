@@ -10,7 +10,7 @@ DEPLOY_ROOT = root / 'dist'
 DEPLOY_ASSET_ROOT = DEPLOY_ROOT / 'assets'
 LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
 LEGACY_ROOT_BUILD_FILES = ('index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'script.js')
-STATIC_ASSET_FILES = ('logo-mark.svg', 'opticable-logo.png')
+STATIC_ASSET_FILES = ('logo-mark.png', 'opticable-logo.png')
 ROOT_GENERATED_ASSET_FILES = (
     'logo-ui.webp',
     'home-building.webp',
@@ -28,13 +28,13 @@ ROOT_GENERATED_ASSET_FILES = (
     'site.js',
 )
 SITE_URL = 'https://opticable.ca'
-ASSET_VER = '20260312m'
+ASSET_VER = '20260314a'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
 RBQ_LICENSE_LABEL = 'License RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
 LOGO_LOCKUP_URL = f'/assets/opticable-logo.png?v={ASSET_VER}'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
-LOGO_MARK_URL = f'/assets/logo-mark.svg?v={ASSET_VER}'
+LOGO_MARK_URL = f'/assets/logo-mark.png?v={ASSET_VER}'
 FAVICON_32_URL = f'/assets/favicon-32.png?v={ASSET_VER}'
 APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
@@ -149,28 +149,28 @@ HOME_IMAGE_EXPORTS = (
         'quality': 90,
     },
     {
-        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
         'target': DEPLOY_ASSET_ROOT / 'favicon-32.png',
         'resize': (FAVICON_32_SIZE, FAVICON_32_SIZE),
         'canvas': (FAVICON_32_SIZE, FAVICON_32_SIZE),
         'format': 'PNG',
     },
     {
-        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
         'target': DEPLOY_ASSET_ROOT / 'apple-touch-icon.png',
         'resize': (APPLE_TOUCH_ICON_SIZE, APPLE_TOUCH_ICON_SIZE),
         'canvas': (APPLE_TOUCH_ICON_SIZE, APPLE_TOUCH_ICON_SIZE),
         'format': 'PNG',
     },
     {
-        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
         'target': DEPLOY_ASSET_ROOT / 'favicon-192.png',
         'resize': (FAVICON_192_SIZE, FAVICON_192_SIZE),
         'canvas': (FAVICON_192_SIZE, FAVICON_192_SIZE),
         'format': 'PNG',
     },
     {
-        'source': SOURCE_ASSET_ROOT / 'opticable-logo.png',
+        'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
         'target': DEPLOY_ASSET_ROOT / 'favicon-512.png',
         'resize': (FAVICON_512_SIZE, FAVICON_512_SIZE),
         'canvas': (FAVICON_512_SIZE, FAVICON_512_SIZE),
@@ -2311,7 +2311,7 @@ def cta(lang):
 
 def icon_link_tags():
     return (
-        f'<link rel="icon" type="image/svg+xml" href="{LOGO_MARK_URL}" />'
+        f'<link rel="icon" type="image/png" href="{LOGO_MARK_URL}" />'
         f'<link rel="icon" type="image/png" sizes="32x32" href="{FAVICON_32_URL}" />'
         f'<link rel="apple-touch-icon" sizes="180x180" href="{APPLE_TOUCH_ICON_URL}" />'
         f'<link rel="manifest" href="{WEBMANIFEST_URL}" />'
@@ -2354,7 +2354,7 @@ def legacy_redirect_html(target, title, desc, lang='fr'):
         f'<meta property="og:image:width" content="{LOGO_LOCKUP_WIDTH}" /><meta property="og:image:height" content="{LOGO_LOCKUP_HEIGHT}" />'
         f'<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(title)}" />'
         f'<meta name="twitter:description" content="{esc(desc)}" /><meta name="twitter:image" content="{absolute_url(LOGO_LOCKUP_URL)}" />'
-        f'<meta name="twitter:image:alt" content="Opticable logo" /><link rel="icon" type="image/svg+xml" href="{LOGO_MARK_URL}" />'
+        f'<meta name="twitter:image:alt" content="Opticable logo" /><link rel="icon" type="image/png" href="{LOGO_MARK_URL}" />'
         f'<link rel="stylesheet" href="{STYLES_URL}" /></head><body><div class="gateway-shell"><section class="gateway-panel">'
         f'<div><div class="gateway-brand">{logo_img("gateway")}</div><p>{esc(T[lang]["company"])}</p>'
         f'<p class="eyebrow">{esc("Redirection" if lang == "fr" else "Redirect")}</p>'
