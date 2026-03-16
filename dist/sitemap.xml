@@ -50,6 +50,27 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
   </url>
   <url>
+    <loc>https://opticable.ca/en/services/structured-cabling/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/structured-cabling/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/cablage-structure/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/cablage-structure/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/services/commercial-wifi-installation/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/commercial-wifi-installation/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/services/network-infrastructure/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/network-infrastructure/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/en/services/security-camera-systems/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/security-camera-systems/" />
@@ -64,13 +85,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/systemes-controle-acces/" />
   </url>
   <url>
-    <loc>https://opticable.ca/en/services/commercial-wifi-installation/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/commercial-wifi-installation/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
-  </url>
-  <url>
     <loc>https://opticable.ca/en/services/intercom-systems/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/intercom-systems/" />
@@ -78,25 +92,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/systemes-interphone/" />
   </url>
   <url>
-    <loc>https://opticable.ca/en/services/structured-cabling/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/structured-cabling/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/cablage-structure/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/cablage-structure/" />
-  </url>
-  <url>
     <loc>https://opticable.ca/en/services/fiber-optic-installation/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/fiber-optic-installation/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-fibre-optique/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-fibre-optique/" />
-  </url>
-  <url>
-    <loc>https://opticable.ca/en/services/network-infrastructure/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/network-infrastructure/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
   </url>
   <url>
     <loc>https://opticable.ca/en/services/ip-phone-systems/</loc>
@@ -155,6 +155,27 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
   </url>
   <url>
+    <loc>https://opticable.ca/fr/services/cablage-structure/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/structured-cabling/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/cablage-structure/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/cablage-structure/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/services/installation-wifi-commercial/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/commercial-wifi-installation/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/services/infrastructure-reseau/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/network-infrastructure/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/fr/services/systemes-cameras-securite/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/security-camera-systems/" />
@@ -169,13 +190,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/systemes-controle-acces/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/services/installation-wifi-commercial/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/commercial-wifi-installation/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-wifi-commercial/" />
-  </url>
-  <url>
     <loc>https://opticable.ca/fr/services/systemes-interphone/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/intercom-systems/" />
@@ -183,25 +197,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/systemes-interphone/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/services/cablage-structure/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/structured-cabling/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/cablage-structure/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/cablage-structure/" />
-  </url>
-  <url>
     <loc>https://opticable.ca/fr/services/installation-fibre-optique/</loc>
     <lastmod>2026-03-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/fiber-optic-installation/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/installation-fibre-optique/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/installation-fibre-optique/" />
-  </url>
-  <url>
-    <loc>https://opticable.ca/fr/services/infrastructure-reseau/</loc>
-    <lastmod>2026-03-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/services/network-infrastructure/" />
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/services/infrastructure-reseau/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/services/systemes-telephonie-ip/</loc>

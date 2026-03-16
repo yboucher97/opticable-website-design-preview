@@ -6,6 +6,12 @@ from PIL import Image, ImageOps
 
 root = Path(__file__).resolve().parent
 SOURCE_ASSET_ROOT = root / 'assets'
+IMAGE_ROOT = root / 'Images'
+PRODUCTION_IMAGE_ROOT = IMAGE_ROOT / 'production'
+PRODUCTION_BRAND_ROOT = PRODUCTION_IMAGE_ROOT / 'brand'
+PRODUCTION_HOME_ROOT = PRODUCTION_IMAGE_ROOT / 'home'
+PRODUCTION_ABOUT_ROOT = PRODUCTION_IMAGE_ROOT / 'about'
+PRODUCTION_SERVICE_ROOT = PRODUCTION_IMAGE_ROOT / 'services'
 DEPLOY_ROOT = root / 'dist'
 DEPLOY_ASSET_ROOT = DEPLOY_ROOT / 'assets'
 LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
@@ -139,10 +145,9 @@ AREA_SERVED_SCHEMA = [
 ]
 
 IMAGE_RESAMPLING = getattr(Image, 'Resampling', Image)
-HOME_SOURCE_DIR = root / 'Images' / 'home-sources'
 HOME_IMAGE_EXPORTS = (
     {
-        'source': SOURCE_ASSET_ROOT / 'logo-ui-source.png',
+        'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source.png',
         'target': DEPLOY_ASSET_ROOT / 'logo-ui.webp',
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
@@ -177,70 +182,70 @@ HOME_IMAGE_EXPORTS = (
         'format': 'PNG',
     },
     {
-        'source': root / 'Images' / 'source-library' / 'ai-generated' / 'gemini-building.png',
+        'source': PRODUCTION_HOME_ROOT / 'home-building.png',
         'target': DEPLOY_ASSET_ROOT / 'home-building.webp',
         'resize': (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
         'format': 'WEBP',
         'quality': 84,
     },
     {
-        'source': HOME_SOURCE_DIR / 'network-rack.png',
+        'source': PRODUCTION_HOME_ROOT / 'network-rack.png',
         'target': DEPLOY_ASSET_ROOT / 'home-rack.webp',
         'resize': (HOME_RACK_WIDTH, HOME_RACK_HEIGHT),
         'format': 'WEBP',
         'quality': 84,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'Gemini_Generated_Image_fipiq6fipiq6fipi.png',
+        'source': PRODUCTION_ABOUT_ROOT / 'about-panel.png',
         'target': DEPLOY_ASSET_ROOT / 'about-panel.webp',
         'resize': (ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT),
         'format': 'WEBP',
         'quality': 92,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'products' / 'intercom-door-station.jpeg',
+        'source': PRODUCTION_SERVICE_ROOT / 'intercom.webp',
         'target': DEPLOY_ASSET_ROOT / 'service-intercom.webp',
         'resize': (SERVICE_INTERCOM_WIDTH, SERVICE_INTERCOM_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'patch-and-switch-original.png',
+        'source': PRODUCTION_SERVICE_ROOT / 'structured-cabling.png',
         'target': DEPLOY_ASSET_ROOT / 'service-cabling.webp',
         'resize': (SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'cabling' / 'cablep4.jpg',
+        'source': PRODUCTION_SERVICE_ROOT / 'fiber-optic.jpg',
         'target': DEPLOY_ASSET_ROOT / 'service-fiber.webp',
         'resize': (SERVICE_FIBER_WIDTH, SERVICE_FIBER_HEIGHT),
         'format': 'WEBP',
         'quality': 92,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'Gemini_Infra_reseau.png',
+        'source': PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png',
         'target': DEPLOY_ASSET_ROOT / 'service-infrastructure.webp',
         'resize': (SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT),
         'format': 'WEBP',
         'quality': 92,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'Gemini_Access_Reader.png',
+        'source': PRODUCTION_SERVICE_ROOT / 'access-control.png',
         'target': DEPLOY_ASSET_ROOT / 'service-access.webp',
         'resize': (SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'ai-generated' / 'gemini-wifi-access-point.png',
+        'source': PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png',
         'target': DEPLOY_ASSET_ROOT / 'service-wifi.webp',
         'resize': (SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
     },
     {
-        'source': root / 'Images' / 'source-library' / 'Gemini_Voip.png',
+        'source': PRODUCTION_SERVICE_ROOT / 'ip-phone.png',
         'target': DEPLOY_ASSET_ROOT / 'service-voip.webp',
         'resize': (SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT),
         'format': 'WEBP',
@@ -249,7 +254,7 @@ HOME_IMAGE_EXPORTS = (
 )
 RUNTIME_ASSET_COPIES = (
     {
-        'source': root / 'Images' / 'source-library' / 'products' / 'Unifi_Bullet_Dual.avif',
+        'source': PRODUCTION_SERVICE_ROOT / 'security-camera.avif',
         'target': DEPLOY_ASSET_ROOT / 'service-camera.avif',
     },
 )
@@ -758,13 +763,13 @@ home_visuals = {
     },
 }
 services_page_chip_keys = (
+    'structured-cabling',
+    'commercial-wifi-installation',
+    'network-infrastructure',
     'security-camera-systems',
     'access-control-systems',
-    'commercial-wifi-installation',
     'intercom-systems',
-    'structured-cabling',
     'fiber-optic-installation',
-    'network-infrastructure',
     'ip-phone-systems',
 )
 service_panel_visuals = {
@@ -998,16 +1003,358 @@ for key in (
     services[key]['en']['industries'] = shared_service_types_en
     services[key]['fr']['industries'] = shared_service_types_fr
 
-primary_order = [
+T['en'].update({
+    'tagline': 'Technology infrastructure partner',
+    'company': 'Opticable helps businesses design, install, and support the technology infrastructure that keeps their operations connected, secure, and efficient.',
+    'home_title': 'Technology Infrastructure Partner for Businesses | Opticable',
+    'home_desc': 'Opticable supports businesses with structured cabling, professional WiFi, IT solutions, surveillance systems, access control, and intercom infrastructure.',
+    'home_kicker': 'Technology infrastructure for businesses',
+    'home_h1': 'Your technology infrastructure partner.',
+    'home_intro': 'Opticable supports businesses with the design, installation, and management of technology infrastructure so day-to-day operations stay reliable, secure, and high performing.',
+    'home_points': [
+        'Structured cabling and backbone infrastructure for connected environments',
+        'Professional WiFi built around coverage, performance, and security',
+        'IT solutions for servers, workstations, and business systems',
+        'Camera surveillance for buildings, teams, and operations',
+        'Intercom and access control for secure, well-managed entry points',
+    ],
+    'featured_title': 'Core services',
+    'featured_intro': 'A concept built around five services that define the broader Opticable offer for modern business environments.',
+    'trust_title': 'Why choose Opticable',
+    'trust': [
+        ('Technical expertise', 'We plan infrastructure with a practical understanding of connectivity, security, deployment, and long-term support.'),
+        ('Tailored solutions', 'Each project is adapted to the site, operational requirements, and growth plans of the client.'),
+        ('Installation quality', 'Clean execution, organized cabling, and dependable system turnover remain part of the deliverable.'),
+        ('Service and support', 'We stay focused on clear communication, reliable follow-up, and systems that remain easier to manage after install.'),
+    ],
+    'services_title': 'Business Technology Services | Opticable',
+    'services_desc': 'Opticable provides structured cabling, professional WiFi, IT solutions, camera surveillance, access control, intercom, fiber optic, and IP phone services for business environments.',
+    'services_h1': 'Professional technology services for connectivity, security, and business operations.',
+    'services_intro': 'Opticable brings together infrastructure, wireless, IT systems, surveillance, and secure-entry services in one clearer technology offering for business clients.',
+    'priority_title': 'Core services',
+    'priority_intro': 'The first services clients typically need when modernizing connectivity, security, and day-to-day operations.',
+    'support_title': 'Complementary services',
+    'support_intro': 'Additional systems and supporting layers that complete a more resilient technology environment.',
+    'extra_title': 'Project capabilities',
+    'extra_intro': 'Common implementation work that often supports a broader technology mandate.',
+    'extras': [
+        ('Patch panels and rack organization', 'Patching, labeling, cable management, and cleaner telecom rooms that stay easier to support.'),
+        ('Wireless optimization', 'Post-install tuning, segmentation, and adjustments that improve reliability and user experience.'),
+        ('Infrastructure testing', 'Verification, validation, and documentation that support better turnover and future maintenance.'),
+        ('After-install support', 'Follow-up support for changes, additions, troubleshooting, and day-to-day operational needs.'),
+    ],
+    'about_title': 'About Opticable | Business Technology Expertise',
+    'about_desc': 'Learn how Opticable supports businesses with reliable, modern, and practical technology infrastructure solutions.',
+    'about_h1': 'Technology expertise in service of business environments.',
+    'about_intro': 'Opticable specializes in technology infrastructure solutions for modern organizations. Our mission is to deliver reliable systems that help businesses stay connected, secure, and efficient in a constantly evolving environment.',
+    'about_story': 'Our team designs and deploys infrastructure adapted to each client, whether the goal is to modernize an existing network, launch a new facility, or improve operations across a professional property. We work with recognized equipment and focus on solutions that simplify work for our clients and support long-term growth.',
+    'about_section_title': 'How we approach projects',
+    'about_section_intro': 'A concept built around reliability, practical planning, and a more complete technology partnership.',
+    'about_values': [
+        ('Business-oriented expertise', 'We approach projects through the operational needs of offices, commercial sites, and managed environments.'),
+        ('Reliable systems', 'The objective is dependable connectivity, better security, and technology that performs consistently.'),
+        ('Professional execution', 'Planning, installation, documentation, and turnover are treated as part of the service quality.'),
+        ('Long-term usefulness', 'Solutions are selected to remain scalable, supportable, and easier to operate over time.'),
+    ],
+    'contact_title': 'Contact Opticable | Discuss Your Technology Project',
+    'contact_desc': 'Talk to Opticable about structured cabling, professional WiFi, IT solutions, surveillance, intercom, and access control for your business.',
+    'contact_h1': 'Let us talk about your technology project.',
+    'contact_intro': 'Want to improve your network infrastructure, deploy business WiFi, install surveillance, or modernize your technology environment? Opticable is ready to support the next step.',
+    'contact_panel_copy': 'Share the site type, your goals, and the systems involved. We can help define the right technical scope for a business-ready deployment.',
+    'process_title': 'Project process',
+    'process_intro': 'A strong technology project starts with the right planning, then moves through clean delivery and practical follow-up.',
+    'process': [
+        ('Assessment', 'We review the site, the current environment, operational constraints, and the systems that need to work together.'),
+        ('Design', 'We define the technical scope, infrastructure approach, device locations, and the right deployment path.'),
+        ('Installation', 'We install, configure, organize, and test the infrastructure with a clean and professional workflow.'),
+        ('Support', 'We help with turnover, optimization, and the next operational steps after implementation.'),
+    ],
+    'clients_title': 'Who we support',
+    'clients_intro': 'Business environments that need modern, reliable, and supportable technology infrastructure.',
+    'clients': [
+        ('Businesses and offices', 'Structured cabling, WiFi, IT systems, and secure operations for professional work environments.'),
+        ('Commercial properties', 'Technology infrastructure that supports occupancy, tenant service, and building performance.'),
+        ('Multi-unit and mixed-use sites', 'Shared-area connectivity, secure entry, surveillance, and practical operational systems.'),
+        ('Developers, contractors, and managers', 'Technology planning and delivery that fits project sequencing and building realities.'),
+    ],
+    'industries_h1': 'Technology infrastructure services for teams that operate, manage, and improve professional environments.',
+    'industries_intro': 'Opticable supports business sites, managed properties, and project teams that want modern systems without losing clarity or reliability.',
+    'overview_intro': 'Scope, business value, and what implementation can include.',
+    'related_intro': 'Related services that often support the same technology roadmap.',
+})
+T['fr'].update({
+    'tagline': 'Partenaire en infrastructure technologique',
+    'company': "Opticable accompagne les entreprises dans la conception, l'installation et la gestion de leurs infrastructures technologiques afin d'assurer une connectivite fiable, securisee et performante.",
+    'home_title': 'Partenaire en infrastructure technologique pour entreprises | Opticable',
+    'home_desc': "Opticable propose le cablage structure, le Wi-Fi professionnel, les solutions informatiques, la videosurveillance, l'intercom et le controle d'acces pour les environnements d'affaires.",
+    'home_kicker': 'Infrastructure technologique pour entreprises',
+    'home_h1': 'Votre partenaire en infrastructure technologique.',
+    'home_intro': "Opticable accompagne les entreprises dans la conception, l'installation et la gestion de leurs infrastructures technologiques afin d'assurer une connectivite fiable, securisee et performante.",
+    'home_points': [
+        'Cablage structure et infrastructures backbone pour des environnements connectes',
+        'Wi-Fi professionnel pense pour la couverture, la performance et la securite',
+        'Solutions informatiques pour serveurs, postes de travail et environnements IT',
+        'Surveillance par camera pour les batiments, les equipes et les operations',
+        "Intercom et controle d'acces pour des entrees mieux gerees et securisees",
+    ],
+    'featured_title': 'Services cles',
+    'featured_intro': "Cinq services au coeur du concept 01 pour presenter Opticable comme un partenaire technologique plus complet.",
+    'trust_title': 'Pourquoi choisir Opticable',
+    'trust': [
+        ('Expertise technique', "Nous concevons les infrastructures avec une vision pratique de la connectivite, de la securite, du deploiement et du soutien a long terme."),
+        ('Solutions sur mesure', "Chaque projet est adapte au site, aux operations et aux objectifs d'evolution du client."),
+        ("Qualite d'installation", "Une execution propre, un cablage organise et une remise structuree font partie integrante de la livraison."),
+        ('Service et accompagnement', 'Nous privilegions la clarte, le suivi et des systemes qui restent simples a faire evoluer apres installation.'),
+    ],
+    'services_title': 'Services technologiques pour entreprises | Opticable',
+    'services_desc': "Opticable offre le cablage structure, le Wi-Fi professionnel, les solutions informatiques, la surveillance par camera, le controle d'acces, l'intercom, la fibre et la telephonie IP pour les environnements d'affaires.",
+    'services_h1': 'Des services technologiques professionnels pour la connectivite, la securite et les operations d affaires.',
+    'services_intro': "Opticable regroupe l'infrastructure, le sans-fil, l'informatique, la surveillance et les services d'entree securisee dans une offre plus claire et plus complete pour les clients d'affaires.",
+    'priority_title': 'Services principaux',
+    'priority_intro': "Les services les plus souvent recherches lorsqu'une entreprise modernise sa connectivite, sa securite et ses operations.",
+    'support_title': 'Services complementaires',
+    'support_intro': "Les couches et systemes additionnels qui completent un environnement technologique plus solide.",
+    'extra_title': 'Capacites de projet',
+    'extra_intro': "Des travaux et interventions qui soutiennent frequemment un mandat technologique plus large.",
+    'extras': [
+        ('Patch panels et organisation de racks', 'Raccordement, etiquetage, gestion des cables et remise en ordre des locaux techniques pour un environnement plus propre.'),
+        ('Optimisation sans fil', 'Ajustements, segmentation et affinage apres installation pour ameliorer la fiabilite et l experience utilisateur.'),
+        ("Verification de l'infrastructure", 'Validation, essais et documentation pour faciliter la remise et la maintenance future.'),
+        ('Soutien apres installation', 'Suivi, ajouts, ajustements et depannage pour soutenir les operations quotidiennes.'),
+    ],
+    'about_title': "A propos d'Opticable | Expertise technologique pour entreprises",
+    'about_desc': "Decouvrez comment Opticable accompagne les organisations avec des solutions d'infrastructure technologique fiables, modernes et utiles.",
+    'about_h1': 'Une expertise technologique au service des entreprises',
+    'about_intro': "Opticable est une entreprise specialisee dans les solutions d'infrastructure technologique pour les organisations modernes. Notre mission est de fournir des systemes fiables et performants qui permettent aux entreprises de rester connectees, securisees et efficaces dans un environnement technologique en constante evolution.",
+    'about_story': "Notre equipe possede l'expertise necessaire pour concevoir et deployer des infrastructures adaptees aux besoins specifiques de chaque client. Qu'il s'agisse de moderniser un reseau existant ou d'implanter une infrastructure complete dans un nouveau batiment, nous assurons une planification rigoureuse et une execution professionnelle. Nous travaillons avec des equipements reconnus afin de garantir la performance, la durabilite et la securite des installations. Notre objectif est simple : offrir des solutions technologiques qui simplifient le travail de nos clients et soutiennent leur croissance.",
+    'about_section_title': 'Notre approche',
+    'about_section_intro': 'Une direction axee sur la fiabilite, la planification pratique et un accompagnement technologique plus complet.',
+    'about_values': [
+        ("Expertise orientee affaires", "Nous abordons les projets selon les realites des bureaux, des immeubles commerciaux et des environnements professionnels."),
+        ('Systemes fiables', 'Notre objectif est de livrer une connectivite stable, une securite mieux integree et des solutions qui performent dans le temps.'),
+        ('Execution professionnelle', "Planification, installation, documentation et remise font partie de la qualite de service attendue."),
+        ('Utilite a long terme', 'Les solutions retenues doivent rester evolutives, durables et simples a soutenir au quotidien.'),
+    ],
+    'contact_title': 'Contacter Opticable | Parlons de votre projet technologique',
+    'contact_desc': "Contactez Opticable pour discuter de cablage structure, de Wi-Fi professionnel, de solutions informatiques, de videosurveillance, d'intercom et de controle d'acces.",
+    'contact_h1': 'Parlons de votre projet technologique',
+    'contact_intro': "Vous souhaitez ameliorer votre infrastructure reseau, installer un systeme de surveillance ou deployer un reseau Wi-Fi performant? L'equipe d'Opticable est prete a vous accompagner dans la realisation de votre projet.",
+    'contact_panel_copy': "Presentez votre type de site, vos objectifs et les systemes concernes. Nous pourrons definir la bonne portee technique pour un deploiement adapte a votre environnement.",
+    'process_title': 'Processus de projet',
+    'process_intro': "Un bon projet technologique commence par une analyse claire, puis avance avec une execution propre et un accompagnement utile.",
+    'process': [
+        ('Analyse', "Nous evaluons le site, l'existant, les contraintes d'exploitation et les systemes qui doivent fonctionner ensemble."),
+        ('Conception', "Nous definissons la portee technique, l'approche d'infrastructure, les emplacements et la bonne strategie de deploiement."),
+        ('Installation', "Nous installons, configurons, organisons et testons l'infrastructure selon une methode claire et professionnelle."),
+        ('Accompagnement', "Nous soutenons la remise, l'optimisation et les prochaines etapes apres la mise en service."),
+    ],
+    'clients_title': 'Clienteles accompagnees',
+    'clients_intro': 'Des environnements d affaires qui ont besoin de technologies modernes, fiables et faciles a soutenir.',
+    'clients': [
+        ('Entreprises et bureaux', 'Cablage structure, Wi-Fi, systemes informatiques et operations securisees pour les environnements professionnels.'),
+        ('Immeubles commerciaux', "Infrastructure technologique qui soutient l'exploitation, le service aux occupants et la performance des batiments."),
+        ('Sites multi-logements et usages mixtes', 'Connectivite des aires communes, gestion des entrees, surveillance et systemes utiles au quotidien.'),
+        ('Promoteurs, entrepreneurs et gestionnaires', 'Planification technologique et livraison adaptee au phasage des projets et aux realites du terrain.'),
+    ],
+    'industries_h1': "Des services d'infrastructure technologique pour les equipes qui exploitent, gerent et ameliorent les environnements professionnels.",
+    'industries_intro': "Opticable accompagne les sites d'affaires, les immeubles geres et les equipes de projet qui veulent des systemes modernes sans perdre en clarte ni en fiabilite.",
+    'overview_intro': "La portee, la valeur d'affaires et ce que l'implantation peut inclure.",
+    'related_intro': 'Les services connexes qui soutiennent souvent la meme feuille de route technologique.',
+})
+home_visuals['en'] = {
+    'eyebrow': 'Project environments',
+    'title': 'Technology systems that feel structured, modern, and supportable.',
+    'top_title': 'Professional buildings and connected business environments',
+    'top_copy': 'Infrastructure that supports connectivity, secure entry, building operations, and a better client experience.',
+    'top_alt': 'Professional building exterior representing a modern connected business environment',
+    'main_title': 'Organized racks, patch panels, and IT backbone',
+    'main_copy': 'Structured cabling, network racks, and cleaner backbone layouts that remain easier to expand and maintain.',
+    'main_alt': 'Organized commercial network rack and structured cabling installation',
+}
+home_visuals['fr'] = {
+    'eyebrow': 'Environnements de projet',
+    'title': 'Des systemes technologiques structures, modernes et plus faciles a soutenir.',
+    'top_title': 'Immeubles professionnels et environnements d affaires connectes',
+    'top_copy': "Une infrastructure qui soutient la connectivite, les entrees securisees, l'exploitation et une meilleure experience utilisateur.",
+    'top_alt': "Immeuble professionnel representant un environnement d'affaires connecte",
+    'main_title': 'Racks organises, patch panels et backbone IT',
+    'main_copy': "Cablage structure, racks reseau et backbone plus propre pour une evolution et un entretien simplifies.",
+    'main_alt': 'Rack reseau commercial avec cablage structure bien organise',
+}
+
+services['structured-cabling']['en'].update({
+    'desc': 'Structured cabling for business environments, including copper, fiber-ready pathways, patch panels, racks, testing, and cleaner room organization.',
+    'hero': 'Structured cabling that gives business technology a dependable foundation.',
+    'intro': 'Structured cabling is the base layer of a modern technology environment. Opticable designs and installs organized cabling systems for offices, commercial sites, industrial spaces, and institutional settings so networks stay stable and easier to evolve.',
+    'summary': 'Structured cabling, patch panels, certification, and rack organization for reliable business connectivity.',
+    'includes': [
+        'Network cable installation for Cat5e, Cat6, Cat6A, and fiber-connected environments',
+        'Patch panels, network racks, cable management, and cleaner telecom room organization',
+        'Testing, certification support, upgrades, and optimization of existing infrastructure',
+    ],
+})
+services['structured-cabling']['fr'].update({
+    'desc': "Le cablage structure constitue la base d'une infrastructure technologique moderne, avec patch panels, racks, certification et organisation des locaux techniques.",
+    'hero': "Le cablage structure qui donne une base fiable a votre environnement technologique.",
+    'intro': "Le cablage structure constitue la base de toute infrastructure technologique moderne. Une installation bien concue assure la stabilite du reseau, optimise la performance des equipements et facilite l'evolution future des systemes. Chez Opticable, nous concevons et installons des systemes de cablage conformes aux standards de l'industrie pour les environnements commerciaux, industriels et institutionnels.",
+    'summary': 'Cablage structure, patch panels, certification et organisation des racks pour une connectivite d affaires fiable.',
+    'includes': [
+        'Installation de cables reseau Cat5e, Cat6, Cat6A et environnements relies a la fibre optique',
+        'Patch panels, racks reseau, gestion du cablage et organisation des locaux techniques',
+        'Tests, soutien a la certification, mises a niveau et optimisation des infrastructures existantes',
+    ],
+})
+services['commercial-wifi-installation']['en'].update({
+    'name': 'Professional WiFi',
+    'title': 'Professional WiFi Design and Installation | Opticable',
+    'desc': 'Professional WiFi planning, access point deployment, controller setup, optimization, and wireless support for business environments.',
+    'hero': 'Professional WiFi built for performance, coverage, and secure day-to-day use.',
+    'intro': 'A strong wireless network is essential to modern business productivity. Opticable designs and deploys professional WiFi for offices, retail sites, warehouses, public spaces, and multi-unit buildings with the infrastructure required to perform reliably.',
+    'summary': 'Coverage planning, access point installation, wireless optimization, and secure business WiFi support.',
+    'includes': [
+        'WiFi coverage analysis and planning for offices, commercial sites, warehouses, and multi-unit buildings',
+        'Installation of professional access points with switching, mounting, and controller coordination',
+        'Wireless optimization, network security, and after-install support for better day-to-day performance',
+    ],
+})
+services['commercial-wifi-installation']['fr'].update({
+    'name': 'Wi-Fi professionnel',
+    'title': 'Conception et installation de Wi-Fi professionnel | Opticable',
+    'desc': "Analyse, planification, installation et optimisation de reseaux Wi-Fi professionnels pour bureaux, commerces, entrepots et immeubles multi-logements.",
+    'hero': 'Un Wi-Fi professionnel pense pour la performance, la couverture et la securite au quotidien.',
+    'intro': "Un reseau Wi-Fi performant est essentiel a la productivite des entreprises modernes. Opticable conçoit et deploie des reseaux Wi-Fi professionnels adaptes aux bureaux, commerces, entrepots, espaces publics et immeubles multi-logements.",
+    'summary': 'Analyse de couverture, installation de bornes, optimisation sans fil et soutien pour reseaux Wi-Fi professionnels.',
+    'includes': [
+        'Analyse et planification de la couverture Wi-Fi pour bureaux, commerces, entrepots et immeubles multi-logements',
+        "Installation de points d'acces professionnels avec coordination des commutateurs, du montage et des controleurs",
+        'Optimisation, securisation des reseaux sans fil et soutien apres installation pour une meilleure performance',
+    ],
+})
+services['network-infrastructure']['en'].update({
+    'name': 'IT Solutions',
+    'title': 'IT Solutions and Business Infrastructure Support | Opticable',
+    'desc': 'IT solutions for business environments, including servers, workstations, network equipment, infrastructure support, and technical assistance.',
+    'hero': 'IT solutions that support business systems, connectivity, and operational stability.',
+    'intro': 'Business technology relies on more than cabling alone. Opticable supports servers, workstations, network hardware, and day-to-day infrastructure needs so business environments remain stable, efficient, and easier to support.',
+    'summary': 'Servers, workstations, network equipment, operational support, and practical IT infrastructure services.',
+    'includes': [
+        'Installation and management support for servers, workstations, and related business equipment',
+        'Deployment of network equipment, switching, racks, and core infrastructure components',
+        'Technical assistance, infrastructure support, and baseline security-minded system guidance',
+    ],
+})
+services['network-infrastructure']['fr'].update({
+    'name': 'Solutions informatiques',
+    'title': 'Solutions informatiques et soutien d infrastructure pour entreprises | Opticable',
+    'desc': "Services informatiques pour entreprises incluant serveurs, postes de travail, equipements reseau, soutien d'infrastructure et assistance technique.",
+    'hero': "Des solutions informatiques qui soutiennent vos systemes d'affaires, votre connectivite et la stabilite de vos operations.",
+    'intro': "Les systemes informatiques sont au coeur des operations de nombreuses organisations. Opticable offre des services complets pour soutenir la performance, la stabilite et la securite des environnements technologiques.",
+    'summary': "Serveurs, postes de travail, equipements reseau, soutien operationnel et services d'infrastructure IT concrets.",
+    'includes': [
+        'Installation et gestion de serveurs, postes de travail et equipements technologiques d affaires',
+        'Deploiement d equipements reseau, de commutation, de racks et des composantes centrales d infrastructure',
+        "Assistance technique, soutien d'infrastructure et bonnes pratiques de securite informatique de base",
+    ],
+})
+services['security-camera-systems']['en'].update({
+    'name': 'Camera Surveillance',
+    'title': 'Business Camera Surveillance Systems | Opticable',
+    'desc': 'Business surveillance systems with camera installation, storage planning, remote access, and integration with existing security infrastructure.',
+    'hero': 'Camera surveillance systems that protect buildings, staff, and operations.',
+    'intro': 'Surveillance systems play a key role in building security and operational visibility. Opticable installs modern camera systems adapted to each environment, with the infrastructure needed for dependable monitoring.',
+    'summary': 'Camera installation, storage planning, remote viewing, and security-system integration for business environments.',
+})
+services['security-camera-systems']['fr'].update({
+    'name': 'Surveillance par camera',
+    'title': 'Systemes de surveillance par camera pour entreprises | Opticable',
+    'desc': "Installation de systemes de videosurveillance avec cablage, stockage, acces a distance et integration aux systemes de securite existants.",
+    'hero': 'Des systemes de surveillance par camera pour proteger les batiments, les equipes et les operations.',
+    'intro': "Les systemes de surveillance jouent un role cle dans la securite des batiments, des employes et des operations. Opticable met en place des solutions modernes de videosurveillance adaptees aux besoins de chaque environnement.",
+    'summary': 'Installation de cameras, gestion du stockage, acces a distance et integration aux systemes de securite pour les environnements d affaires.',
+})
+services['access-control-systems']['en'].update({
+    'name': 'Access Control',
+    'title': 'Access Control and Secure Entry Systems | Opticable',
+    'desc': 'Access control systems with secure entry hardware, reader wiring, controller support, and intercom integration for business environments.',
+    'hero': 'Access control systems for secure entry, better visitor flow, and managed building access.',
+    'intro': 'Access control helps manage how staff, visitors, and tenants move through professional spaces. Opticable installs secure-entry systems that can integrate with intercoms, cameras, and the wider network environment.',
+    'summary': 'Secure entry systems, readers, door hardware, and integrated access workflows for business properties.',
+})
+services['access-control-systems']['fr'].update({
+    'name': "Controle d'acces",
+    'title': "Systemes de controle d'acces et entrees securisees | Opticable",
+    'desc': "Installation de systemes de controle d'acces avec lecteurs, quincaillerie securisee, soutien des panneaux et integration avec intercoms ou systemes de securite.",
+    'hero': "Des systemes de controle d'acces pour des entrees securisees et une meilleure gestion des visiteurs.",
+    'intro': "Les systemes d'intercom et de controle d'acces permettent de mieux gerer la securite et les entrees dans les environnements professionnels et multi-usagers. Opticable propose des solutions fiables, modernes et evolutives pour les portes, les aires communes et les zones sensibles.",
+    'summary': "Lecteurs, quincaillerie securisee, gestion des acces et integration avec l'intercom ou les autres systemes de securite.",
+})
+services['intercom-systems']['en'].update({
+    'summary': 'Audio-video intercom systems for visitor communication, tenant workflows, and integrated secure entry.',
+})
+services['intercom-systems']['fr'].update({
+    'name': 'Systemes intercom',
+    'summary': "Intercoms audio-video pour la communication visiteurs, les parcours des occupants et les entrees integrees.",
+})
+industry_cards['en'] = [
+    ('Businesses and offices', 'Connected workspaces with structured cabling, WiFi, IT systems, and practical operational support.'),
+    ('Commercial properties', 'Infrastructure that supports occupants, building operations, and secure day-to-day activity.'),
+    ('Multi-unit and mixed-use sites', 'Shared-area networks, secure entry, surveillance, and communication systems for modern properties.'),
+    ('Property managers', 'Repeatable standards, cleaner support, and easier technology coordination across active portfolios.'),
+    ('Developers and contractors', 'Technology planning and delivery that fits construction, fit-out, and phased project realities.'),
+    ('Industrial and logistics sites', 'Reliable connectivity, secure access, and infrastructure that supports operational environments.'),
+]
+industry_cards['fr'] = [
+    ('Entreprises et bureaux', 'Espaces de travail connectes avec cablage structure, Wi-Fi, solutions informatiques et soutien operationnel concret.'),
+    ('Immeubles commerciaux', "Infrastructure qui soutient les occupants, l'exploitation et les activites quotidiennes d'un batiment."),
+    ('Sites multi-logements et usages mixtes', 'Reseaux des aires communes, entrees securisees, surveillance et systemes de communication pour proprietes modernes.'),
+    ('Gestionnaires immobiliers', 'Standards repetables, meilleur soutien et coordination technologique plus simple sur des portefeuilles occupes.'),
+    ('Promoteurs et entrepreneurs', 'Planification et livraison technologique adaptees a la construction, aux amenagements et aux projets en phases.'),
+    ('Sites industriels et logistiques', 'Connectivite fiable, acces securise et infrastructure utile aux environnements operationnels.'),
+]
+HOME_POINT_KEYS = (
+    'structured-cabling',
+    'commercial-wifi-installation',
+    'network-infrastructure',
     'security-camera-systems',
     'access-control-systems',
+)
+SERVICE_CARD_META = {
+    'structured-cabling': {'en': {'badge': 'LAN', 'eyebrow': 'Network foundation'}, 'fr': {'badge': 'LAN', 'eyebrow': 'Fondation reseau'}},
+    'commercial-wifi-installation': {'en': {'badge': 'WIFI', 'eyebrow': 'Wireless performance'}, 'fr': {'badge': 'WIFI', 'eyebrow': 'Performance sans fil'}},
+    'network-infrastructure': {'en': {'badge': 'IT', 'eyebrow': 'Managed systems'}, 'fr': {'badge': 'IT', 'eyebrow': 'Environnement informatique'}},
+    'security-camera-systems': {'en': {'badge': 'CCTV', 'eyebrow': 'Site security'}, 'fr': {'badge': 'CCTV', 'eyebrow': 'Securite des sites'}},
+    'access-control-systems': {'en': {'badge': 'ENTRY', 'eyebrow': 'Secure entry'}, 'fr': {'badge': 'ENTRY', 'eyebrow': 'Entrees securisees'}},
+    'intercom-systems': {'en': {'badge': 'COMMS', 'eyebrow': 'Visitor communication'}, 'fr': {'badge': 'COMMS', 'eyebrow': 'Communication visiteurs'}},
+    'fiber-optic-installation': {'en': {'badge': 'FIBER', 'eyebrow': 'Backbone capacity'}, 'fr': {'badge': 'FIBER', 'eyebrow': 'Capacite backbone'}},
+    'ip-phone-systems': {'en': {'badge': 'VOIP', 'eyebrow': 'Business voice'}, 'fr': {'badge': 'VOIP', 'eyebrow': 'Communication vocale'}},
+}
+HOME_FEATURED_SERVICES = {
+    'en': [
+        {'key': 'structured-cabling', 'badge': 'LAN', 'title': 'Structured Cabling', 'copy': 'Cat5e, Cat6, Cat6A, fiber, patch panels, network racks, and certification work for dependable connectivity.'},
+        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'Professional WiFi', 'copy': 'Coverage planning, access point installation, controller setup, and optimization for offices, retail, warehouses, and multi-unit buildings.'},
+        {'key': 'network-infrastructure', 'badge': 'IT', 'title': 'IT Solutions', 'copy': 'Servers, workstations, network equipment, operational support, and practical IT infrastructure for growing business environments.'},
+        {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Camera Surveillance', 'copy': 'Modern surveillance systems designed to protect buildings, teams, and daily operations with reliable monitoring access.'},
+        {'key': 'access-control-systems', 'badge': 'ENTRY', 'title': 'Intercom and Access Control', 'copy': 'Audio-video intercoms, card readers, secure door workflows, and integrated entry management for professional properties.'},
+    ],
+    'fr': [
+        {'key': 'structured-cabling', 'badge': 'LAN', 'title': 'Cablage structure', 'copy': 'Cat5e, Cat6, Cat6A, fibre optique, patch panels, racks reseau et certification pour une base reseau fiable.'},
+        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'Wi-Fi professionnel', 'copy': 'Analyse de couverture, installation de bornes, configuration des controleurs et optimisation pour bureaux, commerces, entrepots et immeubles multi-logements.'},
+        {'key': 'network-infrastructure', 'badge': 'IT', 'title': 'Solutions informatiques', 'copy': 'Serveurs, postes de travail, equipements reseau, soutien operationnel et infrastructure IT adaptee aux entreprises en croissance.'},
+        {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Surveillance par camera', 'copy': 'Systemes de videosurveillance modernes pour proteger les batiments, les equipes et les operations avec un acces fiable aux images.'},
+        {'key': 'access-control-systems', 'badge': 'ENTRY', 'title': "Intercom et controle d'acces", 'copy': 'Intercoms audio-video, lecteurs, gestion des portes et integration des entrees securisees pour les environnements professionnels.'},
+    ],
+}
+
+primary_order = [
+    'structured-cabling',
     'commercial-wifi-installation',
-    'intercom-systems',
+    'network-infrastructure',
+    'security-camera-systems',
+    'access-control-systems',
 ]
 secondary_order = [
-    'structured-cabling',
+    'intercom-systems',
     'fiber-optic-installation',
-    'network-infrastructure',
     'ip-phone-systems',
 ]
 order = primary_order + secondary_order
@@ -1513,6 +1860,80 @@ main section+section{
   transform:translateX(2px);
   text-decoration:underline;
   text-underline-offset:4px;
+}
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.feature-card,
+.service-card{
+  position:relative;
+  overflow:hidden;
+}
+.feature-card::before,
+.service-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at top right,rgba(47,138,88,.15),transparent 38%),
+    linear-gradient(180deg,rgba(255,255,255,.72),rgba(244,249,245,.96));
+  pointer-events:none;
+}
+.feature-card>*,
+.service-card>*{
+  position:relative;
+}
+.feature-card{
+  min-height:100%;
+  gap:14px;
+}
+.feature-card-header,
+.service-card-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+}
+.feature-kicker,
+.service-card-kicker{
+  margin:0;
+  color:var(--primary-dark);
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.feature-badge,
+.service-card-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:56px;
+  padding:9px 12px;
+  border:1px solid rgba(47,138,88,.16);
+  border-radius:999px;
+  background:rgba(226,240,231,.92);
+  color:var(--primary-dark);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.feature-card p,
+.service-card p{
+  max-width:none;
+}
+.service-card{
+  gap:14px;
+  background:linear-gradient(180deg,rgba(249,252,249,.94),rgba(242,247,243,.98));
+}
+.service-card h3{
+  font-size:1.2rem;
+}
+.timeline{
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 }
 .grid-2{
   display:grid;
@@ -2045,9 +2466,29 @@ def card(title, text, link=None, label='Learn more', cls='card'):
     return f'<article class="{cls}"><h3>{esc(title)}</h3><p>{esc(text)}</p>{more}</article>'
 
 
+def feature_card(title, text, link, label, badge, eyebrow):
+    return (
+        f'<article class="card feature-card"><div class="feature-card-header">'
+        f'<div><p class="feature-kicker">{esc(eyebrow)}</p><h3>{esc(title)}</h3></div>'
+        f'<span class="feature-badge">{esc(badge)}</span></div>'
+        f'<p>{esc(text)}</p><a class="more" href="{link}">{esc(label)}</a></article>'
+    )
+
+
+def service_card(lang, key, label):
+    meta = SERVICE_CARD_META[key][lang]
+    return (
+        f'<article class="card service-card"><div class="service-card-header">'
+        f'<div><p class="service-card-kicker">{esc(meta["eyebrow"])}</p><h3>{esc(services[key][lang]["name"])}</h3></div>'
+        f'<span class="service-card-badge">{esc(meta["badge"])}</span></div>'
+        f'<p>{esc(services[key][lang]["summary"])}</p>'
+        f'<a class="more" href="{routes[lang][key]}">{esc(label)}</a></article>'
+    )
+
+
 def service_cards(lang, label, keys=None):
     keys = keys or order
-    return ''.join(card(services[key][lang]['name'], services[key][lang]['summary'], routes[lang][key], label) for key in keys)
+    return ''.join(service_card(lang, key, label) for key in keys)
 
 
 def render_chips(items):
@@ -2062,16 +2503,8 @@ def render_service_chip_links(lang, keys):
 
 
 def render_home_points(lang):
-    point_keys = (
-        'security-camera-systems',
-        'access-control-systems',
-        'commercial-wifi-installation',
-        'ip-phone-systems',
-        'structured-cabling',
-        'network-infrastructure',
-    )
     items = []
-    for text, key in zip(T[lang]['home_points'], point_keys):
+    for text, key in zip(T[lang]['home_points'], HOME_POINT_KEYS):
         items.append(f'<li><a href="{routes[lang][key]}">{esc(text)}</a></li>')
     return f'<ul class="hero-points">{"".join(items)}</ul>'
 
@@ -2161,6 +2594,31 @@ def home_visual_panel(lang):
         f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, zoomable=True, lang=lang, caption=visual["main_title"])}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["main_title"])}</strong><span>{esc(visual["main_copy"])}</span></figcaption></figure>'
         f'</div></aside>'
+    )
+
+
+def home_featured_services_section(lang):
+    t = T[lang]
+    cards = ''.join(
+        feature_card(item['title'], item['copy'], routes[lang][item['key']], t['service_label'], item['badge'], services[item['key']][lang]['name'])
+        for item in HOME_FEATURED_SERVICES[lang]
+    )
+    return (
+        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p>'
+        f'<h2>{esc(t["featured_title"])}</h2><p>{esc(t["featured_intro"])}</p></div>'
+        f'<div class="feature-grid">{cards}</div></section>'
+    )
+
+
+def process_section(lang):
+    items = ''.join(
+        f'<article class="timeline-step"><span>{index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
+        for index, (title, text) in enumerate(T[lang]['process'], 1)
+    )
+    return (
+        f'<section><div class="section-heading"><p class="eyebrow">{esc(T[lang]["process_title"])}</p>'
+        f'<h2>{esc(T[lang]["process_title"])}</h2><p>{esc(T[lang]["process_intro"])}</p></div>'
+        f'<div class="timeline">{items}</div></section>'
     )
 
 
@@ -2481,10 +2939,10 @@ for lang in ('en', 'fr'):
         f'<a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div>'
         f'{render_home_points(lang)}</div>'
         f'{home_visual_panel(lang)}</section>'
+        f'{home_featured_services_section(lang)}'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["trust_title"])}</p><h2>{esc(t["trust_title"])}</h2><p>{esc(t["company"])}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["trust"])}</div></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["priority_title"])}</h2><p>{esc(t["priority_intro"])}</p></div><div class="grid-2">{primary_cards}</div></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["support_title"])}</h2><p>{esc(t["support_intro"])}</p></div><div class="grid-2">{secondary_cards}</div></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["industries_h1"])}</h2><p>{esc(t["industries_intro"])}</p></div>{industries_section(lang)}</section>'
+        f'{process_section(lang)}'
+        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}</section>'
         f'{cta(lang)}'
     )
     write_url(routes[lang]['home'], page(lang, 'home', 'home', t['home_title'], t['home_desc'], home_body))
@@ -2497,6 +2955,7 @@ for lang in ('en', 'fr'):
         f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["company"])}</h2>{render_service_chip_links(lang, services_page_chip_keys)}</aside></section>'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["priority_title"])}</h2><p>{esc(t["priority_intro"])}</p></div><div class="grid-2">{primary_cards}</div></section>'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["support_title"])}</h2><p>{esc(t["support_intro"])}</p></div><div class="grid-2">{secondary_cards}</div></section>'
+        f'{process_section(lang)}'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["extra_title"])}</h2><p>{esc(t["extra_intro"])}</p></div><div class="grid-3">{"".join(card(a, b) for a, b in t["extras"])}</div></section>'
         f'{cta(lang)}'
     )
@@ -2509,6 +2968,7 @@ for lang in ('en', 'fr'):
         f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
         f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["about_story"])}</h2>{about_panel_media(lang)}</aside></section>'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["about"])}</p><h2>{esc(t.get("about_section_title", t["about_h1"]))}</h2><p>{esc(t.get("about_section_intro", t["about_story"]))}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["about_values"])}</div></section>'
+        f'{process_section(lang)}'
         f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}</section>'
         f'{cta(lang)}'
     )
