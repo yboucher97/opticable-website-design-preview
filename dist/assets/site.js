@@ -18,7 +18,7 @@ document.querySelectorAll('[data-year]').forEach((node) => {
 });
 const cookieBanner = document.querySelector('[data-cookie-banner]');
 const cookieAccept = document.querySelector('[data-cookie-accept]');
-const cookieBannerKey = 'opticable-cookie-banner-accepted';
+const cookieBannerKey = "opticable-cookie-banner-accepted";
 if (cookieBanner && cookieAccept) {
   let accepted = false;
   try {
