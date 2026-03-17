@@ -1569,7 +1569,7 @@ T['fr'].update({
     'contact_intro': "Décrivez-nous votre bâtiment, les systèmes visés et votre échéancier. On vous revient rapidement avec les prochaines étapes ou les questions nécessaires pour préciser votre demande.",
     'contact_info_title': 'Coordonnées directes',
     'contact_panel_title': 'Coordonnées directes',
-    'contact_panel_copy': "On lit chaque demande et on vous répond dans les meilleurs délais. Pour les projets urgents, appelez-nous directement du lundi au vendredi.",
+    'contact_panel_copy': '',
     'contact_form_note': "On lit chaque demande et on vous répond dans les meilleurs délais. Pour les projets urgents, appelez-nous directement du lundi au vendredi.",
     'contact_cards': [
         ('Renseignements généraux', 'info@opticable.ca'),
@@ -5179,7 +5179,7 @@ for lang in ('en', 'fr'):
             'layout-shell',
         )
         + band_section(
-            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2><p>{esc(contact_panel_copy)}</p>{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}{f"<div class=\"contact-panel\"><p>{esc(t['contact_form_note'])}</p></div>" if t.get("contact_form_note") else ""}</div></div>',
+            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2>{f"<p>{esc(contact_panel_copy)}</p>" if contact_panel_copy else ""}{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}{f"<div class=\"contact-panel\"><p>{esc(t['contact_form_note'])}</p></div>" if t.get("contact_form_note") else ""}</div></div>',
             'contact-band',
             'section-shell contact-shell',
         )
