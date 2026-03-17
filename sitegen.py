@@ -34,12 +34,13 @@ ROOT_GENERATED_ASSET_FILES = (
     'site.js',
 )
 SITE_URL = 'https://opticable.ca'
-ASSET_VER = '20260315a'
+ASSET_VER = '20260317a'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
-RBQ_LICENSE_LABEL = 'License RBQ : 5864-1648-01'
+RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
 LOGO_LOCKUP_URL = f'/assets/opticable-logo.png?v={ASSET_VER}'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
+LOGO_UI_WHITE_URL = f'/assets/logo-ui-white.webp?v={ASSET_VER}'
 LOGO_MARK_URL = f'/assets/logo-mark.png?v={ASSET_VER}'
 FAVICON_32_URL = f'/assets/favicon-32.png?v={ASSET_VER}'
 APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
@@ -70,6 +71,7 @@ SERVICE_INFRASTRUCTURE_URL = f'/assets/service-infrastructure.webp?v={ASSET_VER}
 SERVICE_ACCESS_URL = f'/assets/service-access.webp?v={ASSET_VER}'
 SERVICE_WIFI_URL = f'/assets/service-wifi.webp?v={ASSET_VER}'
 SERVICE_VOIP_URL = f'/assets/service-voip.webp?v={ASSET_VER}'
+OG_IMAGE_URL = f'/assets/og-image.webp?v={ASSET_VER}'
 LOGO_LOCKUP_WIDTH = 1600
 LOGO_LOCKUP_HEIGHT = 687
 LOGO_UI_WIDTH = 1200
@@ -100,11 +102,13 @@ SERVICE_WIFI_WIDTH = 1200
 SERVICE_WIFI_HEIGHT = 1495
 SERVICE_VOIP_WIDTH = 1400
 SERVICE_VOIP_HEIGHT = 797
+OG_IMAGE_WIDTH = 1200
+OG_IMAGE_HEIGHT = 630
 WEBSITE_ID = f'{SITE_URL}/#website'
 BUSINESS_ID = f'{SITE_URL}/#business'
 GENERAL_INQUIRY_LABELS = {'General inquiries', 'Renseignements généraux', 'Renseignements generaux'}
 PROJECT_REQUEST_LABELS = {'Project requests', 'Demandes de soumission', 'Demandes de projet'}
-PHONE_LABELS = {'Office phone', 'Téléphone du bureau', 'Telephone du bureau'}
+PHONE_LABELS = {'Office phone', 'Téléphone du bureau', 'Telephone du bureau', 'Téléphone', 'Telephone'}
 LIGHTBOX_UI = {
     'en': {
         'open': 'View larger image',
@@ -143,6 +147,14 @@ AREA_SERVED_SCHEMA = [
     {'@type': 'AdministrativeArea', 'name': 'Monteregie'},
     {'@type': 'City', 'name': 'Quebec City'},
 ]
+SCHEMA_AREA_SERVED_NAMES = ['Montréal', 'Laval', 'Longueuil', 'Rive-Sud', 'Rive-Nord', 'Laurentides', 'Québec']
+SCHEMA_BUSINESS_DESCRIPTION = "Installation et gestion de systèmes de caméras, contrôle d'accès, WiFi et câblage structuré pour immeubles commerciaux au Québec."
+SOCIAL_LINKS = (
+    {'key': 'facebook', 'label': 'Facebook', 'href': 'https://www.facebook.com/profile.php?id=61578550161916'},
+    {'key': 'linkedin', 'label': 'LinkedIn', 'href': 'https://www.linkedin.com/company/opticableinc/'},
+    {'key': 'instagram', 'label': 'Instagram', 'href': 'https://www.instagram.com/opticable_inc/'},
+)
+SOCIAL_PROFILE_URLS = [item['href'] for item in SOCIAL_LINKS]
 
 IMAGE_RESAMPLING = getattr(Image, 'Resampling', Image)
 HOME_IMAGE_EXPORTS = (
@@ -152,6 +164,22 @@ HOME_IMAGE_EXPORTS = (
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
+    },
+    {
+        'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
+        'target': DEPLOY_ASSET_ROOT / 'logo-ui-white.webp',
+        'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
+        'format': 'WEBP',
+        'quality': 90,
+    },
+    {
+        'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
+        'target': DEPLOY_ASSET_ROOT / 'og-image.webp',
+        'resize': (720, 320),
+        'canvas': (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
+        'background': (13, 23, 18, 255),
+        'format': 'WEBP',
+        'quality': 92,
     },
     {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
@@ -819,6 +847,10 @@ services = {
         'en': {'slug': 'network-infrastructure', 'name': 'Network Infrastructure', 'title': 'Commercial Network Infrastructure and Server Rack Installation | Opticable', 'desc': 'Commercial network infrastructure services including server rack installation, network room build-outs, switching support, and internet infrastructure deployment.', 'hero': 'Network infrastructure, server rack installation, and room build-outs for commercial environments.', 'intro': 'Opticable supports the physical network infrastructure behind business connectivity, equipment rooms, and internet service deployment. Projects can include server rack installation, patching, switch connectivity, demarc extensions, and cleanup of difficult legacy rooms.', 'summary': 'Server racks, network rooms, handoff routing, patching, switching support, and infrastructure cleanup.', 'includes': ['Server rack and cabinet installation with cable management and organized terminations', 'Patch panels, uplink routing, switch connectivity, and demarc-to-rack pathway planning', 'Internet infrastructure deployment and cleanup of crowded or unlabeled network rooms'], 'benefits': ['Better room serviceability after turnover', 'Cleaner handoff between wireless, security, voice, and tenant systems', 'Less rework during future upgrades and expansion'], 'cases': ['New office or retail suite network room setup', 'Demarc extensions and backbone routing for managed buildings', 'Legacy MDF and IDF cleanup before expansion'], 'industries': ['Business offices', 'Property management portfolios', 'Retail and hospitality properties'], 'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems']},
 'fr': {'slug': 'infrastructure-reseau', 'name': 'Infrastructure reseau', 'title': 'Infrastructure reseau commerciale et installation de baies serveurs | Opticable', 'desc': 'Services d infrastructure reseau commerciale incluant l installation de baies serveurs, l amenagement de salles reseau, le soutien a la commutation et le deploiement d infrastructures internet.', 'hero': 'Infrastructure reseau, installation de baies serveurs et amenagement de salles techniques pour environnements commerciaux.', 'intro': 'Opticable soutient l infrastructure physique derriere la connectivite d affaires, les locaux techniques et le deploiement de services internet. Les projets peuvent inclure l installation de baies serveurs, le raccordement, la connectivite des commutateurs, les extensions de demarcation et la remise en ordre de salles difficiles a entretenir.', 'summary': 'Baies serveurs, salles reseau, routage des handoffs, raccordement, soutien aux commutateurs et remise en ordre des infrastructures.', 'includes': ['Installation de baies et cabinets avec gestion du cablage et terminaisons ordonnees', 'Panneaux de raccordement, routage des uplinks, connectivite des commutateurs et chemin entre la demarcation et la baie', 'Deploiement d infrastructures internet et nettoyage de salles reseau surchargees ou non etiquetees'], 'benefits': ['Salles plus faciles a soutenir apres la remise', 'Transition plus propre entre WiFi, securite, voix et systemes des locataires', 'Moins de reprises lors des mises a niveau et des expansions futures'], 'cases': ['Mise en place de salles reseau pour nouveaux bureaux ou commerces', 'Extensions de demarcation et routage backbone pour immeubles geres', 'Nettoyage de MDF et IDF existants avant expansion'], 'industries': ['Bureaux d entreprise', 'Portefeuilles de gestion immobiliere', 'Commerces et hotellerie'], 'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems']},
     },
+    'managed-it-services': {
+        'en': {'slug': 'it-services-and-support', 'name': 'IT Services', 'title': 'IT Services and Device Management | Opticable', 'desc': 'IT support, device management, network maintenance, and technical support for businesses and commercial properties in Quebec.', 'hero': 'IT services and device management for businesses and commercial properties', 'intro': 'Opticable provides IT support, device management, and practical maintenance after installation so business technology environments keep running without interruption.', 'summary': 'Device management, network support, maintenance, and technical support after installation.', 'includes': ['Device inventory, updates, replacements, and lifecycle tracking for workstations and network equipment', 'Technical support for installed systems, including network, WiFi, cameras, and access-control environments', 'Preventive maintenance, configuration updates, and day-to-day administration for business technology environments'], 'benefits': ['Clearer ownership of the installed environment after deployment', 'Faster response when systems need changes, support, or maintenance', 'A more consistent technical standard across active properties and business sites'], 'cases': ['Clients that want to outsource support for their technology environment', 'Property teams that need recurring follow-up across multiple locations', 'Organizations that have systems in place but limited internal IT capacity'], 'industries': ['Business offices', 'Commercial properties', 'Property management portfolios'], 'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems']},
+        'fr': {'slug': 'services-informatiques', 'name': 'Services informatiques', 'title': 'Services informatiques et gestion de parc | Opticable', 'desc': "Soutien informatique, gestion de parc, maintenance réseau et support technique pour entreprises et immeubles commerciaux au Québec. Opticable — Montréal, Laval et partout au Québec.", 'hero': 'Services informatiques et gestion de parc pour entreprises et immeubles commerciaux', 'intro': "Opticable assure le soutien informatique, la gestion de parc et la maintenance des environnements technologiques après l'installation. On reste disponibles pour que vos systèmes fonctionnent sans interruption.", 'summary': "Gestion de parc, soutien réseau, maintenance et support technique pour vos environnements après l'installation.", 'includes': ['Gestion de parc informatique, inventaire, mises à jour, remplacement et suivi des équipements', 'Soutien technique sur les systèmes installés, incluant réseau, WiFi, caméras et contrôle d’accès', 'Maintenance préventive, administration des systèmes et support utilisateur continu'], 'benefits': ['Un interlocuteur unique pour la gestion courante de votre environnement technologique', 'Des systèmes mieux suivis après la mise en service', 'Moins de friction quand il faut maintenir, ajuster ou faire évoluer les installations'], 'cases': ["Entreprises qui veulent externaliser la gestion de leur environnement technologique", 'Gestionnaires immobiliers qui ont besoin d’un suivi régulier sur plusieurs immeubles', 'Organisations qui ont des systèmes en place mais plus de ressources internes pour les gérer'], 'industries': ['Entreprises', 'Immeubles commerciaux', 'Portefeuilles immobiliers'], 'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems']},
+    },
     'security-camera-systems': {
         'en': {'slug': 'security-camera-systems', 'name': 'Security Camera Systems', 'title': 'Commercial Security Camera System Installation | Opticable', 'desc': 'Commercial security camera system installation with cabling, device connectivity, and network coordination for managed properties and businesses.', 'hero': 'Security camera infrastructure and installation for businesses, buildings, and managed properties.', 'intro': 'Opticable installs the low-voltage and network foundation behind commercial security camera systems. Camera projects are coordinated with cabling, switching, storage locations, and active building conditions.', 'summary': 'Commercial camera cabling, device connectivity, PoE support, and infrastructure planning.', 'includes': ['Cabling and terminations for interior and exterior camera positions', 'PoE-capable connectivity planning with switching and rack coordination', 'Routing to network rooms, storage equipment, or building-wide surveillance infrastructure'], 'benefits': ['More reliable coverage and device connectivity', 'Cleaner integration with the broader network core', 'Easier future expansion for added coverage areas'], 'cases': ['Retail surveillance upgrades', 'Common-area and perimeter camera additions', 'Warehouse and operational monitoring coverage'], 'industries': ['Retail and hospitality', 'Commercial office properties', 'Industrial and warehouse sites'], 'related': ['access-control-systems', 'network-infrastructure', 'structured-cabling']},
         'fr': {'slug': 'systemes-cameras-securite', 'name': 'Systemes de cameras de securite', 'title': 'Installation de systemes de cameras de securite commerciales | Opticable', 'desc': 'Installation de systemes de cameras de securite commerciales avec cablage, connectivite des appareils et coordination reseau pour entreprises et proprietes gerees.', 'hero': 'Infrastructure et installation de cameras de securite pour entreprises, immeubles et proprietes gerees.', 'intro': 'Opticable installe la fondation basse tension et reseau derriere les systemes de cameras de securite commerciales. Les projets sont coordonnes avec le cablage, la commutation, les emplacements de stockage et les conditions des immeubles occupes.', 'summary': 'Cablage de cameras commerciales, connectivite des appareils, soutien PoE et planification d infrastructure.', 'includes': ['Cablage et terminaisons pour positions de cameras interieures et exterieures', 'Planification de la connectivite PoE avec coordination des commutateurs et des baies', 'Routage vers les salles reseau, les equipements de stockage ou l infrastructure de surveillance du batiment'], 'benefits': ['Couverture plus fiable et meilleure connectivite des appareils', 'Integration plus propre avec le coeur du reseau', 'Expansion future simplifiee pour de nouvelles zones de couverture'], 'cases': ['Mises a niveau de surveillance pour commerces', 'Ajout de cameras dans les aires communes et les perimetres', 'Couverture de surveillance dans les entrepots et sites operationnels'], 'industries': ['Commerce et hotellerie', 'Proprietes de bureaux commerciaux', 'Sites industriels et entrepots'], 'related': ['access-control-systems', 'network-infrastructure', 'structured-cabling']},
@@ -996,6 +1028,7 @@ for key in (
     'structured-cabling',
     'fiber-optic-installation',
     'network-infrastructure',
+    'managed-it-services',
     'access-control-systems',
     'intercom-systems',
     'ip-phone-systems',
@@ -1148,18 +1181,18 @@ T['fr'].update({
         ('Installation', "Nous installons, configurons, organisons et testons l'infrastructure selon une methode claire et professionnelle."),
         ('Accompagnement', "Nous soutenons la remise, l'optimisation et les prochaines etapes apres la mise en service."),
     ],
-    'clients_title': 'Clienteles accompagnees',
-    'clients_intro': 'Des environnements d affaires qui ont besoin de technologies modernes, fiables et faciles a soutenir.',
+    'clients_title': 'Clientèles accompagnées',
+    'clients_intro': "Des environnements d'affaires qui ont besoin de technologies modernes, fiables et faciles à soutenir.",
     'clients': [
-        ('Entreprises et bureaux', 'Cablage structure, Wi-Fi, systemes informatiques et operations securisees pour les environnements professionnels.'),
-        ('Immeubles commerciaux', "Infrastructure technologique qui soutient l'exploitation, le service aux occupants et la performance des batiments."),
-        ('Sites multi-logements et usages mixtes', 'Connectivite des aires communes, gestion des entrees, surveillance et systemes utiles au quotidien.'),
-        ('Promoteurs, entrepreneurs et gestionnaires', 'Planification technologique et livraison adaptee au phasage des projets et aux realites du terrain.'),
+        ('Entreprises et bureaux', 'Câblage structuré, Wi-Fi, systèmes informatiques et opérations sécurisées pour les environnements professionnels.'),
+        ('Immeubles commerciaux', "Infrastructure technologique qui soutient l'exploitation, le service aux occupants et la performance des bâtiments."),
+        ('Sites multi-logements et usages mixtes', 'Connectivité des aires communes, gestion des entrées, surveillance et systèmes utiles au quotidien.'),
+        ('Promoteurs, entrepreneurs et gestionnaires', 'Planification technologique et livraison adaptée au phasage des projets et aux réalités du terrain.'),
     ],
-    'industries_h1': "Des services d'infrastructure technologique pour les equipes qui exploitent, gerent et ameliorent les environnements professionnels.",
-    'industries_intro': "Opticable accompagne les sites d'affaires, les immeubles geres et les equipes de projet qui veulent des systemes modernes sans perdre en clarte ni en fiabilite.",
-    'overview_intro': "La portee, la valeur d'affaires et ce que l'implantation peut inclure.",
-    'related_intro': 'Les services connexes qui soutiennent souvent la meme feuille de route technologique.',
+    'industries_h1': "Des services d'infrastructure technologique pour les équipes qui exploitent, gèrent et améliorent les environnements professionnels.",
+    'industries_intro': "Opticable accompagne les sites d'affaires, les immeubles gérés et les équipes de projet qui veulent des systèmes modernes sans perdre en clarté ni en fiabilité.",
+    'overview_intro': "La portée, la valeur d'affaires et ce que l'implantation peut inclure.",
+    'related_intro': 'Les services connexes qui soutiennent souvent la même feuille de route technologique.',
 })
 home_visuals['en'] = {
     'eyebrow': 'Project environments',
@@ -1194,14 +1227,14 @@ services['structured-cabling']['en'].update({
     ],
 })
 services['structured-cabling']['fr'].update({
-    'desc': "Le cablage structure constitue la base d'une infrastructure technologique moderne, avec patch panels, racks, certification et organisation des locaux techniques.",
-    'hero': "Le cablage structure qui donne une base fiable a votre environnement technologique.",
-    'intro': "Le cablage structure constitue la base de toute infrastructure technologique moderne. Une installation bien concue assure la stabilite du reseau, optimise la performance des equipements et facilite l'evolution future des systemes. Chez Opticable, nous concevons et installons des systemes de cablage conformes aux standards de l'industrie pour les environnements commerciaux, industriels et institutionnels.",
-    'summary': 'Cablage structure, patch panels, certification et organisation des racks pour une connectivite d affaires fiable.',
+    'desc': "Le câblage structuré est la base d'une infrastructure technologique moderne, avec backbone, patch panels, racks, certification et locaux techniques bien organisés.",
+    'hero': "Le câblage structuré qui donne une base fiable à votre environnement technologique.",
+    'intro': "Le câblage structuré constitue la base de toute infrastructure technologique moderne. Une installation bien pensée stabilise le réseau, améliore la performance des équipements et simplifie les expansions futures. Chez Opticable, nous concevons et installons des systèmes conformes aux standards de l'industrie pour les environnements commerciaux, industriels et institutionnels.",
+    'summary': "Câblage structuré, patch panels, certification et organisation des racks pour une connectivité d'affaires fiable.",
     'includes': [
-        'Installation de cables reseau Cat5e, Cat6, Cat6A et environnements relies a la fibre optique',
-        'Patch panels, racks reseau, gestion du cablage et organisation des locaux techniques',
-        'Tests, soutien a la certification, mises a niveau et optimisation des infrastructures existantes',
+        'Installation de câbles réseau Cat5e, Cat6, Cat6A et liaisons backbone en fibre optique',
+        'Patch panels, racks réseau, gestion de câblage et organisation des locaux télécom',
+        'Tests, certification, mises à niveau et optimisation des infrastructures existantes',
     ],
 })
 services['commercial-wifi-installation']['en'].update({
@@ -1220,14 +1253,14 @@ services['commercial-wifi-installation']['en'].update({
 services['commercial-wifi-installation']['fr'].update({
     'name': 'Wi-Fi professionnel',
     'title': 'Conception et installation de Wi-Fi professionnel | Opticable',
-    'desc': "Analyse, planification, installation et optimisation de reseaux Wi-Fi professionnels pour bureaux, commerces, entrepots et immeubles multi-logements.",
-    'hero': 'Un Wi-Fi professionnel pense pour la performance, la couverture et la securite au quotidien.',
-    'intro': "Un reseau Wi-Fi performant est essentiel a la productivite des entreprises modernes. Opticable conçoit et deploie des reseaux Wi-Fi professionnels adaptes aux bureaux, commerces, entrepots, espaces publics et immeubles multi-logements.",
-    'summary': 'Analyse de couverture, installation de bornes, optimisation sans fil et soutien pour reseaux Wi-Fi professionnels.',
+    'desc': "Analyse, planification, installation et optimisation de réseaux Wi-Fi professionnels pour bureaux, commerces, entrepôts et immeubles multilocatifs.",
+    'hero': 'Un Wi-Fi professionnel pensé pour la performance, la couverture et la sécurité au quotidien.',
+    'intro': "Un réseau Wi-Fi performant est essentiel à la productivité des entreprises modernes. Opticable conçoit et déploie des réseaux Wi-Fi professionnels adaptés aux bureaux, commerces, entrepôts, espaces publics et immeubles multilocatifs.",
+    'summary': 'Analyse de couverture, installation de bornes, optimisation sans fil et support pour réseaux Wi-Fi professionnels.',
     'includes': [
-        'Analyse et planification de la couverture Wi-Fi pour bureaux, commerces, entrepots et immeubles multi-logements',
-        "Installation de points d'acces professionnels avec coordination des commutateurs, du montage et des controleurs",
-        'Optimisation, securisation des reseaux sans fil et soutien apres installation pour une meilleure performance',
+        'Analyse et planification de la couverture Wi-Fi pour bureaux, commerces, entrepôts et immeubles multilocatifs',
+        "Installation de bornes professionnelles avec coordination des switches, du montage et des contrôleurs",
+        'Optimisation, sécurisation des réseaux sans fil et support après installation pour une meilleure performance',
     ],
 })
 services['network-infrastructure']['en'].update({
@@ -1245,15 +1278,15 @@ services['network-infrastructure']['en'].update({
 })
 services['network-infrastructure']['fr'].update({
     'name': 'Solutions informatiques',
-    'title': 'Solutions informatiques et soutien d infrastructure pour entreprises | Opticable',
-    'desc': "Services informatiques pour entreprises incluant serveurs, postes de travail, equipements reseau, soutien d'infrastructure et assistance technique.",
-    'hero': "Des solutions informatiques qui soutiennent vos systemes d'affaires, votre connectivite et la stabilite de vos operations.",
-    'intro': "Les systemes informatiques sont au coeur des operations de nombreuses organisations. Opticable offre des services complets pour soutenir la performance, la stabilite et la securite des environnements technologiques.",
-    'summary': "Serveurs, postes de travail, equipements reseau, soutien operationnel et services d'infrastructure IT concrets.",
+    'title': "Solutions informatiques et soutien d'infrastructure pour entreprises | Opticable",
+    'desc': "Services informatiques pour entreprises incluant serveurs, postes de travail, équipements réseau, soutien d'infrastructure et assistance technique.",
+    'hero': "Des solutions informatiques qui soutiennent vos systèmes d'affaires, votre connectivité et la stabilité de vos opérations.",
+    'intro': "Les systèmes informatiques sont au cœur des opérations de nombreuses organisations. Opticable offre des services complets pour soutenir la performance, la stabilité et la sécurité des environnements technologiques.",
+    'summary': "Serveurs, postes de travail, équipements réseau, soutien opérationnel et infrastructure IT concrète.",
     'includes': [
-        'Installation et gestion de serveurs, postes de travail et equipements technologiques d affaires',
-        'Deploiement d equipements reseau, de commutation, de racks et des composantes centrales d infrastructure',
-        "Assistance technique, soutien d'infrastructure et bonnes pratiques de securite informatique de base",
+        "Installation et gestion de serveurs, postes de travail et équipements technologiques d'affaires",
+        "Déploiement d'équipements réseau, de switching, de racks et des composantes centrales d'infrastructure",
+        "Support technique, soutien d'infrastructure et bonnes pratiques de sécurité informatique",
     ],
 })
 services['security-camera-systems']['en'].update({
@@ -1265,12 +1298,12 @@ services['security-camera-systems']['en'].update({
     'summary': 'Camera installation, storage planning, remote viewing, and security-system integration for business environments.',
 })
 services['security-camera-systems']['fr'].update({
-    'name': 'Surveillance par camera',
-    'title': 'Systemes de surveillance par camera pour entreprises | Opticable',
-    'desc': "Installation de systemes de videosurveillance avec cablage, stockage, acces a distance et integration aux systemes de securite existants.",
-    'hero': 'Des systemes de surveillance par camera pour proteger les batiments, les equipes et les operations.',
-    'intro': "Les systemes de surveillance jouent un role cle dans la securite des batiments, des employes et des operations. Opticable met en place des solutions modernes de videosurveillance adaptees aux besoins de chaque environnement.",
-    'summary': 'Installation de cameras, gestion du stockage, acces a distance et integration aux systemes de securite pour les environnements d affaires.',
+    'name': 'Surveillance par caméra',
+    'title': 'Systèmes de surveillance par caméra pour entreprises | Opticable',
+    'desc': "Installation de systèmes de vidéosurveillance avec câblage, stockage, accès à distance et intégration aux systèmes de sécurité existants.",
+    'hero': 'Des systèmes de surveillance par caméra pour protéger les bâtiments, les équipes et les opérations.',
+    'intro': "Les systèmes de surveillance jouent un rôle clé dans la sécurité des bâtiments, des employés et des opérations. Opticable met en place des solutions modernes de vidéosurveillance adaptées aux besoins de chaque environnement.",
+    'summary': "Installation de caméras, gestion du stockage, accès à distance et intégration aux systèmes de sécurité pour les environnements d'affaires.",
 })
 services['access-control-systems']['en'].update({
     'name': 'Access Control',
@@ -1282,18 +1315,18 @@ services['access-control-systems']['en'].update({
 })
 services['access-control-systems']['fr'].update({
     'name': "Controle d'acces",
-    'title': "Systemes de controle d'acces et entrees securisees | Opticable",
-    'desc': "Installation de systemes de controle d'acces avec lecteurs, quincaillerie securisee, soutien des panneaux et integration avec intercoms ou systemes de securite.",
-    'hero': "Des systemes de controle d'acces pour des entrees securisees et une meilleure gestion des visiteurs.",
-    'intro': "Les systemes d'intercom et de controle d'acces permettent de mieux gerer la securite et les entrees dans les environnements professionnels et multi-usagers. Opticable propose des solutions fiables, modernes et evolutives pour les portes, les aires communes et les zones sensibles.",
-    'summary': "Lecteurs, quincaillerie securisee, gestion des acces et integration avec l'intercom ou les autres systemes de securite.",
+    'title': "Systèmes de contrôle d'accès et entrées sécurisées | Opticable",
+    'desc': "Installation de systèmes de contrôle d'accès avec lecteurs, quincaillerie sécurisée, contrôleurs et intégration avec intercoms ou systèmes de sécurité.",
+    'hero': "Des systèmes de contrôle d'accès pour des entrées sécurisées et une meilleure gestion des visiteurs.",
+    'intro': "Les systèmes d'intercom et de contrôle d'accès permettent de mieux gérer la sécurité et les entrées dans les environnements professionnels et multi-usagers. Opticable propose des solutions fiables, modernes et évolutives pour les portes, les aires communes et les zones sensibles.",
+    'summary': "Lecteurs, quincaillerie sécurisée, gestion des accès et intégration avec l'intercom ou les autres systèmes de sécurité.",
 })
 services['intercom-systems']['en'].update({
     'summary': 'Audio-video intercom systems for visitor communication, tenant workflows, and integrated secure entry.',
 })
 services['intercom-systems']['fr'].update({
     'name': 'Systemes intercom',
-    'summary': "Intercoms audio-video pour la communication visiteurs, les parcours des occupants et les entrees integrees.",
+    'summary': "Intercoms audio-vidéo pour la communication visiteurs, les parcours des occupants et les entrées intégrées.",
 })
 industry_cards['en'] = [
     ('Businesses and offices', 'Connected workspaces with structured cabling, WiFi, IT systems, and practical operational support.'),
@@ -1304,12 +1337,12 @@ industry_cards['en'] = [
     ('Industrial and logistics sites', 'Reliable connectivity, secure access, and infrastructure that supports operational environments.'),
 ]
 industry_cards['fr'] = [
-    ('Entreprises et bureaux', 'Espaces de travail connectes avec cablage structure, Wi-Fi, solutions informatiques et soutien operationnel concret.'),
+    ('Entreprises et bureaux', 'Espaces de travail connectés avec câblage structuré, Wi-Fi, solutions informatiques et soutien opérationnel concret.'),
     ('Immeubles commerciaux', "Infrastructure qui soutient les occupants, l'exploitation et les activites quotidiennes d'un batiment."),
-    ('Sites multi-logements et usages mixtes', 'Reseaux des aires communes, entrees securisees, surveillance et systemes de communication pour proprietes modernes.'),
-    ('Gestionnaires immobiliers', 'Standards repetables, meilleur soutien et coordination technologique plus simple sur des portefeuilles occupes.'),
-    ('Promoteurs et entrepreneurs', 'Planification et livraison technologique adaptees a la construction, aux amenagements et aux projets en phases.'),
-    ('Sites industriels et logistiques', 'Connectivite fiable, acces securise et infrastructure utile aux environnements operationnels.'),
+    ('Sites multi-logements et usages mixtes', 'Réseaux des aires communes, entrées sécurisées, surveillance et systèmes de communication pour propriétés modernes.'),
+    ('Gestionnaires immobiliers', 'Standards répétables, meilleur support et coordination technologique plus simple sur des portefeuilles occupés.'),
+    ('Promoteurs et entrepreneurs', 'Planification et livraison technologiques adaptées à la construction, aux aménagements et aux projets en phases.'),
+    ('Sites industriels et logistiques', 'Connectivité fiable, accès sécurisé et infrastructure utile aux environnements opérationnels.'),
 ]
 HOME_POINT_KEYS = (
     'structured-cabling',
@@ -1344,23 +1377,787 @@ HOME_FEATURED_SERVICES = {
         {'key': 'access-control-systems', 'badge': 'ENTRY', 'title': "Intercom et controle d'acces", 'copy': 'Intercoms audio-video, lecteurs, gestion des portes et integration des entrees securisees pour les environnements professionnels.'},
     ],
 }
+T['en'].update({
+    'home_kicker': 'Integrated technology infrastructure',
+    'home_h1': 'Connect and secure business environments.',
+    'home_intro': 'Opticable brings backbone cabling, professional WiFi, IT environments, surveillance, intercom, and secure entry into one clearer technical scope.',
+    'home_points': [
+        'Backbone cabling and structured pathways for cleaner growth',
+        'Professional WiFi with stronger coverage and device strategy',
+        'IT environments that support users, workstations, and operations',
+        'Surveillance and access layers designed as one system',
+        'Field-ready execution with a cleaner handoff into operations',
+    ],
+    'focus_chips': ['Structured cabling', 'Professional WiFi', 'IT environments', 'Camera systems', 'Secure entry'],
+    'featured_title': 'Featured interventions',
+    'featured_intro': 'Five high-impact service lines that bring structure, visibility, and control back into the technology environment.',
+    'trust_title': 'Execution built for the field',
+    'trust': [
+        ('Site reading', 'We assess pathways, rooms, doors, coverage constraints, and building realities before proposing the right system mix.'),
+        ('Multi-system coordination', 'Cabling, wireless, surveillance, access, and IT support are presented as connected layers, not isolated trades.'),
+        ('Installation discipline', 'The concept emphasizes cleaner room layouts, sharper detailing, and a stronger final presentation.'),
+        ('Operational follow-through', 'The goal is not just installation, but a site that stays easier to support and evolve after go-live.'),
+    ],
+    'services_h1': 'One partner to connect, structure, and secure your environment.',
+    'services_intro': 'Concept 02 presents Opticable through stronger service poles, inspired by enterprise service-group websites while staying focused on business technology infrastructure.',
+    'extra_title': 'Operational layers',
+    'extra_intro': 'Supporting work that often determines whether a technology environment stays clean, supportable, and scalable.',
+    'about_h1': 'A team that connects the field, the infrastructure, and the operation.',
+    'about_intro': 'Opticable approaches technology projects as operating environments, not just isolated installations. The objective is to make connectivity, secure entry, visibility, and day-to-day support work together with less friction.',
+    'about_story': 'This concept frames Opticable as a commercial technology partner with a more directional visual identity: closer to a specialized group of technical services, but still grounded in practical delivery and approachable client communication.',
+    'contact_h1': 'Start the next technology project with a clearer technical direction.',
+    'contact_intro': 'Tell us what the site needs to do, what is already in place, and where the friction points are. We can help map the right mix of cabling, wireless, IT, and security layers.',
+    'process_title': 'Deployment method',
+    'process_intro': 'Analyze the site, shape the technical direction, execute cleanly, then hand off a supportable environment.',
+    'clients_intro': 'Professional environments that need stronger technical structure without losing clarity.',
+    'division_title': 'Three service poles',
+    'division_intro': 'Inspired by service-group websites, the concept groups Opticable into three clearer business-facing capability areas.',
+})
+T['fr'].update({
+    'home_kicker': 'Infrastructure technologique intégrée',
+    'home_h1': "Connecter et sécuriser les environnements d'affaires.",
+    'home_intro': "Opticable regroupe backbone, câblage structuré, Wi-Fi professionnel, environnements IT, vidéosurveillance, intercom et gestion des accès dans une seule portée technique.",
+    'home_points': [
+        'Backbone et câblage structuré pour une croissance plus propre',
+        "Wi-Fi professionnel avec une meilleure logique de couverture et d'usage",
+        'Environnements IT qui soutiennent les usagers, les postes et les opérations',
+        'Surveillance et accès pensés comme un seul système',
+        "Exécution terrain avec une remise plus claire vers l'exploitation",
+    ],
+    'focus_chips': ['Câblage structuré', 'Wi-Fi professionnel', 'Environnements IT', 'Vidéosurveillance', 'Accès sécurisé'],
+    'featured_title': 'Interventions clés',
+    'featured_intro': "Cinq lignes de service à fort impact pour remettre de la structure, de la visibilité et du contrôle dans l'environnement technologique.",
+    'trust_title': 'Une exécution pensée pour le terrain',
+    'trust': [
+        ('Lecture du site', "Nous analysons les cheminements, les locaux, les portes, la couverture et les contraintes réelles avant de proposer la bonne combinaison de systèmes."),
+        ('Coordination multi-systèmes', "Câblage, sans-fil, surveillance, accès et IT sont présentés comme des couches connectées, pas comme des interventions isolées."),
+        ("Discipline d'installation", "Le concept met l'accent sur des locaux plus propres, un meilleur niveau de détail et une présentation finale plus forte."),
+        ('Suivi opérationnel', "L'objectif n'est pas seulement d'installer, mais de livrer un site plus simple à supporter et à faire évoluer après la mise en service."),
+    ],
+    'services_h1': 'Un seul partenaire pour connecter, structurer et sécuriser votre environnement.',
+    'services_intro': "Le concept 02 présente Opticable par pôles d'expertise, inspirés des groupes de services techniques, tout en restant centré sur l'infrastructure technologique pour entreprises.",
+    'extra_title': 'Couches de support',
+    'extra_intro': "Les travaux de soutien qui déterminent souvent si un environnement technologique reste propre, maintenable et évolutif.",
+    'about_h1': "Une équipe qui relie le terrain, l'infrastructure et l'exploitation.",
+    'about_intro': "Opticable aborde les projets technologiques comme des environnements d'exploitation, pas comme des installations isolées. Le but est de faire mieux fonctionner la connectivité, les accès, la visibilité et le soutien quotidien.",
+    'about_story': "Ce concept positionne Opticable comme un partenaire technologique commercial avec une identité plus directionnelle, plus proche d'un groupe de services spécialisés, mais toujours ancré dans une exécution concrète et une relation client accessible.",
+    'contact_h1': 'Lancez votre prochain projet technologique avec une direction plus claire.',
+    'contact_intro': "Expliquez ce que le site doit accomplir, ce qui est déjà en place et où se trouvent les points de friction. Nous pouvons structurer le bon mélange de câblage, sans-fil, IT et sécurité.",
+    'process_title': 'Méthode de déploiement',
+    'process_intro': 'Analyser le site, définir la bonne direction technique, exécuter proprement, puis remettre un environnement plus simple à exploiter.',
+    'clients_intro': 'Des environnements professionnels qui ont besoin de plus de structure technique sans perdre en clarté.',
+    'division_title': 'Trois pôles de service',
+    'division_intro': "Inspiré des sites de groupes de services, le concept regroupe Opticable en trois zones de compétence plus lisibles pour un client d'affaires.",
+})
+home_visuals['en'] = {
+    'eyebrow': 'Operational environments',
+    'title': 'A more directional, more architectural presentation of Opticable.',
+    'top_title': 'Commercial sites that need cleaner technical leadership',
+    'top_copy': 'Positioning built around connectivity, supportability, and secure daily operations instead of isolated trade descriptions.',
+    'top_alt': 'Professional property exterior representing a more corporate technology-services brand',
+    'main_title': 'Structured backbone, cleaner rooms, stronger visibility',
+    'main_copy': 'A visual language that combines field execution, organized infrastructure, and clearer system layering.',
+    'main_alt': 'Structured rack and building technology environment with organized infrastructure',
+}
+home_visuals['fr'] = {
+    'eyebrow': 'Environnements opérationnels',
+    'title': "Des systèmes installés dans des environnements réels",
+    'top_title': 'Immeubles commerciaux et multilocatifs',
+    'top_copy': "Sécurité, accès et connectivité coordonnés dès le départ pour des bâtiments qui doivent fonctionner au quotidien.",
+    'top_alt': 'Propriété professionnelle représentant une marque de services technologiques plus corporative',
+    'main_title': 'Racks réseau, câblage structuré et locaux techniques',
+    'main_copy': "Une infrastructure bien organisée, documentée et prête pour les ajouts futurs.",
+    'main_alt': 'Rack structuré et environnement technologique de bâtiment avec infrastructure organisée',
+}
+SERVICE_CARD_META = {
+    'structured-cabling': {'en': {'badge': 'CAB', 'eyebrow': 'Backbone'}, 'fr': {'badge': 'CAB', 'eyebrow': 'Backbone'}},
+    'commercial-wifi-installation': {'en': {'badge': 'WIFI', 'eyebrow': 'Wireless layer'}, 'fr': {'badge': 'WIFI', 'eyebrow': 'Couche sans fil'}},
+    'network-infrastructure': {'en': {'badge': 'IT', 'eyebrow': 'Operations'}, 'fr': {'badge': 'IT', 'eyebrow': 'Opérations'}},
+    'managed-it-services': {'en': {'badge': 'IT', 'eyebrow': 'Managed support'}, 'fr': {'badge': 'IT', 'eyebrow': 'Soutien technique'}},
+    'security-camera-systems': {'en': {'badge': 'CCTV', 'eyebrow': 'Visibility'}, 'fr': {'badge': 'CCTV', 'eyebrow': 'Visibilité'}},
+    'access-control-systems': {'en': {'badge': 'ACCESS', 'eyebrow': 'Entry control'}, 'fr': {'badge': 'ACCESS', 'eyebrow': "Contrôle d'entrée"}},
+    'intercom-systems': {'en': {'badge': 'COMMS', 'eyebrow': 'Entry communication'}, 'fr': {'badge': 'COMMS', 'eyebrow': "Communication d'entrée"}},
+    'fiber-optic-installation': {'en': {'badge': 'FIBER', 'eyebrow': 'Capacity'}, 'fr': {'badge': 'FIBER', 'eyebrow': 'Capacité'}},
+    'ip-phone-systems': {'en': {'badge': 'VOICE', 'eyebrow': 'Business voice'}, 'fr': {'badge': 'VOICE', 'eyebrow': "Voix d'affaires"}},
+}
+HOME_FEATURED_SERVICES = {
+    'en': [
+        {'key': 'structured-cabling', 'badge': 'CAB', 'eyebrow': 'Physical layer', 'title': 'Structured backbone', 'copy': 'The physical layer that keeps the environment organized, expandable, and easier to service.'},
+        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'eyebrow': 'Wireless network', 'title': 'Wireless performance', 'copy': 'Coverage, placement, and tuning shaped around real users, real density, and real building constraints.'},
+        {'key': 'network-infrastructure', 'badge': 'IT', 'eyebrow': 'Managed systems', 'title': 'IT environments', 'copy': 'Servers, workstations, racks, and business systems presented as part of one practical operating stack.'},
+        {'key': 'security-camera-systems', 'badge': 'CCTV', 'eyebrow': 'Surveillance', 'title': 'Site visibility', 'copy': 'Modern surveillance systems designed to improve control, traceability, and operational confidence.'},
+        {'key': 'access-control-systems', 'badge': 'ACCESS', 'eyebrow': 'Entry management', 'title': 'Secure entry', 'copy': 'Access control, intercom logic, and managed visitor flow for professional environments.'},
+    ],
+    'fr': [
+        {'key': 'structured-cabling', 'badge': 'CAB', 'eyebrow': 'Couche physique', 'title': 'Backbone structuré', 'copy': "La couche physique qui garde l'environnement organisé, évolutif et plus simple à maintenir."},
+        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'eyebrow': 'Réseau sans fil', 'title': 'Performance sans fil', 'copy': "Couverture, positionnement et optimisation pensés selon les usages réels, la densité et les contraintes du site."},
+        {'key': 'network-infrastructure', 'badge': 'IT', 'eyebrow': 'Soutien informatique', 'title': 'Environnements IT', 'copy': "Serveurs, postes, racks et systèmes d'affaires présentés comme une seule pile opérationnelle cohérente."},
+        {'key': 'security-camera-systems', 'badge': 'CCTV', 'eyebrow': 'Surveillance', 'title': 'Visibilité du site', 'copy': 'Des systèmes de surveillance modernes pour renforcer le contrôle, la traçabilité et la confiance opérationnelle.'},
+        {'key': 'access-control-systems', 'badge': 'ACCESS', 'eyebrow': 'Entrées et visiteurs', 'title': 'Entrées sécurisées', 'copy': "Contrôle d'accès, logique intercom et parcours visiteurs mieux maîtrisés pour les environnements professionnels."},
+    ],
+}
+SERVICE_DIVISION_GROUPS = {
+    'en': [
+        {'eyebrow': 'Pole 01', 'title': 'Connectivity and backbone', 'copy': 'The infrastructure that gives every other system a cleaner, more stable base.', 'keys': ['structured-cabling', 'fiber-optic-installation', 'commercial-wifi-installation']},
+        {'eyebrow': 'Pole 02', 'title': 'IT and operations', 'copy': 'The layers that support users, workstations, telecom rooms, and day-to-day business continuity.', 'keys': ['managed-it-services', 'network-infrastructure', 'ip-phone-systems']},
+        {'eyebrow': 'Pole 03', 'title': 'Security and entry', 'copy': 'The systems that control visibility, visitor flow, doors, and secure access across the site.', 'keys': ['security-camera-systems', 'access-control-systems', 'intercom-systems']},
+    ],
+    'fr': [
+        {'eyebrow': 'Pôle 01', 'title': 'Connectivité et backbone', 'copy': "L'infrastructure qui donne aux autres systèmes une base plus propre et plus stable.", 'keys': ['structured-cabling', 'fiber-optic-installation', 'commercial-wifi-installation']},
+        {'eyebrow': 'Pôle 02', 'title': 'IT et opérations', 'copy': 'Les couches qui soutiennent les usagers, les postes, les locaux télécom et la continuité des opérations.', 'keys': ['managed-it-services', 'network-infrastructure', 'ip-phone-systems']},
+        {'eyebrow': 'Pôle 03', 'title': 'Sécurité et accès', 'copy': 'Les systèmes qui gèrent la visibilité, les visiteurs, les portes et les accès sécurisés sur le site.', 'keys': ['security-camera-systems', 'access-control-systems', 'intercom-systems']},
+    ],
+}
+HOME_PANEL_FACTS = {
+    'en': [('Field-led delivery', 'From planning to install'), ('Integrated scope', 'Connectivity, IT, security'), ('Business-ready', 'Built for live operations')],
+    'fr': [('Exécution terrain', "De l'analyse à l'installation"), ('Portée intégrée', 'Connectivité, IT, sécurité'), ('Prêt à opérer', "Pensé pour des sites en activité")],
+}
 
-primary_order = [
-    'structured-cabling',
-    'commercial-wifi-installation',
-    'network-infrastructure',
+T['fr'].update({
+    'about': 'À propos',
+    'industries': 'Clientèle',
+    'tagline': 'Technologie commerciale et systèmes du bâtiment',
+    'quote': 'Obtenir une soumission',
+    'all_services': 'Voir nos services',
+    'company': "Opticable conçoit, installe et gère les systèmes technologiques des immeubles commerciaux, avec un soutien durable après la mise en service.",
+    'footer': "Opticable installe et gère les systèmes technologiques des immeubles commerciaux à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord, dans les Laurentides et partout au Québec.",
+    'home_title': "Caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux | Opticable",
+    'home_desc': "Opticable installe et gère caméras, accès, WiFi et câblage structuré pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.",
+    'home_kicker': 'Technologie commerciale et systèmes du bâtiment',
+    'home_h1': "Caméras, contrôle d'accès, WiFi et câblage pour des bâtiments mieux gérés",
+    'home_intro': "Opticable conçoit, installe et gère les systèmes technologiques des immeubles commerciaux et multilocatifs au Québec. Un seul partenaire pour la sécurité, l'accès, le WiFi et l'infrastructure réseau, de l'installation au soutien continu.",
+    'home_points': [
+        'Caméras IP pour entrées, stationnements et aires communes',
+        "Contrôle d'accès et intercom pour portes, halls et visiteurs",
+        'WiFi commercial pour bureaux, commerces et espaces partagés',
+        'Câblage structuré, fibre, racks et locaux réseau',
+    ],
+    'focus_chips': ['Installation + soutien', 'Écosystème unifié', 'Bâtiments occupés', 'Portefeuilles multi-immeubles'],
+    'featured_title': 'Nos services — installation, soutien et infrastructure',
+    'featured_intro': "Nous installons, intégrons et gérons les systèmes technologiques des immeubles commerciaux. Un seul partenaire, du premier câble au soutien continu.",
+    'trust_title': 'Pourquoi choisir Opticable',
+    'home_trust_intro': "Nous ne faisons pas que remettre un équipement. Nous structurons des systèmes qui s'exploitent facilement, qui durent et qu'on peut faire évoluer sans repartir de zéro.",
+    'trust': [
+        ('Vision globale du bâtiment', "Accès, caméras, WiFi et réseau sont pensés ensemble dès le départ, pas raccordés en pièces détachées après coup."),
+        ('Installations propres et durables', "Repérage, racks, finition et documentation sont traités avec rigueur pour livrer un système clair et durable."),
+        ("Plus simple à exploiter", "Vos équipes héritent de systèmes mieux organisés, plus faciles à maintenir, à faire évoluer et à soutenir dans le temps."),
+    ],
+    'services_title': 'Services technologiques pour immeubles commerciaux | Opticable',
+    'services_desc': "Installation et soutien de caméras, contrôle d'accès, WiFi, intercom, câblage structuré, fibre et réseau pour immeubles commerciaux au Québec.",
+    'services_h1': "Installation et soutien pour les systèmes technologiques du bâtiment",
+    'services_intro': "Opticable offre deux volets complémentaires: l'installation des systèmes et le soutien continu après la mise en service. On ne fait pas que livrer les équipements; on aide aussi à les gérer, les maintenir et les faire évoluer.",
+    'priority_title': 'Services principaux',
+    'priority_intro': "Les systèmes visibles au quotidien: sécurité, accès, communication d'entrée, WiFi et soutien informatique réseau.",
+    'support_title': 'Infrastructure de soutien',
+    'support_intro': "Le câblage, la fibre, les racks, les locaux techniques et la VoIP donnent la base nécessaire pour que les autres systèmes restent fiables.",
+    'extra_title': "Avantages d'un partenaire unique",
+    'extra_intro': "Ce qui fait la différence quand l'installation, le soutien et l'organisation de l'infrastructure restent coordonnés par la même équipe.",
+    'extras': [
+        ("Écosystème unifié", "Les caméras, l'intercom et le contrôle d'accès peuvent partager une seule plateforme de gestion pour surveiller, ouvrir et communiquer."),
+        ('Soutien après installation', "On reste disponibles pour la maintenance, les ajustements, l'administration des systèmes et le support technique."),
+        ('Documentation utile', "Repérage, organisation des racks et information de remise sont pensés pour les équipes qui devront exploiter le site."),
+        ('Coordination de chantier', "On travaille avec les gestionnaires, promoteurs, entrepreneurs généraux et autres corps de métier sans compliquer le calendrier."),
+    ],
+    'about_title': "À propos d'Opticable | Installation commerciale au Québec",
+    'about_desc': "Opticable installe et gère caméras, accès, WiFi et câblage pour immeubles commerciaux. Montréal, Laval et partout au Québec.",
+    'about_h1': "Opticable, installateur et partenaire technologique pour les immeubles commerciaux",
+    'about_intro': "Opticable est une entreprise québécoise spécialisée dans l'installation et la gestion de systèmes de sécurité, de contrôle d'accès, de WiFi et d'infrastructure réseau pour les immeubles commerciaux. On travaille avec les entreprises, les gestionnaires immobiliers, les promoteurs et les entrepreneurs qui ont besoin que les systèmes soient bien installés et bien gérés, du premier fil jusqu'au soutien continu.",
+    'about_story': "On part du bâtiment, pas du catalogue. Chaque projet est analysé selon l'usage réel du site, les accès, les contraintes d'occupation et l'infrastructure déjà en place.",
+    'contact_title': 'Contactez Opticable — Soumission et renseignements | Opticable',
+    'contact_desc': "Demandez une soumission pour vos caméras, accès, WiFi et câblage commercial. Montréal, Laval, Longueuil et partout au Québec.",
+    'contact_h1': 'Demander une soumission ou nous joindre',
+    'contact_intro': "Décrivez-nous votre bâtiment, les systèmes visés et votre échéancier. On vous revient rapidement avec les prochaines étapes ou les questions nécessaires pour préciser votre demande.",
+    'contact_info_title': 'Coordonnées directes',
+    'contact_panel_title': 'Coordonnées directes',
+    'contact_panel_copy': "On lit chaque demande et on vous répond dans les meilleurs délais. Pour les projets urgents, appelez-nous directement du lundi au vendredi.",
+    'contact_form_note': "On lit chaque demande et on vous répond dans les meilleurs délais. Pour les projets urgents, appelez-nous directement du lundi au vendredi.",
+    'contact_cards': [
+        ('Renseignements généraux', 'info@opticable.ca'),
+        ('Demandes de soumission', 'soumissions@opticable.ca'),
+        ('Téléphone', '514-316-7236'),
+        ('Soumissions et renseignements', 'Lundi au vendredi 8 h à 17 h : par téléphone, courriel ou formulaire'),
+        ('Fin de semaine', 'Samedi et dimanche 10 h à 16 h : par courriel ou formulaire seulement'),
+        ('Support technique', 'Lundi au vendredi 8 h à 17 h · Samedi et dimanche 10 h à 16 h'),
+    ],
+    'service_area_eyebrow': 'Zone de service',
+    'service_area_title': 'Zone de service',
+    'service_area_intro': "Opticable dessert les immeubles commerciaux à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord, dans les Laurentides et partout au Québec.",
+    'service_area_regions': ['Montréal', 'Laval', 'Longueuil', 'Rive-Sud', 'Rive-Nord', 'Laurentides', 'Et partout au Québec'],
+    'industries_title': 'Clients et types de projets desservis | Opticable',
+    'industries_desc': "Opticable installe et gère sécurité, WiFi et câblage pour entreprises, gestionnaires immobiliers et immeubles multilocatifs. Montréal et partout au Québec.",
+    'industries_h1': "Les équipes qui gèrent, construisent et exploitent des immeubles commerciaux",
+    'industries_intro': "Opticable intervient dans des bâtiments occupés, des chantiers actifs et des immeubles en exploitation. Nos clients sont ceux qui ont besoin que les systèmes fonctionnent, sans mauvaises surprises.",
+    'faq_title': 'Questions fréquentes sur nos services | Opticable',
+    'faq_desc': "Réponses aux questions sur l'installation et la gestion de caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux au Québec.",
+    'faq_h1': 'Vous avez des questions sur nos services ou sur un projet ?',
+    'faq_intro': "Voici les questions qu'on nous pose le plus souvent. Si vous ne trouvez pas ce que vous cherchez, contactez-nous directement.",
+    'faq_panel_title': 'Questions fréquentes',
+    'faq_panel_copy': "Réponses utiles sur les soumissions, l'installation, le soutien technique et les systèmes qu'on gère après la mise en service.",
+    'clients_title': 'Des solutions adaptées aux réalités du terrain',
+    'clients_intro': "Nous intervenons dans des bâtiments occupés, des sites multi-usages et des environnements où la continuité des opérations est essentielle.",
+    'clients': [
+        ('Entreprises, bureaux et commerces', "Sécurité, WiFi, connectivité et systèmes d'entrée pour des opérations qui doivent rester stables au quotidien."),
+        ('Immeubles multilocatifs', "Intercoms, accès, caméras, WiFi et câblage pour les aires communes, les halls et les environnements occupés."),
+        ('Immeubles commerciaux à locataires multiples', "Systèmes du bâtiment pensés pour les espaces partagés, les locaux techniques et l'exploitation courante."),
+        ('Gestionnaires immobiliers et promoteurs', 'Interlocuteur unique pour les mises à niveau, la standardisation multi-immeubles et la coordination de chantier.'),
+    ],
+    'process_title': "Notre méthode d'installation",
+    'process_intro': "Un projet bien livré commence par une bonne préparation.",
+    'process': [
+        ("Évaluation du site", "Nous analysons vos besoins, vos accès, vos zones sensibles et l'infrastructure en place."),
+        ('Recommandation claire', "Vous recevez une proposition adaptée à votre bâtiment, votre budget et votre échéancier, sans surprise."),
+        ('Installation propre', "Nos équipes installent, testent et identifient les composantes avec rigueur. Les lieux sont laissés propres."),
+        ('Mise en service et soutien', "Nous validons le fonctionnement complet, vous remettons un système documenté et restons disponibles pour la gestion et le support continu."),
+    ],
+    'cta_kicker': 'Parlons de votre projet',
+    'cta_title': "Besoin d'un partenaire technologique pour votre immeuble ?",
+    'cta_copy': "Expliquez-nous votre bâtiment, les systèmes visés et votre échéancier. Nous vous reviendrons avec une proposition claire, adaptée à votre réalité. Opticable dessert les immeubles commerciaux à Montréal, Laval, Longueuil et partout au Québec.",
+    'service_label': 'Voir le service',
+    'footer_contact_title': 'Coordonnées',
+    'footer_contact_intro': 'Joignez Opticable directement.',
+    'division_title': 'Installation, soutien et infrastructure',
+    'division_intro': "Opticable combine l'installation, la gestion continue et l'infrastructure de soutien pour livrer des systèmes plus cohérents.",
+    'gateway_intro': "Opticable accompagne les immeubles commerciaux avec des systèmes de sécurité, d'accès, de WiFi et d'infrastructure réseau mieux coordonnés. Choisissez votre langue pour continuer.",
+})
+
+T['en'].update({
+    'blog': 'Blog',
+    'case_studies': 'Case studies',
+    'follow_us': 'Follow us',
+    'view_case_study': 'View case study',
+    'view_blog_posts': 'View articles',
+    'contact_cards': [
+        ('General inquiries', 'info@opticable.ca'),
+        ('Project requests', 'quotes@opticable.ca'),
+        ('Technical support', 'support@opticable.ca'),
+        ('Office phone', '514-316-7236'),
+        ('Sales and inquiries', 'Monday to Friday, 8:00 AM to 5:00 PM'),
+        ('Weekend hours', 'Saturday and Sunday, 10:00 AM to 4:00 PM'),
+    ],
+})
+T['fr'].update({
+    'blog': 'Blogue',
+    'case_studies': 'Études de cas',
+    'follow_us': 'Suivez-nous',
+    'view_case_study': "Voir l'étude de cas",
+    'view_blog_posts': 'Voir les articles',
+    'contact_cards': [
+        ('Renseignements généraux', 'info@opticable.ca'),
+        ('Demandes de soumission', 'soumissions@opticable.ca'),
+        ('Support technique', 'support@opticable.ca'),
+        ('Téléphone', '514-316-7236'),
+        ('Soumissions et renseignements', 'Lundi au vendredi 8 h à 17 h : par téléphone, courriel ou formulaire'),
+        ('Fin de semaine', 'Samedi et dimanche 10 h à 16 h : par courriel ou formulaire seulement'),
+        ('Support technique', 'Lundi au vendredi 8 h à 17 h · Samedi et dimanche 10 h à 16 h'),
+    ],
+})
+
+HOME_POINT_KEYS = (
     'security-camera-systems',
     'access-control-systems',
+    'commercial-wifi-installation',
+    'structured-cabling',
+)
+
+SERVICE_CARD_META['security-camera-systems']['fr'] = {'badge': 'CCTV', 'eyebrow': 'Sécurité'}
+SERVICE_CARD_META['access-control-systems']['fr'] = {'badge': 'ACCESS', 'eyebrow': 'Accès'}
+SERVICE_CARD_META['commercial-wifi-installation']['fr'] = {'badge': 'WIFI', 'eyebrow': 'Sans fil'}
+SERVICE_CARD_META['intercom-systems']['fr'] = {'badge': 'INTERCOM', 'eyebrow': 'Entrées'}
+SERVICE_CARD_META['network-infrastructure']['fr'] = {'badge': 'IT', 'eyebrow': 'Support réseau'}
+SERVICE_CARD_META['managed-it-services']['fr'] = {'badge': 'IT', 'eyebrow': 'Soutien continu'}
+SERVICE_CARD_META['structured-cabling']['fr'] = {'badge': 'CAB', 'eyebrow': 'Câblage'}
+SERVICE_CARD_META['fiber-optic-installation']['fr'] = {'badge': 'FIBER', 'eyebrow': 'Backbone'}
+SERVICE_CARD_META['ip-phone-systems']['fr'] = {'badge': 'VOIP', 'eyebrow': 'Voix'}
+
+HOME_FEATURED_SERVICES['fr'] = [
+    {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Caméras de sécurité', 'copy': "Installation, configuration, visionnement à distance et soutien des caméras IP pour entrées, stationnements et aires communes."},
+    {'key': 'access-control-systems', 'badge': 'ACCESS', 'title': "Contrôle d'accès", 'copy': "Lecteurs, serrures, panneaux et câblage de porte pour mieux gérer les entrées, les halls et les zones restreintes."},
+    {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'WiFi commercial', 'copy': "Planification de couverture, bornes professionnelles, maintenance et soutien pour bureaux, commerces et espaces partagés."},
+    {'key': 'intercom-systems', 'badge': 'INTERCOM', 'title': 'Intercom', 'copy': "Intercom audio ou vidéo pour halls, portails et accès visiteurs, avec intégration au contrôle d'accès et au réseau."},
+    {'key': 'managed-it-services', 'badge': 'IT', 'title': 'Services informatiques', 'copy': "Gestion de parc, soutien réseau, maintenance et support technique pour vos environnements après l'installation."},
+    {'key': 'ip-phone-systems', 'badge': 'VOIP', 'title': 'Téléphonie IP', 'copy': "Lignes SIP, postes IP, numéros d'affaires et câblage prêt pour la VoIP pour vos bureaux et espaces de travail."},
+    {'key': 'structured-cabling', 'badge': 'CAB', 'title': 'Câblage structuré', 'copy': "Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, tests et documentation pour une base réseau propre et durable."},
+]
+
+SERVICE_DIVISION_GROUPS['fr'] = [
+    {'eyebrow': 'Volet 01', 'title': 'Installation des systèmes', 'copy': "Caméras, contrôle d'accès, intercom et WiFi installés selon la réalité du bâtiment, des accès et des occupants.", 'keys': ['security-camera-systems', 'access-control-systems', 'intercom-systems', 'commercial-wifi-installation']},
+    {'eyebrow': 'Volet 02', 'title': 'Infrastructure de soutien', 'copy': 'Câblage structuré, fibre optique, racks, patch panels, téléphonie IP et locaux techniques pour donner une base propre au site.', 'keys': ['structured-cabling', 'fiber-optic-installation', 'network-infrastructure', 'ip-phone-systems']},
+    {'eyebrow': 'Volet 03', 'title': 'Gestion et soutien continu', 'copy': "Maintenance, support technique, administration des systèmes et ajustements après la mise en service pour éviter de repartir de zéro.", 'keys': ['security-camera-systems', 'access-control-systems', 'commercial-wifi-installation', 'network-infrastructure']},
+]
+
+HOME_PANEL_FACTS['fr'] = [
+    ('Installation', 'Systèmes et infrastructure'),
+    ('Soutien continu', 'Gestion, maintenance, support'),
+    ('Territoire', 'Montréal, Laval, Longueuil et partout au Québec'),
+]
+
+services['security-camera-systems']['fr'].update({
+    'name': 'Caméras de sécurité',
+    'title': 'Caméras de sécurité pour immeubles commerciaux | Opticable',
+    'desc': "Installation et gestion de caméras IP, NVR et surveillance pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.",
+    'hero': "Caméras de sécurité pour immeubles commerciaux et espaces d'affaires",
+    'intro': "Opticable installe et gère des systèmes de caméras IP adaptés aux immeubles commerciaux, multilocatifs et aux environnements d'affaires. Chaque projet est planifié selon vos zones sensibles, vos accès et les exigences de votre exploitation, avec un soutien continu après la mise en service.",
+    'summary': 'Caméras IP, PoE, NVR, visionnement à distance et soutien continu pour protéger les zones sensibles, aires communes, périmètres et accès.',
+    'related': ['access-control-systems', 'intercom-systems', 'structured-cabling'],
+})
+services['access-control-systems']['fr'].update({
+    'name': "Contrôle d'accès",
+    'title': "Contrôle d'accès pour immeubles commerciaux | Opticable",
+    'desc': "Installation et gestion de contrôle d'accès, lecteurs, panneaux et câblage de portes pour immeubles commerciaux. Montréal, Laval et partout au Québec.",
+    'hero': "Contrôle d'accès pour immeubles, halls d'entrée et espaces sécurisés",
+    'intro': "Opticable installe et gère des systèmes de contrôle d'accès pour les immeubles commerciaux, multilocatifs et les environnements d'affaires. Lecteurs, panneaux de contrôle, serrures électroniques et câblage de portes sont planifiés, installés et soutenus pour des accès fiables et durables.",
+    'summary': "Lecteurs, serrures, panneaux, câblage de portes et administration continue des accès pour halls, entrées et zones restreintes.",
+    'related': ['intercom-systems', 'security-camera-systems', 'structured-cabling'],
+})
+services['commercial-wifi-installation']['fr'].update({
+    'name': 'WiFi commercial',
+    'title': 'Installation WiFi commercial pour bureaux et immeubles | Opticable',
+    'desc': 'Conception, installation, gestion et maintenance de WiFi commercial pour bureaux et immeubles. Montréal, Laval, Longueuil et partout au Québec.',
+    'hero': 'WiFi commercial pour bureaux, immeubles et espaces partagés',
+    'intro': "Opticable conçoit, installe et assure la gestion des réseaux WiFi professionnels pour les immeubles commerciaux et multilocatifs. Signal stable, couverture bien dimensionnée et infrastructure câblée qui supporte les bornes, sans angle mort, sans surcharge, avec un soutien technique disponible.",
+    'summary': 'Planification de couverture, bornes d’accès professionnelles, maintenance et soutien pour les réseaux sans fil des immeubles commerciaux.',
+    'related': ['structured-cabling', 'network-infrastructure', 'access-control-systems'],
+})
+services['intercom-systems']['fr'].update({
+    'name': 'Intercom',
+    'title': "Systèmes d'intercom pour immeubles commerciaux | Opticable",
+    'desc': "Installation d'intercoms audio et vidéo pour halls, portails et immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.",
+    'hero': "Systèmes d'intercom pour halls, portails et immeubles occupés",
+    'intro': "Opticable installe des systèmes d'intercom audio et vidéo pour les halls d'entrée, les portails et les accès visiteurs des immeubles commerciaux et multilocatifs. Coordonnés avec le contrôle d'accès, les caméras et le réseau, pour une communication d'entrée fiable, bien intégrée et facile à gérer.",
+    'summary': "Intercom audio ou vidéo pour halls, portails et accès visiteurs, avec intégration au contrôle d'accès et au réseau.",
+    'related': ['access-control-systems', 'security-camera-systems', 'network-infrastructure'],
+})
+services['structured-cabling']['fr'].update({
+    'name': 'Câblage structuré',
+    'title': 'Câblage structuré pour immeubles commerciaux | Opticable',
+    'desc': 'Installation de câblage structuré Cat 6, Cat 6A, coaxial et fibre optique pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
+    'hero': "Câblage structuré pour immeubles commerciaux et environnements d'affaires",
+    'intro': "Opticable installe le câblage structuré qui supporte vos systèmes de sécurité, de sans-fil, de réseau et de communication. Une installation propre, bien organisée et documentée, qui simplifie l'entretien et les ajouts futurs.",
+    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, tests et documentation pour une base réseau propre et durable.',
+    'related': ['fiber-optic-installation', 'network-infrastructure', 'commercial-wifi-installation'],
+})
+services['fiber-optic-installation']['fr'].update({
+    'name': 'Fibre optique',
+    'title': 'Installation de fibre optique pour immeubles commerciaux | Opticable',
+    'desc': 'Liaisons fibre optique, colonnes montantes et prolongements de service pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
+    'hero': 'Installation de fibre optique pour immeubles commerciaux et sites multi-étages',
+    'intro': "Opticable installe les liaisons en fibre optique qui servent de colonne vertébrale à votre infrastructure réseau. Backbone entre étages, prolongements de service et liaisons haute capacité, pour les bâtiments où le cuivre ne suffit plus.",
+    'summary': 'Backbone, colonnes montantes, prolongements de service et liaisons haute capacité pour immeubles commerciaux.',
+    'related': ['structured-cabling', 'network-infrastructure', 'security-camera-systems'],
+})
+services['network-infrastructure']['fr'].update({
+    'name': 'Infrastructure réseau',
+    'title': 'Infrastructure réseau pour immeubles commerciaux | Opticable',
+    'desc': 'Installation de racks, patch panels et locaux techniques pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
+    'hero': 'Infrastructure réseau pour immeubles commerciaux — racks, locaux techniques et organisation des arrivées',
+    'intro': "Opticable installe et organise l'infrastructure réseau des immeubles commerciaux: racks, patch panels, gestion des arrivées Internet et remise en ordre des locaux techniques existants. Une infrastructure bien structurée, c'est ce qui rend vos systèmes fiables et plus faciles à maintenir.",
+    'summary': 'Racks, patch panels, locaux techniques, gestion des arrivées Internet et soutien réseau pour des environnements plus simples à exploiter.',
+    'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems'],
+})
+services['ip-phone-systems']['fr'].update({
+    'name': 'Téléphonie IP',
+    'title': 'Téléphonie IP et VoIP pour bureaux commerciaux | Opticable',
+    'desc': 'Téléphonie IP, lignes VoIP et câblage pour bureaux commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
+    'hero': "Téléphonie IP et systèmes VoIP pour bureaux et espaces d'affaires",
+    'intro': "Opticable installe le câblage et l'infrastructure réseau nécessaires à vos systèmes de téléphonie IP. Postes de travail, lignes VoIP, numéros d'affaires et câblage structuré prêt pour la communication, pour les bureaux qui veulent une téléphonie fiable et bien intégrée à leur réseau.",
+    'summary': "Téléphonie d'affaires, lignes SIP, postes, câblage VoIP et soutien réseau pour les bureaux commerciaux.",
+    'related': ['network-infrastructure', 'structured-cabling', 'commercial-wifi-installation'],
+})
+
+faq_groups['fr'] = [
+    ('Sur Opticable en général', "Questions de base sur l'entreprise, la zone de service et les services offerts après l'installation.", [
+        ('Quelle région desservez-vous ?', "Opticable intervient principalement à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord et dans les Laurentides, et partout au Québec. Pour les projets situés hors de ces régions, contactez-nous."),
+        ("Est-ce qu'Opticable est une entreprise licenciée ?", 'Oui. Opticable détient la licence RBQ 5864-1648-01, délivrée par la Régie du bâtiment du Québec.'),
+        ('Avec quels types de bâtiments travaillez-vous ?', "Immeubles commerciaux, multilocatifs, bureaux, commerces, hôtels et sites en construction. Si vous n'êtes pas sûr, décrivez-nous votre projet et on vous dira franchement si on peut vous aider."),
+        ("Est-ce qu'Opticable fournit aussi le matériel ou seulement l'installation ?", "Les deux. On peut fournir et installer, ou travailler avec le matériel que vous avez déjà. On vous conseille sur le choix des équipements si besoin."),
+        ("Est-ce qu'Opticable offre des services après l'installation ?", "Oui. On assure le soutien technique, la gestion et la maintenance des systèmes après la mise en service — caméras, WiFi, contrôle d'accès, intercom et réseau. On ne fait pas que les installer."),
+    ]),
+    ('Sur les soumissions et les projets', "Ce qu'il faut prévoir pour obtenir une proposition claire et lancer un projet dans de bonnes conditions.", [
+        ('Comment obtenir une soumission ?', "Remplissez le formulaire de contact ou appelez-nous en semaine. Décrivez le type de bâtiment, les systèmes visés et votre échéancier. On vous revient rapidement avec une proposition claire."),
+        ('Combien coûte une installation ?', "Les coûts varient selon le système, la superficie, le nombre de points et les contraintes d'accès. Chaque projet est différent — contactez-nous pour une soumission adaptée à votre situation."),
+        ("Est-ce que vous faites des projets de petite envergure ?", "Oui. On intervient sur un seul système dans un petit local comme sur une installation complète dans un grand immeuble. La taille du projet n'est pas un critère d'exclusion."),
+        ("Quelle information avez-vous besoin pour préparer une soumission ?", "L'essentiel: type de bâtiment, adresse approximative, systèmes souhaités, nombre de zones, portes ou points, échéancier et contraintes particulières. Plus vous donnez de détails, plus notre proposition sera précise."),
+        ("Est-ce que vous faites des visites de site avant de soumissionner ?", "Pour les projets plus importants, oui. Une visite nous permet de valider les cheminements, les contraintes et l'infrastructure existante avant de remettre une proposition finale."),
+    ]),
+    ("Sur l'installation", "Déroulement, coordination terrain et remise du système après les travaux.", [
+        ("Combien de temps dure une installation typique ?", "Ça dépend du projet. Une installation de caméras dans un commerce peut se faire en une journée. Un projet complet dans un immeuble multilocatif peut s'étaler sur plusieurs jours ou plusieurs semaines. L'échéancier est établi dans la soumission."),
+        ("Est-ce que vous travaillez dans des bâtiments occupés ?", "Oui, c'est notre réalité la plus courante. On planifie les travaux pour minimiser les interruptions et on s'adapte aux horaires de votre immeuble."),
+        ('Est-ce que vous coordonnez avec les autres entrepreneurs sur un chantier ?', "Oui. On coordonne avec l'entrepreneur général, les électriciens et les autres corps de métier pour que le câblage et les systèmes soient installés aux bonnes phases."),
+        ("Qu'est-ce qui est inclus dans la livraison d'un projet ?", "Tous les systèmes sont testés et fonctionnels, les composantes sont identifiées et la documentation de base est remise. Vous héritez d'un système que vous, ou un autre technicien, pouvez comprendre sans tout redécouvrir."),
+    ]),
+    ('Sur les systèmes spécifiques', "Réponses sur les intégrations, l'accès à distance et les choix techniques les plus fréquents.", [
+        ("Est-ce que les caméras, l'intercom et le contrôle d'accès peuvent fonctionner ensemble ?", "Oui. Ces trois systèmes peuvent faire partie du même écosystème — une seule plateforme de gestion pour surveiller, contrôler les accès et communiquer à l'entrée. C'est souvent la solution qu'on recommande pour les immeubles qui veulent simplifier leur gestion."),
+        ("Est-ce qu'on peut accéder aux caméras à distance ?", "Oui. Les systèmes qu'on installe permettent le visionnement à distance depuis un ordinateur, une tablette ou un téléphone."),
+        ("Quelle est la différence entre le contrôle d'accès et un simple verrou électronique ?", "Un verrou électronique ouvre ou ferme une porte. Un système de contrôle d'accès gère qui peut entrer, quand, avec quel type d'identification, et conserve un historique des accès."),
+        ("Est-ce qu'un intercom peut être relié au contrôle d'accès ?", "Oui. Un intercom vidéo relié au contrôle d'accès permet d'identifier un visiteur et de déverrouiller la porte à distance depuis un poste intérieur ou un appareil mobile."),
+        ("Quelle catégorie de câble recommandez-vous pour un nouveau projet ?", "Cat 6 ou Cat 6A pour la grande majorité des projets commerciaux. Le Cat 6A est préférable pour les longues distances ou les environnements à forte densité d'équipements."),
+        ("Est-ce que vous faites de la maintenance après l'installation ?", "Oui. On reste disponibles pour les interventions après la mise en service — ajout de points, remplacement d'équipements, reconfiguration et support technique."),
+        ("Quelles sont vos heures pour le support technique ?", "Le support technique est offert du lundi au vendredi de 8 h à 17 h et le samedi et dimanche de 10 h à 16 h."),
+    ]),
+]
+
+FR_ABOUT_SECTIONS = [
+    {
+        'eyebrow': 'À propos',
+        'title': "Ce qu'on fait, concrètement",
+        'paragraphs': [
+            "On ne vend pas de la technologie pour elle-même. On installe des systèmes qui répondent à un besoin réel et on accompagne nos clients après la mise en service.",
+            "Caméras, contrôle d'accès, intercom, WiFi, câblage structuré, fibre optique et infrastructure réseau sont installés de façon coordonnée, avec une livraison cohérente et un soutien disponible.",
+        ],
+    },
+    {
+        'eyebrow': 'Notre approche',
+        'title': "Notre approche d'installation et de soutien",
+        'cards': [
+            ("On part du bâtiment, pas du catalogue", "Chaque projet commence par une analyse de votre espace, de vos contraintes et de vos besoins réels."),
+            ('On livre proprement', "Câbles identifiés, locaux techniques bien rangés et documentation remise à la fin des travaux."),
+            ('On reste disponibles', "Ajouts, modifications, gestion des systèmes et support technique — vous n'avez pas à repartir de zéro si quelque chose change."),
+        ],
+    },
+    {
+        'eyebrow': 'Informations légales',
+        'title': 'Informations légales et zone de service',
+        'paragraphs': [
+            "Opticable opère sous le numéro d'entreprise 9453-4757 Québec Inc. et détient la licence RBQ 5864-1648-01.",
+            "Nous desservons les immeubles commerciaux à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord, dans les Laurentides et partout au Québec.",
+        ],
+        'details': [
+            ("Numéro d'entreprise", '9453-4757 Québec Inc.'),
+            ('Licence RBQ', '5864-1648-01'),
+            ('Soumissions et renseignements', 'Lundi au vendredi 8 h à 17 h : par téléphone ou courriel/formulaire'),
+            ('Fin de semaine', 'Samedi et dimanche 10 h à 16 h : par courriel ou formulaire seulement'),
+            ('Support technique', 'Lundi au vendredi 8 h à 17 h · Samedi et dimanche 10 h à 16 h'),
+        ],
+    },
+]
+
+FR_CLIENTELE_SECTIONS = [
+    {
+        'title': 'Entreprises, bureaux et commerces',
+        'copy': "Vous gérez un bureau, un commerce ou un espace d'accueil et vous avez besoin que la sécurité, le WiFi et les communications soient fiables au quotidien.",
+        'items': ['Caméras pour entrées et zones intérieures', "Contrôle d'accès pour espaces restreints", 'WiFi dimensionné pour votre espace', 'Câblage et téléphonie IP pour les postes de travail'],
+    },
+    {
+        'title': 'Immeubles multilocatifs et résidences à accès contrôlé',
+        'copy': "Vous gérez un immeuble résidentiel ou mixte et avez besoin de systèmes d'entrée fiables, d'une couverture caméra dans les aires communes et d'une infrastructure qui résiste à l'usage quotidien.",
+        'items': ["Intercom vidéo et contrôle d'accès pour halls d'entrée", 'Caméras dans les aires communes et stationnements', 'WiFi pour espaces partagés', 'Câblage de suites et infrastructure des espaces communs'],
+    },
+    {
+        'title': 'Immeubles commerciaux et propriétés à locataires multiples',
+        'copy': "Vous possédez ou gérez un immeuble à vocation commerciale avec plusieurs locataires et des systèmes partagés. On installe les systèmes du bâtiment, pas ceux d'un locataire en particulier.",
+        'items': ['Caméras pour espaces communs et périmètre', "Contrôle d'accès pour entrées principales", 'Infrastructure réseau des locaux techniques', 'Câblage des espaces loués'],
+    },
+    {
+        'title': 'Gestionnaires immobiliers et équipes multi-immeubles',
+        'copy': "Vous gérez plusieurs immeubles et avez besoin d'un partenaire qui comprend vos contraintes: bâtiments occupés, locataires à accommoder, standards à maintenir et budgets à respecter.",
+        'items': ['Mises à niveau dans des immeubles en service', 'Standardisation sur un portefeuille', 'Interventions planifiées', 'Interlocuteur unique pour plusieurs projets'],
+    },
+    {
+        'title': 'Promoteurs et entrepreneurs généraux en construction',
+        'copy': "Vous construisez ou rénovez un bâtiment et avez besoin que les systèmes technologiques soient coordonnés avec les autres corps de métier, sans retard.",
+        'items': ['Coordination avec les électriciens et autres corps de métier', 'Câblage structuré selon les phases de construction', "Caméras, contrôle d'accès et intercom livrés à temps", 'Documentation complète à la livraison'],
+    },
+]
+
+FR_CLIENTELE_CTA = {
+    'title': "Votre type de projet n'est pas listé ici ?",
+    'copy': "On intervient aussi en hôtellerie, institutionnel et sites industriels. Décrivez-nous votre bâtiment.",
+    'label': 'Nous contacter',
+}
+
+FR_FAQ_CTA = {
+    'title': "Votre question n'est pas ici ?",
+    'copy': 'Contactez-nous par courriel ou formulaire en tout temps, ou par téléphone du lundi au vendredi.',
+    'label': 'Nous contacter',
+}
+
+FR_SERVICE_PAGE_CONTENT = {
+    'security-camera-systems': {
+        'sections': [
+            {'eyebrow': 'Caméras de sécurité', 'title': "Ce qu'on installe et gère", 'items': ['Caméras IP et PoE pour zones intérieures et extérieures', 'Enregistreurs NVR avec enregistrement continu ou sur détection', 'Visionnement à distance depuis ordinateur, tablette ou téléphone', 'Caméras extérieures pour stationnements, entrées de livraison et périmètres', 'Caméras intérieures pour aires communes, halls, corridors et zones d’exploitation', 'Gestion, mises à jour, remplacement d’équipements et soutien technique']},
+            {'eyebrow': 'Écosystème unifié', 'title': "Écosystème unifié — caméras, intercom et contrôle d'accès", 'paragraphs': ["Les caméras peuvent faire partie du même écosystème que votre intercom et votre contrôle d'accès — une seule plateforme de gestion pour surveiller, contrôler les accès et communiquer à l'entrée. Un seul partenaire, une seule installation cohérente."]},
+            {'eyebrow': 'Bâtiments', 'title': 'Pour quels types de bâtiments', 'items': ['Immeubles de bureaux et tours commerciales', 'Immeubles multilocatifs et résidences à accès contrôlé', 'Commerces, boutiques et espaces de vente', 'Entrepôts et sites industriels', 'Hôtels et hébergements commerciaux']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Évaluation des zones: entrées, angles morts, zones à risque et contraintes d’installation.', '02 — Proposition adaptée: nombre de caméras, matériel, résolution, stockage et câblage détaillés dans la soumission.', '03 — Installation coordonnée: câblage structuré, fixation propre, configuration NVR et test de chaque caméra.', '04 — Remise et soutien: système documenté, formation de base et disponibilité pour la gestion continue.']},
+        ],
+        'cta': "Vous planifiez un projet de caméras ? Décrivez-nous votre immeuble et vos zones à couvrir. Nous vous reviendrons avec une proposition claire.",
+    },
+    'access-control-systems': {
+        'sections': [
+            {'eyebrow': 'Contrôle d’accès', 'title': "Ce qu'on installe et gère", 'items': ["Lecteurs d'accès par carte, badge, code ou biométrie selon le niveau de sécurité", 'Panneaux de contrôle avec gestion centralisée des portes et des utilisateurs', 'Serrures, gâches électriques, aimants et mécanismes adaptés à chaque porte', 'Câblage de portes, boîtiers et raccordements propres dans les cadres et cloisons', 'Gestion multi-portes à partir d’une seule interface', 'Soutien, administration, mises à jour et support technique continu']},
+            {'eyebrow': 'Écosystème unifié', 'title': "Écosystème unifié — accès, caméras et intercom", 'paragraphs': ["Le contrôle d'accès peut être intégré aux caméras et à l'intercom au sein d'une seule plateforme de gestion. Une porte bien sécurisée, c'est un lecteur, une caméra et un intercom qui fonctionnent ensemble, pas trois systèmes indépendants gérés séparément."]},
+            {'eyebrow': 'Espaces', 'title': "Pour quels types d'espaces", 'items': ["Halls d'entrée principaux et accès visiteurs", 'Entrées de stationnement et accès souterrains', 'Salles de serveurs, locaux techniques et zones restreintes', "Bureaux à accès limité et salles sécurisées", 'Accès locataires dans les immeubles multilocatifs']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Analyse des accès: portes, zones, niveaux d’accès et contraintes mécaniques.', '02 — Proposition structurée: matériel, câblage, logiciel de gestion et coûts détaillés.', '03 — Installation rigoureuse: câblage propre dans les cadres et murs, lecteurs bien fixés et tests complets.', '04 — Mise en service et formation: configuration des accès, documentation remise et soutien continu.']},
+        ],
+        'cta': "Vous voulez sécuriser vos accès ? Dites-nous combien de portes, le type d'immeuble et vos contraintes. On s'en occupe.",
+    },
+    'commercial-wifi-installation': {
+        'sections': [
+            {'eyebrow': 'WiFi commercial', 'title': "Ce qu'on installe et gère", 'items': ["Bornes d'accès WiFi professionnelles alimentées en PoE", 'Câblage de soutien Cat 6 ou Cat 6A depuis le local réseau', 'Planification de couverture selon murs, matériaux, zones d’usage et bande passante', 'Gestion et maintenance: surveillance, mises à jour et ajout de couverture', 'Services informatiques réseau et administration du sans-fil', 'Soutien après installation pour les ajustements, incidents et besoins d’évolution']},
+            {'eyebrow': 'Infrastructure', 'title': "Un WiFi bien installé, c'est d'abord un bon câblage", 'paragraphs': ["La majorité des problèmes de WiFi viennent de l'infrastructure câblée derrière les bornes. On s'occupe des deux — câblage structuré et WiFi — pour un résultat stable sur le long terme."]},
+            {'eyebrow': 'Espaces', 'title': "Pour quels types d'espaces", 'items': ['Bureaux à aire ouverte et espaces de travail partagés', 'Immeubles multilocatifs — aires communes et couloirs', 'Commerces, restaurants et espaces clients', 'Chantiers de construction actifs', 'Salles de conférence et espaces événementiels', 'Entrepôts et sites industriels']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Analyse du site: superficie, matériaux, nombre d’utilisateurs et usages prévus.', '02 — Plan de couverture: emplacement des bornes, matériel recommandé et câblage nécessaire.', '03 — Installation et câblage: tirage des câbles, fixation des bornes, configuration réseau et tests de signal.', '04 — Validation, remise et soutien: couverture vérifiée, configuration documentée et gestion continue disponible.']},
+        ],
+        'cta': "Vous avez des zones sans signal ou un réseau qui ne suffit plus ? Décrivez-nous votre espace et vos besoins.",
+    },
+    'intercom-systems': {
+        'sections': [
+            {'eyebrow': 'Intercom', 'title': "Ce qu'on installe", 'items': ['Intercom audio pour la communication entre l’entrée et un poste intérieur ou un téléphone', 'Intercom vidéo avec caméra intégrée pour identifier les visiteurs avant d’ouvrir', 'Postes muraux et bornes d’entrée robustes pour halls, réceptions et portails', "Intégration au contrôle d'accès pour déverrouiller depuis un poste intérieur ou un appareil mobile"]},
+            {'eyebrow': 'Écosystème unifié', 'title': 'Écosystème unifié — intercom, accès et caméras', 'paragraphs': ["L'intercom, le contrôle d'accès et les caméras peuvent fonctionner au sein d'un même écosystème — une seule plateforme pour identifier un visiteur, contrôler l'accès et surveiller l'entrée. On les installe ensemble, de façon coordonnée, pour une gestion simplifiée."]},
+            {'eyebrow': 'Immeubles', 'title': "Pour quels types d'immeubles", 'items': ['Immeubles multilocatifs avec entrée sécurisée', "Immeubles de bureaux avec réception ou accès visiteurs", 'Commerces avec zones de livraison ou accès restreint', 'Stationnements couverts et accès souterrains', "Portails extérieurs et cours d'immeuble"]},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ["01 — Analyse de l'entrée: type de porte, flux de visiteurs, contraintes mécaniques et infrastructure existante.", '02 — Recommandation claire: audio ou vidéo, intégration au contrôle d’accès et nombre de postes.', '03 — Installation propre: câblage encastré, borne fixée solidement, configuration et tests complets.', '04 — Mise en service: fonctionnement validé et intégration aux autres systèmes confirmée.']},
+        ],
+        'cta': "Vous cherchez un système d'intercom pour votre entrée ou votre portail ? Parlez-nous de votre immeuble.",
+    },
+    'structured-cabling': {
+        'sections': [
+            {'eyebrow': 'Câblage structuré', 'title': "Ce qu'on installe", 'items': ['Câblage cuivre Cat 5e, Cat 6 et Cat 6A pour postes, bornes WiFi, caméras IP, lecteurs et équipements réseau', 'Câblage coaxial pour caméras analogiques, antennes et distributions de signal existantes', 'Fibre optique sur courte distance pour relier locaux réseau, étages ou zones éloignées', 'Patch panels pour des arrivées de câbles organisées, identifiées et évolutives']},
+            {'eyebrow': 'Usage concret', 'title': 'Ce que ça supporte concrètement', 'items': ['Bornes WiFi alimentées en PoE via Cat 6', 'Caméras IP raccordées à l’enregistreur NVR', "Lecteurs de contrôle d'accès câblés au panneau de contrôle", 'Postes de téléphonie IP et équipements de bureau', 'Équipements réseau dans le local technique']},
+            {'eyebrow': 'Qualité', 'title': "Une installation propre, ça veut dire quoi ?", 'paragraphs': ["Câbles identifiés aux deux extrémités, cheminements bien fixés, patch panels organisés et local réseau que n'importe quel technicien peut comprendre sans tout redécouvrir."]},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Relevé du site: zones à câbler, cheminements possibles et contraintes du bâtiment.', '02 — Plan de câblage: nombre de points, longueurs, type de câble et organisation du local réseau.', '03 — Installation structurée: tirage, connexion aux patch panels et identification complète de chaque point.', '04 — Test et certification: chaque point est testé et la documentation des points est remise.']},
+        ],
+        'cta': "Vous avez un projet de câblage ou un réseau à organiser ? Dites-nous la superficie, le nombre de points et le type de bâtiment.",
+    },
+    'fiber-optic-installation': {
+        'sections': [
+            {'eyebrow': 'Fibre optique', 'title': "Ce qu'on installe", 'items': ['Colonnes montantes et backbone vertical entre les locaux réseau de chaque étage', 'Liaisons longue portée entre bâtiments, ailes ou locaux techniques distants', 'Prolongements de service vers une nouvelle zone, un nouvel étage ou un nouvel équipement', 'Fibre monomode ou multimode selon la distance et la bande passante', 'Raccordements, connecteurs LC, SC ou MPO et organisation dans les boîtiers']},
+            {'eyebrow': 'Usage', 'title': 'Quand la fibre est nécessaire', 'items': ['Bâtiments de plusieurs étages avec un local réseau par niveau', 'Distances supérieures à 90 mètres entre équipements', 'Liaisons entre bâtiments sur un même site', 'Besoins de bande passante élevée pour caméras et réseau principal', 'Infrastructure existante à prolonger ou remplacer']},
+            {'eyebrow': 'Coordination', 'title': 'Coordonné avec le câblage structuré', 'paragraphs': ['La fibre constitue le backbone — le cuivre prend le relais pour les derniers mètres. On installe les deux en coordination pour une infrastructure cohérente du local technique jusqu’au point final.']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ["01 — Analyse de l'infrastructure: points à relier, distances, cheminements et équipements aux deux extrémités.", '02 — Recommandation technique: type de fibre, nombre de brins et type de connecteurs.', '03 — Installation et soudure: passage de la fibre dans les cheminements existants ou nouveaux et connexion des extrémités.', '04 — Test et certification: chaque liaison est testée en atténuation et documentée.']},
+        ],
+        'cta': "Vous avez besoin d'une liaison fibre entre étages ou entre bâtiments ? Décrivez-nous le projet.",
+    },
+    'network-infrastructure': {
+        'sections': [
+            {'eyebrow': 'Infrastructure réseau', 'title': "Ce qu'on installe et organise", 'items': ['Racks et armoires ouverts ou fermés selon les équipements et les besoins d’accès', 'Patch panels pour organiser les arrivées de câbles avec une identification claire', 'Gestion verticale et horizontale des câbles pour des racks lisibles et évolutifs', 'Routage propre des arrivées Internet Bell, Vidéotron, Rogers ou autres', "Remise en ordre de l'existant pour rendre un local technique plus fonctionnel sans tout reconstruire"]},
+            {'eyebrow': 'Valeur', 'title': 'Pourquoi un local réseau bien organisé, ça compte', 'paragraphs': ['Un local chaotique coûte du temps à chaque intervention et rend les modifications risquées. Un local bien structuré est moins cher à entretenir sur le long terme et beaucoup plus simple à faire évoluer.']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Évaluation du local: espace disponible, équipements en place, arrivées existantes et besoins futurs.', '02 — Plan d’organisation: disposition des racks, patch panels, gestion des arrivées et documentation avant les travaux.', '03 — Installation ou réorganisation: montage des racks, câblage des panneaux et identification complète.', '04 — Documentation remise: relevé des ports, équipements, arrivées et cheminements.']},
+        ],
+        'cta': "Votre local réseau a besoin d'attention ? Dites-nous l'état actuel et vos besoins.",
+    },
+    'ip-phone-systems': {
+        'sections': [
+            {'eyebrow': 'Téléphonie IP', 'title': "Ce qu'on installe", 'items': ['Câblage pour postes VoIP alimentés en PoE depuis le commutateur réseau', 'Lignes SIP, numéros locaux ou sans frais et intégration avec votre fournisseur', "Postes de téléphonie IP pour espaces de travail, réceptions et zones opérationnelles", 'Infrastructure réseau et commutation adaptées à la téléphonie IP']},
+            {'eyebrow': 'Infrastructure', 'title': "La téléphonie, c'est d'abord une question d'infrastructure", 'paragraphs': ["Un système VoIP mal câblé, c'est de la voix qui coupe et des problèmes qu'on attribue au fournisseur alors que c'est le réseau qui est en cause. On installe l'infrastructure correctement dès le départ."]},
+            {'eyebrow': 'Besoins', 'title': 'Pour qui', 'items': ['Bureaux en démarrage ou en déménagement', "Entreprises qui migrent d'un système analogique vers la VoIP", 'Immeubles commerciaux qui fournissent la téléphonie aux locataires', 'Espaces de coworking avec plusieurs usagers']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Analyse des besoins: nombre de postes, localisation, type de lignes et infrastructure existante.', '02 — Proposition claire: câblage, matériel, lignes et configuration détaillés.', '03 — Installation et configuration: câblage des postes, configuration des lignes et tests de qualité vocale.', '04 — Mise en service: chaque poste est validé, les numéros sont configurés et le système devient opérationnel.']},
+        ],
+        'cta': "Vous installez ou remplacez votre téléphonie d'affaires ? Dites-nous le nombre de postes et vos besoins.",
+    },
+    'managed-it-services': {
+        'sections': [
+            {'eyebrow': 'Services informatiques et soutien technique', 'title': "Ce qu'on fait", 'items': ['Gestion de parc informatique : inventaire, mises à jour, remplacement et suivi des équipements réseau et postes de travail.', 'Soutien technique : intervention sur les systèmes installés, diagnostic et résolution des problèmes réseau, WiFi, caméras et contrôle d’accès.', 'Maintenance préventive : vérifications périodiques des équipements, des configurations et de la stabilité des systèmes.', 'Administration des systèmes : gestion des accès, mises à jour des configurations et ajustements après la mise en service.', 'Support utilisateur : assistance pour vos équipes sur l’utilisation des systèmes installés.']},
+            {'eyebrow': 'Pour qui', 'title': 'Pour qui', 'items': ['Entreprises qui veulent externaliser la gestion de leur environnement réseau et technologique', 'Gestionnaires immobiliers qui ont besoin d’un suivi régulier sur plusieurs immeubles', 'Organisations qui ont des systèmes en place mais plus de ressources internes pour les gérer']},
+            {'eyebrow': 'Coordination', 'title': 'Coordonné avec vos systèmes existants', 'paragraphs': ["Que les systèmes aient été installés par Opticable ou par un autre prestataire, on peut en prendre la gestion en charge. On fait d'abord un audit de l'existant, puis on propose un plan de soutien adapté."]},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ["01 — Audit de l'existant : on inventorie vos équipements, configurations et points à améliorer.", '02 — Plan de soutien : on vous propose une formule adaptée à vos besoins et votre budget.', '03 — Prise en charge : on devient votre interlocuteur technique pour la gestion courante.', "04 — Suivi continu : interventions réactives et préventives selon l'entente convenue."]},
+        ],
+        'cta': 'Vous cherchez un partenaire pour gérer votre environnement technologique ? Décrivez-nous votre situation.',
+    },
+}
+
+PARTNER_BRANDS = ('Ubiquiti (UniFi)', 'MikroTik', 'Fortinet', 'Hikvision', 'Uniview (UNV)', 'TP-Link Omada')
+PARTNER_BRANDS_COPY = {
+    'en': {
+        'eyebrow': 'Equipment',
+        'title': 'Brands we install and support',
+        'intro': 'We work with commercial-grade equipment recognized across the industry.',
+    },
+    'fr': {
+        'eyebrow': 'Équipements',
+        'title': 'Marques que nous installons et supportons',
+        'intro': "Nous travaillons avec des équipements de qualité commerciale reconnus dans l'industrie.",
+    },
+}
+
+BLOG_PAGE = {
+    'en': {
+        'title': 'Blog — Commercial technology and building systems | Opticable',
+        'desc': 'Advice, guides, and resources about security systems, commercial WiFi, cabling, and network infrastructure for Quebec commercial properties — by Opticable.',
+        'eyebrow': 'Resources and guidance',
+        'h1': 'Opticable blog — Technology for commercial properties',
+        'intro': 'Practical articles about cameras, access control, commercial WiFi, cabling, and network infrastructure for property managers, contractors, and building owners.',
+        'empty': 'The first articles are coming soon. In the meantime, review our service pages or contact us directly with your technical questions.',
+        'primary_cta': 'View our services',
+        'secondary_cta': 'Contact us',
+        'listing_title': 'Articles',
+        'listing_intro': 'This layout is ready for article cards with title, date, excerpt, and link.',
+    },
+    'fr': {
+        'title': 'Blogue — Technologie commerciale et systèmes du bâtiment | Opticable',
+        'desc': 'Conseils, guides et ressources sur les systèmes de sécurité, WiFi commercial, câblage et infrastructure réseau pour immeubles commerciaux au Québec — par Opticable.',
+        'eyebrow': 'Ressources et conseils',
+        'h1': 'Blogue Opticable — Technologie pour immeubles commerciaux',
+        'intro': "Des articles pratiques sur les caméras, le contrôle d'accès, le WiFi commercial, le câblage et l'infrastructure réseau pour les gestionnaires, entrepreneurs et propriétaires d'immeubles.",
+        'empty': "Les premiers articles arrivent bientôt. En attendant, consultez nos pages de services ou contactez-nous directement pour vos questions techniques.",
+        'primary_cta': 'Voir nos services',
+        'secondary_cta': 'Nous contacter',
+        'listing_title': 'Articles',
+        'listing_intro': "La structure est prête pour accueillir des cartes d'articles avec titre, date, extrait et lien.",
+    },
+}
+
+CASE_STUDY_ORDER = (
+    'case-office-building',
+    'case-multitenant-building',
+    'case-retail-space',
+    'case-construction-site',
+)
+CASE_STUDIES = {
+    'en': {
+        'parent': {
+            'title': 'Case Studies — Typical Projects | Opticable',
+            'desc': 'See how Opticable supports office buildings, retail spaces, multi-tenant properties, and construction sites across Quebec.',
+            'h1': 'Case studies — How we approach different project types',
+            'intro': 'These representative project scenarios show how we approach different building types and operating conditions. Every site is different, but the examples reflect how we scope and coordinate systems in the field.',
+            'card_copy': {
+                'case-office-building': 'Office building with MikroTik routing, Omada WiFi and switching, and a UniFi management stack for cameras and access.',
+                'case-multitenant-building': 'Multi-tenant residential property with UniFi Access, UniFi cameras, and Omada WiFi in common areas.',
+                'case-retail-space': 'Retail space with a unified UniFi security platform, Omada WiFi, and MikroTik routing.',
+                'case-construction-site': 'Construction project coordinated in phases around MikroTik routing, Omada switching, and a unified UniFi security stack.',
+            },
+        },
+        'items': {
+            'case-office-building': {
+                'nav': 'Office building',
+                'title': 'Case Study — Commercial Office Building | Opticable',
+                'desc': 'How Opticable installs and manages security, WiFi, and cabling systems in a commercial office building in Quebec.',
+                'h1': 'Typical project — Commercial office building',
+                'context': 'Three-storey office building with about 25 workstations, two main entries, indoor and outdoor parking, and a basement server room.',
+                'challenges': ['Access control at the main entry and restricted areas such as the server room and archives', 'Stable WiFi coverage for offices and the conference room', 'Camera coverage at entries, parking areas, and main corridors', 'Disorganized legacy cabling in the network room'],
+                'work': ['Installation of UniFi Access on four doors with badge readers and centralized management', 'Deployment of eight TP-Link Omada access points with Omada switching and dedicated Cat 6 cabling', 'Installation of 12 UniFi cameras with remote viewing and management from the same platform as access control', 'MikroTik router deployment and full cleanup of the network room with rack, patch panels, and identification of all points', 'Installation of 25 new network drops for workstations'],
+                'result': 'The building is fully cabled, secured, and connected through a single operational stack. The property manager supervises cameras and access from one management platform, and the network room is documented and organized.',
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Does this project look like yours?',
+                'cta_copy': 'Tell us about your building.',
+            },
+            'case-multitenant-building': {
+                'nav': 'Multi-tenant building',
+                'title': 'Case Study — Multi-Tenant Building | Opticable',
+                'desc': 'How Opticable installs intercom, cameras, WiFi, and cabling in a multi-tenant building in Quebec.',
+                'h1': 'Typical project — Multi-tenant residential building',
+                'context': '24-unit building across four storeys with two secure entries, indoor parking, a laundry room, and a shared room on the ground floor.',
+                'challenges': ['Main entry without a working intercom', 'No cameras in common areas', 'No WiFi in corridors and shared spaces', 'Unstructured suite cabling'],
+                'work': ['Installation of a UniFi Access video intercom at the main entry with centralized access-control integration', 'Installation of 10 UniFi cameras in corridors, entries, and parking areas', 'Deployment of TP-Link Omada access points and Omada switches in corridors and common areas', 'MikroTik router deployment, Cat 6 cabling in shared areas, and organization of the network room'],
+                'result': 'The property manager controls entry remotely, reviews cameras from a phone, and manages the intercom and access rights from the same UniFi platform. Residents benefit from WiFi coverage in shared spaces.',
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Do you manage a multi-tenant building?',
+                'cta_copy': 'Let’s discuss your project.',
+            },
+            'case-retail-space': {
+                'nav': 'Retail and sales floor',
+                'title': 'Case Study — Retail and Sales Space | Opticable',
+                'desc': 'How Opticable installs cameras, access control, and WiFi in a retail environment in Quebec.',
+                'h1': 'Typical project — Retail and point-of-sale environment',
+                'context': 'Retail store across two levels with a sales floor, rear warehouse, management office, and outdoor parking.',
+                'challenges': ['No surveillance of the cash area and site entries', 'Unstable WiFi for payment terminals and staff', 'Uncontrolled access to the warehouse', 'Remote viewing needed for the owner'],
+                'work': ['Installation of eight UniFi cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with three TP-Link Omada access points and Omada switches, with separate SSIDs for customers and payment terminals', 'Installation of a UniFi Access reader on the warehouse door', 'MikroTik router deployment and remote viewing setup on the owner’s mobile phone'],
+                'result': 'The owner supervises the store remotely, the WiFi remains stable for operations, and the warehouse stays restricted to authorized staff through the same access and camera management stack.',
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Do you need to secure a retail space?',
+                'cta_copy': 'Tell us what you need.',
+            },
+            'case-construction-site': {
+                'nav': 'Construction site',
+                'title': 'Case Study — Construction Site | Opticable',
+                'desc': 'How Opticable coordinates cabling, cameras, and WiFi on a construction project in Quebec.',
+                'h1': 'Typical project — Technology coordination on an active site',
+                'context': 'Six-storey commercial building under construction with a general contractor, three delivery phases, and one technical room per floor.',
+                'challenges': ['Structured cabling must be installed before walls are closed', 'Coordination with electricians for pathways', 'Technical rooms must be organized early in the build', 'Security systems and WiFi must be ready at handover'],
+                'work': ['Cat 6A cabling pulled through all suites before wall closure — Phase 1', 'MikroTik routing, Omada switching, and rack and patch-panel installation in six technical rooms — Phase 2', 'Deployment of UniFi cameras, UniFi Access, and TP-Link Omada WiFi aligned with final delivery — Phase 3', 'Complete documentation delivered to the general contractor and owner'],
+                'result': 'The technology scope is delivered in line with the construction schedule. No delays are caused by building systems, and the documentation package is clean at handover.',
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Are you building or renovating a property?',
+                'cta_copy': 'Coordinate the systems now.',
+            },
+        },
+    },
+    'fr': {
+        'parent': {
+            'title': 'Études de cas — Projets types | Opticable',
+            'desc': 'Découvrez comment Opticable intervient dans les immeubles de bureaux, commerces, multilocatifs et chantiers de construction au Québec.',
+            'h1': 'Études de cas — Comment on intervient selon le projet',
+            'intro': "Voici des exemples de projets types représentatifs de nos interventions. Chaque bâtiment est différent — ces scénarios illustrent notre approche et les systèmes qu'on déploie selon le contexte.",
+            'card_copy': {
+                'case-office-building': 'Immeuble de bureaux avec routeur MikroTik, WiFi et commutateurs Omada, et gestion unifiée UniFi pour caméras et accès.',
+                'case-multitenant-building': 'Immeuble multilocatif avec UniFi Access, caméras UniFi et WiFi Omada dans les aires communes.',
+                'case-retail-space': 'Commerce avec plateforme de sécurité UniFi, WiFi Omada et routage MikroTik.',
+                'case-construction-site': 'Chantier coordonné en phases autour de MikroTik, Omada et d’une pile de sécurité UniFi unifiée.',
+            },
+        },
+        'items': {
+            'case-office-building': {
+                'nav': 'Immeuble de bureaux',
+                'title': 'Étude de cas — Immeuble de bureaux commercial | Opticable',
+                'desc': "Comment Opticable installe et gère les systèmes de sécurité, WiFi et câblage dans un immeuble de bureaux commercial au Québec.",
+                'h1': 'Projet type — Immeuble de bureaux commercial',
+                'context': 'Immeuble de bureaux de 3 étages, environ 25 postes de travail, 2 entrées principales, stationnement extérieur et intérieur, salle de serveurs au sous-sol.',
+                'challenges': ["Contrôle d'accès à l'entrée principale et aux zones restreintes (salle de serveurs, archives)", 'Couverture WiFi stable pour tous les bureaux et la salle de conférence', 'Caméras sur les entrées, le stationnement et les couloirs principaux', 'Câblage existant désorganisé dans le local réseau'],
+                'work': ["Installation de UniFi Access sur 4 portes avec lecteurs de badge et gestion centralisée", 'Déploiement de 8 bornes TP-Link Omada avec commutateurs Omada et câblage Cat 6 dédié', 'Installation de 12 caméras UniFi avec visionnement à distance et gestion depuis la même plateforme que les accès', 'Déploiement du routeur MikroTik et remise en ordre complète du local réseau : rack, patch panels, identification de tous les points', 'Câblage de 25 nouveaux points réseau pour les postes de travail'],
+                'result': "Un bâtiment entièrement câblé, sécurisé et connecté, géré depuis une seule interface pour les caméras et les accès. Le gestionnaire supervise le site à distance et le local réseau est documenté et propre.",
+                'systems': "MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access",
+                'cta_title': 'Ce projet ressemble au vôtre ?',
+                'cta_copy': 'Décrivez-nous votre bâtiment.',
+            },
+            'case-multitenant-building': {
+                'nav': 'Immeuble multilocatif',
+                'title': 'Étude de cas — Immeuble multilocatif | Opticable',
+                'desc': "Comment Opticable installe intercom, caméras, WiFi et câblage dans un immeuble multilocatif au Québec.",
+                'h1': 'Projet type — Immeuble multilocatif résidentiel',
+                'context': 'Immeuble de 24 unités, 4 étages, 2 entrées sécurisées, stationnement intérieur, buanderie et salle commune au rez-de-chaussée.',
+                'challenges': ["Entrée principale sans intercom fonctionnel", 'Aucune caméra dans les aires communes', 'WiFi inexistant dans les corridors et espaces communs', 'Câblage des suites non structuré'],
+                'work': ["Installation d'un intercom vidéo UniFi Access à l'entrée principale avec intégration complète au contrôle d'accès", 'Installation de 10 caméras UniFi dans les corridors, entrées et stationnement', 'Déploiement de bornes TP-Link Omada et de commutateurs Omada dans les corridors et espaces communs', 'Déploiement du routeur MikroTik, câblage Cat 6 dans les aires communes et organisation du local réseau'],
+                'result': "Le gestionnaire contrôle l'accès à distance, visualise les caméras depuis son téléphone et gère l'intercom et les accès depuis la même plateforme UniFi. Les résidents bénéficient du WiFi dans tous les espaces communs.",
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Vous gérez un immeuble multilocatif ?',
+                'cta_copy': 'Parlons de votre projet.',
+            },
+            'case-retail-space': {
+                'nav': 'Commerce et espace de vente',
+                'title': 'Étude de cas — Commerce et espace de vente | Opticable',
+                'desc': "Comment Opticable installe caméras, contrôle d'accès et WiFi dans un commerce au Québec.",
+                'h1': 'Projet type — Commerce et espace de vente au détail',
+                'context': "Commerce de détail sur 2 niveaux, zone de vente, entrepôt à l'arrière, bureau de gestion et stationnement extérieur.",
+                'challenges': ["Aucune surveillance de la zone de caisse et des entrées/sorties", 'WiFi instable pour les terminaux de paiement et les employés', "Accès à l'entrepôt non contrôlé", 'Besoin de visionnement à distance pour le propriétaire'],
+                'work': ["Installation de 8 caméras UniFi couvrant la zone de vente, la caisse, l'entrepôt et le stationnement", 'Remplacement du WiFi par 3 bornes TP-Link Omada avec commutateurs Omada et SSID séparé pour les clients et les terminaux', "Installation d'un lecteur UniFi Access sur la porte de l'entrepôt", 'Déploiement du routeur MikroTik et configuration du visionnement à distance sur téléphone mobile pour le propriétaire'],
+                'result': "Le propriétaire surveille son commerce à distance, le WiFi est stable pour les opérations et l'entrepôt est accessible uniquement au personnel autorisé via la même pile de gestion que les caméras.",
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Vous avez un commerce à sécuriser ?',
+                'cta_copy': 'Décrivez-nous vos besoins.',
+            },
+            'case-construction-site': {
+                'nav': 'Chantier de construction',
+                'title': 'Étude de cas — Chantier de construction | Opticable',
+                'desc': "Comment Opticable coordonne le câblage, les caméras et le WiFi sur un chantier de construction au Québec.",
+                'h1': 'Projet type — Coordination technologique sur chantier',
+                'context': 'Immeuble commercial de 6 étages en construction, entrepreneur général, livraison en 3 phases, local technique par étage.',
+                'challenges': ['Câblage structuré à installer avant la fermeture des cloisons', 'Coordination avec les électriciens pour les cheminements', 'Locaux techniques à organiser dès la structure', 'Systèmes de sécurité et WiFi à livrer à la remise des clés'],
+                'work': ['Tirage du câblage Cat 6A dans toutes les suites avant la fermeture des murs — Phase 1', 'Déploiement du routage MikroTik, des commutateurs Omada, des racks et patch panels dans les 6 locaux techniques — Phase 2', 'Déploiement des caméras UniFi, de UniFi Access et du WiFi TP-Link Omada coordonné avec la livraison — Phase 3', "Documentation complète remise à l'entrepreneur général et au propriétaire"],
+                'result': 'Livraison technologique complète alignée sur le calendrier de construction. Aucun retard lié aux systèmes. Documentation propre remise à la livraison finale.',
+                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'cta_title': 'Vous construisez ou rénovez un bâtiment ?',
+                'cta_copy': 'Coordonnons les systèmes dès maintenant.',
+            },
+        },
+    },
+}
+
+primary_order = [
+    'security-camera-systems',
+    'access-control-systems',
+    'commercial-wifi-installation',
+    'intercom-systems',
+    'network-infrastructure',
+    'managed-it-services',
 ]
 secondary_order = [
-    'intercom-systems',
+    'structured-cabling',
     'fiber-optic-installation',
     'ip-phone-systems',
 ]
 order = primary_order + secondary_order
+services_page_chip_keys = tuple(primary_order)
 base_routes = {
-    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'thanks': '/en/thank-you/'},
-    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/secteurs/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'thanks': '/fr/merci/'},
+    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
+    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
 }
 routes = {k: dict(v) for k, v in base_routes.items()}
 for key in order:
@@ -2116,6 +2913,272 @@ main section+section{
 .site-nav a,.footer-links a,.footer-services a,.footer-contact-list a,.detail-item strong,.button,.lang-switch,.chip{
   white-space:nowrap;
 }
+:root{
+  --bg:#edf0ea;
+  --surface:rgba(255,255,255,.96);
+  --surface-soft:#f3f6f1;
+  --line:#d1d8d0;
+  --line-strong:#98a79b;
+  --text:#121814;
+  --muted:#5a665d;
+  --primary:#4ddc7a;
+  --primary-dark:#0d1b13;
+  --primary-soft:#e5f9ea;
+  --shadow:0 28px 80px rgba(8,18,12,.08);
+  --radius:32px;
+}
+body{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(77,220,122,.16),transparent 24%),
+    radial-gradient(circle at 100% 14%,rgba(13,27,19,.08),transparent 22%),
+    linear-gradient(180deg,#f6f8f3 0%,#edf0ea 48%,#eef2eb 100%);
+}
+body::before{
+  background-image:radial-gradient(rgba(12,28,18,.08) 1px,transparent 1px);
+  background-size:24px 24px;
+  opacity:.34;
+}
+.header-inner{
+  padding:18px 22px;
+  border-radius:28px;
+  border-color:rgba(77,220,122,.16);
+  background:rgba(13,27,19,.92);
+  box-shadow:0 24px 80px rgba(5,11,8,.28);
+}
+.brand-copy strong{
+  color:#f6fbf7;
+}
+.brand-copy small{
+  color:rgba(232,240,235,.68);
+}
+.site-nav a,.footer-links a,.footer-services a,.footer-contact-list a,.text-link{
+  color:rgba(235,242,236,.72);
+}
+.site-nav a:hover,.site-nav a:focus-visible,.site-nav a[aria-current="page"],.footer-links a:hover,.footer-links a:focus-visible,.footer-services a:hover,.footer-services a:focus-visible,.text-link:hover,.text-link:focus-visible,.footer-contact-list a:hover,.footer-contact-list a:focus-visible{
+  color:#9bffb9;
+}
+.lang-switch{
+  border-color:rgba(255,255,255,.12);
+  background:#132019;
+  color:#f6fbf7;
+}
+.button{
+  min-height:56px;
+  padding:0 24px;
+  border-radius:18px;
+  font-weight:800;
+}
+.button-primary{
+  background:linear-gradient(135deg,#5ce482 0%,#31ba61 100%);
+  color:#09110c;
+  box-shadow:0 14px 34px rgba(77,220,122,.28);
+}
+.button-primary:hover,.button-primary:focus-visible{
+  background:linear-gradient(135deg,#77ef9a 0%,#42ca72 100%);
+}
+.hero-copy .button-secondary,.page-hero-copy .button-secondary,.cta-band .button-secondary{
+  background:transparent;
+  border-color:rgba(255,255,255,.14);
+  color:#f5fbf7;
+}
+.hero,.page-hero{
+  gap:28px;
+}
+.hero.hero-media-layout{
+  grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);
+}
+.hero-copy,.page-hero-copy,.cta-band{
+  background:linear-gradient(160deg,#0d1712 0%,#14231b 68%,#1b3023 100%);
+  border:1px solid rgba(77,220,122,.14);
+  box-shadow:0 28px 90px rgba(5,10,8,.24);
+}
+.hero-copy h1,.page-hero-copy h1,.cta-band h2{
+  color:#f5fbf7;
+  font-size:clamp(2.2rem,4vw,4.15rem);
+  line-height:1;
+}
+.page-hero-copy h1{
+  font-size:clamp(1.95rem,3vw,3rem);
+}
+.hero-copy>p:not(.eyebrow),.page-hero-copy>p:not(.eyebrow),.cta-band p{
+  color:rgba(233,241,236,.78);
+}
+.hero-copy .eyebrow,.page-hero-copy .eyebrow,.cta-band .eyebrow,.division-card .eyebrow,.contact-sidebar .eyebrow{
+  color:#8dffb0;
+}
+.hero-focus-cloud{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.hero-focus-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:10px 14px;
+  border:1px solid rgba(77,220,122,.18);
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:#eef5f0;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.03em;
+}
+.hero-points{
+  gap:12px;
+  margin-top:30px;
+}
+.hero-points li{
+  padding:14px 16px;
+  padding-left:16px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  background:rgba(255,255,255,.05);
+  color:#eef5f0;
+}
+.hero-points li::before{
+  display:none;
+}
+.hero-points a{
+  color:#eef5f0;
+}
+.hero-panel,.page-hero-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(243,247,243,.96));
+  border:1px solid rgba(13,27,19,.08);
+}
+.hero-media-panel{
+  padding:26px;
+}
+.hero-media-main{
+  padding:14px;
+  border-radius:28px;
+  background:#fff;
+  border:1px solid rgba(13,27,19,.08);
+}
+.hero-media-main:nth-child(1){
+  transform:translateX(18px);
+}
+.hero-media-main:nth-child(2){
+  transform:translateX(-18px);
+}
+.hero-signal-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:18px;
+}
+.hero-signal-card{
+  display:grid;
+  gap:6px;
+  padding:16px;
+  border:1px solid rgba(13,27,19,.08);
+  border-radius:20px;
+  background:#fff;
+}
+.hero-signal-card strong{
+  font-size:.9rem;
+  line-height:1.3;
+}
+.hero-signal-card span{
+  color:var(--muted);
+  font-size:.84rem;
+  line-height:1.45;
+}
+.division-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.division-card{
+  padding:28px;
+  border-radius:30px;
+  border:1px solid rgba(77,220,122,.12);
+  background:linear-gradient(180deg,#0f1712 0%,#16241b 100%);
+  box-shadow:0 24px 70px rgba(7,13,10,.22);
+}
+.division-card h3{
+  margin:0;
+  color:#f5fbf7;
+  font-size:1.36rem;
+  line-height:1.18;
+}
+.division-card p{
+  max-width:none;
+  color:rgba(236,243,238,.76);
+}
+.division-card .chip-list{
+  margin-top:18px;
+}
+.division-card .chip{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(77,220,122,.18);
+  color:#eef5f0;
+}
+.feature-card,.service-card,.card,.contact-panel,.form-panel,.faq-item{
+  border:1px solid rgba(13,27,19,.08);
+  box-shadow:0 20px 60px rgba(10,18,13,.08);
+}
+.feature-card,.service-card{
+  border-radius:30px;
+}
+.service-card{
+  background:linear-gradient(180deg,#ffffff,#f4f7f3);
+}
+.timeline-step{
+  background:linear-gradient(180deg,#0f1712,#17251c);
+  border:1px solid rgba(77,220,122,.12);
+  box-shadow:0 22px 70px rgba(6,12,9,.22);
+}
+.timeline-step span,.timeline-step h3{
+  color:#f5fbf7;
+}
+.timeline-step p{
+  color:rgba(236,243,238,.76);
+}
+.contact-layout{
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(241,246,241,.96));
+  border:1px solid rgba(13,27,19,.08);
+}
+.contact-sidebar{
+  padding:34px;
+  border-radius:28px;
+  border:1px solid rgba(77,220,122,.14);
+  background:linear-gradient(160deg,#0f1712,#16241b);
+  box-shadow:0 24px 70px rgba(6,12,9,.22);
+}
+.contact-sidebar h2,.contact-sidebar>p{
+  color:#f5fbf7;
+}
+.contact-sidebar .detail-item{
+  border-color:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+}
+.contact-sidebar .detail-item strong{
+  color:#f5fbf7;
+}
+.contact-sidebar .detail-item p,.contact-sidebar .detail-item a{
+  color:rgba(236,243,238,.76);
+}
+.site-footer{
+  margin-top:48px;
+  padding-top:0;
+  border-top:0;
+}
+.footer-grid{
+  padding:32px;
+  border:1px solid rgba(77,220,122,.12);
+  border-radius:30px;
+  background:linear-gradient(160deg,#0f1712,#16241b);
+}
+.footer-title,.footer-contact-list strong{
+  color:#f5fbf7;
+}
+.footer-note,.footer-links a,.footer-services a,.footer-contact-list a,.footer-legal,.footer-bottom{
+  color:rgba(235,242,236,.72);
+}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+}
 @media (max-width:1280px){
   :root{
     --max:1360px;
@@ -2126,6 +3189,9 @@ main section+section{
   .hero.hero-media-layout{
     grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);
   }
+  .division-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
 @media (max-width:1100px){
   .hero,.page-hero,.contact-layout,.cta-band,.gateway-panel,.two-col,.footer-grid{
@@ -2135,6 +3201,13 @@ main section+section{
     grid-template-columns:1fr;
   }
   .hero-points,.grid-2{
+    grid-template-columns:1fr;
+  }
+  .hero-media-main:nth-child(1),
+  .hero-media-main:nth-child(2){
+    transform:none;
+  }
+  .division-grid,.hero-signal-grid{
     grid-template-columns:1fr;
   }
   .service-carousel-track{
@@ -2202,6 +3275,841 @@ main section+section{
   }
   .service-carousel-track{
     grid-auto-columns:100%;
+  }
+}
+:root{
+  --bg:#dfe5dd;
+  --surface:#f7faf6;
+  --surface-soft:#edf2ed;
+  --line:#c6cfc6;
+  --line-strong:#8da190;
+  --text:#0f1511;
+  --muted:#58655c;
+  --primary:#58df84;
+  --primary-dark:#0a120d;
+  --primary-soft:#e1f6e7;
+  --shadow:0 20px 60px rgba(7,14,10,.12);
+  --radius:8px;
+}
+body{
+  background:
+    linear-gradient(180deg,#e4e9e2 0%,#dfe5dd 100%);
+}
+body::before{
+  background-image:
+    linear-gradient(rgba(10,20,14,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(10,20,14,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  opacity:.2;
+}
+.site-shell,.gateway-shell{
+  width:100%;
+  max-width:none;
+}
+.site-shell{
+  padding:0 0 72px;
+}
+.site-header{
+  top:0;
+  margin-bottom:0;
+}
+.header-inner{
+  padding:18px clamp(22px,4vw,64px);
+  border-top:0;
+  border-left:0;
+  border-right:0;
+  border-radius:0;
+  background:rgba(10,17,13,.96);
+  box-shadow:0 14px 40px rgba(4,8,6,.24);
+}
+.site-nav{
+  gap:26px;
+}
+.site-nav a,.footer-links a,.footer-services a,.footer-contact-list a,.text-link{
+  color:rgba(236,242,238,.72);
+}
+.site-nav a:hover,.site-nav a:focus-visible,.site-nav a[aria-current="page"],.footer-links a:hover,.footer-links a:focus-visible,.footer-services a:hover,.footer-services a:focus-visible,.text-link:hover,.text-link:focus-visible,.footer-contact-list a:hover,.footer-contact-list a:focus-visible{
+  color:#a6ffbf;
+}
+.nav-toggle,.lang-switch,.button,.chip{
+  border-radius:6px;
+}
+.nav-toggle,.lang-switch,.button{
+  min-height:54px;
+  font-weight:800;
+  letter-spacing:.04em;
+}
+.nav-toggle,.lang-switch{
+  border-color:rgba(255,255,255,.14);
+  background:#111a14;
+  color:#f5fbf7;
+}
+.button-primary{
+  background:#58df84;
+  color:#09110c;
+  box-shadow:none;
+}
+.button-primary:hover,.button-primary:focus-visible{
+  background:#7aee9f;
+}
+.button-secondary{
+  background:#f7faf6;
+  border-color:#0f1913;
+  color:#0f1913;
+}
+.hero-copy .button-secondary,.page-hero-copy .button-secondary,.cta-band .button-secondary{
+  background:transparent;
+  border-color:rgba(255,255,255,.16);
+  color:#f5fbf7;
+}
+main{
+  gap:0;
+}
+main section{
+  padding:clamp(38px,5vw,78px) clamp(20px,4vw,72px);
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent;
+  overflow:visible;
+}
+main section::before{
+  display:none;
+}
+.section-shell,.layout-shell,.footer-shell{
+  width:min(100%,1400px);
+  margin:0 auto;
+}
+.breadcrumb{
+  width:min(100%,1400px);
+  margin:0 auto;
+  padding:18px clamp(20px,4vw,72px) 24px;
+  color:#617067;
+}
+.hero-band,.page-hero-band,.division-section,.process-section,.cta-section{
+  background:#0b120d;
+}
+.featured-section,.priority-section,.service-overview-section,.industries-section,.privacy-section,.about-values-section,.thanks-section{
+  background:#f7faf6;
+}
+.support-section,.extra-section,.clients-section,.coverage-section,.service-cases-section,.privacy-choices-section,.contact-band,.carousel-section,.faq-section,.trust-section{
+  background:#e8ede7;
+}
+.hero,.page-hero,.contact-layout,.cta-band,.two-col,.footer-grid{
+  display:grid;
+  gap:22px;
+}
+.hero,.page-hero{
+  grid-template-columns:minmax(0,1.14fr) minmax(340px,.86fr);
+  align-items:stretch;
+}
+.hero.hero-media-layout{
+  grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
+  gap:30px;
+}
+.contact-layout{
+  grid-template-columns:minmax(320px,.88fr) minmax(0,1.12fr);
+  align-items:start;
+  padding:0;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+.cta-band,.two-col{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.contact-hero{
+  grid-template-columns:1fr;
+}
+:root{
+  --muted:#38483d;
+}
+.hero-copy,.page-hero-copy{
+  display:grid;
+  align-content:start;
+  gap:16px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.hero-copy h1,.page-hero-copy h1,.section-heading h2,.cta-band h2{
+  margin:0;
+  line-height:.98;
+  letter-spacing:-.035em;
+}
+.hero-copy h1{
+  max-width:18ch;
+  font-size:clamp(2.35rem,4vw,4rem);
+  color:#f5fbf7;
+}
+.page-hero-copy h1,.section-heading h2,.cta-band h2{
+  font-size:clamp(1.9rem,3vw,2.85rem);
+}
+.page-hero-copy h1,.cta-band h2{
+  color:#f5fbf7;
+}
+.page-home .hero-copy h1{
+  max-width:18ch;
+}
+.page-about .page-hero-copy{
+  gap:14px;
+}
+.page-about .page-hero-copy h1{
+  max-width:18ch;
+  font-size:clamp(1.7rem,2.25vw,2.15rem);
+  line-height:1.08;
+}
+.hero-copy>p:not(.eyebrow),.page-hero-copy>p:not(.eyebrow),.cta-band p{
+  color:rgba(235,242,237,.78);
+  max-width:66ch;
+}
+.section-heading{
+  display:grid;
+  gap:12px;
+  margin-bottom:28px;
+}
+.section-heading p{
+  max-width:72ch;
+}
+.feature-card h3,.service-card h3,.card h3,.contact-panel h2,.detail-item strong,.faq-item summary{
+  color:#132019;
+}
+.feature-card p,.service-card p,.card p,.faq-item p,.detail-item p,.detail-item a,.contact-panel:not(.contact-sidebar) p,.contact-panel:not(.contact-sidebar) .text-link,.form-note{
+  color:#344439;
+}
+.trust-section .section-heading p,.featured-section .section-heading p,.priority-section .section-heading p,.support-section .section-heading p,.extra-section .section-heading p,.about-values-section .section-heading p,.clients-section .section-heading p,.coverage-section .section-heading p,.service-overview-section .section-heading p,.service-cases-section .section-heading p,.carousel-section .section-heading p,.faq-section .section-heading p,.privacy-section .section-heading p,.privacy-choices-section .section-heading p,.industries-section .section-heading p,.thanks-section .section-heading p{
+  color:var(--muted);
+}
+.division-section .section-heading h2,.process-section .section-heading h2{
+  color:#f5fbf7;
+}
+.division-section .section-heading p:not(.eyebrow),.process-section .section-heading p:not(.eyebrow){
+  color:rgba(235,242,237,.74);
+}
+.hero-copy .eyebrow,.page-hero-copy .eyebrow,.division-card .eyebrow,.contact-sidebar .eyebrow,.cta-band .eyebrow,.process-section .timeline-step span{
+  color:#92ffb2;
+}
+.hero-actions,.page-hero-actions,.cta-actions{
+  gap:12px;
+}
+.hero-focus-cloud{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:26px;
+}
+.hero-focus-chip{
+  padding:14px 16px;
+  border:1px solid rgba(88,223,132,.18);
+  border-radius:6px;
+  background:rgba(255,255,255,.06);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.hero-points{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:22px;
+}
+.hero-points li{
+  min-height:100%;
+  padding:18px 18px 18px 20px;
+  border:1px solid rgba(255,255,255,.12);
+  border-left:4px solid #58df84;
+  border-radius:0;
+  background:rgba(255,255,255,.04);
+  color:#edf5ef;
+}
+.hero-points li::before{
+  display:none;
+}
+.hero-points a{
+  color:#edf5ef;
+}
+.hero-points a:hover,
+.hero-points a:focus-visible{
+  color:#f5fbf7;
+  transform:translateX(2px);
+  text-decoration:none;
+}
+.hero-panel,.page-hero-panel,.contact-panel,.form-panel,.faq-item{
+  border-radius:8px;
+  border:1px solid rgba(12,20,15,.12);
+  box-shadow:none;
+}
+.hero-panel,.page-hero-panel{
+  padding:28px;
+  background:#f7faf6;
+}
+.hero-media-panel{
+  display:grid;
+  gap:18px;
+}
+.hero-media-stack{
+  display:grid;
+  gap:16px;
+}
+.hero-media-main{
+  padding:14px;
+  border-radius:8px;
+  border:1px solid rgba(12,20,15,.12);
+  background:#fff;
+}
+.hero-media-main:nth-child(1),.hero-media-main:nth-child(2){
+  transform:none;
+}
+.hero-signal-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  border-top:1px solid rgba(12,20,15,.12);
+  border-left:1px solid rgba(12,20,15,.12);
+}
+.hero-signal-card{
+  padding:18px;
+  border-right:1px solid rgba(12,20,15,.12);
+  border-bottom:1px solid rgba(12,20,15,.12);
+  border-radius:0;
+  background:#eef3ef;
+}
+.division-grid,.process-section .timeline{
+  gap:0;
+}
+.division-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid rgba(255,255,255,.14);
+  border-left:1px solid rgba(255,255,255,.14);
+}
+.division-card{
+  padding:30px;
+  border-right:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.14);
+  border-radius:0;
+  background:rgba(255,255,255,.02);
+  box-shadow:none;
+}
+.division-card h3{
+  margin:0;
+  color:#f5fbf7;
+  font-size:1.42rem;
+  line-height:1.1;
+}
+.division-card p{
+  color:rgba(235,242,237,.78);
+}
+.division-card .chip-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  align-items:stretch;
+}
+.division-card .chip{
+  justify-content:flex-start;
+  border-radius:4px;
+  background:rgba(255,255,255,.06);
+  border-color:rgba(88,223,132,.16);
+  color:#eef5f0;
+}
+.division-card .chip,.service-chip-links .chip{
+  white-space:normal;
+  align-items:flex-start;
+  min-height:100%;
+  line-height:1.35;
+}
+.page-services .page-hero-panel .service-chip-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+.page-services .page-hero-panel .service-chip-links .chip{
+  justify-content:flex-start;
+  padding:12px 14px;
+  background:#fff;
+  border-color:rgba(12,20,15,.12);
+  color:#132019;
+}
+.page-services .page-hero-panel .service-chip-links .chip:last-child:nth-child(odd){
+  grid-column:1/-1;
+}
+.feature-card,.service-card,.card,.contact-panel,.form-panel,.faq-item{
+  border-radius:8px;
+  border:1px solid rgba(12,20,15,.12);
+  box-shadow:none;
+}
+.feature-card,.service-card,.card,.contact-panel,.form-panel{
+  background:#f8fbf8;
+}
+.feature-card,.service-card{
+  min-height:100%;
+}
+.feature-card::before,.service-card::before{
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(241,245,241,.98));
+}
+.feature-badge,.service-card-badge,.chip{
+  border-radius:4px;
+}
+.feature-badge,.service-card-badge{
+  background:#122118;
+  color:#95ffb4;
+}
+.timeline{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.timeline-step{
+  padding:26px;
+  border-radius:0;
+  border-right:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.14);
+  box-shadow:none;
+  background:rgba(255,255,255,.02);
+}
+.timeline-step h3,.timeline-step span{
+  color:#f5fbf7;
+}
+.timeline-step p{
+  color:rgba(235,242,237,.78);
+}
+.contact-sidebar{
+  padding:34px;
+  border-radius:8px;
+  background:linear-gradient(180deg,#09100c,#0f1812);
+  border:1px solid rgba(88,223,132,.18);
+  box-shadow:none;
+  display:grid;
+  align-content:start;
+  min-width:0;
+  position:relative;
+  z-index:1;
+}
+.contact-sidebar h2,.contact-sidebar>p,.contact-sidebar .detail-item strong{
+  color:#f5fbf7;
+}
+.contact-sidebar .detail-item{
+  border-radius:6px;
+  border-color:rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+}
+.contact-sidebar .detail-item p,.contact-sidebar .detail-item a{
+  color:rgba(242,248,244,.88);
+}
+.page-contact .contact-sidebar{
+  background:#fbfcfa;
+  border-color:rgba(12,20,15,.12);
+}
+.page-contact .contact-sidebar .eyebrow{
+  color:var(--primary-dark);
+}
+.page-contact .contact-sidebar h2,.page-contact .contact-sidebar>p,.page-contact .contact-sidebar .detail-item strong{
+  color:#132019;
+}
+.page-contact .contact-sidebar .detail-item{
+  border-color:rgba(12,20,15,.12);
+  background:#fff;
+}
+.page-contact .contact-sidebar .detail-item p,.page-contact .contact-sidebar .detail-item a{
+  color:#344439;
+}
+.detail-item,.field input,.field select,.field textarea,.checkbox-group,.contact-panel .note,.zoho-form-embed iframe{
+  border-radius:6px;
+}
+.contact-band .contact-layout{
+  align-items:start;
+}
+.contact-band .contact-panel:not(.contact-sidebar){
+  background:#fbfcfa;
+}
+.contact-band .contact-layout > *{
+  min-width:0;
+}
+.contact-band .form-panel{
+  position:relative;
+  z-index:0;
+}
+.page-contact .contact-band{
+  background:
+    radial-gradient(circle at top left,rgba(47,138,88,.1),transparent 26%),
+    linear-gradient(180deg,#e6ede7 0%,#edf3ed 52%,#e7ede7 100%);
+}
+.page-contact .contact-shell{
+  width:min(100%,1480px);
+}
+.page-contact .contact-layout{
+  grid-template-columns:minmax(390px,.96fr) minmax(0,1.04fr);
+  gap:30px;
+}
+.page-contact .contact-sidebar{
+  padding:42px;
+  border-radius:20px;
+  border:1px solid rgba(19,32,25,.12);
+  background:
+    radial-gradient(circle at top right,rgba(47,138,88,.12),transparent 36%),
+    linear-gradient(180deg,rgba(255,255,255,.98),rgba(245,249,245,.98));
+  box-shadow:0 24px 80px rgba(12,20,15,.08);
+  overflow:hidden;
+}
+.page-contact .contact-sidebar::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:6px;
+  background:linear-gradient(90deg,#2f8a58 0%,#7ad296 52%,rgba(122,210,150,0) 100%);
+}
+.page-contact .contact-sidebar h2{
+  font-size:clamp(1.58rem,1.9vw,2.1rem);
+  letter-spacing:-.03em;
+}
+.page-contact .contact-sidebar>p{
+  max-width:48ch;
+  color:#415247;
+}
+.page-contact .contact-sidebar-stack{
+  display:grid;
+  gap:18px;
+}
+.page-contact .contact-direct-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.page-contact .contact-hours-grid{
+  display:grid;
+  gap:12px;
+}
+.page-contact .contact-form-column{
+  display:grid;
+  gap:24px;
+}
+.page-contact .contact-sidebar .contact-detail-card{
+  padding:18px 18px 20px;
+  min-height:100%;
+  border-radius:16px;
+  position:relative;
+}
+.page-contact .contact-sidebar .contact-detail-card strong{
+  display:block;
+  margin-bottom:10px;
+  white-space:normal;
+  line-height:1.18;
+}
+.page-contact .contact-sidebar .contact-detail-card p,
+.page-contact .contact-sidebar .contact-detail-card a{
+  max-width:none;
+}
+.page-contact .contact-sidebar .contact-detail-card-direct{
+  border:1px solid rgba(12,20,15,.08);
+  background:linear-gradient(180deg,#ffffff,#f8fbf8);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.page-contact .contact-sidebar .contact-detail-card-direct::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,rgba(47,138,88,.18),rgba(47,138,88,0));
+}
+.page-contact .contact-sidebar .contact-detail-card-hours{
+  border:1px solid rgba(47,138,88,.18);
+  background:linear-gradient(180deg,#f3f8f4,#ebf3ed);
+}
+.page-contact .contact-sidebar .contact-detail-card-hours strong{
+  color:#1f6640;
+}
+@media (max-width:1200px){
+  .page-contact .contact-layout{
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width:760px){
+  .page-contact .contact-sidebar{
+    padding:28px;
+  }
+  .page-contact .contact-direct-grid{
+    grid-template-columns:1fr;
+  }
+}
+.service-carousel-track{
+  grid-auto-columns:calc((100% - 36px) / 3);
+}
+.site-footer{
+  margin-top:0;
+  padding-top:0;
+  border-top:0;
+  background:#0b120d;
+}
+.footer-shell{
+  padding:0 clamp(20px,4vw,72px);
+}
+.footer-grid{
+  grid-template-columns:1.1fr .9fr .8fr .8fr;
+  align-items:start;
+  gap:24px;
+  padding:48px 0 24px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.footer-grid,.footer-bottom{
+  color:rgba(235,242,237,.72);
+}
+.footer-title,.footer-brand strong,.footer-contact-list strong{
+  color:#f5fbf7;
+}
+.footer-brand img{
+  transform:none;
+}
+.footer-bottom{
+  margin-top:0;
+  padding:22px 0 40px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+@media (max-width:1180px){
+  .hero,.page-hero,.contact-layout,.cta-band,.two-col,.footer-grid{
+    grid-template-columns:1fr;
+  }
+  .hero.hero-media-layout{
+    grid-template-columns:1fr;
+  }
+  .division-grid,.timeline{
+    grid-template-columns:1fr;
+  }
+  .grid-4{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .hero-signal-grid{
+    grid-template-columns:1fr;
+  }
+  .service-carousel-track{
+    grid-auto-columns:calc((100% - 18px) / 2);
+  }
+}
+@media (max-width:860px){
+  .header-inner{
+    display:grid;
+    justify-items:start;
+    gap:14px;
+    padding:16px 22px;
+  }
+  .nav-toggle{
+    display:inline-flex;
+  }
+  .site-nav{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    gap:14px;
+    padding-top:10px;
+  }
+  .site-nav.is-open{
+    display:flex;
+  }
+  .header-actions{
+    width:100%;
+    flex-wrap:wrap;
+  }
+  main section{
+    padding:32px 18px;
+  }
+  .breadcrumb{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .hero-focus-cloud,.hero-points,.grid-2,.grid-3,.grid-4,.faq-list,.privacy-grid,.division-card .chip-list{
+    grid-template-columns:1fr;
+  }
+  .page-home .hero-copy h1{
+    font-size:clamp(2rem,9vw,2.85rem);
+  }
+  .page-hero-copy h1{
+    font-size:clamp(1.74rem,7vw,2.2rem);
+  }
+  .page-about .page-hero-copy h1{
+    max-width:none;
+    font-size:clamp(1.58rem,6.2vw,1.9rem);
+    line-height:1.1;
+  }
+  .service-carousel-track{
+    grid-auto-columns:100%;
+  }
+  .footer-shell{
+    padding:0 18px;
+  }
+}
+'''
+
+css += '''
+.nav-item{
+  position:relative;
+}
+.nav-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:40px;
+}
+.nav-item-has-children .nav-link::after{
+  content:"";
+  width:8px;
+  height:8px;
+  margin-left:8px;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
+  transform:translateY(-1px) rotate(45deg);
+  opacity:.68;
+}
+.nav-submenu{
+  position:absolute;
+  top:calc(100% + 10px);
+  left:0;
+  min-width:260px;
+  display:grid;
+  gap:8px;
+  padding:14px;
+  border:1px solid rgba(12,20,15,.12);
+  border-radius:12px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 18px 40px rgba(18,29,22,.12);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(6px);
+  transition:opacity .16s ease,transform .16s ease,visibility .16s ease;
+  z-index:60;
+}
+.nav-submenu a{
+  display:block;
+  padding:10px 12px;
+  border-radius:8px;
+  color:#132019;
+  font-size:.96rem;
+  font-weight:600;
+  line-height:1.4;
+  white-space:normal;
+}
+.nav-submenu a:hover,.nav-submenu a:focus-visible,.nav-submenu a[aria-current="page"]{
+  background:var(--primary-soft);
+}
+.nav-submenu-wide{
+  min-width:620px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px 12px;
+}
+.nav-item-has-children:hover .nav-submenu,.nav-item-has-children:focus-within .nav-submenu{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.brand-badge-grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:14px;
+}
+.brand-badge{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:82px;
+  padding:18px;
+  border:1px solid rgba(12,20,15,.12);
+  border-radius:8px;
+  background:linear-gradient(180deg,#fbfcfb,#f1f5f1);
+  text-align:center;
+}
+.brand-badge span{
+  color:#2b3830;
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.footer-grid{
+  grid-template-columns:1.1fr .95fr .85fr .9fr 1.05fr;
+}
+.footer-contact-list{
+  display:grid;
+  gap:12px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.footer-contact-list li{
+  display:grid;
+  gap:6px;
+}
+.footer-contact-list span,.footer-contact-list a,.footer-links a,.footer-services a,.social-link{
+  color:rgba(235,242,237,.72);
+}
+.footer-socials{
+  display:grid;
+  gap:10px;
+}
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  width:max-content;
+}
+.social-link svg{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+}
+.social-link:hover,.social-link:focus-visible{
+  color:#f5fbf7;
+}
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.blog-empty-card{
+  display:grid;
+  gap:18px;
+  grid-column:1/-1;
+}
+.case-study-systems{
+  margin-top:18px;
+}
+@media (max-width:1180px){
+  .brand-badge-grid,.blog-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .nav-submenu-wide{
+    min-width:520px;
+  }
+}
+@media (max-width:860px){
+  .nav-item-has-children .nav-link::after{
+    display:none;
+  }
+  .nav-submenu{
+    position:static;
+    min-width:0;
+    grid-template-columns:1fr;
+    padding:0 0 0 12px;
+    border:0;
+    border-left:1px solid rgba(12,20,15,.12);
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+  .site-nav:not(.is-open) .nav-submenu{
+    display:none;
+  }
+}
+@media (max-width:740px){
+  .brand-badge-grid,.blog-grid{
+    grid-template-columns:1fr;
+  }
+  .social-link{
+    width:auto;
   }
 }
 '''
@@ -2304,8 +4212,9 @@ def default_route(page_key):
 
 
 def logo_img(context):
+    src = LOGO_UI_WHITE_URL if context in {'header', 'footer', 'gateway'} else LOGO_UI_URL
     attrs = [
-        f'src="{LOGO_UI_URL}"',
+        f'src="{src}"',
         'alt="Opticable logo"',
         f'width="{LOGO_UI_WIDTH}"',
         f'height="{LOGO_UI_HEIGHT}"',
@@ -2398,6 +4307,29 @@ def contact_value_html(label, value):
     return esc(value)
 
 
+def detail_item_html(label, value, extra_class=''):
+    class_name = 'detail-item'
+    if extra_class:
+        class_name += f' {extra_class}'
+    return f'<div class="{class_name}"><strong>{esc(label)}</strong><p>{contact_value_html(label, value)}</p></div>'
+
+
+def contact_sidebar_details_html(lang):
+    direct_items = []
+    schedule_items = []
+    for label, value in T[lang]['contact_cards']:
+        if '@' in value or label in PHONE_LABELS:
+            direct_items.append(detail_item_html(label, value, 'contact-detail-card contact-detail-card-direct'))
+        else:
+            schedule_items.append(detail_item_html(label, value, 'contact-detail-card contact-detail-card-hours'))
+    parts = []
+    if direct_items:
+        parts.append(f'<div class="contact-direct-grid">{"".join(direct_items)}</div>')
+    if schedule_items:
+        parts.append(f'<div class="contact-hours-grid">{"".join(schedule_items)}</div>')
+    return f'<div class="contact-sidebar-stack">{"".join(parts)}</div>'
+
+
 def breadcrumb_nav(items):
     parts = []
     for index, (label, href) in enumerate(items):
@@ -2407,7 +4339,12 @@ def breadcrumb_nav(items):
             parts.append(f'<span aria-current="page">{esc(label)}</span>')
         else:
             parts.append(f'<a href="{href}">{esc(label)}</a>')
-    return f'<nav class="breadcrumb" aria-label="Breadcrumb">{"".join(parts)}</nav>'
+    return f'<nav class="breadcrumb section-shell" aria-label="Breadcrumb">{"".join(parts)}</nav>'
+
+
+def band_section(inner, section_class='', shell_class='section-shell'):
+    attrs = f' class="{section_class}"' if section_class else ''
+    return f'<section{attrs}><div class="{shell_class}">{inner}</div></section>'
 
 
 def breadcrumb_schema(items, page_url):
@@ -2422,7 +4359,18 @@ def breadcrumb_schema(items, page_url):
 
 
 def sitemap_xml():
-    page_keys = ('home', 'services', 'industries', 'about', 'faq', 'contact', 'privacy', *order)
+    page_keys = (
+        'home',
+        'services',
+        *order,
+        'industries',
+        'case-studies',
+        *CASE_STUDY_ORDER,
+        'blog',
+        'about',
+        'faq',
+        'contact',
+    )
     lastmod = date.today().isoformat()
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -2466,10 +4414,84 @@ def card(title, text, link=None, label='Learn more', cls='card'):
     return f'<article class="{cls}"><h3>{esc(title)}</h3><p>{esc(text)}</p>{more}</article>'
 
 
+def social_icon_svg(key):
+    icons = {
+        'facebook': '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 8H16V5h-2.5C10.9 5 9 6.9 9 9.5V12H6.5v3H9V21h3v-6h3.1l.5-3H12V9.8c0-1.1.5-1.8 1.5-1.8Z"/></svg>',
+        'linkedin': '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.3 8.8a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6Zm-1.4 2h2.9V19H4.9v-8.2Zm4.7 0h2.8v1.1h.1c.4-.7 1.3-1.4 2.8-1.4 3 0 3.6 2 3.6 4.6V19H16v-3.3c0-1.6 0-3.5-2.1-3.5s-2.4 1.7-2.4 3.4V19H8.6v-8.2Z"/></svg>',
+        'instagram': '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.9" r="1.1" fill="currentColor"/></svg>',
+    }
+    return icons[key]
+
+
+def label_for_key(lang, key):
+    t = T[lang]
+    if key in t:
+        return t[key]
+    alt_key = key.replace('-', '_')
+    if alt_key in t:
+        return t[alt_key]
+    if key in services:
+        return services[key][lang]['name']
+    return key
+
+
+def nav_dropdown(lang, key, current, child_keys, wide=False):
+    current_attr = ' aria-current="page"' if current == key or current in child_keys else ''
+    submenu_parts = []
+    for child_key in child_keys:
+        child_attr = ' aria-current="page"' if current == child_key else ''
+        submenu_parts.append(f'<a href="{routes[lang][child_key]}"{child_attr}>{esc(label_for_key(lang, child_key))}</a>')
+    submenu = ''.join(submenu_parts)
+    submenu_class = 'nav-submenu nav-submenu-wide' if wide else 'nav-submenu'
+    return (
+        f'<div class="nav-item nav-item-has-children"><a class="nav-link" href="{routes[lang][key]}"{current_attr}>'
+        f'{esc(label_for_key(lang, key))}</a><div class="{submenu_class}">{submenu}</div></div>'
+    )
+
+
+def simple_nav_link(lang, key, current):
+    current_attr = ' aria-current="page"' if current == key else ''
+    return f'<a class="nav-link" href="{routes[lang][key]}"{current_attr}>{esc(label_for_key(lang, key))}</a>'
+
+
+def footer_social_links(lang):
+    links = []
+    for item in SOCIAL_LINKS:
+        links.append(
+            f'<a class="social-link" href="{item["href"]}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="{esc(item["label"])}">{social_icon_svg(item["key"])}<span>{esc(item["label"])}</span></a>'
+        )
+    return ''.join(links)
+
+
+def partner_brands_section(lang):
+    copy = PARTNER_BRANDS_COPY[lang]
+    badges = ''.join(f'<div class="brand-badge"><span>{esc(name)}</span></div>' for name in PARTNER_BRANDS)
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(copy["eyebrow"])}</p>'
+        f'<h2>{esc(copy["title"])}</h2><p>{esc(copy["intro"])}</p></div>'
+        f'<div class="brand-badge-grid">{badges}</div>',
+        'brand-section',
+    )
+
+
+def case_study_cards(lang, current_key=None):
+    parent = CASE_STUDIES[lang]['parent']
+    cards = []
+    for key in CASE_STUDY_ORDER:
+        if current_key and key == current_key:
+            continue
+        cards.append(card(CASE_STUDIES[lang]['items'][key]['nav'], parent['card_copy'][key], routes[lang][key], T[lang]['view_case_study']))
+    return ''.join(cards)
+
+
 def feature_card(title, text, link, label, badge, eyebrow):
+    kicker = ''
+    if eyebrow and eyebrow.strip().casefold() != title.strip().casefold():
+        kicker = f'<p class="feature-kicker">{esc(eyebrow)}</p>'
     return (
         f'<article class="card feature-card"><div class="feature-card-header">'
-        f'<div><p class="feature-kicker">{esc(eyebrow)}</p><h3>{esc(title)}</h3></div>'
+        f'<div>{kicker}<h3>{esc(title)}</h3></div>'
         f'<span class="feature-badge">{esc(badge)}</span></div>'
         f'<p>{esc(text)}</p><a class="more" href="{link}">{esc(label)}</a></article>'
     )
@@ -2477,9 +4499,13 @@ def feature_card(title, text, link, label, badge, eyebrow):
 
 def service_card(lang, key, label):
     meta = SERVICE_CARD_META[key][lang]
+    service_name = services[key][lang]["name"]
+    kicker = ''
+    if meta["eyebrow"] and meta["eyebrow"].strip().casefold() != service_name.strip().casefold():
+        kicker = f'<p class="service-card-kicker">{esc(meta["eyebrow"])}</p>'
     return (
         f'<article class="card service-card"><div class="service-card-header">'
-        f'<div><p class="service-card-kicker">{esc(meta["eyebrow"])}</p><h3>{esc(services[key][lang]["name"])}</h3></div>'
+        f'<div>{kicker}<h3>{esc(service_name)}</h3></div>'
         f'<span class="service-card-badge">{esc(meta["badge"])}</span></div>'
         f'<p>{esc(services[key][lang]["summary"])}</p>'
         f'<a class="more" href="{routes[lang][key]}">{esc(label)}</a></article>'
@@ -2495,8 +4521,11 @@ def render_chips(items):
     return '<div class="chip-list">' + ''.join(f'<span class="chip">{esc(item)}</span>' for item in items) + '</div>'
 
 
-def render_service_chip_links(lang, keys):
-    return '<div class="chip-list service-chip-links">' + ''.join(
+def render_service_chip_links(lang, keys, extra_class=''):
+    class_name = 'chip-list service-chip-links'
+    if extra_class:
+        class_name += f' {extra_class}'
+    return f'<div class="{class_name}">' + ''.join(
         f'<a class="chip" href="{routes[lang][key]}">{esc(services[key][lang]["name"])}</a>'
         for key in keys
     ) + '</div>'
@@ -2507,6 +4536,21 @@ def render_home_points(lang):
     for text, key in zip(T[lang]['home_points'], HOME_POINT_KEYS):
         items.append(f'<li><a href="{routes[lang][key]}">{esc(text)}</a></li>')
     return f'<ul class="hero-points">{"".join(items)}</ul>'
+
+
+def render_focus_chips(lang):
+    items = T[lang].get('focus_chips', [])
+    if not items:
+        return ''
+    return '<div class="hero-focus-cloud">' + ''.join(f'<span class="hero-focus-chip">{esc(item)}</span>' for item in items) + '</div>'
+
+
+def hero_signal_grid(lang):
+    items = ''.join(
+        f'<article class="hero-signal-card"><strong>{esc(title)}</strong><span>{esc(text)}</span></article>'
+        for title, text in HOME_PANEL_FACTS[lang]
+    )
+    return f'<div class="hero-signal-grid">{items}</div>'
 
 
 def service_panel_media(key, lang):
@@ -2572,13 +4616,14 @@ def related_services_carousel(lang, current_key, preferred_keys, label):
         for key in ordered
     )
     ui = CAROUSEL_UI[lang]
-    return (
-        f'<section><div class="service-carousel" data-service-carousel>'
+    return band_section(
+        f'<div class="service-carousel" data-service-carousel>'
         f'<div class="service-carousel-header"><div class="section-heading"><p class="eyebrow">{esc(T[lang]["services"])}</p>'
         f'<h2>{esc(heading)}</h2><p>{esc(T[lang]["related_intro"])}</p></div>'
         f'<div class="service-carousel-controls"><button class="service-carousel-button" type="button" data-carousel-prev aria-label="{esc(ui["prev"])}">&larr;</button>'
         f'<button class="service-carousel-button" type="button" data-carousel-next aria-label="{esc(ui["next"])}">&rarr;</button></div></div>'
-        f'<div class="service-carousel-track" data-carousel-track>{cards}</div></div></section>'
+        f'<div class="service-carousel-track" data-carousel-track>{cards}</div></div>',
+        'carousel-section',
     )
 
 
@@ -2593,20 +4638,37 @@ def home_visual_panel(lang):
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["top_title"])}</strong><span>{esc(visual["top_copy"])}</span></figcaption></figure>'
         f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, zoomable=True, lang=lang, caption=visual["main_title"])}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["main_title"])}</strong><span>{esc(visual["main_copy"])}</span></figcaption></figure>'
-        f'</div></aside>'
+        f'</div>{hero_signal_grid(lang)}</aside>'
     )
 
 
 def home_featured_services_section(lang):
     t = T[lang]
     cards = ''.join(
-        feature_card(item['title'], item['copy'], routes[lang][item['key']], t['service_label'], item['badge'], services[item['key']][lang]['name'])
+        feature_card(item['title'], item['copy'], routes[lang][item['key']], t['service_label'], item['badge'], item.get('eyebrow', ''))
         for item in HOME_FEATURED_SERVICES[lang]
     )
-    return (
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p>'
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p>'
         f'<h2>{esc(t["featured_title"])}</h2><p>{esc(t["featured_intro"])}</p></div>'
-        f'<div class="feature-grid">{cards}</div></section>'
+        f'<div class="feature-grid">{cards}</div>',
+        'featured-section',
+    )
+
+
+def service_divisions_section(lang):
+    t = T[lang]
+    cards = ''.join(
+        f'<article class="division-card"><p class="eyebrow">{esc(item["eyebrow"])}</p>'
+        f'<h3>{esc(item["title"])}</h3><p>{esc(item["copy"])}</p>'
+        f'{render_service_chip_links(lang, item["keys"])}</article>'
+        for item in SERVICE_DIVISION_GROUPS[lang]
+    )
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p>'
+        f'<h2>{esc(t["division_title"])}</h2><p>{esc(t["division_intro"])}</p></div>'
+        f'<div class="division-grid">{cards}</div>',
+        'division-section',
     )
 
 
@@ -2615,10 +4677,57 @@ def process_section(lang):
         f'<article class="timeline-step"><span>{index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
         for index, (title, text) in enumerate(T[lang]['process'], 1)
     )
-    return (
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(T[lang]["process_title"])}</p>'
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(T[lang]["process_title"])}</p>'
         f'<h2>{esc(T[lang]["process_title"])}</h2><p>{esc(T[lang]["process_intro"])}</p></div>'
-        f'<div class="timeline">{items}</div></section>'
+        f'<div class="timeline">{items}</div>',
+        'process-section',
+    )
+
+
+def split_list_items(items):
+    if len(items) <= 4:
+        return [items]
+    midpoint = (len(items) + 1) // 2
+    return [items[:midpoint], items[midpoint:]]
+
+
+def render_custom_content_section(section):
+    heading = f'<div class="section-heading"><p class="eyebrow">{esc(section["eyebrow"])}</p><h2>{esc(section["title"])}</h2>'
+    if section.get('copy'):
+        heading += f'<p>{esc(section["copy"])}</p>'
+    heading += '</div>'
+
+    blocks = []
+    if section.get('paragraphs'):
+        paragraphs = ''.join(f'<p>{esc(text)}</p>' for text in section['paragraphs'])
+        blocks.append(f'<div class="contact-panel">{paragraphs}</div>')
+    if section.get('details'):
+        details = ''.join(f'<div class="detail-item"><strong>{esc(label)}</strong><p>{contact_value_html(label, value)}</p></div>' for label, value in section['details'])
+        blocks.append(f'<div class="contact-panel"><div class="detail-list">{details}</div></div>')
+    if section.get('cards'):
+        grid_class = 'grid-4' if len(section['cards']) == 4 else 'grid-3'
+        blocks.append(f'<div class="{grid_class}">{"".join(card(title, text) for title, text in section["cards"])}</div>')
+    if section.get('items'):
+        groups = split_list_items(section['items'])
+        if len(groups) == 1:
+            item_html = ''.join(f'<li>{esc(item)}</li>' for item in groups[0])
+            blocks.append(f'<div class="contact-panel"><ul class="check-list">{item_html}</ul></div>')
+        else:
+            panels = ''.join(
+                f'<div class="contact-panel"><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in group)}</ul></div>'
+                for group in groups
+            )
+            blocks.append(f'<div class="two-col">{panels}</div>')
+    return band_section(heading + ''.join(blocks), 'content-section')
+
+
+def inline_cta_band(title, copy, href, label):
+    return band_section(
+        f'<div><p class="eyebrow">{esc(label)}</p><h2>{esc(title)}</h2><p>{esc(copy)}</p></div>'
+        f'<div class="cta-actions"><a class="button button-primary" href="{href}">{esc(label)}</a></div>',
+        'inline-cta-section',
+        'layout-shell cta-band',
     )
 
 
@@ -2649,30 +4758,50 @@ def offer_catalog_schema(lang):
     }
 
 
+def social_meta_values(lang, key, title, desc, canonical_url):
+    meta = {
+        'og_title': title,
+        'og_description': desc,
+        'twitter_title': title,
+        'twitter_description': desc,
+        'og_url': canonical_url,
+    }
+    if lang == 'fr' and key == 'home':
+        meta.update({
+            'og_title': "Caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux | Opticable",
+            'og_description': "Installation et gestion de systèmes technologiques pour immeubles commerciaux au Québec. Montréal, Laval, Longueuil et partout au Québec.",
+            'twitter_title': "Caméras, contrôle d'accès, WiFi et câblage | Opticable",
+            'twitter_description': "Installation et gestion de systèmes pour immeubles commerciaux au Québec.",
+            'og_url': absolute_url('/'),
+        })
+    return meta
+
+
 def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None):
     page_url = absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
     business = {
-        '@type': 'ProfessionalService',
+        '@type': 'LocalBusiness',
         '@id': BUSINESS_ID,
         'name': 'Opticable',
         'legalName': LEGAL_BUSINESS_NAME,
         'url': absolute_url(default_route('home')),
-        'logo': absolute_url(LOGO_LOCKUP_URL),
-        'image': absolute_url(LOGO_LOCKUP_URL),
-        'description': T[lang]['company'],
+        'logo': absolute_url(LOGO_UI_URL),
+        'image': absolute_url(OG_IMAGE_URL),
+        'description': SCHEMA_BUSINESS_DESCRIPTION,
         'serviceType': [services[k][lang]['name'] for k in order],
-        'areaServed': AREA_SERVED_SCHEMA,
+        'areaServed': SCHEMA_AREA_SERVED_NAMES,
+        'address': {'@type': 'PostalAddress', 'addressLocality': 'Montréal', 'addressRegion': 'QC', 'addressCountry': 'CA'},
         'availableLanguage': [language_tag('en'), language_tag('fr')],
         'openingHoursSpecification': OPENING_HOURS_SPEC,
         'hasOfferCatalog': {'@id': catalog['@id']},
+        'telephone': '514-316-7236',
+        'email': 'info@opticable.ca',
+        'hasCredential': f'Licence RBQ {RBQ_LICENSE_NUMBER}',
+        'sameAs': SOCIAL_PROFILE_URLS,
         'identifier': [{'@type': 'PropertyValue', 'name': 'RBQ License', 'value': RBQ_LICENSE_NUMBER}],
     }
     contact = contact_details(lang)
-    if contact.get('general_email'):
-        business['email'] = contact['general_email']
-    if contact.get('phone'):
-        business['telephone'] = contact['phone']
     contact_points = []
     if contact.get('general_email'):
         point = {'@type': 'ContactPoint', 'contactType': 'customer service', 'email': contact['general_email'], 'availableLanguage': [language_tag('en'), language_tag('fr')]}
@@ -2719,10 +4848,15 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
 def header(lang, current, page_key):
     t = T[lang]
     alt = 'fr' if lang == 'en' else 'en'
-    nav = []
-    for key in ('home', 'services', 'industries', 'about', 'faq', 'contact'):
-        current_attr = ' aria-current="page"' if current == key else ''
-        nav.append(f'<a href="{routes[lang][key]}"{current_attr}>{esc(t[key])}</a>')
+    nav = [
+        simple_nav_link(lang, 'home', current),
+        nav_dropdown(lang, 'services', current, order, wide=True),
+        nav_dropdown(lang, 'industries', current, ('case-studies',)),
+        simple_nav_link(lang, 'about', current),
+        simple_nav_link(lang, 'faq', current),
+        simple_nav_link(lang, 'blog', current),
+        simple_nav_link(lang, 'contact', current),
+    ]
     return f'<header class="site-header"><div class="header-inner"><a class="brand" href="{routes[lang]["home"]}" aria-label="Opticable {esc(t["home"]).lower()}">{logo_img("header")}</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">{esc(t["menu"])}</button><nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">{"".join(nav)}</nav><div class="header-actions"><a class="lang-switch" href="{routes[alt][page_key]}" lang="{language_tag(alt)}">{esc(t["switch"])}</a><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a></div></div></header>'
 
 
@@ -2757,16 +4891,23 @@ def image_lightbox(lang):
 
 def footer(lang):
     t = T[lang]
-    quick = ''.join(f'<li><a href="{routes[lang][k]}">{esc(t[k])}</a></li>' for k in ('home', 'services', 'about', 'contact', 'privacy'))
-    feat = ''.join(f'<li><a href="{routes[lang][k]}">{esc(services[k][lang]["name"])}</a></li>' for k in order[:4])
+    quick = ''.join(f'<li><a href="{routes[lang][k]}">{esc(label_for_key(lang, k))}</a></li>' for k in ('home', 'services', 'industries', 'case-studies', 'blog', 'about', 'faq', 'contact', 'privacy'))
+    feat = ''.join(f'<li><a href="{routes[lang][k]}">{esc(services[k][lang]["name"])}</a></li>' for k in order)
     contact_items = footer_contact_items(lang)
+    social_items = footer_social_links(lang)
     legal = f'<p class="footer-legal">{esc(LEGAL_BUSINESS_NAME)}<br />{esc(RBQ_LICENSE_LABEL)}</p>'
-    return f'<footer class="site-footer"><div class="footer-grid"><div><div class="footer-brand">{logo_img("footer")}</div><p class="footer-note">{esc(t["footer"])}</p>{legal}</div><div><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div><div><p class="footer-title">{esc(t["contact"])}</p><ul class="footer-links">{quick}</ul></div><div><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div></div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></footer>'
+    return (
+        f'<footer class="site-footer"><div class="footer-shell"><div class="footer-grid"><div><div class="footer-brand">{logo_img("footer")}</div><p class="footer-note">{esc(t["footer"])}</p>{legal}</div><div><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div><div><p class="footer-title">{esc(t["follow_us"])}</p><div class="footer-socials">{social_items}</div></div><div><p class="footer-title">{esc(t["menu"])}</p><ul class="footer-links">{quick}</ul></div><div><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div></div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></div></footer>'
+    )
 
 
 def cta(lang):
     t = T[lang]
-    return f'<section class="cta-band"><div><p class="eyebrow">{esc(t["cta_kicker"])}</p><h2>{esc(t["cta_title"])}</h2><p>{esc(t["cta_copy"])}</p></div><div class="cta-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div></section>'
+    return band_section(
+        f'<div><p class="eyebrow">{esc(t["cta_kicker"])}</p><h2>{esc(t["cta_title"])}</h2><p>{esc(t["cta_copy"])}</p></div><div class="cta-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div>',
+        'cta-section',
+        'layout-shell cta-band',
+    )
 
 
 def icon_link_tags():
@@ -2786,7 +4927,8 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
     t = T[lang]
     canonical_url = absolute_url(canonical_path or routes[lang][key])
     default_url = absolute_url(default_route(key)) if include_alternates else canonical_url
-    og_image_url = absolute_url(LOGO_LOCKUP_URL)
+    social_meta = social_meta_values(lang, key, title, desc, canonical_url)
+    og_image_url = absolute_url(OG_IMAGE_URL)
     alternate_tags = ''
     if include_alternates:
         alternate_tags = (
@@ -2794,19 +4936,20 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][key])}" />'
             f'<link rel="alternate" hreflang="x-default" href="{default_url}" />'
         )
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(title)}" /><meta property="og:description" content="{esc(desc)}" /><meta property="og:url" content="{canonical_url}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:alt" content="Opticable logo" /><meta property="og:image:width" content="{LOGO_LOCKUP_WIDTH}" /><meta property="og:image:height" content="{LOGO_LOCKUP_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(title)}" /><meta name="twitter:description" content="{esc(desc)}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable logo" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    body_class = f'lang-{lang} page-{key}'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 
 
-def legacy_redirect_html(target, title, desc, lang='fr'):
+def legacy_redirect_html(target, title, desc, lang='fr', page_key='home'):
     return (
         f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" />'
         f'<meta http-equiv="refresh" content="0; url={target}" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />'
         f'<title>{esc(title)}</title><meta name="description" content="{esc(desc)}" />'
         f'<meta name="robots" content="noindex, follow" /><meta name="theme-color" content="#153628" />'
         f'<link rel="canonical" href="{absolute_url(target)}" />'
-        f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"]["home"])}" />'
-        f'<link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"]["home"])}" />'
-        f'<link rel="alternate" hreflang="x-default" href="{absolute_url(default_route("home"))}" />'
+        f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][page_key])}" />'
+        f'<link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"][page_key])}" />'
+        f'<link rel="alternate" hreflang="x-default" href="{absolute_url(default_route(page_key))}" />'
         f'<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" />'
         f'<meta property="og:locale" content="{T[lang]["locale"]}" /><meta property="og:title" content="{esc(title)}" />'
         f'<meta property="og:description" content="{esc(desc)}" /><meta property="og:url" content="{absolute_url(target)}" />'
@@ -2830,10 +4973,11 @@ def industries_section(lang):
 
 def coverage_section(lang):
     t = T[lang]
-    return (
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["service_area_eyebrow"])}</p>'
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(t["service_area_eyebrow"])}</p>'
         f'<h2>{esc(t["service_area_title"])}</h2><p>{esc(t["service_area_intro"])}</p></div>'
-        f'{render_chips(t["service_area_regions"])}</section>'
+        f'{render_chips(t["service_area_regions"])}',
+        'coverage-section',
     )
 
 def flat_faq_items(lang):
@@ -2847,9 +4991,10 @@ def faq_sections(lang):
             f'<details class="faq-item" open><summary>{esc(q)}</summary><p>{esc(a)}</p></details>'
             for q, a in items
         )
-        block = (
-            f'<section><div class="section-heading"><p class="eyebrow">FAQ</p><h2>{esc(title)}</h2><p>{esc(intro)}</p></div>'
-            f'<div class="faq-list">{faq_items}</div></section>'
+        block = band_section(
+            f'<div class="section-heading"><p class="eyebrow">FAQ</p><h2>{esc(title)}</h2><p>{esc(intro)}</p></div>'
+            f'<div class="faq-list">{faq_items}</div>',
+            'faq-section',
         )
         sections.append(block)
     return ''.join(sections)
@@ -2930,67 +5075,133 @@ for lang in ('en', 'fr'):
     contact_panel_copy = t.get('contact_panel_copy', t['contact_intro'])
     primary_cards = service_cards(lang, t['service_label'], primary_order)
     secondary_cards = service_cards(lang, t['service_label'], secondary_order)
-    details = ''.join(f'<div class="detail-item"><strong>{esc(a)}</strong><p>{contact_value_html(a, b)}</p></div>' for a, b in t['contact_cards'])
+    details = ''.join(detail_item_html(a, b) for a, b in t['contact_cards'])
+    contact_page_details = contact_sidebar_details_html(lang)
 
     home_body = (
-        f'<section class="hero hero-media-layout"><div class="hero-copy"><p class="eyebrow">{esc(t["home_kicker"])}</p>'
-        f'<h1>{esc(t["home_h1"])}</h1><p>{esc(t["home_intro"])}</p>'
-        f'<div class="hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a>'
-        f'<a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div>'
-        f'{render_home_points(lang)}</div>'
-        f'{home_visual_panel(lang)}</section>'
-        f'{home_featured_services_section(lang)}'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["trust_title"])}</p><h2>{esc(t["trust_title"])}</h2><p>{esc(t["company"])}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["trust"])}</div></section>'
-        f'{process_section(lang)}'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}</section>'
-        f'{cta(lang)}'
+        band_section(
+            f'<div class="hero-copy"><p class="eyebrow">{esc(t["home_kicker"])}</p>'
+            f'<h1>{esc(t["home_h1"])}</h1><p>{esc(t["home_intro"])}</p>'
+            f'<div class="hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a>'
+            f'<a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div>'
+            f'{render_focus_chips(lang)}'
+            f'{render_home_points(lang)}</div>'
+            f'{home_visual_panel(lang)}',
+            'hero-band',
+            'layout-shell hero hero-media-layout',
+        )
+        + (service_divisions_section(lang) if lang != 'fr' else '')
+        + home_featured_services_section(lang)
+        + partner_brands_section(lang)
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["trust_title"])}</p><h2>{esc(t["trust_title"])}</h2><p>{esc(t.get("home_trust_intro", t["company"]))}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["trust"])}</div>',
+            'trust-section',
+        )
+        + process_section(lang)
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}',
+            'clients-section',
+        )
+        + cta(lang)
     )
     write_url(routes[lang]['home'], page(lang, 'home', 'home', t['home_title'], t['home_desc'], home_body))
 
     services_breadcrumbs = [(t['home'], routes[lang]['home']), (t['services'], routes[lang]['services'])]
     services_body = (
-        f'{breadcrumb_nav(services_breadcrumbs)}'
-        f'<section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["services"])}</p><h1>{esc(t["services_h1"])}</h1><p>{esc(t["services_intro"])}</p>'
-        f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["about"]}">{esc(t["about"])}</a></div></div>'
-        f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["company"])}</h2>{render_service_chip_links(lang, services_page_chip_keys)}</aside></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["priority_title"])}</h2><p>{esc(t["priority_intro"])}</p></div><div class="grid-2">{primary_cards}</div></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["support_title"])}</h2><p>{esc(t["support_intro"])}</p></div><div class="grid-2">{secondary_cards}</div></section>'
-        f'{process_section(lang)}'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["extra_title"])}</h2><p>{esc(t["extra_intro"])}</p></div><div class="grid-3">{"".join(card(a, b) for a, b in t["extras"])}</div></section>'
-        f'{cta(lang)}'
+        breadcrumb_nav(services_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["services"])}</p><h1>{esc(t["services_h1"])}</h1><p>{esc(t["services_intro"])}</p>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["about"]}">{esc(t["about"])}</a></div></div>'
+            f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["company"])}</h2>{render_service_chip_links(lang, services_page_chip_keys, "service-chip-links-compact")}</aside>',
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["priority_title"])}</h2><p>{esc(t["priority_intro"])}</p></div><div class="grid-2">{primary_cards}</div>',
+            'priority-section',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["support_title"])}</h2><p>{esc(t["support_intro"])}</p></div><div class="grid-2">{secondary_cards}</div>',
+            'support-section',
+        )
+        + process_section(lang)
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["extra_title"])}</h2><p>{esc(t["extra_intro"])}</p></div><div class="grid-3">{"".join(card(a, b) for a, b in t["extras"])}</div>',
+            'extra-section',
+        )
+        + cta(lang)
     )
     write_url(routes[lang]['services'], page(lang, 'services', 'services', t['services_title'], t['services_desc'], services_body, breadcrumb_items=services_breadcrumbs))
 
     about_breadcrumbs = [(t['home'], routes[lang]['home']), (t['about'], routes[lang]['about'])]
-    about_body = (
-        f'{breadcrumb_nav(about_breadcrumbs)}'
-        f'<section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["about"])}</p><h1>{esc(t["about_h1"])}</h1><p>{esc(t["about_intro"])}</p>'
-        f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
-        f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["about_story"])}</h2>{about_panel_media(lang)}</aside></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["about"])}</p><h2>{esc(t.get("about_section_title", t["about_h1"]))}</h2><p>{esc(t.get("about_section_intro", t["about_story"]))}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["about_values"])}</div></section>'
-        f'{process_section(lang)}'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}</section>'
-        f'{cta(lang)}'
-    )
+    if lang == 'fr':
+        about_body = (
+            breadcrumb_nav(about_breadcrumbs)
+            + band_section(
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["about"])}</p><h1>{esc(t["about_h1"])}</h1><p>{esc(t["about_intro"])}</p>'
+                f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
+                f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["about_story"])}</h2>{about_panel_media(lang)}</aside>',
+                'hero-band page-hero-band',
+                'layout-shell page-hero',
+            )
+            + ''.join(render_custom_content_section(section) for section in FR_ABOUT_SECTIONS)
+            + cta(lang)
+        )
+    else:
+        about_body = (
+            breadcrumb_nav(about_breadcrumbs)
+            + band_section(
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["about"])}</p><h1>{esc(t["about_h1"])}</h1><p>{esc(t["about_intro"])}</p>'
+                f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
+                f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["tagline"])}</p><h2>{esc(t["about_story"])}</h2>{about_panel_media(lang)}</aside>',
+                'hero-band page-hero-band',
+                'layout-shell page-hero',
+            )
+            + band_section(
+                f'<div class="section-heading"><p class="eyebrow">{esc(t["about"])}</p><h2>{esc(t.get("about_section_title", t["about_h1"]))}</h2><p>{esc(t.get("about_section_intro", t["about_story"]))}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["about_values"])}</div>',
+                'about-values-section',
+            )
+            + process_section(lang)
+            + band_section(
+                f'<div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["clients_title"])}</h2><p>{esc(t["clients_intro"])}</p></div>{clients_section(lang)}',
+                'clients-section',
+            )
+            + cta(lang)
+        )
     write_url(routes[lang]['about'], page(lang, 'about', 'about', t['about_title'], t['about_desc'], about_body, breadcrumb_items=about_breadcrumbs))
 
     contact_breadcrumbs = [(t['home'], routes[lang]['home']), (t['contact'], routes[lang]['contact'])]
     contact_body = (
-        f'{breadcrumb_nav(contact_breadcrumbs)}'
-        f'<section class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["contact"])}</p><h1>{esc(t["contact_h1"])}</h1><p>{esc(t["contact_intro"])}</p></div></section>'
-        f'<section class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2><p>{esc(contact_panel_copy)}</p><div class="detail-list">{details}</div></div>{form_section(lang)}</section>'
-        f'{coverage_section(lang)}'
-        f'{cta(lang)}'
+        breadcrumb_nav(contact_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["contact"])}</p><h1>{esc(t["contact_h1"])}</h1><p>{esc(t["contact_intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(
+            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2><p>{esc(contact_panel_copy)}</p>{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}{f"<div class=\"contact-panel\"><p>{esc(t['contact_form_note'])}</p></div>" if t.get("contact_form_note") else ""}</div></div>',
+            'contact-band',
+            'section-shell contact-shell',
+        )
+        + coverage_section(lang)
+        + cta(lang)
     )
     write_url(routes[lang]['contact'], page(lang, 'contact', 'contact', t['contact_title'], t['contact_desc'], contact_body, breadcrumb_items=contact_breadcrumbs))
 
     thanks_breadcrumbs = [(t['home'], routes[lang]['home']), (t['thanks'], routes[lang]['thanks'])]
     thanks_steps_html = ''.join(f'<li>{esc(item)}</li>' for item in t['thanks_steps'])
     thanks_body = (
-        f'{breadcrumb_nav(thanks_breadcrumbs)}'
-        f'<section class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["thanks"])}</p><h1>{esc(t["thanks_h1"])}</h1><p>{esc(t["thanks_intro"])}</p>'
-        f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["home"]}">{esc(t["thanks_return_home"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["thanks_view_services"])}</a></div></div></section>'
-        f'<section class="two-col"><div class="contact-panel"><p class="eyebrow">{esc(t["thanks"])}</p><h2>{esc(t["thanks_panel_title"])}</h2><p>{esc(t["thanks_panel_copy"])}</p><ul class="check-list">{thanks_steps_html}</ul></div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><div class="detail-list">{details}</div></div></section>'
+        breadcrumb_nav(thanks_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["thanks"])}</p><h1>{esc(t["thanks_h1"])}</h1><p>{esc(t["thanks_intro"])}</p>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["home"]}">{esc(t["thanks_return_home"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["thanks_view_services"])}</a></div></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(
+            f'<div class="two-col"><div class="contact-panel"><p class="eyebrow">{esc(t["thanks"])}</p><h2>{esc(t["thanks_panel_title"])}</h2><p>{esc(t["thanks_panel_copy"])}</p><ul class="check-list">{thanks_steps_html}</ul></div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><div class="detail-list">{details}</div></div></div>',
+            'thanks-section',
+        )
     )
     write_url(routes[lang]['thanks'], page(lang, 'thanks', 'contact', t['thanks_title'], t['thanks_desc'], thanks_body, breadcrumb_items=thanks_breadcrumbs, robots='noindex, nofollow'))
 
@@ -2998,50 +5209,189 @@ for lang in ('en', 'fr'):
     privacy_choices_html = ''.join(f'<li>{esc(item)}</li>' for item in t['privacy_choices'])
     privacy_breadcrumbs = [(t['home'], routes[lang]['home']), (t['privacy'], routes[lang]['privacy'])]
     privacy_body = (
-        f'{breadcrumb_nav(privacy_breadcrumbs)}'
-        f'<section class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["privacy"])}</p><h1>{esc(t["privacy_h1"])}</h1><p>{esc(t["privacy_intro"])}</p></div></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_cards_title"])}</h2><p>{esc(t["privacy_cards_intro"])}</p></div><div class="privacy-grid">{privacy_cards_html}</div></section>'
-        f'<section class="two-col"><div class="contact-panel"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_choices_title"])}</h2><ul class="check-list">{privacy_choices_html}</ul></div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><p>{esc(t["footer_contact_intro"])}</p><div class="detail-list">{details}</div></div></section>'
+        breadcrumb_nav(privacy_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["privacy"])}</p><h1>{esc(t["privacy_h1"])}</h1><p>{esc(t["privacy_intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_cards_title"])}</h2><p>{esc(t["privacy_cards_intro"])}</p></div><div class="privacy-grid">{privacy_cards_html}</div>',
+            'privacy-section',
+        )
+        + band_section(
+            f'<div class="two-col"><div class="contact-panel"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_choices_title"])}</h2><ul class="check-list">{privacy_choices_html}</ul></div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><p>{esc(t["footer_contact_intro"])}</p><div class="detail-list">{details}</div></div></div>',
+            'privacy-choices-section',
+        )
     )
     write_url(routes[lang]['privacy'], page(lang, 'privacy', 'privacy', t['privacy_title'], t['privacy_desc'], privacy_body, breadcrumb_items=privacy_breadcrumbs))
 
     industries_breadcrumbs = [(t['home'], routes[lang]['home']), (t['industries'], routes[lang]['industries'])]
-    industries_body = (
-        f'{breadcrumb_nav(industries_breadcrumbs)}'
-        f'<section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(t["industries"])}</p><h1>{esc(t["industries_h1"])}</h1><p>{esc(t["industries_intro"])}</p>'
-        f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
-        f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t.get("industries_panel_title", t["company"]))}</h2><p>{esc(t.get("industries_panel_copy", t["industries_intro"]))}</p></aside></section>'
-        f'<section><div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["industries_h1"])}</h2><p>{esc(t["industries_intro"])}</p></div>{industries_section(lang)}</section>'
-        f'{coverage_section(lang)}'
-        f'{cta(lang)}'
+    case_parent = CASE_STUDIES[lang]['parent']
+    case_preview = band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(t["case_studies"])}</p><h2>{esc(case_parent["h1"])}</h2><p>{esc(case_parent["intro"])}</p></div><div class="grid-2">{case_study_cards(lang)}</div>',
+        'case-study-preview-section',
     )
+    if lang == 'fr':
+        client_sections_html = ''.join(
+            render_custom_content_section({
+                'eyebrow': 'Clientèle',
+                'title': section['title'],
+                'copy': section['copy'],
+                'items': section['items'],
+            })
+            for section in FR_CLIENTELE_SECTIONS
+        )
+        industries_body = (
+            breadcrumb_nav(industries_breadcrumbs)
+            + band_section(
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["industries"])}</p><h1>{esc(t["industries_h1"])}</h1><p>{esc(t["industries_intro"])}</p>'
+                f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
+                f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["company"])}</h2><p>{esc(t["clients_intro"])}</p></aside>',
+                'hero-band page-hero-band',
+                'layout-shell page-hero',
+            )
+            + client_sections_html
+            + case_preview
+            + inline_cta_band(FR_CLIENTELE_CTA['title'], FR_CLIENTELE_CTA['copy'], routes[lang]['contact'], FR_CLIENTELE_CTA['label'])
+        )
+    else:
+        industries_body = (
+            breadcrumb_nav(industries_breadcrumbs)
+            + band_section(
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["industries"])}</p><h1>{esc(t["industries_h1"])}</h1><p>{esc(t["industries_intro"])}</p>'
+                f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
+                f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t.get("industries_panel_title", t["company"]))}</h2><p>{esc(t.get("industries_panel_copy", t["industries_intro"]))}</p></aside>',
+                'hero-band page-hero-band',
+                'layout-shell page-hero',
+            )
+            + band_section(
+                f'<div class="section-heading"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["industries_h1"])}</h2><p>{esc(t["industries_intro"])}</p></div>{industries_section(lang)}',
+                'industries-section',
+            )
+            + case_preview
+            + coverage_section(lang)
+            + cta(lang)
+        )
     write_url(routes[lang]['industries'], page(lang, 'industries', 'industries', t['industries_title'], t['industries_desc'], industries_body, breadcrumb_items=industries_breadcrumbs))
+
+    case_studies_breadcrumbs = [(t['home'], routes[lang]['home']), (t['case_studies'], routes[lang]['case-studies'])]
+    case_studies_body = (
+        breadcrumb_nav(case_studies_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["case_studies"])}</p><h1>{esc(case_parent["h1"])}</h1><p>{esc(case_parent["intro"])}</p></div>'
+            f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["industries"])}</p><h2>{esc(t["company"])}</h2><p>{esc(t["clients_intro"])}</p></aside>',
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["case_studies"])}</p><h2>{esc(case_parent["h1"])}</h2><p>{esc(case_parent["intro"])}</p></div><div class="grid-2">{case_study_cards(lang)}</div>',
+            'case-studies-section',
+        )
+        + cta(lang)
+    )
+    write_url(routes[lang]['case-studies'], page(lang, 'case-studies', 'case-studies', case_parent['title'], case_parent['desc'], case_studies_body, breadcrumb_items=case_studies_breadcrumbs))
+
+    for case_key in CASE_STUDY_ORDER:
+        case_item = CASE_STUDIES[lang]['items'][case_key]
+        case_breadcrumbs = [(t['home'], routes[lang]['home']), (t['case_studies'], routes[lang]['case-studies']), (case_item['nav'], routes[lang][case_key])]
+        case_body = (
+            breadcrumb_nav(case_breadcrumbs)
+            + band_section(
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(t["case_studies"])}</p><h1>{esc(case_item["h1"])}</h1><p>{esc(case_item["context"])}</p></div>'
+                f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(case_item["systems"])}</h2><p>{esc(case_item["result"])}</p></aside>',
+                'hero-band page-hero-band',
+                'layout-shell page-hero',
+            )
+            + render_custom_content_section({'eyebrow': 'Contexte' if lang == 'fr' else 'Context', 'title': 'Contexte' if lang == 'fr' else 'Context', 'paragraphs': [case_item['context']]})
+            + render_custom_content_section({'eyebrow': 'Défis identifiés' if lang == 'fr' else 'Challenges', 'title': 'Défis identifiés' if lang == 'fr' else 'Challenges identified', 'items': case_item['challenges']})
+            + render_custom_content_section({'eyebrow': "Ce qu'on a fait" if lang == 'fr' else 'Scope', 'title': "Ce qu'on a fait" if lang == 'fr' else 'What we delivered', 'items': case_item['work']})
+            + band_section(
+                f'<div class="section-heading"><p class="eyebrow">{"Résultat" if lang == "fr" else "Outcome"}</p><h2>{"Résultat" if lang == "fr" else "Result"}</h2><p>{esc(case_item["result"])}</p></div>'
+                f'<div class="contact-panel case-study-systems"><p class="eyebrow">{"Systèmes utilisés" if lang == "fr" else "Systems used"}</p><h2>{esc(case_item["systems"])}</h2>{render_chips([item.strip() for item in case_item["systems"].split("·")])}</div>',
+                'case-study-result-section',
+            )
+            + inline_cta_band(case_item['cta_title'], case_item['cta_copy'], routes[lang]['contact'], t['quote'])
+            + band_section(
+                f'<div class="section-heading"><p class="eyebrow">{esc(t["case_studies"])}</p><h2>{esc("Autres études de cas" if lang == "fr" else "Related case studies")}</h2><p>{esc(case_parent["intro"])}</p></div><div class="grid-2">{case_study_cards(lang, current_key=case_key)}</div>',
+                'case-study-related-section',
+            )
+        )
+        write_url(routes[lang][case_key], page(lang, case_key, 'case-studies', case_item['title'], case_item['desc'], case_body, breadcrumb_items=case_breadcrumbs))
 
     faq_breadcrumbs = [(t['home'], routes[lang]['home']), ('FAQ', routes[lang]['faq'])]
     faq_body = (
-        f'{breadcrumb_nav(faq_breadcrumbs)}'
-        f'<section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">FAQ</p><h1>{esc(t["faq_h1"])}</h1><p>{esc(t["faq_intro"])}</p></div>'
-        f'<aside class="page-hero-panel"><p class="eyebrow">FAQ</p><h2>{esc(t.get("faq_panel_title", t["faq_h1"]))}</h2><p>{esc(t.get("faq_panel_copy", t["faq_intro"]))}</p></aside></section>'
-        f'{faq_sections(lang)}'
-        f'{cta(lang)}'
+        breadcrumb_nav(faq_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">FAQ</p><h1>{esc(t["faq_h1"])}</h1><p>{esc(t["faq_intro"])}</p></div>'
+            f'<aside class="page-hero-panel"><p class="eyebrow">FAQ</p><h2>{esc(t.get("faq_panel_title", t["faq_h1"]))}</h2><p>{esc(t.get("faq_panel_copy", t["faq_intro"]))}</p></aside>',
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + faq_sections(lang)
+        + (inline_cta_band(FR_FAQ_CTA['title'], FR_FAQ_CTA['copy'], routes[lang]['contact'], FR_FAQ_CTA['label']) if lang == 'fr' else cta(lang))
     )
     write_url(routes[lang]['faq'], page(lang, 'faq', 'faq', t['faq_title'], t['faq_desc'], faq_body, faq_items=flat_faq_items(lang), breadcrumb_items=faq_breadcrumbs))
+
+    blog_data = BLOG_PAGE[lang]
+    blog_breadcrumbs = [(t['home'], routes[lang]['home']), (t['blog'], routes[lang]['blog'])]
+    blog_body = (
+        breadcrumb_nav(blog_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">{esc(blog_data["eyebrow"])}</p><h1>{esc(blog_data["h1"])}</h1><p>{esc(blog_data["intro"])}</p></div>'
+            f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["blog"])}</p><h2>{esc(blog_data["listing_title"])}</h2><p>{esc(blog_data["listing_intro"])}</p></aside>',
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["blog"])}</p><h2>{esc(blog_data["listing_title"])}</h2><p>{esc(blog_data["listing_intro"])}</p></div>'
+            f'<div class="blog-grid"><article class="card blog-empty-card"><p>{esc(blog_data["empty"])}</p><div class="cta-actions"><a class="button button-primary" href="{routes[lang]["services"]}">{esc(blog_data["primary_cta"])}</a><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(blog_data["secondary_cta"])}</a></div></article></div>',
+            'blog-listing-section',
+        )
+    )
+    write_url(routes[lang]['blog'], page(lang, 'blog', 'blog', blog_data['title'], blog_data['desc'], blog_body, breadcrumb_items=blog_breadcrumbs))
 
     for key in order:
         s = services[key][lang]
         related = related_services_carousel(lang, key, s['related'], t['service_label'])
         service_breadcrumbs = [(t['home'], routes[lang]['home']), (t['services'], routes[lang]['services']), (s['name'], routes[lang][key])]
         panel_extra = service_panel_media(key, lang) or render_chips([s["name"], services[s["related"][0]][lang]["name"], services[s["related"][1]][lang]["name"]])
-        body = (
-            f'{breadcrumb_nav(service_breadcrumbs)}'
-            f'<section class="page-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(s["name"])}</p><h1>{esc(s["hero"])}</h1><p>{esc(s["intro"])}</p>'
-            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div></div>'
-            f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(s["summary"])}</h2>{panel_extra}</aside></section>'
-            f'<section><div class="section-heading"><p class="eyebrow">{esc("Service overview" if lang == "en" else "Vue d\'ensemble du service")}</p><h2>{esc(s["name"])}</h2><p>{esc(t["overview_intro"])}</p></div><div class="two-col"><div class="contact-panel service-detail-panel"><p class="eyebrow">{esc("Included work" if lang == "en" else "Travaux inclus")}</p><h2>{esc("What the scope can include" if lang == "en" else "Ce qu\'on peut inclure dans les travaux")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["includes"])}</ul></div><div class="contact-panel service-detail-panel"><p class="eyebrow">{esc("Benefits" if lang == "en" else "Avantages")}</p><h2>{esc("Benefits" if lang == "en" else "Ce que ce service apporte")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["benefits"])}</ul></div></div></section>'
-            f'<section><div class="section-heading"><p class="eyebrow">{esc("Typical use cases" if lang == "en" else "Exemples concrets")}</p><h2>{esc("Typical use cases" if lang == "en" else "Cas d\'usage")}</h2><p>{esc(s["summary"])}</p></div><div class="two-col"><div class="contact-panel"><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["cases"])}</ul></div><div class="contact-panel service-apply-panel"><p class="eyebrow">{esc("Industries served" if lang == "en" else "Types d\'immeubles")}</p><h2>{esc("Industries served" if lang == "en" else "Ou ce service s\'applique")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["industries"])}</ul></div></div></section>'
-            f'{related}'
-            f'{cta(lang)}'
-        )
+        if lang == 'fr' and key in FR_SERVICE_PAGE_CONTENT:
+            service_sections_html = ''.join(render_custom_content_section(section) for section in FR_SERVICE_PAGE_CONTENT[key]['sections'])
+            body = (
+                breadcrumb_nav(service_breadcrumbs)
+                + band_section(
+                    f'<div class="page-hero-copy"><p class="eyebrow">{esc(s["name"])}</p><h1>{esc(s["hero"])}</h1><p>{esc(s["intro"])}</p>'
+                    f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div></div>'
+                    f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(s["summary"])}</h2>{panel_extra}</aside>',
+                    'hero-band page-hero-band',
+                    'layout-shell page-hero',
+                )
+                + service_sections_html
+                + inline_cta_band(FR_SERVICE_PAGE_CONTENT[key]['cta'], "Opticable dessert les immeubles commerciaux à Montréal, Laval, Longueuil et partout au Québec.", routes[lang]['contact'], 'Demander une soumission')
+                + related
+            )
+        else:
+            body = (
+                breadcrumb_nav(service_breadcrumbs)
+                + band_section(
+                    f'<div class="page-hero-copy"><p class="eyebrow">{esc(s["name"])}</p><h1>{esc(s["hero"])}</h1><p>{esc(s["intro"])}</p>'
+                    f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["all_services"])}</a></div></div>'
+                    f'<aside class="page-hero-panel"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(s["summary"])}</h2>{panel_extra}</aside>',
+                    'hero-band page-hero-band',
+                    'layout-shell page-hero',
+                )
+                + band_section(
+                    f'<div class="section-heading"><p class="eyebrow">{esc("Service overview" if lang == "en" else "Vue d\'ensemble du service")}</p><h2>{esc(s["name"])}</h2><p>{esc(t["overview_intro"])}</p></div><div class="two-col"><div class="contact-panel service-detail-panel"><p class="eyebrow">{esc("Included work" if lang == "en" else "Travaux inclus")}</p><h2>{esc("What the scope can include" if lang == "en" else "Ce qu\'on peut inclure dans les travaux")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["includes"])}</ul></div><div class="contact-panel service-detail-panel"><p class="eyebrow">{esc("Benefits" if lang == "en" else "Avantages")}</p><h2>{esc("Benefits" if lang == "en" else "Ce que ce service apporte")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["benefits"])}</ul></div></div>',
+                    'service-overview-section',
+                )
+                + band_section(
+                    f'<div class="section-heading"><p class="eyebrow">{esc("Typical use cases" if lang == "en" else "Exemples concrets")}</p><h2>{esc("Typical use cases" if lang == "en" else "Cas d\'usage")}</h2><p>{esc(s["summary"])}</p></div><div class="two-col"><div class="contact-panel"><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["cases"])}</ul></div><div class="contact-panel service-apply-panel"><p class="eyebrow">{esc("Industries served" if lang == "en" else "Types d\'immeubles")}</p><h2>{esc("Industries served" if lang == "en" else "Où ce service s\'applique")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["industries"])}</ul></div></div>',
+                    'service-cases-section',
+                )
+                + related
+                + cta(lang)
+            )
         write_url(routes[lang][key], page(lang, key, 'services', s['title'], s['desc'], body, service_name=s['name'], breadcrumb_items=service_breadcrumbs))
 
 not_found_body = (
@@ -3069,7 +5419,8 @@ not_found_html = page(
 )
 
 write_url('/fr/', legacy_redirect_html('/', 'Redirection vers la page d accueil française', "La page d accueil française est maintenant servie directement à la racine du site.", lang='fr'))
-(DEPLOY_ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /.playwright-cli/\nDisallow: /output/\nDisallow: /__pycache__/\nSitemap: ' + absolute_url('/sitemap.xml') + '\n', encoding='utf-8')
+write_url('/fr/secteurs/', legacy_redirect_html('/fr/clientele/', 'Redirection vers la page clientèle', "Cette ancienne page est maintenant servie sous le nom Clientèle.", lang='fr', page_key='industries'))
+(DEPLOY_ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + absolute_url('/sitemap.xml') + '\n', encoding='utf-8')
 (DEPLOY_ROOT / 'sitemap.xml').write_text(sitemap_xml(), encoding='utf-8')
 (DEPLOY_ROOT / 'site.webmanifest').write_text(webmanifest_json(), encoding='utf-8')
 (DEPLOY_ROOT / 'ads.txt').write_text('# Opticable does not authorize any third-party digital sellers.\n', encoding='utf-8')

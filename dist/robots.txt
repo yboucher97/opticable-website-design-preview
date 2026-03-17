@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /.playwright-cli/
-Disallow: /output/
-Disallow: /__pycache__/
 Sitemap: https://opticable.ca/sitemap.xml
