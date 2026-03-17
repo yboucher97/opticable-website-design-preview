@@ -2171,45 +2171,15 @@ js = '''
 const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-site-nav]');
 if (navToggle && nav) {
-  const mobileNav = window.matchMedia('(max-width: 860px)');
-  const navDropdowns = Array.from(nav.querySelectorAll('.nav-item-has-children'));
-  const setDropdownState = (item, expanded) => {
-    item.classList.toggle('is-open', expanded);
-    const button = item.querySelector('[data-nav-subtoggle]');
-    if (button) {
-      button.setAttribute('aria-expanded', String(expanded));
-    }
-  };
   navToggle.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
     nav.classList.toggle('is-open', !expanded);
   });
-  nav.querySelectorAll('[data-nav-subtoggle]').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const item = button.closest('.nav-item-has-children');
-      if (!item) {
-        return;
-      }
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      if (mobileNav.matches) {
-        navDropdowns.forEach((other) => {
-          if (other !== item) {
-            setDropdownState(other, false);
-          }
-        });
-      }
-      setDropdownState(item, !expanded);
-    });
-  });
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      if (mobileNav.matches) {
-        navToggle.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('is-open');
-      }
+      navToggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
     });
   });
 }
@@ -3923,63 +3893,26 @@ main section::before{
 @media (max-width:860px){
   .header-inner{
     display:grid;
-    grid-template-columns:minmax(0,1fr) auto;
-    align-items:center;
-    justify-items:stretch;
-    gap:12px;
-    padding:16px 18px;
-  }
-  .brand{
-    min-width:0;
+    justify-items:start;
+    gap:14px;
+    padding:16px 22px;
   }
   .nav-toggle{
     display:inline-flex;
-    justify-self:end;
-    min-width:102px;
   }
   .site-nav{
     display:none;
-    grid-column:1/-1;
     width:100%;
     flex-direction:column;
-    gap:10px;
-    padding:14px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    background:rgba(255,255,255,.03);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    gap:14px;
+    padding-top:10px;
   }
   .site-nav.is-open{
     display:flex;
   }
-  .site-nav>.nav-link,
-  .site-nav>.nav-item{
-    width:100%;
-  }
-  .site-nav .nav-link{
-    display:flex;
-    align-items:center;
-    min-height:52px;
-    padding:14px 16px;
-    border-radius:14px;
-    background:rgba(255,255,255,.04);
-    color:#f4faf6;
-  }
-  .site-nav .nav-link[aria-current="page"]{
-    background:rgba(88,223,132,.12);
-    color:#baffcc;
-  }
   .header-actions{
-    display:grid;
-    grid-column:1/-1;
-    grid-template-columns:minmax(76px,96px) minmax(0,1fr);
     width:100%;
-    gap:10px;
-    flex-wrap:nowrap;
-  }
-  .lang-switch,
-  .header-actions .button{
-    width:100%;
+    flex-wrap:wrap;
   }
   main section{
     padding:32px 18px;
@@ -4015,42 +3948,10 @@ css += '''
 .nav-item{
   position:relative;
 }
-.nav-parent-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.nav-parent-row>.nav-link{
-  flex:1 1 auto;
-  min-width:0;
-}
 .nav-link{
   display:inline-flex;
   align-items:center;
   min-height:40px;
-}
-.nav-subtoggle{
-  display:none;
-  align-items:center;
-  justify-content:center;
-  width:42px;
-  height:42px;
-  flex:0 0 42px;
-  padding:0;
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:12px;
-  background:transparent;
-  color:inherit;
-  transition:border-color .16s ease,background-color .16s ease,transform .16s ease,color .16s ease;
-}
-.nav-subtoggle::before{
-  content:"";
-  width:10px;
-  height:10px;
-  border-right:1.8px solid currentColor;
-  border-bottom:1.8px solid currentColor;
-  transform:translateY(-1px) rotate(45deg);
-  transition:transform .16s ease;
 }
 .nav-item-has-children .nav-link::after{
   content:"";
@@ -4182,57 +4083,22 @@ css += '''
   }
 }
 @media (max-width:860px){
-  .nav-parent-row{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 42px;
-    gap:10px;
-    align-items:center;
-  }
   .nav-item-has-children .nav-link::after{
     display:none;
   }
-  .nav-subtoggle{
-    display:inline-flex;
-    border-color:rgba(255,255,255,.14);
-    background:#111a14;
-    color:#f5fbf7;
-  }
-  .nav-item-has-children.is-open .nav-subtoggle{
-    border-color:rgba(88,223,132,.28);
-    background:rgba(88,223,132,.12);
-    color:#a6ffbf;
-  }
-  .nav-item-has-children.is-open .nav-subtoggle::before{
-    transform:translateY(1px) rotate(-135deg);
-  }
   .nav-submenu{
-    display:none;
     position:static;
     min-width:0;
     grid-template-columns:1fr;
-    gap:8px;
-    padding:8px 0 0;
-    margin-top:6px;
+    padding:0 0 0 12px;
     border:0;
+    border-left:1px solid rgba(12,20,15,.12);
     border-radius:0;
     background:transparent;
     box-shadow:none;
     opacity:1;
     visibility:visible;
     transform:none;
-  }
-  .nav-item-has-children.is-open .nav-submenu{
-    display:grid;
-  }
-  .nav-submenu a{
-    padding:12px 14px;
-    border-radius:12px;
-    background:rgba(255,255,255,.04);
-    color:rgba(236,242,238,.82);
-  }
-  .nav-submenu a[aria-current="page"]{
-    background:rgba(88,223,132,.12);
-    color:#baffcc;
   }
   .site-nav:not(.is-open) .nav-submenu{
     display:none;
@@ -4571,9 +4437,6 @@ def label_for_key(lang, key):
 
 def nav_dropdown(lang, key, current, child_keys, wide=False):
     current_attr = ' aria-current="page"' if current == key or current in child_keys else ''
-    label = label_for_key(lang, key)
-    submenu_id = f'nav-submenu-{lang}-{key}'
-    is_open = current == key or current in child_keys
     submenu_parts = []
     for child_key in child_keys:
         child_attr = ' aria-current="page"' if current == child_key else ''
@@ -4581,11 +4444,8 @@ def nav_dropdown(lang, key, current, child_keys, wide=False):
     submenu = ''.join(submenu_parts)
     submenu_class = 'nav-submenu nav-submenu-wide' if wide else 'nav-submenu'
     return (
-        f'<div class="nav-item nav-item-has-children{" is-open" if is_open else ""}"><div class="nav-parent-row">'
-        f'<a class="nav-link" href="{routes[lang][key]}"{current_attr}>{esc(label)}</a>'
-        f'<button class="nav-subtoggle" type="button" data-nav-subtoggle aria-expanded="{"true" if is_open else "false"}" '
-        f'aria-controls="{submenu_id}" aria-label="{esc(T[lang]["menu"])} {esc(label)}"></button></div>'
-        f'<div class="{submenu_class}" id="{submenu_id}">{submenu}</div></div>'
+        f'<div class="nav-item nav-item-has-children"><a class="nav-link" href="{routes[lang][key]}"{current_attr}>'
+        f'{esc(label_for_key(lang, key))}</a><div class="{submenu_class}">{submenu}</div></div>'
     )
 
 
