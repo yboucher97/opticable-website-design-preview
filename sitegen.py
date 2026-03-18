@@ -2,6 +2,7 @@
 import json
 from datetime import date
 import shutil
+import xml.etree.ElementTree as ET
 from PIL import Image, ImageOps
 
 root = Path(__file__).resolve().parent
@@ -71,7 +72,8 @@ SERVICE_INFRASTRUCTURE_URL = f'/assets/service-infrastructure.webp?v={ASSET_VER}
 SERVICE_ACCESS_URL = f'/assets/service-access.webp?v={ASSET_VER}'
 SERVICE_WIFI_URL = f'/assets/service-wifi.webp?v={ASSET_VER}'
 SERVICE_VOIP_URL = f'/assets/service-voip.webp?v={ASSET_VER}'
-OG_IMAGE_URL = f'/assets/og-image.webp?v={ASSET_VER}'
+OG_IMAGE_URL = f'/assets/og-image.png?v={ASSET_VER}'
+OG_IMAGE_MIME_TYPE = 'image/png'
 LOGO_LOCKUP_WIDTH = 1600
 LOGO_LOCKUP_HEIGHT = 687
 LOGO_UI_WIDTH = 1200
@@ -171,6 +173,14 @@ HOME_IMAGE_EXPORTS = (
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
+    },
+    {
+        'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
+        'target': DEPLOY_ASSET_ROOT / 'og-image.png',
+        'resize': (720, 320),
+        'canvas': (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
+        'background': (13, 23, 18, 255),
+        'format': 'PNG',
     },
     {
         'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
@@ -4114,13 +4124,63 @@ css += '''
 }
 '''
 
-def write_url(url, content):
+def normalize_output_content(content):
+    return content.strip() + '\n'
+
+
+def deploy_path_for_url(url):
     if url == '/':
-        path = DEPLOY_ROOT / 'index.html'
-    else:
-        path = DEPLOY_ROOT / url.strip('/') / 'index.html'
+        return DEPLOY_ROOT / 'index.html'
+    return DEPLOY_ROOT / url.strip('/') / 'index.html'
+
+
+def load_previous_page_contents():
+    pages = {}
+    if not DEPLOY_ROOT.exists():
+        return pages
+    for path in DEPLOY_ROOT.rglob('index.html'):
+        rel = path.relative_to(DEPLOY_ROOT).as_posix()
+        url = '/' if rel == 'index.html' else '/' + rel.removesuffix('index.html')
+        pages[url] = normalize_output_content(path.read_text(encoding='utf-8'))
+    return pages
+
+
+def load_previous_sitemap_lastmods():
+    sitemap_path = DEPLOY_ROOT / 'sitemap.xml'
+    if not sitemap_path.exists():
+        return {}
+    try:
+        root_node = ET.fromstring(sitemap_path.read_text(encoding='utf-8'))
+    except ET.ParseError:
+        return {}
+    ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+    lastmods = {}
+    for url_node in root_node.findall('sm:url', ns):
+        loc_node = url_node.find('sm:loc', ns)
+        lastmod_node = url_node.find('sm:lastmod', ns)
+        if loc_node is None or lastmod_node is None or not loc_node.text or not lastmod_node.text:
+            continue
+        lastmods[loc_node.text] = lastmod_node.text
+    return lastmods
+
+
+BUILD_DATE = date.today().isoformat()
+PREVIOUS_PAGE_CONTENTS = load_previous_page_contents()
+PREVIOUS_SITEMAP_LASTMODS = load_previous_sitemap_lastmods()
+GENERATED_PAGE_LASTMODS = {}
+
+
+def write_url(url, content):
+    path = deploy_path_for_url(url)
+    normalized = normalize_output_content(content)
+    page_url = absolute_url(url)
+    GENERATED_PAGE_LASTMODS[page_url] = (
+        BUILD_DATE
+        if PREVIOUS_PAGE_CONTENTS.get(url) != normalized
+        else PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE)
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content.strip() + '\n', encoding='utf-8')
+    path.write_text(normalized, encoding='utf-8')
 
 
 def export_image_variant(spec):
@@ -4371,16 +4431,16 @@ def sitemap_xml():
         'faq',
         'contact',
     )
-    lastmod = date.today().isoformat()
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ]
     for lang in ('en', 'fr'):
         for key in page_keys:
+            page_url = absolute_url(routes[lang][key])
             lines.append('  <url>')
-            lines.append(f'    <loc>{esc(absolute_url(routes[lang][key]))}</loc>')
-            lines.append(f'    <lastmod>{lastmod}</lastmod>')
+            lines.append(f'    <loc>{esc(page_url)}</loc>')
+            lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("en")}" href="{esc(absolute_url(routes["en"][key]))}" />')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("fr")}" href="{esc(absolute_url(routes["fr"][key]))}" />')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(absolute_url(default_route(key)))}" />')
@@ -4937,7 +4997,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             f'<link rel="alternate" hreflang="x-default" href="{default_url}" />'
         )
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 
 
 def legacy_redirect_html(target, title, desc, lang='fr', page_key='home'):
