@@ -1631,6 +1631,105 @@ T['fr'].update({
 })
 
 T['en'].update({
+    'about': 'About',
+    'industries': 'Who we serve',
+    'tagline': 'Commercial technology and building systems',
+    'quote': 'Request a quote',
+    'all_services': 'View all services',
+    'company': 'Opticable designs, installs, and manages technology systems for commercial buildings, with long-term support after commissioning.',
+    'footer': 'Opticable installs and manages technology systems for commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
+    'home_title': 'Commercial cabling, access control, WiFi, surveillance, and intercom | Opticable',
+    'home_desc': 'Opticable installs and manages cameras, access control, intercom, WiFi, and structured cabling for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'home_kicker': 'Commercial technology and building systems',
+    'home_h1': 'Commercial cabling, access control, WiFi, surveillance, and intercom for better-managed buildings',
+    'home_intro': 'Opticable designs, installs, and manages technology systems for commercial and multi-tenant buildings across Quebec. One partner for security, entry, WiFi, intercom, and network infrastructure, from installation through ongoing support.',
+    'home_points': [
+        'IP cameras for entries, parking areas, and common spaces',
+        'Access control and intercom for doors, lobbies, and visitors',
+        'Commercial WiFi for offices, retail spaces, and shared areas',
+        'Structured cabling, fiber, racks, and network rooms',
+    ],
+    'focus_chips': ['Installation + support', 'Unified ecosystem', 'Occupied buildings', 'Multi-building portfolios'],
+    'featured_title': 'Our services, installation, support, and infrastructure',
+    'featured_intro': 'We install, integrate, and manage technology systems for commercial buildings. One partner, from the first cable run through ongoing support.',
+    'trust_title': 'Why choose Opticable',
+    'home_trust_intro': 'We do not just hand over equipment. We organize systems that are easier to operate, built to last, and easier to expand without starting over.',
+    'trust': [
+        ('A building-wide view', 'Access control, cameras, WiFi, and the network are planned together from the start, not patched together afterward as separate systems.'),
+        ('Clean, durable installations', 'Labeling, racks, finishing, and documentation are handled carefully so the final system is clear and durable.'),
+        ('Easier to operate', 'Your team inherits systems that are better organized and easier to maintain, expand, and support over time.'),
+    ],
+    'services_title': 'Technology services for commercial buildings | Opticable',
+    'services_desc': 'Installation and support for cameras, access control, WiFi, intercom, structured cabling, fiber, and network infrastructure for commercial buildings in Quebec.',
+    'services_h1': 'Installation and support for building technology systems',
+    'services_intro': 'Opticable offers two complementary sides: system installation and ongoing support after commissioning. We do not just deliver equipment; we also help manage, maintain, and expand it.',
+    'priority_title': 'Core services',
+    'priority_intro': 'The systems people rely on every day: security, entry, front-door communication, WiFi, and network IT support.',
+    'support_title': 'Supporting infrastructure',
+    'support_intro': 'Cabling, fiber, racks, technical rooms, and VoIP provide the foundation that keeps the other systems reliable.',
+    'extra_title': 'Why a single partner helps',
+    'extra_intro': 'What changes when installation, support, and infrastructure coordination stay with the same team.',
+    'extras': [
+        ('Unified ecosystem', 'Cameras, intercom, and access control can share one management platform to monitor, unlock, and communicate.'),
+        ('Support after installation', 'We stay available for maintenance, adjustments, system administration, and technical support.'),
+        ('Useful documentation', 'Labeling, rack organization, and handover information are prepared for the teams that will operate the site.'),
+        ('Site coordination', 'We work with property managers, developers, general contractors, and other trades without complicating the schedule.'),
+    ],
+    'about_title': 'About Opticable | Commercial installation in Quebec',
+    'about_desc': 'Opticable installs and manages cameras, access control, WiFi, intercom, and cabling for commercial buildings. Montreal, Laval, and across Quebec.',
+    'about_h1': 'Opticable, installer and technology partner for commercial buildings',
+    'about_intro': 'Opticable is a Quebec company specialized in the installation and management of security, access control, WiFi, intercom, and network infrastructure systems for commercial buildings. We work with businesses, property managers, developers, and contractors that need systems to be installed properly and managed properly, from the first cable through ongoing support.',
+    'about_story': 'We start with the building, not the catalog. Every project is reviewed based on how the site is used, how people enter, occupancy constraints, and the infrastructure already in place.',
+    'contact_title': 'Contact Opticable — Quotes and information | Opticable',
+    'contact_desc': 'Request a quote for cameras, access control, WiFi, intercom, and commercial cabling. Montreal, Laval, Longueuil, and across Quebec.',
+    'contact_h1': 'Request a quote or contact us',
+    'contact_intro': 'Tell us about your building, the systems you need, and your timeline. We will get back to you quickly with the next steps or the questions needed to clarify your request.',
+    'contact_info_title': 'Direct contact details',
+    'contact_panel_title': 'Direct contact details',
+    'contact_panel_copy': '',
+    'contact_form_note': 'We review every request and respond as quickly as possible. For urgent projects, call us directly Monday to Friday.',
+    'service_area_eyebrow': 'Service area',
+    'service_area_title': 'Service area',
+    'service_area_intro': 'Opticable serves commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
+    'service_area_regions': ['Montreal', 'Laval', 'Longueuil', 'South Shore', 'North Shore', 'Laurentians', 'And across Quebec'],
+    'industries_title': 'Clients and project types we serve | Opticable',
+    'industries_desc': 'Opticable installs and manages security, WiFi, and cabling for businesses, property managers, and multi-tenant buildings. Montreal and across Quebec.',
+    'industries_h1': 'The teams that manage, build, and operate commercial buildings',
+    'industries_intro': 'Opticable works in occupied buildings, active construction sites, and properties already in operation. Our clients are the people who need the systems to work without unpleasant surprises.',
+    'faq_title': 'Frequently asked questions about our services | Opticable',
+    'faq_desc': 'Answers to common questions about installing and managing cameras, access control, WiFi, intercom, and cabling for commercial buildings in Quebec.',
+    'faq_h1': 'Do you have questions about our services or a project?',
+    'faq_intro': 'Here are the questions we hear most often. If you do not find what you need, contact us directly.',
+    'faq_panel_title': 'Frequently asked questions',
+    'faq_panel_copy': 'Useful answers about quotes, installation, technical support, and the systems we manage after commissioning.',
+    'clients_title': 'Solutions shaped for real site conditions',
+    'clients_intro': 'We work in occupied buildings, mixed-use sites, and environments where continuity of operations matters.',
+    'clients': [
+        ('Businesses, offices, and retail spaces', 'Security, WiFi, connectivity, and entry systems for operations that need to stay stable every day.'),
+        ('Multi-tenant buildings', 'Intercom, access control, cameras, WiFi, and cabling for common spaces, lobbies, and occupied environments.'),
+        ('Commercial multi-tenant properties', 'Building systems planned for shared spaces, technical rooms, and day-to-day operations.'),
+        ('Property managers and developers', 'One partner for upgrades, multi-building standardization, and site coordination.'),
+    ],
+    'process_title': 'Our installation method',
+    'process_intro': 'A well-delivered project starts with proper preparation.',
+    'process': [
+        ('Site evaluation', 'We review your needs, entries, sensitive areas, and the infrastructure already in place.'),
+        ('Clear recommendation', 'You receive a proposal suited to your building, budget, and timeline, without surprises.'),
+        ('Clean installation', 'Our teams install, test, and identify the components carefully. The site is left clean.'),
+        ('Commissioning and support', 'We validate the full system, hand over a documented setup, and stay available for ongoing management and support.'),
+    ],
+    'cta_kicker': 'Let’s discuss your project',
+    'cta_title': 'Need a technology partner for your building?',
+    'cta_copy': 'Tell us about your building, the systems you need, and your timeline. We will come back with a clear proposal suited to your reality. Opticable serves commercial buildings in Montreal, Laval, Longueuil, and across Quebec.',
+    'service_label': 'View service',
+    'footer_contact_title': 'Contact details',
+    'footer_contact_intro': 'Contact Opticable directly.',
+    'division_title': 'Installation, support, and infrastructure',
+    'division_intro': 'Opticable combines system installation, ongoing management, and supporting infrastructure to deliver more coherent systems.',
+    'gateway_intro': 'Opticable supports commercial buildings with better-coordinated security, entry, WiFi, intercom, and network infrastructure. Choose your language to continue.',
+})
+
+T['en'].update({
     'blog': 'Blog',
     'case_studies': 'Case studies',
     'follow_us': 'Follow us',
@@ -1638,11 +1737,12 @@ T['en'].update({
     'view_blog_posts': 'View articles',
     'contact_cards': [
         ('General inquiries', 'info@opticable.ca'),
-        ('Project requests', 'quotes@opticable.ca'),
+        ('Quote requests', 'quotes@opticable.ca'),
         ('Technical support', 'support@opticable.ca'),
-        ('Office phone', '514-316-7236'),
-        ('Sales and inquiries', 'Monday to Friday, 8:00 AM to 5:00 PM'),
-        ('Weekend hours', 'Saturday and Sunday, 10:00 AM to 4:00 PM'),
+        ('Phone', '514-316-7236'),
+        ('Quotes and inquiries', 'Monday to Friday, 8:00 AM to 5:00 PM: by phone, email, or form'),
+        ('Weekends', 'Saturday and Sunday, 10:00 AM to 4:00 PM: by email or form only'),
+        ('Technical support', 'Monday to Friday, 8:00 AM to 5:00 PM · Saturday and Sunday, 10:00 AM to 4:00 PM'),
     ],
 })
 T['fr'].update({
@@ -1699,6 +1799,163 @@ HOME_PANEL_FACTS['fr'] = [
     ('Installation', 'Systèmes et infrastructure'),
     ('Soutien continu', 'Gestion, maintenance, support'),
     ('Territoire', 'Montréal, Laval, Longueuil et partout au Québec'),
+]
+
+home_visuals['en'] = {
+    'eyebrow': 'Operating environments',
+    'title': 'Systems installed in real operating environments',
+    'top_title': 'Commercial and multi-tenant buildings',
+    'top_copy': 'Security, entry systems, and connectivity coordinated from the start for buildings that need to operate every day.',
+    'top_alt': 'Commercial property representing coordinated building technology systems',
+    'main_title': 'Network racks, structured cabling, and technical rooms',
+    'main_copy': 'Infrastructure that is organized, documented, and ready for future additions.',
+    'main_alt': 'Structured rack and building technology environment with organized infrastructure',
+}
+
+SERVICE_CARD_META['security-camera-systems']['en'] = {'badge': 'CCTV', 'eyebrow': 'Security'}
+SERVICE_CARD_META['access-control-systems']['en'] = {'badge': 'ACCESS', 'eyebrow': 'Access'}
+SERVICE_CARD_META['commercial-wifi-installation']['en'] = {'badge': 'WIFI', 'eyebrow': 'Wireless'}
+SERVICE_CARD_META['intercom-systems']['en'] = {'badge': 'INTERCOM', 'eyebrow': 'Entry'}
+SERVICE_CARD_META['network-infrastructure']['en'] = {'badge': 'IT', 'eyebrow': 'Network support'}
+SERVICE_CARD_META['managed-it-services']['en'] = {'badge': 'IT', 'eyebrow': 'Ongoing support'}
+SERVICE_CARD_META['structured-cabling']['en'] = {'badge': 'CAB', 'eyebrow': 'Cabling'}
+SERVICE_CARD_META['fiber-optic-installation']['en'] = {'badge': 'FIBER', 'eyebrow': 'Backbone'}
+SERVICE_CARD_META['ip-phone-systems']['en'] = {'badge': 'VOIP', 'eyebrow': 'Voice'}
+
+HOME_FEATURED_SERVICES['en'] = [
+    {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Security cameras', 'copy': 'Installation, configuration, remote viewing, and support for IP cameras covering entries, parking areas, and common spaces.'},
+    {'key': 'access-control-systems', 'badge': 'ACCESS', 'title': 'Access control', 'copy': 'Readers, locks, panels, and door cabling to manage entries, lobbies, and restricted areas more effectively.'},
+    {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'Commercial WiFi', 'copy': 'Coverage planning, professional access points, maintenance, and support for offices, retail spaces, and shared environments.'},
+    {'key': 'intercom-systems', 'badge': 'INTERCOM', 'title': 'Intercom', 'copy': 'Audio or video intercom systems for lobbies, gates, and visitor entry points, integrated with access control and the network.'},
+    {'key': 'managed-it-services', 'badge': 'IT', 'title': 'IT services', 'copy': 'Device management, network support, maintenance, and technical support for your environment after installation.'},
+    {'key': 'ip-phone-systems', 'badge': 'VOIP', 'title': 'IP telephony', 'copy': 'SIP lines, IP handsets, business numbers, and VoIP-ready cabling for offices and workspaces.'},
+    {'key': 'structured-cabling', 'badge': 'CAB', 'title': 'Structured cabling', 'copy': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, testing, and documentation for a clean, durable network foundation.'},
+]
+
+SERVICE_DIVISION_GROUPS['en'] = [
+    {'eyebrow': 'Service line 01', 'title': 'System installation', 'copy': 'Cameras, access control, intercom, and WiFi installed around the reality of the building, its entries, and its occupants.', 'keys': ['security-camera-systems', 'access-control-systems', 'intercom-systems', 'commercial-wifi-installation']},
+    {'eyebrow': 'Service line 02', 'title': 'Supporting infrastructure', 'copy': 'Structured cabling, fiber optic links, racks, patch panels, IP telephony, and technical rooms that give the site a clean foundation.', 'keys': ['structured-cabling', 'fiber-optic-installation', 'network-infrastructure', 'ip-phone-systems']},
+    {'eyebrow': 'Service line 03', 'title': 'Ongoing management and support', 'copy': 'Maintenance, technical support, system administration, and post-installation adjustments so you do not have to start from zero when needs change.', 'keys': ['security-camera-systems', 'access-control-systems', 'commercial-wifi-installation', 'network-infrastructure']},
+]
+
+HOME_PANEL_FACTS['en'] = [
+    ('Installation', 'Systems and infrastructure'),
+    ('Ongoing support', 'Management, maintenance, support'),
+    ('Territory', 'Montreal, Laval, Longueuil, and across Quebec'),
+]
+
+services['security-camera-systems']['en'].update({
+    'name': 'Security cameras',
+    'title': 'Security cameras for commercial buildings | Opticable',
+    'desc': 'Installation and management of IP cameras, NVRs, and surveillance systems for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Security cameras for commercial buildings and business environments',
+    'intro': 'Opticable installs and manages IP camera systems for commercial buildings, multi-tenant properties, and business environments. Every project is planned around your sensitive areas, access points, and operating requirements, with ongoing support after commissioning.',
+    'summary': 'IP cameras, PoE, NVRs, remote viewing, and ongoing support to protect sensitive areas, common spaces, perimeters, and entries.',
+    'related': ['access-control-systems', 'intercom-systems', 'structured-cabling'],
+})
+services['access-control-systems']['en'].update({
+    'name': 'Access control',
+    'title': 'Access control for commercial buildings | Opticable',
+    'desc': 'Installation and management of access control, readers, panels, and door cabling for commercial buildings. Montreal, Laval, and across Quebec.',
+    'hero': 'Access control for buildings, lobbies, and secured spaces',
+    'intro': 'Opticable installs and manages access control systems for commercial buildings, multi-tenant properties, and business environments. Readers, control panels, electronic locks, and door cabling are planned, installed, and supported for reliable long-term entry management.',
+    'summary': 'Readers, locks, panels, door cabling, and ongoing access administration for lobbies, entries, and restricted areas.',
+    'related': ['intercom-systems', 'security-camera-systems', 'structured-cabling'],
+})
+services['commercial-wifi-installation']['en'].update({
+    'name': 'Commercial WiFi',
+    'title': 'Commercial WiFi installation for offices and buildings | Opticable',
+    'desc': 'Design, installation, management, and maintenance of commercial WiFi for offices and buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Commercial WiFi for offices, buildings, and shared spaces',
+    'intro': 'Opticable designs, installs, and manages professional WiFi networks for commercial and multi-tenant buildings. Stable signal, properly sized coverage, and the wired infrastructure needed behind the access points, without dead zones or overload, with technical support available.',
+    'summary': 'Coverage planning, professional access points, maintenance, and support for wireless networks in commercial buildings.',
+    'related': ['structured-cabling', 'network-infrastructure', 'access-control-systems'],
+})
+services['intercom-systems']['en'].update({
+    'name': 'Intercom',
+    'title': 'Intercom systems for commercial buildings | Opticable',
+    'desc': 'Installation of audio and video intercom systems for lobbies, gates, and commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Intercom systems for lobbies, gates, and occupied buildings',
+    'intro': 'Opticable installs audio and video intercom systems for lobbies, gates, and visitor entries in commercial and multi-tenant buildings. Coordinated with access control, cameras, and the network for entry communication that is reliable, well integrated, and easy to manage.',
+    'summary': 'Audio or video intercom systems for lobbies, gates, and visitor entries, integrated with access control and the network.',
+    'related': ['access-control-systems', 'security-camera-systems', 'network-infrastructure'],
+})
+services['structured-cabling']['en'].update({
+    'name': 'Structured cabling',
+    'title': 'Structured cabling for commercial buildings | Opticable',
+    'desc': 'Installation of Cat 6, Cat 6A, coaxial, and fiber-ready structured cabling for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Structured cabling for commercial buildings and business environments',
+    'intro': 'Opticable installs the structured cabling that supports your security, wireless, network, and communication systems. A clean, well-organized, documented installation that makes maintenance and future additions easier.',
+    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, testing, and documentation for a clean, durable network foundation.',
+    'related': ['fiber-optic-installation', 'network-infrastructure', 'commercial-wifi-installation'],
+})
+services['fiber-optic-installation']['en'].update({
+    'name': 'Fiber optic',
+    'title': 'Fiber optic installation for commercial buildings | Opticable',
+    'desc': 'Fiber optic links, risers, and service extensions for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Fiber optic installation for commercial buildings and multi-storey sites',
+    'intro': 'Opticable installs fiber optic links that serve as the backbone of your network infrastructure. Risers between floors, service extensions, and high-capacity links for buildings where copper is no longer enough.',
+    'summary': 'Backbone links, risers, service extensions, and high-capacity fiber runs for commercial buildings.',
+    'related': ['structured-cabling', 'network-infrastructure', 'security-camera-systems'],
+})
+services['network-infrastructure']['en'].update({
+    'name': 'Network infrastructure',
+    'title': 'Network infrastructure for commercial buildings | Opticable',
+    'desc': 'Installation of racks, patch panels, and technical rooms for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'Network infrastructure for commercial buildings, including racks, technical rooms, and internet-entry organization',
+    'intro': 'Opticable installs and organizes the network infrastructure of commercial buildings: racks, patch panels, internet-entry management, and cleanup of existing technical rooms. Well-structured infrastructure is what keeps your systems reliable and easier to maintain.',
+    'summary': 'Racks, patch panels, technical rooms, internet-entry management, and network support for environments that are easier to operate.',
+    'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems'],
+})
+services['ip-phone-systems']['en'].update({
+    'name': 'IP telephony',
+    'title': 'IP telephony and VoIP for commercial offices | Opticable',
+    'desc': 'IP telephony, VoIP lines, and cabling for commercial offices. Montreal, Laval, Longueuil, and across Quebec.',
+    'hero': 'IP telephony and VoIP systems for offices and business spaces',
+    'intro': 'Opticable installs the cabling and network infrastructure required for IP telephony systems. Workstations, VoIP lines, business numbers, and structured cabling ready for communication, for offices that need reliable phone service well integrated with the network.',
+    'summary': 'Business telephony, SIP lines, handsets, VoIP cabling, and network support for commercial offices.',
+    'related': ['network-infrastructure', 'structured-cabling', 'commercial-wifi-installation'],
+})
+services['managed-it-services']['en'].update({
+    'name': 'IT services',
+    'title': 'IT services and device management | Opticable',
+    'desc': 'IT support, device management, network maintenance, and technical support for businesses and commercial buildings in Quebec.',
+    'hero': 'IT services and device management for businesses and commercial buildings',
+    'intro': 'Opticable provides IT support, device management, and maintenance for technology environments after installation. We stay available so your systems keep running without interruption.',
+    'summary': 'Device management, network support, maintenance, and technical support for your environment after installation.',
+    'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems'],
+})
+
+faq_groups['en'] = [
+    ('About Opticable in general', 'Basic questions about the company, service territory, and what happens after installation.', [
+        ('What area do you serve?', 'Opticable mainly works in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec. For projects outside these areas, contact us.'),
+        ('Is Opticable a licensed company?', 'Yes. Opticable holds RBQ licence 5864-1648-01, issued by the Regie du batiment du Quebec.'),
+        ('What types of buildings do you work in?', 'Commercial buildings, multi-tenant properties, offices, retail spaces, hotels, and construction sites. If you are not sure, describe the project and we will tell you honestly whether we can help.'),
+        ('Do you supply the equipment or only the installation?', 'Both. We can supply and install, or work with equipment you already have. We can also advise on the right equipment when needed.'),
+        ('Do you offer services after installation?', 'Yes. We provide technical support, management, and maintenance after commissioning for cameras, WiFi, access control, intercom, and network systems. We do not just install them and disappear.'),
+    ]),
+    ('Quotes and project planning', 'What to prepare to get a clear proposal and start a project under the right conditions.', [
+        ('How do I get a quote?', 'Fill out the contact form or call us during the week. Tell us what type of building you have, which systems you need, and your timeline. We will get back to you quickly with a clear proposal.'),
+        ('How much does an installation cost?', 'Costs depend on the system, square footage, number of points, and access constraints. Every project is different, so contact us for a quote adapted to your situation.'),
+        ('Do you handle small projects?', 'Yes. We work on single-system jobs in small spaces as well as full installations in large buildings. Project size is not a reason to say no.'),
+        ('What information do you need to prepare a quote?', 'The basics are the building type, approximate address, desired systems, number of zones, doors, or points, timeline, and any special constraints. The more detail you provide, the more accurate the proposal will be.'),
+        ('Do you do site visits before quoting?', 'Yes, for larger projects. A visit lets us confirm pathways, constraints, and the existing infrastructure before we issue the final proposal.'),
+    ]),
+    ('About the installation', 'How field coordination works and what you receive at handoff.', [
+        ('How long does a typical installation take?', 'It depends on the project. A camera installation in a retail space can be done in one day. A full project in a multi-tenant building can take several days or several weeks. The schedule is set out in the proposal.'),
+        ('Do you work in occupied buildings?', 'Yes. That is our most common reality. We plan the work to minimize interruptions and adapt to the building schedule.'),
+        ('Do you coordinate with other contractors on site?', 'Yes. We coordinate with the general contractor, electricians, and other trades so cabling and systems are installed at the right phases.'),
+        ('What is included when a project is delivered?', 'All systems are tested and working, components are identified, and the basic documentation is handed over. You receive a system that you, or another technician, can understand without rediscovering everything from zero.'),
+    ]),
+    ('Specific systems', 'Answers about integrations, remote access, and the technical choices people ask about most often.', [
+        ('Can cameras, intercom, and access control work together?', 'Yes. These three systems can belong to the same ecosystem, with one management platform to monitor, control access, and communicate at the entry. That is often the solution we recommend for buildings that want simpler management.'),
+        ('Can we view the cameras remotely?', 'Yes. The systems we install allow remote viewing from a computer, tablet, or phone.'),
+        ('What is the difference between access control and a simple electric lock?', 'An electric lock opens or closes a door. An access control system manages who can enter, when they can enter, what identification they use, and it keeps an access history.'),
+        ('Can an intercom be tied into access control?', 'Yes. A video intercom connected to access control makes it possible to identify a visitor and unlock the door remotely from an indoor station or a mobile device.'),
+        ('What cable category do you recommend for a new project?', 'Cat 6 or Cat 6A for the large majority of commercial projects. Cat 6A is preferable for longer distances or environments with a high density of equipment.'),
+        ('Do you provide maintenance after installation?', 'Yes. We remain available for post-commissioning work such as adding points, replacing equipment, reconfiguring systems, and technical support.'),
+        ('What are your technical support hours?', 'Technical support is available Monday to Friday from 8:00 AM to 5:00 PM and Saturday and Sunday from 10:00 AM to 4:00 PM.'),
+    ]),
 ]
 
 services['security-camera-systems']['fr'].update({
@@ -1964,6 +2221,170 @@ FR_SERVICE_PAGE_CONTENT = {
     },
 }
 
+EN_ABOUT_SECTIONS = [
+    {
+        'eyebrow': 'About',
+        'title': 'What we do in practice',
+        'paragraphs': [
+            'We do not sell technology for its own sake. We install systems that answer a real operational need and we support our clients after commissioning.',
+            'Cameras, access control, intercom, WiFi, structured cabling, fiber optic links, and network infrastructure are installed in a coordinated way, with a coherent handoff and support that stays available.',
+        ],
+    },
+    {
+        'eyebrow': 'Our approach',
+        'title': 'How we install and support systems',
+        'cards': [
+            ('We start with the building, not the catalog', 'Every project starts with a review of your space, your constraints, and your real operating needs.'),
+            ('We deliver clean work', 'Cables are labeled, technical rooms are organized, and documentation is handed over at the end of the work.'),
+            ('We stay available', 'Additions, changes, system management, and technical support are handled without forcing you to start from zero when something changes.'),
+        ],
+    },
+    {
+        'eyebrow': 'Legal information',
+        'title': 'Legal information and service territory',
+        'paragraphs': [
+            'Opticable operates under business number 9453-4757 Quebec Inc. and holds RBQ licence 5864-1648-01.',
+            'We serve commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
+        ],
+        'details': [
+            ('Business name', '9453-4757 Quebec Inc.'),
+            ('RBQ licence', '5864-1648-01'),
+            ('Quotes and inquiries', 'Monday to Friday, 8:00 AM to 5:00 PM: by phone or by email/form'),
+            ('Weekends', 'Saturday and Sunday, 10:00 AM to 4:00 PM: by email or form only'),
+            ('Technical support', 'Monday to Friday, 8:00 AM to 5:00 PM · Saturday and Sunday, 10:00 AM to 4:00 PM'),
+        ],
+    },
+]
+
+EN_CLIENTELE_SECTIONS = [
+    {
+        'title': 'Businesses, offices, and retail spaces',
+        'copy': 'You manage an office, a retail space, or a reception area and you need security, WiFi, and communications to stay reliable every day.',
+        'items': ['Cameras for entries and interior areas', 'Access control for restricted spaces', 'WiFi sized for your space', 'Cabling and IP telephony for workstations'],
+    },
+    {
+        'title': 'Multi-tenant buildings and controlled-entry residences',
+        'copy': 'You manage a residential or mixed-use building and need reliable entry systems, camera coverage in common areas, and infrastructure that holds up to daily use.',
+        'items': ['Video intercom and access control for lobby entries', 'Cameras in common areas and parking', 'WiFi for shared spaces', 'Suite cabling and common-area infrastructure'],
+    },
+    {
+        'title': 'Commercial buildings and multi-tenant properties',
+        'copy': 'You own or manage a commercial property with multiple tenants and shared systems. We install the building systems, not just one tenant system in isolation.',
+        'items': ['Cameras for common spaces and the perimeter', 'Access control for main entries', 'Network infrastructure for technical rooms', 'Cabling for leased spaces'],
+    },
+    {
+        'title': 'Property managers and multi-building teams',
+        'copy': 'You manage several properties and need a partner that understands the constraints: occupied buildings, tenant accommodation, standards to maintain, and budgets to respect.',
+        'items': ['Upgrades in active buildings', 'Portfolio-wide standardization', 'Planned interventions', 'One contact for multiple projects'],
+    },
+    {
+        'title': 'Developers and general contractors',
+        'copy': 'You are building or renovating a property and need the technology systems coordinated with the other trades, without delays.',
+        'items': ['Coordination with electricians and other trades', 'Structured cabling aligned with construction phases', 'Cameras, access control, and intercom delivered on schedule', 'Complete documentation at handoff'],
+    },
+]
+
+EN_CLIENTELE_CTA = {
+    'title': 'Do you have a project type that is not listed here?',
+    'copy': 'We also work in hospitality, institutional environments, and industrial sites. Tell us about your building.',
+    'label': 'Contact us',
+}
+
+EN_FAQ_CTA = {
+    'title': 'Is your question not listed here?',
+    'copy': 'Contact us by email or form at any time, or by phone Monday to Friday.',
+    'label': 'Contact us',
+}
+
+EN_SERVICE_PAGE_CONTENT = {
+    'security-camera-systems': {
+        'sections': [
+            {'eyebrow': 'Security cameras', 'title': 'What we install and manage', 'items': ['IP and PoE cameras for interior and exterior areas', 'NVR recorders with continuous or motion-based recording', 'Remote viewing from a computer, tablet, or phone', 'Exterior cameras for parking areas, delivery entries, and perimeters', 'Interior cameras for common spaces, lobbies, corridors, and operating areas', 'Management, updates, equipment replacement, and technical support']},
+            {'eyebrow': 'Unified ecosystem', 'title': 'Unified ecosystem for cameras, intercom, and access control', 'paragraphs': ['Your cameras can belong to the same ecosystem as the intercom and access control system, with one management platform to monitor, manage entry, and communicate at the door. One partner, one coherent installation.']},
+            {'eyebrow': 'Buildings', 'title': 'Where these systems fit', 'items': ['Office buildings and commercial towers', 'Multi-tenant buildings and controlled-entry residences', 'Retail spaces, boutiques, and point-of-sale environments', 'Warehouses and industrial sites', 'Hotels and commercial hospitality properties']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Area review: entries, blind spots, risk zones, and installation constraints.', '02 - Clear proposal: number of cameras, hardware, resolution, storage, and cabling detailed in the quote.', '03 - Coordinated installation: structured cabling, clean mounting, NVR configuration, and testing of every camera.', '04 - Handover and support: documented system, basic training, and availability for ongoing management.']},
+        ],
+        'cta': 'Planning a camera project? Tell us about your building and the areas you need to cover. We will come back with a clear proposal.',
+    },
+    'access-control-systems': {
+        'sections': [
+            {'eyebrow': 'Access control', 'title': 'What we install and manage', 'items': ['Access readers using cards, badges, codes, or biometrics depending on the required security level', 'Control panels with centralized door and user management', 'Locks, electric strikes, magnets, and door hardware suited to each opening', 'Door cabling, enclosures, and clean terminations in frames and partitions', 'Multi-door management from one interface', 'Support, administration, updates, and ongoing technical support']},
+            {'eyebrow': 'Unified ecosystem', 'title': 'Unified ecosystem for access, cameras, and intercom', 'paragraphs': ['Access control can be integrated with cameras and intercom in one management platform. A well-secured door is a reader, a camera, and an intercom working together, not three separate systems managed independently.']},
+            {'eyebrow': 'Spaces', 'title': 'Where this fits', 'items': ['Main lobbies and visitor entries', 'Parking entrances and underground access points', 'Server rooms, technical rooms, and restricted areas', 'Limited-access offices and secured rooms', 'Tenant access in multi-tenant buildings']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Access review: doors, zones, access levels, and mechanical constraints.', '02 - Structured proposal: hardware, cabling, management software, and costs laid out clearly.', '03 - Careful installation: clean cabling in frames and walls, solid reader mounting, and full testing.', '04 - Commissioning and training: access rules configured, documentation handed over, and ongoing support available.']},
+        ],
+        'cta': 'Need to secure your entries? Tell us how many doors you have, what kind of building it is, and any constraints. We will take it from there.',
+    },
+    'commercial-wifi-installation': {
+        'sections': [
+            {'eyebrow': 'Commercial WiFi', 'title': 'What we install and manage', 'items': ['Professional WiFi access points powered by PoE', 'Cat 6 or Cat 6A support cabling from the network room', 'Coverage planning based on walls, materials, usage zones, and bandwidth needs', 'Management and maintenance: monitoring, updates, and coverage expansion', 'Network IT services and wireless administration', 'Post-installation support for adjustments, incidents, and future changes']},
+            {'eyebrow': 'Infrastructure', 'title': 'Good WiFi starts with good cabling', 'paragraphs': ['Most WiFi problems come from the wired infrastructure behind the access points. We handle both the structured cabling and the WiFi layer so the result stays stable over time.']},
+            {'eyebrow': 'Spaces', 'title': 'Where it fits', 'items': ['Open offices and shared workspaces', 'Multi-tenant buildings with common areas and corridors', 'Retail spaces, restaurants, and customer-facing areas', 'Active construction sites', 'Conference rooms and event spaces', 'Warehouses and industrial sites']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Site analysis: square footage, materials, expected users, and actual usage.', '02 - Coverage plan: access-point locations, recommended hardware, and required cabling.', '03 - Installation and cabling: cable pulls, access-point mounting, network configuration, and signal testing.', '04 - Validation, handoff, and support: verified coverage, documented configuration, and ongoing management if needed.']},
+        ],
+        'cta': 'Do you have dead zones or a wireless network that no longer keeps up? Tell us about the space and what it needs to support.',
+    },
+    'intercom-systems': {
+        'sections': [
+            {'eyebrow': 'Intercom', 'title': 'What we install', 'items': ['Audio intercoms for communication between the entry and an indoor station or phone', 'Video intercoms with integrated cameras to identify visitors before unlocking', 'Durable wall stations and entry pedestals for lobbies, reception areas, and gates', 'Integration with access control so doors can be unlocked from an indoor station or mobile device']},
+            {'eyebrow': 'Unified ecosystem', 'title': 'Unified ecosystem for intercom, access, and cameras', 'paragraphs': ['Intercom, access control, and cameras can operate inside one ecosystem, with one platform to identify visitors, manage access, and monitor the entry. We install them together in a coordinated way to simplify day-to-day management.']},
+            {'eyebrow': 'Buildings', 'title': 'Where it fits', 'items': ['Multi-tenant buildings with secured entry', 'Office buildings with reception desks or visitor access', 'Retail spaces with delivery zones or restricted access', 'Covered parking and underground access points', 'Exterior gates and property courtyards']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Entry review: door type, visitor flow, mechanical constraints, and existing infrastructure.', '02 - Clear recommendation: audio or video, access-control integration, and number of stations.', '03 - Clean installation: concealed cabling, solid mounting, configuration, and full testing.', '04 - Commissioning: operation validated and integration with the other systems confirmed.']},
+        ],
+        'cta': 'Looking for an intercom system for an entry or gate? Tell us about the building and the type of access you need to manage.',
+    },
+    'structured-cabling': {
+        'sections': [
+            {'eyebrow': 'Structured cabling', 'title': 'What we install', 'items': ['Cat 5e, Cat 6, and Cat 6A copper cabling for workstations, WiFi access points, IP cameras, readers, and network equipment', 'Coaxial cabling for analog cameras, antennas, and existing signal distribution systems', 'Short-distance fiber optic links for connecting network rooms, floors, or remote zones', 'Patch panels for cable arrivals that stay organized, labeled, and ready for future growth']},
+            {'eyebrow': 'Practical use', 'title': 'What it supports in practice', 'items': ['PoE WiFi access points over Cat 6', 'IP cameras connected back to the NVR', 'Access-control readers wired to the control panel', 'IP phone handsets and office devices', 'Network equipment in the technical room']},
+            {'eyebrow': 'Quality', 'title': 'What a clean installation actually means', 'paragraphs': ['Cables labeled at both ends, pathways secured properly, organized patch panels, and a network room that any technician can understand without rediscovering everything from scratch.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Site survey: areas to cable, available pathways, and building constraints.', '02 - Cabling plan: number of points, run lengths, cable type, and network-room organization.', '03 - Structured installation: cable pulling, patch-panel termination, and full identification of every point.', '04 - Testing and certification: every point is tested and the point list is handed over.']},
+        ],
+        'cta': 'Do you have a cabling project or a network room that needs to be organized? Tell us the square footage, point count, and building type.',
+    },
+    'fiber-optic-installation': {
+        'sections': [
+            {'eyebrow': 'Fiber optic', 'title': 'What we install', 'items': ['Risers and vertical backbones between the network rooms on each floor', 'Long-distance links between buildings, wings, or remote technical rooms', 'Service extensions to a new area, a new floor, or new equipment', 'Single-mode or multi-mode fiber depending on distance and bandwidth needs', 'Terminations, LC, SC, or MPO connectors, and organized fiber enclosures']},
+            {'eyebrow': 'Use cases', 'title': 'When fiber is needed', 'items': ['Multi-storey buildings with one network room per level', 'Runs longer than 90 meters between equipment', 'Links between buildings on the same property', 'High-bandwidth needs for cameras and the core network', 'Existing infrastructure that needs to be extended or replaced']},
+            {'eyebrow': 'Coordination', 'title': 'Coordinated with structured cabling', 'paragraphs': ['Fiber acts as the backbone and copper takes over for the last meters. We install both in coordination so the infrastructure stays coherent from the technical room all the way to the final device.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Infrastructure review: points to connect, distances, pathways, and equipment at both ends.', '02 - Technical recommendation: fiber type, strand count, and connector type.', '03 - Installation and splicing: fiber run through existing or new pathways and clean termination at both ends.', '04 - Testing and certification: every link is attenuation-tested and documented.']},
+        ],
+        'cta': 'Do you need a fiber link between floors or between buildings? Describe the project and we will point you in the right direction.',
+    },
+    'network-infrastructure': {
+        'sections': [
+            {'eyebrow': 'Network infrastructure', 'title': 'What we install and organize', 'items': ['Open or closed racks and cabinets based on the equipment and service-access needs', 'Patch panels that keep incoming cabling organized and clearly labeled', 'Vertical and horizontal cable management for racks that stay readable and expandable', 'Clean routing of Bell, Videotron, Rogers, or other internet entries', 'Cleanup of existing technical rooms to make them more functional without rebuilding everything']},
+            {'eyebrow': 'Value', 'title': 'Why an organized network room matters', 'paragraphs': ['A chaotic room costs time every time someone intervenes and makes changes risky. A well-structured room costs less to maintain over time and is much easier to expand.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Room review: available space, installed equipment, existing internet entries, and future needs.', '02 - Organization plan: rack layout, patch panels, internet-entry routing, and documentation before the work starts.', '03 - Installation or reorganization: rack assembly, panel cabling, and full identification.', '04 - Documentation handoff: port maps, equipment list, internet entries, and pathways.']},
+        ],
+        'cta': 'Does your network room need attention? Tell us what is in place today and what needs to improve.',
+    },
+    'ip-phone-systems': {
+        'sections': [
+            {'eyebrow': 'IP telephony', 'title': 'What we install', 'items': ['Cabling for VoIP handsets powered by PoE from the network switch', 'SIP lines, local or toll-free numbers, and integration with your provider', 'IP phone handsets for work areas, reception desks, and operating zones', 'Network infrastructure and switching prepared for IP telephony']},
+            {'eyebrow': 'Infrastructure', 'title': 'Telephony starts with infrastructure', 'paragraphs': ['A poorly cabled VoIP system creates dropped calls and voice issues that get blamed on the carrier when the real problem is the network. We install the infrastructure correctly from the start.']},
+            {'eyebrow': 'Needs', 'title': 'Who this is for', 'items': ['Offices being launched or relocated', 'Businesses moving from analog systems to VoIP', 'Commercial buildings that provide phone service to tenants', 'Coworking environments with multiple users']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Needs review: number of handsets, locations, line type, and existing infrastructure.', '02 - Clear proposal: cabling, hardware, lines, and configuration detailed clearly.', '03 - Installation and configuration: handset cabling, line setup, and voice-quality testing.', '04 - Commissioning: each handset is validated, numbers are configured, and the system becomes operational.']},
+        ],
+        'cta': 'Installing or replacing your business phone system? Tell us how many handsets you need and what the environment looks like.',
+    },
+    'managed-it-services': {
+        'sections': [
+            {'eyebrow': 'IT services and technical support', 'title': 'What we do', 'items': ['Device management: inventory, updates, replacement, and tracking for network equipment and workstations.', 'Technical support: work on installed systems, diagnosis, and resolution of network, WiFi, camera, and access-control issues.', 'Preventive maintenance: recurring checks of equipment, configurations, and system stability.', 'System administration: user access, configuration updates, and adjustments after commissioning.', 'User support: practical assistance for your team on the systems that are already installed.']},
+            {'eyebrow': 'Who it is for', 'title': 'Who it is for', 'items': ['Businesses that want to outsource management of their network and technology environment', 'Property managers that need regular follow-up across multiple buildings', 'Organizations that have systems in place but no longer have the internal capacity to manage them']},
+            {'eyebrow': 'Coordination', 'title': 'Coordinated with your existing systems', 'paragraphs': ['Whether the systems were installed by Opticable or by another provider, we can take over their management. We begin with an audit of the current environment and then propose a support plan that fits.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Existing-system audit: we inventory your equipment, configurations, and the points that need improvement.', '02 - Support plan: we propose an arrangement that fits your needs and budget.', '03 - Takeover: we become your technical contact for day-to-day management.', '04 - Ongoing follow-up: reactive and preventive interventions based on the agreed plan.']},
+        ],
+        'cta': 'Looking for a partner to manage your technology environment? Tell us about the current setup and where the friction is.',
+    },
+}
+
+ABOUT_SECTIONS_BY_LANG = {'en': EN_ABOUT_SECTIONS, 'fr': FR_ABOUT_SECTIONS}
+CLIENTELE_SECTIONS_BY_LANG = {'en': EN_CLIENTELE_SECTIONS, 'fr': FR_CLIENTELE_SECTIONS}
+CLIENTELE_CTA_BY_LANG = {'en': EN_CLIENTELE_CTA, 'fr': FR_CLIENTELE_CTA}
+FAQ_CTA_BY_LANG = {'en': EN_FAQ_CTA, 'fr': FR_FAQ_CTA}
+SERVICE_PAGE_CONTENT_BY_LANG = {'en': EN_SERVICE_PAGE_CONTENT, 'fr': FR_SERVICE_PAGE_CONTENT}
+
 PARTNER_BRANDS = ('Ubiquiti (UniFi)', 'MikroTik', 'Fortinet', 'Hikvision', 'Uniview (UNV)', 'TP-Link Omada', 'Akuvox')
 PARTNER_BRANDS_COPY = {
     'en': {
@@ -2003,6 +2424,19 @@ BLOG_PAGE = {
         'listing_title': 'Articles',
         'listing_intro': "La structure est prête pour accueillir des cartes d'articles avec titre, date, extrait et lien.",
     },
+}
+
+BLOG_PAGE['en'] = {
+    'title': 'Blog — Commercial technology and building systems | Opticable',
+    'desc': 'Advice, guides, and resources about security systems, commercial WiFi, cabling, and network infrastructure for commercial buildings in Quebec — by Opticable.',
+    'eyebrow': 'Resources and guidance',
+    'h1': 'Opticable blog — Technology for commercial buildings',
+    'intro': 'Practical articles about cameras, access control, commercial WiFi, cabling, and network infrastructure for property managers, contractors, and building owners.',
+    'empty': 'The first articles are coming soon. In the meantime, review our service pages or contact us directly with your technical questions.',
+    'primary_cta': 'View our services',
+    'secondary_cta': 'Contact us',
+    'listing_title': 'Articles',
+    'listing_intro': 'The structure is ready for article cards with title, date, excerpt, and link.',
 }
 
 CASE_STUDY_ORDER = (
@@ -2146,6 +2580,75 @@ CASE_STUDIES = {
                 'cta_title': 'Vous construisez ou rénovez un bâtiment ?',
                 'cta_copy': 'Coordonnons les systèmes dès maintenant.',
             },
+        },
+    },
+}
+
+CASE_STUDIES['en'] = {
+    'parent': {
+        'title': 'Case studies — Typical projects | Opticable',
+        'desc': 'See how Opticable works in office buildings, retail spaces, multi-tenant properties, and construction sites across Quebec.',
+        'h1': 'Case studies — How we approach different project types',
+        'intro': 'Here are representative example projects. Every building is different, but these scenarios illustrate our approach and the systems we deploy based on the context.',
+        'card_copy': {
+            'case-office-building': 'Office building with MikroTik routing, Omada WiFi and switching, and a unified UniFi stack for cameras and access.',
+            'case-multitenant-building': 'Multi-tenant property with UniFi Access, UniFi cameras, and Omada WiFi in the common areas.',
+            'case-retail-space': 'Retail space with a unified UniFi security platform, Omada WiFi, and MikroTik routing.',
+            'case-construction-site': 'Construction site coordinated in phases around MikroTik, Omada, and a unified UniFi security stack.',
+        },
+    },
+    'items': {
+        'case-office-building': {
+            'nav': 'Office building',
+            'title': 'Case study — Commercial office building | Opticable',
+            'desc': 'How Opticable installs and manages security, WiFi, and cabling systems in a commercial office building in Quebec.',
+            'h1': 'Typical project — Commercial office building',
+            'context': 'Three-storey office building with about 25 workstations, two main entries, outdoor and indoor parking, and a server room in the basement.',
+            'challenges': ['Access control at the main entry and restricted areas such as the server room and archives', 'Stable WiFi coverage for all offices and the conference room', 'Cameras covering the entries, parking, and main corridors', 'Disorganized legacy cabling in the network room'],
+            'work': ['Installation of UniFi Access on 4 doors with badge readers and centralized management', 'Deployment of 8 TP-Link Omada access points with Omada switching and dedicated Cat 6 cabling', 'Installation of 12 UniFi cameras with remote viewing and management from the same platform as access control', 'Deployment of a MikroTik router and complete organization of the network room, including rack, patch panels, and full point identification', 'Installation of 25 new network drops for workstations'],
+            'result': 'A building that is fully cabled, secured, and connected, managed from one interface for cameras and access. The property manager supervises the site remotely and the network room is documented and clean.',
+            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'cta_title': 'Does this project look like yours?',
+            'cta_copy': 'Tell us about your building.',
+        },
+        'case-multitenant-building': {
+            'nav': 'Multi-tenant building',
+            'title': 'Case study — Multi-tenant building | Opticable',
+            'desc': 'How Opticable installs intercom, cameras, WiFi, and cabling in a multi-tenant building in Quebec.',
+            'h1': 'Typical project — Multi-tenant residential building',
+            'context': '24-unit building across 4 storeys with 2 secured entries, indoor parking, a laundry room, and a shared room on the ground floor.',
+            'challenges': ['Main entry without a working intercom', 'No cameras in the common areas', 'No WiFi in corridors and shared spaces', 'Unstructured suite cabling'],
+            'work': ['Installation of a UniFi Access video intercom at the main entry with full access-control integration', 'Installation of 10 UniFi cameras in corridors, entries, and parking areas', 'Deployment of TP-Link Omada access points and Omada switches in corridors and common areas', 'Deployment of a MikroTik router, Cat 6 cabling in the common areas, and organization of the network room'],
+            'result': 'The manager controls entry remotely, views the cameras from a phone, and manages the intercom and access rights from the same UniFi platform. Residents benefit from WiFi in all shared spaces.',
+            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'cta_title': 'Do you manage a multi-tenant building?',
+            'cta_copy': 'Let’s discuss your project.',
+        },
+        'case-retail-space': {
+            'nav': 'Retail and sales floor',
+            'title': 'Case study — Retail and sales space | Opticable',
+            'desc': 'How Opticable installs cameras, access control, and WiFi in a retail environment in Quebec.',
+            'h1': 'Typical project — Retail and point-of-sale environment',
+            'context': 'Retail space across 2 levels, with a sales floor, rear warehouse, management office, and outdoor parking.',
+            'challenges': ['No surveillance over the cash area and entries', 'Unstable WiFi for payment terminals and staff', 'Uncontrolled access to the warehouse', 'Remote viewing required for the owner'],
+            'work': ['Installation of 8 UniFi cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with 3 TP-Link Omada access points and Omada switches, with separate SSIDs for customers and payment terminals', 'Installation of a UniFi Access reader on the warehouse door', 'Deployment of a MikroTik router and setup of remote viewing on the owner mobile phone'],
+            'result': 'The owner monitors the store remotely, the WiFi stays stable for operations, and the warehouse remains restricted to authorized staff through the same management stack used for the cameras.',
+            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'cta_title': 'Do you have a retail space to secure?',
+            'cta_copy': 'Tell us what you need.',
+        },
+        'case-construction-site': {
+            'nav': 'Construction site',
+            'title': 'Case study — Construction site | Opticable',
+            'desc': 'How Opticable coordinates cabling, cameras, and WiFi on a construction site in Quebec.',
+            'h1': 'Typical project — Technology coordination on a job site',
+            'context': 'Six-storey commercial building under construction, one general contractor, delivery in 3 phases, and one technical room per floor.',
+            'challenges': ['Structured cabling must be installed before the walls are closed', 'Coordination with electricians for pathways', 'Technical rooms need to be organized from the structural phase', 'Security systems and WiFi must be ready at handoff'],
+            'work': ['Cat 6A cabling pulled through all suites before wall closure - Phase 1', 'Deployment of MikroTik routing, Omada switches, racks, and patch panels in the 6 technical rooms - Phase 2', 'Deployment of UniFi cameras, UniFi Access, and TP-Link Omada WiFi coordinated with final delivery - Phase 3', 'Complete documentation delivered to the general contractor and the owner'],
+            'result': 'Full technology delivery aligned with the construction schedule. No delays caused by the systems, and clean documentation handed over at final delivery.',
+            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'cta_title': 'Are you building or renovating a property?',
+            'cta_copy': 'Let’s coordinate the systems now.',
         },
     },
 }
@@ -4284,11 +4787,10 @@ def logo_img(context):
         attrs.append('loading="lazy"')
     else:
         attrs.append('loading="eager"')
-        attrs.append('fetchpriority="high"')
     return f'<img {" ".join(attrs)} />'
 
 
-def content_img(src, alt, width, height, cls='', eager=False, zoomable=False, lang='en', caption=''):
+def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption=''):
     attrs = [
         f'src="{src}"',
         f'alt="{esc(alt)}"',
@@ -4300,9 +4802,10 @@ def content_img(src, alt, width, height, cls='', eager=False, zoomable=False, la
         attrs.append(f'class="{cls}"')
     if eager:
         attrs.append('loading="eager"')
-        attrs.append('fetchpriority="high"')
     else:
         attrs.append('loading="lazy"')
+    if high_priority:
+        attrs.append('fetchpriority="high"')
     img_html = f'<img {" ".join(attrs)} />'
     if not zoomable:
         return img_html
@@ -4694,9 +5197,9 @@ def home_visual_panel(lang):
         f'<aside class="hero-panel hero-media-panel"><p class="eyebrow">{esc(visual["eyebrow"])}</p>'
         f'{title_html}'
         f'<div class="hero-media-stack">'
-        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_BUILDING_URL, visual["top_alt"], HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, "hero-media-main-image", eager=True, zoomable=True, lang=lang, caption=visual["top_title"])}</div>'
+        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_BUILDING_URL, visual["top_alt"], HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, "hero-media-main-image", zoomable=True, lang=lang, caption=visual["top_title"])}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["top_title"])}</strong><span>{esc(visual["top_copy"])}</span></figcaption></figure>'
-        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, zoomable=True, lang=lang, caption=visual["main_title"])}</div>'
+        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, high_priority=True, zoomable=True, lang=lang, caption=visual["main_title"])}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["main_title"])}</strong><span>{esc(visual["main_copy"])}</span></figcaption></figure>'
         f'</div>{hero_signal_grid(lang)}</aside>'
     )
@@ -5131,6 +5634,11 @@ export_home_images()
 
 for lang in ('en', 'fr'):
     t = T[lang]
+    custom_about_sections = ABOUT_SECTIONS_BY_LANG.get(lang)
+    custom_clientele_sections = CLIENTELE_SECTIONS_BY_LANG.get(lang)
+    custom_clientele_cta = CLIENTELE_CTA_BY_LANG.get(lang)
+    custom_faq_cta = FAQ_CTA_BY_LANG.get(lang)
+    custom_service_page_content = SERVICE_PAGE_CONTENT_BY_LANG.get(lang, {})
     contact_panel_title = t.get('contact_panel_title', t['contact_info_title'])
     contact_panel_copy = t.get('contact_panel_copy', t['contact_intro'])
     primary_cards = service_cards(lang, t['service_label'], primary_order)
@@ -5194,7 +5702,7 @@ for lang in ('en', 'fr'):
     write_url(routes[lang]['services'], page(lang, 'services', 'services', t['services_title'], t['services_desc'], services_body, breadcrumb_items=services_breadcrumbs))
 
     about_breadcrumbs = [(t['home'], routes[lang]['home']), (t['about'], routes[lang]['about'])]
-    if lang == 'fr':
+    if custom_about_sections:
         about_body = (
             breadcrumb_nav(about_breadcrumbs)
             + band_section(
@@ -5204,7 +5712,7 @@ for lang in ('en', 'fr'):
                 'hero-band page-hero-band',
                 'layout-shell page-hero',
             )
-            + ''.join(render_custom_content_section(section) for section in FR_ABOUT_SECTIONS)
+            + ''.join(render_custom_content_section(section) for section in custom_about_sections)
             + cta(lang)
         )
     else:
@@ -5292,15 +5800,15 @@ for lang in ('en', 'fr'):
         f'<div class="section-heading"><p class="eyebrow">{esc(t["case_studies"])}</p><h2>{esc(case_parent["h1"])}</h2><p>{esc(case_parent["intro"])}</p></div><div class="grid-2">{case_study_cards(lang)}</div>',
         'case-study-preview-section',
     )
-    if lang == 'fr':
+    if custom_clientele_sections and custom_clientele_cta:
         client_sections_html = ''.join(
             render_custom_content_section({
-                'eyebrow': 'Clientèle',
+                'eyebrow': t['industries'],
                 'title': section['title'],
                 'copy': section['copy'],
                 'items': section['items'],
             })
-            for section in FR_CLIENTELE_SECTIONS
+            for section in custom_clientele_sections
         )
         industries_body = (
             breadcrumb_nav(industries_breadcrumbs)
@@ -5313,7 +5821,7 @@ for lang in ('en', 'fr'):
             )
             + client_sections_html
             + case_preview
-            + inline_cta_band(FR_CLIENTELE_CTA['title'], FR_CLIENTELE_CTA['copy'], routes[lang]['contact'], FR_CLIENTELE_CTA['label'])
+            + inline_cta_band(custom_clientele_cta['title'], custom_clientele_cta['copy'], routes[lang]['contact'], custom_clientele_cta['label'])
         )
     else:
         industries_body = (
@@ -5389,7 +5897,7 @@ for lang in ('en', 'fr'):
             'layout-shell page-hero',
         )
         + faq_sections(lang)
-        + (inline_cta_band(FR_FAQ_CTA['title'], FR_FAQ_CTA['copy'], routes[lang]['contact'], FR_FAQ_CTA['label']) if lang == 'fr' else cta(lang))
+        + (inline_cta_band(custom_faq_cta['title'], custom_faq_cta['copy'], routes[lang]['contact'], custom_faq_cta['label']) if custom_faq_cta else cta(lang))
     )
     write_url(routes[lang]['faq'], page(lang, 'faq', 'faq', t['faq_title'], t['faq_desc'], faq_body, faq_items=flat_faq_items(lang), breadcrumb_items=faq_breadcrumbs))
 
@@ -5416,8 +5924,8 @@ for lang in ('en', 'fr'):
         related = related_services_carousel(lang, key, s['related'], t['service_label'])
         service_breadcrumbs = [(t['home'], routes[lang]['home']), (t['services'], routes[lang]['services']), (s['name'], routes[lang][key])]
         panel_extra = service_panel_media(key, lang) or render_chips([s["name"], services[s["related"][0]][lang]["name"], services[s["related"][1]][lang]["name"]])
-        if lang == 'fr' and key in FR_SERVICE_PAGE_CONTENT:
-            service_sections_html = ''.join(render_custom_content_section(section) for section in FR_SERVICE_PAGE_CONTENT[key]['sections'])
+        if key in custom_service_page_content:
+            service_sections_html = ''.join(render_custom_content_section(section) for section in custom_service_page_content[key]['sections'])
             body = (
                 breadcrumb_nav(service_breadcrumbs)
                 + band_section(
@@ -5428,7 +5936,7 @@ for lang in ('en', 'fr'):
                     'layout-shell page-hero',
                 )
                 + service_sections_html
-                + inline_cta_band(FR_SERVICE_PAGE_CONTENT[key]['cta'], "Opticable dessert les immeubles commerciaux à Montréal, Laval, Longueuil et partout au Québec.", routes[lang]['contact'], 'Demander une soumission')
+                + inline_cta_band(custom_service_page_content[key]['cta'], t['service_area_intro'], routes[lang]['contact'], t['quote'])
                 + related
             )
         else:
@@ -5480,7 +5988,29 @@ not_found_html = page(
 
 write_url('/fr/', legacy_redirect_html('/', 'Redirection vers la page d accueil française', "La page d accueil française est maintenant servie directement à la racine du site.", lang='fr'))
 write_url('/fr/secteurs/', legacy_redirect_html('/fr/clientele/', 'Redirection vers la page clientèle', "Cette ancienne page est maintenant servie sous le nom Clientèle.", lang='fr', page_key='industries'))
-(DEPLOY_ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + absolute_url('/sitemap.xml') + '\n', encoding='utf-8')
+robots_user_agents = (
+    '*',
+    'Amazonbot',
+    'Applebot',
+    'Applebot-Extended',
+    'Bytespider',
+    'CCBot',
+    'ChatGPT-User',
+    'ClaudeBot',
+    'Claude-SearchBot',
+    'CloudflareBrowserRenderingCrawler',
+    'Google-Extended',
+    'GPTBot',
+    'meta-externalagent',
+    'OAI-SearchBot',
+    'PerplexityBot',
+    'Perplexity-User',
+)
+robots_lines = ['Content-Signal: search=yes, ai-input=yes, ai-train=yes', '']
+for agent in robots_user_agents:
+    robots_lines.extend((f'User-agent: {agent}', 'Allow: /', ''))
+robots_lines.append('Sitemap: ' + absolute_url('/sitemap.xml'))
+(DEPLOY_ROOT / 'robots.txt').write_text('\n'.join(robots_lines) + '\n', encoding='utf-8')
 (DEPLOY_ROOT / 'sitemap.xml').write_text(sitemap_xml(), encoding='utf-8')
 (DEPLOY_ROOT / 'site.webmanifest').write_text(webmanifest_json(), encoding='utf-8')
 (DEPLOY_ROOT / 'ads.txt').write_text('# Opticable does not authorize any third-party digital sellers.\n', encoding='utf-8')
