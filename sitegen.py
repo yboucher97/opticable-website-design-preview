@@ -1954,7 +1954,7 @@ FR_SERVICE_PAGE_CONTENT = {
     },
 }
 
-PARTNER_BRANDS = ('Ubiquiti (UniFi)', 'MikroTik', 'Fortinet', 'Hikvision', 'Uniview (UNV)', 'TP-Link Omada')
+PARTNER_BRANDS = ('Ubiquiti (UniFi)', 'MikroTik', 'Fortinet', 'Hikvision', 'Uniview (UNV)', 'TP-Link Omada', 'Akuvox')
 PARTNER_BRANDS_COPY = {
     'en': {
         'eyebrow': 'Equipment',
