@@ -109,8 +109,8 @@ OG_IMAGE_HEIGHT = 630
 WEBSITE_ID = f'{SITE_URL}/#website'
 BUSINESS_ID = f'{SITE_URL}/#business'
 GENERAL_INQUIRY_LABELS = {'General inquiries', 'Renseignements généraux', 'Renseignements generaux'}
-PROJECT_REQUEST_LABELS = {'Project requests', 'Demandes de soumission', 'Demandes de projet'}
-PHONE_LABELS = {'Office phone', 'Téléphone du bureau', 'Telephone du bureau', 'Téléphone', 'Telephone'}
+PROJECT_REQUEST_LABELS = {'Project requests', 'Quote requests', 'Demandes de soumission', 'Demandes de projet'}
+PHONE_LABELS = {'Office phone', 'Phone', 'Téléphone du bureau', 'Telephone du bureau', 'Téléphone', 'Telephone'}
 LIGHTBOX_UI = {
     'en': {
         'open': 'View larger image',
@@ -149,8 +149,14 @@ AREA_SERVED_SCHEMA = [
     {'@type': 'AdministrativeArea', 'name': 'Monteregie'},
     {'@type': 'City', 'name': 'Quebec City'},
 ]
-SCHEMA_AREA_SERVED_NAMES = ['Montréal', 'Laval', 'Longueuil', 'Rive-Sud', 'Rive-Nord', 'Laurentides', 'Québec']
-SCHEMA_BUSINESS_DESCRIPTION = "Installation et gestion de systèmes de caméras, contrôle d'accès, WiFi et câblage structuré pour immeubles commerciaux au Québec."
+SCHEMA_AREA_SERVED_NAMES = {
+    'en': ['Montreal', 'Laval', 'Longueuil', 'South Shore', 'North Shore', 'Laurentians', 'Quebec'],
+    'fr': ['Montréal', 'Laval', 'Longueuil', 'Rive-Sud', 'Rive-Nord', 'Laurentides', 'Québec'],
+}
+SCHEMA_BUSINESS_DESCRIPTION = {
+    'en': 'Installation and management of camera systems, access control, WiFi, and structured cabling for commercial buildings in Quebec.',
+    'fr': "Installation et gestion de systèmes de caméras, contrôle d'accès, WiFi et câblage structuré pour immeubles commerciaux au Québec.",
+}
 SOCIAL_LINKS = (
     {'key': 'facebook', 'label': 'Facebook', 'href': 'https://www.facebook.com/profile.php?id=61578550161916'},
     {'key': 'linkedin', 'label': 'LinkedIn', 'href': 'https://www.linkedin.com/company/opticableinc/'},
@@ -851,7 +857,7 @@ services = {
     },
     'fiber-optic-installation': {
         'en': {'slug': 'fiber-optic-installation', 'name': 'Fiber Optic Installation', 'title': 'Fiber Optic Cable Installation for Commercial Buildings | Opticable', 'desc': 'Fiber optic cable installation for commercial buildings, backbones, risers, internet handoffs, and high-capacity connectivity.', 'hero': 'Fiber optic cabling for backbone capacity, risers, and business-grade connectivity.', 'intro': 'Opticable installs fiber optic cabling for commercial environments that need reliable backbone distribution, ISP handoff extensions, or higher-capacity links between floors, suites, and network rooms.', 'summary': 'Fiber backbones, risers, handoff extensions, and high-capacity links for commercial properties.', 'includes': ['Fiber backbone cabling between MDF, IDF, suites, and major equipment locations', 'Provider handoff extensions and demarc-to-network-room routing', 'Fiber terminations, patching, pathway organization, and rack-side coordination'], 'benefits': ['Higher-capacity distribution for future growth', 'Dependable long-distance links inside larger properties', 'Better coordination with racks, switching, and room design'], 'cases': ['Multi-floor office and mixed-use properties', 'Internet service handoff extensions to network rooms', 'Backbone refreshes during tenant or landlord improvements'], 'industries': ['Commercial office buildings', 'Multi-tenant properties', 'Industrial and warehouse sites'], 'related': ['network-infrastructure', 'structured-cabling', 'security-camera-systems']},
-'fr': {'slug': 'installation-fibre-optique', 'name': 'Installation de fibre optique', 'title': 'Installation de fibre optique pour immeubles commerciaux | Opticable', 'desc': 'Installation de fibre optique pour immeubles commerciaux, backbones, colonnes montantes, handoffs internet et connectivite a haute capacite.', 'hero': 'Fibre optique pour backbones, colonnes montantes et connectivite d affaires a haute capacite.', 'intro': 'Opticable installe la fibre optique pour les environnements commerciaux qui exigent un backbone fiable, des extensions de handoff fournisseur ou des liens a plus forte capacite entre etages, suites et salles reseau.', 'summary': 'Backbones fibre, colonnes montantes, extensions de handoff et liens a haute capacite pour proprietes commerciales.', 'includes': ['Cablage backbone fibre entre MDF, IDF, suites et points d equipement', 'Extensions de handoff fournisseur et chemin entre le point de demarcation et la salle reseau', 'Terminaisons fibre, raccordement, organisation des chemins et coordination cote baie'], 'benefits': ['Distribution a plus forte capacite pour la croissance future', 'Liens fiables sur de plus longues distances dans les grands sites', 'Meilleure coordination avec les baies, la commutation et les salles techniques'], 'cases': ['Immeubles de bureaux et proprietes mixtes sur plusieurs etages', 'Extensions du handoff du fournisseur internet vers la salle reseau', 'Renouvellement de backbone lors d ameliorations locatives ou proprietaires'], 'industries': ['Immeubles de bureaux commerciaux', 'Proprietes multi-locatives', 'Sites industriels et entrepots'], 'related': ['network-infrastructure', 'structured-cabling', 'security-camera-systems']},
+'fr': {'slug': 'installation-fibre-optique', 'name': 'Installation de fibre optique', 'title': 'Fibre optique pour immeubles commerciaux | Opticable', 'desc': 'Installation de fibre optique pour immeubles commerciaux, backbones, colonnes montantes, handoffs internet et connectivite a haute capacite.', 'hero': 'Fibre optique pour backbones, colonnes montantes et connectivite d affaires a haute capacite.', 'intro': 'Opticable installe la fibre optique pour les environnements commerciaux qui exigent un backbone fiable, des extensions de handoff fournisseur ou des liens a plus forte capacite entre etages, suites et salles reseau.', 'summary': 'Backbones fibre, colonnes montantes, extensions de handoff et liens a haute capacite pour proprietes commerciales.', 'includes': ['Cablage backbone fibre entre MDF, IDF, suites et points d equipement', 'Extensions de handoff fournisseur et chemin entre le point de demarcation et la salle reseau', 'Terminaisons fibre, raccordement, organisation des chemins et coordination cote baie'], 'benefits': ['Distribution a plus forte capacite pour la croissance future', 'Liens fiables sur de plus longues distances dans les grands sites', 'Meilleure coordination avec les baies, la commutation et les salles techniques'], 'cases': ['Immeubles de bureaux et proprietes mixtes sur plusieurs etages', 'Extensions du handoff du fournisseur internet vers la salle reseau', 'Renouvellement de backbone lors d ameliorations locatives ou proprietaires'], 'industries': ['Immeubles de bureaux commerciaux', 'Proprietes multi-locatives', 'Sites industriels et entrepots'], 'related': ['network-infrastructure', 'structured-cabling', 'security-camera-systems']},
     },
     'network-infrastructure': {
         'en': {'slug': 'network-infrastructure', 'name': 'Network Infrastructure', 'title': 'Commercial Network Infrastructure and Server Rack Installation | Opticable', 'desc': 'Commercial network infrastructure services including server rack installation, network room build-outs, switching support, and internet infrastructure deployment.', 'hero': 'Network infrastructure, server rack installation, and room build-outs for commercial environments.', 'intro': 'Opticable supports the physical network infrastructure behind business connectivity, equipment rooms, and internet service deployment. Projects can include server rack installation, patching, switch connectivity, demarc extensions, and cleanup of difficult legacy rooms.', 'summary': 'Server racks, network rooms, handoff routing, patching, switching support, and infrastructure cleanup.', 'includes': ['Server rack and cabinet installation with cable management and organized terminations', 'Patch panels, uplink routing, switch connectivity, and demarc-to-rack pathway planning', 'Internet infrastructure deployment and cleanup of crowded or unlabeled network rooms'], 'benefits': ['Better room serviceability after turnover', 'Cleaner handoff between wireless, security, voice, and tenant systems', 'Less rework during future upgrades and expansion'], 'cases': ['New office or retail suite network room setup', 'Demarc extensions and backbone routing for managed buildings', 'Legacy MDF and IDF cleanup before expansion'], 'industries': ['Business offices', 'Property management portfolios', 'Retail and hospitality properties'], 'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems']},
@@ -859,7 +865,7 @@ services = {
     },
     'managed-it-services': {
         'en': {'slug': 'it-services-and-support', 'name': 'IT Services', 'title': 'IT Services and Device Management | Opticable', 'desc': 'IT support, device management, network maintenance, and technical support for businesses and commercial properties in Quebec.', 'hero': 'IT services and device management for businesses and commercial properties', 'intro': 'Opticable provides IT support, device management, and practical maintenance after installation so business technology environments keep running without interruption.', 'summary': 'Device management, network support, maintenance, and technical support after installation.', 'includes': ['Device inventory, updates, replacements, and lifecycle tracking for workstations and network equipment', 'Technical support for installed systems, including network, WiFi, cameras, and access-control environments', 'Preventive maintenance, configuration updates, and day-to-day administration for business technology environments'], 'benefits': ['Clearer ownership of the installed environment after deployment', 'Faster response when systems need changes, support, or maintenance', 'A more consistent technical standard across active properties and business sites'], 'cases': ['Clients that want to outsource support for their technology environment', 'Property teams that need recurring follow-up across multiple locations', 'Organizations that have systems in place but limited internal IT capacity'], 'industries': ['Business offices', 'Commercial properties', 'Property management portfolios'], 'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems']},
-        'fr': {'slug': 'services-informatiques', 'name': 'Services informatiques', 'title': 'Services informatiques et gestion de parc | Opticable', 'desc': "Soutien informatique, gestion de parc, maintenance réseau et support technique pour entreprises et immeubles commerciaux au Québec. Opticable — Montréal, Laval et partout au Québec.", 'hero': 'Services informatiques et gestion de parc pour entreprises et immeubles commerciaux', 'intro': "Opticable assure le soutien informatique, la gestion de parc et la maintenance des environnements technologiques après l'installation. On reste disponibles pour que vos systèmes fonctionnent sans interruption.", 'summary': "Gestion de parc, soutien réseau, maintenance et support technique pour vos environnements après l'installation.", 'includes': ['Gestion de parc informatique, inventaire, mises à jour, remplacement et suivi des équipements', 'Soutien technique sur les systèmes installés, incluant réseau, WiFi, caméras et contrôle d’accès', 'Maintenance préventive, administration des systèmes et support utilisateur continu'], 'benefits': ['Un interlocuteur unique pour la gestion courante de votre environnement technologique', 'Des systèmes mieux suivis après la mise en service', 'Moins de friction quand il faut maintenir, ajuster ou faire évoluer les installations'], 'cases': ["Entreprises qui veulent externaliser la gestion de leur environnement technologique", 'Gestionnaires immobiliers qui ont besoin d’un suivi régulier sur plusieurs immeubles', 'Organisations qui ont des systèmes en place mais plus de ressources internes pour les gérer'], 'industries': ['Entreprises', 'Immeubles commerciaux', 'Portefeuilles immobiliers'], 'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems']},
+        'fr': {'slug': 'services-informatiques', 'name': 'Services informatiques', 'title': 'Services informatiques et gestion de parc | Opticable', 'desc': "Soutien informatique, gestion de parc et maintenance réseau pour entreprises et immeubles commerciaux au Québec. Montréal, Laval, Longueuil et partout au Québec.", 'hero': 'Services informatiques et gestion de parc pour entreprises et immeubles commerciaux', 'intro': "Opticable assure le soutien informatique, la gestion de parc et la maintenance des environnements technologiques après l'installation. On reste disponibles pour que vos systèmes fonctionnent sans interruption.", 'summary': "Gestion de parc, soutien réseau, maintenance et support technique pour vos environnements après l'installation.", 'includes': ['Gestion de parc informatique, inventaire, mises à jour, remplacement et suivi des équipements', 'Soutien technique sur les systèmes installés, incluant réseau, WiFi, caméras et contrôle d’accès', 'Maintenance préventive, administration des systèmes et support utilisateur continu'], 'benefits': ['Un interlocuteur unique pour la gestion courante de votre environnement technologique', 'Des systèmes mieux suivis après la mise en service', 'Moins de friction quand il faut maintenir, ajuster ou faire évoluer les installations'], 'cases': ["Entreprises qui veulent externaliser la gestion de leur environnement technologique", 'Gestionnaires immobiliers qui ont besoin d’un suivi régulier sur plusieurs immeubles', 'Organisations qui ont des systèmes en place mais plus de ressources internes pour les gérer'], 'industries': ['Entreprises', 'Immeubles commerciaux', 'Portefeuilles immobiliers'], 'related': ['network-infrastructure', 'commercial-wifi-installation', 'ip-phone-systems']},
     },
     'security-camera-systems': {
         'en': {'slug': 'security-camera-systems', 'name': 'Security Camera Systems', 'title': 'Commercial Security Camera System Installation | Opticable', 'desc': 'Commercial security camera system installation with cabling, device connectivity, and network coordination for managed properties and businesses.', 'hero': 'Security camera infrastructure and installation for businesses, buildings, and managed properties.', 'intro': 'Opticable installs the low-voltage and network foundation behind commercial security camera systems. Camera projects are coordinated with cabling, switching, storage locations, and active building conditions.', 'summary': 'Commercial camera cabling, device connectivity, PoE support, and infrastructure planning.', 'includes': ['Cabling and terminations for interior and exterior camera positions', 'PoE-capable connectivity planning with switching and rack coordination', 'Routing to network rooms, storage equipment, or building-wide surveillance infrastructure'], 'benefits': ['More reliable coverage and device connectivity', 'Cleaner integration with the broader network core', 'Easier future expansion for added coverage areas'], 'cases': ['Retail surveillance upgrades', 'Common-area and perimeter camera additions', 'Warehouse and operational monitoring coverage'], 'industries': ['Retail and hospitality', 'Commercial office properties', 'Industrial and warehouse sites'], 'related': ['access-control-systems', 'network-infrastructure', 'structured-cabling']},
@@ -922,7 +928,7 @@ services['security-camera-systems']['en'].update({
 })
 services['fiber-optic-installation']['fr'].update({
     'name': 'Fibre optique',
-    'title': 'Installation de fibre optique pour immeubles commerciaux | Opticable',
+    'title': 'Fibre optique pour immeubles commerciaux | Opticable',
     'desc': "Installation de fibre optique pour liaisons principales, colonnes montantes, prolongements de service Internet et liaisons à haute capacité.",
     'hero': 'Fibre optique pour liaisons principales, colonnes montantes et connectivité à haute capacité.',
     'intro': "Opticable installe la fibre optique dans les environnements commerciaux qui ont besoin d'une liaison principale fiable, d'un prolongement du point de démarcation ou de liaisons à forte capacité entre étages, suites et locaux réseau.",
@@ -1531,7 +1537,7 @@ T['fr'].update({
     'all_services': 'Voir nos services',
     'company': "Opticable conçoit, installe et gère les systèmes technologiques des immeubles commerciaux, avec un soutien durable après la mise en service.",
     'footer': "Opticable installe et gère les systèmes technologiques des immeubles commerciaux à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord, dans les Laurentides et partout au Québec.",
-    'home_title': "Caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux | Opticable",
+    'home_title': "Caméras, accès, WiFi et câblage commercial | Opticable",
     'home_desc': "Opticable installe et gère caméras, accès, WiFi et câblage structuré pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.",
     'home_kicker': 'Technologie commerciale et systèmes du bâtiment',
     'home_h1': "Caméras, contrôle d'accès, WiFi et câblage pour des bâtiments mieux gérés",
@@ -1638,7 +1644,7 @@ T['en'].update({
     'all_services': 'View all services',
     'company': 'Opticable designs, installs, and manages technology systems for commercial buildings, with long-term support after commissioning.',
     'footer': 'Opticable installs and manages technology systems for commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
-    'home_title': 'Commercial cabling, access control, WiFi, surveillance, and intercom | Opticable',
+    'home_title': 'Commercial Cameras, Access, WiFi and Cabling | Opticable',
     'home_desc': 'Opticable installs and manages cameras, access control, intercom, WiFi, and structured cabling for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'home_kicker': 'Commercial technology and building systems',
     'home_h1': 'Commercial cabling, access control, WiFi, surveillance, and intercom for better-managed buildings',
@@ -1864,7 +1870,7 @@ services['access-control-systems']['en'].update({
 })
 services['commercial-wifi-installation']['en'].update({
     'name': 'Commercial WiFi',
-    'title': 'Commercial WiFi installation for offices and buildings | Opticable',
+    'title': 'Commercial WiFi for Offices and Buildings | Opticable',
     'desc': 'Design, installation, management, and maintenance of commercial WiFi for offices and buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Commercial WiFi for offices, buildings, and shared spaces',
     'intro': 'Opticable designs, installs, and manages professional WiFi networks for commercial and multi-tenant buildings. Stable signal, properly sized coverage, and the wired infrastructure needed behind the access points, without dead zones or overload, with technical support available.',
@@ -2005,7 +2011,7 @@ services['structured-cabling']['fr'].update({
 })
 services['fiber-optic-installation']['fr'].update({
     'name': 'Fibre optique',
-    'title': 'Installation de fibre optique pour immeubles commerciaux | Opticable',
+    'title': 'Fibre optique pour immeubles commerciaux | Opticable',
     'desc': 'Liaisons fibre optique, colonnes montantes et prolongements de service pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
     'hero': 'Installation de fibre optique pour immeubles commerciaux et sites multi-étages',
     'intro': "Opticable installe les liaisons en fibre optique qui servent de colonne vertébrale à votre infrastructure réseau. Backbone entre étages, prolongements de service et liaisons haute capacité, pour les bâtiments où le cuivre ne suffit plus.",
@@ -2413,7 +2419,7 @@ BLOG_PAGE = {
         'listing_intro': 'This layout is ready for article cards with title, date, excerpt, and link.',
     },
     'fr': {
-        'title': 'Blogue — Technologie commerciale et systèmes du bâtiment | Opticable',
+        'title': 'Blogue technologie commerciale | Opticable',
         'desc': 'Conseils, guides et ressources sur les systèmes de sécurité, WiFi commercial, câblage et infrastructure réseau pour immeubles commerciaux au Québec — par Opticable.',
         'eyebrow': 'Ressources et conseils',
         'h1': 'Blogue Opticable — Technologie pour immeubles commerciaux',
@@ -4828,7 +4834,7 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
 def resource_hints(page_key):
     hints = []
     if page_key == 'home':
-        hints.append(f'<link rel="preload" as="image" href="{HOME_BUILDING_URL}" />')
+        hints.append(f'<link rel="preload" as="image" href="{HOME_RACK_URL}" />')
     if page_key == 'contact':
         hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
         hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
@@ -5331,9 +5337,9 @@ def social_meta_values(lang, key, title, desc, canonical_url):
     }
     if lang == 'fr' and key == 'home':
         meta.update({
-            'og_title': "Caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux | Opticable",
+            'og_title': "Caméras, accès, WiFi et câblage commercial | Opticable",
             'og_description': "Installation et gestion de systèmes technologiques pour immeubles commerciaux au Québec. Montréal, Laval, Longueuil et partout au Québec.",
-            'twitter_title': "Caméras, contrôle d'accès, WiFi et câblage | Opticable",
+            'twitter_title': "Caméras, accès, WiFi et câblage commercial | Opticable",
             'twitter_description': "Installation et gestion de systèmes pour immeubles commerciaux au Québec.",
             'og_url': absolute_url('/'),
         })
@@ -5351,9 +5357,9 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         'url': absolute_url(default_route('home')),
         'logo': absolute_url(LOGO_UI_URL),
         'image': absolute_url(OG_IMAGE_URL),
-        'description': SCHEMA_BUSINESS_DESCRIPTION,
+        'description': SCHEMA_BUSINESS_DESCRIPTION[lang],
         'serviceType': [services[k][lang]['name'] for k in order],
-        'areaServed': SCHEMA_AREA_SERVED_NAMES,
+        'areaServed': SCHEMA_AREA_SERVED_NAMES[lang],
         'address': {'@type': 'PostalAddress', 'addressLocality': 'Montréal', 'addressRegion': 'QC', 'addressCountry': 'CA'},
         'availableLanguage': [language_tag('en'), language_tag('fr')],
         'openingHoursSpecification': OPENING_HOURS_SPEC,
@@ -5501,33 +5507,6 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
         )
     body_class = f'lang-{lang} page-{key}'
     return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
-
-
-def legacy_redirect_html(target, title, desc, lang='fr', page_key='home'):
-    return (
-        f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" />'
-        f'<meta http-equiv="refresh" content="0; url={target}" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />'
-        f'<title>{esc(title)}</title><meta name="description" content="{esc(desc)}" />'
-        f'<meta name="robots" content="noindex, follow" /><meta name="theme-color" content="#153628" />'
-        f'<link rel="canonical" href="{absolute_url(target)}" />'
-        f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][page_key])}" />'
-        f'<link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"][page_key])}" />'
-        f'<link rel="alternate" hreflang="x-default" href="{absolute_url(default_route(page_key))}" />'
-        f'<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" />'
-        f'<meta property="og:locale" content="{T[lang]["locale"]}" /><meta property="og:title" content="{esc(title)}" />'
-        f'<meta property="og:description" content="{esc(desc)}" /><meta property="og:url" content="{absolute_url(target)}" />'
-        f'<meta property="og:image" content="{absolute_url(LOGO_LOCKUP_URL)}" /><meta property="og:image:alt" content="Opticable logo" />'
-        f'<meta property="og:image:width" content="{LOGO_LOCKUP_WIDTH}" /><meta property="og:image:height" content="{LOGO_LOCKUP_HEIGHT}" />'
-        f'<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(title)}" />'
-        f'<meta name="twitter:description" content="{esc(desc)}" /><meta name="twitter:image" content="{absolute_url(LOGO_LOCKUP_URL)}" />'
-        f'<meta name="twitter:image:alt" content="Opticable logo" /><link rel="icon" type="image/png" href="{LOGO_MARK_URL}" />'
-        f'<link rel="stylesheet" href="{STYLES_URL}" /></head><body><div class="gateway-shell"><section class="gateway-panel">'
-        f'<div><div class="gateway-brand">{logo_img("gateway")}</div><p>{esc(T[lang]["company"])}</p>'
-        f'<p class="eyebrow">{esc("Redirection" if lang == "fr" else "Redirect")}</p>'
-        f'<h1>{esc(title)}</h1><p>{esc(desc)}</p></div><div class="hero-actions">'
-        f'<a class="button button-primary" href="{target}">{esc("Continuer" if lang == "fr" else "Continue")}</a></div></section></div></body></html>'
-    )
-
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -5986,29 +5965,7 @@ not_found_html = page(
     resource_key='404',
 )
 
-write_url('/fr/', legacy_redirect_html('/', 'Redirection vers la page d accueil française', "La page d accueil française est maintenant servie directement à la racine du site.", lang='fr'))
-write_url('/fr/secteurs/', legacy_redirect_html('/fr/clientele/', 'Redirection vers la page clientèle', "Cette ancienne page est maintenant servie sous le nom Clientèle.", lang='fr', page_key='industries'))
-robots_user_agents = (
-    '*',
-    'Amazonbot',
-    'Applebot',
-    'Applebot-Extended',
-    'Bytespider',
-    'CCBot',
-    'ChatGPT-User',
-    'ClaudeBot',
-    'Claude-SearchBot',
-    'CloudflareBrowserRenderingCrawler',
-    'Google-Extended',
-    'GPTBot',
-    'meta-externalagent',
-    'OAI-SearchBot',
-    'PerplexityBot',
-    'Perplexity-User',
-)
-robots_lines = ['Content-Signal: search=yes, ai-input=yes, ai-train=yes', '']
-for agent in robots_user_agents:
-    robots_lines.extend((f'User-agent: {agent}', 'Allow: /', ''))
+robots_lines = ['User-agent: *', 'Allow: /', '']
 robots_lines.append('Sitemap: ' + absolute_url('/sitemap.xml'))
 (DEPLOY_ROOT / 'robots.txt').write_text('\n'.join(robots_lines) + '\n', encoding='utf-8')
 (DEPLOY_ROOT / 'sitemap.xml').write_text(sitemap_xml(), encoding='utf-8')

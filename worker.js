@@ -3,6 +3,14 @@ const WWW_HOST = "www.opticable.ca";
 const HSTS_VALUE = "max-age=31536000; includeSubDomains; preload";
 const LONG_CACHE = "public, max-age=31536000, immutable";
 const HTML_CACHE = "public, max-age=0, must-revalidate";
+const LEGACY_REDIRECTS = new Map([
+  ["/fr", "/"],
+  ["/fr/", "/"],
+  ["/fr/index.html", "/"],
+  ["/fr/secteurs", "/fr/clientele/"],
+  ["/fr/secteurs/", "/fr/clientele/"],
+  ["/fr/secteurs/index.html", "/fr/clientele/"],
+]);
 
 function cacheControlForPath(pathname) {
   if (pathname.startsWith("/assets/")) {
@@ -36,10 +44,22 @@ function withResponseHeaders(response, pathname) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const redirectUrl = new URL(url);
+    let shouldRedirect = false;
 
-    if (url.hostname === WWW_HOST) {
-      url.hostname = APEX_HOST;
-      return Response.redirect(url.toString(), 301);
+    if (redirectUrl.hostname === WWW_HOST) {
+      redirectUrl.hostname = APEX_HOST;
+      shouldRedirect = true;
+    }
+
+    const legacyTarget = LEGACY_REDIRECTS.get(redirectUrl.pathname);
+    if (legacyTarget) {
+      redirectUrl.pathname = legacyTarget;
+      shouldRedirect = true;
+    }
+
+    if (shouldRedirect) {
+      return Response.redirect(redirectUrl.toString(), 301);
     }
 
     let response = await env.ASSETS.fetch(request);
