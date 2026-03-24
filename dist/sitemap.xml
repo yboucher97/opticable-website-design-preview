@@ -121,7 +121,7 @@
   </url>
   <url>
     <loc>https://opticable.ca/en/blog/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/" />
@@ -268,7 +268,7 @@
   </url>
   <url>
     <loc>https://opticable.ca/fr/blogue/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/" />
@@ -293,5 +293,9 @@
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/contact/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/contact/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/contact/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/</loc>
+    <lastmod>2026-03-24</lastmod>
   </url>
 </urlset>

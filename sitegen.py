@@ -1,5 +1,6 @@
 ﻿from pathlib import Path
 import json
+import re
 from datetime import date
 import shutil
 import xml.etree.ElementTree as ET
@@ -2428,7 +2429,7 @@ BLOG_PAGE = {
         'primary_cta': 'Voir nos services',
         'secondary_cta': 'Nous contacter',
         'listing_title': 'Articles',
-        'listing_intro': "La structure est prête pour accueillir des cartes d'articles avec titre, date, extrait et lien.",
+        'listing_intro': 'Des ressources pratiques sur le WiFi, le câblage, la sécurité et les systèmes techniques de bâtiment.',
     },
 }
 
@@ -2442,7 +2443,169 @@ BLOG_PAGE['en'] = {
     'primary_cta': 'View our services',
     'secondary_cta': 'Contact us',
     'listing_title': 'Articles',
-    'listing_intro': 'The structure is ready for article cards with title, date, excerpt, and link.',
+    'listing_intro': 'Practical resources about WiFi, cabling, security, and supporting building infrastructure.',
+}
+
+BLOG_META_UI = {
+    'en': {
+        'author': 'Author',
+        'published': 'Published',
+        'reading_time': 'Reading time',
+        'read_article': 'Read the article',
+        'myth': 'The myth',
+        'reality': 'The reality',
+        'article_panel': 'Article overview',
+        'minutes': 'min read',
+    },
+    'fr': {
+        'author': 'Auteur',
+        'published': 'Publié',
+        'reading_time': 'Temps de lecture',
+        'read_article': "Lire l'article",
+        'myth': 'Le mythe',
+        'reality': 'La réalité',
+        'article_panel': "Aperçu de l'article",
+        'minutes': 'min de lecture',
+    },
+}
+
+BLOG_MONTHS = {
+    'en': ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+    'fr': ('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'),
+}
+
+BLOG_ARTICLES = {
+    'wifi-power': {
+        'published': '2026-03-24',
+        'author': 'Yan-Erik B.',
+        'fr': {
+            'path': '/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/',
+            'title': 'Pourquoi monter la puissance du WiFi empire les choses | Opticable',
+            'desc': "Pourquoi augmenter la puissance d'une borne WiFi règle rarement les problèmes de couverture, d'interférences et de performance dans un immeuble commercial.",
+            'eyebrow': 'WiFi commercial',
+            'headline': "Monter la puissance du WiFi, c'est souvent aggraver le problème.",
+            'intro': "Le signal est faible, les appareils décrochent, la connexion est instable. Le réflexe : monter la puissance du point d'accès WiFi. C'est souvent la pire chose à faire. Voici pourquoi — et ce qui marche vraiment.",
+            'excerpt': "Le signal est faible, les appareils décrochent, la connexion est instable. Monter la puissance paraît logique, mais dans un vrai bâtiment commercial, c'est souvent ce qui aggrave le problème.",
+            'tags': ['WiFi commercial', 'Infrastructure réseau'],
+            'sections': [
+                {
+                    'eyebrow': 'Les bases',
+                    'title': "La base : le WiFi, c'est du son dans l'air",
+                    'paragraphs': [
+                        "Le WiFi, c'est de la radio. Un point d'accès WiFi — aussi appelé borne WiFi ou antenne WiFi — envoie et reçoit des signaux dans l'air sur des fréquences précises. Ces fréquences, on les appelle des bandes.",
+                        "Pensez-y comme du son. Si vous parlez à travers un mur, la personne de l'autre bord vous entend moins bien. Si vous êtes au bout d'un grand couloir, pareil. Et si tout le monde dans la pièce parle en même temps, plus personne ne se comprend — peu importe combien fort vous criez.",
+                        "Le WiFi, c'est exactement ça. Ce n'est pas un tuyau qu'on remplit plus ou moins vite. C'est une conversation dans un espace partagé. Quand l'air est trop occupé, les données ne passent plus — et monter la puissance ne règle rien.",
+                    ],
+                    'callout': "À retenir : la plupart des problèmes WiFi viennent des interférences, d'une surcharge sur un seul point d'accès WiFi ou d'un mauvais choix de bande. La puissance n'est pas la réponse à ces problèmes — elle les empire.",
+                },
+                {
+                    'eyebrow': 'Bandes',
+                    'title': 'Les trois bandes WiFi — ce qu’elles font vraiment',
+                    'paragraphs': [
+                        "Le WiFi moderne fonctionne sur trois bandes de fréquences. Chacune se comporte différemment dans l'air — un peu comme les graves et les aigus dans un système de son. Les graves portent loin mais sont moins précis. Les aigus sont clairs mais ne passent pas bien à travers les murs. Savoir choisir la bonne bande, c'est déjà la moitié du travail.",
+                    ],
+                    'cards': [
+                        ('2.4 GHz', 'Portée longue, débit plus faible, bonne pénétration à travers les murs et bande très saturée.'),
+                        ('5 GHz', 'Portée moyenne, débit élevé, pénétration moyenne et beaucoup moins de congestion.'),
+                        ('6 GHz', 'Portée plus courte, très haut débit, faible pénétration et bande encore très peu encombrée.'),
+                    ],
+                    'subsections': [
+                        {
+                            'title': 'Le 2.4 GHz — la bande la plus surchargée',
+                            'paragraphs': [
+                                "Le 2.4 GHz passe bien à travers les murs et porte loin. Ça a l'air bon. Le problème, c'est que tout le monde l'utilise en même temps. Les voisins, les caméras IP bas de gamme, les téléphones sans fil, les fours à micro-ondes, les moniteurs pour bébé et les thermostats connectés — tout ça trafique sur le 2.4 GHz.",
+                                "Et il y a seulement trois canaux disponibles sur cette bande sans qu'ils se chevauchent. Dans un immeuble à logements ou un immeuble de bureaux, ces trois canaux sont bondés. Imaginez un gymnase où tout le monde parle en même temps sur les mêmes trois sujets. Votre point d'accès WiFi parle, mais personne ne l'entend parce que tout le monde parle en même temps.",
+                                "Monter la puissance dans ce contexte, ça fait quoi ? Ça fait que vous criez encore plus fort dans le gymnase. Vos voisins font pareil. Personne ne s'entend mieux — tout le monde se nuit davantage.",
+                            ],
+                        },
+                        {
+                            'title': 'Le 5 GHz — le bon choix pour la majorité des usages',
+                            'paragraphs': [
+                                "Le 5 GHz a beaucoup plus de canaux disponibles, moins d'appareils qui l'encombrent, et des débits bien plus élevés. La contrepartie : il passe moins bien à travers les obstacles et porte moins loin.",
+                                "Ce n'est pas un défaut. C'est une caractéristique qu'on gère en positionnant mieux les points d'accès WiFi — plus de bornes, mieux placées.",
+                            ],
+                        },
+                        {
+                            'title': 'Le 6 GHz — WiFi 6E et WiFi 7',
+                            'paragraphs': [
+                                "Le 6 GHz, c'est la bande la plus récente. Pour l'instant, elle est pratiquement vide d'interférences — comme parler dans une salle vide, tout se comprend clairement. Les débits sont exceptionnels.",
+                                "Mais elle passe encore moins bien à travers les murs que le 5 GHz. Dans un environnement bien pensé avec le bon nombre de points d'accès WiFi, c'est la bande la plus performante qui soit.",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    'eyebrow': 'Puissance',
+                    'title': 'Pourquoi monter la puissance empire les choses',
+                    'comparisons': [
+                        {
+                            'myth': 'Plus ma borne WiFi est puissante, meilleur est le signal. Un signal fort = une bonne connexion.',
+                            'reality': "Un fort signal du point d'accès WiFi ne change rien si votre téléphone ou laptop ne peut pas répondre à la même puissance. Une connexion WiFi, c'est une conversation à deux sens. Elle est toujours aussi bonne que le maillon le plus faible.",
+                        },
+                        {
+                            'myth': "Si un appareil est loin et décroche, il faut une antenne WiFi plus puissante pour le rejoindre.",
+                            'reality': "L'appareil entend mieux la borne — mais la borne n'entend pas mieux l'appareil pour autant. C'est comme si vous parliez dans un mégaphone à quelqu'un qui répond à voix normale. Vous l'entendez toujours aussi peu.",
+                        },
+                        {
+                            'myth': 'Plus de puissance = meilleure couverture pour tout le monde.',
+                            'reality': "Plus de puissance = plus d'appareils qui se connectent à la même borne WiFi. Elle se surcharge, tout le monde ralentit. C'est comme un guichet unique dans un aéroport — plus de monde ne veut pas dire un service plus rapide.",
+                        },
+                    ],
+                    'subsections': [
+                        {
+                            'title': "L'appareil qui reste pogné sur la mauvaise borne",
+                            'paragraphs': [
+                                "Dans un bâtiment avec plusieurs points d'accès WiFi, un appareil qui se déplace devrait se connecter à la borne la plus proche. Mais si une borne WiFi lointaine est trop puissante, l'appareil reste accroché à elle même quand une meilleure borne est juste à côté.",
+                                "C'est ce qu'on appelle le sticky client — l'appareil est pogné sur un point d'accès WiFi trop loin et ses performances en souffrent inutilement.",
+                            ],
+                        },
+                    ],
+                    'quote': "Crier plus fort dans un gymnase bondé ne règle pas le fait que tout le monde parle en même temps.",
+                },
+                {
+                    'eyebrow': 'Interférences',
+                    'title': 'Ce qui cause vraiment les problèmes de WiFi',
+                    'paragraphs': [
+                        "Voici les vrais coupables. On les voit dans presque tous les bâtiments commerciaux et immeubles à logements.",
+                    ],
+                    'cards': [
+                        ('Deux bornes sur le même canal', 'Deux personnes qui essaient de parler en même temps sur la même fréquence radio. Elles se parlent par-dessus et les appareils doivent attendre leur tour.'),
+                        ("Trop d'appareils sur un seul point d'accès WiFi", "Un point d'accès partage sa bande passante entre tous les appareils connectés. Quand il y en a trop, tout le monde ralentit — même ceux qui sont juste à côté de la borne."),
+                        ('Canaux mal planifiés entre bornes', 'Si deux antennes WiFi voisines utilisent des canaux qui se chevauchent, elles se nuisent en permanence — comme deux radios sur la même fréquence qui jouent en même temps.'),
+                        ('Vieux appareils sur le réseau', "Un vieux téléphone ou un thermostat connecté en WiFi 4 sur le 2.4 GHz force toute la borne WiFi à ralentir pour lui parler. Un seul vieux appareil peut tirer les performances de tout le réseau vers le bas."),
+                        ('Obstacles pas évalués', "Béton, colonnes métalliques, vitres teintées épaisses, salles de serveurs — chaque matériau bloque le signal différemment selon la bande. L'évaluation du site permet d'anticiper ça."),
+                        ('Le WiFi des voisins', "Dans un immeuble à plusieurs locataires, les réseaux WiFi des voisins créent du bruit de fond constant sur les mêmes canaux — surtout en 2.4 GHz. Monter votre puissance les affecte davantage. Ils font pareil pour vous. Tout le monde perd."),
+                    ],
+                    'callout': "Le paradoxe de la puissance : plus une borne WiFi couvre grand, plus elle attire d'appareils — et plus elle se surcharge. Dans un bâtiment dense, baisser la puissance et ajouter des bornes améliore presque toujours les performances. Moins fort, mieux réparti.",
+                },
+                {
+                    'eyebrow': 'Solutions',
+                    'title': 'Ce qui règle vraiment les problèmes de WiFi',
+                    'paragraphs': [
+                        "Voici ce qu'on fait concrètement pour qu'un réseau WiFi performe dans un vrai bâtiment.",
+                    ],
+                    'steps': [
+                        ("Évaluation du site avant d'installer quoi que ce soit", "On regarde les matériaux de construction, les sources d'interférence existantes, les zones à couvrir et le nombre d'appareils à supporter. Ça permet de positionner les points d'accès WiFi là où ils font vraiment leur travail — pas juste là où c'est pratique à câbler."),
+                        ('Plus de bornes, moins de puissance par borne', "Plusieurs points d'accès à puissance modérée, bien positionnés sur des canaux distincts — la charge est distribuée, les interférences tombent, la couverture est uniforme partout dans le bâtiment."),
+                        ('Plan de canaux pour tout le bâtiment', "Sur le 5 GHz, on a beaucoup de canaux distincts disponibles. Bien les répartir entre bornes adjacentes élimine les chevauchements. C'est un ajustement de config — zéro matériel supplémentaire — et souvent l'intervention qui a le plus d'impact immédiat."),
+                        ('Diriger les appareils vers la bonne bande', "Des bornes bien configurées envoient automatiquement les appareils capables vers le 5 GHz ou 6 GHz, et gardent le 2.4 GHz pour les équipements plus vieux qui n'ont pas le choix."),
+                        ("Le câblage, c'est la fondation du WiFi", "Une borne WiFi est aussi bonne que le câble qui l'alimente. Un câble Cat 6 mal tiré ou trop long limite le débit avant même que le signal parte dans l'air."),
+                        ('Du matériel fait pour les environnements commerciaux', "Les bornes WiFi grand public ne sont pas conçues pour gérer 40, 60 ou 100 appareils en même temps dans un espace dense. Les points d'accès commerciaux comme UniFi, TP-Link Omada ou Fortinet ont les fonctionnalités qui font la différence."),
+                    ],
+                    'callout': "Exemple concret : un immeuble de bureaux de 5 000 pi² avec une seule borne WiFi poussée à fond et des plaintes constantes de déconnexions. En la remplaçant par quatre points d'accès UniFi U6 Pro à puissance modérée, avec plan de canaux optimisé et câblage Cat 6 certifié, on obtient zéro déconnexion, des débits trois fois plus élevés aux extrémités du plancher et 60 % de charge en moins par borne.",
+                    'quote': "Un bon WiFi, ça ne se règle pas à l'œil. Ça se planifie, ça se mesure, ça se valide.",
+                },
+            ],
+            'cta': {
+                'title': 'Votre WiFi performe pas comme il devrait ?',
+                'copy': "Avant de changer vos bornes ou de monter la puissance, parlez-nous. On évalue votre situation, on regarde le bâtiment et on vous propose une solution qui règle le vrai problème.",
+                'primary_label': 'Obtenir une soumission',
+                'primary_key': 'contact',
+                'secondary_label': 'Voir le service WiFi',
+                'secondary_key': 'commercial-wifi-installation',
+            },
+        },
+    },
 }
 
 CASE_STUDY_ORDER = (
@@ -4590,6 +4753,110 @@ css += '''
   gap:18px;
   grid-column:1/-1;
 }
+.blog-article-card{
+  display:grid;
+  gap:18px;
+  align-content:start;
+}
+.blog-article-card .chip-list{
+  margin-top:0;
+}
+.blog-card-meta,
+.blog-article-readout{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 18px;
+}
+.blog-card-meta span,
+.blog-article-readout span{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:baseline;
+  color:var(--muted);
+  font-size:.94rem;
+}
+.blog-card-meta strong,
+.blog-article-readout strong{
+  color:var(--text);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-article-panel{
+  display:grid;
+  align-content:start;
+  gap:20px;
+}
+.blog-subsection-stack,
+.blog-comparison-list,
+.blog-step-grid{
+  display:grid;
+  gap:18px;
+}
+.blog-subsection,
+.blog-compare-card,
+.blog-step-card{
+  display:grid;
+  gap:14px;
+}
+.blog-subsection h3,
+.blog-step-card h3{
+  margin:0;
+  font-size:1.22rem;
+}
+.blog-compare-card .grid-2{
+  gap:14px;
+}
+.blog-compare-side{
+  display:grid;
+  gap:8px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface-soft);
+}
+.blog-compare-side strong{
+  color:var(--primary-dark);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-compare-side p,
+.blog-subsection p,
+.blog-step-card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.72;
+}
+.blog-step-card .eyebrow{
+  margin-bottom:0;
+}
+.blog-callout{
+  border-color:rgba(47,138,88,.28);
+  background:linear-gradient(180deg,rgba(47,138,88,.1),rgba(255,255,255,.96));
+}
+.blog-callout p{
+  margin:0;
+  color:var(--text);
+  font-size:1.02rem;
+  line-height:1.7;
+}
+.blog-quote{
+  background:linear-gradient(160deg,#0d1712 0%,#14231b 68%,#1b3023 100%);
+  border-color:rgba(77,220,122,.16);
+}
+.blog-quote p{
+  margin:0;
+  color:#f5fbf7;
+  font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-weight:760;
+  line-height:1.18;
+  letter-spacing:-.02em;
+}
 .case-study-systems{
   margin-top:18px;
 }
@@ -4954,6 +5221,13 @@ def sitemap_xml():
             lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("fr")}" href="{esc(absolute_url(routes["fr"][key]))}" />')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(absolute_url(default_route(key)))}" />')
             lines.append('  </url>')
+    for lang in ('en', 'fr'):
+        for article in blog_articles_for_lang(lang):
+            page_url = absolute_url(article['path'])
+            lines.append('  <url>')
+            lines.append(f'    <loc>{esc(page_url)}</loc>')
+            lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
+            lines.append('  </url>')
     lines.append('</urlset>')
     return '\n'.join(lines) + '\n'
 
@@ -5291,6 +5565,189 @@ def render_custom_content_section(section):
     return band_section(heading + ''.join(blocks), 'content-section')
 
 
+def format_blog_date(value, lang):
+    parsed = date.fromisoformat(value)
+    month = BLOG_MONTHS[lang][parsed.month - 1]
+    if lang == 'fr':
+        return f'{parsed.day} {month} {parsed.year}'
+    return f'{month} {parsed.day}, {parsed.year}'
+
+
+def blog_word_count(text):
+    return len(re.findall(r"[0-9A-Za-zÀ-ÿ]+(?:['’\-][0-9A-Za-zÀ-ÿ]+)*", text))
+
+
+def blog_minutes_for_article(article):
+    pieces = []
+    for key, value in article.items():
+        if key in {'path', 'primary_key', 'secondary_key'}:
+            continue
+        if isinstance(value, str):
+            pieces.append(value)
+        elif isinstance(value, dict):
+            pieces.extend(_collect_blog_text(value))
+        elif isinstance(value, (list, tuple)):
+            pieces.extend(_collect_blog_text(value))
+    words = blog_word_count(' '.join(pieces))
+    return max(1, (words + 219) // 220)
+
+
+def _collect_blog_text(value):
+    parts = []
+    if isinstance(value, str):
+        parts.append(value)
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            if key in {'path', 'primary_key', 'secondary_key'}:
+                continue
+            parts.extend(_collect_blog_text(item))
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            parts.extend(_collect_blog_text(item))
+    return parts
+
+
+def blog_articles_for_lang(lang):
+    articles = []
+    for key, entry in BLOG_ARTICLES.items():
+        localized = entry.get(lang)
+        if not localized:
+            continue
+        merged = {'key': key, 'published': entry['published'], 'author': entry['author'], **localized}
+        articles.append(merged)
+    return sorted(articles, key=lambda item: item['published'], reverse=True)
+
+
+def blog_read_time_label(minutes, lang):
+    return f'{minutes} {BLOG_META_UI[lang]["minutes"]}'
+
+
+def render_blog_meta(article, lang):
+    ui = BLOG_META_UI[lang]
+    minutes = blog_minutes_for_article(article)
+    return (
+        f'<div class="blog-card-meta">'
+        f'<span><strong>{esc(ui["author"])}</strong> {esc(article["author"])}</span>'
+        f'<span><strong>{esc(ui["published"])}</strong> {esc(format_blog_date(article["published"], lang))}</span>'
+        f'<span><strong>{esc(ui["reading_time"])}</strong> {esc(blog_read_time_label(minutes, lang))}</span>'
+        f'</div>'
+    )
+
+
+def render_blog_article_card(article, lang):
+    ui = BLOG_META_UI[lang]
+    return (
+        f'<article class="card blog-article-card">'
+        f'{render_chips(article["tags"])}'
+        f'<h3>{esc(article["headline"])}</h3>'
+        f'<p>{esc(article["excerpt"])}</p>'
+        f'{render_blog_meta(article, lang)}'
+        f'<a class="more" href="{article["path"]}">{esc(ui["read_article"])}</a>'
+        f'</article>'
+    )
+
+
+def render_blog_listing(lang, blog_data):
+    articles = blog_articles_for_lang(lang)
+    if not articles:
+        return (
+            f'<div class="blog-grid"><article class="card blog-empty-card"><p>{esc(blog_data["empty"])}</p>'
+            f'<div class="cta-actions"><a class="button button-primary" href="{routes[lang]["services"]}">{esc(blog_data["primary_cta"])}</a>'
+            f'<a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(blog_data["secondary_cta"])}</a></div></article></div>'
+        )
+    return f'<div class="blog-grid">{"".join(render_blog_article_card(article, lang) for article in articles)}</div>'
+
+
+def render_blog_subsection(subsection):
+    items = ''
+    if subsection.get('items'):
+        items = f'<ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in subsection["items"])}</ul>'
+    paragraphs = ''.join(f'<p>{esc(text)}</p>' for text in subsection.get('paragraphs', []))
+    return f'<article class="contact-panel blog-subsection"><h3>{esc(subsection["title"])}</h3>{paragraphs}{items}</article>'
+
+
+def render_blog_comparison(pair, lang):
+    ui = BLOG_META_UI[lang]
+    return (
+        f'<article class="contact-panel blog-compare-card">'
+        f'<div class="grid-2">'
+        f'<div class="blog-compare-side"><strong>{esc(ui["myth"])}</strong><p>{esc(pair["myth"])}</p></div>'
+        f'<div class="blog-compare-side"><strong>{esc(ui["reality"])}</strong><p>{esc(pair["reality"])}</p></div>'
+        f'</div>'
+        f'</article>'
+    )
+
+
+def render_blog_steps(steps):
+    cards = []
+    for index, (title, text) in enumerate(steps, start=1):
+        cards.append(
+            f'<article class="card blog-step-card"><p class="eyebrow">{index:02d}</p><h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
+        )
+    return f'<div class="grid-3 blog-step-grid">{"".join(cards)}</div>'
+
+
+def render_blog_article_section(section, lang):
+    blocks = [
+        f'<div class="section-heading"><p class="eyebrow">{esc(section["eyebrow"])}</p><h2>{esc(section["title"])}</h2></div>'
+    ]
+    if section.get('paragraphs'):
+        blocks.append(f'<div class="contact-panel">{"".join(f"<p>{esc(text)}</p>" for text in section["paragraphs"])}</div>')
+    if section.get('cards'):
+        grid_class = 'grid-2' if len(section['cards']) == 2 else 'grid-3'
+        blocks.append(f'<div class="{grid_class}">{"".join(card(title, text, cls="card blog-detail-card") for title, text in section["cards"])}</div>')
+    if section.get('comparisons'):
+        blocks.append(f'<div class="blog-comparison-list">{"".join(render_blog_comparison(item, lang) for item in section["comparisons"])}</div>')
+    if section.get('subsections'):
+        blocks.append(f'<div class="blog-subsection-stack">{"".join(render_blog_subsection(item) for item in section["subsections"])}</div>')
+    if section.get('steps'):
+        blocks.append(render_blog_steps(section['steps']))
+    if section.get('callout'):
+        blocks.append(f'<div class="contact-panel blog-callout"><p>{esc(section["callout"])}</p></div>')
+    if section.get('quote'):
+        blocks.append(f'<div class="contact-panel blog-quote"><p>{esc(section["quote"])}</p></div>')
+    return band_section(''.join(blocks), 'blog-article-section')
+
+
+def render_blog_article_page(article, lang):
+    ui = BLOG_META_UI[lang]
+    breadcrumb_items = [
+        (T[lang]['home'], routes[lang]['home']),
+        (T[lang]['blog'], routes[lang]['blog']),
+        (article['headline'], article['path']),
+    ]
+    meta_panel = (
+        f'<aside class="page-hero-panel blog-article-panel"><p class="eyebrow">{esc(ui["article_panel"])}</p>'
+        f'<h2>{esc(article["headline"])}</h2>{render_chips(article["tags"])}'
+        f'<div class="blog-article-readout">'
+        f'<span><strong>{esc(ui["author"])}</strong> {esc(article["author"])}</span>'
+        f'<span><strong>{esc(ui["published"])}</strong> {esc(format_blog_date(article["published"], lang))}</span>'
+        f'<span><strong>{esc(ui["reading_time"])}</strong> {esc(blog_read_time_label(blog_minutes_for_article(article), lang))}</span>'
+        f'</div></aside>'
+    )
+    cta = article.get('cta', {})
+    primary_href = routes[lang][cta['primary_key']] if cta.get('primary_key') else routes[lang]['contact']
+    secondary_href = routes[lang][cta['secondary_key']] if cta.get('secondary_key') else routes[lang]['services']
+    body = (
+        breadcrumb_nav(breadcrumb_items)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">{esc(article["eyebrow"])}</p><h1>{esc(article["headline"])}</h1><p>{esc(article["intro"])}</p></div>'
+            + meta_panel,
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + ''.join(render_blog_article_section(section, lang) for section in article['sections'])
+        + band_section(
+            f'<div><p class="eyebrow">{esc(T[lang]["blog"])}</p><h2>{esc(cta["title"])}</h2><p>{esc(cta["copy"])}</p></div>'
+            f'<div class="cta-actions"><a class="button button-primary" href="{primary_href}">{esc(cta["primary_label"])}</a>'
+            f'<a class="button button-secondary" href="{secondary_href}">{esc(cta["secondary_label"])}</a></div>',
+            'blog-article-cta',
+            'layout-shell cta-band',
+        )
+    )
+    return breadcrumb_items, body
+
+
 def inline_cta_band(title, copy, href, label):
     return band_section(
         f'<div><p class="eyebrow">{esc(label)}</p><h2>{esc(title)}</h2><p>{esc(copy)}</p></div>'
@@ -5346,8 +5803,8 @@ def social_meta_values(lang, key, title, desc, canonical_url):
     return meta
 
 
-def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None):
-    page_url = absolute_url(routes[lang][page_key])
+def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None):
+    page_url = page_url or absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
     business = {
         '@type': 'LocalBusiness',
@@ -5492,7 +5949,7 @@ def stylesheet_link_tags():
     return f'<link rel="stylesheet" href="{STYLES_URL}" />'
 
 
-def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow', canonical_path=None, include_alternates=True, resource_key=None):
+def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None):
     t = T[lang]
     canonical_url = absolute_url(canonical_path or routes[lang][key])
     default_url = absolute_url(default_route(key)) if include_alternates else canonical_url
@@ -5506,7 +5963,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             f'<link rel="alternate" hreflang="x-default" href="{default_url}" />'
         )
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -5892,11 +6349,29 @@ for lang in ('en', 'fr'):
         )
         + band_section(
             f'<div class="section-heading"><p class="eyebrow">{esc(t["blog"])}</p><h2>{esc(blog_data["listing_title"])}</h2><p>{esc(blog_data["listing_intro"])}</p></div>'
-            f'<div class="blog-grid"><article class="card blog-empty-card"><p>{esc(blog_data["empty"])}</p><div class="cta-actions"><a class="button button-primary" href="{routes[lang]["services"]}">{esc(blog_data["primary_cta"])}</a><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(blog_data["secondary_cta"])}</a></div></article></div>',
+            f'{render_blog_listing(lang, blog_data)}',
             'blog-listing-section',
         )
     )
     write_url(routes[lang]['blog'], page(lang, 'blog', 'blog', blog_data['title'], blog_data['desc'], blog_body, breadcrumb_items=blog_breadcrumbs))
+    for article in blog_articles_for_lang(lang):
+        article_breadcrumbs, article_body = render_blog_article_page(article, lang)
+        write_url(
+            article['path'],
+            page(
+                lang,
+                'blog',
+                'blog',
+                article['title'],
+                article['desc'],
+                article_body,
+                breadcrumb_items=article_breadcrumbs,
+                canonical_path=article['path'],
+                include_alternates=False,
+                resource_key='blog',
+                schema_page_url=absolute_url(article['path']),
+            ),
+        )
 
     for key in order:
         s = services[key][lang]

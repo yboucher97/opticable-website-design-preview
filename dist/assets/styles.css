@@ -1771,6 +1771,110 @@ main section::before{
   gap:18px;
   grid-column:1/-1;
 }
+.blog-article-card{
+  display:grid;
+  gap:18px;
+  align-content:start;
+}
+.blog-article-card .chip-list{
+  margin-top:0;
+}
+.blog-card-meta,
+.blog-article-readout{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 18px;
+}
+.blog-card-meta span,
+.blog-article-readout span{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:baseline;
+  color:var(--muted);
+  font-size:.94rem;
+}
+.blog-card-meta strong,
+.blog-article-readout strong{
+  color:var(--text);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-article-panel{
+  display:grid;
+  align-content:start;
+  gap:20px;
+}
+.blog-subsection-stack,
+.blog-comparison-list,
+.blog-step-grid{
+  display:grid;
+  gap:18px;
+}
+.blog-subsection,
+.blog-compare-card,
+.blog-step-card{
+  display:grid;
+  gap:14px;
+}
+.blog-subsection h3,
+.blog-step-card h3{
+  margin:0;
+  font-size:1.22rem;
+}
+.blog-compare-card .grid-2{
+  gap:14px;
+}
+.blog-compare-side{
+  display:grid;
+  gap:8px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface-soft);
+}
+.blog-compare-side strong{
+  color:var(--primary-dark);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-compare-side p,
+.blog-subsection p,
+.blog-step-card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.72;
+}
+.blog-step-card .eyebrow{
+  margin-bottom:0;
+}
+.blog-callout{
+  border-color:rgba(47,138,88,.28);
+  background:linear-gradient(180deg,rgba(47,138,88,.1),rgba(255,255,255,.96));
+}
+.blog-callout p{
+  margin:0;
+  color:var(--text);
+  font-size:1.02rem;
+  line-height:1.7;
+}
+.blog-quote{
+  background:linear-gradient(160deg,#0d1712 0%,#14231b 68%,#1b3023 100%);
+  border-color:rgba(77,220,122,.16);
+}
+.blog-quote p{
+  margin:0;
+  color:#f5fbf7;
+  font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-weight:760;
+  line-height:1.18;
+  letter-spacing:-.02em;
+}
 .case-study-systems{
   margin-top:18px;
 }
