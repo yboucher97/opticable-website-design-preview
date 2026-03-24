@@ -3076,6 +3076,147 @@ BLOG_ARTICLES = {
             },
         },
     },
+    'structured-cabling-foundation': {
+        'published': '2026-03-20',
+        'modified': '2026-03-24',
+        'author': "L'équipe Opticable",
+        'fr': {
+            'path': '/fr/blogue/pourquoi-le-cablage-structure-change-tout/',
+            'title': 'Pourquoi le câblage structuré change tout | Opticable',
+            'desc': "Pourquoi le câblage structuré reste la vraie fondation d'un réseau performant, supportable et prêt pour les années à venir.",
+            'eyebrow': 'Câblage structuré',
+            'headline': 'Un réseau solide, ça commence dans les murs.',
+            'intro': "On parle souvent de WiFi, de switches et de fibre. On parle beaucoup moins du câblage qui se cache derrière. Pourtant, c'est lui qui détermine la performance, la stabilité et la capacité d'évolution du reste de l'infrastructure.",
+            'excerpt': "Quand le câblage est mal planifié, chaque ajout, panne ou expansion coûte plus cher. Bien fait, il devient une base propre, invisible et durable pour tout le reste.",
+            'tags': ['Câblage structuré', 'Infrastructure réseau'],
+            'hero_image': SERVICE_CABLING_URL,
+            'hero_image_position': '52% 52%',
+            'summary': [
+                ('La vraie base', "Le câblage physique détermine la stabilité et la performance de tout le réseau."),
+                ('Le bon choix', 'Cat6, Cat6A et fibre ne jouent pas le même rôle dans un projet sérieux.'),
+                ('Le vrai retour', 'Identification, certification et capacité de réserve évitent des heures perdues plus tard.'),
+            ],
+            'sections': [
+                {
+                    'eyebrow': 'La base',
+                    'title': "L'infrastructure réseau est invisible, mais critique",
+                    'paragraphs': [
+                        "Quand un réseau fonctionne, personne n'y pense. Quand il tombe, ralentit ou décroche, tout le monde le remarque. Employés bloqués, caméras sans flux, paiements ralentis : le problème finit souvent par remonter à la couche physique.",
+                        "La cause n'est pas toujours le switch ou le routeur. Très souvent, c'est le câblage : une terminaison mal faite, un run endommagé, un patch cord de mauvaise qualité ou une salle mécanique devenue illisible avec le temps.",
+                        "Le câblage structuré, ce n'est pas juste du cuivre dans un mur. C'est une fondation. Si elle est bancale, tout ce qu'on ajoute par-dessus devient plus fragile, plus lent et plus coûteux à faire évoluer.",
+                    ],
+                    'cards': [
+                        ('Coupures intermittentes', "Le réseau tombe quelques secondes puis revient. Souvent, le vrai problème est une terminaison ou un câble physique dégradé."),
+                        ('Débit sous les attentes', "Vous payez pour du Gigabit, mais vous voyez des performances bien plus faibles. La catégorie de câble ou la qualité des composants finit par limiter le résultat."),
+                        ('Salle mécanique en chaos', "Câbles non identifiés, longueurs inutiles et chemins improvisés. Au premier incident, le diagnostic prend des heures au lieu de minutes."),
+                        ("Ajouts devenus compliqués", "Pas de port libre au bon endroit, aucun spare prévu, aucun plan clair. Chaque nouveau device devient un mini-projet."),
+                    ],
+                    'callout_label': 'À retenir',
+                    'callout': "Un câblage bien planifié se remarque justement parce qu'on n'a plus besoin d'y penser. Un câblage désordonné finit toujours par se payer en temps, en argent et en stress.",
+                },
+                {
+                    'eyebrow': 'Types de câblage',
+                    'title': 'Coax, Cat6, Cat6A, fibre : lequel pour quel besoin',
+                    'paragraphs': [
+                        "Chaque type de câble a ses forces, ses limites et son rôle. Le bon choix dépend de la distance, du débit voulu, du type d'équipement à alimenter et de la marge de croissance qu'on veut garder pour les prochaines années.",
+                    ],
+                    'table': {
+                        'caption': 'Comparatif rapide des principaux types de câblage',
+                        'columns': ('Type', 'Positionnement', 'Débit / usage', 'Distance', "Quand le choisir"),
+                        'rows': (
+                            ('Coaxial', ('Héritage', 'red'), 'CCTV analogique, distribution TV', "Jusqu'à 300 m", 'Pour des installations analogiques existantes, rarement pour un nouveau projet IP.'),
+                            ('Cat5e', ('Vieillissant', 'amber'), '1 Gbps', '100 m', 'Acceptable pour compléter un existant, mais rarement le bon choix pour du neuf.'),
+                            ('Cat6', ('Recommandé', 'green'), '1 Gbps, 10 Gbps jusqu’à 55 m, PoE', '100 m', 'Le standard actuel pour bureaux, commerces, WiFi, VoIP et caméras IP.'),
+                            ('Cat6A', ('Haute capacité', 'green'), '10 Gbps sur 100 m', '100 m', 'Pour des uplinks cuivre, des salles serveurs ou des environnements plus exigeants.'),
+                            ('Fibre optique', ('Backbone', 'green'), 'Très haut débit, longues distances', 'Plusieurs kilomètres', 'Pour les interconnexions de bâtiments et les liens backbone.'),
+                        ),
+                    },
+                    'subsections': [
+                        {
+                            'title': 'Le coaxial : utile surtout dans les environnements hérités',
+                            'paragraphs': [
+                                "Le coax reste pertinent pour certains systèmes analogiques existants ou pour de la distribution TV. Mais dès qu'on parle de surveillance IP, de PoE, de flexibilité réseau ou de croissance, il montre vite ses limites.",
+                            ],
+                        },
+                        {
+                            'title': 'Cat5e, Cat6, Cat6A : le cuivre Ethernet selon le niveau de projet',
+                            'paragraphs': [
+                                "Le Cat5e peut encore dépanner sur une base existante, mais il vieillit mal comme standard pour de nouvelles installations. Le Cat6 reste aujourd'hui le meilleur équilibre coût / performance pour la majorité des déploiements commerciaux.",
+                                "Le Cat6A prend le relais quand il faut garantir du 10 Gbps sur 100 mètres, mieux contrôler les interférences ou préparer un environnement plus dense comme une salle serveurs ou un backbone cuivre.",
+                            ],
+                        },
+                        {
+                            'title': 'La fibre : pour la distance, le backbone et la marge de croissance',
+                            'paragraphs': [
+                                "Quand il faut relier des bâtiments, monter des liens verticaux dans un grand immeuble ou préparer de gros besoins en bande passante, la fibre devient le bon outil. Elle tolère mal l'improvisation, mais elle reste imbattable sur la distance et l'évolutivité.",
+                            ],
+                        },
+                    ],
+                    'quote': "Choisir le bon câble au départ coûte moins cher que contourner un mauvais choix pendant les dix années suivantes.",
+                },
+                {
+                    'eyebrow': 'Organisation',
+                    'title': "Le câblage structuré, ce n'est pas juste du fil dans le mur",
+                    'paragraphs': [
+                        "Tirer un câble d'un point A à un point B ne suffit pas. Un câblage structuré, c'est un système logique : panneaux de distribution identifiés, chemins propres, ports documentés, runs testés et capacité de réserve pensée d'avance.",
+                    ],
+                    'steps': [
+                        ("Planification avant l'installation", "Nombre de runs, longueurs, emplacements des panneaux et réserves futures sont définis avant de toucher au premier câble."),
+                        ('Identification des câbles et des ports', "Chaque câble, chaque port et chaque prise murale sont identifiés pour qu'un technicien puisse s'y retrouver immédiatement."),
+                        ('Tests et certification', "Chaque run est validé selon les specs. Si le lien ne passe pas correctement, il est repris avant la livraison."),
+                        ('Capacité de réserve planifiée', "On garde des ports libres pour les nouveaux devices, les caméras ou les expansions à venir sans devoir refaire l'infrastructure."),
+                        ('Passage propre et protection mécanique', "Des trajets bien gérés protègent les câbles, facilitent les inspections et gardent la salle technique lisible."),
+                        ('Documentation remise au client', "Vous récupérez une vue claire de l'infrastructure, pas seulement une installation que seul l'installateur connaît."),
+                    ],
+                    'callout_label': 'Ce qui fait la différence',
+                    'callout': "Quand l'organisation est bonne, ajouter un device ou diagnostiquer une panne prend des minutes au lieu d'heures.",
+                },
+                {
+                    'eyebrow': 'ROI',
+                    'title': 'Bien fait une fois, payé une seule fois',
+                    'paragraphs': [
+                        "Le câblage structuré est souvent vu comme un coût initial. En pratique, c'est surtout une économie opérationnelle. Les heures perdues à retrouver un câble, à refaire un run mal choisi ou à contourner une salle mécanique confuse finissent par coûter beaucoup plus cher que le travail bien fait dès le départ.",
+                    ],
+                    'table': {
+                        'caption': 'Ce que le bon câblage change concrètement',
+                        'columns': ('Situation', 'Câblage désordonné', 'Câblage structuré'),
+                        'rows': (
+                            ('Ajouter une caméra IP ou un nouveau device', '2 à 4 heures pour trouver un port, improviser un câble et tester.', '15 à 30 minutes avec un port spare identifié et une base déjà propre.'),
+                            ('Diagnostiquer une coupure réseau', 'Plusieurs heures avec des câbles non tracés et des interventions multiples.', 'Identification rapide grâce aux repères, aux ports documentés et aux runs testés.'),
+                            ('Changer de technicien ou de fournisseur', "L'infrastructure doit être redécouverte parce qu'elle vit surtout dans la tête d'une personne.", "La documentation permet à n'importe quel technicien compétent de reprendre le dossier."),
+                            ('Performance réseau à long terme', "Dégradation progressive et goulots d'étranglement plus difficiles à expliquer.", "Performance plus prévisible, plus stable et plus simple à faire évoluer."),
+                            ('Expansion ou rénovation du site', "Une partie du travail doit être refaite parce que rien n'avait été prévu d'avance.", "La capacité de réserve permet d'ajouter proprement sans casser l'existant."),
+                        ),
+                    },
+                    'quote': "Le meilleur câblage, c'est souvent celui dont vous n'entendez plus parler après l'installation.",
+                },
+                {
+                    'eyebrow': 'Opticable',
+                    'title': 'On installe pour les 10 prochaines années',
+                    'paragraphs': [
+                        "Chez Opticable, le câblage structuré n'est pas un ajout autour d'autres services. C'est une partie centrale de la façon dont on livre des environnements technologiques propres, supportables et cohérents.",
+                        "On analyse les besoins, on choisit le bon média, on installe proprement, on certifie les runs et on remet une documentation exploitable. Le but n'est pas seulement que ça marche au jour un. Le but est que l'infrastructure reste claire et utile pendant des années.",
+                    ],
+                    'cards': [
+                        ('Câblage Cat6 / Cat6A', 'Base cuivre propre pour postes, WiFi, téléphonie IP, caméras et autres équipements réseau.'),
+                        ('Installation fibre optique', 'Liens backbone, interconnexions entre bâtiments et capacités élevées pour les environnements qui grandissent.'),
+                        ('Panneaux et salles techniques', 'Organisation des racks, panneaux de distribution, repérage clair et environnement plus facile à supporter.'),
+                        ('Certification et documentation', 'Validation des runs, remise des schémas et meilleure continuité pour le support futur.'),
+                        ('PoE pour caméras et WiFi', 'Alimentation et données sur une même base propre pour les systèmes IP modernes.'),
+                        ('Audit et remise en ordre', "Analyse d'une infrastructure existante pour corriger les faiblesses avant qu'elles deviennent un vrai problème."),
+                    ],
+                },
+            ],
+            'cta': {
+                'title': 'Votre infrastructure mérite mieux que du provisoire',
+                'copy': "Parlez-nous de votre projet. On évalue votre site, on vous dit exactement ce qu'on recommande et pourquoi.",
+                'primary_label': 'Obtenir une soumission',
+                'primary_key': 'contact',
+                'secondary_label': 'Voir le service câblage',
+                'secondary_key': 'structured-cabling',
+            },
+        },
+    },
 }
 
 CASE_STUDY_ORDER = (
