@@ -8031,8 +8031,7 @@ for lang in ('en', 'fr'):
             'layout-shell page-hero',
         )
         + band_section(
-            f'<div class="section-heading"><p class="eyebrow">{esc(t["blog"])}</p><h2>{esc(blog_data["listing_title"])}</h2><p>{esc(blog_data["listing_intro"])}</p></div>'
-            f'{render_blog_listing(lang, blog_data)}',
+            render_blog_listing(lang, blog_data),
             'blog-listing-section',
         )
     )
