@@ -2465,7 +2465,7 @@ BLOG_META_UI = {
         'myth': 'Le mythe',
         'reality': 'La réalité',
         'article_panel': "Aperçu de l'article",
-        'minutes': 'min de lecture',
+        'minutes': 'minutes',
     },
 }
 
@@ -4798,6 +4798,10 @@ css += '''
   border-radius:22px;
   background:linear-gradient(180deg,#fbfdfb,#eef5ef);
   min-height:100%;
+  color:inherit;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
 }
 .blog-article-card-main::before{
   content:"";
@@ -4815,11 +4819,40 @@ css += '''
   position:relative;
   z-index:1;
 }
+.blog-article-card-main:hover,
+.blog-article-card-main:focus-visible{
+  transform:translateY(-2px);
+  border-color:rgba(31,102,64,.22);
+  box-shadow:0 22px 54px rgba(12,20,15,.12);
+}
 .blog-article-card-main p{
   max-width:58ch;
 }
+.blog-article-card-main h3{
+  transition:color .18s ease;
+}
+.blog-article-card-main:hover h3,
+.blog-article-card-main:focus-visible h3{
+  color:var(--primary-dark);
+}
 .blog-article-card .chip-list{
   margin-top:0;
+}
+.blog-card-surface-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:auto;
+  padding-top:10px;
+  color:var(--primary-dark);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-card-surface-link::after{
+  content:"->";
+  font-size:.95rem;
 }
 .blog-card-meta,
 .blog-article-readout{
@@ -4849,6 +4882,11 @@ css += '''
   color:var(--muted);
   font-size:1rem;
   line-height:1.42;
+}
+.blog-card-link{
+  width:100%;
+  justify-content:center;
+  margin-top:4px;
 }
 .blog-article-panel{
   display:grid;
@@ -4880,7 +4918,7 @@ css += '''
   position:absolute;
   inset:0;
   background-image:
-    linear-gradient(90deg,rgba(7,12,10,.9) 0%,rgba(7,12,10,.84) 34%,rgba(7,12,10,.62) 58%,rgba(7,12,10,.82) 100%),
+    linear-gradient(90deg,rgba(7,12,10,1) 0%,rgba(7,12,10,.94) 34%,rgba(7,12,10,.72) 58%,rgba(7,12,10,.92) 100%),
     radial-gradient(circle at top right,rgba(122,210,150,.12),transparent 34%),
     var(--blog-hero-image,none);
   background-position:center,top right,var(--blog-hero-position,center center);
@@ -6021,8 +6059,9 @@ def render_blog_article_card(article, lang):
         )
     return (
         f'<article class="card blog-article-card">'
-        f'<div class="blog-article-card-main"{main_style}>{render_chips(article["tags"])}<h3>{esc(article["headline"])}</h3><p>{esc(article["excerpt"])}</p></div>'
-        f'<aside class="blog-article-card-side">{render_blog_meta(article, lang)}<a class="more" href="{article["path"]}">{esc(ui["read_article"])}</a></aside>'
+        f'<a class="blog-article-card-main" href="{article["path"]}" aria-label="{esc(ui["read_article"])}: {esc(article["headline"])}"{main_style}>'
+        f'{render_chips(article["tags"])}<h3>{esc(article["headline"])}</h3><p>{esc(article["excerpt"])}</p><span class="blog-card-surface-link">{esc(ui["read_article"])}</span></a>'
+        f'<aside class="blog-article-card-side">{render_blog_meta(article, lang)}<a class="button button-primary blog-card-link" href="{article["path"]}">{esc(ui["read_article"])}</a></aside>'
         f'</article>'
     )
 
