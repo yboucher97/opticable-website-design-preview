@@ -2487,6 +2487,11 @@ BLOG_ARTICLES = {
             'intro': "Le signal est faible, les appareils décrochent, la connexion est instable. Le réflexe : monter la puissance du point d'accès WiFi. C'est souvent la pire chose à faire. Voici pourquoi — et ce qui marche vraiment.",
             'excerpt': "Le signal est faible, les appareils décrochent, la connexion est instable. Monter la puissance paraît logique, mais dans un vrai bâtiment commercial, c'est souvent ce qui aggrave le problème.",
             'tags': ['WiFi commercial', 'Infrastructure réseau'],
+            'summary': [
+                ('Le réflexe à éviter', "Monter la puissance d'une seule borne pour compenser un mauvais WiFi."),
+                ('Le vrai problème', "Interférences, congestion de clients et mauvaise planification de bande."),
+                ('Ce qui fonctionne', 'Plus de bornes, moins de puissance et un vrai plan de canaux.'),
+            ],
             'sections': [
                 {
                     'eyebrow': 'Les bases',
@@ -2504,11 +2509,15 @@ BLOG_ARTICLES = {
                     'paragraphs': [
                         "Le WiFi moderne fonctionne sur trois bandes de fréquences. Chacune se comporte différemment dans l'air — un peu comme les graves et les aigus dans un système de son. Les graves portent loin mais sont moins précis. Les aigus sont clairs mais ne passent pas bien à travers les murs. Savoir choisir la bonne bande, c'est déjà la moitié du travail.",
                     ],
-                    'cards': [
-                        ('2.4 GHz', 'Portée longue, débit plus faible, bonne pénétration à travers les murs et bande très saturée.'),
-                        ('5 GHz', 'Portée moyenne, débit élevé, pénétration moyenne et beaucoup moins de congestion.'),
-                        ('6 GHz', 'Portée plus courte, très haut débit, faible pénétration et bande encore très peu encombrée.'),
-                    ],
+                    'table': {
+                        'caption': 'Comparatif rapide des trois bandes WiFi',
+                        'columns': ('Bande', 'Portée', 'Débit', 'Pénétration', 'Congestion'),
+                        'rows': (
+                            ('2.4 GHz', 'Longue', 'Faible', 'Élevée', 'Très saturé'),
+                            ('5 GHz', 'Moyenne', 'Élevé', 'Moyenne', 'Moins saturé'),
+                            ('6 GHz', 'Courte', 'Très élevé', 'Faible', 'Quasiment vide'),
+                        ),
+                    },
                     'subsections': [
                         {
                             'title': 'Le 2.4 GHz — la bande la plus surchargée',
@@ -4753,41 +4762,209 @@ css += '''
   gap:18px;
   grid-column:1/-1;
 }
+.blog-grid-single{
+  grid-template-columns:1fr;
+}
 .blog-article-card{
   display:grid;
-  gap:18px;
+  gap:26px;
+  align-items:start;
+}
+.blog-grid-single .blog-article-card{
+  grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);
+  padding:30px;
+}
+.blog-article-card-main,
+.blog-article-card-side{
+  display:grid;
   align-content:start;
+  gap:16px;
+}
+.blog-grid-single .blog-article-card-main h3{
+  font-size:clamp(1.5rem,2vw,2rem);
+  line-height:1.16;
 }
 .blog-article-card .chip-list{
   margin-top:0;
 }
 .blog-card-meta,
 .blog-article-readout{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px 18px;
+  display:grid;
+  gap:12px;
 }
-.blog-card-meta span,
-.blog-article-readout span{
-  display:inline-flex;
-  flex-wrap:wrap;
+.blog-article-readout{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.blog-meta-item{
+  display:grid;
   gap:6px;
-  align-items:baseline;
-  color:var(--muted);
-  font-size:.94rem;
+  padding:16px 18px;
+  border:1px solid rgba(12,20,15,.1);
+  border-radius:18px;
+  background:linear-gradient(180deg,#ffffff,#f2f7f2);
+  min-width:0;
 }
-.blog-card-meta strong,
-.blog-article-readout strong{
+.blog-meta-item strong{
   color:var(--text);
   font-size:.76rem;
   font-weight:800;
   letter-spacing:.12em;
   text-transform:uppercase;
 }
+.blog-meta-item span{
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.42;
+}
 .blog-article-panel{
   display:grid;
   align-content:start;
   gap:20px;
+  position:relative;
+  overflow:hidden;
+}
+.blog-article-panel::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:5px;
+  background:linear-gradient(90deg,#2f8a58 0%,#7ad296 56%,rgba(122,210,150,0) 100%);
+}
+.blog-article-panel > *{
+  position:relative;
+}
+.blog-article-shell{
+  width:min(100%,1480px);
+}
+.blog-article-hero{
+  grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
+  gap:30px;
+}
+.blog-article-hero .page-hero-copy > p:not(.eyebrow){
+  max-width:62ch;
+  font-size:1.08rem;
+}
+.blog-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.blog-summary-card{
+  min-height:100%;
+  background:linear-gradient(180deg,#fbfdfb,#eef5ef);
+}
+.blog-summary-card h3{
+  margin:0;
+  font-size:1.35rem;
+  line-height:1.2;
+}
+.blog-summary-card p:last-child{
+  margin:0;
+}
+.blog-section-stack{
+  display:grid;
+  gap:22px;
+}
+.blog-section-intro{
+  display:grid;
+  gap:22px;
+}
+.blog-section-intro.blog-section-intro-split{
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+  align-items:start;
+}
+.blog-prose-panel{
+  display:grid;
+  gap:18px;
+  padding:30px 32px;
+}
+.blog-prose-panel p{
+  margin:0;
+  max-width:74ch;
+  color:var(--muted);
+  font-size:1.03rem;
+  line-height:1.78;
+}
+.blog-subsection-stack,
+.blog-comparison-list,
+.blog-step-grid{
+  display:grid;
+  gap:18px;
+}
+.blog-subsection-stack{
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.blog-comparison-list{
+  grid-template-columns:1fr;
+}
+.blog-table-panel{
+  display:grid;
+  gap:16px;
+  padding:0;
+  overflow:hidden;
+}
+.blog-table-head{
+  padding:22px 26px 0;
+}
+.blog-table-head h3{
+  margin:0;
+  font-size:1.24rem;
+}
+.blog-table-head p{
+  margin:10px 0 0;
+  color:var(--muted);
+}
+.blog-table-scroll{
+  overflow-x:auto;
+  padding:0 12px 12px;
+}
+.blog-table{
+  width:100%;
+  min-width:760px;
+  border-collapse:separate;
+  border-spacing:0;
+}
+.blog-table th,
+.blog-table td{
+  padding:18px 20px;
+  border-right:1px solid rgba(12,20,15,.08);
+  border-bottom:1px solid rgba(12,20,15,.08);
+  text-align:left;
+  vertical-align:top;
+}
+.blog-table thead th{
+  background:#132019;
+  color:#f5fbf7;
+  font-size:.84rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.blog-table thead th:first-child{
+  border-top-left-radius:18px;
+}
+.blog-table thead th:last-child{
+  border-top-right-radius:18px;
+  border-right:0;
+}
+.blog-table tbody th{
+  width:16%;
+  background:#edf4ee;
+  color:#153628;
+  font-size:1rem;
+  font-weight:800;
+}
+.blog-table tbody td{
+  color:var(--muted);
+  background:#fbfdfb;
+  line-height:1.55;
+}
+.blog-table tbody tr:nth-child(even) td{
+  background:#f4f8f4;
+}
+.blog-table tbody td:last-child,
+.blog-table tbody th:last-child{
+  border-right:0;
 }
 .blog-subsection-stack,
 .blog-comparison-list,
@@ -4801,21 +4978,31 @@ css += '''
   display:grid;
   gap:14px;
 }
+.blog-detail-card,
+.blog-subsection,
+.blog-step-card,
+.blog-compare-card{
+  min-height:100%;
+}
+.blog-detail-card{
+  background:linear-gradient(180deg,#fbfdfb,#eef4ef);
+}
 .blog-subsection h3,
 .blog-step-card h3{
   margin:0;
   font-size:1.22rem;
 }
 .blog-compare-card .grid-2{
-  gap:14px;
+  gap:0;
+  border:1px solid rgba(12,20,15,.08);
+  border-radius:22px;
+  overflow:hidden;
 }
 .blog-compare-side{
   display:grid;
-  gap:8px;
-  padding:18px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:var(--surface-soft);
+  gap:10px;
+  padding:24px;
+  min-height:100%;
 }
 .blog-compare-side strong{
   color:var(--primary-dark);
@@ -4831,17 +5018,32 @@ css += '''
   color:var(--muted);
   line-height:1.72;
 }
+.blog-compare-side:first-child{
+  background:linear-gradient(180deg,#fbfdfb,#eef5ef);
+  border-right:1px solid rgba(12,20,15,.08);
+}
+.blog-compare-side:last-child{
+  background:linear-gradient(180deg,#132019,#192a20);
+}
+.blog-compare-side:last-child strong{
+  color:#95ffb4;
+}
+.blog-compare-side:last-child p{
+  color:rgba(245,251,247,.84);
+}
 .blog-step-card .eyebrow{
   margin-bottom:0;
 }
 .blog-callout{
-  border-color:rgba(47,138,88,.28);
-  background:linear-gradient(180deg,rgba(47,138,88,.1),rgba(255,255,255,.96));
+  border-color:rgba(47,138,88,.18);
+  background:
+    radial-gradient(circle at top right,rgba(47,138,88,.12),transparent 36%),
+    linear-gradient(180deg,#ffffff,#eff6f0);
 }
 .blog-callout p{
   margin:0;
   color:var(--text);
-  font-size:1.02rem;
+  font-size:1.06rem;
   line-height:1.7;
 }
 .blog-quote{
@@ -4862,6 +5064,17 @@ css += '''
 }
 @media (max-width:1180px){
   .brand-badge-grid,.blog-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .blog-grid-single .blog-article-card,
+  .blog-article-hero,
+  .blog-section-intro.blog-section-intro-split{
+    grid-template-columns:1fr;
+  }
+  .blog-summary-grid{
+    grid-template-columns:1fr;
+  }
+  .blog-article-readout{
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
   .nav-submenu-wide{
@@ -4893,6 +5106,13 @@ css += '''
 @media (max-width:740px){
   .brand-badge-grid,.blog-grid{
     grid-template-columns:1fr;
+  }
+  .blog-card-meta,
+  .blog-article-readout{
+    grid-template-columns:1fr;
+  }
+  .blog-table{
+    min-width:640px;
   }
   .social-link{
     width:auto;
@@ -5622,14 +5842,17 @@ def blog_read_time_label(minutes, lang):
     return f'{minutes} {BLOG_META_UI[lang]["minutes"]}'
 
 
-def render_blog_meta(article, lang):
+def render_blog_meta(article, lang, cls='blog-card-meta'):
     ui = BLOG_META_UI[lang]
     minutes = blog_minutes_for_article(article)
+    items = (
+        (ui['author'], article['author']),
+        (ui['published'], format_blog_date(article['published'], lang)),
+        (ui['reading_time'], blog_read_time_label(minutes, lang)),
+    )
     return (
-        f'<div class="blog-card-meta">'
-        f'<span><strong>{esc(ui["author"])}</strong> {esc(article["author"])}</span>'
-        f'<span><strong>{esc(ui["published"])}</strong> {esc(format_blog_date(article["published"], lang))}</span>'
-        f'<span><strong>{esc(ui["reading_time"])}</strong> {esc(blog_read_time_label(minutes, lang))}</span>'
+        f'<div class="{cls}">'
+        f'{"".join(f"<div class=\"blog-meta-item\"><strong>{esc(label)}</strong><span>{esc(value)}</span></div>" for label, value in items)}'
         f'</div>'
     )
 
@@ -5638,11 +5861,8 @@ def render_blog_article_card(article, lang):
     ui = BLOG_META_UI[lang]
     return (
         f'<article class="card blog-article-card">'
-        f'{render_chips(article["tags"])}'
-        f'<h3>{esc(article["headline"])}</h3>'
-        f'<p>{esc(article["excerpt"])}</p>'
-        f'{render_blog_meta(article, lang)}'
-        f'<a class="more" href="{article["path"]}">{esc(ui["read_article"])}</a>'
+        f'<div class="blog-article-card-main">{render_chips(article["tags"])}<h3>{esc(article["headline"])}</h3><p>{esc(article["excerpt"])}</p></div>'
+        f'<aside class="blog-article-card-side">{render_blog_meta(article, lang)}<a class="more" href="{article["path"]}">{esc(ui["read_article"])}</a></aside>'
         f'</article>'
     )
 
@@ -5655,7 +5875,38 @@ def render_blog_listing(lang, blog_data):
             f'<div class="cta-actions"><a class="button button-primary" href="{routes[lang]["services"]}">{esc(blog_data["primary_cta"])}</a>'
             f'<a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(blog_data["secondary_cta"])}</a></div></article></div>'
         )
-    return f'<div class="blog-grid">{"".join(render_blog_article_card(article, lang) for article in articles)}</div>'
+    grid_class = 'blog-grid blog-grid-single' if len(articles) == 1 else 'blog-grid'
+    return f'<div class="{grid_class}">{"".join(render_blog_article_card(article, lang) for article in articles)}</div>'
+
+
+def render_blog_summary(article):
+    summary_items = article.get('summary', [])
+    if not summary_items:
+        return ''
+    cards = ''.join(
+        f'<article class="card blog-summary-card"><p class="eyebrow">{esc(label)}</p><h3>{esc(title)}</h3></article>'
+        for label, title in summary_items
+    )
+    return f'<div class="blog-summary-grid">{cards}</div>'
+
+
+def render_blog_table(table):
+    if not table:
+        return ''
+    columns = ''.join(f'<th scope="col">{esc(column)}</th>' for column in table['columns'])
+    rows = []
+    for row in table['rows']:
+        cells = [f'<th scope="row">{esc(row[0])}</th>']
+        cells.extend(f'<td>{esc(cell)}</td>' for cell in row[1:])
+        rows.append(f'<tr>{"".join(cells)}</tr>')
+    head = ''
+    if table.get('caption'):
+        head = f'<div class="blog-table-head"><h3>{esc(table["caption"])}</h3></div>'
+    return (
+        f'<div class="contact-panel blog-table-panel">{head}'
+        f'<div class="blog-table-scroll"><table class="blog-table"><thead><tr>{columns}</tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div></div>'
+    )
 
 
 def render_blog_subsection(subsection):
@@ -5691,8 +5942,19 @@ def render_blog_article_section(section, lang):
     blocks = [
         f'<div class="section-heading"><p class="eyebrow">{esc(section["eyebrow"])}</p><h2>{esc(section["title"])}</h2></div>'
     ]
+    callout_rendered = False
     if section.get('paragraphs'):
-        blocks.append(f'<div class="contact-panel">{"".join(f"<p>{esc(text)}</p>" for text in section["paragraphs"])}</div>')
+        prose = f'<div class="contact-panel blog-prose-panel">{"".join(f"<p>{esc(text)}</p>" for text in section["paragraphs"])}</div>'
+        if section.get('callout') and not section.get('steps') and not section.get('cards'):
+            blocks.append(
+                f'<div class="blog-section-intro blog-section-intro-split">{prose}'
+                f'<div class="contact-panel blog-callout"><p>{esc(section["callout"])}</p></div></div>'
+            )
+            callout_rendered = True
+        else:
+            blocks.append(f'<div class="blog-section-intro">{prose}</div>')
+    if section.get('table'):
+        blocks.append(render_blog_table(section['table']))
     if section.get('cards'):
         grid_class = 'grid-2' if len(section['cards']) == 2 else 'grid-3'
         blocks.append(f'<div class="{grid_class}">{"".join(card(title, text, cls="card blog-detail-card") for title, text in section["cards"])}</div>')
@@ -5702,11 +5964,11 @@ def render_blog_article_section(section, lang):
         blocks.append(f'<div class="blog-subsection-stack">{"".join(render_blog_subsection(item) for item in section["subsections"])}</div>')
     if section.get('steps'):
         blocks.append(render_blog_steps(section['steps']))
-    if section.get('callout'):
+    if section.get('callout') and not callout_rendered:
         blocks.append(f'<div class="contact-panel blog-callout"><p>{esc(section["callout"])}</p></div>')
     if section.get('quote'):
         blocks.append(f'<div class="contact-panel blog-quote"><p>{esc(section["quote"])}</p></div>')
-    return band_section(''.join(blocks), 'blog-article-section')
+    return band_section(f'<div class="blog-section-stack">{"".join(blocks)}</div>', 'blog-article-section', 'section-shell blog-article-shell')
 
 
 def render_blog_article_page(article, lang):
@@ -5719,11 +5981,7 @@ def render_blog_article_page(article, lang):
     meta_panel = (
         f'<aside class="page-hero-panel blog-article-panel"><p class="eyebrow">{esc(ui["article_panel"])}</p>'
         f'<h2>{esc(article["headline"])}</h2>{render_chips(article["tags"])}'
-        f'<div class="blog-article-readout">'
-        f'<span><strong>{esc(ui["author"])}</strong> {esc(article["author"])}</span>'
-        f'<span><strong>{esc(ui["published"])}</strong> {esc(format_blog_date(article["published"], lang))}</span>'
-        f'<span><strong>{esc(ui["reading_time"])}</strong> {esc(blog_read_time_label(blog_minutes_for_article(article), lang))}</span>'
-        f'</div></aside>'
+        f'{render_blog_meta(article, lang, "blog-article-readout")}</aside>'
     )
     cta = article.get('cta', {})
     primary_href = routes[lang][cta['primary_key']] if cta.get('primary_key') else routes[lang]['contact']
@@ -5734,15 +5992,16 @@ def render_blog_article_page(article, lang):
             f'<div class="page-hero-copy"><p class="eyebrow">{esc(article["eyebrow"])}</p><h1>{esc(article["headline"])}</h1><p>{esc(article["intro"])}</p></div>'
             + meta_panel,
             'hero-band page-hero-band',
-            'layout-shell page-hero',
+            'layout-shell blog-article-shell page-hero blog-article-hero',
         )
+        + (band_section(render_blog_summary(article), 'blog-summary-section', 'section-shell blog-article-shell') if article.get('summary') else '')
         + ''.join(render_blog_article_section(section, lang) for section in article['sections'])
         + band_section(
             f'<div><p class="eyebrow">{esc(T[lang]["blog"])}</p><h2>{esc(cta["title"])}</h2><p>{esc(cta["copy"])}</p></div>'
             f'<div class="cta-actions"><a class="button button-primary" href="{primary_href}">{esc(cta["primary_label"])}</a>'
             f'<a class="button button-secondary" href="{secondary_href}">{esc(cta["secondary_label"])}</a></div>',
             'blog-article-cta',
-            'layout-shell cta-band',
+            'layout-shell blog-article-shell cta-band',
         )
     )
     return breadcrumb_items, body
