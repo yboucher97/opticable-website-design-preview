@@ -2487,6 +2487,8 @@ BLOG_ARTICLES = {
             'intro': "Le signal est faible, les appareils décrochent, la connexion est instable. Le réflexe : monter la puissance du point d'accès WiFi. C'est souvent la pire chose à faire. Voici pourquoi — et ce qui marche vraiment.",
             'excerpt': "Le signal est faible, les appareils décrochent, la connexion est instable. Monter la puissance paraît logique, mais dans un vrai bâtiment commercial, c'est souvent ce qui aggrave le problème.",
             'tags': ['WiFi commercial', 'Infrastructure réseau'],
+            'hero_image': SERVICE_WIFI_URL,
+            'hero_image_position': '38% 58%',
             'summary': [
                 ('Le réflexe à éviter', "Monter la puissance d'une seule borne pour compenser un mauvais WiFi."),
                 ('Le vrai problème', "Interférences, congestion de clients et mauvaise planification de bande."),
@@ -4784,6 +4786,34 @@ css += '''
   font-size:clamp(1.5rem,2vw,2rem);
   line-height:1.16;
 }
+.blog-article-card-main{
+  position:relative;
+  overflow:hidden;
+  padding:28px;
+  border:1px solid rgba(12,20,15,.08);
+  border-radius:22px;
+  background:linear-gradient(180deg,#fbfdfb,#eef5ef);
+  min-height:100%;
+}
+.blog-article-card-main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(120deg,rgba(255,255,255,.94) 0%,rgba(248,251,248,.9) 46%,rgba(255,255,255,.78) 100%),
+    var(--blog-card-image,none);
+  background-position:center,var(--blog-card-image-position,center center);
+  background-size:auto,cover;
+  background-repeat:no-repeat;
+  transform:scale(1.02);
+}
+.blog-article-card-main > *{
+  position:relative;
+  z-index:1;
+}
+.blog-article-card-main p{
+  max-width:58ch;
+}
 .blog-article-card .chip-list{
   margin-top:0;
 }
@@ -4836,6 +4866,35 @@ css += '''
 .blog-article-shell{
   width:min(100%,1480px);
 }
+.blog-article-hero-band{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.blog-article-hero-band::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(90deg,rgba(7,12,10,.9) 0%,rgba(7,12,10,.84) 34%,rgba(7,12,10,.62) 58%,rgba(7,12,10,.82) 100%),
+    radial-gradient(circle at top right,rgba(122,210,150,.12),transparent 34%),
+    var(--blog-hero-image,none);
+  background-position:center,top right,var(--blog-hero-position,center center);
+  background-size:auto,auto,cover;
+  background-repeat:no-repeat;
+  filter:saturate(.82) brightness(.9);
+  transform:scale(1.03);
+  z-index:-2;
+}
+.blog-article-hero-band::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(7,12,10,.2),rgba(7,12,10,.06) 30%,rgba(7,12,10,.18) 100%),
+    radial-gradient(circle at left center,rgba(7,12,10,.14),transparent 38%);
+  z-index:-1;
+}
 .blog-article-hero{
   grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
   gap:30px;
@@ -4843,6 +4902,30 @@ css += '''
 .blog-article-hero .page-hero-copy > p:not(.eyebrow){
   max-width:62ch;
   font-size:1.08rem;
+}
+.blog-article-hero .page-hero-copy{
+  padding:16px 0;
+  position:relative;
+  isolation:isolate;
+}
+.blog-article-hero .page-hero-copy::after{
+  content:"";
+  position:absolute;
+  top:18px;
+  right:18px;
+  bottom:18px;
+  width:min(430px,48%);
+  border-radius:28px;
+  background-image:
+    linear-gradient(90deg,rgba(7,12,10,.28) 0%,rgba(7,12,10,.58) 100%),
+    var(--blog-hero-image,none);
+  background-position:center,var(--blog-hero-position,center center);
+  background-size:auto,cover;
+  background-repeat:no-repeat;
+  opacity:.34;
+  filter:saturate(.78);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.3) 18%,#000 100%);
+  z-index:-1;
 }
 .blog-summary-grid{
   display:grid;
@@ -5859,9 +5942,15 @@ def render_blog_meta(article, lang, cls='blog-card-meta'):
 
 def render_blog_article_card(article, lang):
     ui = BLOG_META_UI[lang]
+    main_style = ''
+    if article.get('hero_image'):
+        main_style = (
+            f' style="--blog-card-image:url({esc(article["hero_image"])});'
+            f'--blog-card-image-position:{esc(article.get("hero_image_position", "center center"))};"'
+        )
     return (
         f'<article class="card blog-article-card">'
-        f'<div class="blog-article-card-main">{render_chips(article["tags"])}<h3>{esc(article["headline"])}</h3><p>{esc(article["excerpt"])}</p></div>'
+        f'<div class="blog-article-card-main"{main_style}>{render_chips(article["tags"])}<h3>{esc(article["headline"])}</h3><p>{esc(article["excerpt"])}</p></div>'
         f'<aside class="blog-article-card-side">{render_blog_meta(article, lang)}<a class="more" href="{article["path"]}">{esc(ui["read_article"])}</a></aside>'
         f'</article>'
     )
@@ -5978,6 +6067,12 @@ def render_blog_article_page(article, lang):
         (T[lang]['blog'], routes[lang]['blog']),
         (article['headline'], article['path']),
     ]
+    hero_style = ''
+    if article.get('hero_image'):
+        hero_style = (
+            f' style="--blog-hero-image:url({esc(article["hero_image"])});'
+            f'--blog-hero-position:{esc(article.get("hero_image_position", "center center"))};"'
+        )
     meta_panel = (
         f'<aside class="page-hero-panel blog-article-panel"><p class="eyebrow">{esc(ui["article_panel"])}</p>'
         f'<h2>{esc(article["headline"])}</h2>{render_chips(article["tags"])}'
@@ -5988,12 +6083,11 @@ def render_blog_article_page(article, lang):
     secondary_href = routes[lang][cta['secondary_key']] if cta.get('secondary_key') else routes[lang]['services']
     body = (
         breadcrumb_nav(breadcrumb_items)
-        + band_section(
-            f'<div class="page-hero-copy"><p class="eyebrow">{esc(article["eyebrow"])}</p><h1>{esc(article["headline"])}</h1><p>{esc(article["intro"])}</p></div>'
-            + meta_panel,
-            'hero-band page-hero-band',
-            'layout-shell blog-article-shell page-hero blog-article-hero',
-        )
+        + f'<section class="hero-band page-hero-band blog-article-hero-band"{hero_style}>'
+        + f'<div class="layout-shell blog-article-shell page-hero blog-article-hero">'
+        + f'<div class="page-hero-copy"><p class="eyebrow">{esc(article["eyebrow"])}</p><h1>{esc(article["headline"])}</h1><p>{esc(article["intro"])}</p></div>'
+        + meta_panel
+        + '</div></section>'
         + (band_section(render_blog_summary(article), 'blog-summary-section', 'section-shell blog-article-shell') if article.get('summary') else '')
         + ''.join(render_blog_article_section(section, lang) for section in article['sections'])
         + band_section(
