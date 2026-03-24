@@ -12,7 +12,6 @@ This repository uses a strict split between production, concepts, and archive.
 
 - `concepts/concept-01/`
 - `concepts/concept-02/`
-- `concepts/concept-03/`
 
 Each concept folder contains:
 

@@ -6,4 +6,3 @@ Use the concept folder matching the active branch:
 
 - `concept-01`
 - `concept-02`
-- `concept-03`

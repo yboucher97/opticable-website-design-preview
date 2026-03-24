@@ -27,7 +27,6 @@ Use the concept folder that matches the active branch:
 
 - `codex/concept-01` -> `Images/concepts/concept-01/` and `concepts/concept-01/`
 - `codex/concept-02` -> `Images/concepts/concept-02/` and `concepts/concept-02/`
-- `codex/concept-03` -> `Images/concepts/concept-03/` and `concepts/concept-03/`
 
 Inside each concept image folder:
 
