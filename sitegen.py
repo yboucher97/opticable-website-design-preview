@@ -1,11 +1,12 @@
 ﻿from pathlib import Path
 import json
+from functools import lru_cache
 import re
 from datetime import date, datetime, time
 import shutil
 import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
-from PIL import Image, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps, UnidentifiedImageError
 
 root = Path(__file__).resolve().parent
 SOURCE_ASSET_ROOT = root / 'assets'
@@ -76,6 +77,7 @@ SERVICE_WIFI_URL = f'/assets/service-wifi.webp?v={ASSET_VER}'
 SERVICE_VOIP_URL = f'/assets/service-voip.webp?v={ASSET_VER}'
 OG_IMAGE_URL = f'/assets/og-image.png?v={ASSET_VER}'
 OG_IMAGE_MIME_TYPE = 'image/png'
+BLOG_SOCIAL_IMAGE_DIR = DEPLOY_ASSET_ROOT / 'blog-social'
 LOGO_LOCKUP_WIDTH = 1600
 LOGO_LOCKUP_HEIGHT = 687
 LOGO_UI_WIDTH = 1200
@@ -108,6 +110,8 @@ SERVICE_VOIP_WIDTH = 1400
 SERVICE_VOIP_HEIGHT = 797
 OG_IMAGE_WIDTH = 1200
 OG_IMAGE_HEIGHT = 630
+BLOG_SOCIAL_IMAGE_WIDTH = 1200
+BLOG_SOCIAL_IMAGE_HEIGHT = 630
 SITE_TIMEZONE = ZoneInfo('America/Toronto')
 IMAGE_DIMENSIONS_BY_URL = {
     HOME_BUILDING_URL: (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
@@ -122,6 +126,17 @@ IMAGE_DIMENSIONS_BY_URL = {
     SERVICE_WIFI_URL: (SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT),
     SERVICE_VOIP_URL: (SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT),
     OG_IMAGE_URL: (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
+}
+FONT_CANDIDATES = {
+    'display': (
+        Path(r'C:\Windows\Fonts\bahnschrift.ttf'),
+        Path(r'C:\Windows\Fonts\segoeuib.ttf'),
+        Path(r'C:\Windows\Fonts\arialbd.ttf'),
+    ),
+    'body': (
+        Path(r'C:\Windows\Fonts\segoeui.ttf'),
+        Path(r'C:\Windows\Fonts\arial.ttf'),
+    ),
 }
 WEBSITE_ID = f'{SITE_URL}/#website'
 BUSINESS_ID = f'{SITE_URL}/#business'
@@ -2468,20 +2483,30 @@ BLOG_META_UI = {
         'published': 'Published',
         'reading_time': 'Reading time',
         'read_article': 'Read the article',
+        'view_service': 'View service',
         'myth': 'The myth',
         'reality': 'The reality',
         'article_panel': 'Article overview',
         'minutes': 'min read',
+        'related_services': 'Related services',
+        'related_services_intro': 'Services that usually support the same problem or project scope.',
+        'related_articles': 'Read next',
+        'related_articles_intro': 'Related articles that continue the same technical conversation.',
     },
     'fr': {
         'author': 'Auteur',
         'published': 'Publié',
         'reading_time': 'Temps de lecture',
         'read_article': "Lire l'article",
+        'view_service': 'Voir le service',
         'myth': 'Le mythe',
         'reality': 'La réalité',
         'article_panel': "Aperçu de l'article",
         'minutes': 'minutes',
+        'related_services': 'Services connexes',
+        'related_services_intro': 'Services qui reviennent souvent dans le même projet ou le même problème technique.',
+        'related_articles': 'À lire ensuite',
+        'related_articles_intro': 'Articles liés pour poursuivre sur le même sujet technique.',
     },
 }
 
@@ -2495,6 +2520,8 @@ BLOG_ARTICLES = {
         'published': '2026-03-24',
         'modified': '2026-03-24',
         'author': 'Yan-Erik B.',
+        'related_services': ('commercial-wifi-installation', 'network-infrastructure', 'structured-cabling'),
+        'related_articles': ('ip-cameras-network-upgrade', 'structured-cabling-foundation'),
         'en': {
             'path': '/en/blog/why-more-wifi-power-makes-things-worse/',
             'title': 'Why Turning Up WiFi Power Usually Makes Things Worse | Opticable',
@@ -2784,6 +2811,8 @@ BLOG_ARTICLES = {
         'published': '2026-03-23',
         'modified': '2026-03-24',
         'author': "L'équipe Opticable",
+        'related_services': ('security-camera-systems', 'network-infrastructure', 'structured-cabling'),
+        'related_articles': ('structured-cabling-foundation', 'wifi-power'),
         'en': {
             'path': '/en/blog/ip-cameras-network-upgrade/',
             'author': 'Opticable Team',
@@ -3080,6 +3109,145 @@ BLOG_ARTICLES = {
         'published': '2026-03-20',
         'modified': '2026-03-24',
         'author': "L'équipe Opticable",
+        'related_services': ('structured-cabling', 'network-infrastructure', 'fiber-optic-installation'),
+        'related_articles': ('wifi-power', 'ip-cameras-network-upgrade'),
+        'en': {
+            'path': '/en/blog/why-structured-cabling-changes-everything/',
+            'author': 'Opticable Team',
+            'title': 'Why Structured Cabling Changes Everything | Opticable',
+            'desc': 'Why structured cabling is still the real foundation of a reliable, supportable network that can grow with your building.',
+            'eyebrow': 'Structured Cabling',
+            'headline': 'A solid network starts inside the walls.',
+            'intro': 'People talk about WiFi, switches, and fiber. They talk much less about the cabling underneath it all. But that physical layer is what determines performance, stability, and how easily the rest of the infrastructure can evolve.',
+            'excerpt': 'When cabling is poorly planned, every new device, outage, or expansion costs more. Done properly, it becomes a clean, invisible, durable base for everything else.',
+            'tags': ['Structured Cabling', 'Network Infrastructure'],
+            'hero_image': SERVICE_CABLING_URL,
+            'hero_image_position': '52% 52%',
+            'summary': [
+                ('The real foundation', 'The physical cabling layer determines the stability and performance of the entire network.'),
+                ('The right medium', 'Coax, Cat6, Cat6A, and fiber do not solve the same problems or serve the same role.'),
+                ('The long-term return', 'Labeling, certification, and spare capacity prevent expensive wasted time later.'),
+            ],
+            'sections': [
+                {
+                    'eyebrow': 'Foundation',
+                    'title': 'Network infrastructure is invisible, but critical',
+                    'paragraphs': [
+                        'When a network works, nobody thinks about it. When it drops, slows down, or behaves unpredictably, everyone notices. Staff gets blocked, cameras lose streams, payments drag, and the issue often traces back to the physical layer.',
+                        'The cause is not always the switch or router. Very often it is the cabling itself: a bad termination, a damaged run, a poor patch cord, or a mechanical room that has become unreadable over time.',
+                        'Structured cabling is not just copper in a wall. It is a foundation. If that foundation is weak, everything you build on top of it becomes harder to support, slower to troubleshoot, and more expensive to grow.',
+                    ],
+                    'cards': [
+                        ('Intermittent drops', 'The network cuts out for a few seconds and comes back. Often the real issue is a bad physical connection or damaged cable.'),
+                        ('Performance below expectation', 'You paid for Gigabit but you are seeing much less. Cable category and component quality can quietly become the bottleneck.'),
+                        ('Mechanical room chaos', 'Unlabeled cables, unnecessary slack, and improvised pathways turn every incident into a slow diagnosis.'),
+                        ('New additions become painful', 'No free port where it is needed, no spare capacity, and no plan. Every new device becomes a mini-project.'),
+                    ],
+                    'callout_label': 'Key takeaway',
+                    'callout': 'Well-planned cabling is noticeable because nobody has to think about it. Disorganized cabling always gets paid for later in time, money, and stress.',
+                },
+                {
+                    'eyebrow': 'Cable types',
+                    'title': 'Coax, Cat6, Cat6A, fiber: which one fits which job',
+                    'paragraphs': [
+                        'Each cable type has strengths, limits, and a proper role. The right choice depends on distance, bandwidth targets, the devices being supported, and how much growth you want to plan for over the coming years.',
+                    ],
+                    'table': {
+                        'caption': 'Quick comparison of the main cabling types',
+                        'columns': ('Type', 'Positioning', 'Bandwidth / use', 'Distance', 'When to choose it'),
+                        'rows': (
+                            ('Coaxial', ('Legacy', 'red'), 'Analog CCTV, TV distribution', 'Up to 300 m', 'Useful for existing analog systems, but rarely the right answer for a new IP project.'),
+                            ('Cat5e', ('Aging', 'amber'), '1 Gbps', '100 m', 'Acceptable for extending an existing install, but rarely the right choice for new work.'),
+                            ('Cat6', ('Recommended', 'green'), '1 Gbps, 10 Gbps up to 55 m, PoE', '100 m', 'The current standard for offices, retail, WiFi, VoIP, and IP cameras.'),
+                            ('Cat6A', ('Higher capacity', 'green'), '10 Gbps over 100 m', '100 m', 'Useful for copper uplinks, server rooms, and more demanding environments.'),
+                            ('Fiber optic', ('Backbone', 'green'), 'High throughput, long-distance links', 'Several kilometers', 'Best for building interconnects and high-capacity backbone links.'),
+                        ),
+                    },
+                    'subsections': [
+                        {
+                            'title': 'Coax: mostly relevant in legacy environments',
+                            'paragraphs': [
+                                'Coax still has a place in some analog systems and TV distribution. But once you need IP surveillance, PoE, flexible network design, or future growth, its limitations show up quickly.',
+                            ],
+                        },
+                        {
+                            'title': 'Cat5e, Cat6, Cat6A: copper Ethernet at different project levels',
+                            'paragraphs': [
+                                'Cat5e can still be acceptable in an existing environment, but it is aging badly as a default standard for new installations. Cat6 is still the best cost-to-performance balance for most commercial deployments.',
+                                'Cat6A becomes the better fit when you need 10 Gbps over the full 100 meters, better resistance to interference, or more headroom for dense environments like server rooms and copper backbones.',
+                            ],
+                        },
+                        {
+                            'title': 'Fiber: for distance, backbone, and long-term growth',
+                            'paragraphs': [
+                                'When you need to link buildings, build vertical risers in a larger property, or prepare for higher-capacity links, fiber becomes the right tool. It is less forgiving of improvised work, but unmatched for distance and scalability.',
+                            ],
+                        },
+                    ],
+                    'quote': 'Choosing the right cable up front costs less than working around the wrong one for the next ten years.',
+                },
+                {
+                    'eyebrow': 'Organization',
+                    'title': 'Structured cabling is not just wire in the wall',
+                    'paragraphs': [
+                        'Running a cable from point A to point B is not enough. Structured cabling is a logical system: labeled patch panels, clean pathways, documented ports, tested runs, and spare capacity planned in advance.',
+                    ],
+                    'steps': [
+                        ('Planning before installation', 'The number of runs, distances, panel locations, and future reserve are decided before the first cable is pulled.'),
+                        ('Cable and port identification', 'Every cable, every port, and every wall plate is labeled so a technician can understand the system immediately.'),
+                        ('Testing and certification', 'Each run is validated against spec. If the link does not pass properly, it gets redone before handoff.'),
+                        ('Planned spare capacity', 'You keep free ports available for new devices, cameras, and future expansion without rebuilding the infrastructure.'),
+                        ('Clean routing and mechanical protection', 'Well-managed pathways protect the cabling, simplify inspections, and keep technical rooms readable.'),
+                        ('Documentation delivered to the client', 'You end up with a clear infrastructure map, not just an install that only the original technician understands.'),
+                    ],
+                    'callout_label': 'Why it matters',
+                    'callout': 'When the organization is right, adding a device or diagnosing an outage takes minutes instead of hours.',
+                },
+                {
+                    'eyebrow': 'Return',
+                    'title': 'Done properly once, paid for once',
+                    'paragraphs': [
+                        'Structured cabling is often treated like an upfront cost. In practice, it is usually an operational saving. Hours wasted tracing an unlabeled cable, redoing the wrong run, or working around a chaotic network room end up costing more than doing the job properly from the start.',
+                    ],
+                    'table': {
+                        'caption': 'What good cabling changes in practice',
+                        'columns': ('Situation', 'Disorganized cabling', 'Structured cabling'),
+                        'rows': (
+                            ('Add an IP camera or new device', '2 to 4 hours to find a port, improvise a run, and test it.', '15 to 30 minutes with an identified spare port and a clean base already in place.'),
+                            ('Diagnose a network outage', 'Several hours with untraced cables and multiple interventions.', 'Fast identification through labels, documented ports, and tested runs.'),
+                            ('Change technician or provider', 'The infrastructure has to be rediscovered because it mostly lives in one person’s head.', 'Documentation lets any competent technician take over the environment.'),
+                            ('Long-term network performance', 'Gradual degradation and bottlenecks that are harder to explain.', 'More predictable, more stable performance that is easier to upgrade.'),
+                            ('Expand or renovate the site', 'Part of the work has to be redone because nothing was planned for growth.', 'Spare capacity lets you add cleanly without disturbing what already works.'),
+                        ),
+                    },
+                    'quote': 'The best cabling is usually the cabling you stop hearing about after installation.',
+                },
+                {
+                    'eyebrow': 'Opticable',
+                    'title': 'We install for the next 10 years',
+                    'paragraphs': [
+                        'At Opticable, structured cabling is not an add-on around other services. It is a core part of how we deliver cleaner, more supportable technology environments.',
+                        'We assess the need, choose the right medium, install cleanly, certify the runs, and hand over documentation that remains usable later. The goal is not just to make it work on day one. The goal is to keep the infrastructure clear and useful for years.',
+                    ],
+                    'cards': [
+                        ('Cat6 / Cat6A structured cabling', 'Clean copper infrastructure for workstations, WiFi, IP telephony, cameras, and other network-connected systems.'),
+                        ('Fiber optic installation', 'Backbone links, building interconnects, and higher-capacity transport for growing environments.'),
+                        ('Panels and technical rooms', 'Rack organization, patch panels, clearer labeling, and technical spaces that are easier to support.'),
+                        ('Certification and documentation', 'Validated runs, delivered diagrams, and better continuity for future maintenance.'),
+                        ('PoE for cameras and WiFi', 'Power and data over the same clean foundation for modern IP systems.'),
+                        ('Audit and remediation', 'Assessment of an existing infrastructure to correct weak points before they become major problems.'),
+                    ],
+                },
+            ],
+            'cta': {
+                'title': 'Your infrastructure deserves better than temporary fixes',
+                'copy': 'Tell us about your project. We will assess the site, explain what we recommend, and show you why.',
+                'primary_label': 'Request a quote',
+                'primary_key': 'contact',
+                'secondary_label': 'View structured cabling service',
+                'secondary_key': 'structured-cabling',
+            },
+        },
         'fr': {
             'path': '/fr/blogue/pourquoi-le-cablage-structure-change-tout/',
             'title': 'Pourquoi le câblage structuré change tout | Opticable',
@@ -5996,6 +6164,179 @@ def write_url(url, content):
     path.write_text(normalized, encoding='utf-8')
 
 
+def deploy_asset_path_from_url(url):
+    path = url.split('?', 1)[0]
+    if not path.startswith('/'):
+        return None
+    return DEPLOY_ROOT / path.lstrip('/')
+
+
+@lru_cache(maxsize=None)
+def load_font(size, family='body'):
+    candidates = FONT_CANDIDATES['display'] if family == 'display' else FONT_CANDIDATES['body']
+    for font_path in candidates:
+        if font_path.exists():
+            return ImageFont.truetype(str(font_path), size=size)
+    return ImageFont.load_default()
+
+
+def text_width(draw, text, font):
+    return draw.textbbox((0, 0), text, font=font)[2]
+
+
+def ellipsize_text(draw, text, font, max_width):
+    cleaned = ' '.join(text.split())
+    if text_width(draw, cleaned, font) <= max_width:
+        return cleaned
+    words = cleaned.split()
+    while words:
+        candidate = ' '.join(words).rstrip(' ,.;:') + '…'
+        if text_width(draw, candidate, font) <= max_width:
+            return candidate
+        words.pop()
+    return '…'
+
+
+def wrap_text_lines(draw, text, font, max_width, max_lines=None):
+    words = text.split()
+    if not words:
+        return []
+    lines = []
+    current = words[0]
+    for word in words[1:]:
+        tentative = f'{current} {word}'
+        if text_width(draw, tentative, font) <= max_width:
+            current = tentative
+        else:
+            lines.append(current)
+            current = word
+    lines.append(current)
+    if max_lines and len(lines) > max_lines:
+        trailing = ' '.join(lines[max_lines - 1:])
+        lines = lines[:max_lines - 1] + [ellipsize_text(draw, trailing, font, max_width)]
+    return lines
+
+
+def parse_image_position(position):
+    parts = (position or 'center center').split()
+    if len(parts) != 2:
+        return (0.5, 0.5)
+
+    def parse_part(value):
+        value = value.strip().lower()
+        named = {
+            'left': 0.0,
+            'center': 0.5,
+            'right': 1.0,
+            'top': 0.0,
+            'bottom': 1.0,
+        }
+        if value in named:
+            return named[value]
+        if value.endswith('%'):
+            try:
+                return max(0.0, min(1.0, float(value[:-1]) / 100.0))
+            except ValueError:
+                return 0.5
+        return 0.5
+
+    return (parse_part(parts[0]), parse_part(parts[1]))
+
+
+def blog_social_image_url(article_key, lang):
+    return f'/assets/blog-social/{article_key}-{lang}.png?v={ASSET_VER}'
+
+
+def blog_social_image_path(article_key, lang):
+    return BLOG_SOCIAL_IMAGE_DIR / f'{article_key}-{lang}.png'
+
+
+def export_blog_social_image(article_key, lang, article):
+    target = blog_social_image_path(article_key, lang)
+    source_path = deploy_asset_path_from_url(article.get('hero_image') or OG_IMAGE_URL)
+    fallback_path = deploy_asset_path_from_url(OG_IMAGE_URL)
+    if source_path is None or not source_path.exists():
+        source_path = fallback_path
+    if source_path is None or not source_path.exists():
+        return
+
+    try:
+        with Image.open(source_path) as background:
+            if (
+                fallback_path
+                and fallback_path.exists()
+                and (background.width < BLOG_SOCIAL_IMAGE_WIDTH // 2 or background.height < BLOG_SOCIAL_IMAGE_HEIGHT // 2)
+            ):
+                with Image.open(fallback_path) as fallback:
+                    background = fallback.convert('RGBA')
+            else:
+                background = background.convert('RGBA')
+            canvas = ImageOps.fit(
+                background,
+                (BLOG_SOCIAL_IMAGE_WIDTH, BLOG_SOCIAL_IMAGE_HEIGHT),
+                IMAGE_RESAMPLING.LANCZOS,
+                centering=parse_image_position(article.get('hero_image_position', 'center center')),
+            )
+    except (FileNotFoundError, UnidentifiedImageError):
+        if fallback_path is None or not fallback_path.exists():
+            return
+        with Image.open(fallback_path) as fallback:
+            canvas = ImageOps.fit(
+                fallback.convert('RGBA'),
+                (BLOG_SOCIAL_IMAGE_WIDTH, BLOG_SOCIAL_IMAGE_HEIGHT),
+                IMAGE_RESAMPLING.LANCZOS,
+            )
+
+    overlay = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    for x in range(BLOG_SOCIAL_IMAGE_WIDTH):
+        blend = x / max(1, BLOG_SOCIAL_IMAGE_WIDTH - 1)
+        alpha = int(228 - (blend * 150))
+        draw.line((x, 0, x, BLOG_SOCIAL_IMAGE_HEIGHT), fill=(7, 12, 10, max(0, alpha)))
+    draw.rounded_rectangle((74, 60, 408, 112), radius=20, fill=(18, 45, 30, 216), outline=(122, 210, 150, 88), width=2)
+    draw.rounded_rectangle((74, 134, 718, 566), radius=30, fill=(10, 18, 14, 116))
+
+    eyebrow_font = load_font(26, 'body')
+    headline_font = load_font(72, 'display')
+    body_font = load_font(31, 'body')
+    small_font = load_font(22, 'body')
+
+    draw.text((100, 75), article.get('eyebrow', 'Opticable').upper(), font=eyebrow_font, fill=(198, 239, 214, 255))
+
+    headline_lines = wrap_text_lines(draw, article['headline'], headline_font, 560, max_lines=4)
+    y = 164
+    for line in headline_lines:
+        draw.text((96, y), line, font=headline_font, fill=(248, 252, 249, 255))
+        y += 78
+
+    max_excerpt_lines = max(0, min(3, (548 - (y + 14)) // 40))
+    excerpt_lines = wrap_text_lines(draw, article.get('excerpt') or article.get('desc', ''), body_font, 560, max_lines=max_excerpt_lines)
+    if excerpt_lines:
+        y += 14
+        for line in excerpt_lines:
+            draw.text((98, y), line, font=body_font, fill=(214, 227, 218, 245))
+            y += 40
+
+    footer_text = 'Opticable Blog' if lang == 'en' else 'Blogue Opticable'
+    if article.get('tags'):
+        footer_text += '  |  ' + '  |  '.join(article['tags'][:2])
+    draw.text((98, 584), footer_text, font=small_font, fill=(176, 214, 188, 255))
+
+    image = Image.alpha_composite(canvas, overlay)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    image.save(target, format='PNG', optimize=True)
+    IMAGE_DIMENSIONS_BY_URL[blog_social_image_url(article_key, lang)] = (BLOG_SOCIAL_IMAGE_WIDTH, BLOG_SOCIAL_IMAGE_HEIGHT)
+
+
+def export_blog_social_images():
+    for article_key, entry in BLOG_ARTICLES.items():
+        for lang in ('en', 'fr'):
+            localized = entry.get(lang)
+            if not localized:
+                continue
+            export_blog_social_image(article_key, lang, localized)
+
+
 def export_image_variant(spec):
     source = spec['source']
     if not source.exists():
@@ -6702,6 +7043,8 @@ def blog_articles_for_lang(lang):
             'published': entry['published'],
             'modified': entry.get('modified', entry['published']),
             'author': entry['author'],
+            'related_services': entry.get('related_services', ()),
+            'related_articles': entry.get('related_articles', ()),
             **localized,
         }
         articles.append(merged)
@@ -6725,7 +7068,7 @@ def schema_author_entity(name):
 
 
 def blog_article_seo_data(article, lang):
-    image = image_meta_for_url(article.get('hero_image') or OG_IMAGE_URL, article.get('headline', article.get('title', 'Opticable article')))
+    social_image = image_meta_for_url(blog_social_image_url(article['key'], lang), article.get('headline', article.get('title', 'Opticable article')))
     published = article['published']
     modified = article.get('modified', published)
     words = blog_word_count_for_article(article)
@@ -6739,7 +7082,8 @@ def blog_article_seo_data(article, lang):
         'modified': modified,
         'published_iso': iso_datetime_for_date(published, 9),
         'modified_iso': iso_datetime_for_date(modified, 15),
-        'image': image,
+        'image': social_image,
+        'social_image': social_image,
         'section': section,
         'tags': article.get('tags', []),
         'word_count': words,
@@ -6805,6 +7149,45 @@ def render_blog_summary(article):
         for label, title in summary_items
     )
     return f'<div class="blog-summary-grid">{cards}</div>'
+
+
+def render_blog_related_services(article, lang):
+    service_keys = [key for key in article.get('related_services', ()) if key in services]
+    if not service_keys:
+        return ''
+    ui = BLOG_META_UI[lang]
+    cards = ''.join(
+        card(services[key][lang]['name'], services[key][lang]['summary'], routes[lang][key], ui['view_service'])
+        for key in service_keys[:3]
+    )
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(T[lang]["services"])}</p>'
+        f'<h2>{esc(ui["related_services"])}</h2><p>{esc(ui["related_services_intro"])}</p></div>'
+        f'<div class="grid-3">{cards}</div>',
+        'blog-related-services-section',
+        'section-shell blog-article-shell',
+    )
+
+
+def render_blog_related_articles(article, lang):
+    articles_by_key = {item['key']: item for item in blog_articles_for_lang(lang)}
+    ordered = []
+    for key in [*article.get('related_articles', ()), *(articles_by_key.keys())]:
+        if key == article['key'] or key in ordered or key not in articles_by_key:
+            continue
+        ordered.append(key)
+    related = [articles_by_key[key] for key in ordered[:3]]
+    if not related:
+        return ''
+    ui = BLOG_META_UI[lang]
+    cards = ''.join(card(item['headline'], item['excerpt'], item['path'], ui['read_article']) for item in related)
+    return band_section(
+        f'<div class="section-heading"><p class="eyebrow">{esc(T[lang]["blog"])}</p>'
+        f'<h2>{esc(ui["related_articles"])}</h2><p>{esc(ui["related_articles_intro"])}</p></div>'
+        f'<div class="grid-3">{cards}</div>',
+        'blog-related-articles-section',
+        'section-shell blog-article-shell',
+    )
 
 
 def render_blog_table_cell(cell):
@@ -6935,6 +7318,8 @@ def render_blog_article_page(article, lang):
         + '</div></section>'
         + (band_section(render_blog_summary(article), 'blog-summary-section', 'section-shell blog-article-shell') if article.get('summary') else '')
         + ''.join(render_blog_article_section(section, lang) for section in article['sections'])
+        + render_blog_related_services(article, lang)
+        + render_blog_related_articles(article, lang)
         + band_section(
             f'<div><p class="eyebrow">{esc(T[lang]["blog"])}</p><h2>{esc(cta["title"])}</h2><p>{esc(cta["copy"])}</p></div>'
             f'<div class="cta-actions"><a class="button button-primary" href="{primary_href}">{esc(cta["primary_label"])}</a>'
@@ -7013,6 +7398,11 @@ def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None)
     if article_meta:
         meta.update({
             'og_type': 'article',
+            'og_image': article_meta['social_image']['url'],
+            'og_image_type': article_meta['social_image']['mime_type'],
+            'og_image_width': article_meta['social_image']['width'],
+            'og_image_height': article_meta['social_image']['height'],
+            'og_image_alt': article_meta['headline'],
             'meta_author': article_meta['author'],
             'article_published_time': article_meta['published_iso'],
             'article_modified_time': article_meta['modified_iso'],
@@ -7344,6 +7734,7 @@ remove_legacy_root_build()
 reset_deploy_dir()
 copy_static_assets()
 export_home_images()
+export_blog_social_images()
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(css.strip() + '\n', encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site.js').write_text(js.strip() + '\n', encoding='utf-8')
 
