@@ -2035,9 +2035,12 @@ main section::before{
   gap:14px;
 }
 .blog-section-intro.blog-section-intro-split{
-  grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+  grid-template-columns:minmax(0,1.22fr) minmax(300px,.78fr);
   align-items:start;
   gap:14px;
+}
+.blog-section-intro.blog-section-intro-split .blog-prose-panel p{
+  max-width:none;
 }
 .blog-prose-panel{
   display:grid;

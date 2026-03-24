@@ -5628,9 +5628,12 @@ css += '''
   gap:14px;
 }
 .blog-section-intro.blog-section-intro-split{
-  grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+  grid-template-columns:minmax(0,1.22fr) minmax(300px,.78fr);
   align-items:start;
   gap:14px;
+}
+.blog-section-intro.blog-section-intro-split .blog-prose-panel p{
+  max-width:none;
 }
 .blog-prose-panel{
   display:grid;
@@ -6876,7 +6879,7 @@ def render_blog_article_section(section, lang):
     callout_rendered = False
     if section.get('paragraphs'):
         prose = f'<div class="contact-panel blog-prose-panel">{"".join(f"<p>{esc(text)}</p>" for text in section["paragraphs"])}</div>'
-        if section.get('callout') and not section.get('steps') and not section.get('cards'):
+        if section.get('callout'):
             blocks.append(
                 f'<div class="blog-section-intro blog-section-intro-split">{prose}'
                 f'{render_blog_callout(section)}</div>'
