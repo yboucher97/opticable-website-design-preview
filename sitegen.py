@@ -5453,31 +5453,35 @@ css += '''
 .blog-card-meta,
 .blog-article-readout{
   display:grid;
-  gap:12px;
+  gap:10px;
 }
 .blog-article-readout{
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.blog-article-readout .blog-meta-item:last-child{
+  grid-column:1 / -1;
 }
 .blog-meta-item{
   display:grid;
   gap:6px;
-  padding:16px 18px;
+  padding:14px 16px;
   border:1px solid rgba(12,20,15,.1);
-  border-radius:18px;
+  border-radius:16px;
   background:linear-gradient(180deg,#ffffff,#f2f7f2);
   min-width:0;
 }
 .blog-meta-item strong{
   color:var(--text);
-  font-size:.76rem;
+  font-size:.72rem;
   font-weight:800;
   letter-spacing:.12em;
+  line-height:1.1;
   text-transform:uppercase;
 }
 .blog-meta-item span{
   color:var(--muted);
-  font-size:1rem;
-  line-height:1.42;
+  font-size:.96rem;
+  line-height:1.38;
 }
 .blog-card-link{
   width:100%;
@@ -5534,13 +5538,18 @@ css += '''
   z-index:-1;
 }
 .blog-article-hero{
-  grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
-  gap:30px;
+  grid-template-columns:minmax(0,1.34fr) minmax(320px,.66fr);
+  gap:24px;
+  align-items:stretch;
+}
+.blog-article-hero .page-hero-copy h1{
+  max-width:15ch;
+  font-size:clamp(2.05rem,3.2vw,3.1rem);
 }
 .blog-article-hero .page-hero-copy > p:not(.eyebrow){
-  max-width:62ch;
+  max-width:58ch;
   font-size:1.08rem;
-  padding-left:20px;
+  padding-left:18px;
   border-left:3px solid rgba(122,210,150,.58);
   color:rgba(245,251,247,.84);
 }
@@ -5570,18 +5579,18 @@ css += '''
 }
 .blog-summary-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
 }
 .blog-summary-section,
 .blog-article-section,
 .blog-article-cta{
-  padding:24px 26px;
+  padding:18px 22px;
 }
 .blog-summary-section+.blog-article-section,
 .blog-article-section+.blog-article-section,
 .blog-article-section+.blog-article-cta{
-  margin-top:16px;
+  margin-top:10px;
 }
 .blog-summary-card{
   min-height:100%;
@@ -5589,17 +5598,17 @@ css += '''
 }
 .blog-summary-card h3{
   margin:0;
-  font-size:1.35rem;
-  line-height:1.2;
+  font-size:1.22rem;
+  line-height:1.16;
 }
 .blog-summary-card p:last-child{
   margin:0;
 }
 .blog-section-stack{
   display:grid;
-  gap:18px;
+  gap:14px;
   position:relative;
-  padding-top:24px;
+  padding-top:18px;
 }
 .blog-section-stack::before{
   content:"";
@@ -5610,22 +5619,27 @@ css += '''
   height:1px;
   background:linear-gradient(90deg,rgba(12,20,15,.18),rgba(12,20,15,.06));
 }
+.blog-section-stack .section-heading{
+  gap:8px;
+  margin-bottom:8px;
+}
 .blog-section-intro{
   display:grid;
-  gap:18px;
+  gap:14px;
 }
 .blog-section-intro.blog-section-intro-split{
   grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
   align-items:start;
+  gap:14px;
 }
 .blog-prose-panel{
   display:grid;
-  gap:18px;
-  padding:26px 28px;
+  gap:14px;
+  padding:22px 24px;
 }
 .blog-prose-panel p{
   margin:0;
-  max-width:74ch;
+  max-width:78ch;
   color:var(--muted);
   font-size:1.03rem;
   line-height:1.78;
@@ -5634,7 +5648,7 @@ css += '''
 .blog-comparison-list,
 .blog-step-grid{
   display:grid;
-  gap:18px;
+  gap:14px;
 }
 .blog-subsection-stack{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -5748,7 +5762,7 @@ css += '''
 .blog-compare-card,
 .blog-step-card{
   display:grid;
-  gap:14px;
+  gap:12px;
 }
 .blog-detail-card,
 .blog-subsection,
@@ -5773,7 +5787,7 @@ css += '''
 .blog-compare-side{
   display:grid;
   gap:10px;
-  padding:24px;
+  padding:20px 22px;
   min-height:100%;
 }
 .blog-compare-side strong{
@@ -5839,7 +5853,7 @@ css += '''
   line-height:1.7;
 }
 .blog-quote{
-  padding:30px 0;
+  padding:22px 0;
   background:transparent;
   border:0;
   border-top:2px solid rgba(47,138,88,.45);
@@ -5870,15 +5884,12 @@ css += '''
     grid-template-columns:1fr;
   }
   .blog-summary-grid{
-    grid-template-columns:1fr;
-  }
-  .blog-article-readout{
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
   .blog-summary-section,
   .blog-article-section,
   .blog-article-cta{
-    padding:22px;
+    padding:18px;
   }
   .nav-submenu-wide{
     min-width:520px;
