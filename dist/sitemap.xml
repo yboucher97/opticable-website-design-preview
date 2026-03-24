@@ -302,6 +302,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/" />
   </url>
   <url>
+    <loc>https://opticable.ca/en/blog/ip-cameras-network-upgrade/</loc>
+    <lastmod>2026-03-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/ip-cameras-network-upgrade/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/</loc>
     <lastmod>2026-03-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/why-more-wifi-power-makes-things-worse/" />
@@ -311,6 +318,7 @@
   <url>
     <loc>https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/</loc>
     <lastmod>2026-03-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/ip-cameras-network-upgrade/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/" />
   </url>

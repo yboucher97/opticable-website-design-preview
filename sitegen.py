@@ -2766,6 +2766,152 @@ BLOG_ARTICLES = {
     'ip-cameras-network-upgrade': {
         'published': '2026-03-23',
         'author': "L'équipe Opticable",
+        'en': {
+            'path': '/en/blog/ip-cameras-network-upgrade/',
+            'author': 'Opticable Team',
+            'title': 'IP Cameras: Why Your Surveillance Network Needs an Upgrade | Opticable',
+            'desc': 'Why older CCTV and DVR systems reach their limits quickly, and what an upgrade to IP cameras with a cloud-ready NVR platform actually changes.',
+            'eyebrow': 'IP Security',
+            'headline': 'Are your security cameras keeping up with your network?',
+            'intro': 'Old CCTV and DVR systems had their place. Today, IP cameras on a cloud-ready NVR platform change the equation completely: more control, more flexibility, and centralized management across every site from one interface.',
+            'excerpt': 'An IP camera is not just a sharper version of CCTV. It is a real network upgrade for access, management, storage, and multi-site visibility.',
+            'tags': ['IP Security', 'Security Cameras', 'Network Infrastructure'],
+            'hero_image': SERVICE_CAMERA_URL,
+            'hero_image_position': '52% 50%',
+            'summary': [
+                ('What really changes', 'You move from an isolated DVR to an IP platform managed on your network.'),
+                ('What you gain', 'Better image quality, cleaner remote access, centralized management, and easier integrations.'),
+                ('What to plan for', 'PoE, Cat 6 cabling, network segmentation, storage, and access rights all need to be designed properly.'),
+            ],
+            'sections': [
+                {
+                    'eyebrow': 'Why it matters',
+                    'title': 'IP surveillance is not just about video anymore',
+                    'paragraphs': [
+                        'A security camera is not just an eye pointed at your building. It is a device on your network: equipment that moves traffic, authenticates, records or streams data continuously, and has to fit cleanly into the rest of your infrastructure.',
+                        'When the system is designed well, it protects entries, discourages incidents before they happen, and leaves you with usable evidence when something does go wrong. When it is integrated poorly, it adds network noise, blind spots, weak remote access, and unnecessary support overhead.',
+                        'Whether you manage a residential building, a retail space, an office, or several sites at once, the question is no longer "do we need cameras?" The real question is "does our current system actually do the job we need it to do today?"',
+                    ],
+                    'callout_label': 'Key takeaway',
+                    'callout': 'Moving to IP cameras is not just about replacing cameras. It is an upgrade to your surveillance network, your remote access model, and your ability to manage the system properly.',
+                },
+                {
+                    'eyebrow': 'Who needs it',
+                    'title': 'Who really benefits from moving to IP cameras',
+                    'paragraphs': [
+                        'There is no single client profile for IP surveillance. Every environment comes with its own requirements for coverage, retention, remote access, and user management.',
+                    ],
+                    'cards': [
+                        ('Residential buildings', 'Entries, parking, corridors, and common areas. Residents want peace of mind; managers want archives and remote access when an incident happens.'),
+                        ('Retail and storefronts', 'Cash areas, stock rooms, receiving doors, and the sales floor. Video helps reduce theft, document events, and maintain visibility over operations.'),
+                        ('Offices and SMBs', 'Server rooms, reception, restricted spaces, and internal circulation. IP cameras belong inside a real physical-security strategy, not just beside a recorder in a closet.'),
+                        ('Industrial and warehouse sites', 'Loading docks, perimeters, inventory zones, and exterior areas. These sites need robust cameras, proper IR coverage, alerts, and a network that can handle multiple video streams at once.'),
+                        ('Restaurants and hospitality', 'Kitchens, lobbies, bars, parking areas, and supplier entrances. Video protects the business from outside incidents as well as internal disputes and loss.'),
+                        ('Multi-site portfolios', 'As soon as there are multiple buildings, stores, or branches, the difference becomes obvious. One interface replaces a patchwork of separate DVRs that are hard to supervise.'),
+                    ],
+                },
+                {
+                    'eyebrow': 'Comparison',
+                    'title': 'CCTV / DVR versus IP cameras / cloud NVR',
+                    'paragraphs': [
+                        'For years, the standard setup was a DVR connected to analog cameras over coax. It worked, but it falls short quickly once you need better image quality, cleaner remote viewing, or management across more than one site.',
+                    ],
+                    'table': {
+                        'caption': 'What actually changes when you move to an IP system',
+                        'columns': ('Criteria', 'Analog CCTV / DVR', 'IP cameras / cloud NVR'),
+                        'rows': (
+                            ('Image', 'Limited resolution on older systems and often far below current expectations.', 'Full HD, 4K, or HDR depending on the model, with much better performance in difficult scenes.'),
+                            ('Cabling', 'Coax and separate power, usually disconnected from the rest of the network environment.', 'Cat 6 / PoE, a single cable for data and power, integrated with the existing network.'),
+                            ('Access', 'Mostly local access or remote viewing that is awkward to maintain.', 'Native remote viewing on mobile and web, with centralized user management.'),
+                            ('Storage', 'One local DVR. If the unit fails or disappears, the footage goes with it.', 'Local NVR, hybrid storage, or cloud redundancy depending on the platform.'),
+                            ('Multi-site', 'Each site behaves like a separate island.', 'Multiple sites can roll up into one interface with permissions by location.'),
+                            ('Security', 'Updates are rare and firmware is often left untouched for years.', 'Platforms are easier to maintain, with cleaner updates, user roles, and ongoing supervision.'),
+                        ),
+                    },
+                    'quote': 'An old DVR may still record. That does not mean it still meets the needs of an active building.',
+                },
+                {
+                    'eyebrow': 'Management',
+                    'title': 'The real value shows up when you have multiple sites',
+                    'paragraphs': [
+                        'This is where modern IP platforms really separate themselves. Three buildings, five stores, or twenty branches can all be managed through the same dashboard instead of a pile of different logins, local IP addresses, and on-site checks.',
+                    ],
+                    'steps': [
+                        ('Unified dashboard', 'Every camera and every site lives in one interface. You can filter by location, zone, or event without jumping between disconnected systems.'),
+                        ('Smart alerts', 'Motion, line crossing, after-hours activity, or video clips can go directly to the right person. The system becomes operationally useful, not just something you review later.'),
+                        ('Granular permissions', 'Each user sees only what they should see. The manager for site A does not touch site B, while leadership or centralized security keeps the broader view.'),
+                        ('Redundant archives', 'Recordings can stay available even if a local NVR is damaged, stolen, or unreachable. That matters when you need evidence after the fact.'),
+                    ],
+                    'callout_label': 'Why this matters',
+                    'callout': 'When the cameras, the network, access rights, and the users are planned together, you move from a system that only provides evidence after an incident to one that is useful every day.',
+                },
+                {
+                    'eyebrow': 'Network',
+                    'title': 'Good IP cameras start with a good network',
+                    'paragraphs': [
+                        'The best camera on the market will not compensate for a poorly planned network. Before installing anything, you need to look at the PoE budget, uplinks, existing cabling, VLAN segmentation, required retention, and how users will connect to the system.',
+                        'A poorly integrated IP camera setup does not just create a mediocre image or a blind spot. It can also saturate a link, pollute production traffic, expose remote access unnecessarily, or make maintenance harder for years afterward.',
+                    ],
+                    'subsections': [
+                        {
+                            'title': 'What we validate before deployment',
+                            'items': [
+                                'The quality of the existing cabling and which routes need to be redone',
+                                'Available PoE budget on the switching layer',
+                                'Local, remote, or hybrid retention requirements',
+                                'Risk zones, blind spots, and lighting conditions',
+                                'How camera traffic is separated from the rest of the network',
+                            ],
+                        },
+                        {
+                            'title': 'What we put in place next',
+                            'items': [
+                                'Indoor and outdoor IP cameras suited to the site',
+                                'Clean, labeled Cat 6 structured cabling',
+                                'NVR or VMS platform configured with user roles',
+                                'VLAN and network policies that isolate video traffic',
+                                'Secure remote access for authorized users',
+                            ],
+                        },
+                        {
+                            'title': 'What we avoid at all costs',
+                            'items': [
+                                'Putting every camera on a flat network with no segmentation',
+                                'Underestimating storage and bandwidth requirements',
+                                'Leaving remote access improvised or poorly protected',
+                                'Reusing questionable cable segments without validation',
+                                'Treating surveillance as if it were separate from the rest of the building systems',
+                            ],
+                        },
+                    ],
+                    'quote': 'A badly integrated IP camera does not just create a blind spot. It also creates noise, risk, and unnecessary support.',
+                },
+                {
+                    'eyebrow': 'Opticable',
+                    'title': 'The right network, the right team',
+                    'paragraphs': [
+                        'Opticable installs IP camera systems the same way we deploy network infrastructure: methodically, with validation, and with a focus on making the finished system supportable after go-live.',
+                        'We start with the existing infrastructure: switches, cabling, uplinks, available bandwidth, coverage zones, retention needs, and access requirements. The goal is not to sell boxes. The goal is to deliver a coherent system that actually fits the way your site operates.',
+                    ],
+                    'cards': [
+                        ('IP camera installation', 'Interior and exterior cameras for entries, parking, perimeters, and common areas.'),
+                        ('Cat 6 structured cabling', 'Clean pathways, terminations, labeling, and a physical foundation the whole system can rely on.'),
+                        ('NVR / VMS configuration', 'Recording, retention, user roles, alerts, and remote viewing configured properly from the start.'),
+                        ('VLAN segmentation', 'Separation between camera traffic, workstations, guest WiFi, and critical systems for a healthier network.'),
+                        ('Multi-site management', 'One dashboard for multiple buildings, stores, or branches with clear access rights.'),
+                        ('Support and maintenance', 'Updates, adjustments, replacements, and follow-up after the system is in service.'),
+                    ],
+                },
+            ],
+            'cta': {
+                'title': 'Ready to modernize your IP surveillance?',
+                'copy': 'Tell us about your building or portfolio. We can review the site, the network, and the security requirements and come back with a solution that actually holds up in practice.',
+                'primary_label': 'Request a quote',
+                'primary_key': 'contact',
+                'secondary_label': 'View camera service',
+                'secondary_key': 'security-camera-systems',
+            },
+        },
         'fr': {
             'path': '/fr/blogue/cameras-ip-mise-a-niveau-reseau/',
             'title': 'Caméras IP : pourquoi votre réseau de surveillance mérite une mise à niveau | Opticable',
@@ -5268,6 +5414,16 @@ css += '''
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px;
 }
+.blog-summary-section,
+.blog-article-section,
+.blog-article-cta{
+  padding:24px 26px;
+}
+.blog-summary-section+.blog-article-section,
+.blog-article-section+.blog-article-section,
+.blog-article-section+.blog-article-cta{
+  margin-top:16px;
+}
 .blog-summary-card{
   min-height:100%;
   background:linear-gradient(180deg,#fbfdfb,#eef5ef);
@@ -5282,9 +5438,9 @@ css += '''
 }
 .blog-section-stack{
   display:grid;
-  gap:22px;
+  gap:18px;
   position:relative;
-  padding-top:34px;
+  padding-top:24px;
 }
 .blog-section-stack::before{
   content:"";
@@ -5297,7 +5453,7 @@ css += '''
 }
 .blog-section-intro{
   display:grid;
-  gap:22px;
+  gap:18px;
 }
 .blog-section-intro.blog-section-intro-split{
   grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
@@ -5306,7 +5462,7 @@ css += '''
 .blog-prose-panel{
   display:grid;
   gap:18px;
-  padding:30px 32px;
+  padding:26px 28px;
 }
 .blog-prose-panel p{
   margin:0;
@@ -5559,6 +5715,11 @@ css += '''
   }
   .blog-article-readout{
     grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .blog-summary-section,
+  .blog-article-section,
+  .blog-article-cta{
+    padding:22px;
   }
   .nav-submenu-wide{
     min-width:520px;
