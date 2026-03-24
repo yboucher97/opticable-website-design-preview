@@ -2503,7 +2503,8 @@ BLOG_ARTICLES = {
                         "Pensez-y comme du son. Si vous parlez à travers un mur, la personne de l'autre bord vous entend moins bien. Si vous êtes au bout d'un grand couloir, pareil. Et si tout le monde dans la pièce parle en même temps, plus personne ne se comprend — peu importe combien fort vous criez.",
                         "Le WiFi, c'est exactement ça. Ce n'est pas un tuyau qu'on remplit plus ou moins vite. C'est une conversation dans un espace partagé. Quand l'air est trop occupé, les données ne passent plus — et monter la puissance ne règle rien.",
                     ],
-                    'callout': "À retenir : la plupart des problèmes WiFi viennent des interférences, d'une surcharge sur un seul point d'accès WiFi ou d'un mauvais choix de bande. La puissance n'est pas la réponse à ces problèmes — elle les empire.",
+                    'callout_label': 'À retenir',
+                    'callout': "La plupart des problèmes WiFi viennent des interférences, d'une surcharge sur un seul point d'accès WiFi ou d'un mauvais choix de bande. La puissance n'est pas la réponse à ces problèmes — elle les empire.",
                 },
                 {
                     'eyebrow': 'Bandes',
@@ -2513,11 +2514,11 @@ BLOG_ARTICLES = {
                     ],
                     'table': {
                         'caption': 'Comparatif rapide des trois bandes WiFi',
-                        'columns': ('Bande', 'Portée', 'Débit', 'Pénétration', 'Congestion'),
+                        'columns': ('Bande', 'Fréquence', 'Portée', 'Débit', 'Pénétration', 'Encombrement'),
                         'rows': (
-                            ('2.4 GHz', 'Longue', 'Faible', 'Élevée', 'Très saturé'),
-                            ('5 GHz', 'Moyenne', 'Élevé', 'Moyenne', 'Moins saturé'),
-                            ('6 GHz', 'Courte', 'Très élevé', 'Faible', 'Quasiment vide'),
+                            ('2.4 GHz', '2.4 GHz', ('Longue', 'green'), ('Faible', 'amber'), ('Élevée', 'green'), ('Très saturé', 'red')),
+                            ('5 GHz', '5 GHz', ('Moyenne', 'amber'), ('Élevé', 'green'), ('Moyenne', 'amber'), ('Moins saturé', 'green')),
+                            ('6 GHz', '6 GHz', ('Courte', 'red'), ('Très élevé', 'green'), ('Faible', 'red'), ('Quasiment vide', 'green')),
                         ),
                     },
                     'subsections': [
@@ -2587,7 +2588,9 @@ BLOG_ARTICLES = {
                         ('Obstacles pas évalués', "Béton, colonnes métalliques, vitres teintées épaisses, salles de serveurs — chaque matériau bloque le signal différemment selon la bande. L'évaluation du site permet d'anticiper ça."),
                         ('Le WiFi des voisins', "Dans un immeuble à plusieurs locataires, les réseaux WiFi des voisins créent du bruit de fond constant sur les mêmes canaux — surtout en 2.4 GHz. Monter votre puissance les affecte davantage. Ils font pareil pour vous. Tout le monde perd."),
                     ],
-                    'callout': "Le paradoxe de la puissance : plus une borne WiFi couvre grand, plus elle attire d'appareils — et plus elle se surcharge. Dans un bâtiment dense, baisser la puissance et ajouter des bornes améliore presque toujours les performances. Moins fort, mieux réparti.",
+                    'callout_tone': 'warning',
+                    'callout_label': 'Le paradoxe de la puissance',
+                    'callout': "Plus une borne WiFi couvre grand, plus elle attire d'appareils — et plus elle se surcharge. Dans un bâtiment dense, baisser la puissance et ajouter des bornes améliore presque toujours les performances. Moins fort, mieux réparti.",
                 },
                 {
                     'eyebrow': 'Solutions',
@@ -2603,7 +2606,8 @@ BLOG_ARTICLES = {
                         ("Le câblage, c'est la fondation du WiFi", "Une borne WiFi est aussi bonne que le câble qui l'alimente. Un câble Cat 6 mal tiré ou trop long limite le débit avant même que le signal parte dans l'air."),
                         ('Du matériel fait pour les environnements commerciaux', "Les bornes WiFi grand public ne sont pas conçues pour gérer 40, 60 ou 100 appareils en même temps dans un espace dense. Les points d'accès commerciaux comme UniFi, TP-Link Omada ou Fortinet ont les fonctionnalités qui font la différence."),
                     ],
-                    'callout': "Exemple concret : un immeuble de bureaux de 5 000 pi² avec une seule borne WiFi poussée à fond et des plaintes constantes de déconnexions. En la remplaçant par quatre points d'accès UniFi U6 Pro à puissance modérée, avec plan de canaux optimisé et câblage Cat 6 certifié, on obtient zéro déconnexion, des débits trois fois plus élevés aux extrémités du plancher et 60 % de charge en moins par borne.",
+                    'callout_label': 'Exemple concret',
+                    'callout': "Un immeuble de bureaux de 5 000 pi² avec une seule borne WiFi poussée à fond et des plaintes constantes de déconnexions. En la remplaçant par quatre points d'accès UniFi U6 Pro à puissance modérée, avec plan de canaux optimisé et câblage Cat 6 certifié, on obtient zéro déconnexion, des débits trois fois plus élevés aux extrémités du plancher et 60 % de charge en moins par borne.",
                     'quote': "Un bon WiFi, ça ne se règle pas à l'œil. Ça se planifie, ça se mesure, ça se valide.",
                 },
             ],
@@ -4902,6 +4906,9 @@ css += '''
 .blog-article-hero .page-hero-copy > p:not(.eyebrow){
   max-width:62ch;
   font-size:1.08rem;
+  padding-left:20px;
+  border-left:3px solid rgba(122,210,150,.58);
+  color:rgba(245,251,247,.84);
 }
 .blog-article-hero .page-hero-copy{
   padding:16px 0;
@@ -4947,6 +4954,17 @@ css += '''
 .blog-section-stack{
   display:grid;
   gap:22px;
+  position:relative;
+  padding-top:34px;
+}
+.blog-section-stack::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg,rgba(12,20,15,.18),rgba(12,20,15,.06));
 }
 .blog-section-intro{
   display:grid;
@@ -5042,6 +5060,33 @@ css += '''
   background:#fbfdfb;
   line-height:1.55;
 }
+.blog-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.blog-pill-green{
+  color:#1f6640;
+  background:rgba(34,197,94,.1);
+  border:1px solid rgba(34,197,94,.18);
+}
+.blog-pill-amber{
+  color:#a15f00;
+  background:rgba(245,158,11,.12);
+  border:1px solid rgba(245,158,11,.2);
+}
+.blog-pill-red{
+  color:#c63f3f;
+  background:rgba(239,68,68,.09);
+  border:1px solid rgba(239,68,68,.16);
+}
 .blog-table tbody tr:nth-child(even) td{
   background:#f4f8f4;
 }
@@ -5102,17 +5147,20 @@ css += '''
   line-height:1.72;
 }
 .blog-compare-side:first-child{
-  background:linear-gradient(180deg,#fbfdfb,#eef5ef);
-  border-right:1px solid rgba(12,20,15,.08);
+  background:rgba(239,68,68,.05);
+  border-right:1px solid rgba(239,68,68,.14);
 }
 .blog-compare-side:last-child{
-  background:linear-gradient(180deg,#132019,#192a20);
+  background:rgba(34,197,94,.06);
+}
+.blog-compare-side:first-child strong{
+  color:#d95b5b;
 }
 .blog-compare-side:last-child strong{
-  color:#95ffb4;
+  color:#1f6640;
 }
 .blog-compare-side:last-child p{
-  color:rgba(245,251,247,.84);
+  color:var(--muted);
 }
 .blog-step-card .eyebrow{
   margin-bottom:0;
@@ -5123,6 +5171,23 @@ css += '''
     radial-gradient(circle at top right,rgba(47,138,88,.12),transparent 36%),
     linear-gradient(180deg,#ffffff,#eff6f0);
 }
+.blog-callout-warning{
+  border-color:rgba(245,158,11,.24);
+  background:
+    radial-gradient(circle at top right,rgba(245,158,11,.08),transparent 40%),
+    linear-gradient(180deg,rgba(255,247,230,.96),rgba(255,251,241,.96));
+}
+.blog-callout-label{
+  margin:0 0 10px;
+  color:#1f6640;
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.blog-callout-warning .blog-callout-label{
+  color:#b36a00;
+}
 .blog-callout p{
   margin:0;
   color:var(--text);
@@ -5130,17 +5195,23 @@ css += '''
   line-height:1.7;
 }
 .blog-quote{
-  background:linear-gradient(160deg,#0d1712 0%,#14231b 68%,#1b3023 100%);
-  border-color:rgba(77,220,122,.16);
+  padding:30px 0;
+  background:transparent;
+  border:0;
+  border-top:2px solid rgba(47,138,88,.45);
+  border-bottom:2px solid rgba(47,138,88,.45);
+  border-radius:0;
+  box-shadow:none;
 }
 .blog-quote p{
   margin:0;
-  color:#f5fbf7;
+  color:#153628;
   font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;
   font-size:clamp(1.4rem,2.5vw,2rem);
   font-weight:760;
   line-height:1.18;
   letter-spacing:-.02em;
+  text-align:center;
 }
 .case-study-systems{
   margin-top:18px;
@@ -5979,6 +6050,13 @@ def render_blog_summary(article):
     return f'<div class="blog-summary-grid">{cards}</div>'
 
 
+def render_blog_table_cell(cell):
+    if isinstance(cell, (tuple, list)) and len(cell) == 2:
+        value, tone = cell
+        return f'<span class="blog-pill blog-pill-{esc(tone)}">{esc(value)}</span>'
+    return esc(cell)
+
+
 def render_blog_table(table):
     if not table:
         return ''
@@ -5986,7 +6064,7 @@ def render_blog_table(table):
     rows = []
     for row in table['rows']:
         cells = [f'<th scope="row">{esc(row[0])}</th>']
-        cells.extend(f'<td>{esc(cell)}</td>' for cell in row[1:])
+        cells.extend(f'<td>{render_blog_table_cell(cell)}</td>' for cell in row[1:])
         rows.append(f'<tr>{"".join(cells)}</tr>')
     head = ''
     if table.get('caption'):
@@ -5996,6 +6074,16 @@ def render_blog_table(table):
         f'<div class="blog-table-scroll"><table class="blog-table"><thead><tr>{columns}</tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>'
     )
+
+
+def render_blog_callout(section):
+    if not section.get('callout'):
+        return ''
+    class_name = 'contact-panel blog-callout'
+    if section.get('callout_tone') == 'warning':
+        class_name += ' blog-callout-warning'
+    label = f'<p class="blog-callout-label">{esc(section["callout_label"])}</p>' if section.get('callout_label') else ''
+    return f'<div class="{class_name}">{label}<p>{esc(section["callout"])}</p></div>'
 
 
 def render_blog_subsection(subsection):
@@ -6037,7 +6125,7 @@ def render_blog_article_section(section, lang):
         if section.get('callout') and not section.get('steps') and not section.get('cards'):
             blocks.append(
                 f'<div class="blog-section-intro blog-section-intro-split">{prose}'
-                f'<div class="contact-panel blog-callout"><p>{esc(section["callout"])}</p></div></div>'
+                f'{render_blog_callout(section)}</div>'
             )
             callout_rendered = True
         else:
@@ -6054,7 +6142,7 @@ def render_blog_article_section(section, lang):
     if section.get('steps'):
         blocks.append(render_blog_steps(section['steps']))
     if section.get('callout') and not callout_rendered:
-        blocks.append(f'<div class="contact-panel blog-callout"><p>{esc(section["callout"])}</p></div>')
+        blocks.append(render_blog_callout(section))
     if section.get('quote'):
         blocks.append(f'<div class="contact-panel blog-quote"><p>{esc(section["quote"])}</p></div>')
     return band_section(f'<div class="blog-section-stack">{"".join(blocks)}</div>', 'blog-article-section', 'section-shell blog-article-shell')
