@@ -10,6 +10,12 @@ const LEGACY_REDIRECTS = new Map([
   ["/fr/secteurs", "/fr/clientele/"],
   ["/fr/secteurs/", "/fr/clientele/"],
   ["/fr/secteurs/index.html", "/fr/clientele/"],
+  ["/en/blog/why-turning-up-wifi-power-usually-makes-things-worse", "/en/blog/why-more-wifi-power-makes-things-worse/"],
+  ["/en/blog/why-turning-up-wifi-power-usually-makes-things-worse/", "/en/blog/why-more-wifi-power-makes-things-worse/"],
+  ["/en/blog/why-turning-up-wifi-power-usually-makes-things-worse/index.html", "/en/blog/why-more-wifi-power-makes-things-worse/"],
+  ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
+  ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
+  ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/index.html", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
 ]);
 
 function cacheControlForPath(pathname) {

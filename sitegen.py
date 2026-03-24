@@ -2478,8 +2478,150 @@ BLOG_ARTICLES = {
     'wifi-power': {
         'published': '2026-03-24',
         'author': 'Yan-Erik B.',
+        'en': {
+            'path': '/en/blog/why-more-wifi-power-makes-things-worse/',
+            'title': 'Why Turning Up WiFi Power Usually Makes Things Worse | Opticable',
+            'desc': 'Why increasing WiFi access point power rarely fixes coverage, interference, or performance problems in a commercial building.',
+            'eyebrow': 'Commercial WiFi',
+            'headline': 'Turning up WiFi power usually makes the problem worse.',
+            'intro': 'The signal is weak, devices keep dropping, and the connection feels unstable. The reflex is to turn up the WiFi access point power. In many cases, that is the worst thing to do. Here is why, and what actually works.',
+            'excerpt': 'Weak signal, dropped devices, unstable performance. Turning up the power sounds logical, but in a real commercial building it often makes the problem worse.',
+            'tags': ['Commercial WiFi', 'Network Infrastructure'],
+            'hero_image': SERVICE_WIFI_URL,
+            'hero_image_position': '38% 58%',
+            'summary': [
+                ('The reflex to avoid', 'Turning up the power on a single access point to compensate for bad WiFi.'),
+                ('The real problem', 'Interference, client congestion, and poor band planning.'),
+                ('What works', 'More access points, less power, and a real channel plan.'),
+            ],
+            'sections': [
+                {
+                    'eyebrow': 'Basics',
+                    'title': 'The basic idea: WiFi is sound in the air',
+                    'paragraphs': [
+                        'WiFi is radio. A WiFi access point, also called a WiFi antenna or wireless AP, sends and receives signals through the air on specific frequencies. Those frequencies are grouped into bands.',
+                        'Think of it like sound. If you talk through a wall, the person on the other side hears you less clearly. If you stand at the far end of a long corridor, same problem. And if everyone in the room talks at the same time, nobody understands each other no matter how loudly they shout.',
+                        'WiFi works the same way. It is not a pipe that you simply force more data through. It is a shared conversation in physical space. When the air is too busy, the data does not move well, and increasing transmit power does not solve that.',
+                    ],
+                    'callout_label': 'Key takeaway',
+                    'callout': 'Most WiFi problems come from interference, too many clients on one access point, or poor band selection. Power is not the answer to those problems. It usually makes them worse.',
+                },
+                {
+                    'eyebrow': 'Bands',
+                    'title': 'The three WiFi bands and what they actually do',
+                    'paragraphs': [
+                        'Modern WiFi runs on three frequency bands. Each one behaves differently in the air, similar to low and high frequencies in an audio system. Lower frequencies travel farther but with less precision. Higher frequencies are cleaner and faster but do not move through walls as well. Choosing the right band is already half the job.',
+                    ],
+                    'table': {
+                        'caption': 'Quick comparison of the three WiFi bands',
+                        'columns': ('Band', 'Frequency', 'Range', 'Speed', 'Penetration', 'Congestion'),
+                        'rows': (
+                            ('2.4 GHz', '2.4 GHz', ('Long', 'green'), ('Low', 'amber'), ('High', 'green'), ('Very crowded', 'red')),
+                            ('5 GHz', '5 GHz', ('Medium', 'amber'), ('High', 'green'), ('Medium', 'amber'), ('Less crowded', 'green')),
+                            ('6 GHz', '6 GHz', ('Short', 'red'), ('Very high', 'green'), ('Low', 'red'), ('Nearly empty', 'green')),
+                        ),
+                    },
+                    'subsections': [
+                        {
+                            'title': '2.4 GHz: the most crowded band',
+                            'paragraphs': [
+                                '2.4 GHz travels well through walls and reaches farther. That sounds good. The problem is that almost everything uses it at the same time. Neighbors, low-end IP cameras, cordless phones, microwave ovens, baby monitors, and smart thermostats all compete there.',
+                                'There are only three usable non-overlapping channels on that band. In an apartment building or commercial office, those three channels fill up fast. Picture a gym where everybody is shouting over the same three conversations. Your WiFi access point is still talking, but nobody can hear it clearly because the room is already full of noise.',
+                                'What happens when you turn up the power in that situation? You just shout louder in the same gym. Your neighbors do the same. Nobody understands better. Everybody interferes with everybody else more.',
+                            ],
+                        },
+                        {
+                            'title': '5 GHz: usually the right choice for most applications',
+                            'paragraphs': [
+                                '5 GHz gives you far more channels, less interference, and much higher throughput. The tradeoff is shorter range and weaker penetration through obstacles.',
+                                'That is not a flaw. It is a design constraint you handle by placing access points more intelligently, with better coverage geometry and more appropriate density.',
+                            ],
+                        },
+                        {
+                            'title': '6 GHz: WiFi 6E and WiFi 7',
+                            'paragraphs': [
+                                '6 GHz is the newest band. Right now it is close to empty compared with older bands, which means cleaner airtime and excellent performance.',
+                                'But it travels through walls even less effectively than 5 GHz. In a properly designed environment with the right number of access points, it is the highest-performing band available.',
+                            ],
+                        },
+                    ],
+                },
+                {
+                    'eyebrow': 'Power',
+                    'title': 'Why turning up the power makes things worse',
+                    'comparisons': [
+                        {
+                            'myth': 'The more powerful my WiFi access point is, the better the signal. Strong signal means a good connection.',
+                            'reality': 'A stronger signal from the access point means nothing if your phone or laptop cannot answer back at the same level. WiFi is a two-way conversation. It is only as strong as the weaker side of the link.',
+                        },
+                        {
+                            'myth': 'If a device is far away and drops, I need a more powerful WiFi antenna to reach it.',
+                            'reality': 'The device may hear the access point better, but the access point does not hear the device better in return. It is like talking through a megaphone to someone who answers in a normal voice.',
+                        },
+                        {
+                            'myth': 'More power means better coverage for everybody.',
+                            'reality': 'More power means more devices attach to the same access point. It gets overloaded and performance drops for everyone. One crowded check-in desk does not become faster just because more people line up at it.',
+                        },
+                    ],
+                    'subsections': [
+                        {
+                            'title': 'The device that stays stuck to the wrong access point',
+                            'paragraphs': [
+                                'In a building with multiple WiFi access points, a moving device should attach to whichever access point is actually closest and healthiest. But when a far-away access point is broadcasting too aggressively, the device can stay attached to it even after a better one is nearby.',
+                                'That is the sticky client problem. The device stays glued to a weak, distant access point and suffers for no good reason.',
+                            ],
+                        },
+                    ],
+                    'quote': 'Shouting louder in a packed gym does not solve the fact that everyone is talking at once.',
+                },
+                {
+                    'eyebrow': 'Interference',
+                    'title': 'What really causes WiFi problems',
+                    'paragraphs': [
+                        'These are the real causes. We see them in commercial buildings and multi-tenant properties all the time.',
+                    ],
+                    'cards': [
+                        ('Two access points on the same channel', 'Two people trying to speak at the same time on the same radio frequency. They talk over each other and client devices have to wait.'),
+                        ('Too many devices on one access point', 'One access point shares airtime and throughput across every connected device. When too many clients pile onto it, everyone slows down, even the people standing nearby.'),
+                        ('Poor channel planning between access points', 'If neighboring WiFi access points use overlapping channels, they interfere with each other constantly like two radios fighting on the same frequency.'),
+                        ('Old devices on the network', 'An old WiFi 4 device on 2.4 GHz can force the whole access point to slow down to speak its language. One weak client can drag down the performance of the entire network.'),
+                        ('Obstacles were never evaluated', 'Concrete, steel columns, heavily coated glass, and server rooms all affect signal differently depending on the band. A site review is how you account for that before deployment.'),
+                        ('Neighboring WiFi', 'In multi-tenant properties, neighboring WiFi networks create constant background noise on the same channels, especially on 2.4 GHz. Increasing your power affects them more, and they return the favor. Everybody loses.'),
+                    ],
+                    'callout_tone': 'warning',
+                    'callout_label': 'The power paradox',
+                    'callout': 'The more area one access point covers, the more devices it attracts, and the more overloaded it becomes. In dense buildings, lowering power and adding access points almost always improves performance. Less power, better distribution.',
+                },
+                {
+                    'eyebrow': 'Solutions',
+                    'title': 'What actually fixes WiFi problems',
+                    'paragraphs': [
+                        'This is what we do in practice when a WiFi network needs to perform properly in a real building.',
+                    ],
+                    'steps': [
+                        ('Site survey before installing anything', 'We review building materials, existing interference sources, target coverage areas, and expected device counts. That lets us place WiFi access points where they actually need to work, not just where cabling is easiest.'),
+                        ('More access points, less power per access point', 'Multiple access points at moderate power, correctly spaced and set on distinct channels, spread the client load, reduce interference, and create more even coverage across the building.'),
+                        ('A channel plan for the whole building', 'On 5 GHz you have many distinct channels available. Assigning them properly between neighboring access points removes overlap. It is often the configuration change with the biggest immediate impact.'),
+                        ('Steering devices to the right band', 'Well-configured access points move capable devices toward 5 GHz or 6 GHz and leave 2.4 GHz for older equipment that still depends on it.'),
+                        ('Cabling is the foundation of WiFi', 'A WiFi access point is only as good as the cable feeding it. Poorly installed or overly long Cat 6 runs can limit throughput before the signal even leaves the device.'),
+                        ('Hardware designed for commercial environments', 'Consumer WiFi gear is not built to handle 40, 60, or 100 active clients in a dense environment. Commercial access points from platforms like UniFi, TP-Link Omada, or Fortinet include the features that matter.'),
+                    ],
+                    'callout_label': 'Real example',
+                    'callout': 'A 5,000 sq ft office had one access point running at full power and constant complaints about disconnects. Replacing it with four UniFi U6 Pro access points at moderate power, along with an optimized channel plan and certified Cat 6 cabling, resulted in zero dropouts, three times higher speeds at the edges of the floor, and roughly 60 percent less load per access point.',
+                    'quote': 'Good WiFi is not tuned by feel. It is planned, measured, and validated.',
+                },
+            ],
+            'cta': {
+                'title': 'Is your WiFi underperforming?',
+                'copy': 'Before replacing access points or turning up the power, talk to us. We can assess the building, identify the real issue, and recommend a solution that fixes the root cause.',
+                'primary_label': 'Request a quote',
+                'primary_key': 'contact',
+                'secondary_label': 'View WiFi service',
+                'secondary_key': 'commercial-wifi-installation',
+            },
+        },
         'fr': {
-            'path': '/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/',
+            'path': '/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/',
             'title': 'Pourquoi monter la puissance du WiFi empire les choses | Opticable',
             'desc': "Pourquoi augmenter la puissance d'une borne WiFi règle rarement les problèmes de couverture, d'interférences et de performance dans un immeuble commercial.",
             'eyebrow': 'WiFi commercial',
@@ -5636,9 +5778,17 @@ def sitemap_xml():
     for lang in ('en', 'fr'):
         for article in blog_articles_for_lang(lang):
             page_url = absolute_url(article['path'])
+            article_paths = blog_article_paths(article['key'])
             lines.append('  <url>')
             lines.append(f'    <loc>{esc(page_url)}</loc>')
             lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
+            if article_paths.get('en'):
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("en")}" href="{esc(absolute_url(article_paths["en"]))}" />')
+            if article_paths.get('fr'):
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("fr")}" href="{esc(absolute_url(article_paths["fr"]))}" />')
+            default_article_path = article_paths.get('fr') or article_paths.get('en')
+            if default_article_path:
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(absolute_url(default_article_path))}" />')
             lines.append('  </url>')
     lines.append('</urlset>')
     return '\n'.join(lines) + '\n'
@@ -6030,6 +6180,15 @@ def blog_articles_for_lang(lang):
     return sorted(articles, key=lambda item: item['published'], reverse=True)
 
 
+def blog_article_paths(article_key):
+    entry = BLOG_ARTICLES.get(article_key, {})
+    return {
+        localized_lang: localized['path']
+        for localized_lang in ('en', 'fr')
+        if (localized := entry.get(localized_lang)) and localized.get('path')
+    }
+
+
 def blog_read_time_label(minutes, lang):
     return f'{minutes} {BLOG_META_UI[lang]["minutes"]}'
 
@@ -6351,9 +6510,10 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
     return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
 
 
-def header(lang, current, page_key):
+def header(lang, current, page_key, lang_switch_href=None):
     t = T[lang]
     alt = 'fr' if lang == 'en' else 'en'
+    switch_href = lang_switch_href or routes[alt][page_key]
     nav = [
         simple_nav_link(lang, 'home', current),
         nav_dropdown(lang, 'services', current, order, wide=True),
@@ -6363,7 +6523,7 @@ def header(lang, current, page_key):
         simple_nav_link(lang, 'blog', current),
         simple_nav_link(lang, 'contact', current),
     ]
-    return f'<header class="site-header"><div class="header-inner"><a class="brand" href="{routes[lang]["home"]}" aria-label="Opticable {esc(t["home"]).lower()}">{logo_img("header")}</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">{esc(t["menu"])}</button><nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">{"".join(nav)}</nav><div class="header-actions"><a class="lang-switch" href="{routes[alt][page_key]}" lang="{language_tag(alt)}">{esc(t["switch"])}</a><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a></div></div></header>'
+    return f'<header class="site-header"><div class="header-inner"><a class="brand" href="{routes[lang]["home"]}" aria-label="Opticable {esc(t["home"]).lower()}">{logo_img("header")}</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">{esc(t["menu"])}</button><nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">{"".join(nav)}</nav><div class="header-actions"><a class="lang-switch" href="{switch_href}" lang="{language_tag(alt)}">{esc(t["switch"])}</a><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a></div></div></header>'
 
 
 def footer_contact_items(lang):
@@ -6429,21 +6589,24 @@ def stylesheet_link_tags():
     return f'<link rel="stylesheet" href="{STYLES_URL}" />'
 
 
-def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None):
+def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None):
     t = T[lang]
     canonical_url = absolute_url(canonical_path or routes[lang][key])
-    default_url = absolute_url(default_route(key)) if include_alternates else canonical_url
     social_meta = social_meta_values(lang, key, title, desc, canonical_url)
     og_image_url = absolute_url(OG_IMAGE_URL)
     alternate_tags = ''
     if include_alternates:
+        alternate_paths = alternate_paths or {}
+        en_alternate = absolute_url(alternate_paths.get('en') or routes['en'][key])
+        fr_alternate = absolute_url(alternate_paths.get('fr') or routes['fr'][key])
+        default_url = absolute_url(alternate_paths.get('fr') or default_route(key))
         alternate_tags = (
-            f'<link rel="alternate" hreflang="{language_tag("en")}" href="{absolute_url(routes["en"][key])}" />'
-            f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{absolute_url(routes["fr"][key])}" />'
+            f'<link rel="alternate" hreflang="{language_tag("en")}" href="{en_alternate}" />'
+            f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{fr_alternate}" />'
             f'<link rel="alternate" hreflang="x-default" href="{default_url}" />'
         )
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -6835,6 +6998,8 @@ for lang in ('en', 'fr'):
     )
     write_url(routes[lang]['blog'], page(lang, 'blog', 'blog', blog_data['title'], blog_data['desc'], blog_body, breadcrumb_items=blog_breadcrumbs))
     for article in blog_articles_for_lang(lang):
+        article_paths = blog_article_paths(article['key'])
+        article_has_pair = bool(article_paths.get('en') and article_paths.get('fr'))
         article_breadcrumbs, article_body = render_blog_article_page(article, lang)
         write_url(
             article['path'],
@@ -6847,9 +7012,11 @@ for lang in ('en', 'fr'):
                 article_body,
                 breadcrumb_items=article_breadcrumbs,
                 canonical_path=article['path'],
-                include_alternates=False,
+                include_alternates=article_has_pair,
                 resource_key='blog',
                 schema_page_url=absolute_url(article['path']),
+                alternate_paths=article_paths if article_has_pair else None,
+                lang_switch_href=article_paths.get('fr' if lang == 'en' else 'en'),
             ),
         )
 
