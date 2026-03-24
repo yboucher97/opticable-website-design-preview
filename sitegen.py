@@ -1,9 +1,10 @@
 ﻿from pathlib import Path
 import json
 import re
-from datetime import date
+from datetime import date, datetime, time
 import shutil
 import xml.etree.ElementTree as ET
+from zoneinfo import ZoneInfo
 from PIL import Image, ImageOps
 
 root = Path(__file__).resolve().parent
@@ -107,6 +108,21 @@ SERVICE_VOIP_WIDTH = 1400
 SERVICE_VOIP_HEIGHT = 797
 OG_IMAGE_WIDTH = 1200
 OG_IMAGE_HEIGHT = 630
+SITE_TIMEZONE = ZoneInfo('America/Toronto')
+IMAGE_DIMENSIONS_BY_URL = {
+    HOME_BUILDING_URL: (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
+    HOME_RACK_URL: (HOME_RACK_WIDTH, HOME_RACK_HEIGHT),
+    ABOUT_PANEL_URL: (ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT),
+    SERVICE_CAMERA_URL: (SERVICE_CAMERA_WIDTH, SERVICE_CAMERA_HEIGHT),
+    SERVICE_INTERCOM_URL: (SERVICE_INTERCOM_WIDTH, SERVICE_INTERCOM_HEIGHT),
+    SERVICE_CABLING_URL: (SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT),
+    SERVICE_FIBER_URL: (SERVICE_FIBER_WIDTH, SERVICE_FIBER_HEIGHT),
+    SERVICE_INFRASTRUCTURE_URL: (SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT),
+    SERVICE_ACCESS_URL: (SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT),
+    SERVICE_WIFI_URL: (SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT),
+    SERVICE_VOIP_URL: (SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT),
+    OG_IMAGE_URL: (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
+}
 WEBSITE_ID = f'{SITE_URL}/#website'
 BUSINESS_ID = f'{SITE_URL}/#business'
 GENERAL_INQUIRY_LABELS = {'General inquiries', 'Renseignements généraux', 'Renseignements generaux'}
@@ -2477,6 +2493,7 @@ BLOG_MONTHS = {
 BLOG_ARTICLES = {
     'wifi-power': {
         'published': '2026-03-24',
+        'modified': '2026-03-24',
         'author': 'Yan-Erik B.',
         'en': {
             'path': '/en/blog/why-more-wifi-power-makes-things-worse/',
@@ -2765,6 +2782,7 @@ BLOG_ARTICLES = {
     },
     'ip-cameras-network-upgrade': {
         'published': '2026-03-23',
+        'modified': '2026-03-24',
         'author': "L'équipe Opticable",
         'en': {
             'path': '/en/blog/ip-cameras-network-upgrade/',
@@ -5903,6 +5921,39 @@ def absolute_url(path):
     return f'{SITE_URL}{path}'
 
 
+def asset_mime_type(url):
+    path = url.split('?', 1)[0].lower()
+    if path.endswith('.png'):
+        return 'image/png'
+    if path.endswith('.jpg') or path.endswith('.jpeg'):
+        return 'image/jpeg'
+    if path.endswith('.webp'):
+        return 'image/webp'
+    if path.endswith('.avif'):
+        return 'image/avif'
+    return 'image/png'
+
+
+def image_dimensions_for_url(url):
+    return IMAGE_DIMENSIONS_BY_URL.get(url, (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT))
+
+
+def image_meta_for_url(url, alt=''):
+    width, height = image_dimensions_for_url(url)
+    return {
+        'url': absolute_url(url),
+        'width': width,
+        'height': height,
+        'mime_type': asset_mime_type(url),
+        'alt': alt or 'Opticable preview image',
+    }
+
+
+def iso_datetime_for_date(value, hour=9):
+    parsed = date.fromisoformat(value)
+    return datetime.combine(parsed, time(hour, 0), tzinfo=SITE_TIMEZONE).isoformat()
+
+
 def language_tag(lang):
     return T[lang]['locale'].replace('_', '-')
 
@@ -5962,13 +6013,15 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
     return f'<a {" ".join(trigger_attrs)}>{img_html}</a>'
 
 
-def resource_hints(page_key):
+def resource_hints(page_key, preload_image_url=None):
     hints = []
     if page_key == 'home':
         hints.append(f'<link rel="preload" as="image" href="{HOME_RACK_URL}" />')
     if page_key == 'contact':
         hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
         hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
+    if preload_image_url:
+        hints.append(f'<link rel="preload" as="image" href="{esc(preload_image_url)}" />')
     return ''.join(hints)
 
 
@@ -6449,7 +6502,7 @@ def blog_word_count(text):
     return len(re.findall(r"[0-9A-Za-zÀ-ÿ]+(?:['’\-][0-9A-Za-zÀ-ÿ]+)*", text))
 
 
-def blog_minutes_for_article(article):
+def blog_word_count_for_article(article):
     pieces = []
     for key, value in article.items():
         if key in {'path', 'primary_key', 'secondary_key'}:
@@ -6460,7 +6513,11 @@ def blog_minutes_for_article(article):
             pieces.extend(_collect_blog_text(value))
         elif isinstance(value, (list, tuple)):
             pieces.extend(_collect_blog_text(value))
-    words = blog_word_count(' '.join(pieces))
+    return blog_word_count(' '.join(pieces))
+
+
+def blog_minutes_for_article(article):
+    words = blog_word_count_for_article(article)
     return max(1, (words + 219) // 220)
 
 
@@ -6485,7 +6542,13 @@ def blog_articles_for_lang(lang):
         localized = entry.get(lang)
         if not localized:
             continue
-        merged = {'key': key, 'published': entry['published'], 'author': entry['author'], **localized}
+        merged = {
+            'key': key,
+            'published': entry['published'],
+            'modified': entry.get('modified', entry['published']),
+            'author': entry['author'],
+            **localized,
+        }
         articles.append(merged)
     return sorted(articles, key=lambda item: item['published'], reverse=True)
 
@@ -6496,6 +6559,37 @@ def blog_article_paths(article_key):
         localized_lang: localized['path']
         for localized_lang in ('en', 'fr')
         if (localized := entry.get(localized_lang)) and localized.get('path')
+    }
+
+
+def schema_author_entity(name):
+    normalized = name.casefold()
+    if 'opticable' in normalized or 'team' in normalized or 'équipe' in normalized or 'equipe' in normalized:
+        return {'@type': 'Organization', 'name': name}
+    return {'@type': 'Person', 'name': name}
+
+
+def blog_article_seo_data(article, lang):
+    image = image_meta_for_url(article.get('hero_image') or OG_IMAGE_URL, article.get('headline', article.get('title', 'Opticable article')))
+    published = article['published']
+    modified = article.get('modified', published)
+    words = blog_word_count_for_article(article)
+    minutes = blog_minutes_for_article(article)
+    section = article.get('eyebrow') or next(iter(article.get('tags', [])), '')
+    return {
+        'headline': article['headline'],
+        'description': article.get('desc') or article.get('excerpt') or article.get('intro', ''),
+        'author': article['author'],
+        'published': published,
+        'modified': modified,
+        'published_iso': iso_datetime_for_date(published, 9),
+        'modified_iso': iso_datetime_for_date(modified, 15),
+        'image': image,
+        'section': section,
+        'tags': article.get('tags', []),
+        'word_count': words,
+        'time_required': f'PT{minutes}M',
+        'in_language': language_tag(lang),
     }
 
 
@@ -6733,13 +6827,25 @@ def offer_catalog_schema(lang):
     }
 
 
-def social_meta_values(lang, key, title, desc, canonical_url):
+def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None):
     meta = {
         'og_title': title,
         'og_description': desc,
         'twitter_title': title,
         'twitter_description': desc,
         'og_url': canonical_url,
+        'og_type': 'website',
+        'og_image': absolute_url(OG_IMAGE_URL),
+        'og_image_type': OG_IMAGE_MIME_TYPE,
+        'og_image_width': OG_IMAGE_WIDTH,
+        'og_image_height': OG_IMAGE_HEIGHT,
+        'og_image_alt': 'Opticable preview image',
+        'twitter_card': 'summary_large_image',
+        'meta_author': '',
+        'article_published_time': '',
+        'article_modified_time': '',
+        'article_section': '',
+        'article_tags': (),
     }
     if lang == 'fr' and key == 'home':
         meta.update({
@@ -6749,10 +6855,19 @@ def social_meta_values(lang, key, title, desc, canonical_url):
             'twitter_description': "Installation et gestion de systèmes pour immeubles commerciaux au Québec.",
             'og_url': absolute_url('/'),
         })
+    if article_meta:
+        meta.update({
+            'og_type': 'article',
+            'meta_author': article_meta['author'],
+            'article_published_time': article_meta['published_iso'],
+            'article_modified_time': article_meta['modified_iso'],
+            'article_section': article_meta['section'],
+            'article_tags': tuple(article_meta['tags']),
+        })
     return meta
 
 
-def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None):
+def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None, article_meta=None):
     page_url = page_url or absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
     business = {
@@ -6817,6 +6932,47 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         graph.append({'@type': 'Service', '@id': page_url + '#service', 'name': service_name, 'description': desc, 'serviceType': service_name, 'provider': {'@id': BUSINESS_ID}, 'url': page_url, 'areaServed': AREA_SERVED_SCHEMA})
     if faq_items:
         graph.append({'@type': 'FAQPage', '@id': page_url + '#faq', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq_items]})
+    if article_meta:
+        article_image = {
+            '@type': 'ImageObject',
+            'url': article_meta['image']['url'],
+            'width': article_meta['image']['width'],
+            'height': article_meta['image']['height'],
+        }
+        page['mainEntity'] = {'@id': page_url + '#article'}
+        page['primaryImageOfPage'] = article_image
+        article = {
+            '@type': 'BlogPosting',
+            '@id': page_url + '#article',
+            'mainEntityOfPage': {'@id': page_url + '#webpage'},
+            'headline': article_meta['headline'],
+            'description': article_meta['description'],
+            'url': page_url,
+            'inLanguage': article_meta['in_language'],
+            'author': schema_author_entity(article_meta['author']),
+            'publisher': {
+                '@type': 'Organization',
+                '@id': BUSINESS_ID,
+                'name': 'Opticable',
+                'logo': {
+                    '@type': 'ImageObject',
+                    'url': absolute_url(LOGO_UI_URL),
+                    'width': LOGO_UI_WIDTH,
+                    'height': LOGO_UI_HEIGHT,
+                },
+            },
+            'datePublished': article_meta['published_iso'],
+            'dateModified': article_meta['modified_iso'],
+            'image': article_image,
+            'wordCount': article_meta['word_count'],
+            'timeRequired': article_meta['time_required'],
+            'isAccessibleForFree': True,
+        }
+        if article_meta.get('section'):
+            article['articleSection'] = article_meta['section']
+        if article_meta.get('tags'):
+            article['keywords'] = article_meta['tags']
+        graph.append(article)
     return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
 
 
@@ -6899,12 +7055,12 @@ def stylesheet_link_tags():
     return f'<link rel="stylesheet" href="{STYLES_URL}" />'
 
 
-def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None):
+def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow, max-image-preview:large', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None, article_meta=None, preload_image_url=None):
     t = T[lang]
     canonical_url = absolute_url(canonical_path or routes[lang][key])
-    social_meta = social_meta_values(lang, key, title, desc, canonical_url)
-    og_image_url = absolute_url(OG_IMAGE_URL)
+    social_meta = social_meta_values(lang, key, title, desc, canonical_url, article_meta=article_meta)
     alternate_tags = ''
+    og_locale_alternates = ''
     if include_alternates:
         alternate_paths = alternate_paths or {}
         en_alternate = absolute_url(alternate_paths.get('en') or routes['en'][key])
@@ -6915,8 +7071,23 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             f'<link rel="alternate" hreflang="{language_tag("fr")}" href="{fr_alternate}" />'
             f'<link rel="alternate" hreflang="x-default" href="{default_url}" />'
         )
+        other_lang = 'fr' if lang == 'en' else 'en'
+        other_path = alternate_paths.get(other_lang)
+        if other_path:
+            og_locale_alternates = f'<meta property="og:locale:alternate" content="{T[other_lang]["locale"]}" />'
+    article_meta_tags = ''
+    if article_meta:
+        article_meta_tags = (
+            f'<meta name="author" content="{esc(article_meta["author"])}" />'
+            f'<meta property="article:published_time" content="{esc(article_meta["published_iso"])}" />'
+            f'<meta property="article:modified_time" content="{esc(article_meta["modified_iso"])}" />'
+            f'<meta property="og:updated_time" content="{esc(article_meta["modified_iso"])}" />'
+        )
+        if article_meta.get('section'):
+            article_meta_tags += f'<meta property="article:section" content="{esc(article_meta["section"])}" />'
+        article_meta_tags += ''.join(f'<meta property="article:tag" content="{esc(tag)}" />' for tag in article_meta['tags'])
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="website" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" /><meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{og_image_url}" /><meta property="og:image:type" content="{OG_IMAGE_MIME_TYPE}" /><meta property="og:image:alt" content="Opticable preview image" /><meta property="og:image:width" content="{OG_IMAGE_WIDTH}" /><meta property="og:image:height" content="{OG_IMAGE_HEIGHT}" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{og_image_url}" /><meta name="twitter:image:alt" content="Opticable preview image" />{resource_hints(resource_key or key)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -7311,6 +7482,7 @@ for lang in ('en', 'fr'):
         article_paths = blog_article_paths(article['key'])
         article_has_pair = bool(article_paths.get('en') and article_paths.get('fr'))
         article_breadcrumbs, article_body = render_blog_article_page(article, lang)
+        article_meta = blog_article_seo_data(article, lang)
         write_url(
             article['path'],
             page(
@@ -7327,6 +7499,8 @@ for lang in ('en', 'fr'):
                 schema_page_url=absolute_url(article['path']),
                 alternate_paths=article_paths if article_has_pair else None,
                 lang_switch_href=article_paths.get('fr' if lang == 'en' else 'en'),
+                article_meta=article_meta,
+                preload_image_url=article.get('hero_image'),
             ),
         )
 
