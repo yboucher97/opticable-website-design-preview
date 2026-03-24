@@ -2763,6 +2763,155 @@ BLOG_ARTICLES = {
             },
         },
     },
+    'ip-cameras-network-upgrade': {
+        'published': '2026-03-23',
+        'author': "L'équipe Opticable",
+        'fr': {
+            'path': '/fr/blogue/cameras-ip-mise-a-niveau-reseau/',
+            'title': 'Caméras IP : pourquoi votre réseau de surveillance mérite une mise à niveau | Opticable',
+            'desc': "Pourquoi les vieux systèmes CCTV / DVR atteignent vite leurs limites, et ce qu'une migration vers des caméras IP avec NVR cloud change réellement.",
+            'eyebrow': 'Sécurité IP',
+            'headline': 'Vos caméras de sécurité sont-elles à la hauteur de votre réseau ?',
+            'intro': "Les vieux systèmes CCTV et DVR ont fait leur temps. Aujourd'hui, les caméras IP sur plateforme NVR cloud changent complètement la donne : plus de contrôle, plus de flexibilité, et une gestion centralisée de tous vos sites dans une seule interface.",
+            'excerpt': "Une caméra IP n'est pas juste une version plus nette du CCTV. C'est une vraie mise à niveau réseau pour l'accès, la gestion, le stockage et la supervision multi-site.",
+            'tags': ['Sécurité IP', 'Caméras de sécurité', 'Infrastructure réseau'],
+            'hero_image': SERVICE_CAMERA_URL,
+            'hero_image_position': '52% 50%',
+            'summary': [
+                ('Le vrai changement', "Passer d'un DVR isolé à une plateforme IP gérée sur votre réseau."),
+                ('Ce que ça apporte', 'Meilleure image, accès distant, gestion centralisée et intégrations plus propres.'),
+                ('Ce qu’il faut prévoir', 'PoE, câblage Cat 6, segmentation réseau, stockage et droits d’accès bien planifiés.'),
+            ],
+            'sections': [
+                {
+                    'eyebrow': "Pourquoi c'est important",
+                    'title': "La surveillance IP, ce n'est plus juste de la vidéo",
+                    'paragraphs': [
+                        "Une caméra de sécurité n'est pas seulement un œil pointé sur votre bâtiment. C'est un appareil branché sur votre réseau : un équipement qui transmet du trafic, qui s'authentifie, qui enregistre ou streame des données en continu, et qui doit s'intégrer proprement au reste de votre infrastructure.",
+                        "Quand le système est bien pensé, il protège vos accès, décourage les incidents avant qu'ils arrivent, et vous laisse une trace exploitable si quelque chose se passe. Quand il est mal intégré, il ajoute du bruit réseau, des angles morts, des accès distants fragiles et beaucoup de support inutile.",
+                        "Que vous gériez un immeuble résidentiel, un commerce, un bureau ou plusieurs sites à la fois, la vraie question n'est plus « est-ce qu'on a besoin de caméras ? ». La vraie question, c'est « est-ce que notre système actuel fait vraiment le travail qu'on lui demande aujourd'hui ? »",
+                    ],
+                    'callout_label': 'À retenir',
+                    'callout': "Migrer vers les caméras IP, ce n'est pas seulement remplacer des caméras. C'est mettre à niveau votre réseau de surveillance, votre accès à distance et votre capacité de gestion.",
+                },
+                {
+                    'eyebrow': "Qui en a besoin",
+                    'title': 'Qui a vraiment intérêt à passer aux caméras IP',
+                    'paragraphs': [
+                        "Il n'y a pas un seul profil de client pour la surveillance IP. Chaque environnement a ses propres contraintes de zones à couvrir, de rétention, d'accès à distance et de nombre d'utilisateurs à gérer.",
+                    ],
+                    'cards': [
+                        ('Immeubles résidentiels', "Entrées, stationnements, corridors et aires communes. Les résidents veulent de la tranquillité d'esprit; les gestionnaires veulent des archives et un accès à distance quand un incident survient."),
+                        ('Commerces et détail', 'Caisses, réserves, portes de livraison et plancher de vente. La vidéo sert à réduire le vol, documenter les événements et garder une visibilité sur les opérations.'),
+                        ('Bureaux et PME', "Salles serveurs, réception, accès restreints et circulation interne. Les caméras IP s'intègrent à une vraie stratégie de sécurité physique, pas seulement à un enregistreur posé dans un coin."),
+                        ('Industries et entrepôts', "Quais, périmètres, inventaire et zones extérieures. Ici, il faut des caméras robustes, du bon éclairage IR, des alertes et un réseau capable d'absorber plusieurs flux vidéo en parallèle."),
+                        ('Restaurants et hôtellerie', "Cuisine, hall, bar, stationnements et entrées fournisseurs. La vidéo protège l'établissement autant contre les incidents externes que contre les litiges ou les pertes internes."),
+                        ('Portefeuilles multi-sites', "Dès qu'il y a plusieurs immeubles, commerces ou succursales, la différence devient énorme. Une seule interface remplace une collection de DVR séparés et difficiles à suivre."),
+                    ],
+                },
+                {
+                    'eyebrow': 'Comparatif',
+                    'title': 'CCTV / DVR contre caméras IP / NVR cloud',
+                    'paragraphs': [
+                        "Pendant longtemps, le standard, c'était un DVR branché à des caméras analogiques sur coaxial. Ça fonctionnait, mais ça répond mal aux besoins actuels dès qu'on veut de la qualité d'image, du visionnement distant propre ou une gestion à l'échelle de plusieurs sites.",
+                    ],
+                    'table': {
+                        'caption': 'Ce qui change concrètement quand on migre vers un système IP',
+                        'columns': ('Critère', 'CCTV / DVR analogique', 'Caméras IP / NVR cloud'),
+                        'rows': (
+                            ('Image', 'Résolution limitée sur les installations plus âgées, souvent loin des standards actuels.', 'Full HD, 4K ou HDR selon le modèle, avec bien meilleure performance dans les scènes difficiles.'),
+                            ('Câblage', 'Coaxial et alimentation séparée, infrastructure souvent déconnectée du reste du réseau.', 'Cat 6 / PoE, un seul câble pour les données et l’alimentation, intégré au réseau existant.'),
+                            ('Accès', 'Consultation locale ou accès distant complexe à maintenir.', 'Visionnement distant natif sur mobile et web, avec gestion centralisée des utilisateurs.'),
+                            ('Stockage', 'DVR local unique : si la machine tombe ou disparaît, les archives partent avec.', 'NVR local, stockage hybride ou redondance cloud selon la plateforme choisie.'),
+                            ('Multi-site', 'Chaque site fonctionne comme une île séparée.', 'Tous les sites peuvent remonter dans une seule interface avec des permissions par emplacement.'),
+                            ('Sécurité', 'Mises à jour rares et firmwares souvent laissés en place pendant des années.', 'Plateformes plus propres à maintenir, avec mises à jour, rôles utilisateurs et supervision plus rigoureuse.'),
+                        ),
+                    },
+                    'quote': "Un vieux DVR peut encore enregistrer. Ça ne veut pas dire qu'il répond encore aux besoins d'un bâtiment actif.",
+                },
+                {
+                    'eyebrow': 'Gestion',
+                    'title': 'La vraie valeur apparaît quand il y a plusieurs sites',
+                    'paragraphs': [
+                        "C'est là que les plateformes IP modernes font vraiment la différence. Trois immeubles, cinq commerces ou vingt succursales : tout peut être regroupé dans le même tableau de bord, au lieu de multiplier les accès, les mots de passe, les IP locales et les visites sur place.",
+                    ],
+                    'steps': [
+                        ('Dashboard unifié', 'Toutes les caméras, tous les sites, dans une seule interface. Vous filtrez par emplacement, par zone ou par événement sans jongler avec plusieurs systèmes.'),
+                        ('Alertes intelligentes', 'Mouvement, franchissement de zone, activité hors horaire ou clip vidéo envoyé directement à la bonne personne. Le système devient exploitable, pas seulement consultable.'),
+                        ('Permissions granulaires', "Chaque utilisateur voit ce qu'il doit voir. Le gérant du site A ne touche pas au site B, pendant que la direction ou la sécurité centrale conserve une vue d'ensemble."),
+                        ('Archives redondantes', "Les enregistrements peuvent rester disponibles même si un NVR local est endommagé, volé ou inaccessible. C'est une vraie différence quand il faut récupérer une preuve après coup."),
+                    ],
+                    'callout_label': 'Pourquoi ça compte',
+                    'callout': "Quand la caméra, le réseau, les accès et les utilisateurs sont pensés ensemble, vous passez d'un système de preuve après incident à un système de supervision réellement utile au quotidien.",
+                },
+                {
+                    'eyebrow': 'Réseau',
+                    'title': 'Une bonne caméra IP commence par un bon réseau',
+                    'paragraphs': [
+                        "La meilleure caméra du marché ne compensera pas un réseau mal planifié. Avant de poser quoi que ce soit, il faut regarder le budget PoE, les uplinks, le câblage existant, la segmentation VLAN, la rétention vidéo voulue et la façon dont les utilisateurs vont se connecter.",
+                        "Une caméra IP mal intégrée, ça ne crée pas seulement une image moyenne ou un angle mort. Ça peut aussi saturer un lien, polluer le trafic de production, exposer un accès distant inutilement ou compliquer toute la maintenance pour les années suivantes.",
+                    ],
+                    'subsections': [
+                        {
+                            'title': "Ce qu'on valide avant le déploiement",
+                            'items': [
+                                'La qualité du câblage existant et les parcours à reprendre',
+                                'Le budget PoE disponible sur les commutateurs',
+                                'Les besoins de rétention locale, distante ou hybride',
+                                'Les zones à risque, angles morts et conditions lumineuses',
+                                'La séparation du trafic caméras du reste du réseau',
+                            ],
+                        },
+                        {
+                            'title': "Ce qu'on met en place ensuite",
+                            'items': [
+                                'Caméras IP intérieures et extérieures adaptées au site',
+                                'Câblage structuré Cat 6 propre et identifié',
+                                'NVR ou plateforme VMS configurée avec profils utilisateurs',
+                                'VLAN et politiques réseau pour isoler le trafic vidéo',
+                                'Accès distant sécurisé pour les personnes autorisées',
+                            ],
+                        },
+                        {
+                            'title': "Ce qu'on évite absolument",
+                            'items': [
+                                'Brancher toutes les caméras sur un réseau plat sans segmentation',
+                                'Sous-estimer le stockage et la bande passante nécessaires',
+                                'Laisser un accès distant improvisé ou mal protégé',
+                                'Réutiliser des segments de câblage douteux sans validation',
+                                'Traiter la surveillance comme un système isolé du reste du bâtiment',
+                            ],
+                        },
+                    ],
+                    'quote': "Une caméra IP mal intégrée ne crée pas seulement un angle mort. Elle crée aussi du bruit, du risque et du support inutile.",
+                },
+                {
+                    'eyebrow': 'Opticable',
+                    'title': 'Le bon réseau, la bonne équipe',
+                    'paragraphs': [
+                        "Opticable installe des systèmes de caméras IP comme on déploie une infrastructure réseau : avec méthode, avec validation, et en s'assurant que le tout reste supportable après la mise en service.",
+                        "On commence par l'infrastructure existante : commutateurs, câblage, uplinks, bande passante, zones à couvrir, rétention et besoins d'accès. Le but n'est pas de vendre des boîtes. Le but est de livrer un système cohérent qui tient la route dans votre réalité.",
+                    ],
+                    'cards': [
+                        ('Installation de caméras IP', 'Caméras intérieures et extérieures, couverture des accès, stationnements, périmètres et zones communes.'),
+                        ('Câblage structuré Cat 6', 'Parcours propres, terminaisons, étiquetage et base physique solide pour l’ensemble du système.'),
+                        ('Configuration NVR / VMS', 'Enregistrement, rétention, profils utilisateurs, alertes et visionnement à distance configurés proprement.'),
+                        ('Segmentation VLAN', 'Séparation du trafic caméras, postes, WiFi invité et systèmes critiques pour garder un réseau plus sain.'),
+                        ('Gestion multi-site', 'Un seul tableau de bord pour plusieurs immeubles, commerces ou succursales avec droits d’accès clairs.'),
+                        ('Support et maintenance', 'Mises à jour, ajustements, remplacements et accompagnement après la mise en service.'),
+                    ],
+                },
+            ],
+            'cta': {
+                'title': 'Prêt à moderniser votre surveillance IP ?',
+                'copy': "Parlez-nous de votre bâtiment ou de votre parc immobilier. On analyse votre site, votre réseau et vos besoins de sécurité pour vous proposer une solution qui tient vraiment la route.",
+                'primary_label': 'Obtenir une soumission',
+                'primary_key': 'contact',
+                'secondary_label': 'Voir le service caméras',
+                'secondary_key': 'security-camera-systems',
+            },
+        },
+    },
 }
 
 CASE_STUDY_ORDER = (
