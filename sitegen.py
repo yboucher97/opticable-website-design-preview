@@ -51,6 +51,20 @@ APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
 WEBMANIFEST_URL = '/site.webmanifest'
+GOOGLE_ANALYTICS_TAG_ID = 'G-GYLGWDS464'
+GOOGLE_ADS_TAG_ID = 'AW-18043353221'
+GOOGLE_TAG_SNIPPET = (
+    f'<script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_ANALYTICS_TAG_ID}"></script>'
+    '<script>\n'
+    '  window.dataLayer = window.dataLayer || [];\n'
+    '  function gtag(){dataLayer.push(arguments);}\n'
+    "  gtag('js', new Date());\n\n"
+    '  // Google Analytics 4\n'
+    f"  gtag('config', '{GOOGLE_ANALYTICS_TAG_ID}');\n\n"
+    '  // Google Ads\n'
+    f"  gtag('config', '{GOOGLE_ADS_TAG_ID}');\n"
+    '</script>'
+)
 ZOHO_FORM_CONFIG = {
     'fr': {
         'src': 'https://forms.zohopublic.com/opticable/form/Formulairedemandedesoumission/formperma/i6pIlfoGOFER0OCZ4oUH_KMxVWRZKC9Of8vbyNAjR0g',
@@ -7645,7 +7659,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             article_meta_tags += f'<meta property="article:section" content="{esc(article_meta["section"])}" />'
         article_meta_tags += ''.join(f'<meta property="article:tag" content="{esc(tag)}" />' for tag in article_meta['tags'])
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head>{GOOGLE_TAG_SNIPPET}<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
