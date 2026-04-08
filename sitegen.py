@@ -1851,13 +1851,13 @@ MONTH_NAMES = {
 PROMO_PAGE_CONTENT = {
     'en': {
         'label': 'Promo',
-        'title': 'Quebec commercial quote promo | Opticable',
-        'desc': 'Enter your details, get an instant Opticable promo code, and apply it to a new commercial installation quote in Quebec.',
-        'hero_eyebrow': 'Quebec commercial promo',
-        'h1': 'Roll a promo code for your next commercial installation quote.',
-        'intro': 'Enter your details to lock in one promo code between 5% and 25% off. The code can be applied manually to an approved new Opticable installation quote in Quebec, up to the campaign cap.',
+        'title': 'Quebec installation quote promo | Opticable',
+        'desc': 'Enter your details, get an instant Opticable promo code, and apply it to a new installation quote in Quebec.',
+        'hero_eyebrow': 'Quebec promo',
+        'h1': 'Roll a promo code for your next installation quote.',
+        'intro': 'Enter your details to get one promo code between 5% and 25% off. The code can be applied manually to an approved new Opticable installation quote in Quebec, up to the campaign cap.',
         'hero_panel_title': 'One entry, one code, your next quote.',
-        'hero_panel_copy': 'Use the code on a cameras, access control, WiFi, intercom, structured cabling, or network infrastructure quote for a commercial project in Quebec.',
+        'hero_panel_copy': 'Use the code on a cameras, access control, WiFi, intercom, structured cabling, or network infrastructure quote for a project in Quebec.',
         'hero_points': [
             'Instant result after one form submission',
             'Code validity linked to the campaign rules',
@@ -1883,7 +1883,6 @@ PROMO_PAGE_CONTENT = {
             'skill': 'Skill-testing question',
         },
         'consents': {
-            'business': 'I confirm this entry is for a commercial project.',
             'quebec': 'I confirm the project property is in Quebec.',
             'rules': 'I have read and accept the promo rules and privacy terms.',
             'marketing': 'I agree to receive marketing emails from Opticable. This is optional and not required to enter.',
@@ -1913,7 +1912,7 @@ PROMO_PAGE_CONTENT = {
             'saved_code': 'Saved',
             'close_modal': 'Close',
         },
-        'faq_intro': 'Useful answers before submitting a commercial promo entry.',
+        'faq_intro': 'Useful answers before submitting a promo entry.',
         'faqs': [
             ('Does this replace the normal quote review?', 'No. The code is attached to the existing quote process. The team still reviews scope, eligibility, exclusions, and project fit before applying any discount.'),
             ('Can I reroll with the same email?', 'No. The campaign stores one result per email address and returns the original result on later submissions.'),
@@ -1921,9 +1920,9 @@ PROMO_PAGE_CONTENT = {
             ('Can the code be used on support or managed service work?', 'No. The campaign is limited to qualifying new installation quotes and excludes recurring services, support calls, taxes, and already discounted work.'),
         ],
         'rules_title': 'Promo rules | Opticable',
-        'rules_desc': 'Official rules for the Opticable Quebec commercial promo campaign, including eligibility, odds, discount limits, and redemption rules.',
+        'rules_desc': 'Official rules for the Opticable Quebec promo campaign, including eligibility, odds, discount limits, and redemption rules.',
         'rules_h1': 'Official promo rules',
-        'rules_intro': 'Read these terms before submitting an entry. The promo is intended for Quebec commercial projects and is tied to Opticable’s quote review process.',
+        'rules_intro': 'Read these terms before submitting an entry. The promo is intended for Quebec projects and is tied to Opticable’s quote review process.',
         'unsubscribe_title': 'Marketing email unsubscribe | Opticable',
         'unsubscribe_desc': 'Withdraw optional marketing consent for Opticable promotional emails without affecting quote-related follow-up.',
         'unsubscribe_h1': 'Withdraw marketing email consent',
@@ -1936,18 +1935,18 @@ PROMO_PAGE_CONTENT = {
         'reminder_copy': 'Your promo code is already saved and ready to use.',
         'cta_eyebrow': 'Promo',
         'cta_title': 'Want to lock in a code before requesting a quote?',
-        'cta_copy': 'Use the promo entry page to collect your one-time code, then continue into the normal commercial quote flow with a better-qualified lead.',
+        'cta_copy': 'Use the promo entry page to collect your one-time code, then continue into the normal quote flow with a better-qualified lead.',
         'cta_button': 'View the promo page',
     },
     'fr': {
         'label': 'Promo',
-        'title': 'Promo pour soumission commerciale au Québec | Opticable',
-        'desc': "Entrez vos coordonnées, obtenez un code promo instantané Opticable et appliquez-le à une nouvelle soumission d'installation commerciale au Québec.",
-        'hero_eyebrow': 'Promo commerciale Québec',
-        'h1': 'Roulez un code promo pour votre prochaine soumission d’installation commerciale.',
+        'title': 'Promo pour soumission d’installation au Québec | Opticable',
+        'desc': "Entrez vos coordonnées, obtenez un code promo instantané Opticable et appliquez-le à une nouvelle soumission d'installation au Québec.",
+        'hero_eyebrow': 'Promo Québec',
+        'h1': 'Roulez un code promo pour votre prochaine soumission d’installation.',
         'intro': "Entrez vos coordonnées pour avoir un code promo entre 5 % et 25 %. Le code peut être appliqué manuellement à une nouvelle soumission d'installation Opticable admissible au Québec, jusqu'au plafond de la campagne.",
         'hero_panel_title': 'Une entrée, un code, votre prochaine soumission.',
-        'hero_panel_copy': "Utilisez ce code pour une demande de caméras, de contrôle d'accès, de WiFi, d'intercom, de câblage structuré ou d'infrastructure réseau liée à un projet commercial au Québec.",
+        'hero_panel_copy': "Utilisez ce code pour une demande de caméras, de contrôle d'accès, de WiFi, d'intercom, de câblage structuré ou d'infrastructure réseau liée à un projet au Québec.",
         'hero_points': [
             'Résultat instantané après une seule soumission',
             'Validité du code liée au règlement officiel',
@@ -1973,7 +1972,6 @@ PROMO_PAGE_CONTENT = {
             'skill': "Question d'habileté",
         },
         'consents': {
-            'business': "Je confirme que cette entrée vise un projet commercial.",
             'quebec': "Je confirme que la propriété visée par le projet se trouve au Québec.",
             'rules': "J'ai lu et j'accepte le règlement promo et les modalités de confidentialité.",
             'marketing': "J'accepte de recevoir des courriels marketing d'Opticable. Ce choix est optionnel et non requis pour participer.",
@@ -2003,7 +2001,7 @@ PROMO_PAGE_CONTENT = {
             'saved_code': 'Code enregistré',
             'close_modal': 'Fermer',
         },
-        'faq_intro': 'Réponses utiles avant de soumettre une entrée promotionnelle commerciale.',
+        'faq_intro': 'Réponses utiles avant de soumettre une entrée promotionnelle.',
         'faqs': [
             ("Est-ce que cela remplace l'analyse normale de la soumission ?", "Non. Le code est rattaché au processus de soumission existant. L'équipe valide toujours la portée, l'admissibilité, les exclusions et la pertinence du projet avant d'appliquer un rabais."),
             ('Puis-je rerouler avec le même courriel ?', "Non. La campagne conserve un seul résultat par adresse courriel et retourne le résultat original lors des soumissions suivantes."),
@@ -2011,9 +2009,9 @@ PROMO_PAGE_CONTENT = {
             ("Le code peut-il être appliqué à du soutien ou à des services récurrents ?", "Non. La campagne vise seulement les nouvelles soumissions d'installation admissibles et exclut les services récurrents, les appels de soutien, les taxes et les travaux déjà escomptés."),
         ],
         'rules_title': 'Règlement promo | Opticable',
-        'rules_desc': "Règlement officiel de la campagne promo commerciale Opticable au Québec, incluant l'admissibilité, les probabilités, les plafonds de rabais et les règles d'utilisation.",
+        'rules_desc': "Règlement officiel de la campagne promo Opticable au Québec, incluant l'admissibilité, les probabilités, les plafonds de rabais et les règles d'utilisation.",
         'rules_h1': 'Règlement officiel de la promo',
-        'rules_intro': "Lisez ces conditions avant de soumettre une entrée. La promo vise les projets commerciaux au Québec et reste rattachée au processus d'analyse des soumissions d'Opticable.",
+        'rules_intro': "Lisez ces conditions avant de soumettre une entrée. La promo vise les projets au Québec et reste rattachée au processus d'analyse des soumissions d'Opticable.",
         'unsubscribe_title': 'Désabonnement des courriels marketing | Opticable',
         'unsubscribe_desc': "Retirez le consentement optionnel aux courriels marketing d'Opticable sans affecter les suivis liés aux soumissions ou aux services.",
         'unsubscribe_h1': 'Retirer le consentement marketing',
@@ -2026,7 +2024,7 @@ PROMO_PAGE_CONTENT = {
         'reminder_copy': "Votre code promo est déjà prêt à utiliser.",
         'cta_eyebrow': 'Promo',
         'cta_title': 'Vous voulez obtenir un code avant de demander une soumission ?',
-        'cta_copy': "Passez par la page promo pour obtenir votre code unique, puis poursuivez vers le processus normal de soumission commerciale avec un lead mieux qualifié.",
+        'cta_copy': "Passez par la page promo pour obtenir votre code unique, puis poursuivez vers le processus normal de soumission avec un lead mieux qualifié.",
         'cta_button': 'Voir la page promo',
     },
 }
@@ -4388,7 +4386,7 @@ async function initPromoForms() {
         showError(copy.requiredField || '');
         return;
       }
-      if (!form.elements.namedItem('business_attestation').checked || !form.elements.namedItem('quebec_attestation').checked || !form.elements.namedItem('rules_attestation').checked) {
+      if (!form.elements.namedItem('quebec_attestation').checked || !form.elements.namedItem('rules_attestation').checked) {
         showError(copy.requiredConsent || '');
         return;
       }
@@ -4410,7 +4408,6 @@ async function initPromoForms() {
         skillAnswer: String(form.elements.namedItem('skill_answer').value || '').trim(),
         skillToken: String(form.elements.namedItem('skill_token').value || '').trim(),
         turnstileToken,
-        businessAttestation: form.elements.namedItem('business_attestation').checked,
         quebecAttestation: form.elements.namedItem('quebec_attestation').checked,
         rulesAttestation: form.elements.namedItem('rules_attestation').checked,
         marketingOptIn: form.elements.namedItem('marketing_opt_in').checked,
@@ -7903,13 +7900,13 @@ def promo_rules_summary(lang):
     if lang == 'fr':
         return [
             ('Période de la campagne', f'Du {localized_datetime_label(PROMO_START, lang, True)} au {localized_datetime_label(PROMO_END, lang, True)}.'),
-            ('Admissibilité', "Les entrées doivent concerner un projet commercial situé au Québec."),
+            ('Admissibilité', "Les entrées doivent concerner un projet situé au Québec."),
             ('Valeur de la promo', f'Rabais entre {promo_discount_range_label(lang)} sur le sous-total avant taxes, jusqu’à {promo_cap_label()} par soumission admissible.'),
             ('Limites', "Une seule entrée par adresse courriel et par campagne. Les services récurrents, appels de soutien, taxes et travaux déjà escomptés sont exclus."),
         ]
     return [
         ('Campaign period', f'From {localized_datetime_label(PROMO_START, lang, True)} through {localized_datetime_label(PROMO_END, lang, True)}.'),
-        ('Eligibility', 'Entries must relate to a Quebec commercial project.'),
+        ('Eligibility', 'Entries must relate to a project in Quebec.'),
         ('Promo value', f'Discounts range from {promo_discount_range_label(lang)} on the pre-tax quoted subtotal, capped at {promo_cap_label()} per qualifying quote.'),
         ('Limits', 'One entry per email address per campaign. Recurring services, support calls, taxes, and already discounted work are excluded.'),
     ]
@@ -7992,7 +7989,6 @@ def promo_form_shell(lang):
         f'</div>'
         f'<div class="promo-turnstile-shell"><div class="promo-turnstile" data-promo-turnstile></div></div>'
         f'<div class="promo-checklist">'
-        f'<label><input name="business_attestation" type="checkbox" required /> <span>{esc(consents["business"])}</span></label>'
         f'<label><input name="quebec_attestation" type="checkbox" required /> <span>{esc(consents["quebec"])}</span></label>'
         f'<label><input name="rules_attestation" type="checkbox" required />'
         f'<span class="promo-consent-copy"><span class="promo-consent-text">{esc(consents["rules"])}</span>'
@@ -8014,7 +8010,7 @@ def promo_rules_body(lang):
     if lang == 'fr':
         sections = (
             ('Promoteur', f'{PROMO_CONFIG["sponsor"]["legalName"]}, faisant affaire sous le nom Opticable.'),
-            ('Admissibilité', "La campagne est ouverte aux personnes majeures qui soumettent une entrée liée à un projet commercial situé au Québec. Les projets hors Québec et les demandes non commerciales sont exclus."),
+            ('Admissibilité', "La campagne est ouverte aux personnes majeures qui soumettent une entrée liée à un projet situé au Québec. Les projets hors Québec sont exclus."),
             ('Aucun achat requis', "Aucun achat n'est requis pour participer. Une bonne réponse à la question d'habileté et le respect du présent règlement sont nécessaires pour conserver le résultat attribué."),
             ('Probabilités de gain', "Les probabilités dépendent de la grille pondérée ci-dessous. Chaque entrée valide obtient un seul résultat pour la campagne."),
             ('Utilisation du code', "Le code promo doit être mentionné dans la demande de soumission Opticable avant l'expiration. Le rabais, s'il est applicable, est calculé sur le sous-total avant taxes d'une nouvelle soumission d'installation admissible et demeure plafonné à " + promo_cap_label() + '.'),
@@ -8025,7 +8021,7 @@ def promo_rules_body(lang):
     else:
         sections = (
             ('Sponsor', f'{PROMO_CONFIG["sponsor"]["legalName"]}, carrying on business as Opticable.'),
-            ('Eligibility', 'The campaign is open to adults submitting an entry tied to a Quebec commercial project. Non-Quebec projects and non-commercial quote requests are excluded.'),
+            ('Eligibility', 'The campaign is open to adults submitting an entry tied to a project in Quebec. Non-Quebec projects are excluded.'),
             ('No purchase required', 'No purchase is required to enter. A correct answer to the skill-testing question and compliance with these rules are required to keep the assigned result.'),
             ('Odds', 'The odds follow the weighted distribution below. Each valid email address receives one result for the campaign.'),
             ('Code redemption', 'The promo code must be mentioned in the Opticable quote request before expiry. If applicable, the discount is calculated on the pre-tax subtotal of a qualifying new installation quote and remains capped at ' + promo_cap_label() + '.'),

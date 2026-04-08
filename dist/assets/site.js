@@ -400,7 +400,7 @@ async function initPromoForms() {
         showError(copy.requiredField || '');
         return;
       }
-      if (!form.elements.namedItem('business_attestation').checked || !form.elements.namedItem('quebec_attestation').checked || !form.elements.namedItem('rules_attestation').checked) {
+      if (!form.elements.namedItem('quebec_attestation').checked || !form.elements.namedItem('rules_attestation').checked) {
         showError(copy.requiredConsent || '');
         return;
       }
@@ -422,7 +422,6 @@ async function initPromoForms() {
         skillAnswer: String(form.elements.namedItem('skill_answer').value || '').trim(),
         skillToken: String(form.elements.namedItem('skill_token').value || '').trim(),
         turnstileToken,
-        businessAttestation: form.elements.namedItem('business_attestation').checked,
         quebecAttestation: form.elements.namedItem('quebec_attestation').checked,
         rulesAttestation: form.elements.namedItem('rules_attestation').checked,
         marketingOptIn: form.elements.namedItem('marketing_opt_in').checked,

@@ -628,7 +628,7 @@ async function handlePromoEntry(request, env) {
   if (!name || !emailNormalized || !isValidEmail(emailNormalized)) {
     return jsonResponse({ ok: false, error: text.invalidEmail }, 400);
   }
-  if (!body.businessAttestation || !body.quebecAttestation || !body.rulesAttestation) {
+  if (!body.quebecAttestation || !body.rulesAttestation) {
     return jsonResponse({ ok: false, error: text.requiredConsent }, 400);
   }
   const skill = await verifySkillChallenge(env, safeTrim(body.skillToken, 500), safeTrim(body.skillAnswer, 20), locale);
@@ -699,7 +699,7 @@ async function handlePromoEntry(request, env) {
         emailNormalized,
         phone,
         company,
-        body.businessAttestation ? 1 : 0,
+        0,
         body.quebecAttestation ? 1 : 0,
         promoConfig.rulesVersion,
         promoConfig.privacyVersion,
