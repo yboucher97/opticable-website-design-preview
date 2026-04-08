@@ -2031,6 +2031,129 @@ PROMO_PAGE_CONTENT = {
     },
 }
 
+PROMO_ADMIN_CONTENT = {
+    'en': {
+        'label': 'Promo admin',
+        'title': 'Promo leads admin | Opticable',
+        'desc': 'Protected Opticable admin page to review promo leads and export CSV files.',
+        'eyebrow': 'Protected promo admin',
+        'h1': 'Promo leads dashboard',
+        'intro': 'Review the latest promo entries, switch between the current campaign and all campaigns, and export the records as CSV.',
+        'panel_title': 'What this page shows',
+        'panel_copy': 'This page stays out of search and is protected before it loads. Use it to inspect incoming leads without opening D1 manually.',
+        'panel_points': [
+            'Latest entries visible in the browser',
+            'Toggle between the current campaign and all campaigns',
+            'Download a CSV export whenever you need it',
+        ],
+        'scope_label': 'View',
+        'scope_current': 'Current campaign',
+        'scope_all': 'All campaigns',
+        'refresh': 'Refresh',
+        'export': 'Export CSV',
+        'delete_selected': 'Delete selected',
+        'delete_view': 'Delete current view',
+        'delete_view_all': 'Delete all campaigns',
+        'select_all': 'Select all visible entries',
+        'summary': {
+            'entries': 'Entries',
+            'marketing': 'Marketing opt-ins',
+            'recent': 'Last 7 days',
+            'latest': 'Latest entry',
+            'current_campaign': 'Current campaign',
+            'campaign_window': 'Campaign window',
+            'active_view': 'Active view',
+        },
+        'table': {
+            'received': 'Received',
+            'select': 'Select',
+            'campaign': 'Campaign',
+            'name': 'Name',
+            'email': 'Email',
+            'phone': 'Phone',
+            'company': 'Company',
+            'discount': 'Discount',
+            'code': 'Promo code',
+            'expires': 'Valid until',
+            'marketing': 'Marketing',
+            'attribution': 'Attribution',
+        },
+        'loading': 'Loading promo entries...',
+        'load_error': 'The promo entries could not be loaded right now.',
+        'empty': 'No promo entries are available for this view yet.',
+        'marketing_yes': 'Opted in',
+        'marketing_no': 'No',
+        'marketing_out': 'Opted out',
+        'none': '—',
+        'delete_error': 'The selected promo entries could not be deleted right now.',
+        'delete_none': 'Select at least one promo entry first.',
+        'delete_selected_confirm': 'Delete the selected promo entries permanently?',
+        'delete_view_confirm': 'Delete every promo entry in the current view permanently?',
+        'delete_selected_success': 'Selected promo entries were deleted.',
+        'delete_view_success': 'The current view was deleted.',
+    },
+    'fr': {
+        'label': 'Admin promo',
+        'title': 'Admin des leads promo | Opticable',
+        'desc': "Page d'administration protégée d'Opticable pour consulter les leads promo et exporter des fichiers CSV.",
+        'eyebrow': 'Admin promo protégé',
+        'h1': 'Tableau des leads promo',
+        'intro': "Consultez les dernières entrées promo, basculez entre la campagne en cours et l'ensemble des campagnes, puis exportez les données en CSV.",
+        'panel_title': 'Ce que cette page affiche',
+        'panel_copy': "Cette page reste hors recherche et protégée avant son chargement. Utilisez-la pour consulter les leads entrants sans ouvrir D1 manuellement.",
+        'panel_points': [
+            "Les dernières entrées visibles dans le navigateur",
+            "Un basculement entre la campagne en cours et toutes les campagnes",
+            "Un export CSV téléchargeable au besoin",
+        ],
+        'scope_label': 'Vue',
+        'scope_current': 'Campagne en cours',
+        'scope_all': 'Toutes les campagnes',
+        'refresh': 'Actualiser',
+        'export': 'Exporter CSV',
+        'delete_selected': 'Supprimer la sélection',
+        'delete_view': 'Supprimer la vue active',
+        'delete_view_all': 'Supprimer toutes les campagnes',
+        'select_all': 'Sélectionner toutes les entrées visibles',
+        'summary': {
+            'entries': 'Entrées',
+            'marketing': 'Consentements marketing',
+            'recent': '7 derniers jours',
+            'latest': 'Dernière entrée',
+            'current_campaign': 'Campagne active',
+            'campaign_window': 'Période',
+            'active_view': 'Vue active',
+        },
+        'table': {
+            'received': 'Reçue le',
+            'select': 'Sélection',
+            'campaign': 'Campagne',
+            'name': 'Nom',
+            'email': 'Courriel',
+            'phone': 'Téléphone',
+            'company': 'Entreprise',
+            'discount': 'Rabais',
+            'code': 'Code promo',
+            'expires': "Valide jusqu'au",
+            'marketing': 'Marketing',
+            'attribution': 'Attribution',
+        },
+        'loading': 'Chargement des entrées promo...',
+        'load_error': "Les entrées promo n'ont pas pu être chargées pour le moment.",
+        'empty': "Aucune entrée promo n'est encore disponible pour cette vue.",
+        'marketing_yes': 'Inscrit',
+        'marketing_no': 'Non',
+        'marketing_out': 'Désabonné',
+        'none': '—',
+        'delete_error': "Les entrées promo sélectionnées n'ont pas pu être supprimées pour le moment.",
+        'delete_none': "Sélectionnez d'abord au moins une entrée promo.",
+        'delete_selected_confirm': 'Supprimer définitivement les entrées promo sélectionnées ?',
+        'delete_view_confirm': 'Supprimer définitivement toutes les entrées de la vue active ?',
+        'delete_selected_success': 'Les entrées promo sélectionnées ont été supprimées.',
+        'delete_view_success': 'La vue active a été supprimée.',
+    },
+}
+
 HOME_POINT_KEYS = (
     'security-camera-systems',
     'access-control-systems',
@@ -3848,8 +3971,8 @@ secondary_order = [
 order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
 base_routes = {
-    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
-    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
+    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
+    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
 }
 routes = {k: dict(v) for k, v in base_routes.items()}
 for key in order:
@@ -4386,6 +4509,242 @@ function initPromoUnsubscribe() {
     });
   });
 }
+function promoAdminAttribution(entry, copy) {
+  const utmBits = [entry.utm_source, entry.utm_medium, entry.utm_campaign].filter(Boolean);
+  if (utmBits.length) {
+    return utmBits.join(' / ');
+  }
+  return entry.referrer_host || copy.none || '—';
+}
+function promoAdminMarketingLabel(entry, copy) {
+  if (entry.marketing_opt_out_at) return copy.marketingOut || copy.none || '—';
+  if (entry.marketing_opt_in) return copy.marketingYes || copy.none || '—';
+  return copy.marketingNo || copy.none || '—';
+}
+function promoAdminTableCell(value, className) {
+  const cell = document.createElement('td');
+  if (className) {
+    cell.className = className;
+  }
+  cell.textContent = value == null || value === '' ? '—' : String(value);
+  return cell;
+}
+function initPromoAdmin() {
+  document.querySelectorAll('[data-promo-admin]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-promo-admin-copy]');
+    const lang = shell.dataset.lang || 'en';
+    const entriesUrl = shell.dataset.entriesUrl;
+    const exportUrl = shell.dataset.exportUrl;
+    const deleteUrl = shell.dataset.deleteUrl;
+    const status = shell.querySelector('[data-promo-admin-status]');
+    const errorNode = shell.querySelector('[data-promo-admin-error]');
+    const refreshButton = shell.querySelector('[data-promo-admin-refresh]');
+    const exportLink = shell.querySelector('[data-promo-admin-export]');
+    const deleteSelectedButton = shell.querySelector('[data-promo-admin-delete-selected]');
+    const deleteViewButton = shell.querySelector('[data-promo-admin-delete-view]');
+    const scopeButtons = shell.querySelectorAll('[data-promo-admin-scope]');
+    const selectAll = shell.querySelector('[data-promo-admin-select-all]');
+    const tableBody = shell.querySelector('[data-promo-admin-table-body]');
+    const emptyNode = shell.querySelector('[data-promo-admin-empty]');
+    const totalEntries = shell.querySelector('[data-promo-admin-total]');
+    const marketingEntries = shell.querySelector('[data-promo-admin-marketing]');
+    const recentEntries = shell.querySelector('[data-promo-admin-recent]');
+    const latestEntry = shell.querySelector('[data-promo-admin-latest]');
+    const campaignName = shell.querySelector('[data-promo-admin-current-name]');
+    const campaignWindow = shell.querySelector('[data-promo-admin-window]');
+    const activeView = shell.querySelector('[data-promo-admin-view]');
+    if (!entriesUrl || !exportUrl || !deleteUrl || !status || !errorNode || !refreshButton || !exportLink || !deleteSelectedButton || !deleteViewButton || !selectAll || !tableBody) {
+      return;
+    }
+    let currentScope = 'current';
+    let activeRows = [];
+    const selectedIds = new Set();
+    const setStatus = (message) => {
+      status.textContent = message || '';
+      status.hidden = !message;
+    };
+    const setError = (message) => {
+      errorNode.textContent = message || '';
+      errorNode.hidden = !message;
+    };
+    const syncSelectionUi = () => {
+      deleteSelectedButton.disabled = selectedIds.size === 0 || activeRows.length === 0;
+      selectAll.checked = activeRows.length > 0 && activeRows.every((entry) => selectedIds.has(entry.id));
+      selectAll.indeterminate = selectedIds.size > 0 && !selectAll.checked;
+    };
+    const resetSelection = () => {
+      selectedIds.clear();
+      syncSelectionUi();
+    };
+    const setScope = (scope) => {
+      currentScope = scope === 'all' ? 'all' : 'current';
+      scopeButtons.forEach((button) => {
+        const pressed = button.dataset.promoAdminScope === currentScope;
+        button.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      });
+      const nextExportUrl = new URL(exportUrl, window.location.origin);
+      nextExportUrl.searchParams.set('scope', currentScope);
+      exportLink.href = nextExportUrl.toString();
+      deleteViewButton.textContent = currentScope === 'all'
+        ? (copy.deleteViewAllLabel || copy.deleteViewLabel || deleteViewButton.textContent)
+        : (copy.deleteViewLabel || deleteViewButton.textContent);
+      resetSelection();
+    };
+    const renderEntries = (entries) => {
+      tableBody.textContent = '';
+      activeRows = Array.isArray(entries) ? entries : [];
+      if (!activeRows.length) {
+        emptyNode.hidden = false;
+        resetSelection();
+        return;
+      }
+      emptyNode.hidden = true;
+      activeRows.forEach((entry) => {
+        const row = document.createElement('tr');
+        const selectCell = document.createElement('td');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedIds.has(entry.id);
+        checkbox.setAttribute('aria-label', entry.email || entry.name || String(entry.id));
+        checkbox.addEventListener('change', () => {
+          if (checkbox.checked) {
+            selectedIds.add(entry.id);
+          } else {
+            selectedIds.delete(entry.id);
+          }
+          syncSelectionUi();
+        });
+        selectCell.appendChild(checkbox);
+        row.appendChild(selectCell);
+        row.appendChild(promoAdminTableCell(promoDateLabel(entry.created_at, lang) || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.campaign_id || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.name || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.email || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.phone || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.company || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(entry.discount_percent ? `${entry.discount_percent}%` : (copy.none || '—')));
+        row.appendChild(promoAdminTableCell(entry.promo_code || copy.none || '—', 'promo-admin-code'));
+        row.appendChild(promoAdminTableCell(promoDateLabel(entry.promo_expires_at, lang) || copy.none || '—'));
+        row.appendChild(promoAdminTableCell(promoAdminMarketingLabel(entry, copy)));
+        row.appendChild(promoAdminTableCell(promoAdminAttribution(entry, copy)));
+        tableBody.appendChild(row);
+      });
+      syncSelectionUi();
+    };
+    const setBusy = (busy) => {
+      refreshButton.disabled = busy;
+      deleteViewButton.disabled = busy;
+      deleteSelectedButton.disabled = busy || selectedIds.size === 0 || activeRows.length === 0;
+      exportLink.setAttribute('aria-disabled', busy ? 'true' : 'false');
+      if (busy) {
+        exportLink.classList.add('is-disabled');
+      } else {
+        exportLink.classList.remove('is-disabled');
+      }
+      scopeButtons.forEach((button) => {
+        button.disabled = busy;
+      });
+      selectAll.disabled = busy || activeRows.length === 0;
+    };
+    const deleteEntries = async (mode) => {
+      if (mode === 'selected' && selectedIds.size === 0) {
+        setError(copy.deleteNone || copy.deleteError || '');
+        return;
+      }
+      const confirmed = window.confirm(mode === 'all' ? (copy.deleteViewConfirm || '') : (copy.deleteSelectedConfirm || ''));
+      if (!confirmed) {
+        return;
+      }
+      setError('');
+      setStatus(copy.loading || '');
+      setBusy(true);
+      try {
+        const response = await fetch(deleteUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            mode,
+            scope: currentScope,
+            ids: mode === 'selected' ? Array.from(selectedIds) : [],
+          }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.deleteError || '');
+        }
+        resetSelection();
+        await loadEntries(mode === 'all' ? (copy.deleteViewSuccess || '') : (copy.deleteSelectedSuccess || ''));
+      } catch (error) {
+        setError(error.message || copy.deleteError || '');
+        setStatus('');
+      } finally {
+        setBusy(false);
+      }
+    };
+    const loadEntries = async (successMessage = '') => {
+      setError('');
+      setStatus(successMessage || copy.loading || '');
+      setBusy(true);
+      try {
+        const requestUrl = new URL(entriesUrl, window.location.origin);
+        requestUrl.searchParams.set('scope', currentScope);
+        requestUrl.searchParams.set('limit', shell.dataset.limit || '200');
+        const response = await fetch(requestUrl.toString(), { headers: { Accept: 'application/json' } });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.loadError || '');
+        }
+        if (totalEntries) totalEntries.textContent = String(payload.summary.totalEntries || 0);
+        if (marketingEntries) marketingEntries.textContent = String(payload.summary.marketingActive || 0);
+        if (recentEntries) recentEntries.textContent = String(payload.summary.recentEntries || 0);
+        if (latestEntry) latestEntry.textContent = payload.summary.latestEntryAt ? promoDateLabel(payload.summary.latestEntryAt, lang) : (copy.none || '—');
+        if (campaignName) {
+          campaignName.textContent = `${payload.campaign.currentName || ''} (${payload.campaign.currentId || ''})`.trim();
+        }
+        if (campaignWindow) {
+          campaignWindow.textContent = `${promoDateLabel(payload.campaign.startsAt, lang)} - ${promoDateLabel(payload.campaign.endsAt, lang)}`;
+        }
+        if (activeView) {
+          activeView.textContent = currentScope === 'all' ? (copy.scopeAll || '') : (copy.scopeCurrent || '');
+        }
+        renderEntries(payload.entries || []);
+        if (!successMessage) {
+          setStatus('');
+        }
+      } catch (error) {
+        activeRows = [];
+        emptyNode.hidden = true;
+        tableBody.textContent = '';
+        resetSelection();
+        setError(error.message || copy.loadError || '');
+        setStatus('');
+      } finally {
+        setBusy(false);
+        syncSelectionUi();
+      }
+    };
+    scopeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.promoAdminScope === currentScope) return;
+        setScope(button.dataset.promoAdminScope);
+        loadEntries();
+      });
+    });
+    selectAll.addEventListener('change', () => {
+      if (selectAll.checked) {
+        activeRows.forEach((entry) => selectedIds.add(entry.id));
+      } else {
+        activeRows.forEach((entry) => selectedIds.delete(entry.id));
+      }
+      renderEntries(activeRows);
+    });
+    refreshButton.addEventListener('click', loadEntries);
+    deleteSelectedButton.addEventListener('click', () => deleteEntries('selected'));
+    deleteViewButton.addEventListener('click', () => deleteEntries('all'));
+    setScope(currentScope);
+    loadEntries();
+  });
+}
 async function initSiteConfig() {
   try {
     const response = await fetch('/api/site-config', { headers: { Accept: 'application/json' } });
@@ -4403,6 +4762,7 @@ async function initSiteConfig() {
 }
 initPromoForms();
 initPromoUnsubscribe();
+initPromoAdmin();
 initSiteConfig();
 '''
 
@@ -7719,6 +8079,74 @@ def promo_unsubscribe_form(lang):
     )
 
 
+def promo_admin_shell(lang):
+    copy = PROMO_ADMIN_CONTENT[lang]
+    payload = {
+        'loading': copy['loading'],
+        'loadError': copy['load_error'],
+        'marketingYes': copy['marketing_yes'],
+        'marketingNo': copy['marketing_no'],
+        'marketingOut': copy['marketing_out'],
+        'scopeCurrent': copy['scope_current'],
+        'scopeAll': copy['scope_all'],
+        'none': copy['none'],
+        'deleteError': copy['delete_error'],
+        'deleteNone': copy['delete_none'],
+        'deleteSelectedConfirm': copy['delete_selected_confirm'],
+        'deleteViewConfirm': copy['delete_view_confirm'],
+        'deleteSelectedSuccess': copy['delete_selected_success'],
+        'deleteViewSuccess': copy['delete_view_success'],
+        'deleteViewLabel': copy['delete_view'],
+        'deleteViewAllLabel': copy['delete_view_all'],
+    }
+    summary = copy['summary']
+    table = copy['table']
+    return (
+        f'<div class="form-panel promo-admin-shell" data-promo-admin data-lang="{lang}" data-entries-url="/api/promo/admin/entries?lang={lang}" data-export-url="/api/promo/admin/export.csv" data-delete-url="/api/promo/admin/delete" data-limit="200">'
+        f'<script type="application/json" data-promo-admin-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<div class="promo-admin-toolbar">'
+        f'<div class="promo-admin-scope" role="group" aria-label="{esc(copy["scope_label"])}">'
+        f'<button class="button button-secondary" type="button" data-promo-admin-scope="current" aria-pressed="true">{esc(copy["scope_current"])}</button>'
+        f'<button class="button button-secondary" type="button" data-promo-admin-scope="all" aria-pressed="false">{esc(copy["scope_all"])}</button>'
+        f'</div>'
+        f'<div class="promo-admin-actions">'
+        f'<button class="button button-secondary" type="button" data-promo-admin-refresh>{esc(copy["refresh"])}</button>'
+        f'<button class="button button-secondary" type="button" data-promo-admin-delete-selected disabled>{esc(copy["delete_selected"])}</button>'
+        f'<button class="button button-secondary" type="button" data-promo-admin-delete-view>{esc(copy["delete_view"])}</button>'
+        f'<a class="button button-primary" data-promo-admin-export href="/api/promo/admin/export.csv?scope=current">{esc(copy["export"])}</a>'
+        f'</div></div>'
+        f'<div class="promo-inline-status" data-promo-admin-status>{esc(copy["loading"])}</div>'
+        f'<div class="promo-inline-error" data-promo-admin-error hidden></div>'
+        f'<div class="promo-admin-summary">'
+        f'<div class="detail-item"><strong>{esc(summary["entries"])}</strong><p data-promo-admin-total>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(summary["marketing"])}</strong><p data-promo-admin-marketing>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(summary["recent"])}</strong><p data-promo-admin-recent>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(summary["latest"])}</strong><p data-promo-admin-latest>{esc(copy["none"])}</p></div>'
+        f'</div>'
+        f'<div class="promo-admin-meta">'
+        f'<div class="detail-item"><strong>{esc(summary["current_campaign"])}</strong><p data-promo-admin-current-name>{esc(copy["none"])}</p></div>'
+        f'<div class="detail-item"><strong>{esc(summary["campaign_window"])}</strong><p data-promo-admin-window>{esc(copy["none"])}</p></div>'
+        f'<div class="detail-item"><strong>{esc(summary["active_view"])}</strong><p data-promo-admin-view>{esc(copy["scope_current"])}</p></div>'
+        f'</div>'
+        f'<div class="promo-admin-table-shell"><table class="promo-admin-table"><thead><tr>'
+        f'<th><label class="promo-admin-select-all"><input type="checkbox" data-promo-admin-select-all aria-label="{esc(copy["select_all"])}" /> <span>{esc(table["select"])}</span></label></th>'
+        f'<th>{esc(table["received"])}</th>'
+        f'<th>{esc(table["campaign"])}</th>'
+        f'<th>{esc(table["name"])}</th>'
+        f'<th>{esc(table["email"])}</th>'
+        f'<th>{esc(table["phone"])}</th>'
+        f'<th>{esc(table["company"])}</th>'
+        f'<th>{esc(table["discount"])}</th>'
+        f'<th>{esc(table["code"])}</th>'
+        f'<th>{esc(table["expires"])}</th>'
+        f'<th>{esc(table["marketing"])}</th>'
+        f'<th>{esc(table["attribution"])}</th>'
+        f'</tr></thead><tbody data-promo-admin-table-body></tbody></table></div>'
+        f'<div class="promo-admin-empty" data-promo-admin-empty hidden>{esc(copy["empty"])}</div>'
+        f'</div>'
+    )
+
+
 def promo_cta_band(lang):
     copy = PROMO_PAGE_CONTENT[lang]
     return band_section(
@@ -8728,8 +9156,27 @@ css += '''
 .promo-reminder-link{font-weight:700;color:var(--primary-dark)}
 .promo-cta-band{border-color:rgba(47,138,88,.22)}
 .promo-services-grid,.promo-related-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.promo-admin-shell{display:grid;gap:20px}
+.promo-admin-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+.promo-admin-scope{display:flex;flex-wrap:wrap;gap:10px}
+.promo-admin-scope .button[aria-pressed="true"]{background:var(--primary-dark);border-color:var(--primary-dark);color:#fff}
+.promo-admin-actions{display:flex;flex-wrap:wrap;gap:10px}
+.promo-admin-summary,.promo-admin-meta{display:grid;gap:18px}
+.promo-admin-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+.promo-admin-meta{grid-template-columns:repeat(3,minmax(0,1fr))}
+.promo-admin-meta .detail-item p,.promo-admin-summary .detail-item p{margin:0;line-height:1.4;color:var(--text)}
+.promo-admin-select-all{display:inline-flex;align-items:center;gap:10px;font-weight:700}
+.promo-admin-select-all input,.promo-admin-table tbody input[type="checkbox"]{width:18px;height:18px;accent-color:var(--primary)}
+.promo-admin-table-shell{overflow:auto;border:1px solid var(--line);border-radius:24px;background:#fff}
+.promo-admin-table{width:100%;min-width:1180px;border-collapse:collapse}
+.promo-admin-table th,.promo-admin-table td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.promo-admin-table thead th{position:sticky;top:0;background:var(--surface-soft);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-dark);z-index:1}
+.promo-admin-table tbody tr:nth-child(even){background:rgba(247,250,247,.6)}
+.promo-admin-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.promo-admin-empty{padding:20px 22px;border:1px dashed var(--line-strong);border-radius:20px;background:var(--surface-soft);color:var(--muted)}
+.promo-admin-actions .is-disabled{pointer-events:none;opacity:.6}
 @media (max-width:920px){
-  .promo-hero-grid,.promo-how-section .timeline,.promo-result-grid,.promo-rules-summary-section .grid-2,.promo-rules-section .grid-2,.promo-services-grid,.promo-related-grid{grid-template-columns:1fr}
+  .promo-hero-grid,.promo-how-section .timeline,.promo-result-grid,.promo-rules-summary-section .grid-2,.promo-rules-section .grid-2,.promo-services-grid,.promo-related-grid,.promo-admin-summary,.promo-admin-meta{grid-template-columns:1fr}
   .promo-reminder-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:640px){
@@ -8739,6 +9186,7 @@ css += '''
   .promo-copy-button,.promo-save-button{width:100%}
   .promo-reminder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .promo-reminder-grid .detail-item:nth-child(2){grid-column:1/-1}
+  .promo-admin-toolbar,.promo-admin-actions,.promo-admin-scope{display:grid;grid-template-columns:1fr}
 }
 '''
 
@@ -8753,6 +9201,7 @@ export_blog_social_images()
 for lang in ('en', 'fr'):
     t = T[lang]
     promo_copy = PROMO_PAGE_CONTENT[lang]
+    promo_admin_copy = PROMO_ADMIN_CONTENT[lang]
     custom_about_sections = ABOUT_SECTIONS_BY_LANG.get(lang)
     custom_clientele_sections = CLIENTELE_SECTIONS_BY_LANG.get(lang)
     custom_clientele_cta = CLIENTELE_CTA_BY_LANG.get(lang)
@@ -9042,6 +9491,33 @@ for lang in ('en', 'fr'):
             robots='noindex, follow',
             social_image_url=PROMO_SOCIAL_URL,
             social_image_alt=promo_copy['unsubscribe_h1'],
+        ),
+    )
+
+    promo_admin_breadcrumbs = [*promo_breadcrumbs, (promo_admin_copy['label'], routes[lang]['promo-admin'])]
+    promo_admin_body = (
+        breadcrumb_nav(promo_admin_breadcrumbs)
+        + band_section(
+            f'<div class="promo-hero-grid"><div class="page-hero-copy"><p class="eyebrow">{esc(promo_admin_copy["eyebrow"])}</p><h1>{esc(promo_admin_copy["h1"])}</h1><p>{esc(promo_admin_copy["intro"])}</p></div>'
+            f'<aside class="page-hero-panel promo-visual-panel"><p class="eyebrow">{esc(promo_admin_copy["label"])}</p><h2>{esc(promo_admin_copy["panel_title"])}</h2><p>{esc(promo_admin_copy["panel_copy"])}</p><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in promo_admin_copy["panel_points"])}</ul></aside></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(promo_admin_shell(lang), 'promo-admin-section')
+    )
+    write_url(
+        routes[lang]['promo-admin'],
+        page(
+            lang,
+            'promo-admin',
+            'contact',
+            promo_admin_copy['title'],
+            promo_admin_copy['desc'],
+            promo_admin_body,
+            breadcrumb_items=promo_admin_breadcrumbs,
+            robots='noindex, nofollow',
+            social_image_url=PROMO_SOCIAL_URL,
+            social_image_alt=promo_admin_copy['h1'],
         ),
     )
 

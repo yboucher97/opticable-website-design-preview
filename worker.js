@@ -262,6 +262,288 @@ function entryResult(row) {
   };
 }
 
+function parseAdminScope(value) {
+  return value === "all" ? "all" : "current";
+}
+
+function parseAdminLimit(value, fallback = 200, maximum = 500) {
+  const parsed = Number.parseInt(String(value || ""), 10);
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    return fallback;
+  }
+  return Math.min(parsed, maximum);
+}
+
+function toNumber(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : 0;
+}
+
+function adminCredentials(env) {
+  const username = safeTrim(env.PROMO_ADMIN_USERNAME, 120);
+  const password = typeof env.PROMO_ADMIN_PASSWORD === "string" ? env.PROMO_ADMIN_PASSWORD : "";
+  return username && password ? { username, password } : null;
+}
+
+function parseBasicAuthorization(header) {
+  if (!header || !header.startsWith("Basic ")) {
+    return null;
+  }
+  try {
+    const decoded = atob(header.slice(6));
+    const separatorIndex = decoded.indexOf(":");
+    if (separatorIndex < 0) {
+      return null;
+    }
+    return {
+      username: decoded.slice(0, separatorIndex),
+      password: decoded.slice(separatorIndex + 1),
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function secureStringEqual(left, right) {
+  const encoder = new TextEncoder();
+  const leftBytes = encoder.encode(String(left));
+  const rightBytes = encoder.encode(String(right));
+  const length = Math.max(leftBytes.length, rightBytes.length);
+  let diff = leftBytes.length ^ rightBytes.length;
+  for (let index = 0; index < length; index += 1) {
+    diff |= (leftBytes[index] || 0) ^ (rightBytes[index] || 0);
+  }
+  return diff === 0;
+}
+
+function adminChallengeResponse(status = 401, message = "Authentication required.") {
+  return new Response(message, {
+    status,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "WWW-Authenticate": 'Basic realm="Opticable Promo Admin", charset="UTF-8"',
+    },
+  });
+}
+
+async function requireAdminAuth(request, env) {
+  const credentials = adminCredentials(env);
+  if (!credentials) {
+    return new Response("Promo admin access is not configured.", {
+      status: 503,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+    });
+  }
+  const authorization = parseBasicAuthorization(request.headers.get("Authorization"));
+  if (!authorization) {
+    return adminChallengeResponse();
+  }
+  const [usernameOk, passwordOk] = await Promise.all([
+    secureStringEqual(authorization.username, credentials.username),
+    secureStringEqual(authorization.password, credentials.password),
+  ]);
+  if (!usernameOk || !passwordOk) {
+    return adminChallengeResponse();
+  }
+  return null;
+}
+
+function isProtectedAdminPath(pathname) {
+  return pathname.startsWith("/en/admin/") || pathname.startsWith("/fr/admin/") || pathname.startsWith("/api/promo/admin/");
+}
+
+async function fetchPromoAdminSummary(env, scope) {
+  const sevenDaysAgo = new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)).toISOString();
+  if (scope === "all") {
+    return env.PROMO_DB.prepare(
+      `SELECT
+         COUNT(*) AS total_entries,
+         SUM(CASE WHEN marketing_opt_in = 1 AND marketing_opt_out_at IS NULL THEN 1 ELSE 0 END) AS marketing_active,
+         SUM(CASE WHEN marketing_opt_out_at IS NOT NULL THEN 1 ELSE 0 END) AS marketing_opt_outs,
+         SUM(CASE WHEN created_at >= ?1 THEN 1 ELSE 0 END) AS recent_entries,
+         MAX(created_at) AS latest_entry_at
+       FROM promo_entries`
+    ).bind(sevenDaysAgo).first();
+  }
+  return env.PROMO_DB.prepare(
+    `SELECT
+       COUNT(*) AS total_entries,
+       SUM(CASE WHEN marketing_opt_in = 1 AND marketing_opt_out_at IS NULL THEN 1 ELSE 0 END) AS marketing_active,
+       SUM(CASE WHEN marketing_opt_out_at IS NOT NULL THEN 1 ELSE 0 END) AS marketing_opt_outs,
+       SUM(CASE WHEN created_at >= ?2 THEN 1 ELSE 0 END) AS recent_entries,
+       MAX(created_at) AS latest_entry_at
+     FROM promo_entries
+     WHERE campaign_id = ?1`
+  ).bind(promoConfig.campaignId, sevenDaysAgo).first();
+}
+
+async function fetchPromoAdminEntries(env, scope, limit) {
+  const columns = `id, campaign_id, created_at, locale, name, email, phone, company, discount_percent, promo_code,
+    promo_expires_at, marketing_opt_in, marketing_opt_in_at, marketing_opt_out_at, status,
+    referrer_host, utm_source, utm_medium, utm_campaign`;
+  if (scope === "all") {
+    return env.PROMO_DB.prepare(
+      `SELECT ${columns}
+       FROM promo_entries
+       ORDER BY created_at DESC
+       LIMIT ?1`
+    ).bind(limit).all();
+  }
+  return env.PROMO_DB.prepare(
+    `SELECT ${columns}
+     FROM promo_entries
+     WHERE campaign_id = ?1
+     ORDER BY created_at DESC
+     LIMIT ?2`
+  ).bind(promoConfig.campaignId, limit).all();
+}
+
+async function fetchPromoAdminExportRows(env, scope) {
+  const columns = `campaign_id, created_at, locale, name, email, phone, company, business_attestation,
+    quebec_attestation, rules_version, privacy_version, marketing_opt_in, marketing_opt_in_at,
+    marketing_opt_out_at, status, discount_percent, discount_cap_cad, promo_code, promo_expires_at,
+    skill_question, result_created_at, landing_path, landing_url, referrer_url, referrer_host,
+    utm_source, utm_medium, utm_campaign, utm_content, utm_term, turnstile_hostname`;
+  if (scope === "all") {
+    return env.PROMO_DB.prepare(
+      `SELECT ${columns}
+       FROM promo_entries
+       ORDER BY created_at DESC`
+    ).all();
+  }
+  return env.PROMO_DB.prepare(
+    `SELECT ${columns}
+     FROM promo_entries
+     WHERE campaign_id = ?1
+     ORDER BY created_at DESC`
+  ).bind(promoConfig.campaignId).all();
+}
+
+function parseAdminIds(values) {
+  if (!Array.isArray(values)) {
+    return [];
+  }
+  const ids = [];
+  const seen = new Set();
+  for (const value of values) {
+    const parsed = Number.parseInt(String(value), 10);
+    if (!Number.isFinite(parsed) || parsed < 1 || seen.has(parsed)) {
+      continue;
+    }
+    seen.add(parsed);
+    ids.push(parsed);
+    if (ids.length >= 500) {
+      break;
+    }
+  }
+  return ids;
+}
+
+async function countPromoEntriesForScope(env, scope) {
+  if (scope === "all") {
+    return env.PROMO_DB.prepare(`SELECT COUNT(*) AS total_entries FROM promo_entries`).first();
+  }
+  return env.PROMO_DB.prepare(
+    `SELECT COUNT(*) AS total_entries
+     FROM promo_entries
+     WHERE campaign_id = ?1`
+  ).bind(promoConfig.campaignId).first();
+}
+
+async function fetchPromoEntriesForDeletion(env, scope, ids) {
+  if (!ids.length) {
+    return [];
+  }
+  const placeholders = ids.map((_, index) => `?${index + 1}`).join(", ");
+  const params = [...ids];
+  let sql = `SELECT id, campaign_id, email_normalized FROM promo_entries WHERE id IN (${placeholders})`;
+  if (scope === "current") {
+    sql += ` AND campaign_id = ?${params.length + 1}`;
+    params.push(promoConfig.campaignId);
+  }
+  const result = await env.PROMO_DB.prepare(sql).bind(...params).all();
+  return result.results || [];
+}
+
+async function deletePromoEventsForPairs(env, pairs) {
+  if (!pairs.length) {
+    return 0;
+  }
+  const statements = pairs.map((pair) =>
+    env.PROMO_DB.prepare(
+      `DELETE FROM promo_marketing_events
+       WHERE campaign_id = ?1 AND email_normalized = ?2`
+    ).bind(pair.campaignId, pair.emailNormalized)
+  );
+  const results = await env.PROMO_DB.batch(statements);
+  return results.reduce((sum, item) => sum + toNumber(item?.meta?.changes), 0);
+}
+
+async function deletePromoEntriesByIds(env, scope, ids) {
+  const rows = await fetchPromoEntriesForDeletion(env, scope, ids);
+  if (!rows.length) {
+    return { deletedEntries: 0, deletedEvents: 0 };
+  }
+  const uniquePairs = [];
+  const pairKeys = new Set();
+  for (const row of rows) {
+    const key = `${row.campaign_id}::${row.email_normalized}`;
+    if (pairKeys.has(key)) {
+      continue;
+    }
+    pairKeys.add(key);
+    uniquePairs.push({ campaignId: row.campaign_id, emailNormalized: row.email_normalized });
+  }
+  const deletedEvents = await deletePromoEventsForPairs(env, uniquePairs);
+  const placeholders = rows.map((_, index) => `?${index + 1}`).join(", ");
+  const deleteResult = await env.PROMO_DB.prepare(
+    `DELETE FROM promo_entries
+     WHERE id IN (${placeholders})`
+  ).bind(...rows.map((row) => row.id)).run();
+  return {
+    deletedEntries: toNumber(deleteResult.meta?.changes),
+    deletedEvents,
+  };
+}
+
+async function deletePromoEntriesForScope(env, scope) {
+  if (scope === "all") {
+    const countRow = await countPromoEntriesForScope(env, scope);
+    const [eventDelete, entryDelete] = await Promise.all([
+      env.PROMO_DB.prepare(`DELETE FROM promo_marketing_events`).run(),
+      env.PROMO_DB.prepare(`DELETE FROM promo_entries`).run(),
+    ]);
+    return {
+      deletedEntries: toNumber(countRow?.total_entries),
+      deletedEvents: toNumber(eventDelete.meta?.changes),
+      deletedRowsByQuery: toNumber(entryDelete.meta?.changes),
+    };
+  }
+  const countRow = await countPromoEntriesForScope(env, scope);
+  const [eventDelete, entryDelete] = await Promise.all([
+    env.PROMO_DB.prepare(
+      `DELETE FROM promo_marketing_events
+       WHERE campaign_id = ?1`
+    ).bind(promoConfig.campaignId).run(),
+    env.PROMO_DB.prepare(
+      `DELETE FROM promo_entries
+       WHERE campaign_id = ?1`
+    ).bind(promoConfig.campaignId).run(),
+  ]);
+  return {
+    deletedEntries: toNumber(countRow?.total_entries),
+    deletedEvents: toNumber(eventDelete.meta?.changes),
+    deletedRowsByQuery: toNumber(entryDelete.meta?.changes),
+  };
+}
+
+function csvEscape(value) {
+  const stringValue = value == null ? "" : String(value);
+  return `"${stringValue.replace(/"/g, '""')}"`;
+}
+
 function isPromoCodeConflict(error) {
   return String(error?.message || "").includes("promo_entries_campaign_code_idx");
 }
@@ -560,6 +842,134 @@ async function handleSiteConfig(_request, env) {
   });
 }
 
+async function handlePromoAdminEntries(request, env) {
+  if (!env.PROMO_DB) {
+    return jsonResponse({ ok: false, error: "The promo database is not configured." }, 503);
+  }
+  const url = new URL(request.url);
+  const locale = normalizeLocale(url.searchParams.get("lang"));
+  const scope = parseAdminScope(url.searchParams.get("scope"));
+  const limit = parseAdminLimit(url.searchParams.get("limit"));
+  const [summaryRow, entryRows] = await Promise.all([
+    fetchPromoAdminSummary(env, scope),
+    fetchPromoAdminEntries(env, scope, limit),
+  ]);
+  return jsonResponse({
+    ok: true,
+    locale,
+    scope,
+    limit,
+    campaign: {
+      currentId: promoConfig.campaignId,
+      currentName: promoConfig.campaignName[locale],
+      startsAt: promoConfig.startAt,
+      endsAt: promoConfig.endAt,
+    },
+    summary: {
+      totalEntries: toNumber(summaryRow?.total_entries),
+      marketingActive: toNumber(summaryRow?.marketing_active),
+      marketingOptOuts: toNumber(summaryRow?.marketing_opt_outs),
+      recentEntries: toNumber(summaryRow?.recent_entries),
+      latestEntryAt: summaryRow?.latest_entry_at || "",
+    },
+    entries: entryRows.results || [],
+  });
+}
+
+async function handlePromoAdminExport(request, env) {
+  if (!env.PROMO_DB) {
+    return new Response("The promo database is not configured.", {
+      status: 503,
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
+  }
+  const url = new URL(request.url);
+  const scope = parseAdminScope(url.searchParams.get("scope"));
+  const exportRows = await fetchPromoAdminExportRows(env, scope);
+  const filenameDate = new Date().toISOString().slice(0, 10);
+  const filenameScope = scope === "all" ? "all-campaigns" : promoConfig.campaignId;
+  const headings = [
+    "campaign_id",
+    "created_at",
+    "locale",
+    "name",
+    "email",
+    "phone",
+    "company",
+    "business_attestation",
+    "quebec_attestation",
+    "rules_version",
+    "privacy_version",
+    "marketing_opt_in",
+    "marketing_opt_in_at",
+    "marketing_opt_out_at",
+    "status",
+    "discount_percent",
+    "discount_cap_cad",
+    "promo_code",
+    "promo_expires_at",
+    "skill_question",
+    "result_created_at",
+    "landing_path",
+    "landing_url",
+    "referrer_url",
+    "referrer_host",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "turnstile_hostname",
+  ];
+  const lines = [headings.join(",")];
+  for (const row of exportRows.results || []) {
+    lines.push(headings.map((heading) => csvEscape(row[heading])).join(","));
+  }
+  return new Response(`\ufeff${lines.join("\r\n")}\r\n`, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="opticable-promo-entries-${filenameScope}-${filenameDate}.csv"`,
+    },
+  });
+}
+
+async function handlePromoAdminDelete(request, env) {
+  if (!env.PROMO_DB) {
+    return jsonResponse({ ok: false, error: "The promo database is not configured." }, 503);
+  }
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    body = {};
+  }
+  const mode = body.mode === "all" ? "all" : "selected";
+  const scope = parseAdminScope(body.scope);
+  if (mode === "all") {
+    const result = await deletePromoEntriesForScope(env, scope);
+    return jsonResponse({
+      ok: true,
+      mode,
+      scope,
+      deletedEntries: result.deletedEntries,
+      deletedEvents: result.deletedEvents,
+    });
+  }
+  const ids = parseAdminIds(body.ids);
+  if (!ids.length) {
+    return jsonResponse({ ok: false, error: "No promo entries were selected." }, 400);
+  }
+  const result = await deletePromoEntriesByIds(env, scope, ids);
+  return jsonResponse({
+    ok: true,
+    mode,
+    scope,
+    deletedEntries: result.deletedEntries,
+    deletedEvents: result.deletedEvents,
+  });
+}
+
 async function routeApi(request, env) {
   const url = new URL(request.url);
   if (request.method === "OPTIONS") {
@@ -573,6 +983,15 @@ async function routeApi(request, env) {
   }
   if (url.pathname === "/api/promo/unsubscribe" && request.method === "POST") {
     return handlePromoUnsubscribe(request, env);
+  }
+  if (url.pathname === "/api/promo/admin/entries" && request.method === "GET") {
+    return handlePromoAdminEntries(request, env);
+  }
+  if (url.pathname === "/api/promo/admin/export.csv" && request.method === "GET") {
+    return handlePromoAdminExport(request, env);
+  }
+  if (url.pathname === "/api/promo/admin/delete" && request.method === "POST") {
+    return handlePromoAdminDelete(request, env);
   }
   if (url.pathname === "/api/site-config" && request.method === "GET") {
     return handleSiteConfig(request, env);
@@ -599,6 +1018,13 @@ export default {
 
     if (shouldRedirect) {
       return Response.redirect(redirectUrl.toString(), 301);
+    }
+
+    if (isProtectedAdminPath(url.pathname)) {
+      const authResponse = await requireAdminAuth(request, env);
+      if (authResponse) {
+        return withResponseHeaders(authResponse, url.pathname);
+      }
     }
 
     if (url.pathname.startsWith("/api/")) {
