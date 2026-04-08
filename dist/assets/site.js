@@ -546,11 +546,13 @@ function initPromoAdmin() {
     const lang = shell.dataset.lang || 'en';
     const entriesUrl = shell.dataset.entriesUrl;
     const exportUrl = shell.dataset.exportUrl;
+    const subscribersExportUrl = shell.dataset.subscribersExportUrl;
     const deleteUrl = shell.dataset.deleteUrl;
     const status = shell.querySelector('[data-promo-admin-status]');
     const errorNode = shell.querySelector('[data-promo-admin-error]');
     const refreshButton = shell.querySelector('[data-promo-admin-refresh]');
     const exportLink = shell.querySelector('[data-promo-admin-export]');
+    const subscribersExportLink = shell.querySelector('[data-promo-admin-export-subscribers]');
     const deleteSelectedButton = shell.querySelector('[data-promo-admin-delete-selected]');
     const deleteViewButton = shell.querySelector('[data-promo-admin-delete-view]');
     const scopeButtons = shell.querySelectorAll('[data-promo-admin-scope]');
@@ -564,12 +566,13 @@ function initPromoAdmin() {
     const campaignName = shell.querySelector('[data-promo-admin-current-name]');
     const campaignWindow = shell.querySelector('[data-promo-admin-window]');
     const activeView = shell.querySelector('[data-promo-admin-view]');
-    if (!entriesUrl || !exportUrl || !deleteUrl || !status || !errorNode || !refreshButton || !exportLink || !deleteSelectedButton || !deleteViewButton || !selectAll || !tableBody) {
+    if (!entriesUrl || !exportUrl || !subscribersExportUrl || !deleteUrl || !status || !errorNode || !refreshButton || !exportLink || !subscribersExportLink || !deleteSelectedButton || !deleteViewButton || !selectAll || !tableBody) {
       return;
     }
     let currentScope = 'current';
     let activeRows = [];
     const selectedIds = new Set();
+    const exportLinks = [exportLink, subscribersExportLink];
     const setStatus = (message) => {
       status.textContent = message || '';
       status.hidden = !message;
@@ -596,6 +599,9 @@ function initPromoAdmin() {
       const nextExportUrl = new URL(exportUrl, window.location.origin);
       nextExportUrl.searchParams.set('scope', currentScope);
       exportLink.href = nextExportUrl.toString();
+      const nextSubscribersExportUrl = new URL(subscribersExportUrl, window.location.origin);
+      nextSubscribersExportUrl.searchParams.set('scope', currentScope);
+      subscribersExportLink.href = nextSubscribersExportUrl.toString();
       deleteViewButton.textContent = currentScope === 'all'
         ? (copy.deleteViewAllLabel || copy.deleteViewLabel || deleteViewButton.textContent)
         : (copy.deleteViewLabel || deleteViewButton.textContent);
@@ -646,12 +652,14 @@ function initPromoAdmin() {
       refreshButton.disabled = busy;
       deleteViewButton.disabled = busy;
       deleteSelectedButton.disabled = busy || selectedIds.size === 0 || activeRows.length === 0;
-      exportLink.setAttribute('aria-disabled', busy ? 'true' : 'false');
-      if (busy) {
-        exportLink.classList.add('is-disabled');
-      } else {
-        exportLink.classList.remove('is-disabled');
-      }
+      exportLinks.forEach((link) => {
+        link.setAttribute('aria-disabled', busy ? 'true' : 'false');
+        if (busy) {
+          link.classList.add('is-disabled');
+        } else {
+          link.classList.remove('is-disabled');
+        }
+      });
       scopeButtons.forEach((button) => {
         button.disabled = busy;
       });

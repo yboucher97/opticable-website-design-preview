@@ -421,6 +421,69 @@ async function fetchPromoAdminExportRows(env, scope) {
   ).bind(promoConfig.campaignId).all();
 }
 
+async function fetchPromoAdminSubscriberRows(env, scope) {
+  const scopeClause = scope === "all" ? "" : "WHERE campaign_id = ?1";
+  const statement = env.PROMO_DB.prepare(
+    `WITH scoped_entries AS (
+       SELECT
+         id, campaign_id, locale, name, email, email_normalized, phone, company,
+         marketing_opt_in, marketing_opt_in_at, marketing_opt_out_at,
+         referrer_host, utm_source, utm_medium, utm_campaign, created_at
+       FROM promo_entries
+       ${scopeClause}
+     ),
+     subscriber_emails AS (
+       SELECT
+         email_normalized,
+         MIN(CASE WHEN marketing_opt_in = 1 AND marketing_opt_out_at IS NULL THEN marketing_opt_in_at END) AS first_marketing_opt_in_at,
+         MAX(CASE WHEN marketing_opt_in = 1 AND marketing_opt_out_at IS NULL THEN marketing_opt_in_at END) AS latest_marketing_opt_in_at,
+         COUNT(DISTINCT campaign_id) AS campaigns_count
+       FROM scoped_entries
+       GROUP BY email_normalized
+       HAVING MAX(CASE WHEN marketing_opt_in = 1 AND marketing_opt_out_at IS NULL THEN 1 ELSE 0 END) = 1
+     ),
+     ranked_entries AS (
+       SELECT
+         scoped_entries.*,
+         ROW_NUMBER() OVER (
+           PARTITION BY scoped_entries.email_normalized
+           ORDER BY datetime(scoped_entries.created_at) DESC, scoped_entries.id DESC
+         ) AS row_number
+       FROM scoped_entries
+       INNER JOIN subscriber_emails
+         ON subscriber_emails.email_normalized = scoped_entries.email_normalized
+     )
+     SELECT
+       ranked_entries.email,
+       ranked_entries.email_normalized,
+       ranked_entries.name,
+       ranked_entries.phone,
+       ranked_entries.company,
+       ranked_entries.locale,
+       ranked_entries.campaign_id AS latest_campaign_id,
+       ranked_entries.created_at AS latest_entry_at,
+       subscriber_emails.first_marketing_opt_in_at,
+       subscriber_emails.latest_marketing_opt_in_at,
+       subscriber_emails.campaigns_count,
+       ranked_entries.referrer_host,
+       ranked_entries.utm_source,
+       ranked_entries.utm_medium,
+       ranked_entries.utm_campaign
+     FROM ranked_entries
+     INNER JOIN subscriber_emails
+       ON subscriber_emails.email_normalized = ranked_entries.email_normalized
+     WHERE ranked_entries.row_number = 1
+     ORDER BY
+       datetime(subscriber_emails.latest_marketing_opt_in_at) DESC,
+       datetime(ranked_entries.created_at) DESC,
+       ranked_entries.email_normalized ASC`
+  );
+  if (scope === "all") {
+    return statement.all();
+  }
+  return statement.bind(promoConfig.campaignId).all();
+}
+
 function parseAdminIds(values) {
   if (!Array.isArray(values)) {
     return [];
@@ -934,6 +997,48 @@ async function handlePromoAdminExport(request, env) {
   });
 }
 
+async function handlePromoAdminSubscribersExport(request, env) {
+  if (!env.PROMO_DB) {
+    return new Response("The promo database is not configured.", {
+      status: 503,
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
+  }
+  const url = new URL(request.url);
+  const scope = parseAdminScope(url.searchParams.get("scope"));
+  const exportRows = await fetchPromoAdminSubscriberRows(env, scope);
+  const filenameDate = new Date().toISOString().slice(0, 10);
+  const filenameScope = scope === "all" ? "all-campaigns" : promoConfig.campaignId;
+  const headings = [
+    "email",
+    "email_normalized",
+    "name",
+    "phone",
+    "company",
+    "locale",
+    "latest_campaign_id",
+    "latest_entry_at",
+    "first_marketing_opt_in_at",
+    "latest_marketing_opt_in_at",
+    "campaigns_count",
+    "referrer_host",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+  ];
+  const lines = [headings.join(",")];
+  for (const row of exportRows.results || []) {
+    lines.push(headings.map((heading) => csvEscape(row[heading])).join(","));
+  }
+  return new Response(`\ufeff${lines.join("\r\n")}\r\n`, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="opticable-promo-subscribers-${filenameScope}-${filenameDate}.csv"`,
+    },
+  });
+}
+
 async function handlePromoAdminDelete(request, env) {
   if (!env.PROMO_DB) {
     return jsonResponse({ ok: false, error: "The promo database is not configured." }, 503);
@@ -989,6 +1094,9 @@ async function routeApi(request, env) {
   }
   if (url.pathname === "/api/promo/admin/export.csv" && request.method === "GET") {
     return handlePromoAdminExport(request, env);
+  }
+  if (url.pathname === "/api/promo/admin/subscribers.csv" && request.method === "GET") {
+    return handlePromoAdminSubscribersExport(request, env);
   }
   if (url.pathname === "/api/promo/admin/delete" && request.method === "POST") {
     return handlePromoAdminDelete(request, env);

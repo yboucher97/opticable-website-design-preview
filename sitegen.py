@@ -2048,7 +2048,8 @@ PROMO_ADMIN_CONTENT = {
         'scope_current': 'Current campaign',
         'scope_all': 'All campaigns',
         'refresh': 'Refresh',
-        'export': 'Export CSV',
+        'export_entries': 'Export entries CSV',
+        'export_subscribers': 'Export subscribers CSV',
         'delete_selected': 'Delete selected',
         'delete_view': 'Delete current view',
         'delete_view_all': 'Delete all campaigns',
@@ -2108,7 +2109,8 @@ PROMO_ADMIN_CONTENT = {
         'scope_current': 'Campagne en cours',
         'scope_all': 'Toutes les campagnes',
         'refresh': 'Actualiser',
-        'export': 'Exporter CSV',
+        'export_entries': 'Exporter les entrées CSV',
+        'export_subscribers': 'Exporter les abonnés CSV',
         'delete_selected': 'Supprimer la sélection',
         'delete_view': 'Supprimer la vue active',
         'delete_view_all': 'Supprimer toutes les campagnes',
@@ -4532,11 +4534,13 @@ function initPromoAdmin() {
     const lang = shell.dataset.lang || 'en';
     const entriesUrl = shell.dataset.entriesUrl;
     const exportUrl = shell.dataset.exportUrl;
+    const subscribersExportUrl = shell.dataset.subscribersExportUrl;
     const deleteUrl = shell.dataset.deleteUrl;
     const status = shell.querySelector('[data-promo-admin-status]');
     const errorNode = shell.querySelector('[data-promo-admin-error]');
     const refreshButton = shell.querySelector('[data-promo-admin-refresh]');
     const exportLink = shell.querySelector('[data-promo-admin-export]');
+    const subscribersExportLink = shell.querySelector('[data-promo-admin-export-subscribers]');
     const deleteSelectedButton = shell.querySelector('[data-promo-admin-delete-selected]');
     const deleteViewButton = shell.querySelector('[data-promo-admin-delete-view]');
     const scopeButtons = shell.querySelectorAll('[data-promo-admin-scope]');
@@ -4550,12 +4554,13 @@ function initPromoAdmin() {
     const campaignName = shell.querySelector('[data-promo-admin-current-name]');
     const campaignWindow = shell.querySelector('[data-promo-admin-window]');
     const activeView = shell.querySelector('[data-promo-admin-view]');
-    if (!entriesUrl || !exportUrl || !deleteUrl || !status || !errorNode || !refreshButton || !exportLink || !deleteSelectedButton || !deleteViewButton || !selectAll || !tableBody) {
+    if (!entriesUrl || !exportUrl || !subscribersExportUrl || !deleteUrl || !status || !errorNode || !refreshButton || !exportLink || !subscribersExportLink || !deleteSelectedButton || !deleteViewButton || !selectAll || !tableBody) {
       return;
     }
     let currentScope = 'current';
     let activeRows = [];
     const selectedIds = new Set();
+    const exportLinks = [exportLink, subscribersExportLink];
     const setStatus = (message) => {
       status.textContent = message || '';
       status.hidden = !message;
@@ -4582,6 +4587,9 @@ function initPromoAdmin() {
       const nextExportUrl = new URL(exportUrl, window.location.origin);
       nextExportUrl.searchParams.set('scope', currentScope);
       exportLink.href = nextExportUrl.toString();
+      const nextSubscribersExportUrl = new URL(subscribersExportUrl, window.location.origin);
+      nextSubscribersExportUrl.searchParams.set('scope', currentScope);
+      subscribersExportLink.href = nextSubscribersExportUrl.toString();
       deleteViewButton.textContent = currentScope === 'all'
         ? (copy.deleteViewAllLabel || copy.deleteViewLabel || deleteViewButton.textContent)
         : (copy.deleteViewLabel || deleteViewButton.textContent);
@@ -4632,12 +4640,14 @@ function initPromoAdmin() {
       refreshButton.disabled = busy;
       deleteViewButton.disabled = busy;
       deleteSelectedButton.disabled = busy || selectedIds.size === 0 || activeRows.length === 0;
-      exportLink.setAttribute('aria-disabled', busy ? 'true' : 'false');
-      if (busy) {
-        exportLink.classList.add('is-disabled');
-      } else {
-        exportLink.classList.remove('is-disabled');
-      }
+      exportLinks.forEach((link) => {
+        link.setAttribute('aria-disabled', busy ? 'true' : 'false');
+        if (busy) {
+          link.classList.add('is-disabled');
+        } else {
+          link.classList.remove('is-disabled');
+        }
+      });
       scopeButtons.forEach((button) => {
         button.disabled = busy;
       });
@@ -8098,7 +8108,7 @@ def promo_admin_shell(lang):
     summary = copy['summary']
     table = copy['table']
     return (
-        f'<div class="form-panel promo-admin-shell" data-promo-admin data-lang="{lang}" data-entries-url="/api/promo/admin/entries?lang={lang}" data-export-url="/api/promo/admin/export.csv" data-delete-url="/api/promo/admin/delete" data-limit="200">'
+        f'<div class="form-panel promo-admin-shell" data-promo-admin data-lang="{lang}" data-entries-url="/api/promo/admin/entries?lang={lang}" data-export-url="/api/promo/admin/export.csv" data-subscribers-export-url="/api/promo/admin/subscribers.csv" data-delete-url="/api/promo/admin/delete" data-limit="200">'
         f'<script type="application/json" data-promo-admin-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
         f'<div class="promo-admin-toolbar">'
         f'<div class="promo-admin-scope" role="group" aria-label="{esc(copy["scope_label"])}">'
@@ -8109,7 +8119,8 @@ def promo_admin_shell(lang):
         f'<button class="button button-secondary" type="button" data-promo-admin-refresh>{esc(copy["refresh"])}</button>'
         f'<button class="button button-secondary" type="button" data-promo-admin-delete-selected disabled>{esc(copy["delete_selected"])}</button>'
         f'<button class="button button-secondary" type="button" data-promo-admin-delete-view>{esc(copy["delete_view"])}</button>'
-        f'<a class="button button-primary" data-promo-admin-export href="/api/promo/admin/export.csv?scope=current">{esc(copy["export"])}</a>'
+        f'<a class="button button-primary" data-promo-admin-export-subscribers href="/api/promo/admin/subscribers.csv?scope=current">{esc(copy["export_subscribers"])}</a>'
+        f'<a class="button button-secondary" data-promo-admin-export href="/api/promo/admin/export.csv?scope=current">{esc(copy["export_entries"])}</a>'
         f'</div></div>'
         f'<div class="promo-inline-status" data-promo-admin-status>{esc(copy["loading"])}</div>'
         f'<div class="promo-inline-error" data-promo-admin-error hidden></div>'
