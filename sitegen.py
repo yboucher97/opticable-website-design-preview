@@ -1,5 +1,6 @@
 ﻿from pathlib import Path
 import json
+import os
 from functools import lru_cache
 import re
 from datetime import date, datetime, time
@@ -9,6 +10,11 @@ from zoneinfo import ZoneInfo
 from PIL import Image, ImageDraw, ImageFont, ImageOps, UnidentifiedImageError
 
 root = Path(__file__).resolve().parent
+DEFAULT_SITE_URL = 'https://opticable.ca'
+SITE_URL = os.environ.get('OPTICABLE_SITE_URL', DEFAULT_SITE_URL).rstrip('/')
+DEPLOY_DIR_NAME = os.environ.get('OPTICABLE_DEPLOY_DIR', 'dist').strip() or 'dist'
+SITE_ENV = os.environ.get('OPTICABLE_SITE_ENV', 'production').strip().lower() or 'production'
+FORCE_NOINDEX = os.environ.get('OPTICABLE_FORCE_NOINDEX', '').strip().lower() in {'1', 'true', 'yes', 'on'}
 SOURCE_ASSET_ROOT = root / 'assets'
 IMAGE_ROOT = root / 'Images'
 PRODUCTION_IMAGE_ROOT = IMAGE_ROOT / 'production'
@@ -16,7 +22,8 @@ PRODUCTION_BRAND_ROOT = PRODUCTION_IMAGE_ROOT / 'brand'
 PRODUCTION_HOME_ROOT = PRODUCTION_IMAGE_ROOT / 'home'
 PRODUCTION_ABOUT_ROOT = PRODUCTION_IMAGE_ROOT / 'about'
 PRODUCTION_SERVICE_ROOT = PRODUCTION_IMAGE_ROOT / 'services'
-DEPLOY_ROOT = root / 'dist'
+PRODUCTION_PROMO_ROOT = PRODUCTION_IMAGE_ROOT / 'promo'
+DEPLOY_ROOT = root / DEPLOY_DIR_NAME
 DEPLOY_ASSET_ROOT = DEPLOY_ROOT / 'assets'
 LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
 LEGACY_ROOT_BUILD_FILES = ('index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'script.js')
@@ -37,8 +44,7 @@ ROOT_GENERATED_ASSET_FILES = (
     'styles.css',
     'site.js',
 )
-SITE_URL = 'https://opticable.ca'
-ASSET_VER = '20260317a'
+ASSET_VER = '20260408b'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
 RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
@@ -65,6 +71,7 @@ GOOGLE_TAG_SNIPPET = (
     f"  gtag('config', '{GOOGLE_ADS_TAG_ID}');\n"
     '</script>'
 )
+PROMO_CONFIG = json.loads((root / 'promo-config.json').read_text(encoding='utf-8'))
 ZOHO_FORM_CONFIG = {
     'fr': {
         'src': 'https://forms.zohopublic.com/opticable/form/Formulairedemandedesoumission/formperma/i6pIlfoGOFER0OCZ4oUH_KMxVWRZKC9Of8vbyNAjR0g',
@@ -90,6 +97,7 @@ SERVICE_ACCESS_URL = f'/assets/service-access.webp?v={ASSET_VER}'
 SERVICE_WIFI_URL = f'/assets/service-wifi.webp?v={ASSET_VER}'
 SERVICE_VOIP_URL = f'/assets/service-voip.webp?v={ASSET_VER}'
 OG_IMAGE_URL = f'/assets/og-image.png?v={ASSET_VER}'
+PROMO_SOCIAL_URL = f'/assets/promo-social.png?v={ASSET_VER}'
 OG_IMAGE_MIME_TYPE = 'image/png'
 BLOG_SOCIAL_IMAGE_DIR = DEPLOY_ASSET_ROOT / 'blog-social'
 LOGO_LOCKUP_WIDTH = 1600
@@ -124,6 +132,8 @@ SERVICE_VOIP_WIDTH = 1400
 SERVICE_VOIP_HEIGHT = 797
 OG_IMAGE_WIDTH = 1200
 OG_IMAGE_HEIGHT = 630
+PROMO_SOCIAL_WIDTH = 1200
+PROMO_SOCIAL_HEIGHT = 630
 BLOG_SOCIAL_IMAGE_WIDTH = 1200
 BLOG_SOCIAL_IMAGE_HEIGHT = 630
 SITE_TIMEZONE = ZoneInfo('America/Toronto')
@@ -140,6 +150,7 @@ IMAGE_DIMENSIONS_BY_URL = {
     SERVICE_WIFI_URL: (SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT),
     SERVICE_VOIP_URL: (SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT),
     OG_IMAGE_URL: (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
+    PROMO_SOCIAL_URL: (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
 }
 FONT_CANDIDATES = {
     'display': (
@@ -340,6 +351,13 @@ HOME_IMAGE_EXPORTS = (
         'resize': (SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT),
         'format': 'WEBP',
         'quality': 90,
+    },
+    {
+        'source': PRODUCTION_PROMO_ROOT / 'promo-roll-source.png',
+        'target': DEPLOY_ASSET_ROOT / 'promo-social.png',
+        'resize': (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
+        'canvas': (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
+        'format': 'PNG',
     },
 )
 RUNTIME_ASSET_COPIES = (
@@ -1813,6 +1831,205 @@ T['fr'].update({
         ('Support technique', 'Lundi au vendredi 8 h à 17 h · Samedi et dimanche 10 h à 16 h'),
     ],
 })
+
+PROMO_START = datetime.fromisoformat(PROMO_CONFIG['startAt'])
+PROMO_END = datetime.fromisoformat(PROMO_CONFIG['endAt'])
+PROMO_ACTIVE = PROMO_START <= datetime.now(PROMO_START.tzinfo) <= PROMO_END
+PROMO_SERVICE_KEYS = (
+    'security-camera-systems',
+    'access-control-systems',
+    'commercial-wifi-installation',
+    'structured-cabling',
+)
+PROMO_BLOG_KEYS = ('wifi-power', 'ip-cameras-network-upgrade', 'structured-cabling-foundation')
+
+MONTH_NAMES = {
+    'en': ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+    'fr': ('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'),
+}
+
+PROMO_PAGE_CONTENT = {
+    'en': {
+        'label': 'Promo',
+        'title': 'Quebec commercial quote promo | Opticable',
+        'desc': 'Enter your details, get an instant Opticable promo code, and apply it to a new commercial installation quote in Quebec.',
+        'hero_eyebrow': 'Quebec commercial promo',
+        'h1': 'Roll a promo code for your next commercial installation quote.',
+        'intro': 'Enter your details to lock in one promo code between 5% and 25% off. The code can be applied manually to an approved new Opticable installation quote in Quebec, up to the campaign cap.',
+        'hero_panel_title': 'One entry, one code, your next quote.',
+        'hero_panel_copy': 'Use the code on a cameras, access control, WiFi, intercom, structured cabling, or network infrastructure quote for a commercial project in Quebec.',
+        'hero_points': [
+            'Instant result after one form submission',
+            'Code validity linked to the campaign rules',
+            'Optional marketing consent kept separate from quote follow-up',
+            'Manual code redemption on qualifying new installation quotes',
+        ],
+        'how_title': 'How the promo works',
+        'how_intro': 'Enter your details, get your code, and continue to the quote form.',
+        'how_steps': [
+            ('Enter your details', 'Add your name and email. Phone and company are optional.'),
+            ('Get your code', 'Answer the quick question and receive your promo code.'),
+            ('Go to the quote form', 'Open the quote form and paste in your code when you are ready.'),
+        ],
+        'form_eyebrow': 'Enter once',
+        'form_title': 'Get your promo code',
+        'form_intro': 'Required fields are limited to what is needed to assign one code and connect it to your quote request.',
+        'contact_note': 'After submission, your code will appear here in a popup so you can copy or save it.',
+        'fields': {
+            'name': 'Name',
+            'email': 'Email',
+            'phone': 'Phone (optional)',
+            'company': 'Company (optional)',
+            'skill': 'Skill-testing question',
+        },
+        'consents': {
+            'business': 'I confirm this entry is for a commercial project.',
+            'quebec': 'I confirm the project property is in Quebec.',
+            'rules': 'I have read and accept the promo rules and privacy terms.',
+            'marketing': 'I agree to receive marketing emails from Opticable. This is optional and not required to enter.',
+        },
+        'submit': 'Roll my promo code',
+        'submit_loading': 'Rolling...',
+        'status_loading': 'Loading campaign availability...',
+        'status_unavailable': 'The promo is not available right now. You can still request a quote directly.',
+        'existing_title': 'Your promo code is ready',
+        'existing_copy': 'Copy this code and paste it into your quote request when you are ready.',
+        'result_title': 'Your promo code is ready',
+        'result_copy': 'Copy this code now and paste it into your quote request.',
+        'duplicate_title': 'Your promo code is already assigned',
+        'duplicate_copy': 'This email already has a code for the current campaign. Retrieve it below.',
+        'result_labels': {
+            'discount': 'Discount',
+            'code': 'Promo code',
+            'expires': 'Valid until',
+        },
+        'actions': {
+            'quote': 'Request your quote!',
+            'rules': 'Review the promo rules',
+            'rules_inline': 'Promo rules',
+            'copy_code': 'Copy code',
+            'copied_code': 'Copied',
+            'save_code': 'Save code',
+            'saved_code': 'Saved',
+            'close_modal': 'Close',
+        },
+        'faq_intro': 'Useful answers before submitting a commercial promo entry.',
+        'faqs': [
+            ('Does this replace the normal quote review?', 'No. The code is attached to the existing quote process. The team still reviews scope, eligibility, exclusions, and project fit before applying any discount.'),
+            ('Can I reroll with the same email?', 'No. The campaign stores one result per email address and returns the original result on later submissions.'),
+            ('Do I need to agree to marketing emails to enter?', 'No. Marketing consent is optional and separate from the required campaign confirmations.'),
+            ('Can the code be used on support or managed service work?', 'No. The campaign is limited to qualifying new installation quotes and excludes recurring services, support calls, taxes, and already discounted work.'),
+        ],
+        'rules_title': 'Promo rules | Opticable',
+        'rules_desc': 'Official rules for the Opticable Quebec commercial promo campaign, including eligibility, odds, discount limits, and redemption rules.',
+        'rules_h1': 'Official promo rules',
+        'rules_intro': 'Read these terms before submitting an entry. The promo is intended for Quebec commercial projects and is tied to Opticable’s quote review process.',
+        'unsubscribe_title': 'Marketing email unsubscribe | Opticable',
+        'unsubscribe_desc': 'Withdraw optional marketing consent for Opticable promotional emails without affecting quote-related follow-up.',
+        'unsubscribe_h1': 'Withdraw marketing email consent',
+        'unsubscribe_intro': 'Use the same email address you used for the promo entry. Withdrawing marketing consent does not remove service or quote-related operational follow-up.',
+        'unsubscribe_button': 'Withdraw marketing consent',
+        'unsubscribe_success': 'Marketing consent has been withdrawn for this email address.',
+        'unsubscribe_note': 'You can still contact Opticable directly or request a quote after unsubscribing.',
+        'reminder_eyebrow': 'Promo code ready',
+        'reminder_title': 'Add this code to your quote request.',
+        'reminder_copy': 'Your promo code is already saved and ready to use.',
+        'cta_eyebrow': 'Promo',
+        'cta_title': 'Want to lock in a code before requesting a quote?',
+        'cta_copy': 'Use the promo entry page to collect your one-time code, then continue into the normal commercial quote flow with a better-qualified lead.',
+        'cta_button': 'View the promo page',
+    },
+    'fr': {
+        'label': 'Promo',
+        'title': 'Promo pour soumission commerciale au Québec | Opticable',
+        'desc': "Entrez vos coordonnées, obtenez un code promo instantané Opticable et appliquez-le à une nouvelle soumission d'installation commerciale au Québec.",
+        'hero_eyebrow': 'Promo commerciale Québec',
+        'h1': 'Roulez un code promo pour votre prochaine soumission d’installation commerciale.',
+        'intro': "Entrez vos coordonnées pour avoir un code promo entre 5 % et 25 %. Le code peut être appliqué manuellement à une nouvelle soumission d'installation Opticable admissible au Québec, jusqu'au plafond de la campagne.",
+        'hero_panel_title': 'Une entrée, un code, votre prochaine soumission.',
+        'hero_panel_copy': "Utilisez ce code pour une demande de caméras, de contrôle d'accès, de WiFi, d'intercom, de câblage structuré ou d'infrastructure réseau liée à un projet commercial au Québec.",
+        'hero_points': [
+            'Résultat instantané après une seule soumission',
+            'Validité du code liée au règlement officiel',
+            "Consentement marketing optionnel et séparé du suivi de soumission",
+            "Utilisation manuelle du code sur les nouvelles soumissions d'installation admissibles",
+        ],
+        'how_title': 'Comment la promo fonctionne',
+        'how_intro': "Entrez vos coordonnées, obtenez votre code, puis poursuivez vers le formulaire de soumission.",
+        'how_steps': [
+            ('Entrez vos coordonnées', "Ajoutez votre nom et votre courriel. Le téléphone et l'entreprise sont optionnels."),
+            ('Obtenez votre code', "Répondez à la question et recevez votre code promo."),
+            ('Passez à la soumission', "Ouvrez le formulaire de soumission et collez votre code quand vous serez prêt."),
+        ],
+        'form_eyebrow': 'Une seule entrée',
+        'form_title': 'Obtenir votre code promo',
+        'form_intro': "Les champs requis servent simplement à attribuer un seul code et à le rattacher à votre demande de soumission.",
+        'contact_note': "",
+        'fields': {
+            'name': 'Nom',
+            'email': "Courriel",
+            'phone': 'Téléphone (optionnel)',
+            'company': 'Entreprise (optionnel)',
+            'skill': "Question d'habileté",
+        },
+        'consents': {
+            'business': "Je confirme que cette entrée vise un projet commercial.",
+            'quebec': "Je confirme que la propriété visée par le projet se trouve au Québec.",
+            'rules': "J'ai lu et j'accepte le règlement promo et les modalités de confidentialité.",
+            'marketing': "J'accepte de recevoir des courriels marketing d'Opticable. Ce choix est optionnel et non requis pour participer.",
+        },
+        'submit': 'Obtenir mon code',
+        'submit_loading': 'Traitement...',
+        'status_loading': 'Chargement de la disponibilité de la campagne...',
+        'status_unavailable': "La promo n'est pas disponible pour le moment. Vous pouvez tout de même demander une soumission directement.",
+        'existing_title': 'Votre code promo est prêt',
+        'existing_copy': 'Copiez ce code et collez-le dans votre demande de soumission quand vous serez prêt.',
+        'result_title': 'Votre code promo est prêt',
+        'result_copy': "Copiez ce code maintenant et collez-le dans votre demande de soumission.",
+        'duplicate_title': 'Votre code promo est déjà attribué',
+        'duplicate_copy': "Cette adresse courriel possède déjà un code pour la campagne en cours. Récupérez-le ci-dessous.",
+        'result_labels': {
+            'discount': 'Rabais',
+            'code': 'Code promo',
+            'expires': "Valide jusqu'au",
+        },
+        'actions': {
+            'quote': 'Demander votre soumission!',
+            'rules': 'Consulter le règlement promo',
+            'rules_inline': 'Règlement promo',
+            'copy_code': 'Copier le code',
+            'copied_code': 'Code copié',
+            'save_code': 'Enregistrer le code',
+            'saved_code': 'Code enregistré',
+            'close_modal': 'Fermer',
+        },
+        'faq_intro': 'Réponses utiles avant de soumettre une entrée promotionnelle commerciale.',
+        'faqs': [
+            ("Est-ce que cela remplace l'analyse normale de la soumission ?", "Non. Le code est rattaché au processus de soumission existant. L'équipe valide toujours la portée, l'admissibilité, les exclusions et la pertinence du projet avant d'appliquer un rabais."),
+            ('Puis-je rerouler avec le même courriel ?', "Non. La campagne conserve un seul résultat par adresse courriel et retourne le résultat original lors des soumissions suivantes."),
+            ('Dois-je accepter les courriels marketing pour participer ?', "Non. Le consentement marketing est optionnel et séparé des confirmations obligatoires de la campagne."),
+            ("Le code peut-il être appliqué à du soutien ou à des services récurrents ?", "Non. La campagne vise seulement les nouvelles soumissions d'installation admissibles et exclut les services récurrents, les appels de soutien, les taxes et les travaux déjà escomptés."),
+        ],
+        'rules_title': 'Règlement promo | Opticable',
+        'rules_desc': "Règlement officiel de la campagne promo commerciale Opticable au Québec, incluant l'admissibilité, les probabilités, les plafonds de rabais et les règles d'utilisation.",
+        'rules_h1': 'Règlement officiel de la promo',
+        'rules_intro': "Lisez ces conditions avant de soumettre une entrée. La promo vise les projets commerciaux au Québec et reste rattachée au processus d'analyse des soumissions d'Opticable.",
+        'unsubscribe_title': 'Désabonnement des courriels marketing | Opticable',
+        'unsubscribe_desc': "Retirez le consentement optionnel aux courriels marketing d'Opticable sans affecter les suivis liés aux soumissions ou aux services.",
+        'unsubscribe_h1': 'Retirer le consentement marketing',
+        'unsubscribe_intro': "Utilisez la même adresse courriel que celle soumise pour la promo. Le retrait du consentement marketing n'enlève pas les suivis opérationnels liés à une soumission ou à un service.",
+        'unsubscribe_button': 'Retirer mon consentement marketing',
+        'unsubscribe_success': "Le consentement marketing a été retiré pour cette adresse courriel.",
+        'unsubscribe_note': "Vous pouvez toujours contacter Opticable directement ou demander une soumission après le désabonnement.",
+        'reminder_eyebrow': 'Code promo prêt',
+        'reminder_title': 'Ajoutez ce code dans votre soumission.',
+        'reminder_copy': "Votre code promo est déjà prêt à utiliser.",
+        'cta_eyebrow': 'Promo',
+        'cta_title': 'Vous voulez obtenir un code avant de demander une soumission ?',
+        'cta_copy': "Passez par la page promo pour obtenir votre code unique, puis poursuivez vers le processus normal de soumission commerciale avec un lead mieux qualifié.",
+        'cta_button': 'Voir la page promo',
+    },
+}
 
 HOME_POINT_KEYS = (
     'security-camera-systems',
@@ -3631,8 +3848,8 @@ secondary_order = [
 order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
 base_routes = {
-    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
-    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
+    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
+    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
 }
 routes = {k: dict(v) for k, v in base_routes.items()}
 for key in order:
@@ -3769,6 +3986,425 @@ document.querySelectorAll('[data-service-carousel]').forEach((carousel) => {
 });
 '''
 js = js.replace('__COOKIE_BANNER_ACCEPT_KEY__', json.dumps(COOKIE_BANNER_ACCEPT_KEY))
+
+js += '''
+const promoStorageKey = 'opticable-promo-entry';
+const promoLocaleMap = { en: 'en-CA', fr: 'fr-CA' };
+let promoTurnstileScriptPromise = null;
+function readPromoEntry() {
+  try {
+    const raw = window.localStorage.getItem(promoStorageKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+function writePromoEntry(entry) {
+  try {
+    window.localStorage.setItem(promoStorageKey, JSON.stringify(entry));
+  } catch (error) {}
+}
+function clearPromoEntry() {
+  try {
+    window.localStorage.removeItem(promoStorageKey);
+  } catch (error) {}
+}
+function promoDateLabel(value, lang) {
+  if (!value) return '';
+  try {
+    return new Intl.DateTimeFormat(promoLocaleMap[lang] || 'en-CA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'America/Toronto',
+    }).format(new Date(value));
+  } catch (error) {
+    return value;
+  }
+}
+function promoEntryActive(entry) {
+  if (!entry || !entry.promoExpiresAt) return false;
+  return new Date(entry.promoExpiresAt).getTime() > Date.now();
+}
+function promoPayloadCopy(node, selector) {
+  const source = node.querySelector(selector);
+  if (!source) return {};
+  try {
+    return JSON.parse(source.textContent || '{}');
+  } catch (error) {
+    return {};
+  }
+}
+function promoUtms() {
+  const url = new URL(window.location.href);
+  return {
+    utmSource: url.searchParams.get('utm_source') || '',
+    utmMedium: url.searchParams.get('utm_medium') || '',
+    utmCampaign: url.searchParams.get('utm_campaign') || '',
+    utmContent: url.searchParams.get('utm_content') || '',
+    utmTerm: url.searchParams.get('utm_term') || '',
+  };
+}
+function applyPromoResult(shell, copy, payload, stateLabel, title, description) {
+  const panel = shell.querySelector('[data-promo-result]');
+  if (!panel || !payload) return;
+  const state = panel.querySelector('[data-promo-result-state]');
+  const titleNode = panel.querySelector('[data-promo-result-title]');
+  const copyNode = panel.querySelector('[data-promo-result-copy]');
+  const discountNode = panel.querySelector('[data-promo-result-discount]');
+  const codeInput = panel.querySelector('[data-promo-result-code-input]');
+  const expiryNode = panel.querySelector('[data-promo-result-expiry]');
+  const copyButton = panel.querySelector('[data-promo-result-copy-button]');
+  const saveButton = panel.querySelector('[data-promo-result-save-button]');
+  if (state) {
+    state.textContent = stateLabel || '';
+    state.hidden = !stateLabel;
+  }
+  if (titleNode) titleNode.textContent = title || copy.resultTitle || '';
+  if (copyNode) copyNode.textContent = description || copy.resultCopy || '';
+  if (discountNode) discountNode.textContent = payload.discountLabel || '';
+  if (codeInput) codeInput.value = payload.promoCode || '';
+  if (expiryNode) expiryNode.textContent = promoDateLabel(payload.promoExpiresAt, payload.locale || shell.dataset.lang || 'en');
+  if (copyButton) {
+    copyButton.textContent = copyButton.dataset.copyDefault || copyButton.textContent;
+  }
+  if (saveButton) {
+    saveButton.textContent = saveButton.dataset.saveDefault || saveButton.textContent;
+  }
+  panel.hidden = false;
+  document.body.classList.add('lightbox-open');
+}
+function loadPromoTurnstileScript() {
+  if (window.turnstile) {
+    return Promise.resolve(window.turnstile);
+  }
+  if (!promoTurnstileScriptPromise) {
+    promoTurnstileScriptPromise = new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-promo-turnstile-script]');
+      if (existing) {
+        existing.addEventListener('load', () => resolve(window.turnstile));
+        existing.addEventListener('error', reject);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.dataset.promoTurnstileScript = 'true';
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+  return promoTurnstileScriptPromise;
+}
+async function initPromoForms() {
+  const promoRoots = document.querySelectorAll('[data-promo-root]');
+  if (!promoRoots.length) {
+    return;
+  }
+  clearPromoEntry();
+  for (const shell of promoRoots) {
+    const lang = shell.dataset.lang || 'en';
+    const copy = promoPayloadCopy(shell, '[data-promo-copy]');
+    const configUrl = shell.dataset.configUrl;
+    const entryUrl = shell.dataset.entryUrl;
+    const form = shell.querySelector('[data-promo-form]');
+    const submit = shell.querySelector('[data-promo-submit]');
+    const status = shell.querySelector('[data-promo-status]');
+    const errorNode = shell.querySelector('[data-promo-error]');
+    const skillShell = shell.querySelector('[data-promo-skill-shell]');
+    const skillPrompt = shell.querySelector('[data-promo-skill-prompt]');
+    const turnstileMount = shell.querySelector('[data-promo-turnstile]');
+    const resultPanel = shell.querySelector('[data-promo-result]');
+    if (!configUrl || !entryUrl || !form || !submit || !status || !errorNode || !skillShell || !skillPrompt || !turnstileMount) {
+      continue;
+    }
+    let config = null;
+    let turnstileToken = '';
+    let widgetId = null;
+    const showError = (message) => {
+      errorNode.textContent = message || copy.genericError || '';
+      errorNode.hidden = !message;
+    };
+    const showStatus = (message) => {
+      status.textContent = message || '';
+      status.hidden = !message;
+    };
+    const closePromoResult = () => {
+      if (!resultPanel || resultPanel.hidden) return;
+      resultPanel.hidden = true;
+      document.body.classList.remove('lightbox-open');
+    };
+    if (resultPanel) {
+      resultPanel.querySelectorAll('[data-promo-result-close]').forEach((button) => {
+        button.addEventListener('click', closePromoResult);
+      });
+      resultPanel.addEventListener('click', (event) => {
+        if (event.target === resultPanel) {
+          closePromoResult();
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !resultPanel.hidden) {
+          closePromoResult();
+        }
+      });
+      const copyButton = resultPanel.querySelector('[data-promo-result-copy-button]');
+      const saveButton = resultPanel.querySelector('[data-promo-result-save-button]');
+      const codeInput = resultPanel.querySelector('[data-promo-result-code-input]');
+      const titleNode = resultPanel.querySelector('[data-promo-result-title]');
+      const discountNode = resultPanel.querySelector('[data-promo-result-discount]');
+      const expiryNode = resultPanel.querySelector('[data-promo-result-expiry]');
+      let copyResetTimer = null;
+      let saveResetTimer = null;
+      if (copyButton && codeInput) {
+        copyButton.addEventListener('click', async () => {
+          const code = codeInput.value || '';
+          if (!code) return;
+          let copied = false;
+          try {
+            await navigator.clipboard.writeText(code);
+            copied = true;
+          } catch (error) {
+            codeInput.focus();
+            codeInput.select();
+            try {
+              copied = document.execCommand('copy');
+            } catch (fallbackError) {
+              copied = false;
+            }
+          }
+          if (!copied) return;
+          copyButton.textContent = copyButton.dataset.copySuccess || copyButton.textContent;
+          window.clearTimeout(copyResetTimer);
+          copyResetTimer = window.setTimeout(() => {
+            copyButton.textContent = copyButton.dataset.copyDefault || copyButton.textContent;
+          }, 1800);
+        });
+      }
+      if (saveButton && codeInput) {
+        saveButton.addEventListener('click', () => {
+          const code = (codeInput.value || '').trim();
+          if (!code) return;
+          const labels = copy.resultLabels || {};
+          const lines = [
+            titleNode ? titleNode.textContent.trim() : (copy.resultTitle || ''),
+            '',
+            `${labels.code || 'Promo code'}: ${code}`,
+            `${labels.discount || 'Discount'}: ${discountNode ? discountNode.textContent.trim() : ''}`,
+            `${labels.expires || 'Valid until'}: ${expiryNode ? expiryNode.textContent.trim() : ''}`,
+            '',
+            `${copy.saveQuoteLabel || 'Quote page'}: ${new URL(copy.quotePath || '/', window.location.origin).toString()}`,
+          ].filter(Boolean);
+          try {
+            const blob = new Blob(['\\ufeff', lines.join('\\r\\n')], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            const objectUrl = URL.createObjectURL(blob);
+            link.href = objectUrl;
+            link.download = `${copy.saveFilePrefix || 'opticable-promo-code'}-${code.toLowerCase()}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.setTimeout(() => URL.revokeObjectURL(objectUrl), 2000);
+            saveButton.textContent = saveButton.dataset.saveSuccess || saveButton.textContent;
+            window.clearTimeout(saveResetTimer);
+            saveResetTimer = window.setTimeout(() => {
+              saveButton.textContent = saveButton.dataset.saveDefault || saveButton.textContent;
+            }, 1800);
+          } catch (error) {}
+        });
+      }
+    }
+    showStatus(copy.statusLoading || '');
+    showError('');
+    try {
+      const response = await fetch(configUrl, { headers: { Accept: 'application/json' } });
+      config = await response.json();
+    } catch (error) {
+      config = { available: false };
+    }
+    if (!config || !config.available || !config.turnstileSiteKey || !config.challenge) {
+      showStatus(copy.statusUnavailable || '');
+      submit.disabled = true;
+      continue;
+    }
+    skillShell.hidden = false;
+    skillPrompt.textContent = config.challenge.prompt || '';
+    const skillTokenField = form.elements.namedItem('skill_token');
+    if (skillTokenField) {
+      skillTokenField.value = config.challenge.token || '';
+    }
+    try {
+      const turnstile = await loadPromoTurnstileScript();
+      widgetId = turnstile.render(turnstileMount, {
+        sitekey: config.turnstileSiteKey,
+        action: config.turnstileAction || 'promo-entry',
+        callback(token) {
+          turnstileToken = token || '';
+        },
+        'expired-callback'() {
+          turnstileToken = '';
+        },
+        'error-callback'() {
+          turnstileToken = '';
+        },
+      });
+      submit.disabled = false;
+      showStatus('');
+    } catch (error) {
+      showStatus(copy.statusUnavailable || '');
+      showError(copy.turnstileError || copy.genericError || '');
+      submit.disabled = true;
+      continue;
+    }
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showError('');
+      if (!form.reportValidity()) {
+        showError(copy.requiredField || '');
+        return;
+      }
+      if (!form.elements.namedItem('business_attestation').checked || !form.elements.namedItem('quebec_attestation').checked || !form.elements.namedItem('rules_attestation').checked) {
+        showError(copy.requiredConsent || '');
+        return;
+      }
+      const email = String(form.elements.namedItem('email').value || '').trim();
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        showError(copy.invalidEmail || '');
+        return;
+      }
+      if (!turnstileToken) {
+        showError(copy.turnstileError || '');
+        return;
+      }
+      const payload = {
+        locale: lang,
+        name: String(form.elements.namedItem('name').value || '').trim(),
+        email,
+        phone: String(form.elements.namedItem('phone').value || '').trim(),
+        company: String(form.elements.namedItem('company').value || '').trim(),
+        skillAnswer: String(form.elements.namedItem('skill_answer').value || '').trim(),
+        skillToken: String(form.elements.namedItem('skill_token').value || '').trim(),
+        turnstileToken,
+        businessAttestation: form.elements.namedItem('business_attestation').checked,
+        quebecAttestation: form.elements.namedItem('quebec_attestation').checked,
+        rulesAttestation: form.elements.namedItem('rules_attestation').checked,
+        marketingOptIn: form.elements.namedItem('marketing_opt_in').checked,
+        landingPath: window.location.pathname,
+        landingUrl: window.location.href,
+        referrerUrl: document.referrer || '',
+        ...promoUtms(),
+      };
+      submit.disabled = true;
+      const previousLabel = submit.textContent;
+      submit.textContent = copy.submitLoading || previousLabel;
+      try {
+        const response = await fetch(entryUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          showError(result.error || copy.genericError || '');
+        } else {
+          const entry = result.entry || {};
+          const stored = {
+            campaignId: result.campaignId,
+            discountPercent: entry.discountPercent,
+            discountLabel: entry.discountLabel,
+            promoCode: entry.promoCode,
+            promoExpiresAt: entry.promoExpiresAt,
+            locale: lang,
+          };
+          showStatus('');
+          applyPromoResult(
+            shell,
+            copy,
+            stored,
+            '',
+            result.duplicate ? copy.duplicateTitle : copy.resultTitle,
+            result.duplicate ? copy.duplicateCopy : copy.resultCopy
+          );
+          if (resultPanel) {
+            const focusTarget = resultPanel.querySelector('[data-promo-result-copy-button]') || resultPanel.querySelector('[data-promo-result-close]');
+            if (focusTarget) {
+              window.setTimeout(() => focusTarget.focus(), 40);
+            }
+          }
+        }
+        if (window.turnstile && widgetId !== null) {
+          window.turnstile.reset(widgetId);
+          turnstileToken = '';
+        }
+      } catch (error) {
+        showError(copy.genericError || '');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = previousLabel;
+      }
+    });
+  }
+}
+function initPromoUnsubscribe() {
+  document.querySelectorAll('[data-promo-unsubscribe]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-promo-unsubscribe-copy]');
+    const form = shell.querySelector('[data-promo-unsubscribe-form]');
+    const status = shell.querySelector('[data-promo-unsubscribe-status]');
+    const errorNode = shell.querySelector('[data-promo-unsubscribe-error]');
+    const url = shell.dataset.unsubscribeUrl;
+    const lang = shell.dataset.lang || 'en';
+    if (!form || !status || !errorNode || !url) return;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.hidden = true;
+      errorNode.hidden = true;
+      const email = String(form.elements.namedItem('email').value || '').trim();
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        errorNode.textContent = copy.invalidEmail || '';
+        errorNode.hidden = false;
+        return;
+      }
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ email, locale: lang }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          throw new Error(result.error || copy.genericError || '');
+        }
+        status.textContent = result.message || copy.success || '';
+        status.hidden = false;
+        form.reset();
+      } catch (error) {
+        errorNode.textContent = error.message || copy.genericError || '';
+        errorNode.hidden = false;
+      }
+    });
+  });
+}
+async function initSiteConfig() {
+  try {
+    const response = await fetch('/api/site-config', { headers: { Accept: 'application/json' } });
+    const config = await response.json();
+    if (!config || !config.analyticsToken || document.querySelector('script[data-cf-beacon-script]')) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    script.dataset.cfBeaconScript = 'true';
+    script.setAttribute('data-cf-beacon', JSON.stringify({ token: config.analyticsToken }));
+    document.head.appendChild(script);
+  } catch (error) {}
+}
+initPromoForms();
+initPromoUnsubscribe();
+initSiteConfig();
+'''
 
 css += '''
 .hero-panel,.page-hero-panel,.cta-band{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(245,250,246,.96)),radial-gradient(circle at top right,rgba(47,138,88,.12),transparent 32%)}.hero-panel h2,.page-hero-panel h2,.contact-panel h2{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;font-size:clamp(1.7rem,2.6vw,2.6rem);line-height:1.08}.chip-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{display:inline-flex;align-items:center;padding:10px 14px;border:1px solid rgba(47,138,88,.16);border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);font-size:.78rem;font-weight:700}.section-heading{display:grid;gap:12px;margin-bottom:24px}.grid-3,.grid-4,.timeline,.faq-list,.detail-list,.input-grid,.checkbox-group,.footer-grid,.language-cards{display:grid;gap:18px}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{padding:22px;border-radius:24px;background:rgba(247,250,247,.92)}.card h3{margin:0 0 10px;font-size:1.16rem}.card p{margin:0;color:var(--muted);line-height:1.68}.card .more{display:inline-block;margin-top:14px;color:var(--primary-dark);font-weight:700}.breadcrumb{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;color:var(--muted);font-size:.96rem}.breadcrumb span[aria-current="page"]{color:var(--text)}.timeline{grid-template-columns:repeat(4,minmax(0,1fr))}.timeline-step{padding:24px;border-radius:24px}.timeline-step span{display:inline-block;margin-bottom:18px;color:var(--primary-dark);font-size:.78rem;font-weight:800}.timeline-step h3{margin:0 0 10px;font-size:1.16rem}.timeline-step p{margin:0;color:var(--muted);line-height:1.68}.faq-list{grid-template-columns:repeat(2,minmax(0,1fr))}.faq-item{border-radius:24px;overflow:hidden}.faq-item summary{padding:22px 24px;cursor:pointer;font-weight:700;list-style:none}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+";float:right;color:var(--primary-dark);font-size:1.3rem;line-height:1}.faq-item[open] summary::after{content:"-"}.faq-item p{margin:0;padding:0 24px 24px;color:var(--muted);line-height:1.68}.contact-panel .note{padding:16px 18px;border-radius:18px;background:var(--primary-soft);color:var(--primary-dark);line-height:1.6}.detail-item{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}.detail-item strong{display:block;margin-bottom:8px}form{display:grid;gap:18px}.input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.field{display:grid;gap:10px;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:14px 16px;border:1px solid var(--line-strong);border-radius:16px;background:#fff;color:var(--text)}.field textarea{min-height:160px;resize:vertical}.checkbox-group{grid-template-columns:repeat(2,minmax(0,1fr));margin:0;padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}.checkbox-group legend{padding:0 8px;font-weight:700}.checkbox-group label{display:flex;align-items:center;gap:10px;font-weight:600}.checkbox-group input{width:18px;height:18px;accent-color:var(--primary)}.form-note{margin:0;color:var(--muted);line-height:1.6}.zoho-form-shell{display:grid;gap:0;align-content:stretch;padding-top:0;padding-bottom:0}.zoho-form-shell .footer-note{margin:0}.zoho-form-embed{width:100%}.zoho-form-embed iframe{display:block;width:100%;min-height:1120px;border:0;border-radius:20px;background:#fff}.site-footer{margin-top:44px;padding-top:26px;border-top:1px solid var(--line-strong)}.footer-grid{grid-template-columns:1.2fr .8fr 1fr;align-items:start}.footer-title{margin:0 0 14px;font-size:.92rem;letter-spacing:.16em;text-transform:uppercase;color:var(--primary-dark)}.footer-links,.footer-services{display:grid;gap:10px}.footer-bottom{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted)}.language-card{padding:24px;border:1px solid var(--line);border-radius:24px;background:rgba(247,250,247,.92)}.language-card h2{margin:0 0 10px;font-size:1.28rem}.language-card p{margin:0 0 18px;color:var(--muted);line-height:1.62}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid rgba(47,138,88,.28);outline-offset:2px}@media (max-width:1100px){.hero,.page-hero,.cta-band,.contact-layout,.gateway-panel,.two-col,.footer-grid{grid-template-columns:1fr}.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:920px){.site-header{position:static}.header-inner{display:grid;justify-items:start;border-radius:30px}.nav-toggle{display:inline-flex}.site-nav{display:none;width:100%;flex-direction:column;align-items:flex-start;padding-top:10px}.site-nav.is-open{display:flex}.header-actions{width:100%;flex-wrap:wrap}.grid-3,.timeline,.input-grid,.checkbox-group{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:740px){.site-shell,.gateway-shell{width:min(calc(100% - 24px),var(--max))}.hero-copy,.hero-panel,.page-hero-copy,.page-hero-panel,.contact-panel,.form-panel,.cta-band,.gateway-panel{padding:24px}.hero-copy h1{font-size:clamp(2rem,11vw,3rem)}.page-hero-copy h1,.section-heading h2,.cta-band h2,.gateway-panel h1{font-size:clamp(1.85rem,8vw,2.6rem)}.grid-3,.grid-4,.faq-list,.timeline,.input-grid,.checkbox-group{grid-template-columns:1fr}.contact-layout{padding:24px}.zoho-form-shell{padding-top:0;padding-bottom:0}}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -5253,7 +5889,7 @@ main section::before{
 }
 .page-contact .contact-hours-grid{
   display:grid;
-  gap:12px;
+  gap:14px;
 }
 .page-contact .contact-form-column{
   display:grid;
@@ -5295,6 +5931,14 @@ main section::before{
 }
 .page-contact .contact-sidebar .contact-detail-card-hours strong{
   color:#1f6640;
+}
+.page-contact .contact-sidebar .contact-detail-card-note{
+  border:1px solid rgba(21,54,40,.14);
+  background:linear-gradient(180deg,#ffffff,#f3f7f4);
+}
+.page-contact .contact-sidebar .contact-detail-card-note p{
+  margin:0;
+  color:#415247;
 }
 @media (max-width:1200px){
   .page-contact .contact-layout{
@@ -6444,6 +7088,16 @@ def absolute_url(path):
     return f'{SITE_URL}{path}'
 
 
+def effective_robots_value(robots):
+    if not FORCE_NOINDEX or robots.startswith('noindex'):
+        return robots
+    return 'noindex, nofollow'
+
+
+def promo_publicly_indexable():
+    return not FORCE_NOINDEX and PROMO_ACTIVE
+
+
 def asset_mime_type(url):
     path = url.split('?', 1)[0].lower()
     if path.endswith('.png'):
@@ -6543,6 +7197,9 @@ def resource_hints(page_key, preload_image_url=None):
     if page_key == 'contact':
         hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
         hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
+    if page_key == 'promo':
+        hints.append('<link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin />')
+        hints.append('<link rel="dns-prefetch" href="//challenges.cloudflare.com" />')
     if preload_image_url:
         hints.append(f'<link rel="preload" as="image" href="{esc(preload_image_url)}" />')
     return ''.join(hints)
@@ -6598,6 +7255,9 @@ def contact_sidebar_details_html(lang):
             direct_items.append(detail_item_html(label, value, 'contact-detail-card contact-detail-card-direct'))
         else:
             schedule_items.append(detail_item_html(label, value, 'contact-detail-card contact-detail-card-hours'))
+    contact_note = T[lang].get('contact_form_note')
+    if contact_note:
+        schedule_items.append(f'<div class="detail-item contact-detail-card contact-detail-card-note"><p>{esc(contact_note)}</p></div>')
     parts = []
     if direct_items:
         parts.append(f'<div class="contact-direct-grid">{"".join(direct_items)}</div>')
@@ -6635,7 +7295,7 @@ def breadcrumb_schema(items, page_url):
 
 
 def sitemap_xml():
-    page_keys = (
+    page_keys = [
         'home',
         'services',
         *order,
@@ -6646,7 +7306,12 @@ def sitemap_xml():
         'about',
         'faq',
         'contact',
-    )
+    ]
+    if promo_publicly_indexable():
+        page_keys.extend((
+            'promo',
+            'promo-rules',
+        ))
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
@@ -6834,6 +7499,234 @@ def render_focus_chips(lang):
     if not items:
         return ''
     return '<div class="hero-focus-cloud">' + ''.join(f'<span class="hero-focus-chip">{esc(item)}</span>' for item in items) + '</div>'
+
+
+def localized_datetime_label(value, lang, include_time=False):
+    if isinstance(value, str):
+        parsed = datetime.fromisoformat(value)
+    else:
+        parsed = value
+    month_name = MONTH_NAMES[lang][parsed.month - 1]
+    if lang == 'fr':
+        date_label = f'{parsed.day} {month_name} {parsed.year}'
+        if include_time:
+            return f'{date_label} à {parsed.strftime("%H:%M")} (heure de Toronto)'
+        return date_label
+    date_label = f'{month_name} {parsed.day}, {parsed.year}'
+    if include_time:
+        return f'{date_label} at {parsed.strftime("%I:%M %p").lstrip("0")} Toronto time'
+    return date_label
+
+
+def promo_discount_range_label(lang):
+    discounts = sorted(item['percent'] for item in PROMO_CONFIG['discounts'])
+    if lang == 'fr':
+        return f'{discounts[0]} % à {discounts[-1]} %'
+    return f'{discounts[0]}% to {discounts[-1]}%'
+
+
+def promo_cap_label():
+    return f'${PROMO_CONFIG["discountCapCad"]:,} CAD'
+
+
+def promo_odds_rows(lang):
+    rows = []
+    for item in PROMO_CONFIG['discounts']:
+        chance_label = f'{item["weight"]} %' if lang == 'fr' else f'{item["weight"]}%'
+        rows.append(
+            f'<tr><th scope="row">{item["percent"]}%</th><td>{esc(chance_label)}</td></tr>'
+        )
+    return ''.join(rows)
+
+
+def promo_rules_summary(lang):
+    if lang == 'fr':
+        return [
+            ('Période de la campagne', f'Du {localized_datetime_label(PROMO_START, lang, True)} au {localized_datetime_label(PROMO_END, lang, True)}.'),
+            ('Admissibilité', "Les entrées doivent concerner un projet commercial situé au Québec."),
+            ('Valeur de la promo', f'Rabais entre {promo_discount_range_label(lang)} sur le sous-total avant taxes, jusqu’à {promo_cap_label()} par soumission admissible.'),
+            ('Limites', "Une seule entrée par adresse courriel et par campagne. Les services récurrents, appels de soutien, taxes et travaux déjà escomptés sont exclus."),
+        ]
+    return [
+        ('Campaign period', f'From {localized_datetime_label(PROMO_START, lang, True)} through {localized_datetime_label(PROMO_END, lang, True)}.'),
+        ('Eligibility', 'Entries must relate to a Quebec commercial project.'),
+        ('Promo value', f'Discounts range from {promo_discount_range_label(lang)} on the pre-tax quoted subtotal, capped at {promo_cap_label()} per qualifying quote.'),
+        ('Limits', 'One entry per email address per campaign. Recurring services, support calls, taxes, and already discounted work are excluded.'),
+    ]
+
+
+def promo_result_panel(lang):
+    copy = PROMO_PAGE_CONTENT[lang]
+    labels = copy['result_labels']
+    return (
+        f'<div class="promo-result-overlay" data-promo-result hidden>'
+        f'<section class="promo-result-dialog contact-panel" role="dialog" aria-modal="true" aria-labelledby="promo-result-title-{lang}">'
+        f'<button class="promo-result-close" type="button" data-promo-result-close aria-label="{esc(copy["actions"]["close_modal"])}">&times;</button>'
+        f'<p class="eyebrow" data-promo-result-state></p>'
+        f'<h2 id="promo-result-title-{lang}" data-promo-result-title>{esc(copy["result_title"])}</h2>'
+        f'<p class="promo-result-copy" data-promo-result-copy>{esc(copy["result_copy"])}</p>'
+        f'<div class="promo-result-code-shell">'
+        f'<strong>{esc(labels["code"])}</strong>'
+        f'<div class="promo-result-code-row">'
+        f'<input class="promo-result-code-input" data-promo-result-code-input type="text" readonly value="" />'
+        f'<div class="promo-result-code-actions">'
+        f'<button class="button button-primary promo-copy-button" type="button" data-promo-result-copy-button data-copy-default="{esc(copy["actions"]["copy_code"])}" data-copy-success="{esc(copy["actions"]["copied_code"])}">{esc(copy["actions"]["copy_code"])}</button>'
+        f'<button class="button button-secondary promo-save-button" type="button" data-promo-result-save-button data-save-default="{esc(copy["actions"]["save_code"])}" data-save-success="{esc(copy["actions"]["saved_code"])}">{esc(copy["actions"]["save_code"])}</button>'
+        f'</div>'
+        f'</div></div>'
+        f'<div class="promo-result-grid promo-result-grid-compact">'
+        f'<div class="detail-item"><strong>{esc(labels["discount"])}</strong><p data-promo-result-discount></p></div>'
+        f'<div class="detail-item"><strong>{esc(labels["expires"])}</strong><p data-promo-result-expiry></p></div>'
+        f'</div>'
+        f'<div class="promo-result-actions">'
+        f'<a class="button button-secondary" data-promo-result-contact href="{routes[lang]["contact"]}">{esc(copy["actions"]["quote"])}</a>'
+        f'<a class="text-link promo-result-rules-link" href="{routes[lang]["promo-rules"]}">{esc(copy["actions"]["rules"])}</a>'
+        f'</div></section></div>'
+    )
+
+
+def promo_form_shell(lang):
+    copy = PROMO_PAGE_CONTENT[lang]
+    contact_note_html = f'<p class="form-note">{esc(copy["contact_note"])}</p>' if copy.get('contact_note') else ''
+    form_copy = {
+        'statusLoading': copy['status_loading'],
+        'statusUnavailable': copy['status_unavailable'],
+        'submitLoading': copy['submit_loading'],
+        'existingTitle': copy['existing_title'],
+        'existingCopy': copy['existing_copy'],
+        'resultTitle': copy['result_title'],
+        'resultCopy': copy['result_copy'],
+        'duplicateTitle': copy['duplicate_title'],
+        'duplicateCopy': copy['duplicate_copy'],
+        'invalidEmail': 'Use a valid email address.' if lang == 'en' else 'Utilisez une adresse courriel valide.',
+        'requiredField': 'Complete all required fields.' if lang == 'en' else 'Remplissez tous les champs obligatoires.',
+        'requiredConsent': 'Confirm the required eligibility and rules checkboxes.' if lang == 'en' else "Confirmez les cases obligatoires liées à l'admissibilité et au règlement.",
+        'requiredSkill': 'Answer the skill-testing question.' if lang == 'en' else "Répondez à la question d'habileté.",
+        'turnstileError': 'The security check could not be validated. Reload the page and try again.' if lang == 'en' else "La vérification de sécurité a échoué. Rechargez la page et réessayez.",
+        'genericError': 'The promo entry could not be completed. Please try again or use the quote page directly.' if lang == 'en' else "L'entrée promo n'a pas pu être traitée. Réessayez ou utilisez directement la page de soumission.",
+        'challengeLabel': copy['fields']['skill'],
+        'resultLabels': copy['result_labels'],
+        'quotePath': routes[lang]['contact'],
+        'saveQuoteLabel': 'Quote page' if lang == 'en' else 'Page de soumission',
+        'saveFilePrefix': 'opticable-promo-code' if lang == 'en' else 'code-promo-opticable',
+    }
+    fields = copy['fields']
+    consents = copy['consents']
+    return (
+        f'<div class="form-panel promo-form-shell" data-promo-root data-lang="{lang}" data-config-url="/api/promo/config?lang={lang}" data-entry-url="/api/promo/entry">'
+        f'<script type="application/json" data-promo-copy>{json.dumps(form_copy, ensure_ascii=False)}</script>'
+        f'<p class="eyebrow">{esc(copy["form_eyebrow"])}</p><h2>{esc(copy["form_title"])}</h2><p>{esc(copy["form_intro"])}</p>'
+        f'<div class="promo-inline-status" data-promo-status>{esc(copy["status_loading"])}</div>'
+        f'<div class="promo-inline-error" data-promo-error hidden></div>'
+        f'<form class="promo-entry-form" data-promo-form novalidate>'
+        f'<div class="input-grid">'
+        f'<label class="field"><span>{esc(fields["name"])}</span><input name="name" autocomplete="name" required /></label>'
+        f'<label class="field"><span>{esc(fields["email"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<label class="field"><span>{esc(fields["phone"])}</span><input name="phone" type="tel" autocomplete="tel" /></label>'
+        f'<label class="field"><span>{esc(fields["company"])}</span><input name="company" autocomplete="organization" /></label>'
+        f'</div>'
+        f'<div class="promo-skill-shell" data-promo-skill-shell hidden>'
+        f'<p class="promo-skill-prompt" data-promo-skill-prompt></p>'
+        f'<label class="field"><span>{esc(fields["skill"])}</span><input name="skill_answer" inputmode="numeric" required /></label>'
+        f'<input name="skill_token" type="hidden" />'
+        f'</div>'
+        f'<div class="promo-turnstile-shell"><div class="promo-turnstile" data-promo-turnstile></div></div>'
+        f'<div class="promo-checklist">'
+        f'<label><input name="business_attestation" type="checkbox" required /> <span>{esc(consents["business"])}</span></label>'
+        f'<label><input name="quebec_attestation" type="checkbox" required /> <span>{esc(consents["quebec"])}</span></label>'
+        f'<label><input name="rules_attestation" type="checkbox" required />'
+        f'<span class="promo-consent-copy"><span class="promo-consent-text">{esc(consents["rules"])}</span>'
+        f'<span class="promo-consent-links"><a href="{routes[lang]["promo-rules"]}">{esc(copy["actions"].get("rules_inline", copy["actions"]["rules"]))}</a><span class="promo-consent-separator" aria-hidden="true">·</span><a href="{routes[lang]["privacy"]}">{esc(T[lang]["privacy"])}</a></span>'
+        f'</span></label>'
+        f'<label><input name="marketing_opt_in" type="checkbox" /> <span>{esc(consents["marketing"])}</span></label>'
+        f'</div>'
+        f'<button class="button button-primary promo-submit" type="submit" data-promo-submit disabled>{esc(copy["submit"])}</button>'
+        f'</form>'
+        f'{contact_note_html}'
+        f'{promo_result_panel(lang)}'
+        f'</div>'
+    )
+
+
+def promo_rules_body(lang):
+    copy = PROMO_PAGE_CONTENT[lang]
+    summary_cards = ''.join(card(title, text) for title, text in promo_rules_summary(lang))
+    if lang == 'fr':
+        sections = (
+            ('Promoteur', f'{PROMO_CONFIG["sponsor"]["legalName"]}, faisant affaire sous le nom Opticable.'),
+            ('Admissibilité', "La campagne est ouverte aux personnes majeures qui soumettent une entrée liée à un projet commercial situé au Québec. Les projets hors Québec et les demandes non commerciales sont exclus."),
+            ('Aucun achat requis', "Aucun achat n'est requis pour participer. Une bonne réponse à la question d'habileté et le respect du présent règlement sont nécessaires pour conserver le résultat attribué."),
+            ('Probabilités de gain', "Les probabilités dépendent de la grille pondérée ci-dessous. Chaque entrée valide obtient un seul résultat pour la campagne."),
+            ('Utilisation du code', "Le code promo doit être mentionné dans la demande de soumission Opticable avant l'expiration. Le rabais, s'il est applicable, est calculé sur le sous-total avant taxes d'une nouvelle soumission d'installation admissible et demeure plafonné à " + promo_cap_label() + '.'),
+            ('Exclusions', "Les taxes, appels de soutien, services récurrents, contrats déjà signés, travaux déjà réduits, matériel acheté séparément et autres services exclus par la soumission ne sont pas admissibles."),
+            ('Consentement et confidentialité', "Les renseignements saisis servent à administrer la campagne, à prévenir les abus, à faire le suivi commercial et, seulement si vous y consentez, à l'envoi de communications marketing. Le retrait du consentement marketing n'affecte pas les suivis liés aux soumissions ou aux services."),
+            ('Différends', "Le règlement et l'administration de la campagne sont régis par les lois applicables au Québec et au Canada. En cas de divergence, la version publiée sur le site Opticable prévaut pour cette campagne."),
+        )
+    else:
+        sections = (
+            ('Sponsor', f'{PROMO_CONFIG["sponsor"]["legalName"]}, carrying on business as Opticable.'),
+            ('Eligibility', 'The campaign is open to adults submitting an entry tied to a Quebec commercial project. Non-Quebec projects and non-commercial quote requests are excluded.'),
+            ('No purchase required', 'No purchase is required to enter. A correct answer to the skill-testing question and compliance with these rules are required to keep the assigned result.'),
+            ('Odds', 'The odds follow the weighted distribution below. Each valid email address receives one result for the campaign.'),
+            ('Code redemption', 'The promo code must be mentioned in the Opticable quote request before expiry. If applicable, the discount is calculated on the pre-tax subtotal of a qualifying new installation quote and remains capped at ' + promo_cap_label() + '.'),
+            ('Exclusions', 'Taxes, support calls, recurring services, already signed work, already discounted scopes, separately purchased material, and other excluded services are not eligible.'),
+            ('Consent and privacy', 'Submitted information is used to administer the campaign, prevent abuse, support commercial follow-up, and, only if you opt in, send marketing communications. Withdrawing marketing consent does not affect quote or service follow-up.'),
+            ('Disputes', 'The rules and campaign administration are governed by applicable Quebec and Canadian law. The version published on the Opticable website governs this campaign.'),
+        )
+    section_html = ''.join(
+        f'<article class="contact-panel"><h2>{esc(title)}</h2><p>{esc(text)}</p></article>'
+        for title, text in sections
+    )
+    odds_heading = 'Weighted promo distribution' if lang == 'en' else 'Répartition pondérée de la promo'
+    odds_copy = 'Assigned immediately after validation.' if lang == 'en' else 'Attribuée immédiatement après validation.'
+    return (
+        band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(copy["label"])}</p><h1>{esc(copy["rules_h1"])}</h1><p>{esc(copy["rules_intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(copy["rules_h1"])}</h2><p>{esc(copy["rules_desc"])}</p></div><div class="grid-2">{summary_cards}</div>',
+            'promo-rules-summary-section',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(odds_heading)}</h2><p>{esc(odds_copy)}</p></div>'
+            f'<div class="contact-panel promo-odds-panel"><table class="promo-odds-table"><thead><tr><th>{"Discount" if lang == "en" else "Rabais"}</th><th>{"Chance" if lang == "en" else "Probabilité"}</th></tr></thead><tbody>{promo_odds_rows(lang)}</tbody></table></div>',
+            'promo-rules-odds-section',
+        )
+        + band_section(f'<div class="grid-2">{section_html}</div>', 'promo-rules-section')
+    )
+
+
+def promo_unsubscribe_form(lang):
+    copy = PROMO_PAGE_CONTENT[lang]
+    payload = {
+        'success': copy['unsubscribe_success'],
+        'invalidEmail': 'Use a valid email address.' if lang == 'en' else 'Utilisez une adresse courriel valide.',
+        'genericError': 'The request could not be completed. Please try again.' if lang == 'en' else "La demande n'a pas pu être traitée. Réessayez.",
+    }
+    return (
+        f'<div class="form-panel promo-unsubscribe-shell" data-promo-unsubscribe data-lang="{lang}" data-unsubscribe-url="/api/promo/unsubscribe">'
+        f'<script type="application/json" data-promo-unsubscribe-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(copy["unsubscribe_h1"])}</h2><p>{esc(copy["unsubscribe_intro"])}</p>'
+        f'<form class="promo-unsubscribe-form" data-promo-unsubscribe-form novalidate>'
+        f'<label class="field"><span>{esc(copy["fields"]["email"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<button class="button button-primary" type="submit">{esc(copy["unsubscribe_button"])}</button>'
+        f'</form>'
+        f'<div class="promo-inline-status" data-promo-unsubscribe-status hidden></div>'
+        f'<div class="promo-inline-error" data-promo-unsubscribe-error hidden></div>'
+        f'<p class="form-note">{esc(copy["unsubscribe_note"])}</p></div>'
+    )
+
+
+def promo_cta_band(lang):
+    copy = PROMO_PAGE_CONTENT[lang]
+    return band_section(
+        f'<div><p class="eyebrow">{esc(copy["cta_eyebrow"])}</p><h2>{esc(copy["cta_title"])}</h2><p>{esc(copy["cta_copy"])}</p></div>'
+        f'<div class="cta-actions"><a class="button button-primary" href="{routes[lang]["promo"]}">{esc(copy["cta_button"])}</a><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(T[lang]["quote"])}</a></div>',
+        'promo-cta-section',
+        'layout-shell cta-band promo-cta-band',
+    )
 
 
 def hero_signal_grid(lang):
@@ -7347,6 +8240,7 @@ def render_blog_article_page(article, lang):
         + ''.join(render_blog_article_section(section, lang) for section in article['sections'])
         + render_blog_related_services(article, lang)
         + render_blog_related_articles(article, lang)
+        + promo_cta_band(lang)
         + band_section(
             f'<div><p class="eyebrow">{esc(T[lang]["blog"])}</p><h2>{esc(cta["title"])}</h2><p>{esc(cta["copy"])}</p></div>'
             f'<div class="cta-actions"><a class="button button-primary" href="{primary_href}">{esc(cta["primary_label"])}</a>'
@@ -7394,7 +8288,7 @@ def offer_catalog_schema(lang):
     }
 
 
-def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None):
+def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None, image_url=None, image_alt=''):
     meta = {
         'og_title': title,
         'og_description': desc,
@@ -7436,10 +8330,19 @@ def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None)
             'article_section': article_meta['section'],
             'article_tags': tuple(article_meta['tags']),
         })
+    elif image_url:
+        image = image_meta_for_url(image_url, image_alt or title)
+        meta.update({
+            'og_image': image['url'],
+            'og_image_type': image['mime_type'],
+            'og_image_width': image['width'],
+            'og_image_height': image['height'],
+            'og_image_alt': image['alt'],
+        })
     return meta
 
 
-def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None, article_meta=None):
+def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None, article_meta=None, page_image_url=None, page_image_alt=''):
     page_url = page_url or absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
     business = {
@@ -7504,6 +8407,14 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
         graph.append({'@type': 'Service', '@id': page_url + '#service', 'name': service_name, 'description': desc, 'serviceType': service_name, 'provider': {'@id': BUSINESS_ID}, 'url': page_url, 'areaServed': AREA_SERVED_SCHEMA})
     if faq_items:
         graph.append({'@type': 'FAQPage', '@id': page_url + '#faq', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq_items]})
+    if page_image_url:
+        page['primaryImageOfPage'] = {
+            '@type': 'ImageObject',
+            'url': absolute_url(page_image_url),
+            'width': image_dimensions_for_url(page_image_url)[0],
+            'height': image_dimensions_for_url(page_image_url)[1],
+            'caption': page_image_alt or title,
+        }
     if article_meta:
         article_image = {
             '@type': 'ImageObject',
@@ -7627,10 +8538,11 @@ def stylesheet_link_tags():
     return f'<link rel="stylesheet" href="{STYLES_URL}" />'
 
 
-def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow, max-image-preview:large', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None, article_meta=None, preload_image_url=None):
+def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow, max-image-preview:large', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None, article_meta=None, preload_image_url=None, social_image_url=None, social_image_alt=''):
     t = T[lang]
     canonical_url = absolute_url(canonical_path or routes[lang][key])
-    social_meta = social_meta_values(lang, key, title, desc, canonical_url, article_meta=article_meta)
+    robots_value = effective_robots_value(robots)
+    social_meta = social_meta_values(lang, key, title, desc, canonical_url, article_meta=article_meta, image_url=social_image_url, image_alt=social_image_alt)
     alternate_tags = ''
     og_locale_alternates = ''
     if include_alternates:
@@ -7659,7 +8571,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             article_meta_tags += f'<meta property="article:section" content="{esc(article_meta["section"])}" />'
         article_meta_tags += ''.join(f'<meta property="article:tag" content="{esc(tag)}" />' for tag in article_meta['tags'])
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head>{GOOGLE_TAG_SNIPPET}<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head>{GOOGLE_TAG_SNIPPET}<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots_value)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta, page_image_url=social_image_url, page_image_alt=social_image_alt)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -7757,6 +8669,79 @@ def form_section(lang):
     )
     return f'<div class="form-panel zoho-form-shell"><div id="{container_id}" class="zoho-form-embed"></div>{script}</div>'
 
+css += '''
+.promo-hero-grid,.promo-services-grid,.promo-related-grid,.promo-result-grid{display:grid;gap:18px}
+.promo-hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.promo-visual-panel{display:grid;gap:18px}
+.promo-how-section .timeline{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.promo-how-section .timeline-step{min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:24px;background:linear-gradient(180deg,#122018,#1b2c22)}
+.promo-how-section .timeline-step span,.promo-how-section .timeline-step h3{color:#f6fbf8;white-space:normal;overflow-wrap:anywhere}
+.promo-how-section .timeline-step p{color:rgba(241,247,243,.9);white-space:normal;overflow-wrap:anywhere}
+.promo-inline-status,.promo-inline-error{padding:14px 16px;border-radius:18px;font-weight:700}
+.promo-inline-status{background:var(--primary-soft);color:var(--primary-dark)}
+.promo-inline-error{background:#fff2f2;color:#8b2020;border:1px solid rgba(139,32,32,.16)}
+.promo-form-shell,.promo-unsubscribe-shell{display:grid;gap:18px}
+.promo-entry-form,.promo-unsubscribe-form{display:grid;gap:18px}
+.promo-skill-shell,.promo-turnstile-shell{padding:18px;border:1px solid var(--line);border-radius:20px;background:rgba(247,250,247,.92)}
+.promo-skill-prompt{margin:0;color:var(--primary-dark);font-weight:700}
+.promo-checklist{display:grid;gap:12px}
+.promo-checklist label{display:flex;gap:12px;align-items:flex-start;color:var(--muted);line-height:1.55}
+.promo-checklist input{margin-top:4px;width:18px;height:18px;accent-color:var(--primary)}
+.promo-checklist a{color:var(--primary-dark);font-weight:700}
+.promo-consent-copy{display:grid;gap:8px}
+.promo-consent-text{display:block}
+.promo-consent-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.promo-consent-links a{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(21,54,40,.08);border:1px solid rgba(21,54,40,.12);white-space:nowrap}
+.promo-consent-separator{color:rgba(21,54,40,.5);font-weight:700}
+.promo-submit[disabled]{opacity:.64;cursor:not-allowed}
+.promo-result-overlay{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:24px;background:rgba(13,22,17,.78);backdrop-filter:blur(10px)}
+.promo-result-overlay[hidden]{display:none}
+.promo-result-dialog{position:relative;width:min(620px,100%);display:grid;gap:18px;padding:28px}
+.promo-result-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--text);font-size:1.6rem;line-height:1}
+.promo-result-copy{margin:0;color:var(--muted);line-height:1.55}
+.promo-result-code-shell{display:grid;gap:10px;padding:16px;border:1px solid var(--line);border-radius:20px;background:var(--surface-soft)}
+.promo-result-code-shell strong{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-dark)}
+.promo-result-code-row{display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+.promo-result-code-actions{display:flex;flex-wrap:wrap;gap:10px}
+.promo-result-code-input{width:100%;padding:14px 16px;border:1px solid var(--line-strong);border-radius:16px;background:#fff;color:var(--primary-dark);font-size:clamp(.96rem,2.4vw,1.08rem);font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-align:center}
+.promo-copy-button,.promo-save-button{min-width:148px}
+.promo-result-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.promo-result-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr))}
+.promo-code{font-size:1.1rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-dark)}
+.promo-result-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.promo-result-rules-link{font-weight:700;color:var(--primary-dark)}
+.promo-rules-summary-section .grid-2,.promo-rules-section .grid-2{display:grid;gap:18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.promo-odds-panel{overflow-x:auto}
+.promo-odds-table{width:100%;border-collapse:collapse}
+.promo-odds-table th,.promo-odds-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left}
+.promo-odds-table thead th{font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-dark)}
+.promo-reminder-panel{display:grid;gap:12px;padding:20px 22px;border-radius:22px}
+.promo-reminder-copy{display:grid;gap:4px}
+.promo-reminder-title{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;font-size:1.22rem;line-height:1.15}
+.promo-reminder-text{margin:0;font-size:.95rem;line-height:1.45;color:var(--muted)}
+.promo-reminder-grid{gap:12px}
+.promo-reminder-panel .detail-item{padding:12px 14px;border-radius:16px}
+.promo-reminder-panel .detail-item strong{margin-bottom:4px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-dark)}
+.promo-reminder-panel .detail-item p{margin:0;line-height:1.35}
+.promo-reminder-panel .promo-code{font-size:1rem;letter-spacing:.04em}
+.promo-reminder-actions{display:flex;justify-content:flex-start}
+.promo-reminder-link{font-weight:700;color:var(--primary-dark)}
+.promo-cta-band{border-color:rgba(47,138,88,.22)}
+.promo-services-grid,.promo-related-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:920px){
+  .promo-hero-grid,.promo-how-section .timeline,.promo-result-grid,.promo-rules-summary-section .grid-2,.promo-rules-section .grid-2,.promo-services-grid,.promo-related-grid{grid-template-columns:1fr}
+  .promo-reminder-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .promo-result-dialog{padding:24px 20px}
+  .promo-result-code-row{grid-template-columns:1fr}
+  .promo-result-code-actions{display:grid;grid-template-columns:1fr}
+  .promo-copy-button,.promo-save-button{width:100%}
+  .promo-reminder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promo-reminder-grid .detail-item:nth-child(2){grid-column:1/-1}
+}
+'''
+
 remove_legacy_root_build()
 reset_deploy_dir()
 copy_static_assets()
@@ -7767,6 +8752,7 @@ export_blog_social_images()
 
 for lang in ('en', 'fr'):
     t = T[lang]
+    promo_copy = PROMO_PAGE_CONTENT[lang]
     custom_about_sections = ABOUT_SECTIONS_BY_LANG.get(lang)
     custom_clientele_sections = CLIENTELE_SECTIONS_BY_LANG.get(lang)
     custom_clientele_cta = CLIENTELE_CTA_BY_LANG.get(lang)
@@ -7778,6 +8764,32 @@ for lang in ('en', 'fr'):
     secondary_cards = service_cards(lang, t['service_label'], secondary_order)
     details = ''.join(detail_item_html(a, b) for a, b in t['contact_cards'])
     contact_page_details = contact_sidebar_details_html(lang)
+    if lang == 'fr':
+        privacy_cards = [
+            *t['privacy_cards'],
+            ('Base promo Opticable', "Les données soumises dans la promo sont conservées dans une base de données Cloudflare D1 afin d'administrer la campagne, de prévenir les abus, de journaliser les consentements et d'associer un code promo à une seule adresse courriel."),
+            ('Cloudflare Turnstile', "Turnstile est utilisé pour réduire les soumissions automatisées avant l'attribution d'un résultat promo."),
+            ('Cloudflare Web Analytics', "Si l'outil est activé pour le site, Cloudflare Web Analytics peut mesurer des visites agrégées sans recourir à des pixels publicitaires."),
+        ]
+        privacy_choices = [
+            *t['privacy_choices'],
+            "Ne cochez pas le consentement marketing si vous souhaitez seulement recevoir un suivi lié à votre demande de soumission.",
+            "Utilisez la page de désabonnement promo pour retirer ultérieurement votre consentement marketing sans affecter les suivis opérationnels.",
+        ]
+        privacy_cards_intro = "Le site reste volontairement simple. Il n'utilise pas de pixels publicitaires, mais certains services d'infrastructure, de mesure ou de formulaires peuvent traiter des données limitées quand ils sont activés ou quand vous choisissez de les utiliser."
+    else:
+        privacy_cards = [
+            *t['privacy_cards'],
+            ('Opticable promo database', 'Promo entries are stored in a Cloudflare D1 database so the campaign can be administered, abuse can be reduced, consent choices can be logged, and one promo code can be tied to one email address.'),
+            ('Cloudflare Turnstile', 'Turnstile is used to reduce automated submissions before a promo result is assigned.'),
+            ('Cloudflare Web Analytics', 'If enabled for the site, Cloudflare Web Analytics may measure aggregated visits without using advertising pixels.'),
+        ]
+        privacy_choices = [
+            *t['privacy_choices'],
+            'Leave marketing consent unchecked if you only want quote-related follow-up.',
+            'Use the promo unsubscribe page later to withdraw marketing consent without affecting operational quote or service follow-up.',
+        ]
+        privacy_cards_intro = 'The site stays intentionally simple. It does not use advertising trackers, but some infrastructure, measurement, and form services may still process limited data when they are enabled or when you choose to use them.'
 
     home_body = (
         band_section(
@@ -7793,6 +8805,7 @@ for lang in ('en', 'fr'):
         )
         + (service_divisions_section(lang) if lang != 'fr' else '')
         + home_featured_services_section(lang)
+        + promo_cta_band(lang)
         + partner_brands_section(lang)
         + band_section(
             f'<div class="section-heading"><p class="eyebrow">{esc(t["trust_title"])}</p><h2>{esc(t["trust_title"])}</h2><p>{esc(t.get("home_trust_intro", t["company"]))}</p></div><div class="grid-4">{"".join(card(a, b) for a, b in t["trust"])}</div>',
@@ -7880,7 +8893,7 @@ for lang in ('en', 'fr'):
             'layout-shell',
         )
         + band_section(
-            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2>{f"<p>{esc(contact_panel_copy)}</p>" if contact_panel_copy else ""}{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}{f"<div class=\"contact-panel\"><p>{esc(t['contact_form_note'])}</p></div>" if t.get("contact_form_note") else ""}</div></div>',
+            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2>{f"<p>{esc(contact_panel_copy)}</p>" if contact_panel_copy else ""}{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}</div></div>',
             'contact-band',
             'section-shell contact-shell',
         )
@@ -7906,8 +8919,8 @@ for lang in ('en', 'fr'):
     )
     write_url(routes[lang]['thanks'], page(lang, 'thanks', 'contact', t['thanks_title'], t['thanks_desc'], thanks_body, breadcrumb_items=thanks_breadcrumbs, robots='noindex, nofollow'))
 
-    privacy_cards_html = ''.join(card(title, copy) for title, copy in t['privacy_cards'])
-    privacy_choices_html = ''.join(f'<li>{esc(item)}</li>' for item in t['privacy_choices'])
+    privacy_cards_html = ''.join(card(title, copy) for title, copy in privacy_cards)
+    privacy_choices_html = ''.join(f'<li>{esc(item)}</li>' for item in privacy_choices)
     privacy_breadcrumbs = [(t['home'], routes[lang]['home']), (t['privacy'], routes[lang]['privacy'])]
     privacy_body = (
         breadcrumb_nav(privacy_breadcrumbs)
@@ -7917,7 +8930,7 @@ for lang in ('en', 'fr'):
             'layout-shell',
         )
         + band_section(
-            f'<div class="section-heading"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_cards_title"])}</h2><p>{esc(t["privacy_cards_intro"])}</p></div><div class="privacy-grid">{privacy_cards_html}</div>',
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["privacy"])}</p><h2>{esc(t["privacy_cards_title"])}</h2><p>{esc(privacy_cards_intro)}</p></div><div class="privacy-grid">{privacy_cards_html}</div>',
             'privacy-section',
         )
         + band_section(
@@ -7926,6 +8939,111 @@ for lang in ('en', 'fr'):
         )
     )
     write_url(routes[lang]['privacy'], page(lang, 'privacy', 'privacy', t['privacy_title'], t['privacy_desc'], privacy_body, breadcrumb_items=privacy_breadcrumbs))
+
+    promo_breadcrumbs = [(t['home'], routes[lang]['home']), (promo_copy['label'], routes[lang]['promo'])]
+    promo_service_cards = ''.join(card(services[key][lang]['name'], services[key][lang]['summary'], routes[lang][key], t['service_label']) for key in PROMO_SERVICE_KEYS)
+    promo_article_cards = ''.join(
+        card(article['headline'], article['excerpt'], article['path'], BLOG_META_UI[lang]['read_article'])
+        for article in blog_articles_for_lang(lang)
+        if article['key'] in PROMO_BLOG_KEYS
+    )
+    promo_steps = ''.join(
+        f'<article class="timeline-step"><span>{index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
+        for index, (title, text) in enumerate(promo_copy['how_steps'], 1)
+    )
+    promo_faq_items = promo_copy['faqs']
+    promo_faq_html = ''.join(
+        f'<details class="faq-item" open><summary>{esc(question)}</summary><p>{esc(answer)}</p></details>'
+        for question, answer in promo_faq_items
+    )
+    promo_body = (
+        breadcrumb_nav(promo_breadcrumbs)
+        + band_section(
+            f'<div class="promo-hero-grid"><div class="page-hero-copy"><p class="eyebrow">{esc(promo_copy["hero_eyebrow"])}</p><h1>{esc(promo_copy["h1"])}</h1><p>{esc(promo_copy["intro"])}</p>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="#promo-entry">{esc(promo_copy["submit"])}</a><a class="button button-secondary" href="{routes[lang]["promo-rules"]}">{esc(promo_copy["actions"]["rules"])}</a></div>'
+            f'{render_chips([promo_discount_range_label(lang), promo_cap_label(), localized_datetime_label(PROMO_END, lang)])}</div>'
+            f'<aside class="page-hero-panel promo-visual-panel"><p class="eyebrow">{esc(promo_copy["label"])}</p><h2>{esc(promo_copy["hero_panel_title"])}</h2><p>{esc(promo_copy["hero_panel_copy"])}</p>'
+            f'<ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in promo_copy["hero_points"])}</ul></aside></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(promo_copy["label"])}</p><h2>{esc(promo_copy["how_title"])}</h2><p>{esc(promo_copy["how_intro"])}</p></div><div class="timeline">{promo_steps}</div>',
+            'promo-how-section',
+        )
+        + band_section(
+            f'<div class="two-col"><div id="promo-entry">{promo_form_shell(lang)}</div><div class="contact-panel"><p class="eyebrow">{esc(t["services"])}</p><h2>{esc(t["services_title"])}</h2><p>{esc(t["services_intro"])}</p><div class="promo-services-grid">{promo_service_cards}</div></div></div>',
+            'promo-form-section',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(t["blog"])}</p><h2>{esc(BLOG_META_UI[lang]["related_articles"])}</h2><p>{esc(BLOG_META_UI[lang]["related_articles_intro"])}</p></div><div class="promo-related-grid">{promo_article_cards}</div>',
+            'promo-related-section',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">FAQ</p><h2>{esc(t["faq_h1"])}</h2><p>{esc(promo_copy["faq_intro"])}</p></div><div class="faq-list">{promo_faq_html}</div>',
+            'promo-faq-section',
+        )
+        + cta(lang)
+    )
+    write_url(
+        routes[lang]['promo'],
+        page(
+            lang,
+            'promo',
+            'contact',
+            promo_copy['title'],
+            promo_copy['desc'],
+            promo_body,
+            faq_items=promo_faq_items,
+            breadcrumb_items=promo_breadcrumbs,
+            robots='index, follow, max-image-preview:large' if promo_publicly_indexable() else 'noindex, follow',
+            social_image_url=PROMO_SOCIAL_URL,
+            social_image_alt=promo_copy['h1'],
+        ),
+    )
+
+    promo_rules_breadcrumbs = [*promo_breadcrumbs, (promo_copy['rules_h1'], routes[lang]['promo-rules'])]
+    write_url(
+        routes[lang]['promo-rules'],
+        page(
+            lang,
+            'promo-rules',
+            'contact',
+            promo_copy['rules_title'],
+            promo_copy['rules_desc'],
+            breadcrumb_nav(promo_rules_breadcrumbs) + promo_rules_body(lang),
+            breadcrumb_items=promo_rules_breadcrumbs,
+            robots='index, follow, max-image-preview:large' if promo_publicly_indexable() else 'noindex, follow',
+            social_image_url=PROMO_SOCIAL_URL,
+            social_image_alt=promo_copy['rules_h1'],
+        ),
+    )
+
+    promo_unsubscribe_breadcrumbs = [*promo_breadcrumbs, (promo_copy['unsubscribe_h1'], routes[lang]['promo-unsubscribe'])]
+    promo_unsubscribe_body = (
+        breadcrumb_nav(promo_unsubscribe_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(promo_copy["label"])}</p><h1>{esc(promo_copy["unsubscribe_h1"])}</h1><p>{esc(promo_copy["unsubscribe_intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(f'<div class="two-col"><div>{promo_unsubscribe_form(lang)}</div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><p>{esc(t["footer_contact_intro"])}</p><div class="detail-list">{details}</div></div></div>', 'promo-unsubscribe-section')
+    )
+    write_url(
+        routes[lang]['promo-unsubscribe'],
+        page(
+            lang,
+            'promo-unsubscribe',
+            'contact',
+            promo_copy['unsubscribe_title'],
+            promo_copy['unsubscribe_desc'],
+            promo_unsubscribe_body,
+            breadcrumb_items=promo_unsubscribe_breadcrumbs,
+            robots='noindex, follow',
+            social_image_url=PROMO_SOCIAL_URL,
+            social_image_alt=promo_copy['unsubscribe_h1'],
+        ),
+    )
 
     industries_breadcrumbs = [(t['home'], routes[lang]['home']), (t['industries'], routes[lang]['industries'])]
     case_parent = CASE_STUDIES[lang]['parent']
@@ -8048,6 +9166,7 @@ for lang in ('en', 'fr'):
             render_blog_listing(lang, blog_data),
             'blog-listing-section',
         )
+        + promo_cta_band(lang)
     )
     write_url(routes[lang]['blog'], page(lang, 'blog', 'blog', blog_data['title'], blog_data['desc'], blog_body, breadcrumb_items=blog_breadcrumbs))
     for article in blog_articles_for_lang(lang):
@@ -8094,6 +9213,7 @@ for lang in ('en', 'fr'):
                 )
                 + service_sections_html
                 + inline_cta_band(custom_service_page_content[key]['cta'], t['service_area_intro'], routes[lang]['contact'], t['quote'])
+                + promo_cta_band(lang)
                 + related
             )
         else:
@@ -8114,6 +9234,7 @@ for lang in ('en', 'fr'):
                     f'<div class="section-heading"><p class="eyebrow">{esc("Typical use cases" if lang == "en" else "Exemples concrets")}</p><h2>{esc("Typical use cases" if lang == "en" else "Cas d\'usage")}</h2><p>{esc(s["summary"])}</p></div><div class="two-col"><div class="contact-panel"><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["cases"])}</ul></div><div class="contact-panel service-apply-panel"><p class="eyebrow">{esc("Industries served" if lang == "en" else "Types d\'immeubles")}</p><h2>{esc("Industries served" if lang == "en" else "Où ce service s\'applique")}</h2><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in s["industries"])}</ul></div></div>',
                     'service-cases-section',
                 )
+                + promo_cta_band(lang)
                 + related
                 + cta(lang)
             )
@@ -8143,8 +9264,11 @@ not_found_html = page(
     resource_key='404',
 )
 
-robots_lines = ['User-agent: *', 'Allow: /', '']
-robots_lines.append('Sitemap: ' + absolute_url('/sitemap.xml'))
+if FORCE_NOINDEX:
+    robots_lines = ['User-agent: *', 'Disallow: /', '']
+else:
+    robots_lines = ['User-agent: *', 'Allow: /', '']
+    robots_lines.append('Sitemap: ' + absolute_url('/sitemap.xml'))
 (DEPLOY_ROOT / 'robots.txt').write_text('\n'.join(robots_lines) + '\n', encoding='utf-8')
 (DEPLOY_ROOT / 'sitemap.xml').write_text(sitemap_xml(), encoding='utf-8')
 (DEPLOY_ROOT / 'site.webmanifest').write_text(webmanifest_json(), encoding='utf-8')

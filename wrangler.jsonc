@@ -3,9 +3,41 @@
   "name": "opticable-website",
   "main": "./worker.js",
   "compatibility_date": "2026-03-14",
+  "vars": {
+    "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2RkCsNJ9_amJwl",
+    "PROMO_WEB_ANALYTICS_TOKEN": "e665c94202a846ca8472a2fed08999ae"
+  },
+  "d1_databases": [
+    {
+      "binding": "PROMO_DB",
+      "database_name": "opticable-promo-db",
+      "database_id": "402ef6df-2ce5-451c-94d8-fbaaa99f7dc0"
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "run_worker_first": true
+  },
+  "env": {
+    "concept01": {
+      "name": "opticable-website-concept01",
+      "vars": {
+        "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2OXTtzBra649xW",
+        "PROMO_WEB_ANALYTICS_TOKEN": ""
+      },
+      "d1_databases": [
+        {
+          "binding": "PROMO_DB",
+          "database_name": "opticable-promo-db-concept01",
+          "database_id": "0f54156c-6919-46d3-a182-2e6569343637"
+        }
+      ],
+      "assets": {
+        "directory": "./dist-concept01",
+        "binding": "ASSETS",
+        "run_worker_first": true
+      }
+    }
   }
 }

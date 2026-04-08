@@ -1,0 +1,658 @@
+{
+  "created_at": "2026-04-07T23:24:10.747237-04:00",
+  "snapshot_name": "2026-04-07T232410-0400",
+  "source": "https://opticable.ca",
+  "html_and_asset_backup": true,
+  "fetched_count": 79,
+  "error_count": 0,
+  "external_reference_count": 6,
+  "path_conflict_count": 0,
+  "notes": [
+    "Snapshot generated from the live public site, not from local dist output.",
+    "Only same-origin pages and assets were archived as files.",
+    "External third-party URLs are listed in this manifest but not mirrored."
+  ],
+  "files": [
+    {
+      "source_url": "https://opticable.ca/sitemap.xml",
+      "final_url": "https://opticable.ca/sitemap.xml",
+      "relative_path": "sitemap.xml",
+      "content_type": "application/xml",
+      "size": 21815,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/robots.txt",
+      "final_url": "https://opticable.ca/robots.txt",
+      "relative_path": "robots.txt",
+      "content_type": "text/plain",
+      "size": 66,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/ads.txt",
+      "final_url": "https://opticable.ca/ads.txt",
+      "relative_path": "ads.txt",
+      "content_type": "text/plain",
+      "size": 64,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/site.webmanifest",
+      "final_url": "https://opticable.ca/site.webmanifest",
+      "relative_path": "site.webmanifest",
+      "content_type": "application/manifest+json",
+      "size": 406,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/404.html",
+      "final_url": "https://opticable.ca/404",
+      "relative_path": "404.html",
+      "content_type": "text/html",
+      "size": 30682,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/",
+      "final_url": "https://opticable.ca/",
+      "relative_path": "index.html",
+      "content_type": "text/html",
+      "size": 42226,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/",
+      "final_url": "https://opticable.ca/en/",
+      "relative_path": "en/index.html",
+      "content_type": "text/html",
+      "size": 43503,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/",
+      "final_url": "https://opticable.ca/en/services/",
+      "relative_path": "en/services/index.html",
+      "content_type": "text/html",
+      "size": 39089,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/security-camera-systems/",
+      "final_url": "https://opticable.ca/en/services/security-camera-systems/",
+      "relative_path": "en/services/security-camera-systems/index.html",
+      "content_type": "text/html",
+      "size": 40059,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/access-control-systems/",
+      "final_url": "https://opticable.ca/en/services/access-control-systems/",
+      "relative_path": "en/services/access-control-systems/index.html",
+      "content_type": "text/html",
+      "size": 40075,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/commercial-wifi-installation/",
+      "final_url": "https://opticable.ca/en/services/commercial-wifi-installation/",
+      "relative_path": "en/services/commercial-wifi-installation/index.html",
+      "content_type": "text/html",
+      "size": 40069,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/intercom-systems/",
+      "final_url": "https://opticable.ca/en/services/intercom-systems/",
+      "relative_path": "en/services/intercom-systems/index.html",
+      "content_type": "text/html",
+      "size": 39795,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/network-infrastructure/",
+      "final_url": "https://opticable.ca/en/services/network-infrastructure/",
+      "relative_path": "en/services/network-infrastructure/index.html",
+      "content_type": "text/html",
+      "size": 39512,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/it-services-and-support/",
+      "final_url": "https://opticable.ca/en/services/it-services-and-support/",
+      "relative_path": "en/services/it-services-and-support/index.html",
+      "content_type": "text/html",
+      "size": 39235,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/structured-cabling/",
+      "final_url": "https://opticable.ca/en/services/structured-cabling/",
+      "relative_path": "en/services/structured-cabling/index.html",
+      "content_type": "text/html",
+      "size": 39806,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/fiber-optic-installation/",
+      "final_url": "https://opticable.ca/en/services/fiber-optic-installation/",
+      "relative_path": "en/services/fiber-optic-installation/index.html",
+      "content_type": "text/html",
+      "size": 39892,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/services/ip-phone-systems/",
+      "final_url": "https://opticable.ca/en/services/ip-phone-systems/",
+      "relative_path": "en/services/ip-phone-systems/index.html",
+      "content_type": "text/html",
+      "size": 39354,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/industries/",
+      "final_url": "https://opticable.ca/en/industries/",
+      "relative_path": "en/industries/index.html",
+      "content_type": "text/html",
+      "size": 36412,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/case-studies/",
+      "final_url": "https://opticable.ca/en/case-studies/",
+      "relative_path": "en/case-studies/index.html",
+      "content_type": "text/html",
+      "size": 33347,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/case-studies/office-building/",
+      "final_url": "https://opticable.ca/en/case-studies/office-building/",
+      "relative_path": "en/case-studies/office-building/index.html",
+      "content_type": "text/html",
+      "size": 35682,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/case-studies/multi-tenant-building/",
+      "final_url": "https://opticable.ca/en/case-studies/multi-tenant-building/",
+      "relative_path": "en/case-studies/multi-tenant-building/index.html",
+      "content_type": "text/html",
+      "size": 35321,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/case-studies/retail-and-sales-floor/",
+      "final_url": "https://opticable.ca/en/case-studies/retail-and-sales-floor/",
+      "relative_path": "en/case-studies/retail-and-sales-floor/index.html",
+      "content_type": "text/html",
+      "size": 35295,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/case-studies/construction-site/",
+      "final_url": "https://opticable.ca/en/case-studies/construction-site/",
+      "relative_path": "en/case-studies/construction-site/index.html",
+      "content_type": "text/html",
+      "size": 35243,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/blog/",
+      "final_url": "https://opticable.ca/en/blog/",
+      "relative_path": "en/blog/index.html",
+      "content_type": "text/html",
+      "size": 35009,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/about/",
+      "final_url": "https://opticable.ca/en/about/",
+      "relative_path": "en/about/index.html",
+      "content_type": "text/html",
+      "size": 35538,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/faq/",
+      "final_url": "https://opticable.ca/en/faq/",
+      "relative_path": "en/faq/index.html",
+      "content_type": "text/html",
+      "size": 46226,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/contact/",
+      "final_url": "https://opticable.ca/en/contact/",
+      "relative_path": "en/contact/index.html",
+      "content_type": "text/html",
+      "size": 36354,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/",
+      "final_url": "https://opticable.ca/fr/services/",
+      "relative_path": "fr/services/index.html",
+      "content_type": "text/html",
+      "size": 40130,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/systemes-cameras-securite/",
+      "final_url": "https://opticable.ca/fr/services/systemes-cameras-securite/",
+      "relative_path": "fr/services/systemes-cameras-securite/index.html",
+      "content_type": "text/html",
+      "size": 41031,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/systemes-controle-acces/",
+      "final_url": "https://opticable.ca/fr/services/systemes-controle-acces/",
+      "relative_path": "fr/services/systemes-controle-acces/index.html",
+      "content_type": "text/html",
+      "size": 41091,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/installation-wifi-commercial/",
+      "final_url": "https://opticable.ca/fr/services/installation-wifi-commercial/",
+      "relative_path": "fr/services/installation-wifi-commercial/index.html",
+      "content_type": "text/html",
+      "size": 40987,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/systemes-interphone/",
+      "final_url": "https://opticable.ca/fr/services/systemes-interphone/",
+      "relative_path": "fr/services/systemes-interphone/index.html",
+      "content_type": "text/html",
+      "size": 40656,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/infrastructure-reseau/",
+      "final_url": "https://opticable.ca/fr/services/infrastructure-reseau/",
+      "relative_path": "fr/services/infrastructure-reseau/index.html",
+      "content_type": "text/html",
+      "size": 40342,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/services-informatiques/",
+      "final_url": "https://opticable.ca/fr/services/services-informatiques/",
+      "relative_path": "fr/services/services-informatiques/index.html",
+      "content_type": "text/html",
+      "size": 40389,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/cablage-structure/",
+      "final_url": "https://opticable.ca/fr/services/cablage-structure/",
+      "relative_path": "fr/services/cablage-structure/index.html",
+      "content_type": "text/html",
+      "size": 40640,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/installation-fibre-optique/",
+      "final_url": "https://opticable.ca/fr/services/installation-fibre-optique/",
+      "relative_path": "fr/services/installation-fibre-optique/index.html",
+      "content_type": "text/html",
+      "size": 40836,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/services/systemes-telephonie-ip/",
+      "final_url": "https://opticable.ca/fr/services/systemes-telephonie-ip/",
+      "relative_path": "fr/services/systemes-telephonie-ip/index.html",
+      "content_type": "text/html",
+      "size": 40357,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/clientele/",
+      "final_url": "https://opticable.ca/fr/clientele/",
+      "relative_path": "fr/clientele/index.html",
+      "content_type": "text/html",
+      "size": 37427,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/etudes-de-cas/",
+      "final_url": "https://opticable.ca/fr/etudes-de-cas/",
+      "relative_path": "fr/etudes-de-cas/index.html",
+      "content_type": "text/html",
+      "size": 34102,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/etudes-de-cas/immeuble-de-bureaux/",
+      "final_url": "https://opticable.ca/fr/etudes-de-cas/immeuble-de-bureaux/",
+      "relative_path": "fr/etudes-de-cas/immeuble-de-bureaux/index.html",
+      "content_type": "text/html",
+      "size": 36541,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/etudes-de-cas/immeuble-multilocatif/",
+      "final_url": "https://opticable.ca/fr/etudes-de-cas/immeuble-multilocatif/",
+      "relative_path": "fr/etudes-de-cas/immeuble-multilocatif/index.html",
+      "content_type": "text/html",
+      "size": 36128,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/etudes-de-cas/commerce-espace-de-vente/",
+      "final_url": "https://opticable.ca/fr/etudes-de-cas/commerce-espace-de-vente/",
+      "relative_path": "fr/etudes-de-cas/commerce-espace-de-vente/index.html",
+      "content_type": "text/html",
+      "size": 36128,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/etudes-de-cas/chantier-de-construction/",
+      "final_url": "https://opticable.ca/fr/etudes-de-cas/chantier-de-construction/",
+      "relative_path": "fr/etudes-de-cas/chantier-de-construction/index.html",
+      "content_type": "text/html",
+      "size": 36102,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/blogue/",
+      "final_url": "https://opticable.ca/fr/blogue/",
+      "relative_path": "fr/blogue/index.html",
+      "content_type": "text/html",
+      "size": 35688,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/a-propos/",
+      "final_url": "https://opticable.ca/fr/a-propos/",
+      "relative_path": "fr/a-propos/index.html",
+      "content_type": "text/html",
+      "size": 36237,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/faq/",
+      "final_url": "https://opticable.ca/fr/faq/",
+      "relative_path": "fr/faq/index.html",
+      "content_type": "text/html",
+      "size": 48441,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/contact/",
+      "final_url": "https://opticable.ca/fr/contact/",
+      "relative_path": "fr/contact/index.html",
+      "content_type": "text/html",
+      "size": 37053,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/blog/why-more-wifi-power-makes-things-worse/",
+      "final_url": "https://opticable.ca/en/blog/why-more-wifi-power-makes-things-worse/",
+      "relative_path": "en/blog/why-more-wifi-power-makes-things-worse/index.html",
+      "content_type": "text/html",
+      "size": 51406,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/blog/ip-cameras-network-upgrade/",
+      "final_url": "https://opticable.ca/en/blog/ip-cameras-network-upgrade/",
+      "relative_path": "en/blog/ip-cameras-network-upgrade/index.html",
+      "content_type": "text/html",
+      "size": 50538,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/blog/why-structured-cabling-changes-everything/",
+      "final_url": "https://opticable.ca/en/blog/why-structured-cabling-changes-everything/",
+      "relative_path": "en/blog/why-structured-cabling-changes-everything/index.html",
+      "content_type": "text/html",
+      "size": 50189,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/",
+      "final_url": "https://opticable.ca/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/",
+      "relative_path": "fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/index.html",
+      "content_type": "text/html",
+      "size": 53464,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/",
+      "final_url": "https://opticable.ca/fr/blogue/cameras-ip-mise-a-niveau-reseau/",
+      "relative_path": "fr/blogue/cameras-ip-mise-a-niveau-reseau/index.html",
+      "content_type": "text/html",
+      "size": 52474,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/blogue/pourquoi-le-cablage-structure-change-tout/",
+      "final_url": "https://opticable.ca/fr/blogue/pourquoi-le-cablage-structure-change-tout/",
+      "relative_path": "fr/blogue/pourquoi-le-cablage-structure-change-tout/index.html",
+      "content_type": "text/html",
+      "size": 51824,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/logo-mark.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/logo-mark.png?v=20260317a",
+      "relative_path": "assets/logo-mark.png",
+      "content_type": "image/png",
+      "size": 200048,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/styles.css?v=20260317a",
+      "final_url": "https://opticable.ca/assets/styles.css?v=20260317a",
+      "relative_path": "assets/styles.css",
+      "content_type": "text/css",
+      "size": 64000,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/apple-touch-icon.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/apple-touch-icon.png?v=20260317a",
+      "relative_path": "assets/apple-touch-icon.png",
+      "content_type": "image/png",
+      "size": 10154,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/site.js?v=20260317a",
+      "final_url": "https://opticable.ca/assets/site.js?v=20260317a",
+      "relative_path": "assets/site.js",
+      "content_type": "text/javascript",
+      "size": 4917,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/favicon-32.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/favicon-32.png?v=20260317a",
+      "relative_path": "assets/favicon-32.png",
+      "content_type": "image/png",
+      "size": 1100,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/fr/confidentialite/",
+      "final_url": "https://opticable.ca/fr/confidentialite/",
+      "relative_path": "fr/confidentialite/index.html",
+      "content_type": "text/html",
+      "size": 34793,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/logo-ui-white.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/logo-ui-white.webp?v=20260317a",
+      "relative_path": "assets/logo-ui-white.webp",
+      "content_type": "image/webp",
+      "size": 56672,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/og-image.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/og-image.png?v=20260317a",
+      "relative_path": "assets/og-image.png",
+      "content_type": "image/png",
+      "size": 73181,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/home-building.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/home-building.webp?v=20260317a",
+      "relative_path": "assets/home-building.webp",
+      "content_type": "image/webp",
+      "size": 182722,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/home-rack.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/home-rack.webp?v=20260317a",
+      "relative_path": "assets/home-rack.webp",
+      "content_type": "image/webp",
+      "size": 305644,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/en/privacy/",
+      "final_url": "https://opticable.ca/en/privacy/",
+      "relative_path": "en/privacy/index.html",
+      "content_type": "text/html",
+      "size": 33975,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-camera.avif?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-camera.avif?v=20260317a",
+      "relative_path": "assets/service-camera.avif",
+      "content_type": "image/avif",
+      "size": 31499,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-access.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-access.webp?v=20260317a",
+      "relative_path": "assets/service-access.webp",
+      "content_type": "image/webp",
+      "size": 85400,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-wifi.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-wifi.webp?v=20260317a",
+      "relative_path": "assets/service-wifi.webp",
+      "content_type": "image/webp",
+      "size": 86542,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-intercom.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-intercom.webp?v=20260317a",
+      "relative_path": "assets/service-intercom.webp",
+      "content_type": "image/webp",
+      "size": 21902,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-infrastructure.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-infrastructure.webp?v=20260317a",
+      "relative_path": "assets/service-infrastructure.webp",
+      "content_type": "image/webp",
+      "size": 164610,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-cabling.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-cabling.webp?v=20260317a",
+      "relative_path": "assets/service-cabling.webp",
+      "content_type": "image/webp",
+      "size": 149936,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-fiber.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-fiber.webp?v=20260317a",
+      "relative_path": "assets/service-fiber.webp",
+      "content_type": "image/webp",
+      "size": 21098,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/service-voip.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/service-voip.webp?v=20260317a",
+      "relative_path": "assets/service-voip.webp",
+      "content_type": "image/webp",
+      "size": 38540,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/about-panel.webp?v=20260317a",
+      "final_url": "https://opticable.ca/assets/about-panel.webp?v=20260317a",
+      "relative_path": "assets/about-panel.webp",
+      "content_type": "image/webp",
+      "size": 84014,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/wifi-power-en.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/wifi-power-en.png?v=20260317a",
+      "relative_path": "assets/blog-social/wifi-power-en.png",
+      "content_type": "image/png",
+      "size": 489697,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/ip-cameras-network-upgrade-en.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/ip-cameras-network-upgrade-en.png?v=20260317a",
+      "relative_path": "assets/blog-social/ip-cameras-network-upgrade-en.png",
+      "content_type": "image/png",
+      "size": 115035,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/structured-cabling-foundation-en.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/structured-cabling-foundation-en.png?v=20260317a",
+      "relative_path": "assets/blog-social/structured-cabling-foundation-en.png",
+      "content_type": "image/png",
+      "size": 894206,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/wifi-power-fr.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/wifi-power-fr.png?v=20260317a",
+      "relative_path": "assets/blog-social/wifi-power-fr.png",
+      "content_type": "image/png",
+      "size": 484478,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/ip-cameras-network-upgrade-fr.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/ip-cameras-network-upgrade-fr.png?v=20260317a",
+      "relative_path": "assets/blog-social/ip-cameras-network-upgrade-fr.png",
+      "content_type": "image/png",
+      "size": 112754,
+      "status": "ok"
+    },
+    {
+      "source_url": "https://opticable.ca/assets/blog-social/structured-cabling-foundation-fr.png?v=20260317a",
+      "final_url": "https://opticable.ca/assets/blog-social/structured-cabling-foundation-fr.png?v=20260317a",
+      "relative_path": "assets/blog-social/structured-cabling-foundation-fr.png",
+      "content_type": "image/png",
+      "size": 894184,
+      "status": "ok"
+    }
+  ],
+  "path_conflicts": [],
+  "external_references": [
+    "https://forms.zohopublic.com",
+    "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+    "https://www.facebook.com/profile.php?id=61578550161916",
+    "https://www.googletagmanager.com/gtag/js?id=G-GYLGWDS464",
+    "https://www.instagram.com/opticable_inc/",
+    "https://www.linkedin.com/company/opticableinc/"
+  ]
+}

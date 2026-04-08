@@ -1,0 +1,49 @@
+{
+  "campaignId": "quebec-commercial-promo-2026-04",
+  "campaignName": {
+    "en": "Quebec commercial promo roll",
+    "fr": "Promo commerciale Quebec"
+  },
+  "timezone": "America/Toronto",
+  "startAt": "2026-04-07T00:00:00-04:00",
+  "endAt": "2026-05-07T23:59:59-04:00",
+  "codeValidityDays": 30,
+  "discountCapCad": 1500,
+  "discounts": [
+    {
+      "percent": 5,
+      "weight": 5
+    },
+    {
+      "percent": 10,
+      "weight": 60
+    },
+    {
+      "percent": 15,
+      "weight": 25
+    },
+    {
+      "percent": 20,
+      "weight": 8
+    },
+    {
+      "percent": 25,
+      "weight": 2
+    }
+  ],
+  "rulesVersion": "2026-04-07",
+  "privacyVersion": "2026-04-07",
+  "unsubscribeVersion": "2026-04-07",
+  "sponsor": {
+    "brandName": "Opticable",
+    "legalName": "9453-4757 Quebec Inc."
+  },
+  "eligibility": {
+    "en": "Entries tied to Quebec commercial projects only.",
+    "fr": "Entrees liees a des projets commerciaux situes au Quebec seulement."
+  },
+  "redemption": {
+    "en": "Manual promo code applied to approved new installation quotes before taxes.",
+    "fr": "Code promo manuel applique aux nouvelles soumissions d'installation approuvees avant taxes."
+  }
+}

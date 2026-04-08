@@ -3,5 +3,8 @@ output/
 __pycache__/
 *.pyc
 .wrangler/
+.wrangler-build/
+.wrangler-build*/
 .venv/
 exports/
+dist-concept01/
