@@ -1,0 +1,250 @@
+{
+  "clientProgram": {
+    "en": {
+      "label": "Referral Program",
+      "title": "Referral Program | Opticable",
+      "desc": "Refer a qualifying Quebec project to Opticable. The referred client gets 5% off and you earn future Opticable credit after the project is completed and paid.",
+      "eyebrow": "Referral Program",
+      "h1": "Refer a project and earn Opticable credit.",
+      "intro": "This program is for clients, property managers, and business contacts who want to recommend Opticable. The referred client gets 5% off a qualifying new project, and you earn 5% in Opticable credit once that project is completed and paid.",
+      "comparison_title": "This program is best if...",
+      "comparison_copy": "You want a simple referral setup with future Opticable credit instead of a commercial payout.",
+      "comparison_points": [
+        "A referred client gets 5% off, up to CAD 1,500 per quote",
+        "You earn 5% in Opticable credit, up to CAD 1,500 per completed project",
+        "Credits accumulate in one balance for future Opticable work",
+        "A maximum of CAD 1,500 in credit can be applied to one quote or project"
+      ],
+      "steps_title": "How it works",
+      "steps_intro": "The process stays intentionally simple. Share your code, the new contact uses it on the first quote request, and the reward is issued only after the project is completed and paid.",
+      "steps": [
+        ["Create your account", "Join once and get access to your referral portal."],
+        ["Share your code", "Send your referral link or code to a new Quebec contact."],
+        ["They request a quote", "The code must be used on the first quote request."],
+        ["You earn credit", "Once the project is completed and paid, the credit appears in your account."]
+      ],
+      "faq_intro": "Quick answers before you join.",
+      "faqs": [
+        ["Who should use this version?", "Clients, property managers, and business contacts who want a simple refer-and-earn setup."],
+        ["What does the referred client get?", "A 5% discount on a qualifying pre-tax subtotal, capped at CAD 1,500 per quote."],
+        ["What do I get?", "A 5% Opticable credit on the same qualifying subtotal, capped at CAD 1,500 per completed project."],
+        ["Can credits stack?", "Yes. Eligible completed referrals accumulate in one credit balance."],
+        ["How much can I apply to one quote?", "A maximum of CAD 1,500 in accumulated credit can be applied to one quote or project, even if your balance is higher."],
+        ["When is the credit earned?", "Only after the referred project is completed and fully paid."]
+      ],
+      "form_title": "Join the Referral Program",
+      "form_intro": "Create your referral account and we will open your portal with a secure sign-in link.",
+      "terms_title": "Referral Program terms",
+      "terms_intro": "These rules stay short and practical. They explain eligibility, the reward, and the main exclusions.",
+      "terms_sections": [
+        ["Eligibility", "This program is for clients, property managers, and contacts referring a new qualifying Quebec project to Opticable."],
+        ["Client discount", "The referred client gets 5% off the qualifying pre-tax subtotal, capped at CAD 1,500 per quote."],
+        ["Referrer reward", "The referrer earns 5% in Opticable credit on the same qualifying subtotal, capped at CAD 1,500 per completed project."],
+        ["When credit is earned", "Credit is issued only after the referred project is completed and fully paid."],
+        ["Exclusions", "Self-referrals, same-company abuse, existing requests already open with Opticable, taxes, recurring services, support calls, already-signed work, and already-discounted scopes are excluded."],
+        ["Credit use", "Credits are non-cash and non-transferable. A maximum of CAD 1,500 can be applied to one quote or project."]
+      ]
+    },
+    "fr": {
+      "label": "Programme de référence",
+      "title": "Programme de référence | Opticable",
+      "desc": "Recommandez un projet admissible au Québec à Opticable. Le client référé obtient 5 % de rabais et vous gagnez un crédit Opticable après la réalisation et le paiement du projet.",
+      "eyebrow": "Programme de référence",
+      "h1": "Recommandez un projet et obtenez un crédit Opticable.",
+      "intro": "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable. Le client référé obtient 5 % de rabais sur un nouveau projet admissible, et vous recevez 5 % en crédit Opticable lorsque le projet est réalisé et payé.",
+      "comparison_title": "Ce programme est pour vous si...",
+      "comparison_copy": "Vous souhaitez recommander Opticable et accumuler un crédit applicable à un futur projet.",
+      "comparison_points": [
+        "Le client référé obtient 5 % de rabais, jusqu'à 1 500 $ par soumission",
+        "Vous recevez 5 % en crédit Opticable, jusqu'à 1 500 $ par projet réalisé",
+        "Les crédits s'accumulent dans un seul solde pour de futurs travaux Opticable",
+        "Un maximum de 1 500 $ en crédit peut être appliqué à une même soumission ou à un même projet"
+      ],
+      "steps_title": "Comment ça fonctionne",
+      "steps_intro": "Le fonctionnement reste volontairement simple. Vous partagez votre code, le nouveau contact l'utilise lors de la première demande de soumission, puis la récompense est émise seulement après la réalisation et le paiement.",
+      "steps": [
+        ["Créez votre compte", "Inscrivez-vous une fois et obtenez l'accès à votre portail."],
+        ["Partagez votre code", "Envoyez votre lien ou votre code à un nouveau contact au Québec."],
+        ["Le contact demande une soumission", "Le code doit être utilisé lors de la première demande de soumission."],
+        ["Vous gagnez votre crédit", "Une fois le projet réalisé et payé, le crédit apparaît dans votre compte."]
+      ],
+      "faq_intro": "Réponses rapides avant de vous inscrire.",
+      "faqs": [
+        ["À qui s'adresse ce programme ?", "Aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable."],
+        ["Que reçoit le client référé ?", "Un rabais de 5 % sur le sous-total admissible avant taxes, jusqu'à 1 500 $ par soumission."],
+        ["Que reçois-je ?", "Un crédit Opticable de 5 % sur le même sous-total admissible, jusqu'à 1 500 $ par projet réalisé."],
+        ["Les crédits s'additionnent-ils ?", "Oui. Les références admissibles réalisées s'accumulent dans un seul solde."],
+        ["Combien puis-je appliquer sur une même soumission ?", "Un maximum de 1 500 $ en crédit peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé."],
+        ["Quand le crédit est-il gagné ?", "Seulement après la réalisation et le paiement complet du projet référé."]
+      ],
+      "form_title": "Joindre le programme de référence",
+      "form_intro": "Créez votre compte et activez votre accès permanent au portail.",
+      "terms_title": "Conditions du programme de référence",
+      "terms_intro": "Ces règles restent courtes et concrètes. Elles expliquent l'admissibilité, la récompense et les principales exclusions.",
+      "terms_sections": [
+        ["Admissibilité", "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts qui réfèrent un nouveau projet admissible au Québec à Opticable."],
+        ["Rabais du client référé", "Le client référé obtient 5 % de rabais sur le sous-total admissible avant taxes, jusqu'à 1 500 $ par soumission."],
+        ["Récompense du référent", "Le référent gagne 5 % en crédit Opticable sur le même sous-total admissible, jusqu'à 1 500 $ par projet réalisé."],
+        ["Quand le crédit est émis", "Le crédit est émis seulement après la réalisation et le paiement complet du projet référé."],
+        ["Exclusions", "Les auto-références, les abus entre entreprises liées, les demandes déjà ouvertes chez Opticable, les taxes, les services récurrents, les appels de soutien, les travaux déjà signés et les travaux déjà escomptés sont exclus."],
+        ["Utilisation du crédit", "Les crédits sont non monétaires et non transférables. Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet."]
+      ]
+    }
+  },
+  "partnerProgram": {
+    "en": {
+      "label": "Referral Partner Program",
+      "title": "Referral Partner Program | Opticable",
+      "desc": "Apply to become an Opticable referral partner. Approved partners receive a unique code and earn fixed payouts when referred projects are completed and paid.",
+      "eyebrow": "Referral Partner Program",
+      "h1": "Become an Opticable referral partner.",
+      "intro": "This program is for businesses and professionals who can refer multiple qualified projects. Applications are reviewed first, and the partner account is created only after approval.",
+      "comparison_title": "This program is best if...",
+      "comparison_copy": "You are a business contact, trade, consultant, integrator, or property-side partner sending repeat opportunities.",
+      "comparison_points": [
+        "Built for businesses and repeat referrers",
+        "Application and approval are required",
+        "No automatic client discount is promised in this program",
+        "Payouts follow fixed project-size tiers after completion and payment"
+      ],
+      "steps_title": "How it works",
+      "steps_intro": "Partners submit an application first. After approval, Opticable creates the account, the code, and the portal access.",
+      "steps": [
+        ["Apply for approval", "Tell us who you are and how you expect to refer projects."],
+        ["Account created after approval", "After approval, Opticable creates the partner account, the code, and the portal access."],
+        ["Use the code on first contact", "The new client must use the code on the first quote request."],
+        ["Earn a payout", "Payout is earned only after the referred project is completed and fully paid."]
+      ],
+      "faq_intro": "Important points before you apply.",
+      "faqs": [
+        ["Who should use this version?", "IT providers, trades, consultants, property contacts, and businesses sending repeat referrals."],
+        ["What does the referred client get?", "This program does not promise an automatic discount to the referred client."],
+        ["What do I get?", "A fixed payout after completion and payment: CAD 250 below 10,000, CAD 500 from 10,000 to 24,999.99, and CAD 1,000 from 25,000 and up."],
+        ["When is the payout earned?", "Only after the referred project is completed and fully paid."],
+        ["Do I get a portal?", "Yes, but only after the application is approved and the partner account is created."]
+      ],
+      "form_title": "Apply as a Referral Partner",
+      "form_intro": "Submit your business details for review. Opticable validates the request first, then creates the partner account if approved.",
+      "terms_title": "Referral Partner terms",
+      "terms_intro": "The partner program stays simple, but it is more structured than the client referral program because approvals and payouts are involved.",
+      "terms_sections": [
+        ["Eligibility", "This program is for businesses and professionals referring new Quebec projects to Opticable."],
+        ["Approval", "Every partner request is validated before the partner account is created."],
+        ["Client offer", "This program does not promise an automatic discount to the referred client."],
+        ["Partner payout", "Completed and paid projects earn a fixed payout based on project size: CAD 250 below 10,000, CAD 500 from 10,000 to 24,999.99, and CAD 1,000 at 25,000 and up."],
+        ["When payout is earned", "Payout is earned only after the referred project is completed and fully paid."],
+        ["Exclusions", "Self-referrals, same-company abuse, existing requests already open with Opticable, taxes, recurring services, support calls, already-signed work, and already-discounted scopes are excluded."]
+      ]
+    },
+    "fr": {
+      "label": "Programme de partenaires référents",
+      "title": "Programme de partenaires référents | Opticable",
+      "desc": "Soumettez votre candidature pour devenir partenaire référent Opticable. Les partenaires approuvés reçoivent un code unique et gagnent des paiements fixes lorsque les projets référés sont réalisés et payés.",
+      "eyebrow": "Programme de partenaires référents",
+      "h1": "Devenez partenaire référent Opticable.",
+      "intro": "Ce programme s'adresse aux entreprises et aux professionnels capables de recommander plusieurs projets qualifiés. Chaque demande est validée avant la création du compte partenaire.",
+      "comparison_title": "Ce programme est pour vous si...",
+      "comparison_copy": "Vous représentez une entreprise ou un professionnel qui recommande régulièrement de nouveaux projets.",
+      "comparison_points": [
+        "Vous recommandez régulièrement de nouveaux projets au Québec",
+        "Une demande et une approbation sont requises",
+        "Aucun rabais automatique n'est promis au client référé",
+        "Les paiements suivent des paliers fixes après réalisation et paiement"
+      ],
+      "steps_title": "Comment ça fonctionne",
+      "steps_intro": "Vous soumettez d'abord une demande. Après validation, Opticable crée le compte, le code et l'accès portail.",
+      "steps": [
+        ["Faites une demande", "Présentez votre entreprise et le type de références visé."],
+        ["Compte créé après approbation", "Après validation, Opticable crée le compte partenaire, le code et l'accès portail."],
+        ["Utilisez le code au premier contact", "Le nouveau client doit utiliser le code lors de la première demande de soumission."],
+        ["Gagnez un paiement", "Le paiement est gagné seulement après la réalisation et le paiement complet du projet référé."]
+      ],
+      "faq_intro": "Les points importants avant de soumettre votre demande.",
+      "faqs": [
+        ["À qui s'adresse ce programme ?", "Aux fournisseurs TI, aux corps de métier, aux consultants, aux contacts immobiliers et aux entreprises qui envoient des références récurrentes."],
+        ["Que reçoit le client référé ?", "Ce programme ne promet pas automatiquement un rabais au client référé."],
+        ["Que reçois-je ?", "Un paiement fixe après réalisation et paiement : 250 $ sous 10 000 $, 500 $ de 10 000 $ à 24 999,99 $ et 1 000 $ à partir de 25 000 $."],
+        ["Quand le paiement est-il gagné ?", "Seulement après la réalisation et le paiement complet du projet référé."],
+        ["Ai-je accès à un portail ?", "Oui, après l'approbation de la demande et la création du compte partenaire par Opticable."]
+      ],
+      "form_title": "Soumettre une demande partenaire",
+      "form_intro": "Transmettez les coordonnées de votre entreprise pour révision. Opticable valide d'abord la demande, puis crée le compte partenaire si elle est approuvée.",
+      "terms_title": "Conditions du programme de partenaires référents",
+      "terms_intro": "Le programme partenaires reste simple, mais il est plus structuré que le programme de référence puisqu'il comprend une approbation et des paiements.",
+      "terms_sections": [
+        ["Admissibilité", "Ce programme est destiné aux entreprises et aux professionnels qui réfèrent de nouveaux projets au Québec à Opticable."],
+        ["Approbation", "Chaque demande partenaire est validée avant la création du compte partenaire."],
+        ["Offre au client", "Ce programme ne promet pas automatiquement un rabais au client référé."],
+        ["Paiement du partenaire", "Les projets réalisés et payés donnent droit à un paiement fixe selon la taille du projet : 250 $ sous 10 000 $, 500 $ de 10 000 $ à 24 999,99 $ et 1 000 $ à 25 000 $ et plus."],
+        ["Quand le paiement est gagné", "Le paiement est gagné seulement après la réalisation et le paiement complet du projet référé."],
+        ["Exclusions", "Les auto-références, les abus entre entreprises liées, les demandes déjà ouvertes chez Opticable, les taxes, les services récurrents, les appels de soutien, les travaux déjà signés et les travaux déjà escomptés sont exclus."]
+      ]
+    }
+  },
+  "portal": {
+    "en": {
+      "label": "Referral Portal",
+      "title": "Referral Portal | Opticable",
+      "desc": "Opticable portal for the Referral Program and the Referral Partner Program.",
+      "eyebrow": "Referral Portal",
+      "h1": "Access your portal.",
+      "intro": "Use your email address to review your code, your referrals, your credit, or your commission ledger.",
+      "login_title": "Portal sign-in",
+      "login_intro": "Enter the email address used for your referral or partner account.",
+      "login_button": "Sign in",
+      "logged_out_note": "",
+      "logout_label": "Sign out"
+    },
+    "fr": {
+      "label": "Portail de référence",
+      "title": "Portail de référence | Opticable",
+      "desc": "Portail Opticable avec accès permanent pour le programme de référence et le programme de partenaires référents.",
+      "eyebrow": "Portail de référence",
+      "h1": "Accédez à votre portail.",
+      "intro": "Utilisez l'adresse courriel liée à votre compte pour consulter votre code, vos références, vos crédits ou votre registre de paiements.",
+      "login_title": "Connexion au portail",
+      "login_intro": "Entrez l'adresse courriel utilisée pour votre compte de référence ou partenaire.",
+      "login_button": "Se connecter",
+      "logged_out_note": "",
+      "logout_label": "Se déconnecter"
+    }
+  },
+  "admin": {
+    "en": {
+      "label": "Referral Admin",
+      "title": "Referral Admin | Opticable",
+      "desc": "Protected Opticable referral admin for accounts, cases, rewards, and CSV exports.",
+      "eyebrow": "Protected Referral Admin",
+      "h1": "Review referral accounts, cases, and rewards.",
+      "intro": "Approve partners, review referral cases, move them through the workflow, and settle partner payouts from one place."
+    },
+    "fr": {
+      "label": "Admin références",
+      "title": "Admin références | Opticable",
+      "desc": "Administration protégée Opticable pour les comptes, les dossiers de références, les récompenses et les exports CSV.",
+      "eyebrow": "Administration références protégée",
+      "h1": "Consultez les comptes, les dossiers et les récompenses.",
+      "intro": "Approuvez les partenaires, révisez les dossiers de références, faites-les avancer dans le processus et réglez les paiements partenaires au même endroit."
+    }
+  },
+  "contactCapture": {
+    "en": {
+      "title": "Using a referral code?",
+      "intro": "Enter the code directly in the quote form below.",
+      "note": "The code must be used on the first quote request to keep the referral eligible.",
+      "detected_label": "Detected code",
+      "fallback_label": "No code detected yet",
+      "helper_label": "What to do",
+      "helper_copy": "Enter the code in the “Referral code” field before submitting your request."
+    },
+    "fr": {
+      "title": "Vous utilisez un code de référence ?",
+      "intro": "Entrez le code directement dans le formulaire de soumission ci-dessous.",
+      "note": "Le code doit être utilisé lors de la première demande de soumission pour rester admissible.",
+      "detected_label": "Code détecté",
+      "fallback_label": "Aucun code détecté pour le moment",
+      "helper_label": "À faire",
+      "helper_copy": "Entrez votre code dans le champ « Code de référence » avant d'envoyer votre demande."
+    }
+  }
+}

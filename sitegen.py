@@ -44,7 +44,7 @@ ROOT_GENERATED_ASSET_FILES = (
     'styles.css',
     'site.js',
 )
-ASSET_VER = '20260408c'
+ASSET_VER = '20260414h'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
 RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
@@ -72,6 +72,8 @@ GOOGLE_TAG_SNIPPET = (
     '</script>'
 )
 PROMO_CONFIG = json.loads((root / 'promo-config.json').read_text(encoding='utf-8'))
+REFERRAL_CONFIG = json.loads((root / 'referral-config.json').read_text(encoding='utf-8'))
+REFERRAL_CONTENT = json.loads((root / 'referral-content.json').read_text(encoding='utf-8'))
 ZOHO_FORM_CONFIG = {
     'fr': {
         'src': 'https://forms.zohopublic.com/opticable/form/Formulairedemandedesoumission/formperma/i6pIlfoGOFER0OCZ4oUH_KMxVWRZKC9Of8vbyNAjR0g',
@@ -1855,7 +1857,7 @@ PROMO_PAGE_CONTENT = {
         'desc': 'Enter your details, get an instant Opticable promo code, and apply it to a new installation quote in Quebec.',
         'hero_eyebrow': 'Quebec promo',
         'h1': 'Roll a promo code for your next installation quote.',
-        'intro': 'Enter your details to get one promo code between 5% and 25% off. The code can be applied manually to an approved new Opticable installation quote in Quebec, up to the campaign cap.',
+        'intro': 'Enter your details to get one promo code between 5% and 25% off. This is a limited-time offer and the code can be applied manually to an approved new Opticable installation quote in Quebec, up to the campaign cap.',
         'hero_panel_title': 'One entry, one code, your next quote.',
         'hero_panel_copy': 'Use the code on a cameras, access control, WiFi, intercom, structured cabling, or network infrastructure quote for a project in Quebec.',
         'hero_points': [
@@ -1934,8 +1936,8 @@ PROMO_PAGE_CONTENT = {
         'reminder_title': 'Add this code to your quote request.',
         'reminder_copy': 'Your promo code is already saved and ready to use.',
         'cta_eyebrow': 'Promo',
-        'cta_title': 'Want to lock in a code before requesting a quote?',
-        'cta_copy': 'Use the promo entry page to collect your one-time code, then continue into the normal quote flow with a better-qualified lead.',
+        'cta_title': 'Limited-time offer: lock in a promo code before requesting a quote.',
+        'cta_copy': 'Use the promo entry page to collect your one-time code before the campaign ends, then continue into the normal quote flow with a better-qualified lead.',
         'cta_button': 'View the promo page',
     },
     'fr': {
@@ -1944,7 +1946,7 @@ PROMO_PAGE_CONTENT = {
         'desc': "Entrez vos coordonnées, obtenez un code promo instantané Opticable et appliquez-le à une nouvelle soumission d'installation au Québec.",
         'hero_eyebrow': 'Promo Québec',
         'h1': 'Roulez un code promo pour votre prochaine soumission d’installation.',
-        'intro': "Entrez vos coordonnées pour avoir un code promo entre 5 % et 25 %. Le code peut être appliqué manuellement à une nouvelle soumission d'installation Opticable admissible au Québec, jusqu'au plafond de la campagne.",
+        'intro': "Entrez vos coordonnées pour avoir un code promo entre 5 % et 25 %. Il s'agit d'une offre à durée limitée, applicable manuellement à une nouvelle soumission d'installation Opticable admissible au Québec, jusqu'au plafond de la campagne.",
         'hero_panel_title': 'Une entrée, un code, votre prochaine soumission.',
         'hero_panel_copy': "Utilisez ce code pour une demande de caméras, de contrôle d'accès, de WiFi, d'intercom, de câblage structuré ou d'infrastructure réseau liée à un projet au Québec.",
         'hero_points': [
@@ -2023,8 +2025,8 @@ PROMO_PAGE_CONTENT = {
         'reminder_title': 'Ajoutez ce code dans votre soumission.',
         'reminder_copy': "Votre code promo est déjà prêt à utiliser.",
         'cta_eyebrow': 'Promo',
-        'cta_title': 'Vous voulez obtenir un code avant de demander une soumission ?',
-        'cta_copy': "Passez par la page promo pour obtenir votre code unique, puis poursuivez vers le processus normal de soumission avec un lead mieux qualifié.",
+        'cta_title': 'Offre à durée limitée : obtenez un code avant de demander une soumission.',
+        'cta_copy': "Passez par la page promo pour obtenir votre code unique avant la fin de la campagne, puis poursuivez vers le processus normal de soumission.",
         'cta_button': 'Voir la page promo',
     },
 }
@@ -3971,8 +3973,8 @@ secondary_order = [
 order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
 base_routes = {
-    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
-    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
+    'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'referral-program': '/en/referral-program/', 'referral-program-terms': '/en/referral-program/terms/', 'referral-partner-program': '/en/referral-partner-program/', 'referral-partner-program-terms': '/en/referral-partner-program/terms/', 'referral-portal': '/en/referral-portal/', 'referral-access': '/en/referral-portal/access/', 'referral-admin': '/en/admin/referrals/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
+    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'referral-program': '/fr/programme-reference/', 'referral-program-terms': '/fr/programme-reference/reglement/', 'referral-partner-program': '/fr/programme-partenaires-referents/', 'referral-partner-program-terms': '/fr/programme-partenaires-referents/reglement/', 'referral-portal': '/fr/portail-references/', 'referral-access': '/fr/portail-references/acces/', 'referral-admin': '/fr/admin/references/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
 }
 routes = {k: dict(v) for k, v in base_routes.items()}
 for key in order:
@@ -4167,6 +4169,26 @@ function promoUtms() {
     utmContent: url.searchParams.get('utm_content') || '',
     utmTerm: url.searchParams.get('utm_term') || '',
   };
+}
+function trackPromoAnalyticsEvent(eventName, detail) {
+  if (!eventName || typeof window === 'undefined') return;
+  const payload = {
+    event_category: 'promo',
+    promo_campaign_id: detail && detail.campaignId ? detail.campaignId : '',
+    promo_discount_percent: detail && typeof detail.discountPercent !== 'undefined' ? detail.discountPercent : null,
+    promo_locale: detail && detail.locale ? detail.locale : '',
+    promo_code: detail && detail.promoCode ? detail.promoCode : '',
+    promo_duplicate: detail && detail.duplicate ? 'true' : 'false',
+  };
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({ event: eventName, ...payload });
+  }
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, payload);
+    if (detail && detail.googleAdsSendTo) {
+      window.gtag('event', 'conversion', { send_to: detail.googleAdsSendTo });
+    }
+  }
 }
 function applyPromoResult(shell, copy, payload, stateLabel, title, description) {
   const panel = shell.querySelector('[data-promo-result]');
@@ -4448,6 +4470,17 @@ async function initPromoForms() {
             '',
             result.duplicate ? copy.duplicateTitle : copy.resultTitle,
             result.duplicate ? copy.duplicateCopy : copy.resultCopy
+          );
+          trackPromoAnalyticsEvent(
+            result.duplicate ? 'promo_code_retrieved' : 'promo_code_generated',
+            {
+              campaignId: result.campaignId || '',
+              discountPercent: entry.discountPercent,
+              promoCode: entry.promoCode || '',
+              locale: lang,
+              duplicate: Boolean(result.duplicate),
+              googleAdsSendTo: result.duplicate ? '' : 'AW-18043353221/d5WVCLvr0JgcEIXx3ptD',
+            }
           );
           if (resultPanel) {
             const focusTarget = resultPanel.querySelector('[data-promo-result-copy-button]') || resultPanel.querySelector('[data-promo-result-close]');
@@ -4752,6 +4785,1622 @@ function initPromoAdmin() {
     loadEntries();
   });
 }
+function referralCurrency(value) {
+  if (value == null || value === '') return '—';
+  return `${value} CAD`;
+}
+function referralDate(value, lang) {
+  return promoDateLabel(value, lang) || '—';
+}
+function referralDateTime(value, lang) {
+  if (!value) return '—';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return referralDate(value, lang);
+  try {
+    return new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-CA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(date);
+  } catch {
+    return referralDate(value, lang);
+  }
+}
+function referralLabel(group, key, fallback = '—') {
+  if (!group || !Object.prototype.hasOwnProperty.call(group, key)) return fallback;
+  return group[key];
+}
+function initReferralApplyForms() {
+  document.querySelectorAll('[data-referral-apply]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-referral-apply-copy]');
+    const lang = shell.dataset.lang || 'en';
+    const form = shell.querySelector('[data-referral-apply-form]');
+    const status = shell.querySelector('[data-referral-apply-status]');
+    const errorNode = shell.querySelector('[data-referral-apply-error]');
+    const linkWrap = shell.querySelector('[data-referral-apply-link]');
+    const linkAnchor = shell.querySelector('[data-referral-apply-link-anchor]');
+    const url = shell.dataset.applyUrl;
+    const portalUrl = shell.dataset.portalUrl || (lang === 'fr' ? '/fr/portail-references/' : '/en/referral-portal/');
+    const companyRequired = shell.dataset.companyRequired === 'true';
+    const requiresPassword = shell.dataset.requiresPassword === 'true';
+    if (!form || !status || !errorNode || !linkWrap || !linkAnchor || !url) return;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.hidden = true;
+      errorNode.hidden = true;
+      linkWrap.hidden = true;
+      const email = String(form.elements.namedItem('email').value || '').trim();
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        errorNode.textContent = copy.invalidEmail || '';
+        errorNode.hidden = false;
+        return;
+      }
+      if (!String(form.elements.namedItem('name').value || '').trim()) {
+        errorNode.textContent = copy.requiredField || '';
+        errorNode.hidden = false;
+        return;
+      }
+      if (companyRequired && !String(form.elements.namedItem('company').value || '').trim()) {
+        errorNode.textContent = copy.requiredField || '';
+        errorNode.hidden = false;
+        return;
+      }
+      const passwordField = form.elements.namedItem('password');
+      const confirmPasswordField = form.elements.namedItem('password_confirm');
+      const password = passwordField ? String(passwordField.value || '') : '';
+      const confirmPassword = confirmPasswordField ? String(confirmPasswordField.value || '') : '';
+      if (requiresPassword) {
+        if (password.length < 10) {
+          errorNode.textContent = copy.invalidPassword || '';
+          errorNode.hidden = false;
+          return;
+        }
+        if (password !== confirmPassword) {
+          errorNode.textContent = copy.passwordMismatch || '';
+          errorNode.hidden = false;
+          return;
+        }
+      }
+      if (!form.elements.namedItem('rules_attestation').checked) {
+        errorNode.textContent = copy.requiredConsent || '';
+        errorNode.hidden = false;
+        return;
+      }
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            locale: lang,
+            accountType: shell.dataset.accountType || 'client',
+            name: String(form.elements.namedItem('name').value || '').trim(),
+            email,
+            phone: String(form.elements.namedItem('phone').value || '').trim(),
+            company: String(form.elements.namedItem('company').value || '').trim(),
+            website: form.elements.namedItem('website') ? String(form.elements.namedItem('website').value || '').trim() : '',
+            notes: form.elements.namedItem('notes') ? String(form.elements.namedItem('notes').value || '').trim() : '',
+            password: requiresPassword ? password : '',
+            rulesAttestation: form.elements.namedItem('rules_attestation').checked,
+          }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        status.textContent = payload.message || (payload.duplicate ? (copy.duplicate || payload.magicLink?.message || '') : (copy.success || payload.magicLink?.message || ''));
+        status.hidden = false;
+        if (!payload.duplicate && payload.portalUrl) {
+          window.setTimeout(() => {
+            window.location.assign(payload.portalUrl || portalUrl);
+          }, 180);
+          return;
+        }
+        if (payload.magicLink && payload.magicLink.previewLink) {
+          linkAnchor.href = payload.magicLink.previewLink;
+          linkWrap.hidden = false;
+          window.setTimeout(() => {
+            window.location.assign(payload.magicLink.previewLink);
+          }, 180);
+        }
+      } catch (error) {
+        errorNode.textContent = error.message || copy.genericError || '';
+        errorNode.hidden = false;
+      }
+    });
+  });
+}
+function initReferralPortal() {
+  document.querySelectorAll('[data-referral-portal]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-referral-portal-copy]');
+    const lang = shell.dataset.lang || 'en';
+    const loginUrl = shell.dataset.loginUrl;
+    const requestLinkUrl = shell.dataset.requestLinkUrl;
+    const passwordUrl = shell.dataset.passwordUrl;
+    const portalUrl = shell.dataset.portalUrl;
+    const accessUrl = shell.dataset.accessUrl || portalUrl;
+    const authBox = shell.querySelector('[data-referral-portal-auth]');
+    const loginForm = shell.querySelector('[data-referral-portal-login]');
+    const recoveryForm = shell.querySelector('[data-referral-portal-link-form]');
+    const status = shell.querySelector('[data-referral-portal-status]');
+    const errorNode = shell.querySelector('[data-referral-portal-error]');
+    const dashboard = shell.querySelector('[data-referral-portal-dashboard]');
+    const shareCopyButton = shell.querySelector('[data-referral-portal-share-copy]');
+    const shareStatus = shell.querySelector('[data-referral-portal-share-status]');
+    const creditMeta = shell.querySelector('[data-referral-credit-meta]');
+    const creditPanel = shell.querySelector('[data-referral-credit-panel]');
+    const passwordForm = shell.querySelector('[data-referral-password-form]');
+    const passwordStatus = shell.querySelector('[data-referral-password-status]');
+    const passwordError = shell.querySelector('[data-referral-password-error]');
+    const passwordCurrentWrap = shell.querySelector('[data-referral-password-current-wrap]');
+    const passwordSubmit = shell.querySelector('[data-referral-password-submit]');
+    if (!loginUrl || !requestLinkUrl || !passwordUrl || !portalUrl || !authBox || !loginForm || !recoveryForm || !status || !errorNode || !dashboard || !creditMeta || !creditPanel || !passwordForm || !passwordStatus || !passwordError || !passwordCurrentWrap || !passwordSubmit) return;
+    const labels = copy.labels || {};
+    let activeAccount = null;
+    const queryState = new URL(window.location.href);
+    const authState = queryState.searchParams.get('auth') || '';
+    const resetState = queryState.searchParams.get('reset') || '';
+    const clearAuthState = () => {
+      const current = new URL(window.location.href);
+      if (!current.searchParams.has('auth')) return;
+      current.searchParams.delete('auth');
+      window.history.replaceState({}, '', current.toString());
+    };
+    const clearResetState = () => {
+      const current = new URL(window.location.href);
+      if (!current.searchParams.has('reset')) return;
+      current.searchParams.delete('reset');
+      window.history.replaceState({}, '', current.toString());
+    };
+    const authMessage = () => {
+      if (authState === 'expired') return copy.authExpired || '';
+      if (authState === 'used') return copy.authUsed || '';
+      if (authState === 'invalid') return copy.authInvalid || '';
+      return '';
+    };
+    const resetMessage = () => {
+      if (resetState === 'ready') return copy.resetReady || '';
+      return '';
+    };
+    const viewCopy = (accountType) => {
+      const views = copy.views || {};
+      return accountType === 'partner' ? (views.partner || {}) : (views.client || {});
+    };
+    const caseReference = (item) => {
+      if (item.quoteReference) return item.quoteReference;
+      if (item.zohoQuoteId) return `${lang === 'fr' ? 'Soum.' : 'Quote'} ${item.zohoQuoteId}`;
+      if (item.zohoInvoiceId) return `${lang === 'fr' ? 'Fact.' : 'Invoice'} ${item.zohoInvoiceId}`;
+      if (item.referredCompany) return item.referredCompany;
+      if (item.referredName) return item.referredName;
+      return '—';
+    };
+    const setInlineMessage = (node, message) => {
+      node.textContent = message || '';
+      node.hidden = !message;
+    };
+    const renderTableRows = (target, rows, cells) => {
+      target.textContent = '';
+      if (!rows.length) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = cells.length;
+        cell.textContent = '—';
+        row.appendChild(cell);
+        target.appendChild(row);
+        return;
+      }
+      rows.forEach((item) => {
+        const row = document.createElement('tr');
+        cells.forEach((cellBuilder) => {
+          row.appendChild(promoAdminTableCell(cellBuilder(item)));
+        });
+        target.appendChild(row);
+      });
+    };
+    const showAuth = (show) => {
+      authBox.hidden = !show;
+      dashboard.hidden = show;
+    };
+    const populateView = (payload) => {
+      const accountType = payload.account.accountType === 'partner' ? 'partner' : 'client';
+      const view = viewCopy(accountType);
+      shell.classList.toggle('is-partner', accountType === 'partner');
+      shell.classList.toggle('is-client', accountType !== 'partner');
+      creditMeta.hidden = false;
+      creditPanel.hidden = accountType === 'partner';
+      shell.querySelector('[data-referral-portal-banner-eyebrow]').textContent = view.bannerEyebrow || '';
+      shell.querySelector('[data-referral-portal-banner-title]').textContent = view.bannerTitle || '';
+      shell.querySelector('[data-referral-portal-banner-copy]').textContent = view.bannerCopy || '';
+      shell.querySelector('[data-referral-help-title]').textContent = view.helpTitle || '';
+      const helpList = shell.querySelector('[data-referral-help-list]');
+      helpList.textContent = '';
+      (view.help || []).forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        helpList.appendChild(li);
+      });
+      const stats = view.stats || {};
+      shell.querySelector('[data-referral-stat-label-total]').textContent = stats.total || '';
+      shell.querySelector('[data-referral-stat-label-open]').textContent = stats.open || '';
+      shell.querySelector('[data-referral-stat-label-completed]').textContent = stats.completed || '';
+      shell.querySelector('[data-referral-stat-label-primary]').textContent = stats.primary || '';
+      shell.querySelector('[data-referral-stat-label-secondary]').textContent = stats.secondary || '';
+      shell.querySelector('[data-referral-stat-label-tertiary]').textContent = stats.tertiary || '';
+      shell.querySelector('[data-referral-stat-total]').textContent = String(payload.stats.totalReferrals || 0);
+      shell.querySelector('[data-referral-stat-open]').textContent = String(payload.stats.openReferrals || 0);
+      shell.querySelector('[data-referral-stat-completed]').textContent = String(payload.stats.completedReferrals || 0);
+      shell.querySelector('[data-referral-portal-referrals-title]').textContent = view.referralsTitle || '';
+      shell.querySelector('[data-referral-portal-referrals-intro]').textContent = view.referralsIntro || '';
+      shell.querySelector('[data-referral-portal-rewards-title]').textContent = view.rewardsTitle || '';
+      shell.querySelector('[data-referral-portal-rewards-intro]').textContent = view.rewardsIntro || '';
+      shell.querySelector('[data-referral-portal-amount-label]').textContent = view.amountLabel || '';
+      shell.querySelector('[data-referral-portal-summary-note]').textContent = view.summaryNote || '';
+      if (accountType === 'partner') {
+        shell.querySelector('[data-referral-stat-primary]').textContent = referralCurrency(payload.stats.pendingPayoutCad);
+        shell.querySelector('[data-referral-stat-secondary]').textContent = referralCurrency(payload.stats.settledPayoutCad);
+        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency(payload.stats.trackedSubtotalCad);
+      } else {
+        shell.querySelector('[data-referral-stat-primary]').textContent = referralCurrency(payload.account.walletBalanceCad);
+        shell.querySelector('[data-referral-stat-secondary]').textContent = referralCurrency(payload.account.totalEarnedCad);
+        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency('1500.00');
+      }
+      shell.querySelector('[data-referral-password-title]').textContent = payload.account.hasPassword
+        ? (copy.passwordPanel?.changeTitle || '')
+        : (copy.passwordPanel?.createTitle || '');
+      shell.querySelector('[data-referral-password-intro]').textContent = payload.account.hasPassword
+        ? (copy.passwordPanel?.changeIntro || '')
+        : (copy.passwordPanel?.createIntro || '');
+      passwordSubmit.textContent = payload.account.hasPassword
+        ? (copy.passwordPanel?.changeButton || '')
+        : (copy.passwordPanel?.createButton || '');
+      passwordCurrentWrap.hidden = !payload.account.hasPassword;
+    };
+    const loadPortal = async () => {
+      try {
+        status.hidden = true;
+        errorNode.hidden = true;
+        const response = await fetch(portalUrl, { headers: { Accept: 'application/json' } });
+        if (response.status === 401) {
+          showAuth(true);
+          if (authMessage()) {
+            status.hidden = true;
+            errorNode.textContent = authMessage();
+            errorNode.hidden = false;
+          } else {
+            status.textContent = copy.notSignedIn || '';
+            status.hidden = false;
+          }
+          return;
+        }
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        if (payload.account.passwordResetReady && accessUrl) {
+          const target = new URL(accessUrl, window.location.origin);
+          window.location.assign(target.toString());
+          return;
+        }
+        activeAccount = payload.account;
+        clearAuthState();
+        clearResetState();
+        showAuth(false);
+        shell.querySelector('[data-referral-portal-name]').textContent = payload.account.name || payload.account.email || '—';
+        const accountTypeLabel = referralLabel(labels.accountTypes, payload.account.accountType, payload.account.accountType || '—');
+        const accountStatusLabel = referralLabel(labels.accountStatuses, payload.account.status, payload.account.status || '—');
+        shell.querySelector('[data-referral-portal-meta]').textContent = `${accountTypeLabel} · ${accountStatusLabel} · ${payload.account.email}`;
+        populateView(payload);
+        shell.querySelector('[data-referral-portal-code]').textContent = payload.account.currentCode || '—';
+        shell.querySelector('[data-referral-portal-credit-code]').textContent = payload.account.currentCreditCode || '—';
+        shell.querySelector('[data-referral-portal-email]').textContent = payload.account.email || '—';
+        const share = shell.querySelector('[data-referral-portal-share]');
+        share.textContent = payload.account.shareLink || '—';
+        share.href = payload.account.shareLink || shell.dataset.contactUrl || '#';
+        share.dataset.shareLink = payload.account.shareLink || '';
+        share.title = payload.account.shareLink || '';
+        if (shareStatus) {
+          shareStatus.textContent = '';
+          shareStatus.hidden = true;
+        }
+        renderTableRows(shell.querySelector('[data-referral-portal-referrals]'), payload.referrals || [], [
+          (item) => item.id,
+          (item) => caseReference(item),
+          (item) => referralLabel(labels.caseStatuses, item.status, item.status || '—'),
+          (item) => referralDate(item.createdAt, lang),
+          (item) => item.quotedSubtotalCad ? referralCurrency(item.quotedSubtotalCad) : '—',
+          (item) => item.rewardAmountCad ? referralCurrency(item.rewardAmountCad) : '—',
+        ]);
+        renderTableRows(shell.querySelector('[data-referral-portal-rewards]'), payload.rewards || [], [
+          (item) => item.id,
+          (item) => referralLabel(copy.ledgerStatuses || labels.rewardStatuses, item.status, referralLabel(labels.rewardStatuses, item.status, item.status || '—')),
+          (item) => referralCurrency(item.amountCad),
+          (item) => referralDate(item.createdAt, lang),
+          (item) => item.note || '—',
+        ]);
+        shell.querySelector('[data-referral-credit-panel-code]').textContent = payload.account.currentCreditCode || '—';
+        shell.querySelector('[data-referral-credit-panel-balance]').textContent = referralCurrency(payload.account.walletBalanceCad);
+        shell.querySelector('[data-referral-credit-panel-cap]').textContent = referralCurrency('1500.00');
+        const creditInstruction = shell.querySelector('[data-referral-credit-panel-instruction]');
+        if (creditInstruction) {
+          creditInstruction.textContent = (copy.creditPanel && copy.creditPanel.manualCopy) || '';
+        }
+        setInlineMessage(passwordStatus, '');
+        setInlineMessage(passwordError, '');
+        passwordForm.reset();
+      } catch (error) {
+        showAuth(true);
+        errorNode.textContent = error.message || copy.genericError || '';
+        errorNode.hidden = false;
+      }
+    };
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearAuthState();
+      clearResetState();
+      setInlineMessage(status, '');
+      setInlineMessage(errorNode, '');
+      const email = String(loginForm.elements.namedItem('email').value || '').trim();
+      const password = String(loginForm.elements.namedItem('password').value || '');
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        setInlineMessage(errorNode, copy.invalidEmail || '');
+        return;
+      }
+      if (password.length < 10) {
+        setInlineMessage(errorNode, copy.invalidPassword || '');
+        return;
+      }
+      try {
+        const response = await fetch(loginUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ email, password, locale: lang }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.invalidCredentials || copy.genericError || '');
+        }
+        window.location.assign(payload.portalUrl || window.location.pathname);
+      } catch (error) {
+        setInlineMessage(errorNode, error.message || copy.invalidCredentials || copy.genericError || '');
+      }
+    });
+    recoveryForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearAuthState();
+      clearResetState();
+      setInlineMessage(status, '');
+      setInlineMessage(errorNode, '');
+      const email = String(recoveryForm.elements.namedItem('email').value || '').trim();
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        setInlineMessage(errorNode, copy.invalidEmail || '');
+        return;
+      }
+      try {
+        const response = await fetch(requestLinkUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ email, locale: lang, redirectPath: accessUrl }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        setInlineMessage(status, payload.message || copy.loginSent || '');
+      } catch (error) {
+        setInlineMessage(errorNode, error.message || copy.genericError || '');
+      }
+    });
+    passwordForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setInlineMessage(passwordStatus, '');
+      setInlineMessage(passwordError, '');
+      const currentPassword = String(passwordForm.elements.namedItem('current_password').value || '');
+      const newPassword = String(passwordForm.elements.namedItem('new_password').value || '');
+      const confirmPassword = String(passwordForm.elements.namedItem('confirm_password').value || '');
+      if (newPassword.length < 10) {
+        setInlineMessage(passwordError, copy.invalidPassword || '');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setInlineMessage(passwordError, copy.passwordMismatch || '');
+        return;
+      }
+      try {
+        const response = await fetch(passwordUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ locale: lang, currentPassword, newPassword }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        setInlineMessage(passwordStatus, payload.message || copy.passwordSaved || '');
+        await loadPortal();
+      } catch (error) {
+        setInlineMessage(passwordError, error.message || copy.genericError || '');
+      }
+    });
+    if (shareCopyButton) {
+      shareCopyButton.addEventListener('click', async () => {
+        const share = shell.querySelector('[data-referral-portal-share]');
+        const value = share?.dataset.shareLink || '';
+        if (!value) return;
+        try {
+          await navigator.clipboard.writeText(value);
+          if (shareStatus) setInlineMessage(shareStatus, copy.shareCopied || '');
+        } catch {
+          if (shareStatus) setInlineMessage(shareStatus, copy.shareCopyError || '');
+        }
+      });
+    }
+    loadPortal();
+  });
+}
+function initReferralAccess() {
+  document.querySelectorAll('[data-referral-access]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-referral-access-copy]');
+    const lang = shell.dataset.lang || 'en';
+    const requestLinkUrl = shell.dataset.requestLinkUrl;
+    const passwordUrl = shell.dataset.passwordUrl;
+    const portalUrl = shell.dataset.portalUrl;
+    const portalPageUrl = shell.dataset.portalPageUrl || (lang === 'fr' ? '/fr/portail-references/' : '/en/referral-portal/');
+    const accessUrl = shell.dataset.accessUrl || portalPageUrl;
+    const status = shell.querySelector('[data-referral-access-status]');
+    const errorNode = shell.querySelector('[data-referral-access-error]');
+    const readyWrap = shell.querySelector('[data-referral-access-ready]');
+    const readyAccount = shell.querySelector('[data-referral-access-account]');
+    const requestWrap = shell.querySelector('[data-referral-access-request]');
+    const requestForm = shell.querySelector('[data-referral-access-request-form]');
+    const passwordForm = shell.querySelector('[data-referral-access-password-form]');
+    const passwordStatus = shell.querySelector('[data-referral-access-password-status]');
+    const passwordError = shell.querySelector('[data-referral-access-password-error]');
+    if (!requestLinkUrl || !passwordUrl || !portalUrl || !status || !errorNode || !readyWrap || !readyAccount || !requestWrap || !requestForm || !passwordForm || !passwordStatus || !passwordError) return;
+    const query = new URL(window.location.href);
+    const authState = query.searchParams.get('auth') || '';
+    const setInlineMessage = (node, message) => {
+      node.textContent = message || '';
+      node.hidden = !message;
+    };
+    const authMessage = () => {
+      if (authState === 'expired') return copy.authExpired || '';
+      if (authState === 'used') return copy.authUsed || '';
+      if (authState === 'invalid') return copy.authInvalid || '';
+      return '';
+    };
+    const showReset = (payload) => {
+      requestWrap.hidden = true;
+      readyWrap.hidden = false;
+      const accountType = payload.account.accountType === 'partner'
+        ? (lang === 'fr' ? 'Programme de partenaires référents' : 'Referral Partner Program')
+        : (lang === 'fr' ? 'Programme de référence' : 'Referral Program');
+      readyAccount.textContent = `${payload.account.name || payload.account.email || '—'} · ${accountType} · ${payload.account.email || '—'}`;
+    };
+    const showRequest = (message = '', isError = false) => {
+      readyWrap.hidden = true;
+      requestWrap.hidden = false;
+      setInlineMessage(status, isError ? '' : message);
+      setInlineMessage(errorNode, isError ? message : '');
+    };
+    const loadAccessState = async () => {
+      setInlineMessage(status, '');
+      setInlineMessage(errorNode, '');
+      try {
+        const response = await fetch(portalUrl, { headers: { Accept: 'application/json' } });
+        if (response.status === 401) {
+          showRequest(authMessage() || copy.notReady || '', Boolean(authMessage()));
+          return;
+        }
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        if (!payload.account.passwordResetReady) {
+          window.location.assign(portalPageUrl);
+          return;
+        }
+        showReset(payload);
+      } catch (error) {
+        showRequest(error.message || copy.genericError || '', true);
+      }
+    };
+    requestForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setInlineMessage(status, '');
+      setInlineMessage(errorNode, '');
+      const email = String(requestForm.elements.namedItem('email').value || '').trim();
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        setInlineMessage(errorNode, copy.invalidEmail || '');
+        return;
+      }
+      try {
+        const response = await fetch(requestLinkUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ email, locale: lang, redirectPath: accessUrl }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        setInlineMessage(status, payload.message || copy.requestSent || '');
+      } catch (error) {
+        setInlineMessage(errorNode, error.message || copy.genericError || '');
+      }
+    });
+    passwordForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setInlineMessage(passwordStatus, '');
+      setInlineMessage(passwordError, '');
+      const newPassword = String(passwordForm.elements.namedItem('new_password').value || '');
+      const confirmPassword = String(passwordForm.elements.namedItem('confirm_password').value || '');
+      if (newPassword.length < 10) {
+        setInlineMessage(passwordError, copy.invalidPassword || '');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setInlineMessage(passwordError, copy.passwordMismatch || '');
+        return;
+      }
+      try {
+        const response = await fetch(passwordUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ locale: lang, newPassword }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || copy.genericError || '');
+        }
+        setInlineMessage(passwordStatus, payload.message || copy.passwordSaved || '');
+        window.setTimeout(() => {
+          window.location.assign(portalPageUrl);
+        }, 250);
+      } catch (error) {
+        setInlineMessage(passwordError, error.message || copy.genericError || '');
+      }
+    });
+    loadAccessState();
+  });
+}
+function initReferralAdmin() {
+  document.querySelectorAll('[data-referral-admin]').forEach((shell) => {
+    const copy = promoPayloadCopy(shell, '[data-referral-admin-copy]');
+    const lang = shell.dataset.lang || 'en';
+    const status = shell.querySelector('[data-referral-admin-status]');
+    const errorNode = shell.querySelector('[data-referral-admin-error]');
+    const refreshButton = shell.querySelector('[data-referral-admin-refresh]');
+    const applicationsBody = shell.querySelector('[data-referral-admin-applications]');
+    const accountsBody = shell.querySelector('[data-referral-admin-accounts]');
+    const casesBody = shell.querySelector('[data-referral-admin-cases]');
+    const rewardsBody = shell.querySelector('[data-referral-admin-rewards]');
+    const createForm = shell.querySelector('[data-referral-admin-create-form]');
+    const applicationStatusFilter = shell.querySelector('[data-referral-filter-applications-status]');
+    const applicationSearchFilter = shell.querySelector('[data-referral-filter-applications-search]');
+    const accountProgramFilter = shell.querySelector('[data-referral-filter-accounts-program]');
+    const accountStatusFilter = shell.querySelector('[data-referral-filter-accounts-status]');
+    const accountSearchFilter = shell.querySelector('[data-referral-filter-accounts-search]');
+    const caseProgramFilter = shell.querySelector('[data-referral-filter-cases-program]');
+    const caseStatusFilter = shell.querySelector('[data-referral-filter-cases-status]');
+    const caseSearchFilter = shell.querySelector('[data-referral-filter-cases-search]');
+    const rewardTypeFilter = shell.querySelector('[data-referral-filter-rewards-type]');
+    const rewardStatusFilter = shell.querySelector('[data-referral-filter-rewards-status]');
+    const rewardSearchFilter = shell.querySelector('[data-referral-filter-rewards-search]');
+    const detailEmpty = shell.querySelector('[data-referral-admin-detail-empty]');
+    const detailWrap = shell.querySelector('[data-referral-admin-detail]');
+    const detailName = shell.querySelector('[data-referral-admin-detail-name]');
+    const detailMeta = shell.querySelector('[data-referral-admin-detail-meta]');
+    const detailProgram = shell.querySelector('[data-referral-admin-detail-program]');
+    const detailStatus = shell.querySelector('[data-referral-admin-detail-status]');
+    const detailEmail = shell.querySelector('[data-referral-admin-detail-email]');
+    const detailPhone = shell.querySelector('[data-referral-admin-detail-phone]');
+    const detailCompany = shell.querySelector('[data-referral-admin-detail-company]');
+    const detailWebsite = shell.querySelector('[data-referral-admin-detail-website]');
+    const detailShareCode = shell.querySelector('[data-referral-admin-detail-share-code]');
+    const detailCreditCode = shell.querySelector('[data-referral-admin-detail-credit-code]');
+    const detailBalance = shell.querySelector('[data-referral-admin-detail-balance]');
+    const detailEarned = shell.querySelector('[data-referral-admin-detail-earned]');
+    const detailCreated = shell.querySelector('[data-referral-admin-detail-created]');
+    const detailLogin = shell.querySelector('[data-referral-admin-detail-login]');
+    const detailNotes = shell.querySelector('[data-referral-admin-detail-notes]');
+    const detailCasesBody = shell.querySelector('[data-referral-admin-detail-cases]');
+    const detailRewardsBody = shell.querySelector('[data-referral-admin-detail-rewards]');
+    const detailAuditBody = shell.querySelector('[data-referral-admin-detail-audit]');
+    const detailExportButton = shell.querySelector('[data-referral-admin-detail-export]');
+    const detailResetButton = shell.querySelector('[data-referral-admin-detail-reset]');
+    const detailDeleteButton = shell.querySelector('[data-referral-admin-detail-delete]');
+    const detailCaseForm = shell.querySelector('[data-referral-admin-case-form]');
+    const detailCaseSubmit = shell.querySelector('[data-referral-admin-case-submit]');
+    const detailCaseCancel = shell.querySelector('[data-referral-admin-case-cancel]');
+    const detailCaseState = shell.querySelector('[data-referral-admin-case-state]');
+    if (!status || !errorNode || !refreshButton || !applicationsBody || !accountsBody || !casesBody || !rewardsBody || !createForm) return;
+    const labels = copy.labels || {};
+    let selectedAccountId = null;
+    let selectedAccount = null;
+    let selectedCaseId = null;
+    const setStatus = (message) => {
+      status.textContent = message || '';
+      status.hidden = !message;
+    };
+    const setError = (message) => {
+      errorNode.textContent = message || '';
+      errorNode.hidden = !message;
+    };
+    const clearMessages = () => {
+      setStatus('');
+      setError('');
+    };
+    const adminBaseUrl = (() => {
+      const current = new URL(window.location.href);
+      current.username = '';
+      current.password = '';
+      current.hash = '';
+      current.search = '';
+      return current.toString();
+    })();
+    const resolveAdminUrl = (value) => {
+      try {
+        return new URL(value, adminBaseUrl).toString();
+      } catch {
+        return value;
+      }
+    };
+    const programLabel = (accountType) => referralLabel(labels.programTypes || labels.accountTypes, accountType, referralLabel(labels.accountTypes, accountType, accountType || '—'));
+    const accountLabel = (item) => `${item.name || '—'} (${item.email || '—'})`;
+    const searchBlob = (...values) => values.filter(Boolean).join(' ').toLowerCase();
+    const setDetailEmptyState = (message) => {
+      selectedAccount = null;
+      selectedCaseId = null;
+      if (detailEmpty) {
+        detailEmpty.textContent = message || copy.messages?.detailEmpty || '';
+        detailEmpty.hidden = false;
+      }
+      if (detailWrap) detailWrap.hidden = true;
+    };
+    const parseMetadata = (value) => {
+      if (!value) return {};
+      try {
+        return JSON.parse(value);
+      } catch {
+        return {};
+      }
+    };
+    const auditNote = (entry) => {
+      const metadata = parseMetadata(entry.metadata_json);
+      const subtotalLabel = lang === 'fr' ? 'Sous-total' : 'Subtotal';
+      const rewardLabel = lang === 'fr' ? 'Récompense' : 'Reward';
+      const parts = [];
+      if (typeof metadata.previousBalanceCents === 'number' && typeof metadata.nextBalanceCents === 'number') {
+        parts.push(`${referralCurrency((metadata.previousBalanceCents / 100).toFixed(2))} → ${referralCurrency((metadata.nextBalanceCents / 100).toFixed(2))}`);
+      }
+      if (typeof metadata.previousAmountCents === 'number' && typeof metadata.nextAmountCents === 'number') {
+        parts.push(`${referralCurrency((metadata.previousAmountCents / 100).toFixed(2))} → ${referralCurrency((metadata.nextAmountCents / 100).toFixed(2))}`);
+      }
+      if (metadata.referredName) parts.push(metadata.referredName);
+      if (metadata.referredCompany) parts.push(metadata.referredCompany);
+      if (metadata.quoteReference) parts.push(metadata.quoteReference);
+      if (metadata.referralCode) parts.push(metadata.referralCode);
+      if (metadata.email) parts.push(metadata.email);
+      if (metadata.referredEmail) parts.push(metadata.referredEmail);
+      if (typeof metadata.deltaCents === 'number') parts.push(referralCurrency((metadata.deltaCents / 100).toFixed(2)));
+      if (typeof metadata.previousSubtotalCents === 'number' && typeof metadata.nextSubtotalCents === 'number') {
+        parts.push(`${subtotalLabel}: ${referralCurrency((metadata.previousSubtotalCents / 100).toFixed(2))} → ${referralCurrency((metadata.nextSubtotalCents / 100).toFixed(2))}`);
+      } else if (typeof metadata.quotedSubtotalCents === 'number') {
+        parts.push(`${subtotalLabel}: ${referralCurrency((metadata.quotedSubtotalCents / 100).toFixed(2))}`);
+      } else if (typeof metadata.nextSubtotalCents === 'number') {
+        parts.push(`${subtotalLabel}: ${referralCurrency((metadata.nextSubtotalCents / 100).toFixed(2))}`);
+      }
+      if (typeof metadata.previousRewardAmountCents === 'number' && typeof metadata.nextRewardAmountCents === 'number') {
+        parts.push(`${rewardLabel}: ${referralCurrency((metadata.previousRewardAmountCents / 100).toFixed(2))} → ${referralCurrency((metadata.nextRewardAmountCents / 100).toFixed(2))}`);
+      } else if (typeof metadata.previousRewardAmountCents === 'number') {
+        parts.push(`${rewardLabel}: ${referralCurrency((metadata.previousRewardAmountCents / 100).toFixed(2))}`);
+      } else if (typeof metadata.nextRewardAmountCents === 'number') {
+        parts.push(`${rewardLabel}: ${referralCurrency((metadata.nextRewardAmountCents / 100).toFixed(2))}`);
+      }
+      if (typeof metadata.manualRewardAmountCents === 'number') parts.push(`${rewardLabel}: ${referralCurrency((metadata.manualRewardAmountCents / 100).toFixed(2))}`);
+      if (metadata.previousStatus || metadata.nextStatus) {
+        parts.push(`${referralLabel(labels.caseStatuses, metadata.previousStatus, metadata.previousStatus || '—')} → ${referralLabel(labels.caseStatuses, metadata.nextStatus, metadata.nextStatus || '—')}`);
+      } else if (metadata.status) {
+        parts.push(referralLabel(labels.caseStatuses, metadata.status, metadata.status));
+      }
+      if (metadata.note) parts.push(metadata.note);
+      if (parts.length) return parts.join(' · ');
+      return '—';
+    };
+    const requestJson = async (url, init = {}) => {
+      const response = await fetch(resolveAdminUrl(url), {
+        headers: { Accept: 'application/json', ...(init.headers || {}) },
+        ...init,
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || copy.genericError || '');
+      }
+      return payload;
+    };
+    const applyAccountStatus = async (accountId, statusValue) => {
+      return requestJson(shell.dataset.accountStatusUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ accountId, status: statusValue }),
+      });
+    };
+    const adjustAccountBalance = async (accountId, deltaCad, note) => {
+      return requestJson(shell.dataset.accountBalanceAdjustUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ accountId, deltaCad, note }),
+      });
+    };
+    const createManualCase = async (payload) => {
+      return requestJson(shell.dataset.caseCreateUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    };
+    const updateManualCase = async (payload) => {
+      return requestJson(shell.dataset.caseUpdateUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    };
+    const applyCaseStatus = async (caseId, statusValue, subtotal, quoteReference) => {
+      return requestJson(shell.dataset.caseStatusUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ caseId, status: statusValue, quotedSubtotalCad: subtotal, quoteReference }),
+      });
+    };
+    const adjustCaseReward = async (caseId, amountCad, note, clearOverride = false) => {
+      return requestJson(shell.dataset.caseRewardAdjustUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ caseId, amountCad, note, clearOverride }),
+      });
+    };
+    const settleReward = async (rewardId) => {
+      return requestJson(shell.dataset.rewardSettleUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ rewardId }),
+      });
+    };
+    const changeApplicationStatus = async (applicationId, nextStatus) => {
+      return requestJson(shell.dataset.applicationStatusUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ applicationId, status: nextStatus }),
+      });
+    };
+    const deleteApplication = async (applicationId) => {
+      return requestJson(shell.dataset.applicationDeleteUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ applicationId }),
+      });
+    };
+    const createAccount = async (payload) => {
+      return requestJson(shell.dataset.accountCreateUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    };
+    const resetAccountAccess = async (accountId) => {
+      return requestJson(shell.dataset.accountResetAccessUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ accountId, sendSetupLink: true }),
+      });
+    };
+    const deleteAccount = async (accountId) => {
+      return requestJson(shell.dataset.accountDeleteUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ accountId }),
+      });
+    };
+    const deleteCase = async (caseId) => {
+      return requestJson(shell.dataset.caseDeleteUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ caseId }),
+      });
+    };
+    const downloadAccount = (accountId) => {
+      const url = new URL(resolveAdminUrl(shell.dataset.accountExportUrl));
+      url.searchParams.set('accountId', String(accountId));
+      window.location.assign(url.toString());
+    };
+    const fetchAccountDetail = async (accountId) => {
+      const url = new URL(resolveAdminUrl(shell.dataset.accountDetailUrl || shell.dataset.accountExportUrl));
+      url.searchParams.set('accountId', String(accountId));
+      const response = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error || copy.genericError || '');
+      }
+      return payload;
+    };
+    const actionStack = () => {
+      const wrap = document.createElement('div');
+      wrap.className = 'referral-admin-action-stack';
+      return wrap;
+    };
+    const makeButton = (label, className = 'button button-secondary') => {
+      const button = document.createElement('button');
+      button.className = className;
+      button.type = 'button';
+      button.textContent = label;
+      return button;
+    };
+    const resetCaseForm = () => {
+      selectedCaseId = null;
+      if (!detailCaseForm) return;
+      detailCaseForm.reset();
+      const statusField = detailCaseForm.elements.namedItem('status');
+      if (statusField) statusField.value = 'new';
+      const referralCodeField = detailCaseForm.elements.namedItem('referral_code');
+      if (referralCodeField) referralCodeField.value = selectedAccount?.current_code || '';
+      if (detailCaseSubmit) detailCaseSubmit.textContent = copy.actions.saveCase || 'Add project';
+      if (detailCaseCancel) detailCaseCancel.hidden = true;
+      if (detailCaseState) detailCaseState.textContent = '';
+    };
+    const beginCaseEdit = (item) => {
+      if (!detailCaseForm) return;
+      selectedCaseId = Number(item.id);
+      const normalizedStatus = item.status === 'won' ? 'accepted' : (item.status || 'new');
+      detailCaseForm.elements.namedItem('referral_code').value = item.referral_code || selectedAccount?.current_code || '';
+      detailCaseForm.elements.namedItem('referred_name').value = item.referred_name || '';
+      detailCaseForm.elements.namedItem('referred_email').value = item.referred_email || '';
+      detailCaseForm.elements.namedItem('referred_phone').value = item.referred_phone || '';
+      detailCaseForm.elements.namedItem('referred_company').value = item.referred_company || '';
+      detailCaseForm.elements.namedItem('quote_reference').value = item.quote_reference || '';
+      detailCaseForm.elements.namedItem('status').value = normalizedStatus;
+      detailCaseForm.elements.namedItem('quoted_subtotal').value = item.quoted_subtotal_cents == null ? '' : (Number(item.quoted_subtotal_cents || 0) / 100).toFixed(2);
+      detailCaseForm.elements.namedItem('manual_reward').value = item.manual_reward_amount_cents == null ? '' : (Number(item.manual_reward_amount_cents || 0) / 100).toFixed(2);
+      detailCaseForm.elements.namedItem('note').value = item.referred_project_notes || item.manual_reward_note || '';
+      if (detailCaseSubmit) detailCaseSubmit.textContent = copy.actions.updateCase || 'Update project';
+      if (detailCaseCancel) detailCaseCancel.hidden = false;
+      if (detailCaseState) detailCaseState.textContent = `${copy.labels?.caseIdLabel || 'Project ID'}: ${item.id}`;
+      detailCaseForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    const applyRowFilters = () => {
+      Array.from(applicationsBody.querySelectorAll('tr')).forEach((row) => {
+        const statusValue = row.dataset.status || '';
+        const searchValue = row.dataset.search || '';
+        const statusMatch = !applicationStatusFilter || applicationStatusFilter.value === 'all' || statusValue === applicationStatusFilter.value;
+        const searchMatch = !applicationSearchFilter || !applicationSearchFilter.value.trim() || searchValue.includes(applicationSearchFilter.value.trim().toLowerCase());
+        row.hidden = !(statusMatch && searchMatch);
+      });
+      Array.from(accountsBody.querySelectorAll('tr')).forEach((row) => {
+        const programValue = row.dataset.program || '';
+        const statusValue = row.dataset.status || '';
+        const searchValue = row.dataset.search || '';
+        const programMatch = !accountProgramFilter || accountProgramFilter.value === 'all' || programValue === accountProgramFilter.value;
+        const statusMatch = !accountStatusFilter || accountStatusFilter.value === 'all' || statusValue === accountStatusFilter.value;
+        const searchMatch = !accountSearchFilter || !accountSearchFilter.value.trim() || searchValue.includes(accountSearchFilter.value.trim().toLowerCase());
+        row.hidden = !(programMatch && statusMatch && searchMatch);
+      });
+      Array.from(casesBody.querySelectorAll('tr')).forEach((row) => {
+        const programValue = row.dataset.program || '';
+        const statusValue = row.dataset.status || '';
+        const searchValue = row.dataset.search || '';
+        const programMatch = !caseProgramFilter || caseProgramFilter.value === 'all' || programValue === caseProgramFilter.value;
+        const statusMatch = !caseStatusFilter || caseStatusFilter.value === 'all' || statusValue === caseStatusFilter.value;
+        const searchMatch = !caseSearchFilter || !caseSearchFilter.value.trim() || searchValue.includes(caseSearchFilter.value.trim().toLowerCase());
+        row.hidden = !(programMatch && statusMatch && searchMatch);
+      });
+      Array.from(rewardsBody.querySelectorAll('tr')).forEach((row) => {
+        const typeValue = row.dataset.type || '';
+        const statusValue = row.dataset.status || '';
+        const searchValue = row.dataset.search || '';
+        const typeMatch = !rewardTypeFilter || rewardTypeFilter.value === 'all' || typeValue === rewardTypeFilter.value;
+        const statusMatch = !rewardStatusFilter || rewardStatusFilter.value === 'all' || statusValue === rewardStatusFilter.value;
+        const searchMatch = !rewardSearchFilter || !rewardSearchFilter.value.trim() || searchValue.includes(rewardSearchFilter.value.trim().toLowerCase());
+        row.hidden = !(typeMatch && statusMatch && searchMatch);
+      });
+    };
+    const renderAccountDetail = (payload) => {
+      const account = payload.account || {};
+      const rollup = payload.rollup || {};
+      const rewardRows = payload.rewards || [];
+      const auditRows = payload.auditEvents || [];
+      const isPartner = account.account_type === 'partner';
+      const pendingPayoutCents = rewardRows
+        .filter((item) => item.reward_type === 'payout' && item.status === 'earned')
+        .reduce((sum, item) => sum + Number(item.amount_cents || 0), 0);
+      const totalPayoutCents = rewardRows
+        .filter((item) => item.reward_type === 'payout' && (item.status === 'earned' || item.status === 'settled'))
+        .reduce((sum, item) => sum + Number(item.amount_cents || 0), 0);
+      selectedAccountId = account.id || null;
+      selectedAccount = account;
+      resetCaseForm();
+      if (detailEmpty) detailEmpty.hidden = true;
+      if (detailWrap) detailWrap.hidden = false;
+      if (detailName) detailName.textContent = account.name || account.email || '—';
+      if (detailMeta) detailMeta.textContent = `${programLabel(account.account_type)} · ${referralLabel(labels.accountStatuses, account.status, account.status || '—')} · ${account.email || '—'}`;
+      if (detailProgram) detailProgram.textContent = programLabel(account.account_type);
+      if (detailStatus) detailStatus.textContent = referralLabel(labels.accountStatuses, account.status, account.status || '—');
+      if (detailEmail) detailEmail.textContent = account.email || '—';
+      if (detailPhone) detailPhone.textContent = account.phone || '—';
+      if (detailCompany) detailCompany.textContent = account.company || '—';
+      if (detailWebsite) detailWebsite.textContent = account.website || '—';
+      if (detailShareCode) detailShareCode.textContent = account.current_code || '—';
+      if (detailCreditCode) detailCreditCode.textContent = account.current_credit_code || '—';
+      if (detailBalance) detailBalance.textContent = referralCurrency((Number(rollup.currentOutstandingCents || 0) / 100).toFixed(2));
+      if (detailEarned) detailEarned.textContent = isPartner
+        ? referralCurrency((Number(rollup.totalEarnedCents || totalPayoutCents) / 100).toFixed(2))
+        : referralCurrency((Number(rollup.totalEarnedCents || 0) / 100).toFixed(2));
+      if (detailCreated) detailCreated.textContent = referralDate(account.created_at, lang);
+      if (detailLogin) detailLogin.textContent = referralDate(account.last_login_at, lang);
+      if (detailNotes) detailNotes.textContent = account.notes || '—';
+      if (detailCasesBody) {
+        detailCasesBody.textContent = '';
+        const rows = payload.referralCases || [];
+        if (!rows.length) {
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.colSpan = 6;
+          cell.textContent = '—';
+          row.appendChild(cell);
+          detailCasesBody.appendChild(row);
+        } else {
+          rows.slice(0, 50).forEach((item) => {
+            const row = document.createElement('tr');
+            row.appendChild(promoAdminTableCell(item.id));
+            row.appendChild(promoAdminTableCell(referralLabel(labels.caseStatuses, item.status, item.status || '—')));
+            row.appendChild(promoAdminTableCell([
+              item.quote_reference || item.zoho_quote_id || item.zoho_invoice_id || '—',
+              item.referred_name || '—',
+              item.referred_company || '—',
+            ].join(' · ')));
+            row.appendChild(promoAdminTableCell(item.quoted_subtotal_cents == null ? '—' : referralCurrency((Number(item.quoted_subtotal_cents || 0) / 100).toFixed(2))));
+            row.appendChild(promoAdminTableCell(item.reward_amount_cents == null ? '—' : referralCurrency((Number(item.reward_amount_cents || 0) / 100).toFixed(2))));
+            const actionCell = document.createElement('td');
+            const stack = actionStack();
+            const editButton = makeButton(copy.actions.editCase || 'Edit project');
+            editButton.addEventListener('click', () => beginCaseEdit(item));
+            stack.appendChild(editButton);
+            const adjustButton = makeButton(copy.actions.adjustReward || 'Adjust amount');
+            adjustButton.addEventListener('click', async () => {
+              const currentValue = item.reward_amount_cents == null ? '' : (Number(item.reward_amount_cents || 0) / 100).toFixed(2);
+              const amountRaw = window.prompt(copy.messages?.caseRewardPrompt || copy.genericError || '', currentValue);
+              if (amountRaw == null) return;
+              const normalized = String(amountRaw).trim().replace(',', '.');
+              const note = window.prompt(copy.messages?.caseRewardNotePrompt || '', '') || '';
+              try {
+                if (!normalized) {
+                  await adjustCaseReward(item.id, '', note, true);
+                } else {
+                  const amount = Number.parseFloat(normalized);
+                  if (!Number.isFinite(amount) || amount < 0) {
+                    setError(copy.messages?.caseRewardPrompt || copy.genericError || '');
+                    return;
+                  }
+                  await adjustCaseReward(item.id, amount.toFixed(2), note, false);
+                }
+                setStatus(copy.messages?.caseRewardAdjusted || '');
+                await loadAll();
+              } catch (error) {
+                setError(error.message || copy.genericError || '');
+              }
+            });
+            stack.appendChild(adjustButton);
+            const deleteButton = makeButton(copy.actions.delete || 'Delete');
+            deleteButton.addEventListener('click', async () => {
+              if (!window.confirm(copy.messages?.confirmDeleteCase || 'Delete this project?')) return;
+              try {
+                await deleteCase(item.id);
+                setStatus(copy.messages?.caseDeleted || '');
+                await loadAll();
+              } catch (error) {
+                setError(error.message || copy.genericError || '');
+              }
+            });
+            stack.appendChild(deleteButton);
+            actionCell.appendChild(stack);
+            row.appendChild(actionCell);
+            detailCasesBody.appendChild(row);
+          });
+        }
+      }
+      if (detailRewardsBody) {
+        detailRewardsBody.textContent = '';
+        const rewardLedger = [
+          ...rewardRows.map((item) => ({
+            id: item.id,
+            status: referralLabel(labels.rewardStatuses, item.status, item.status || '—'),
+            amount: referralCurrency((Number(item.amount_cents || 0) / 100).toFixed(2)),
+            created: referralDateTime(item.created_at, lang),
+            note: item.note || '—',
+          })),
+          ...auditRows
+            .filter((item) => item.event_type === 'client_wallet_adjusted')
+            .map((item) => {
+              const metadata = parseMetadata(item.metadata_json);
+              return {
+                id: `audit-${item.id}`,
+                status: lang === 'fr' ? 'Solde ajusté' : 'Balance adjusted',
+                amount: referralCurrency(((Number(metadata.deltaCents || 0)) / 100).toFixed(2)),
+                created: referralDateTime(item.created_at, lang),
+                note: metadata.note || '—',
+              };
+            }),
+        ];
+        if (!rewardLedger.length) {
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.colSpan = 5;
+          cell.textContent = '—';
+          row.appendChild(cell);
+          detailRewardsBody.appendChild(row);
+        } else {
+          rewardLedger.slice(0, 50).forEach((item) => {
+            const row = document.createElement('tr');
+            row.appendChild(promoAdminTableCell(item.id));
+            row.appendChild(promoAdminTableCell(item.status));
+            row.appendChild(promoAdminTableCell(item.amount));
+            row.appendChild(promoAdminTableCell(item.created));
+            row.appendChild(promoAdminTableCell(item.note));
+            detailRewardsBody.appendChild(row);
+          });
+        }
+      }
+      if (detailAuditBody) {
+        detailAuditBody.textContent = '';
+        if (!auditRows.length) {
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.colSpan = 3;
+          cell.textContent = '—';
+          row.appendChild(cell);
+          detailAuditBody.appendChild(row);
+        } else {
+          auditRows.slice(0, 50).forEach((item) => {
+            const row = document.createElement('tr');
+            row.appendChild(promoAdminTableCell(referralDateTime(item.created_at, lang)));
+            row.appendChild(promoAdminTableCell(item.event_type || '—'));
+            row.appendChild(promoAdminTableCell(auditNote(item)));
+            detailAuditBody.appendChild(row);
+          });
+        }
+      }
+    };
+    const openAccountDetail = async (accountId) => {
+      try {
+        setError('');
+        setStatus(copy.messages?.detailLoading || copy.loading || 'Loading…');
+        const payload = await fetchAccountDetail(accountId);
+        renderAccountDetail(payload);
+        setStatus('');
+        return payload;
+      } catch (error) {
+        setError(error.message || copy.genericError || '');
+        setStatus('');
+        return null;
+      }
+    };
+    const loadAll = async () => {
+      setError('');
+      setStatus(copy.loading || 'Loading…');
+      try {
+        const [summaryResponse, applicationsResponse, accountsResponse, casesResponse, rewardsResponse] = await Promise.all([
+          fetch(resolveAdminUrl(shell.dataset.summaryUrl), { headers: { Accept: 'application/json' } }),
+          fetch(resolveAdminUrl(shell.dataset.applicationsUrl), { headers: { Accept: 'application/json' } }),
+          fetch(resolveAdminUrl(shell.dataset.accountsUrl), { headers: { Accept: 'application/json' } }),
+          fetch(resolveAdminUrl(shell.dataset.casesUrl), { headers: { Accept: 'application/json' } }),
+          fetch(resolveAdminUrl(shell.dataset.rewardsUrl), { headers: { Accept: 'application/json' } }),
+        ]);
+        const [summaryPayload, applicationsPayload, accountsPayload, casesPayload, rewardsPayload] = await Promise.all([
+          summaryResponse.json(),
+          applicationsResponse.json(),
+          accountsResponse.json(),
+          casesResponse.json(),
+          rewardsResponse.json(),
+        ]);
+        if (!summaryResponse.ok || !applicationsResponse.ok || !accountsResponse.ok || !casesResponse.ok || !rewardsResponse.ok) {
+          throw new Error(summaryPayload.error || applicationsPayload.error || accountsPayload.error || casesPayload.error || rewardsPayload.error || copy.genericError || '');
+        }
+        shell.querySelector('[data-referral-summary-active]').textContent = String(summaryPayload.summary.activeAccounts || 0);
+        shell.querySelector('[data-referral-summary-pending]').textContent = String(summaryPayload.summary.pendingPartners || 0);
+        shell.querySelector('[data-referral-summary-open]').textContent = String(summaryPayload.summary.openCases || 0);
+        shell.querySelector('[data-referral-summary-payouts]').textContent = referralCurrency(summaryPayload.summary.pendingPayoutCad);
+        applicationsBody.textContent = '';
+        (applicationsPayload.applications || []).forEach((item) => {
+          const row = document.createElement('tr');
+          row.dataset.status = item.status || '';
+          row.dataset.search = searchBlob(item.name, item.email, item.company);
+          row.appendChild(promoAdminTableCell(item.id));
+          row.appendChild(promoAdminTableCell(referralLabel(labels.applicationStatuses, item.status, item.status || '—')));
+          row.appendChild(promoAdminTableCell(item.name || '—'));
+          row.appendChild(promoAdminTableCell(item.email || '—'));
+          row.appendChild(promoAdminTableCell(item.company || '—'));
+          row.appendChild(promoAdminTableCell(referralDate(item.created_at, lang)));
+          const actionCell = document.createElement('td');
+          const stack = actionStack();
+          const createButton = makeButton(copy.actions.createAccount || 'Create account');
+          createButton.addEventListener('click', async () => {
+            try {
+              const payload = await createAccount({ applicationId: item.id, status: 'active', sendSetupLink: true });
+              setStatus(payload.message || copy.messages?.accountCreated || '');
+              await loadAll();
+              if (payload?.account?.id) {
+                await openAccountDetail(payload.account.id);
+              }
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(createButton);
+          const rejectButton = makeButton(copy.actions.reject || 'Reject');
+          rejectButton.addEventListener('click', async () => {
+            try {
+              await changeApplicationStatus(item.id, 'rejected');
+              setStatus(copy.messages?.applicationUpdated || '');
+              loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(rejectButton);
+          const voidButton = makeButton(copy.actions.delete || 'Delete');
+          voidButton.addEventListener('click', async () => {
+            if (!window.confirm(copy.messages?.confirmDeleteApplication || 'Delete this partner application?')) return;
+            try {
+              await deleteApplication(item.id);
+              setStatus(copy.messages?.applicationDeleted || '');
+              loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(voidButton);
+          actionCell.appendChild(stack);
+          row.appendChild(actionCell);
+          applicationsBody.appendChild(row);
+        });
+        accountsBody.textContent = '';
+        (accountsPayload.accounts || []).forEach((item) => {
+          const row = document.createElement('tr');
+          row.dataset.program = item.account_type || '';
+          row.dataset.status = item.status || '';
+          row.dataset.search = searchBlob(item.name, item.email, item.company, item.current_code, item.current_credit_code);
+          row.appendChild(promoAdminTableCell(item.id));
+          row.appendChild(promoAdminTableCell(programLabel(item.account_type)));
+          const statusCell = document.createElement('td');
+          const select = document.createElement('select');
+          ['pending', 'active', 'paused', 'rejected'].forEach((value) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = referralLabel(labels.accountStatuses, value, value);
+            option.selected = value === item.status;
+            select.appendChild(option);
+          });
+          statusCell.appendChild(select);
+          row.appendChild(statusCell);
+          const nameCell = document.createElement('td');
+          const nameButton = makeButton(item.name || '—', 'button button-link referral-admin-view-button');
+          nameButton.addEventListener('click', async () => {
+            await openAccountDetail(item.id);
+          });
+          nameCell.appendChild(nameButton);
+          row.appendChild(nameCell);
+          row.appendChild(promoAdminTableCell(item.email || '—'));
+          const codeCell = document.createElement('td');
+          const codeWrap = document.createElement('div');
+          codeWrap.className = 'referral-admin-code-stack';
+          const shareCode = document.createElement('p');
+          shareCode.className = 'promo-admin-code';
+          shareCode.textContent = item.current_code || '—';
+          codeWrap.appendChild(shareCode);
+          if (item.current_credit_code) {
+            const creditCode = document.createElement('p');
+            creditCode.className = 'promo-admin-code';
+            creditCode.textContent = item.current_credit_code;
+            codeWrap.appendChild(creditCode);
+          }
+          codeCell.appendChild(codeWrap);
+          row.appendChild(codeCell);
+          row.appendChild(promoAdminTableCell(
+            referralCurrency((Number(item.current_outstanding_cents || 0) / 100).toFixed(2))
+          ));
+          const actionCell = document.createElement('td');
+          const stack = actionStack();
+          const applyButton = makeButton(copy.actions.apply || 'Apply');
+          applyButton.addEventListener('click', async () => {
+            try {
+              await applyAccountStatus(item.id, select.value);
+              setStatus(copy.messages?.accountUpdated || '');
+              loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(applyButton);
+          if (item.account_type === 'client') {
+            const adjustButton = makeButton(copy.actions.adjustCredit || 'Adjust credit');
+            adjustButton.addEventListener('click', async () => {
+              const amountLabel = copy.messages?.creditAdjustPrompt || copy.genericError || '';
+              const amountRaw = window.prompt(amountLabel, '');
+              if (amountRaw == null) return;
+              const normalized = String(amountRaw).trim().replace(',', '.');
+              if (!normalized) return;
+              const amount = Number.parseFloat(normalized);
+              if (!Number.isFinite(amount) || amount === 0) {
+                setError(copy.messages?.creditAdjustPrompt || copy.genericError || '');
+                return;
+              }
+              const note = window.prompt(copy.messages?.creditAdjustNotePrompt || '', '') || '';
+              try {
+                await adjustAccountBalance(item.id, amount.toFixed(2), note);
+                setStatus(copy.messages?.creditAdjusted || '');
+                loadAll();
+              } catch (error) {
+                setError(error.message || copy.genericError || '');
+              }
+            });
+            stack.appendChild(adjustButton);
+          }
+          const exportButton = makeButton(copy.actions.exportOne || 'Download');
+          exportButton.addEventListener('click', () => downloadAccount(item.id));
+          stack.appendChild(exportButton);
+          const detailButton = makeButton(copy.actions.viewDetails || 'View details');
+          detailButton.addEventListener('click', async () => {
+            await openAccountDetail(item.id);
+          });
+          stack.appendChild(detailButton);
+          const resetButton = makeButton(copy.actions.resetAccess || 'Reset access');
+          resetButton.disabled = item.status !== 'active';
+          resetButton.addEventListener('click', async () => {
+            try {
+              const payload = await resetAccountAccess(item.id);
+              setStatus(payload.message || copy.messages?.accessReset || '');
+              loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(resetButton);
+          const deleteButton = makeButton(copy.actions.delete || 'Delete');
+          deleteButton.addEventListener('click', async () => {
+            if (!window.confirm(copy.messages?.confirmDeleteAccount || 'Delete this account and all related referral data?')) return;
+            try {
+              await deleteAccount(item.id);
+              setStatus(copy.messages?.accountDeleted || '');
+              loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(deleteButton);
+          actionCell.appendChild(stack);
+          row.appendChild(actionCell);
+          accountsBody.appendChild(row);
+        });
+        casesBody.textContent = '';
+        (casesPayload.cases || []).forEach((item) => {
+          const normalizedCaseStatus = item.status === 'won' ? 'accepted' : (item.status || '');
+          const row = document.createElement('tr');
+          row.dataset.program = item.account_type || '';
+          row.dataset.status = normalizedCaseStatus;
+          row.dataset.search = searchBlob(item.account_name, item.account_email, item.referral_code, item.quote_reference, item.referred_name, item.referred_email, item.referred_company);
+          row.appendChild(promoAdminTableCell(item.id));
+          row.appendChild(promoAdminTableCell(`${item.account_name || '—'} (${item.account_email || '—'})`));
+          row.appendChild(promoAdminTableCell(item.referral_code || '—', 'promo-admin-code'));
+          const statusCell = document.createElement('td');
+          const statusSelect = document.createElement('select');
+          ['new', 'quoted', 'accepted', 'completed_paid', 'member_paid', 'void'].forEach((value) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = referralLabel(labels.caseStatuses, value, value);
+            option.selected = value === normalizedCaseStatus;
+            statusSelect.appendChild(option);
+          });
+          statusCell.appendChild(statusSelect);
+          row.appendChild(statusCell);
+          const subtotalCell = document.createElement('td');
+          const subtotalInput = document.createElement('input');
+          subtotalInput.type = 'number';
+          subtotalInput.step = '0.01';
+          subtotalInput.value = item.quoted_subtotal_cents == null ? '' : (Number(item.quoted_subtotal_cents || 0) / 100).toFixed(2);
+          subtotalCell.appendChild(subtotalInput);
+          row.appendChild(subtotalCell);
+          const refCell = document.createElement('td');
+          const refInput = document.createElement('input');
+          refInput.value = item.quote_reference || '';
+          refCell.appendChild(refInput);
+          const refMeta = document.createElement('div');
+          refMeta.className = 'form-note';
+          refMeta.textContent = [item.referred_name || '—', item.referred_company || '—'].join(' · ');
+          refCell.appendChild(refMeta);
+          row.appendChild(refCell);
+          row.appendChild(promoAdminTableCell(item.reward_amount_cents == null ? '—' : referralCurrency((Number(item.reward_amount_cents || 0) / 100).toFixed(2))));
+          const actionCell = document.createElement('td');
+          const stack = actionStack();
+          const editButton = makeButton(copy.actions.editCase || 'Edit project');
+          editButton.addEventListener('click', async () => {
+            const payload = await openAccountDetail(item.account_id);
+            const match = (payload?.referralCases || []).find((entry) => Number(entry.id) === Number(item.id));
+            if (match) beginCaseEdit(match);
+          });
+          stack.appendChild(editButton);
+          const button = document.createElement('button');
+          button.className = 'button button-secondary';
+          button.type = 'button';
+          button.textContent = copy.actions.apply || 'Apply';
+          button.addEventListener('click', async () => {
+            try {
+              await applyCaseStatus(item.id, statusSelect.value, subtotalInput.value, refInput.value);
+              await loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(button);
+          const adjustRewardButton = makeButton(copy.actions.adjustReward || 'Adjust amount');
+          adjustRewardButton.addEventListener('click', async () => {
+            const currentValue = item.reward_amount_cents == null ? '' : (Number(item.reward_amount_cents || 0) / 100).toFixed(2);
+            const amountRaw = window.prompt(copy.messages?.caseRewardPrompt || copy.genericError || '', currentValue);
+            if (amountRaw == null) return;
+            const normalized = String(amountRaw).trim().replace(',', '.');
+            const note = window.prompt(copy.messages?.caseRewardNotePrompt || '', '') || '';
+            try {
+              if (!normalized) {
+                await adjustCaseReward(item.id, '', note, true);
+              } else {
+                const amount = Number.parseFloat(normalized);
+                if (!Number.isFinite(amount) || amount < 0) {
+                  setError(copy.messages?.caseRewardPrompt || copy.genericError || '');
+                  return;
+                }
+                await adjustCaseReward(item.id, amount.toFixed(2), note, false);
+              }
+              setStatus(copy.messages?.caseRewardAdjusted || '');
+              await loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(adjustRewardButton);
+          const deleteButton = makeButton(copy.actions.delete || 'Delete');
+          deleteButton.addEventListener('click', async () => {
+            if (!window.confirm(copy.messages?.confirmDeleteCase || 'Delete this referral case?')) return;
+            try {
+              await deleteCase(item.id);
+              setStatus(copy.messages?.caseDeleted || '');
+              await loadAll();
+            } catch (error) {
+              setError(error.message || copy.genericError || '');
+            }
+          });
+          stack.appendChild(deleteButton);
+          actionCell.appendChild(stack);
+          row.appendChild(actionCell);
+          casesBody.appendChild(row);
+        });
+        rewardsBody.textContent = '';
+        (rewardsPayload.rewards || []).forEach((item) => {
+          const row = document.createElement('tr');
+          row.dataset.type = item.reward_type || '';
+          row.dataset.status = item.status || '';
+          row.dataset.search = searchBlob(item.account_name, item.account_email, item.note, item.reward_type);
+          row.appendChild(promoAdminTableCell(item.id));
+          row.appendChild(promoAdminTableCell(`${item.account_name || '—'} (${item.account_email || '—'})`));
+          row.appendChild(promoAdminTableCell(referralLabel(labels.rewardTypes, item.reward_type, item.reward_type || '—')));
+          row.appendChild(promoAdminTableCell(referralLabel(labels.rewardStatuses, item.status, item.status || '—')));
+          row.appendChild(promoAdminTableCell(referralCurrency((Number(item.amount_cents || 0) / 100).toFixed(2))));
+          row.appendChild(promoAdminTableCell(item.note || '—'));
+          const actionCell = document.createElement('td');
+          if (item.reward_type === 'payout' && item.status === 'earned') {
+            const button = document.createElement('button');
+            button.className = 'button button-secondary';
+            button.type = 'button';
+            button.textContent = copy.actions.settle || 'Settle';
+            button.addEventListener('click', async () => {
+              try {
+                await settleReward(item.id);
+                loadAll();
+              } catch (error) {
+                setError(error.message || copy.genericError || '');
+              }
+            });
+            actionCell.appendChild(button);
+          } else {
+            actionCell.textContent = '—';
+          }
+          row.appendChild(actionCell);
+          rewardsBody.appendChild(row);
+        });
+        applyRowFilters();
+        if (selectedAccountId) {
+          await openAccountDetail(selectedAccountId);
+        } else {
+          setDetailEmptyState(copy.messages?.detailEmpty || '');
+        }
+        setStatus('');
+      } catch (error) {
+        setError(error.message || copy.genericError || '');
+        setStatus('');
+      }
+    };
+    [
+      applicationStatusFilter,
+      applicationSearchFilter,
+      accountProgramFilter,
+      accountStatusFilter,
+      accountSearchFilter,
+      caseProgramFilter,
+      caseStatusFilter,
+      caseSearchFilter,
+      rewardTypeFilter,
+      rewardStatusFilter,
+      rewardSearchFilter,
+    ].filter(Boolean).forEach((control) => {
+      control.addEventListener('input', applyRowFilters);
+      control.addEventListener('change', applyRowFilters);
+    });
+    refreshButton.addEventListener('click', loadAll);
+    if (detailExportButton) {
+      detailExportButton.addEventListener('click', () => {
+        if (!selectedAccountId) return;
+        downloadAccount(selectedAccountId);
+      });
+    }
+    if (detailResetButton) {
+      detailResetButton.addEventListener('click', async () => {
+        if (!selectedAccountId) return;
+        try {
+          const payload = await resetAccountAccess(selectedAccountId);
+          setStatus(payload.message || copy.messages?.accessReset || '');
+          await loadAll();
+        } catch (error) {
+          setError(error.message || copy.genericError || '');
+        }
+      });
+    }
+    if (detailDeleteButton) {
+      detailDeleteButton.addEventListener('click', async () => {
+        if (!selectedAccountId) return;
+        if (!window.confirm(copy.messages?.confirmDeleteAccount || 'Delete this account and all related referral data?')) return;
+        try {
+          await deleteAccount(selectedAccountId);
+          selectedAccountId = null;
+          setStatus(copy.messages?.accountDeleted || '');
+          setDetailEmptyState(copy.messages?.detailEmpty || '');
+          await loadAll();
+        } catch (error) {
+          setError(error.message || copy.genericError || '');
+        }
+      });
+    }
+    if (detailCaseForm) {
+      detailCaseForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!selectedAccountId || !selectedAccount) {
+          setError(copy.messages?.detailEmpty || copy.genericError || '');
+          return;
+        }
+        const referralCode = String(detailCaseForm.elements.namedItem('referral_code').value || '').trim().toUpperCase();
+        const referredName = String(detailCaseForm.elements.namedItem('referred_name').value || '').trim();
+        const referredEmail = String(detailCaseForm.elements.namedItem('referred_email').value || '').trim();
+        const referredPhone = String(detailCaseForm.elements.namedItem('referred_phone').value || '').trim();
+        const referredCompany = String(detailCaseForm.elements.namedItem('referred_company').value || '').trim();
+        const quoteReference = String(detailCaseForm.elements.namedItem('quote_reference').value || '').trim();
+        const statusValue = String(detailCaseForm.elements.namedItem('status').value || 'new');
+        const subtotal = String(detailCaseForm.elements.namedItem('quoted_subtotal').value || '').trim();
+        const manualReward = String(detailCaseForm.elements.namedItem('manual_reward').value || '').trim();
+        const note = String(detailCaseForm.elements.namedItem('note').value || '').trim();
+        if (!referralCode || !referredName || !referredEmail || !referredCompany) {
+          setError(copy.messages?.caseCreateRequired || copy.genericError || '');
+          return;
+        }
+        if (statusValue === 'completed_paid' && !subtotal) {
+          setError(copy.messages?.caseCreateSubtotalRequired || copy.genericError || '');
+          return;
+        }
+        try {
+          let successMessage = '';
+          if (selectedCaseId) {
+            const payload = await updateManualCase({
+              caseId: selectedCaseId,
+              accountId: selectedAccountId,
+              locale: selectedAccount.locale || lang,
+              referralCode,
+              referredName,
+              referredEmail,
+              referredPhone,
+              referredCompany,
+              quoteReference,
+              status: statusValue,
+              quotedSubtotalCad: subtotal,
+              manualRewardCad: manualReward,
+              note,
+            });
+            successMessage = `${copy.messages?.caseUpdated || ''} #${payload?.referralCase?.id || selectedCaseId} ${quoteReference || referredName || ''}`.trim();
+          } else {
+            const payload = await createManualCase({
+              accountId: selectedAccountId,
+              locale: selectedAccount.locale || lang,
+              referralCode,
+              referredName,
+              referredEmail,
+              referredPhone,
+              referredCompany,
+              quoteReference,
+              status: statusValue,
+              quotedSubtotalCad: subtotal,
+              manualRewardCad: manualReward,
+              note,
+            });
+            successMessage = `${copy.messages?.caseCreated || ''} #${payload?.referralCase?.id || ''} ${quoteReference || referredName || ''}`.trim();
+          }
+          resetCaseForm();
+          await loadAll();
+          setStatus(successMessage);
+        } catch (error) {
+          setError(error.message || copy.genericError || '');
+        }
+      });
+    }
+    if (detailCaseCancel) {
+      detailCaseCancel.addEventListener('click', () => {
+        clearMessages();
+        resetCaseForm();
+      });
+    }
+    createForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setError('');
+      const accountType = String(createForm.elements.namedItem('account_type').value || 'client');
+      const locale = String(createForm.elements.namedItem('locale').value || 'fr');
+      const name = String(createForm.elements.namedItem('name').value || '').trim();
+      const email = String(createForm.elements.namedItem('email').value || '').trim();
+      const phone = String(createForm.elements.namedItem('phone').value || '').trim();
+      const company = String(createForm.elements.namedItem('company').value || '').trim();
+      const website = String(createForm.elements.namedItem('website').value || '').trim();
+      const notes = String(createForm.elements.namedItem('notes').value || '').trim();
+      const statusValue = String(createForm.elements.namedItem('status').value || 'active');
+      const sendSetupLink = Boolean(createForm.elements.namedItem('send_setup_link').checked);
+      if (!name || !email) {
+        setError(copy.messages?.createAccountRequired || copy.genericError || '');
+        return;
+      }
+      if (accountType === 'partner' && !company) {
+        setError(copy.messages?.createPartnerCompanyRequired || copy.genericError || '');
+        return;
+      }
+      try {
+        const payload = await createAccount({
+          accountType,
+          locale,
+          status: statusValue,
+          name,
+          email,
+          phone,
+          company,
+          website,
+          notes,
+          sendSetupLink,
+        });
+        createForm.reset();
+        createForm.elements.namedItem('account_type').value = 'client';
+        createForm.elements.namedItem('locale').value = locale;
+        createForm.elements.namedItem('status').value = 'active';
+        createForm.elements.namedItem('send_setup_link').checked = true;
+        setStatus(payload.message || copy.messages?.accountCreated || '');
+        loadAll();
+      } catch (error) {
+        setError(error.message || copy.genericError || '');
+      }
+    });
+    setDetailEmptyState(copy.messages?.detailEmpty || '');
+    loadAll();
+  });
+}
 async function initSiteConfig() {
   try {
     const response = await fetch('/api/site-config', { headers: { Accept: 'application/json' } });
@@ -4770,6 +6419,10 @@ async function initSiteConfig() {
 initPromoForms();
 initPromoUnsubscribe();
 initPromoAdmin();
+initReferralApplyForms();
+initReferralPortal();
+initReferralAccess();
+initReferralAdmin();
 initSiteConfig();
 '''
 
@@ -7673,6 +9326,10 @@ def sitemap_xml():
         'about',
         'faq',
         'contact',
+        'referral-program',
+        'referral-program-terms',
+        'referral-partner-program',
+        'referral-partner-program-terms',
     ]
     if promo_publicly_indexable():
         page_keys.extend((
@@ -7894,6 +9551,16 @@ def promo_discount_range_label(lang):
 
 def promo_cap_label():
     return f'${PROMO_CONFIG["discountCapCad"]:,} CAD'
+
+
+def promo_limited_time_label(lang):
+    return 'Limited-time offer' if lang == 'en' else 'Offre à durée limitée'
+
+
+def promo_deadline_label(lang):
+    if lang == 'fr':
+        return f"Jusqu'au {localized_datetime_label(PROMO_END, lang)}"
+    return f'Ends {localized_datetime_label(PROMO_END, lang)}'
 
 
 def promo_odds_rows(lang):
@@ -8154,10 +9821,810 @@ def promo_admin_shell(lang):
     )
 
 
+def referral_program_copy(lang, program_key):
+    key = 'partnerProgram' if program_key == 'partner' else 'clientProgram'
+    copy = dict(REFERRAL_CONTENT[key][lang])
+    if program_key == 'client':
+        if lang == 'fr':
+            copy['faqs'] = [
+                *copy['faqs'],
+                ("Comment utiliser mon crédit ?", "Votre portail affiche votre code membre et votre solde disponible. Pour appliquer un crédit, appelez Opticable, donnez votre code membre et confirmez le montant à utiliser. Opticable valide ensuite le montant et le déduit de votre solde."),
+            ]
+            copy['terms_sections'] = [
+                *copy['terms_sections'],
+                ("Code membre et utilisation du crédit", "Le portail client affiche un code membre réservé au titulaire du compte. Pour appliquer un crédit, le titulaire doit communiquer avec Opticable. Après validation, Opticable déduit le montant approuvé du solde disponible."),
+            ]
+        else:
+            copy['faqs'] = [
+                *copy['faqs'],
+                ("How do I use my available credit?", "Your portal shows your member code and your available balance. To apply credit, call Opticable, provide your member code, and confirm the amount to use. Opticable then validates it and deducts it from your balance."),
+            ]
+            copy['terms_sections'] = [
+                *copy['terms_sections'],
+                ("Member code and credit use", "The client portal shows a member-only code reserved for the account holder. To apply credit, the account holder must contact Opticable. After validation, Opticable deducts the approved amount from the available balance."),
+            ]
+    else:
+        if lang == 'fr':
+            copy.update({
+                'intro': "Ce programme s'adresse aux entreprises et aux professionnels capables de recommander plusieurs projets qualifiés. Chaque demande est validée avant la création du compte partenaire.",
+                'steps_intro': "Vous soumettez d'abord une demande. Après validation, Opticable crée le compte, le code et l'accès portail.",
+                'form_intro': "Transmettez les coordonnées de votre entreprise pour révision. Opticable valide d'abord la demande, puis crée le compte partenaire si elle est approuvée.",
+            })
+            copy['steps'] = [
+                ("Faites une demande", "Présentez votre entreprise et le type de références visé."),
+                ("Compte créé après approbation", "Après validation, Opticable crée le compte partenaire, le code et l'accès portail."),
+                ("Utilisez le code au premier contact", "Le nouveau client doit utiliser le code lors de la première demande de soumission."),
+                ("Gagnez un paiement", "Le paiement est gagné seulement après la réalisation et le paiement complet du projet référé."),
+            ]
+            updated_faqs = []
+            for title, text in copy['faqs']:
+                if title == "Ai-je accès à un portail ?":
+                    updated_faqs.append((title, "Oui, après l'approbation de la demande et la création du compte partenaire par Opticable."))
+                else:
+                    updated_faqs.append((title, text))
+            copy['faqs'] = updated_faqs
+            updated_terms = []
+            for title, text in copy['terms_sections']:
+                if title == "Approbation":
+                    updated_terms.append((title, "Chaque demande partenaire est validée avant la création du compte partenaire."))
+                else:
+                    updated_terms.append((title, text))
+            copy['terms_sections'] = updated_terms
+            copy['faqs'] = [
+                *copy['faqs'],
+                ("Comment retirer une commission ?", "Communiquez avec Opticable pour confirmer le montant à régler. Une fois le virement transmis, Opticable marque la commission comme réglée dans votre portail."),
+            ]
+            copy['terms_sections'] = [
+                *copy['terms_sections'],
+                ("Règlement des commissions", "Les commissions ne sont pas retirées automatiquement dans le portail. Le partenaire doit communiquer avec Opticable pour demander le règlement, puis Opticable confirme le transfert et met le dossier à jour."),
+            ]
+        else:
+            copy['faqs'] = [
+                *copy['faqs'],
+                ("How do I withdraw a commission?", "Contact Opticable to confirm the amount to settle. Once the transfer is sent, Opticable marks the commission as settled in your portal."),
+            ]
+            copy['terms_sections'] = [
+                *copy['terms_sections'],
+                ("Commission settlement", "Commissions are not withdrawn automatically from the portal. The partner must contact Opticable to request settlement, then Opticable confirms the transfer and updates the portal."),
+            ]
+    return copy
+
+
+def referral_portal_copy(lang):
+    copy = dict(REFERRAL_CONTENT['portal'][lang])
+    if lang == 'fr':
+        copy.update({
+            'label': 'Portail de référence',
+            'title': 'Portail de référence | Opticable',
+            'desc': 'Portail Opticable avec accès permanent par courriel et mot de passe, plus réinitialisation du mot de passe au besoin, pour le programme de référence et le programme de partenaires référents.',
+            'eyebrow': 'Portail de référence',
+            'h1': 'Connexion au portail de référence.',
+            'intro': "Connectez-vous avec votre courriel et votre mot de passe pour consulter votre code, vos références, vos crédits ou vos commissions. Au besoin, réinitialisez votre mot de passe depuis cette page.",
+            'login_title': 'Connexion permanente',
+            'login_intro': 'Utilisez le courriel associé à votre compte et votre mot de passe.',
+            'login_button': 'Se connecter',
+            'logged_out_note': 'Si vous perdez votre mot de passe, demandez un courriel de réinitialisation depuis le portail.',
+            'logout_label': 'Se déconnecter',
+        })
+    else:
+        copy.update({
+            'h1': 'Access your referral portal.',
+            'intro': 'Sign in with your email and password to review your code, your referrals, your credits, or your commission ledger. If needed, request a password reset email from the portal.',
+            'login_title': 'Permanent access',
+            'login_intro': 'Use the email address linked to your account and your password.',
+            'login_button': 'Sign in',
+            'logged_out_note': 'If you lose your password, request a password reset email from the portal.',
+        })
+    return copy
+
+
+def referral_access_copy(lang):
+    if lang == 'fr':
+        return {
+            'label': 'Accès au portail de référence',
+            'title': 'Créer ou réinitialiser votre mot de passe | Opticable',
+            'desc': 'Page Opticable dédiée à la création initiale du mot de passe et à la réinitialisation du mot de passe pour le portail de référence.',
+            'eyebrow': 'Accès sécurisé',
+            'h1': 'Créez ou réinitialisez votre mot de passe.',
+            'intro': 'Cette page sert uniquement à configurer un nouveau mot de passe après une approbation partenaire ou une demande de réinitialisation.',
+        }
+    return {
+        'label': 'Referral portal access',
+        'title': 'Create or reset your password | Opticable',
+        'desc': 'Dedicated Opticable page for first-time password setup and password reset for the referral portal.',
+        'eyebrow': 'Secure access',
+        'h1': 'Create or reset your password.',
+        'intro': 'This page is only used to set a new password after partner approval or a password reset request.',
+    }
+
+
+def referral_admin_copy(lang):
+    return REFERRAL_CONTENT['admin'][lang]
+
+
+def referral_nav_items(lang):
+    return [
+        {
+            'key': 'client',
+            'label': referral_program_copy(lang, 'client')['label'],
+            'href': routes[lang]['referral-program'],
+            'copy': (
+                'For clients and contacts who want future Opticable credit.'
+                if lang == 'en' else
+                'Pour les clients et contacts qui veulent accumuler un crédit Opticable.'
+            ),
+        },
+        {
+            'key': 'partner',
+            'label': referral_program_copy(lang, 'partner')['label'],
+            'href': routes[lang]['referral-partner-program'],
+            'copy': (
+                'For businesses and professionals sending repeat referrals.'
+                if lang == 'en' else
+                'Pour les entreprises et professionnels qui recommandent des projets récurrents.'
+            ),
+        },
+        {
+            'key': 'portal',
+            'label': referral_portal_copy(lang)['label'],
+            'href': routes[lang]['referral-portal'],
+            'copy': (
+                'Review your code, share link, referrals, and rewards.'
+                if lang == 'en' else
+                'Pour consulter votre code, votre lien de partage, vos références et vos récompenses.'
+            ),
+        },
+        {
+            'key': 'contact',
+            'label': T[lang]['quote'],
+            'href': routes[lang]['contact'],
+            'copy': (
+                'Use your referral code in the quote request.'
+                if lang == 'en' else
+                'Pour utiliser votre code de référence dans la demande de soumission.'
+            ),
+        },
+    ]
+
+
+def referral_nav_shell(lang, current_key):
+    title = 'Navigate the referral pages' if lang == 'en' else 'Naviguer entre les pages de référence'
+    items = ''.join(
+        f'<a class="referral-nav-card{" is-current" if item["key"] == current_key else ""}" href="{item["href"]}"'
+        f'{" aria-current=\"page\"" if item["key"] == current_key else ""}>'
+        f'<strong>{esc(item["label"])}</strong><span>{esc(item["copy"])}</span></a>'
+        for item in referral_nav_items(lang)
+    )
+    return f'<nav class="referral-nav" aria-label="{esc(title)}">{items}</nav>'
+
+
+def referral_program_form_shell(lang, program_key):
+    copy = referral_program_copy(lang, program_key)
+    account_type = 'partner' if program_key == 'partner' else 'client'
+    form_intro = (
+        (
+            'Create your account, choose a password, and open your portal right away.'
+            if lang == 'en' else
+            'Créez votre compte, choisissez un mot de passe et ouvrez votre portail immédiatement.'
+        ) if program_key == 'client' else (
+            'Submit your business details for review. Opticable will validate the request first, then create the partner account if approved.'
+            if lang == 'en' else
+            'Transmettez les coordonnées de votre entreprise pour révision. Opticable valide d’abord la demande, puis crée le compte partenaire si elle est approuvée.'
+        )
+    )
+    fields = {
+        'name': 'Full name' if lang == 'en' else 'Nom complet',
+        'email': 'Email address' if lang == 'en' else 'Adresse courriel',
+        'phone': 'Phone number' if lang == 'en' else 'Téléphone',
+        'company': 'Company' if lang == 'en' else 'Entreprise',
+        'website': 'Website' if lang == 'en' else 'Site web',
+        'notes': 'How would you like to work with Opticable?' if lang == 'en' else 'Comment souhaitez-vous travailler avec Opticable ?',
+        'password': 'Password' if lang == 'en' else 'Mot de passe',
+        'password_confirm': 'Confirm password' if lang == 'en' else 'Confirmer le mot de passe',
+    }
+    payload = {
+        'invalidEmail': 'Use a valid email address.' if lang == 'en' else 'Utilisez une adresse courriel valide.',
+        'requiredField': 'Complete all required fields.' if lang == 'en' else 'Remplissez tous les champs obligatoires.',
+        'requiredConsent': 'Accept the program terms before continuing.' if lang == 'en' else 'Acceptez les conditions du programme avant de continuer.',
+        'invalidPassword': 'Use a password with at least 10 characters.' if lang == 'en' else 'Utilisez un mot de passe d’au moins 10 caractères.',
+        'passwordMismatch': 'The two passwords must match.' if lang == 'en' else 'Les deux mots de passe doivent correspondre.',
+        'genericError': 'The request could not be completed right now.' if lang == 'en' else "La demande n'a pas pu être complétée pour le moment.",
+        'success': (
+            'Your portal is ready. Opening it now.'
+            if lang == 'en' else
+            'Votre portail est prêt. Ouverture en cours.'
+        ) if program_key == 'client' else (
+            'Your partner application has been sent. Opticable will review it and contact you.'
+            if lang == 'en' else
+            'Votre demande partenaire a été transmise. Opticable la révisera et communiquera avec vous.'
+        ),
+        'duplicate': (
+            'An account already exists for this email. Use the portal login or request a password reset email.'
+            if lang == 'en' else
+            'Un compte existe déjà pour cette adresse. Utilisez la connexion du portail ou demandez un courriel de réinitialisation.'
+        ) if program_key == 'client' else (
+            'A partner application or partner account already exists for this email. Opticable will review it.'
+            if lang == 'en' else
+            'Une demande partenaire ou un compte partenaire existe déjà pour cette adresse. Opticable la révisera.'
+        ),
+        'previewLabel': 'Go to the portal' if lang == 'en' else 'Accéder au portail',
+    }
+    terms_key = 'referral-partner-program-terms' if program_key == 'partner' else 'referral-program-terms'
+    consent_label = (
+        'I have read the program terms and privacy policy.'
+        if lang == 'en' else
+        "J'ai lu les conditions du programme et la politique de confidentialité."
+    )
+    website_field = (
+        f'<label class="field"><span>{esc(fields["website"])}</span><input name="website" inputmode="url" autocomplete="url" /></label>'
+        if program_key == 'partner' else ''
+    )
+    notes_field = (
+        f'<label class="field"><span>{esc(fields["notes"])}</span><textarea name="notes"></textarea></label>'
+        if program_key == 'partner' else ''
+    )
+    password_fields = (
+        f'<label class="field"><span>{esc(fields["password"])}</span><input name="password" type="password" autocomplete="new-password" minlength="10" required /></label>'
+        f'<label class="field"><span>{esc(fields["password_confirm"])}</span><input name="password_confirm" type="password" autocomplete="new-password" minlength="10" required /></label>'
+    ) if program_key == 'client' else ''
+    company_required = ' required' if program_key == 'partner' else ''
+    company_required_copy = ' data-company-required="true"' if program_key == 'partner' else ''
+    return (
+        f'<div class="form-panel referral-apply-shell" data-referral-apply data-lang="{lang}" data-account-type="{account_type}" data-requires-password="{str(program_key == "client").lower()}" data-apply-url="/api/referrals/apply" data-portal-url="{routes[lang]["referral-portal"]}"{company_required_copy}>'
+        f'<script type="application/json" data-referral-apply-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(copy["form_title"])}</h2><p>{esc(form_intro)}</p>'
+        f'<form class="referral-apply-form" data-referral-apply-form novalidate>'
+        f'<div class="input-grid">'
+        f'<label class="field"><span>{esc(fields["name"])}</span><input name="name" autocomplete="name" required /></label>'
+        f'<label class="field"><span>{esc(fields["email"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<label class="field"><span>{esc(fields["phone"])}</span><input name="phone" type="tel" autocomplete="tel" /></label>'
+        f'<label class="field"><span>{esc(fields["company"])}</span><input name="company" autocomplete="organization"{company_required} /></label>'
+        f'{website_field}'
+        f'{password_fields}'
+        f'</div>'
+        f'{notes_field}'
+        f'<div class="promo-checklist referral-checklist">'
+        f'<label><input name="rules_attestation" type="checkbox" required />'
+        f'<span class="promo-consent-copy"><span class="promo-consent-text">{esc(consent_label)}</span>'
+        f'<span class="promo-consent-links"><a href="{routes[lang][terms_key]}">{esc(copy["terms_title"])}</a><span class="promo-consent-separator" aria-hidden="true">·</span><a href="{routes[lang]["privacy"]}">{esc(T[lang]["privacy"])}</a></span>'
+        f'</span></label>'
+        f'</div>'
+        f'<button class="button button-primary" type="submit">{esc(copy["form_title"])}</button>'
+        f'</form>'
+        f'<div class="promo-inline-status" data-referral-apply-status hidden></div>'
+        f'<div class="promo-inline-error" data-referral-apply-error hidden></div>'
+        f'<div class="referral-magic-link" data-referral-apply-link hidden><a class="button button-secondary" data-referral-apply-link-anchor href="{routes[lang]["referral-portal"]}">{esc(payload["previewLabel"])}</a></div>'
+        f'</div>'
+    )
+
+
+def referral_terms_body(lang, program_key):
+    copy = referral_program_copy(lang, program_key)
+    route_key = 'referral-partner-program' if program_key == 'partner' else 'referral-program'
+    terms_route_key = 'referral-partner-program-terms' if program_key == 'partner' else 'referral-program-terms'
+    breadcrumbs = [
+        (T[lang]['home'], routes[lang]['home']),
+        (copy['label'], routes[lang][route_key]),
+        (copy['terms_title'], routes[lang][terms_route_key]),
+    ]
+    cards = ''.join(card(title, text) for title, text in copy['terms_sections'])
+    return (
+        breadcrumb_nav(breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(copy["label"])}</p><h1>{esc(copy["terms_title"])}</h1><p>{esc(copy["terms_intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(referral_nav_shell(lang, program_key), 'referral-nav-section')
+        + band_section(f'<div class="grid-2">{cards}</div>', 'referral-terms-section')
+    )
+
+
+def referral_program_page_body(lang, program_key):
+    copy = referral_program_copy(lang, program_key)
+    other_key = 'partner' if program_key == 'client' else 'client'
+    other_copy = referral_program_copy(lang, other_key)
+    program_class = 'is-partner-program' if program_key == 'partner' else 'is-client-program'
+    route_key = 'referral-partner-program' if program_key == 'partner' else 'referral-program'
+    breadcrumbs = [(T[lang]['home'], routes[lang]['home']), (copy['label'], routes[lang][route_key])]
+    steps = ''.join(
+        f'<article class="timeline-step"><span>{index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p></article>'
+        for index, (title, text) in enumerate(copy['steps'], 1)
+    )
+    faq_html = ''.join(
+        f'<details class="faq-item" open><summary>{esc(question)}</summary><p>{esc(answer)}</p></details>'
+        for question, answer in copy['faqs']
+    )
+    comparison_list = ''.join(f'<li>{esc(item)}</li>' for item in copy['comparison_points'])
+    portal_cta = 'Open the portal' if lang == 'en' else 'Ouvrir le portail'
+    other_cta = (
+        'See the Referral Partner Program'
+        if (lang == 'en' and program_key == 'client') else
+        ('See the Referral Program' if lang == 'en' else (
+            'Voir le programme de partenaires référents'
+            if program_key == 'client' else
+            'Voir le programme de référence'
+        ))
+    )
+    faq_title = 'Frequently asked questions' if lang == 'en' else 'Questions fréquentes'
+    terms_cta = 'Read the terms' if lang == 'en' else 'Lire les conditions'
+    terms_route = routes[lang]['referral-partner-program-terms' if program_key == 'partner' else 'referral-program-terms']
+    return (
+        f'<div class="referral-program-page {program_class}">'
+        + breadcrumb_nav(breadcrumbs)
+        + band_section(
+            f'<div class="promo-hero-grid"><div class="page-hero-copy"><p class="eyebrow">{esc(copy["eyebrow"])}</p><h1>{esc(copy["h1"])}</h1><p>{esc(copy["intro"])}</p>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="#referral-apply-{program_key}-{lang}">{esc(copy["form_title"])}</a><a class="button button-secondary" href="{routes[lang]["referral-portal"]}">{esc(portal_cta)}</a></div></div>'
+            f'<aside class="page-hero-panel promo-visual-panel referral-program-visual"><p class="eyebrow">{esc(copy["comparison_title"])}</p><h2>{esc(copy["label"])}</h2><p>{esc(copy["comparison_copy"])}</p><ul class="check-list">{comparison_list}</ul><a class="button button-secondary" href="{routes[lang]["referral-partner-program" if program_key == "client" else "referral-program"]}">{esc(other_cta)}</a></aside></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(referral_nav_shell(lang, program_key), 'referral-nav-section')
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(copy["steps_title"])}</h2><p>{esc(copy["steps_intro"])}</p></div><div class="timeline">{steps}</div>',
+            'referral-steps-section',
+        )
+        + band_section(
+            f'<div class="two-col"><div id="referral-apply-{program_key}-{lang}">{referral_program_form_shell(lang, program_key)}</div><div class="contact-panel referral-program-compare"><p class="eyebrow">{esc(other_copy["label"])}</p><h2>{esc(other_copy["label"])}</h2><p>{esc(other_copy["comparison_copy"])}</p><ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in other_copy["comparison_points"])}</ul><div class="hero-actions"><a class="button button-secondary" href="{routes[lang]["referral-partner-program" if program_key == "client" else "referral-program"]}">{esc(other_cta)}</a><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(T[lang]["quote"])}</a></div></div></div>',
+            'referral-form-section',
+        )
+        + band_section(
+            f'<div class="section-heading"><p class="eyebrow">FAQ</p><h2>{esc(faq_title)}</h2><p>{esc(copy["faq_intro"])}</p></div><div class="faq-list">{faq_html}</div><div class="hero-actions"><a class="button button-secondary" href="{terms_route}">{esc(terms_cta)}</a></div>',
+            'referral-faq-section',
+        )
+        + '</div>'
+    )
+
+
+def referral_portal_shell(lang):
+    copy = referral_portal_copy(lang)
+    portal_label = 'Referral Portal' if lang == 'en' else 'Portail de référence'
+    portal_h1 = 'Access your referral portal.' if lang == 'en' else 'Connectez-vous à votre portail de référence.'
+    portal_intro = (
+        'Use your permanent portal login to review your code, your referrals, your credits, or your commission ledger.'
+        if lang == 'en' else
+        'Utilisez votre accès permanent pour consulter votre code, vos références, vos crédits ou votre registre de commissions.'
+    )
+    logout_label = 'Sign out' if lang == 'en' else 'Se déconnecter'
+    payload = {
+        'invalidEmail': 'Use a valid email address.' if lang == 'en' else 'Utilisez une adresse courriel valide.',
+        'invalidPassword': 'Use a password with at least 10 characters.' if lang == 'en' else 'Utilisez un mot de passe d’au moins 10 caractères.',
+        'passwordMismatch': 'The two passwords must match.' if lang == 'en' else 'Les deux mots de passe doivent correspondre.',
+        'genericError': 'The portal request could not be completed right now.' if lang == 'en' else "La demande du portail n'a pas pu être traitée pour le moment.",
+        'invalidCredentials': 'The email address or password is invalid.' if lang == 'en' else 'Le courriel ou le mot de passe est invalide.',
+        'loginSent': 'If an account exists for this address, a password reset email has just been sent. Check your junk folder if needed.' if lang == 'en' else "Si un compte existe pour cette adresse, un courriel de réinitialisation du mot de passe vient d’être envoyé. Vérifiez aussi vos courriels indésirables au besoin.",
+        'notSignedIn': 'Sign in with your email and password. If needed, request a password reset below.' if lang == 'en' else 'Connectez-vous avec votre courriel et votre mot de passe. Au besoin, utilisez la réinitialisation du mot de passe ci-dessous.',
+        'authExpired': 'This reset link has expired. Request a new password reset email below.' if lang == 'en' else "Ce lien de réinitialisation a expiré. Demandez un nouveau courriel de réinitialisation ci-dessous.",
+        'authUsed': 'This reset link has already been used. Request a new password reset email if needed.' if lang == 'en' else "Ce lien de réinitialisation a déjà été utilisé. Demandez un nouveau courriel de réinitialisation au besoin.",
+        'authInvalid': 'This reset link is invalid. Request a new password reset email below.' if lang == 'en' else "Ce lien de réinitialisation est invalide. Demandez un nouveau courriel de réinitialisation ci-dessous.",
+        'resetReady': 'Choose your new password below to finish restoring access.' if lang == 'en' else 'Choisissez votre nouveau mot de passe ci-dessous pour terminer la réinitialisation.',
+        'shareCopied': 'Share link copied.' if lang == 'en' else 'Lien de partage copié.',
+        'shareCopyError': 'Unable to copy the link automatically.' if lang == 'en' else "Impossible de copier le lien automatiquement.",
+        'passwordSaved': 'Your password has been saved.' if lang == 'en' else 'Votre mot de passe a été enregistré.',
+        'labels': {
+            'accountTypes': {
+                'client': 'Client' if lang == 'en' else 'Client',
+                'partner': 'Partner' if lang == 'en' else 'Partenaire',
+            },
+            'programTypes': {
+                'client': 'Referral Program' if lang == 'en' else 'Programme de référence',
+                'partner': 'Referral Partner Program' if lang == 'en' else 'Programme de partenaires référents',
+            },
+            'accountStatuses': {
+                'pending': 'Pending' if lang == 'en' else 'En attente',
+                'active': 'Active' if lang == 'en' else 'Actif',
+                'paused': 'Paused' if lang == 'en' else 'En pause',
+                'rejected': 'Rejected' if lang == 'en' else 'Refusé',
+            },
+            'caseStatuses': {
+                'new': 'New' if lang == 'en' else 'Nouveau',
+                'quoted': 'Quoted' if lang == 'en' else 'Soumission envoyée',
+                'won': 'Accepted' if lang == 'en' else 'Acceptée',
+                'accepted': 'Accepted' if lang == 'en' else 'Acceptée',
+                'completed_paid': 'Installed + paid' if lang == 'en' else 'Installé et payé',
+                'member_paid': 'Member paid' if lang == 'en' else 'Membre payé',
+                'void': 'Void' if lang == 'en' else 'Annulée',
+            },
+            'rewardStatuses': {
+                'pending': 'Pending' if lang == 'en' else 'En attente',
+                'earned': 'Earned' if lang == 'en' else 'Gagné',
+                'settled': 'Settled' if lang == 'en' else 'Réglé',
+                'void': 'Void' if lang == 'en' else 'Annulé',
+            },
+            'creditStatuses': {
+                'reserved': 'Reserved' if lang == 'en' else 'Réservé',
+                'applied': 'Applied' if lang == 'en' else 'Appliqué',
+                'released': 'Released' if lang == 'en' else 'Libéré',
+                'void': 'Void' if lang == 'en' else 'Annulé',
+            },
+        },
+        'auth': {
+            'loginEyebrow': 'Sign in' if lang == 'en' else 'Connexion',
+            'loginTitle': 'Sign in to your portal' if lang == 'en' else 'Se connecter au portail',
+            'loginIntro': 'Use the email address linked to your referral account and your password.' if lang == 'en' else 'Utilisez le courriel lié à votre compte et votre mot de passe.',
+            'recoveryEyebrow': 'Password reset' if lang == 'en' else 'Mot de passe oublié',
+            'recoveryTitle': 'Forgot your password?' if lang == 'en' else 'Réinitialiser votre mot de passe',
+            'recoveryIntro': 'Enter the email linked to your account. If the account exists, Opticable will send you a password reset email.' if lang == 'en' else 'Entrez le courriel lié à votre compte. Si le compte existe, Opticable vous enverra un courriel de réinitialisation du mot de passe.',
+            'emailLabel': 'Email address' if lang == 'en' else 'Adresse courriel',
+            'passwordLabel': 'Password' if lang == 'en' else 'Mot de passe',
+            'loginButton': 'Sign in' if lang == 'en' else 'Se connecter',
+            'recoveryButton': 'Send reset email' if lang == 'en' else 'Envoyer le courriel de réinitialisation',
+        },
+        'portal': {
+            'currentCode': 'Referral code' if lang == 'en' else 'Code de partage',
+            'creditCode': 'Member code' if lang == 'en' else 'Code membre',
+            'shareLink': 'Share link' if lang == 'en' else 'Lien de partage',
+            'contactEmail': 'Portal email' if lang == 'en' else 'Courriel du portail',
+            'copyButton': 'Copy' if lang == 'en' else 'Copier',
+            'contactCta': 'Request a quote' if lang == 'en' else 'Demander une soumission',
+        },
+        'creditPanel': {
+            'eyebrow': 'Client credit' if lang == 'en' else 'Crédit client',
+            'title': 'Apply your credit with Opticable' if lang == 'en' else 'Appliquez votre crédit avec Opticable',
+            'intro': 'Call Opticable, provide your member code, and confirm the amount you want applied. Opticable validates the amount and deducts it from your balance.' if lang == 'en' else 'Communiquez avec Opticable, donnez votre code membre et confirmez le montant à appliquer. Opticable valide ensuite le montant et le déduit de votre solde.',
+            'availableLabel': 'Available balance' if lang == 'en' else 'Solde disponible',
+            'capLabel': 'Maximum applicable' if lang == 'en' else 'Maximum applicable',
+            'selectedCodeLabel': 'Member code' if lang == 'en' else 'Code membre',
+            'manualTitle': 'How this works' if lang == 'en' else 'Fonctionnement',
+            'manualCopy': 'This code is not for public quote forms. Keep it for direct discussions with Opticable when you want to apply part of your available balance.' if lang == 'en' else 'Ce code ne sert pas dans les formulaires publics. Gardez-le pour vos échanges directs avec Opticable lorsque vous souhaitez appliquer une partie de votre solde disponible.',
+        },
+        'passwordPanel': {
+            'eyebrow': 'Account security' if lang == 'en' else 'Sécurité du compte',
+            'createTitle': 'Create your permanent password' if lang == 'en' else 'Créez votre mot de passe permanent',
+            'changeTitle': 'Change your password' if lang == 'en' else 'Modifiez votre mot de passe',
+            'createIntro': 'Use a password of at least 10 characters to activate your permanent portal access.' if lang == 'en' else 'Utilisez un mot de passe d’au moins 10 caractères pour activer votre accès permanent au portail.',
+            'changeIntro': 'Keep a permanent password for your portal. If you lose it, request a password reset email from the sign-in screen.' if lang == 'en' else 'Conservez un mot de passe permanent pour votre portail. Si vous le perdez, demandez un courriel de réinitialisation depuis l’écran de connexion.',
+            'resetTitle': 'Choose your new password' if lang == 'en' else 'Choisissez votre nouveau mot de passe',
+            'resetIntro': 'This secure reset session lets you choose a new permanent password without entering the current one.' if lang == 'en' else 'Cette session sécurisée vous permet de choisir un nouveau mot de passe permanent sans entrer l’ancien.',
+            'currentLabel': 'Current password' if lang == 'en' else 'Mot de passe actuel',
+            'newLabel': 'New password' if lang == 'en' else 'Nouveau mot de passe',
+            'confirmLabel': 'Confirm new password' if lang == 'en' else 'Confirmer le nouveau mot de passe',
+            'createButton': 'Save my password' if lang == 'en' else 'Enregistrer mon mot de passe',
+            'changeButton': 'Update my password' if lang == 'en' else 'Mettre à jour mon mot de passe',
+            'resetButton': 'Save the new password' if lang == 'en' else 'Enregistrer le nouveau mot de passe',
+        },
+        'views': {
+            'client': {
+                'bannerEyebrow': 'Referral Program' if lang == 'en' else 'Programme de référence',
+                'bannerTitle': 'Track your Opticable credit clearly.' if lang == 'en' else 'Suivez votre crédit Opticable clairement.',
+                'bannerCopy': 'This portal shows the referrals tied to your code, the eligible subtotals, and the balance you can apply later with Opticable. A maximum of 1 500 $ can be applied to one quote or project.' if lang == 'en' else 'Ce portail affiche les références liées à votre code, les sous-totaux admissibles et le solde que vous pourrez appliquer plus tard avec Opticable. Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet.',
+                'stats': {
+                    'total': 'Linked cases' if lang == 'en' else 'Dossiers liés',
+                    'open': 'Active cases' if lang == 'en' else 'Dossiers en cours',
+                    'completed': 'Completed + paid' if lang == 'en' else 'Dossiers payés',
+                    'primary': 'Available credit' if lang == 'en' else 'Crédit disponible',
+                    'secondary': 'Total earned' if lang == 'en' else 'Total gagné',
+                    'tertiary': 'Maximum applicable' if lang == 'en' else 'Maximum applicable',
+                },
+                'summaryNote': 'The cards above summarize your current position. The tables below show each linked case and each credit movement line by line.' if lang == 'en' else 'Les bulles ci-dessus résument votre situation actuelle. Les tableaux ci-dessous détaillent chaque dossier lié à votre code et chaque mouvement de crédit.',
+                'helpTitle': 'What you can see here' if lang == 'en' else 'Ce que vous voyez ici',
+                'help': [
+                    'Every linked case comes from a quote or project that used your code.' if lang == 'en' else 'Chaque dossier lié provient d’une soumission ou d’un projet ayant utilisé votre code.',
+                    'Available credit is the amount you can still ask Opticable to apply on a future quote or project.' if lang == 'en' else 'Le crédit disponible correspond au montant que vous pouvez encore demander à Opticable d’appliquer sur une future soumission ou un futur projet.',
+                    'Use the member code shown in this portal only when speaking directly with Opticable. It is not a public referral code.' if lang == 'en' else 'Utilisez le code membre affiché dans ce portail uniquement lors d’un échange direct avec Opticable. Ce n’est pas un code public de référence.',
+                    'The share link opens the quote page, but the referred contact must still enter your referral code on the first quote request.' if lang == 'en' else 'Le lien de partage ouvre la page de soumission, mais le contact référé doit tout de même entrer votre code de référence lors de la première demande.',
+                    'A maximum of 1 500 $ can be applied to one quote or project even if your balance is higher.' if lang == 'en' else 'Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé.',
+                ],
+                'referralsTitle': 'Linked cases' if lang == 'en' else 'Dossiers liés à votre code',
+                'referralsIntro': 'Each line below corresponds to a quote or project tied to your public referral code.' if lang == 'en' else 'Chaque ligne ci-dessous correspond à une soumission ou à un projet rattaché à votre code de référence public.',
+                'rewardsTitle': 'Credit ledger' if lang == 'en' else 'Mouvements de crédit',
+                'rewardsIntro': 'This ledger shows credit earned through referrals and balance adjustments confirmed in your portal.' if lang == 'en' else 'Ce registre montre les crédits gagnés grâce aux références et les ajustements de solde confirmés dans votre portail.',
+                'amountLabel': 'Credit' if lang == 'en' else 'Crédit',
+            },
+            'partner': {
+                'bannerEyebrow': 'Referral Partner Program' if lang == 'en' else 'Programme de partenaires référents',
+                'bannerTitle': 'Track your commissions and referred projects.' if lang == 'en' else 'Suivez vos commissions et vos projets référés.',
+                'bannerCopy': 'This portal shows the referred cases tied to your code, the tracked subtotals, and the commission amounts earned or pending. Once Opticable confirms the transfer, the commission is marked as settled here.' if lang == 'en' else 'Ce portail affiche les dossiers référés liés à votre code, les sous-totaux suivis et les montants de commission gagnés ou en attente. Après confirmation du transfert par Opticable, la commission est marquée comme réglée ici.',
+                'stats': {
+                    'total': 'Linked cases' if lang == 'en' else 'Dossiers liés',
+                    'open': 'Active cases' if lang == 'en' else 'Dossiers en cours',
+                    'completed': 'Completed + paid' if lang == 'en' else 'Dossiers payés',
+                    'primary': 'Pending commissions' if lang == 'en' else 'Commissions en attente',
+                    'secondary': 'Settled commissions' if lang == 'en' else 'Commissions réglées',
+                    'tertiary': 'Tracked subtotal' if lang == 'en' else 'Sous-total suivi',
+                },
+                'summaryNote': 'The cards above summarize your active file count, pending commissions, and tracked subtotals. The tables below show the linked cases and the commission ledger.' if lang == 'en' else 'Les bulles ci-dessus résument vos dossiers actifs, vos commissions en attente et les sous-totaux suivis. Les tableaux ci-dessous détaillent les dossiers liés et le registre des commissions.',
+                'helpTitle': 'What you can see here' if lang == 'en' else 'Ce que vous voyez ici',
+                'help': [
+                    'Tracked subtotal shows the total value currently associated with the cases tied to your code.' if lang == 'en' else 'Le sous-total suivi représente la valeur actuellement associée aux dossiers liés à votre code.',
+                    'Pending commissions are earned but not yet marked as settled.' if lang == 'en' else 'Les commissions en attente sont gagnées, mais pas encore réglées.',
+                    'Use the member code shown here only when speaking directly with Opticable about a payout or an account adjustment. It is not a public referral code.' if lang == 'en' else 'Utilisez le code membre affiché ici uniquement lors d’un échange direct avec Opticable au sujet d’un règlement ou d’un ajustement. Ce n’est pas un code public de référence.',
+                    'The share link opens the quote page, but the referred contact must still enter your referral code on the first quote request.' if lang == 'en' else 'Le lien de partage ouvre la page de soumission, mais le contact référé doit tout de même entrer votre code de référence lors de la première demande.',
+                    'To request a payout, contact Opticable directly. Once the transfer is sent, Opticable marks the commission as settled in this portal.' if lang == 'en' else 'Pour demander un règlement, communiquez directement avec Opticable. Une fois le transfert envoyé, Opticable marque la commission comme réglée dans ce portail.',
+                    'The commission ledger stays separate from the referred-client quote details.' if lang == 'en' else 'Le registre des commissions demeure distinct des détails complets de la soumission du client référé.',
+                ],
+                'referralsTitle': 'Linked cases' if lang == 'en' else 'Dossiers liés à votre code',
+                'referralsIntro': 'Each line below corresponds to a quote or project tied to your public referral code.' if lang == 'en' else 'Chaque ligne ci-dessous correspond à une soumission ou à un projet rattaché à votre code de référence public.',
+                'rewardsTitle': 'Commission ledger' if lang == 'en' else 'Registre des commissions',
+                'rewardsIntro': 'This ledger shows earned commissions and the amounts already marked as settled in your portal.' if lang == 'en' else 'Ce registre montre les commissions gagnées et les montants déjà marqués comme réglés dans votre portail.',
+                'amountLabel': 'Commission' if lang == 'en' else 'Commission',
+            },
+        },
+        'tables': {
+            'case': 'Case' if lang == 'en' else 'Dossier',
+            'reference': 'Reference' if lang == 'en' else 'Référence',
+            'status': 'Status' if lang == 'en' else 'Statut',
+            'created': 'Created' if lang == 'en' else 'Créé',
+            'subtotal': 'Subtotal' if lang == 'en' else 'Sous-total',
+            'amount': 'Amount' if lang == 'en' else 'Montant',
+            'note': 'Note' if lang == 'en' else 'Note',
+        },
+            'ledgerStatuses': {
+                'credit_earned': 'Credit earned' if lang == 'en' else 'Crédit gagné',
+                'credit_settled': 'Credit settled' if lang == 'en' else 'Crédit réglé',
+                'credit_void': 'Credit voided' if lang == 'en' else 'Crédit annulé',
+                'balance_adjusted': 'Balance adjusted' if lang == 'en' else 'Solde ajusté',
+            },
+    }
+    login_label = 'Sign in' if lang == 'en' else 'Se connecter'
+    return (
+        f'<div class="form-panel referral-portal-shell" data-referral-portal data-lang="{lang}" data-login-url="/api/referrals/auth/login" data-request-link-url="/api/referrals/auth/request-reset" data-password-url="/api/referrals/auth/password" data-portal-url="/api/referrals/portal" data-access-url="{routes[lang]["referral-access"]}" data-logout-url="/api/referrals/auth/logout?lang={lang}" data-contact-url="{routes[lang]["contact"]}">'
+        f'<script type="application/json" data-referral-portal-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<div class="referral-portal-auth" data-referral-portal-auth>'
+        f'<p class="eyebrow">{esc(portal_label)}</p><h2>{esc(portal_h1)}</h2><p>{esc(portal_intro)}</p>'
+        f'<div class="two-col referral-auth-grid">'
+        f'<div class="contact-panel referral-auth-card">'
+        f'<p class="eyebrow">{esc(payload["auth"]["loginEyebrow"])}</p><h2>{esc(payload["auth"]["loginTitle"])}</h2><p>{esc(payload["auth"]["loginIntro"])}</p>'
+        f'<form class="referral-portal-login-form" data-referral-portal-login novalidate>'
+        f'<label class="field"><span>{esc(payload["auth"]["emailLabel"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<label class="field"><span>{esc(payload["auth"]["passwordLabel"])}</span><input name="password" type="password" autocomplete="current-password" required /></label>'
+        f'<button class="button button-primary" type="submit">{esc(login_label)}</button>'
+        f'</form></div>'
+        f'<div class="contact-panel referral-auth-card">'
+        f'<p class="eyebrow">{esc(payload["auth"]["recoveryEyebrow"])}</p><h2>{esc(payload["auth"]["recoveryTitle"])}</h2><p>{esc(payload["auth"]["recoveryIntro"])}</p>'
+        f'<form class="referral-portal-login-form" data-referral-portal-link-form novalidate>'
+        f'<label class="field"><span>{esc(payload["auth"]["emailLabel"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<button class="button button-secondary" type="submit">{esc(payload["auth"]["recoveryButton"])}</button>'
+        f'</form></div>'
+        f'</div>'
+        f'<div class="promo-inline-status" data-referral-portal-status hidden></div><div class="promo-inline-error" data-referral-portal-error hidden></div>'
+        f'</div>'
+        f'<div class="referral-portal-dashboard" data-referral-portal-dashboard hidden>'
+        f'<div class="referral-portal-header"><div class="referral-portal-copy"><p class="eyebrow">{esc(portal_label)}</p><h2 data-referral-portal-name></h2><p data-referral-portal-meta></p></div><a class="button button-secondary" data-referral-portal-logout href="/api/referrals/auth/logout?lang={lang}">{esc(logout_label)}</a></div>'
+        f'<div class="contact-panel referral-program-banner"><p class="eyebrow" data-referral-portal-banner-eyebrow>—</p><h2 data-referral-portal-banner-title>—</h2><p data-referral-portal-banner-copy>—</p><div class="hero-actions"><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(payload["portal"]["contactCta"])}</a></div></div>'
+        f'<div class="promo-admin-summary referral-portal-stats">'
+        f'<div class="detail-item"><strong data-referral-stat-label-total>{esc(payload["tables"]["case"])}</strong><p data-referral-stat-total>0</p></div>'
+        f'<div class="detail-item"><strong data-referral-stat-label-open>—</strong><p data-referral-stat-open>0</p></div>'
+        f'<div class="detail-item"><strong data-referral-stat-label-completed>—</strong><p data-referral-stat-completed>0</p></div>'
+        f'<div class="detail-item"><strong data-referral-stat-label-primary>—</strong><p data-referral-stat-primary>0.00</p></div>'
+        f'<div class="detail-item"><strong data-referral-stat-label-secondary>—</strong><p data-referral-stat-secondary>0.00</p></div>'
+        f'<div class="detail-item"><strong data-referral-stat-label-tertiary>—</strong><p data-referral-stat-tertiary>0.00</p></div>'
+        f'</div>'
+        f'<p class="form-note referral-summary-note" data-referral-portal-summary-note>—</p>'
+        f'<div class="promo-admin-meta referral-portal-meta-grid">'
+        f'<div class="detail-item"><strong>{esc(payload["portal"]["currentCode"])}</strong><p class="promo-admin-code" data-referral-portal-code>—</p></div>'
+        f'<div class="detail-item" data-referral-credit-meta hidden><strong>{esc(payload["portal"]["creditCode"])}</strong><p class="promo-admin-code" data-referral-portal-credit-code>—</p></div>'
+        f'<div class="detail-item referral-share-item"><strong>{esc(payload["portal"]["shareLink"])}</strong><div class="referral-share-row"><a class="text-link referral-share-link" data-referral-portal-share href="{routes[lang]["contact"]}">—</a><button class="button button-secondary referral-copy-button" type="button" data-referral-portal-share-copy>{esc(payload["portal"]["copyButton"])}</button></div><span class="referral-inline-note" data-referral-portal-share-status hidden></span></div>'
+        f'<div class="detail-item"><strong>{esc(payload["portal"]["contactEmail"])}</strong><p data-referral-portal-email>—</p></div>'
+        f'</div>'
+        f'<div class="contact-panel referral-portal-help"><h2 data-referral-help-title>—</h2><ul class="check-list referral-help-list" data-referral-help-list></ul></div>'
+        f'<div class="contact-panel referral-credit-panel" data-referral-credit-panel hidden><p class="eyebrow">{esc(payload["creditPanel"]["eyebrow"])}</p><h2>{esc(payload["creditPanel"]["title"])}</h2><p>{esc(payload["creditPanel"]["intro"])}</p><div class="promo-admin-meta referral-credit-meta"><div class="detail-item"><strong>{esc(payload["creditPanel"]["selectedCodeLabel"])}</strong><p class="promo-admin-code" data-referral-credit-panel-code>—</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["availableLabel"])}</strong><p data-referral-credit-panel-balance>0.00</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["capLabel"])}</strong><p data-referral-credit-panel-cap>1500.00</p></div></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["manualTitle"])}</strong><p data-referral-credit-panel-instruction>{esc(payload["creditPanel"]["manualCopy"])}</p></div></div>'
+        f'<div class="two-col referral-portal-grids"><div class="contact-panel"><h2 data-referral-portal-referrals-title>—</h2><p class="form-note referral-section-intro" data-referral-portal-referrals-intro>—</p><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table referral-portal-cases-table"><thead><tr><th>{esc(payload["tables"]["case"])}</th><th>{esc(payload["tables"]["reference"])}</th><th>{esc(payload["tables"]["status"])}</th><th>{esc(payload["tables"]["created"])}</th><th>{esc(payload["tables"]["subtotal"])}</th><th data-referral-portal-amount-label>{esc(payload["tables"]["amount"])}</th></tr></thead><tbody data-referral-portal-referrals></tbody></table></div></div><div class="contact-panel"><h2 data-referral-portal-rewards-title>—</h2><p class="form-note referral-section-intro" data-referral-portal-rewards-intro>—</p><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table referral-portal-rewards-table"><thead><tr><th>ID</th><th>{esc(payload["tables"]["status"])}</th><th>{esc(payload["tables"]["amount"])}</th><th>{esc(payload["tables"]["created"])}</th><th>{esc(payload["tables"]["note"])}</th></tr></thead><tbody data-referral-portal-rewards></tbody></table></div></div></div>'
+        f'<div class="contact-panel referral-portal-security"><p class="eyebrow">{esc(payload["passwordPanel"]["eyebrow"])}</p><h2 data-referral-password-title>—</h2><p data-referral-password-intro>—</p><form class="referral-password-form" data-referral-password-form novalidate><div class="input-grid referral-password-grid"><label class="field" data-referral-password-current-wrap hidden><span>{esc(payload["passwordPanel"]["currentLabel"])}</span><input name="current_password" type="password" autocomplete="current-password" /></label><label class="field"><span>{esc(payload["passwordPanel"]["newLabel"])}</span><input name="new_password" type="password" autocomplete="new-password" minlength="10" required /></label><label class="field"><span>{esc(payload["passwordPanel"]["confirmLabel"])}</span><input name="confirm_password" type="password" autocomplete="new-password" minlength="10" required /></label></div><button class="button button-primary" type="submit" data-referral-password-submit>{esc(payload["passwordPanel"]["createButton"])}</button></form><div class="promo-inline-status" data-referral-password-status hidden></div><div class="promo-inline-error" data-referral-password-error hidden></div></div>'
+        f'</div></div>'
+    )
+
+
+def referral_access_shell(lang):
+    copy = referral_access_copy(lang)
+    payload = {
+        'invalidEmail': 'Use a valid email address.' if lang == 'en' else 'Utilisez une adresse courriel valide.',
+        'invalidPassword': 'Use a password with at least 10 characters.' if lang == 'en' else 'Utilisez un mot de passe d’au moins 10 caractères.',
+        'passwordMismatch': 'The two passwords must match.' if lang == 'en' else 'Les deux mots de passe doivent correspondre.',
+        'genericError': 'The access request could not be completed right now.' if lang == 'en' else "La demande d'accès n'a pas pu être traitée pour le moment.",
+        'passwordSaved': 'Your password has been saved. Opening your portal now.' if lang == 'en' else 'Votre mot de passe a été enregistré. Ouverture du portail en cours.',
+        'notReady': 'This page must be opened from a valid setup or reset email. You can request a new password reset email below.' if lang == 'en' else 'Cette page doit être ouverte à partir d’un courriel valide de configuration ou de réinitialisation. Vous pouvez demander un nouveau courriel ci-dessous.',
+        'authExpired': 'This setup or reset link has expired. Request a new password reset email below.' if lang == 'en' else 'Ce lien de configuration ou de réinitialisation a expiré. Demandez un nouveau courriel de réinitialisation ci-dessous.',
+        'authUsed': 'This setup or reset link has already been used. Request a new password reset email if needed.' if lang == 'en' else 'Ce lien de configuration ou de réinitialisation a déjà été utilisé. Demandez un nouveau courriel de réinitialisation au besoin.',
+        'authInvalid': 'This setup or reset link is invalid. Request a new password reset email below.' if lang == 'en' else 'Ce lien de configuration ou de réinitialisation est invalide. Demandez un nouveau courriel de réinitialisation ci-dessous.',
+        'requestSent': 'If an account exists for this address, a password reset email has just been sent. Check your junk folder if needed.' if lang == 'en' else "Si un compte existe pour cette adresse, un courriel de réinitialisation du mot de passe vient d’être envoyé. Vérifiez aussi vos courriels indésirables au besoin.",
+        'accountReady': 'Create the password that will be linked to this account.' if lang == 'en' else 'Créez le mot de passe qui sera associé à ce compte.',
+        'requestEyebrow': 'Need a new email?' if lang == 'en' else 'Besoin d’un nouveau courriel ?',
+        'requestTitle': 'Request a new reset email' if lang == 'en' else 'Demander un nouveau courriel de réinitialisation',
+        'requestIntro': 'Enter the email address linked to your referral account and we will send a fresh password reset email if the account exists.' if lang == 'en' else 'Entrez le courriel associé à votre compte de référence et nous enverrons un nouveau courriel de réinitialisation si le compte existe.',
+        'emailLabel': 'Email address' if lang == 'en' else 'Adresse courriel',
+        'requestButton': 'Send the reset email' if lang == 'en' else 'Envoyer le courriel de réinitialisation',
+        'passwordEyebrow': 'Password setup' if lang == 'en' else 'Configuration du mot de passe',
+        'passwordTitle': 'Choose your new password' if lang == 'en' else 'Choisissez votre nouveau mot de passe',
+        'passwordIntro': 'This password will be required for future portal sign-ins.' if lang == 'en' else 'Ce mot de passe sera requis pour les prochaines connexions au portail.',
+        'newPasswordLabel': 'New password' if lang == 'en' else 'Nouveau mot de passe',
+        'confirmPasswordLabel': 'Confirm the new password' if lang == 'en' else 'Confirmer le nouveau mot de passe',
+        'passwordButton': 'Save the password' if lang == 'en' else 'Enregistrer le mot de passe',
+        'openPortal': 'Open the portal' if lang == 'en' else 'Ouvrir le portail',
+        'signedInAs': 'Account ready' if lang == 'en' else 'Compte prêt',
+    }
+    return (
+        f'<div class="form-panel referral-access-shell" data-referral-access data-lang="{lang}" data-request-link-url="/api/referrals/auth/request-reset" data-password-url="/api/referrals/auth/password" data-portal-url="/api/referrals/portal" data-portal-page-url="{routes[lang]["referral-portal"]}" data-access-url="{routes[lang]["referral-access"]}">'
+        f'<script type="application/json" data-referral-access-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<div class="contact-panel referral-access-card">'
+        f'<p class="eyebrow">{esc(copy["eyebrow"])}</p><h2>{esc(copy["h1"])}</h2><p>{esc(copy["intro"])}</p>'
+        f'<div class="promo-inline-status" data-referral-access-status hidden></div><div class="promo-inline-error" data-referral-access-error hidden></div>'
+        f'<div class="referral-access-ready" data-referral-access-ready hidden>'
+        f'<p class="form-note" data-referral-access-account>—</p>'
+        f'<form class="referral-password-form" data-referral-access-password-form novalidate>'
+        f'<div class="input-grid referral-password-grid">'
+        f'<label class="field"><span>{esc(payload["newPasswordLabel"])}</span><input name="new_password" type="password" autocomplete="new-password" minlength="10" required /></label>'
+        f'<label class="field"><span>{esc(payload["confirmPasswordLabel"])}</span><input name="confirm_password" type="password" autocomplete="new-password" minlength="10" required /></label>'
+        f'</div>'
+        f'<button class="button button-primary" type="submit">{esc(payload["passwordButton"])}</button>'
+        f'</form>'
+        f'<div class="promo-inline-status" data-referral-access-password-status hidden></div><div class="promo-inline-error" data-referral-access-password-error hidden></div>'
+        f'</div>'
+        f'<div class="referral-access-request" data-referral-access-request>'
+        f'<p class="eyebrow">{esc(payload["requestEyebrow"])}</p><h3>{esc(payload["requestTitle"])}</h3><p>{esc(payload["requestIntro"])}</p>'
+        f'<form class="referral-portal-login-form" data-referral-access-request-form novalidate>'
+        f'<label class="field"><span>{esc(payload["emailLabel"])}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<button class="button button-secondary" type="submit">{esc(payload["requestButton"])}</button>'
+        f'</form>'
+        f'<div class="hero-actions"><a class="button button-secondary" href="{routes[lang]["referral-portal"]}">{esc(payload["openPortal"])}</a></div>'
+        f'</div>'
+        f'</div>'
+        f'</div>'
+    )
+
+
+def referral_admin_shell(lang):
+    copy = referral_admin_copy(lang)
+    payload = {
+        'genericError': 'The referral admin request could not be completed.' if lang == 'en' else "La demande d'administration des références n'a pas pu être traitée.",
+        'loading': 'Loading…' if lang == 'en' else 'Chargement…',
+        'summary': {
+            'activeAccounts': 'Active accounts' if lang == 'en' else 'Comptes actifs',
+            'pendingPartners': 'Pending partner applications' if lang == 'en' else 'Demandes partenaires en attente',
+            'openCases': 'Open cases' if lang == 'en' else 'Dossiers ouverts',
+            'pendingPayouts': 'Pending payouts' if lang == 'en' else 'Paiements en attente',
+        },
+        'labels': {
+            'accountTypes': {
+                'client': 'Client' if lang == 'en' else 'Client',
+                'partner': 'Partner' if lang == 'en' else 'Partenaire',
+            },
+            'accountStatuses': {
+                'pending': 'Pending' if lang == 'en' else 'En attente',
+                'active': 'Active' if lang == 'en' else 'Actif',
+                'paused': 'Paused' if lang == 'en' else 'En pause',
+                'rejected': 'Rejected' if lang == 'en' else 'Refusé',
+            },
+            'caseStatuses': {
+                'new': 'New' if lang == 'en' else 'Nouveau',
+                'quoted': 'Quoted' if lang == 'en' else 'Soumission envoyée',
+                'won': 'Accepted' if lang == 'en' else 'Acceptée',
+                'accepted': 'Accepted' if lang == 'en' else 'Acceptée',
+                'completed_paid': 'Installed + paid' if lang == 'en' else 'Installé et payé',
+                'member_paid': 'Member paid' if lang == 'en' else 'Membre payé',
+                'void': 'Void' if lang == 'en' else 'Annulé',
+            },
+            'rewardTypes': {
+                'credit': 'Credit' if lang == 'en' else 'Crédit',
+                'payout': 'Payout' if lang == 'en' else 'Paiement',
+            },
+            'rewardStatuses': {
+                'pending': 'Pending' if lang == 'en' else 'En attente',
+                'earned': 'Earned' if lang == 'en' else 'Gagné',
+                'settled': 'Settled' if lang == 'en' else 'Réglé',
+                'void': 'Void' if lang == 'en' else 'Annulé',
+            },
+            'applicationStatuses': {
+                'pending': 'Pending review' if lang == 'en' else 'À réviser',
+                'reviewed': 'Reviewed' if lang == 'en' else 'Révisée',
+                'approved': 'Approved' if lang == 'en' else 'Approuvée',
+                'rejected': 'Rejected' if lang == 'en' else 'Refusée',
+                'void': 'Deleted' if lang == 'en' else 'Supprimée',
+            },
+            'caseIdLabel': 'Project ID' if lang == 'en' else 'Projet ID',
+        },
+        'actions': {
+            'refresh': 'Refresh' if lang == 'en' else 'Actualiser',
+            'exportAccounts': 'Export accounts CSV' if lang == 'en' else 'Exporter comptes CSV',
+            'exportCases': 'Export cases CSV' if lang == 'en' else 'Exporter dossiers CSV',
+            'exportRewards': 'Export rewards CSV' if lang == 'en' else 'Exporter récompenses CSV',
+            'apply': 'Apply' if lang == 'en' else 'Appliquer',
+            'adjustCredit': 'Adjust credit' if lang == 'en' else 'Ajuster le crédit',
+            'adjustReward': 'Adjust credit / commission' if lang == 'en' else 'Ajuster crédit / commission',
+            'settle': 'Settle' if lang == 'en' else 'Régler',
+            'createAccount': 'Create account' if lang == 'en' else 'Créer le compte',
+            'reject': 'Reject' if lang == 'en' else 'Refuser',
+            'delete': 'Delete' if lang == 'en' else 'Supprimer',
+            'exportOne': 'Download file' if lang == 'en' else 'Télécharger la fiche',
+            'resetAccess': 'Send password reset' if lang == 'en' else 'Envoyer la réinitialisation',
+            'saveAccount': 'Add account' if lang == 'en' else 'Ajouter le compte',
+            'viewDetails': 'View details' if lang == 'en' else 'Voir la fiche',
+            'saveCase': 'Add project' if lang == 'en' else 'Ajouter le projet',
+            'updateCase': 'Update project' if lang == 'en' else 'Mettre à jour le projet',
+            'cancelEdit': 'Cancel' if lang == 'en' else 'Annuler',
+            'editCase': 'Edit project' if lang == 'en' else 'Modifier le projet',
+        },
+        'messages': {
+            'accountCreated': 'Account created successfully.' if lang == 'en' else 'Compte créé avec succès.',
+            'applicationUpdated': 'Partner application updated.' if lang == 'en' else 'Demande partenaire mise à jour.',
+            'applicationDeleted': 'Partner application deleted.' if lang == 'en' else 'Demande partenaire supprimée.',
+            'confirmDeleteApplication': 'Delete this partner application?' if lang == 'en' else 'Supprimer cette demande partenaire ?',
+            'accountUpdated': 'Account updated.' if lang == 'en' else 'Compte mis à jour.',
+            'accessReset': 'A password reset email was sent if the account is active.' if lang == 'en' else "Un courriel de réinitialisation du mot de passe a été envoyé si le compte est actif.",
+            'confirmDeleteAccount': 'Delete this account and all related referral data?' if lang == 'en' else 'Supprimer ce compte et toutes les données de référence liées ?',
+            'accountDeleted': 'Account deleted.' if lang == 'en' else 'Compte supprimé.',
+            'confirmDeleteCase': 'Delete this project and its linked reward data?' if lang == 'en' else 'Supprimer ce projet et ses récompenses liées ?',
+            'caseDeleted': 'Project deleted.' if lang == 'en' else 'Projet supprimé.',
+            'creditAdjusted': 'Client credit balance adjusted.' if lang == 'en' else 'Le solde du crédit client a été ajusté.',
+            'creditAdjustPrompt': 'Enter a positive amount to add or a negative amount to deduct.' if lang == 'en' else 'Entrez un montant positif pour ajouter ou négatif pour déduire.',
+            'creditAdjustNotePrompt': 'Optional note saved in the admin audit trail.' if lang == 'en' else 'Note optionnelle conservée dans le journal admin.',
+            'caseCreated': 'Manual project added.' if lang == 'en' else 'Projet manuel ajouté.',
+            'caseUpdated': 'Project updated.' if lang == 'en' else 'Projet mis à jour.',
+            'caseCreateRequired': 'Referral code, name, email, and company are required.' if lang == 'en' else 'Le code de référence, le nom, le courriel et l’entreprise sont obligatoires.',
+            'caseCreateSubtotalRequired': 'A completed and paid project needs a subtotal.' if lang == 'en' else 'Un projet réalisé et payé doit avoir un sous-total.',
+            'caseRewardAdjusted': 'Project amount updated.' if lang == 'en' else 'Montant du projet mis à jour.',
+            'caseRewardPrompt': 'Enter the final credit or commission amount for this project. Use 0 to zero it out. Leave blank to return to automatic calculation.' if lang == 'en' else 'Entrez le montant final du crédit ou de la commission pour ce projet. Utilisez 0 pour le mettre à zéro. Laissez vide pour revenir au calcul automatique.',
+            'caseRewardNotePrompt': 'Optional note saved with this project amount.' if lang == 'en' else 'Note optionnelle enregistrée avec ce montant de projet.',
+            'createAccountRequired': 'Name and email are required.' if lang == 'en' else 'Le nom et le courriel sont obligatoires.',
+            'createPartnerCompanyRequired': 'Company is required for a partner account.' if lang == 'en' else 'L’entreprise est obligatoire pour un compte partenaire.',
+            'detailLoading': 'Loading the account detail…' if lang == 'en' else 'Chargement de la fiche compte…',
+            'detailEmpty': 'Select an account to load the full detail, linked cases, rewards, and audit trail.' if lang == 'en' else 'Sélectionnez un compte pour charger la fiche complète, les dossiers liés, les récompenses et le journal d’activité.',
+        }
+    }
+    create_title = 'Add an account manually' if lang == 'en' else 'Ajouter un compte manuellement'
+    create_intro = (
+        'Create a client or partner account directly from the admin without using the public forms.'
+        if lang == 'en' else
+        'Créez un compte client ou partenaire directement depuis l’admin sans passer par les formulaires publics.'
+    )
+    applications_title = 'Partner applications' if lang == 'en' else 'Demandes partenaires'
+    applications_intro = (
+        'Review pending requests, approve them by creating the real account, or close the request.'
+        if lang == 'en' else
+        'Révisez les demandes en attente, approuvez-les en créant le vrai compte, ou fermez la demande.'
+    )
+    accounts_title = 'Accounts' if lang == 'en' else 'Comptes'
+    accounts_intro = (
+        'Each row can be exported individually, have its access reset, or be deleted.'
+        if lang == 'en' else
+        'Chaque ligne peut être exportée séparément, réinitialisée ou supprimée.'
+    )
+    return (
+        f'<div class="form-panel referral-admin-shell" data-referral-admin data-lang="{lang}" data-summary-url="/api/referrals/admin/summary" data-applications-url="/api/referrals/admin/applications" data-accounts-url="/api/referrals/admin/accounts" data-cases-url="/api/referrals/admin/cases" data-rewards-url="/api/referrals/admin/rewards" data-account-status-url="/api/referrals/admin/account-status" data-account-balance-adjust-url="/api/referrals/admin/account-balance-adjust" data-case-create-url="/api/referrals/admin/referral-create" data-case-update-url="/api/referrals/admin/referral-update" data-case-reward-adjust-url="/api/referrals/admin/referral-reward-adjust" data-case-status-url="/api/referrals/admin/referral-status" data-case-delete-url="/api/referrals/admin/referral-delete" data-reward-settle-url="/api/referrals/admin/reward-settle" data-export-url="/api/referrals/admin/export.csv" data-account-create-url="/api/referrals/admin/account-create" data-account-reset-access-url="/api/referrals/admin/account-reset-access" data-account-delete-url="/api/referrals/admin/account-delete" data-application-status-url="/api/referrals/admin/application-status" data-application-delete-url="/api/referrals/admin/application-delete" data-account-export-url="/api/referrals/admin/account-export" data-account-detail-url="/api/referrals/admin/account-export">'
+        f'<script type="application/json" data-referral-admin-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
+        f'<div class="promo-admin-toolbar"><div class="promo-admin-actions"><button class="button button-secondary" type="button" data-referral-admin-refresh>{esc(payload["actions"]["refresh"])}</button><a class="button button-secondary" data-referral-export-accounts href="/api/referrals/admin/export.csv?kind=accounts">{esc(payload["actions"]["exportAccounts"])}</a><a class="button button-secondary" data-referral-export-cases href="/api/referrals/admin/export.csv?kind=cases">{esc(payload["actions"]["exportCases"])}</a><a class="button button-secondary" data-referral-export-rewards href="/api/referrals/admin/export.csv?kind=rewards">{esc(payload["actions"]["exportRewards"])}</a></div></div>'
+        f'<div class="promo-inline-status" data-referral-admin-status hidden></div><div class="promo-inline-error" data-referral-admin-error hidden></div>'
+        f'<div class="promo-admin-summary">'
+        f'<div class="detail-item"><strong>{esc(payload["summary"]["activeAccounts"])}</strong><p data-referral-summary-active>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(payload["summary"]["pendingPartners"])}</strong><p data-referral-summary-pending>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(payload["summary"]["openCases"])}</strong><p data-referral-summary-open>0</p></div>'
+        f'<div class="detail-item"><strong>{esc(payload["summary"]["pendingPayouts"])}</strong><p data-referral-summary-payouts>0.00</p></div>'
+        f'</div>'
+        f'<div class="referral-admin-grids">'
+        f'<div class="contact-panel"><p class="eyebrow">{esc(copy["label"])}</p><h2>{esc(create_title)}</h2><p>{esc(create_intro)}</p>'
+        f'<form class="referral-admin-create-form" data-referral-admin-create-form novalidate>'
+        f'<div class="input-grid referral-admin-form-grid">'
+        f'<label class="field"><span>{"Account type" if lang == "en" else "Type de compte"}</span><select name="account_type"><option value="client">{"Client" if lang == "en" else "Client"}</option><option value="partner">{"Partner" if lang == "en" else "Partenaire"}</option></select></label>'
+        f'<label class="field"><span>{"Language" if lang == "en" else "Langue"}</span><select name="locale"><option value="fr">Français</option><option value="en">English</option></select></label>'
+        f'<label class="field"><span>{"Status" if lang == "en" else "Statut"}</span><select name="status"><option value="active">{"Active" if lang == "en" else "Actif"}</option><option value="pending">{"Pending" if lang == "en" else "En attente"}</option><option value="paused">{"Paused" if lang == "en" else "En pause"}</option><option value="rejected">{"Rejected" if lang == "en" else "Refusé"}</option></select></label>'
+        f'<label class="field"><span>{"Full name" if lang == "en" else "Nom complet"}</span><input name="name" type="text" autocomplete="name" required /></label>'
+        f'<label class="field"><span>{"Email address" if lang == "en" else "Adresse courriel"}</span><input name="email" type="email" autocomplete="email" required /></label>'
+        f'<label class="field"><span>{"Phone number" if lang == "en" else "Téléphone"}</span><input name="phone" type="tel" autocomplete="tel" /></label>'
+        f'<label class="field"><span>{"Company" if lang == "en" else "Entreprise"}</span><input name="company" type="text" autocomplete="organization" /></label>'
+        f'<label class="field"><span>{"Website" if lang == "en" else "Site web"}</span><input name="website" type="url" inputmode="url" /></label>'
+        f'</div>'
+        f'<label class="field"><span>{"Notes" if lang == "en" else "Notes"}</span><textarea name="notes"></textarea></label>'
+        f'<label class="referral-admin-checkbox"><input name="send_setup_link" type="checkbox" checked /><span>{"Send a setup link by email immediately" if lang == "en" else "Envoyer immédiatement un lien de configuration par courriel"}</span></label>'
+        f'<div class="hero-actions"><button class="button button-primary" type="submit">{esc(payload["actions"]["saveAccount"])}</button></div>'
+        f'</form></div>'
+        f'<div class="contact-panel"><h2>{esc(applications_title)}</h2><p>{esc(applications_intro)}</p><div class="referral-admin-filters"><label class="field"><span>{"Status" if lang == "en" else "Statut"}</span><select data-referral-filter-applications-status><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="pending">{"Pending review" if lang == "en" else "À réviser"}</option><option value="reviewed">{"Reviewed" if lang == "en" else "Révisée"}</option><option value="approved">{"Approved" if lang == "en" else "Approuvée"}</option><option value="rejected">{"Rejected" if lang == "en" else "Refusée"}</option><option value="void">{"Deleted" if lang == "en" else "Supprimée"}</option></select></label><label class="field"><span>{"Search" if lang == "en" else "Recherche"}</span><input type="search" data-referral-filter-applications-search /></label></div><div class="promo-admin-table-shell"><table class="promo-admin-table referral-admin-table"><thead><tr><th>ID</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Name" if lang == "en" else "Nom"}</th><th>{"Email" if lang == "en" else "Courriel"}</th><th>{"Company" if lang == "en" else "Entreprise"}</th><th>{"Created" if lang == "en" else "Créée"}</th><th>{"Action" if lang == "en" else "Action"}</th></tr></thead><tbody data-referral-admin-applications></tbody></table></div></div>'
+        f'<div class="contact-panel"><h2>{esc(accounts_title)}</h2><p>{esc(accounts_intro)}</p><div class="referral-admin-filters"><label class="field"><span>{"Program" if lang == "en" else "Programme"}</span><select data-referral-filter-accounts-program><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="client">{"Referral Program" if lang == "en" else "Programme de référence"}</option><option value="partner">{"Referral Partner Program" if lang == "en" else "Programme de partenaires référents"}</option></select></label><label class="field"><span>{"Status" if lang == "en" else "Statut"}</span><select data-referral-filter-accounts-status><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="pending">{"Pending" if lang == "en" else "En attente"}</option><option value="active">{"Active" if lang == "en" else "Actif"}</option><option value="paused">{"Paused" if lang == "en" else "En pause"}</option><option value="rejected">{"Rejected" if lang == "en" else "Refusé"}</option></select></label><label class="field"><span>{"Search" if lang == "en" else "Recherche"}</span><input type="search" data-referral-filter-accounts-search /></label></div><div class="promo-admin-table-shell"><table class="promo-admin-table referral-admin-table"><thead><tr><th>ID</th><th>{"Program" if lang == "en" else "Programme"}</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Name" if lang == "en" else "Nom"}</th><th>{"Email" if lang == "en" else "Courriel"}</th><th>{"Code(s)" if lang == "en" else "Code(s)"}</th><th>{"Balance" if lang == "en" else "Solde"}</th><th>{"Action" if lang == "en" else "Action"}</th></tr></thead><tbody data-referral-admin-accounts></tbody></table></div></div>'
+        f'<div class="contact-panel"><h2>{"Projects / referral cases" if lang == "en" else "Projets / dossiers de référence"}</h2><div class="referral-admin-filters"><label class="field"><span>{"Program" if lang == "en" else "Programme"}</span><select data-referral-filter-cases-program><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="client">{"Referral Program" if lang == "en" else "Programme de référence"}</option><option value="partner">{"Referral Partner Program" if lang == "en" else "Programme de partenaires référents"}</option></select></label><label class="field referral-status-filter-field"><span>{"Status" if lang == "en" else "Statut"}</span><select data-referral-filter-cases-status><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="new">{"New" if lang == "en" else "Nouveau"}</option><option value="quoted">{"Quoted" if lang == "en" else "Soumission envoyée"}</option><option value="accepted">{"Accepted" if lang == "en" else "Acceptée"}</option><option value="completed_paid">{"Installed + paid" if lang == "en" else "Installé et payé"}</option><option value="member_paid">{"Member paid" if lang == "en" else "Membre payé"}</option><option value="void">{"Void" if lang == "en" else "Annulé"}</option></select></label><label class="field"><span>{"Search" if lang == "en" else "Recherche"}</span><input type="search" data-referral-filter-cases-search /></label></div><div class="promo-admin-table-shell"><table class="promo-admin-table referral-admin-table referral-admin-cases-table"><thead><tr><th>ID</th><th>{"Account" if lang == "en" else "Compte"}</th><th>{"Code" if lang == "en" else "Code"}</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Subtotal" if lang == "en" else "Sous-total"}</th><th>{"Quote ref" if lang == "en" else "Réf. soumission"}</th><th>{"Reward" if lang == "en" else "Récompense"}</th><th>{"Action" if lang == "en" else "Action"}</th></tr></thead><tbody data-referral-admin-cases></tbody></table></div></div>'
+        f'<div class="contact-panel"><h2>{"Rewards" if lang == "en" else "Récompenses"}</h2><div class="referral-admin-filters"><label class="field"><span>{"Type" if lang == "en" else "Type"}</span><select data-referral-filter-rewards-type><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="credit">{"Credit" if lang == "en" else "Crédit"}</option><option value="payout">{"Payout" if lang == "en" else "Paiement"}</option></select></label><label class="field"><span>{"Status" if lang == "en" else "Statut"}</span><select data-referral-filter-rewards-status><option value="all">{"All" if lang == "en" else "Tous"}</option><option value="pending">{"Pending" if lang == "en" else "En attente"}</option><option value="earned">{"Earned" if lang == "en" else "Gagné"}</option><option value="settled">{"Settled" if lang == "en" else "Réglé"}</option><option value="void">{"Void" if lang == "en" else "Annulé"}</option></select></label><label class="field"><span>{"Search" if lang == "en" else "Recherche"}</span><input type="search" data-referral-filter-rewards-search /></label></div><div class="promo-admin-table-shell"><table class="promo-admin-table referral-admin-table"><thead><tr><th>ID</th><th>{"Account" if lang == "en" else "Compte"}</th><th>{"Type" if lang == "en" else "Type"}</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Amount" if lang == "en" else "Montant"}</th><th>{"Note" if lang == "en" else "Note"}</th><th>{"Action" if lang == "en" else "Action"}</th></tr></thead><tbody data-referral-admin-rewards></tbody></table></div></div>'
+        f'<div class="contact-panel referral-admin-detail-panel"><p class="eyebrow">{"Account detail" if lang == "en" else "Fiche compte"}</p><h2>{"Selected account" if lang == "en" else "Compte sélectionné"}</h2><p data-referral-admin-detail-empty>{esc(payload["messages"]["detailEmpty"])}</p><div data-referral-admin-detail hidden><div class="referral-admin-detail-header"><div><h3 data-referral-admin-detail-name>—</h3><p data-referral-admin-detail-meta>—</p></div><div class="referral-admin-action-stack"><button class="button button-secondary" type="button" data-referral-admin-detail-export>{esc(payload["actions"]["exportOne"])}</button><button class="button button-secondary" type="button" data-referral-admin-detail-reset>{esc(payload["actions"]["resetAccess"])}</button><button class="button button-secondary" type="button" data-referral-admin-detail-delete>{esc(payload["actions"]["delete"])}</button></div></div><div class="promo-admin-meta referral-admin-detail-grid"><div class="detail-item"><strong>{"Programme" if lang == "en" else "Programme"}</strong><p data-referral-admin-detail-program>—</p></div><div class="detail-item"><strong>{"Status" if lang == "en" else "Statut"}</strong><p data-referral-admin-detail-status>—</p></div><div class="detail-item"><strong>{"Email" if lang == "en" else "Courriel"}</strong><p data-referral-admin-detail-email>—</p></div><div class="detail-item"><strong>{"Phone" if lang == "en" else "Téléphone"}</strong><p data-referral-admin-detail-phone>—</p></div><div class="detail-item"><strong>{"Company" if lang == "en" else "Entreprise"}</strong><p data-referral-admin-detail-company>—</p></div><div class="detail-item"><strong>{"Website" if lang == "en" else "Site web"}</strong><p data-referral-admin-detail-website>—</p></div><div class="detail-item"><strong>{"Referral code" if lang == "en" else "Code de référence"}</strong><p class="promo-admin-code" data-referral-admin-detail-share-code>—</p></div><div class="detail-item"><strong>{"Member code" if lang == "en" else "Code membre"}</strong><p class="promo-admin-code" data-referral-admin-detail-credit-code>—</p></div><div class="detail-item"><strong>{"Wallet / pending" if lang == "en" else "Solde / attente"}</strong><p data-referral-admin-detail-balance>—</p></div><div class="detail-item"><strong>{"Total earned" if lang == "en" else "Total gagné"}</strong><p data-referral-admin-detail-earned>—</p></div><div class="detail-item"><strong>{"Created" if lang == "en" else "Créé"}</strong><p data-referral-admin-detail-created>—</p></div><div class="detail-item"><strong>{"Last login" if lang == "en" else "Dernière connexion"}</strong><p data-referral-admin-detail-login>—</p></div></div><div class="detail-item"><strong>{"Notes" if lang == "en" else "Notes"}</strong><p data-referral-admin-detail-notes>—</p></div><div class="contact-panel referral-admin-projects-panel"><div class="referral-admin-section-header"><p class="eyebrow">{"Projects" if lang == "en" else "Projets"}</p><h3>{"Manage linked projects" if lang == "en" else "Gérer les projets liés"}</h3><p>{"Add a project to this account, then edit, adjust, or delete it directly from the list below." if lang == "en" else "Ajoutez un projet à ce compte, puis modifiez-le, ajustez-le ou supprimez-le directement dans la liste ci-dessous."}</p></div><form class="referral-admin-case-form" data-referral-admin-case-form novalidate><div class="input-grid referral-admin-form-grid"><label class="field"><span>{"Referral code" if lang == "en" else "Code de référence"}</span><input name="referral_code" type="text" required /></label><label class="field"><span>{"Contact name" if lang == "en" else "Nom du contact"}</span><input name="referred_name" type="text" required /></label><label class="field"><span>{"Contact email" if lang == "en" else "Courriel du contact"}</span><input name="referred_email" type="email" required /></label><label class="field"><span>{"Phone" if lang == "en" else "Téléphone"}</span><input name="referred_phone" type="tel" /></label><label class="field"><span>{"Company" if lang == "en" else "Entreprise"}</span><input name="referred_company" type="text" required /></label><label class="field"><span>{"Quote reference" if lang == "en" else "Réf. soumission"}</span><input name="quote_reference" type="text" /></label><label class="field referral-status-field"><span>{"Status" if lang == "en" else "Statut"}</span><select name="status"><option value="new">{"New" if lang == "en" else "Nouveau"}</option><option value="quoted">{"Quoted" if lang == "en" else "Soumission envoyée"}</option><option value="accepted">{"Accepted" if lang == "en" else "Acceptée"}</option><option value="completed_paid">{"Installed + paid" if lang == "en" else "Installé et payé"}</option><option value="member_paid">{"Member paid" if lang == "en" else "Membre payé"}</option><option value="void">{"Void" if lang == "en" else "Annulé"}</option></select></label><label class="field"><span>{"Subtotal (CAD)" if lang == "en" else "Sous-total (CAD)"}</span><input name="quoted_subtotal" type="number" min="0" step="0.01" /></label><label class="field"><span>{"Manual credit / commission" if lang == "en" else "Crédit / commission manuel"}</span><input name="manual_reward" type="number" min="0" step="0.01" /></label></div><label class="field"><span>{"Internal note" if lang == "en" else "Note interne"}</span><textarea name="note"></textarea></label><p class="form-note" data-referral-admin-case-state></p><div class="hero-actions"><button class="button button-primary" type="submit" data-referral-admin-case-submit>{esc(payload["actions"]["saveCase"])}</button><button class="button button-secondary" type="button" data-referral-admin-case-cancel hidden>{esc(payload["actions"]["cancelEdit"])}</button></div></form><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table referral-detail-cases-table"><thead><tr><th>ID</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Reference" if lang == "en" else "Référence"}</th><th>{"Subtotal" if lang == "en" else "Sous-total"}</th><th>{"Reward" if lang == "en" else "Récompense"}</th><th>{"Action" if lang == "en" else "Action"}</th></tr></thead><tbody data-referral-admin-detail-cases></tbody></table></div></div><div class="contact-panel"><h3>{"Rewards and balance changes" if lang == "en" else "Récompenses et ajustements"}</h3><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table"><thead><tr><th>ID</th><th>{"Status" if lang == "en" else "Statut"}</th><th>{"Amount" if lang == "en" else "Montant"}</th><th>{"Created" if lang == "en" else "Créé"}</th><th>{"Note" if lang == "en" else "Note"}</th></tr></thead><tbody data-referral-admin-detail-rewards></tbody></table></div></div><div class="contact-panel"><h3>{"Audit trail" if lang == "en" else "Journal d’activité"}</h3><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table"><thead><tr><th>{"Created" if lang == "en" else "Créé"}</th><th>{"Event" if lang == "en" else "Événement"}</th><th>{"Note" if lang == "en" else "Note"}</th></tr></thead><tbody data-referral-admin-detail-audit></tbody></table></div></div></div></div>'
+        f'</div></div>'
+    )
+
+
+def referral_contact_form_stack(lang):
+    return f'<div class="referral-contact-stack">{form_section(lang)}</div>'
+
+
 def promo_cta_band(lang):
     copy = PROMO_PAGE_CONTENT[lang]
     return band_section(
         f'<div><p class="eyebrow">{esc(copy["cta_eyebrow"])}</p><h2>{esc(copy["cta_title"])}</h2><p>{esc(copy["cta_copy"])}</p></div>'
+        f'{render_chips([promo_limited_time_label(lang), promo_deadline_label(lang), promo_discount_range_label(lang), promo_cap_label()])}'
         f'<div class="cta-actions"><a class="button button-primary" href="{routes[lang]["promo"]}">{esc(copy["cta_button"])}</a><a class="button button-secondary" href="{routes[lang]["contact"]}">{esc(T[lang]["quote"])}</a></div>',
         'promo-cta-section',
         'layout-shell cta-band promo-cta-band',
@@ -9197,6 +11664,116 @@ css += '''
 }
 '''
 
+css += '''
+.referral-checklist{margin-top:4px}
+.referral-program-page{display:grid;gap:0}
+.referral-magic-link{display:grid;gap:10px}
+.referral-nav{display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-nav-card{display:grid;gap:8px;padding:18px 20px;border:1px solid rgba(21,54,40,.14);border-radius:22px;background:#fff;color:var(--text);text-decoration:none;box-shadow:0 18px 34px rgba(10,31,23,.06)}
+.referral-nav-card strong{color:var(--primary-dark);font-size:.98rem}
+.referral-nav-card span{color:var(--muted);line-height:1.5}
+.referral-nav-card:hover,.referral-nav-card:focus-visible{border-color:rgba(47,138,88,.32);box-shadow:0 20px 38px rgba(10,31,23,.10)}
+.referral-nav-card.is-current{background:linear-gradient(135deg,rgba(21,54,40,.98),rgba(32,78,57,.96));border-color:rgba(21,54,40,.96);color:#fff}
+.referral-nav-card.is-current strong,.referral-nav-card.is-current span{color:#fff}
+.referral-steps-section .timeline{grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-steps-section .timeline-step{min-width:0;border:1px solid rgba(255,255,255,.12)!important;border-radius:24px;background:linear-gradient(180deg,#122018,#1b2c22)!important;color:#f6fbf8!important;box-shadow:0 18px 34px rgba(10,31,23,.16)!important}
+.referral-steps-section .timeline-step span,.referral-steps-section .timeline-step h3{color:#f6fbf8!important;white-space:normal;overflow-wrap:anywhere}
+.referral-steps-section .timeline-step p{color:rgba(241,247,243,.9)!important;white-space:normal;overflow-wrap:anywhere}
+.referral-program-page .referral-program-visual,.referral-program-page .referral-program-compare{border:1px solid rgba(21,54,40,.10)}
+.referral-program-page.is-client-program .referral-program-visual{background:linear-gradient(135deg,#173826,#2b6c49);color:#f5fbf7}
+.referral-program-page.is-client-program .referral-program-visual p,.referral-program-page.is-client-program .referral-program-visual li{color:rgba(245,251,247,.92)!important}
+.referral-program-page.is-client-program .referral-program-visual .eyebrow{color:#bfe5cb}
+.referral-program-page.is-client-program .referral-program-visual h2{color:#fff!important}
+.referral-program-page.is-client-program .referral-program-compare strong,.referral-program-page.is-client-program .referral-program-compare .eyebrow{color:#1f6640}
+.referral-program-page.is-partner-program .referral-program-visual{background:linear-gradient(135deg,#16263d,#264c7b);color:#f7faff}
+.referral-program-page.is-partner-program .referral-program-visual p,.referral-program-page.is-partner-program .referral-program-visual li{color:rgba(247,250,255,.92)!important}
+.referral-program-page.is-partner-program .referral-program-visual .eyebrow{color:#c4dbff}
+.referral-program-page.is-partner-program .referral-program-visual h2{color:#fff!important}
+.referral-program-page.is-partner-program .referral-program-compare strong,.referral-program-page.is-partner-program .referral-program-compare .eyebrow{color:#16365b}
+.referral-program-page.is-partner-program .referral-steps-section .timeline-step{background:linear-gradient(180deg,#16263d,#203552)!important}
+.referral-program-page.is-partner-program .referral-nav-card:hover,.referral-program-page.is-partner-program .referral-nav-card:focus-visible{border-color:rgba(38,76,123,.32);box-shadow:0 20px 38px rgba(20,38,61,.10)}
+.referral-program-page.is-partner-program .referral-nav-card.is-current{background:linear-gradient(135deg,rgba(22,38,61,.98),rgba(38,76,123,.96));border-color:rgba(22,38,61,.96)}
+.referral-contact-stack,.referral-admin-grids,.referral-portal-grids{display:grid;gap:20px}
+.referral-access-shell{display:grid;gap:20px;background:#fff;color:var(--text)}
+.referral-access-card{display:grid;gap:16px}
+.referral-access-ready,.referral-access-request{display:grid;gap:16px}
+.referral-contact-stack{align-content:start}
+.referral-portal-shell,.referral-admin-shell{display:grid;gap:20px}
+.referral-apply-shell,.referral-portal-shell,.referral-admin-shell{background:#fff;color:var(--text)}
+.referral-apply-shell h2,.referral-portal-shell h2,.referral-admin-shell h2,.referral-access-shell h2,.referral-access-shell h3{color:var(--text)}
+.referral-apply-shell p,.referral-portal-shell p,.referral-admin-shell p,.referral-access-shell p{color:inherit}
+.referral-portal-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
+.referral-portal-copy{display:grid;gap:6px}
+.referral-portal-copy h2{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif}
+.referral-portal-copy p{margin:0;color:var(--muted)}
+.referral-auth-grid,.referral-admin-grids,.referral-portal-grids{display:grid;gap:20px}
+.referral-auth-card,.referral-program-banner,.referral-portal-help,.referral-portal-security{display:grid;gap:12px}
+.referral-program-banner{border:1px solid rgba(21,54,40,.10);background:linear-gradient(135deg,#173826,#254f39);color:#f5fbf7}
+.referral-program-banner p{color:rgba(245,251,247,.92)!important}
+.referral-program-banner .eyebrow{color:#bfe5cb}
+.referral-program-banner h2{color:#fff!important}
+.referral-portal-shell.is-client .referral-program-banner{background:linear-gradient(135deg,#173826,#2b6c49)}
+.referral-portal-shell.is-partner .referral-program-banner{background:linear-gradient(135deg,#16263d,#264c7b)}
+.referral-portal-shell.is-partner .referral-program-banner .eyebrow{color:#c4dbff}
+.referral-portal-shell.is-partner .detail-item{border-color:rgba(38,76,123,.22)}
+.referral-portal-shell.is-partner .detail-item strong{color:#16365b}
+.referral-portal-shell.is-client .detail-item strong{color:#1f6640}
+.referral-portal-stats{grid-template-columns:repeat(6,minmax(0,1fr))}
+.referral-portal-meta-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-portal-grids{grid-template-columns:1fr}
+.referral-portal-stats .detail-item,.referral-portal-meta-grid .detail-item,.referral-credit-meta .detail-item{min-width:0}
+.referral-portal-stats .detail-item strong,.referral-portal-meta-grid .detail-item strong,.referral-credit-meta .detail-item strong{line-height:1.35;overflow-wrap:anywhere}
+.referral-summary-note,.referral-section-intro{margin:0}
+.referral-share-item{grid-column:span 2}
+.referral-portal-help{display:grid;gap:12px}
+.referral-help-list{display:grid;gap:10px}
+.referral-credit-panel{display:grid;gap:16px}
+.referral-credit-meta{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-credit-grid{grid-template-columns:minmax(0,280px)}
+.referral-share-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.referral-share-link{display:block;min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.referral-copy-button{min-width:112px}
+.referral-inline-note{display:block;margin-top:8px;color:var(--muted);font-size:.92rem}
+.referral-password-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-admin-form-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-status-field{grid-column:span 2}
+.referral-status-field select,.referral-status-filter-field select{min-width:220px}
+.referral-admin-checkbox{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface-soft);font-weight:600}
+.referral-admin-checkbox input{width:18px;height:18px;accent-color:var(--primary);margin-top:2px}
+.referral-admin-action-stack,.referral-admin-code-stack{display:grid;gap:8px}
+.referral-admin-action-stack .button{width:100%}
+.referral-admin-view-button{padding:0;border:0;background:none;color:var(--primary-dark);font-weight:700;text-align:left}
+.referral-admin-view-button:hover,.referral-admin-view-button:focus-visible{text-decoration:underline}
+.referral-admin-code-stack .promo-admin-code{margin:0}
+.referral-admin-filters{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:18px}
+.referral-admin-detail-panel{display:grid;gap:18px}
+.referral-admin-detail-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
+.referral-admin-detail-header h3{margin:0}
+.referral-admin-detail-header p{margin:0;color:var(--muted)}
+.referral-admin-section-header{display:grid;gap:6px}
+.referral-admin-section-header h3,.referral-admin-section-header p{margin:0}
+.referral-admin-section-header p{color:var(--muted)}
+.referral-admin-projects-panel{display:grid;gap:18px}
+.referral-admin-detail-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-admin-detail-tables{align-items:start}
+.referral-admin-grids{grid-template-columns:1fr}
+.referral-mini-table,.referral-admin-table{min-width:1320px}
+.referral-portal-cases-table th:nth-child(3),.referral-portal-cases-table td:nth-child(3){min-width:170px}
+.referral-admin-cases-table th:nth-child(4),.referral-admin-cases-table td:nth-child(4){min-width:170px}
+.referral-detail-cases-table th:nth-child(2),.referral-detail-cases-table td:nth-child(2){min-width:170px}
+.referral-portal-grids .contact-panel,.referral-admin-detail-panel .contact-panel,.referral-admin-shell > .contact-panel{overflow:hidden}
+.referral-mini-table th,.referral-admin-table th{white-space:nowrap}
+.referral-mini-table td,.referral-admin-table td{white-space:nowrap}
+.referral-mini-table td .form-note,.referral-admin-table td .form-note{white-space:normal;min-width:220px}
+.referral-mini-table td p,.referral-admin-table td p{margin:0}
+.referral-admin-table input,.referral-admin-table select{width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:14px;background:#fff}
+@media (max-width:920px){
+  .referral-nav,.referral-steps-section .timeline,.referral-portal-stats,.referral-portal-meta-grid,.referral-credit-meta,.referral-password-grid,.referral-admin-form-grid,.referral-admin-filters,.referral-admin-detail-grid{grid-template-columns:1fr}
+  .referral-share-item{grid-column:auto}
+  .referral-share-row{grid-template-columns:1fr}
+}
+'''
+
 remove_legacy_root_build()
 reset_deploy_dir()
 copy_static_assets()
@@ -9224,6 +11801,8 @@ for lang in ('en', 'fr'):
         privacy_cards = [
             *t['privacy_cards'],
             ('Base promo Opticable', "Les données soumises dans la promo sont conservées dans une base de données Cloudflare D1 afin d'administrer la campagne, de prévenir les abus, de journaliser les consentements et d'associer un code promo à une seule adresse courriel."),
+            ('Programme de référence Opticable', "Les comptes de référence, les codes, les dossiers et les récompenses sont conservés afin d'administrer la plateforme, de valider l'admissibilité et de suivre les crédits ou paiements associés."),
+            ('Accès au portail de référence', "Quand le portail de référence est utilisé, un courriel sécurisé de réinitialisation peut être émis afin de rétablir l'accès au compte."),
             ('Cloudflare Turnstile', "Turnstile est utilisé pour réduire les soumissions automatisées avant l'attribution d'un résultat promo."),
             ('Cloudflare Web Analytics', "Si l'outil est activé pour le site, Cloudflare Web Analytics peut mesurer des visites agrégées sans recourir à des pixels publicitaires."),
         ]
@@ -9237,6 +11816,8 @@ for lang in ('en', 'fr'):
         privacy_cards = [
             *t['privacy_cards'],
             ('Opticable promo database', 'Promo entries are stored in a Cloudflare D1 database so the campaign can be administered, abuse can be reduced, consent choices can be logged, and one promo code can be tied to one email address.'),
+            ('Opticable referral program', 'Referral accounts, codes, cases, and rewards are stored so the platform can be administered, eligibility can be reviewed, and related credits or payouts can be tracked.'),
+            ('Referral portal access', 'When the referral portal is used, secure password reset emails can be issued so account access can be restored without exposing the existing password.'),
             ('Cloudflare Turnstile', 'Turnstile is used to reduce automated submissions before a promo result is assigned.'),
             ('Cloudflare Web Analytics', 'If enabled for the site, Cloudflare Web Analytics may measure aggregated visits without using advertising pixels.'),
         ]
@@ -9349,7 +11930,7 @@ for lang in ('en', 'fr'):
             'layout-shell',
         )
         + band_section(
-            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2>{f"<p>{esc(contact_panel_copy)}</p>" if contact_panel_copy else ""}{contact_page_details}</div><div class="contact-form-column">{form_section(lang)}</div></div>',
+            f'<div class="contact-layout"><div class="contact-panel contact-sidebar"><h2>{esc(contact_panel_title)}</h2>{f"<p>{esc(contact_panel_copy)}</p>" if contact_panel_copy else ""}{contact_page_details}</div><div class="contact-form-column">{referral_contact_form_stack(lang)}</div></div>',
             'contact-band',
             'section-shell contact-shell',
         )
@@ -9417,7 +11998,7 @@ for lang in ('en', 'fr'):
         + band_section(
             f'<div class="promo-hero-grid"><div class="page-hero-copy"><p class="eyebrow">{esc(promo_copy["hero_eyebrow"])}</p><h1>{esc(promo_copy["h1"])}</h1><p>{esc(promo_copy["intro"])}</p>'
             f'<div class="page-hero-actions"><a class="button button-primary" href="#promo-entry">{esc(promo_copy["submit"])}</a><a class="button button-secondary" href="{routes[lang]["promo-rules"]}">{esc(promo_copy["actions"]["rules"])}</a></div>'
-            f'{render_chips([promo_discount_range_label(lang), promo_cap_label(), localized_datetime_label(PROMO_END, lang)])}</div>'
+            f'{render_chips([promo_limited_time_label(lang), promo_deadline_label(lang), promo_discount_range_label(lang), promo_cap_label()])}</div>'
             f'<aside class="page-hero-panel promo-visual-panel"><p class="eyebrow">{esc(promo_copy["label"])}</p><h2>{esc(promo_copy["hero_panel_title"])}</h2><p>{esc(promo_copy["hero_panel_copy"])}</p>'
             f'<ul class="check-list">{"".join(f"<li>{esc(item)}</li>" for item in promo_copy["hero_points"])}</ul></aside></div>',
             'hero-band page-hero-band',
@@ -9525,6 +12106,143 @@ for lang in ('en', 'fr'):
             robots='noindex, nofollow',
             social_image_url=PROMO_SOCIAL_URL,
             social_image_alt=promo_admin_copy['h1'],
+        ),
+    )
+
+    referral_program_copy_current = referral_program_copy(lang, 'client')
+    referral_program_breadcrumbs = [(t['home'], routes[lang]['home']), (referral_program_copy_current['label'], routes[lang]['referral-program'])]
+    write_url(
+        routes[lang]['referral-program'],
+        page(
+            lang,
+            'referral-program',
+            'contact',
+            referral_program_copy_current['title'],
+            referral_program_copy_current['desc'],
+            referral_program_page_body(lang, 'client'),
+            faq_items=referral_program_copy_current['faqs'],
+            breadcrumb_items=referral_program_breadcrumbs,
+        ),
+    )
+
+    referral_program_terms_copy = referral_program_copy_current
+    referral_program_terms_breadcrumbs = [*referral_program_breadcrumbs, (referral_program_terms_copy['terms_title'], routes[lang]['referral-program-terms'])]
+    write_url(
+        routes[lang]['referral-program-terms'],
+        page(
+            lang,
+            'referral-program-terms',
+            'contact',
+            referral_program_terms_copy['terms_title'],
+            referral_program_terms_copy['desc'],
+            referral_terms_body(lang, 'client'),
+            breadcrumb_items=referral_program_terms_breadcrumbs,
+        ),
+    )
+
+    referral_partner_copy_current = referral_program_copy(lang, 'partner')
+    referral_partner_breadcrumbs = [(t['home'], routes[lang]['home']), (referral_partner_copy_current['label'], routes[lang]['referral-partner-program'])]
+    write_url(
+        routes[lang]['referral-partner-program'],
+        page(
+            lang,
+            'referral-partner-program',
+            'contact',
+            referral_partner_copy_current['title'],
+            referral_partner_copy_current['desc'],
+            referral_program_page_body(lang, 'partner'),
+            faq_items=referral_partner_copy_current['faqs'],
+            breadcrumb_items=referral_partner_breadcrumbs,
+        ),
+    )
+
+    referral_partner_terms_breadcrumbs = [*referral_partner_breadcrumbs, (referral_partner_copy_current['terms_title'], routes[lang]['referral-partner-program-terms'])]
+    write_url(
+        routes[lang]['referral-partner-program-terms'],
+        page(
+            lang,
+            'referral-partner-program-terms',
+            'contact',
+            referral_partner_copy_current['terms_title'],
+            referral_partner_copy_current['desc'],
+            referral_terms_body(lang, 'partner'),
+            breadcrumb_items=referral_partner_terms_breadcrumbs,
+        ),
+    )
+
+    portal_copy = referral_portal_copy(lang)
+    portal_breadcrumbs = [(t['home'], routes[lang]['home']), (portal_copy['label'], routes[lang]['referral-portal'])]
+    portal_body = (
+        breadcrumb_nav(portal_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(portal_copy["eyebrow"])}</p><h1>{esc(portal_copy["h1"])}</h1><p>{esc(portal_copy["intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(referral_nav_shell(lang, 'portal'), 'referral-nav-section')
+        + band_section(referral_portal_shell(lang), 'referral-portal-section')
+    )
+    write_url(
+        routes[lang]['referral-portal'],
+        page(
+            lang,
+            'referral-portal',
+            'contact',
+            portal_copy['title'],
+            portal_copy['desc'],
+            portal_body,
+            breadcrumb_items=portal_breadcrumbs,
+            robots='noindex, nofollow',
+        ),
+    )
+
+    access_copy = referral_access_copy(lang)
+    access_breadcrumbs = [(t['home'], routes[lang]['home']), (portal_copy['label'], routes[lang]['referral-portal']), (access_copy['label'], routes[lang]['referral-access'])]
+    access_body = (
+        breadcrumb_nav(access_breadcrumbs)
+        + band_section(
+            f'<div class="page-hero contact-hero"><div class="page-hero-copy"><p class="eyebrow">{esc(access_copy["eyebrow"])}</p><h1>{esc(access_copy["h1"])}</h1><p>{esc(access_copy["intro"])}</p></div></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(referral_access_shell(lang), 'referral-access-section')
+    )
+    write_url(
+        routes[lang]['referral-access'],
+        page(
+            lang,
+            'referral-access',
+            'contact',
+            access_copy['title'],
+            access_copy['desc'],
+            access_body,
+            breadcrumb_items=access_breadcrumbs,
+            robots='noindex, nofollow',
+        ),
+    )
+
+    admin_copy = referral_admin_copy(lang)
+    admin_breadcrumbs = [(t['home'], routes[lang]['home']), (admin_copy['label'], routes[lang]['referral-admin'])]
+    admin_body = (
+        breadcrumb_nav(admin_breadcrumbs)
+        + band_section(
+            f'<div class="promo-hero-grid"><div class="page-hero-copy"><p class="eyebrow">{esc(admin_copy["eyebrow"])}</p><h1>{esc(admin_copy["h1"])}</h1><p>{esc(admin_copy["intro"])}</p></div><aside class="page-hero-panel promo-visual-panel"><p class="eyebrow">{esc(admin_copy["label"])}</p><h2>{esc(admin_copy["label"])}</h2><p>{esc(admin_copy["intro"])}</p><ul class="check-list"><li>{"Approve partner applications" if lang == "en" else "Approuver les demandes partenaires"}</li><li>{"Move cases through each stage" if lang == "en" else "Faire avancer les dossiers à chaque étape"}</li><li>{"Track credits and payouts" if lang == "en" else "Suivre les crédits et les paiements"}</li></ul></aside></div>',
+            'hero-band page-hero-band',
+            'layout-shell',
+        )
+        + band_section(referral_admin_shell(lang), 'referral-admin-section')
+    )
+    write_url(
+        routes[lang]['referral-admin'],
+        page(
+            lang,
+            'referral-admin',
+            'contact',
+            admin_copy['title'],
+            admin_copy['desc'],
+            admin_body,
+            breadcrumb_items=admin_breadcrumbs,
+            robots='noindex, nofollow',
         ),
     )
 

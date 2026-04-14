@@ -5,13 +5,21 @@
   "compatibility_date": "2026-03-14",
   "vars": {
     "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2RkCsNJ9_amJwl",
-    "PROMO_WEB_ANALYTICS_TOKEN": "e665c94202a846ca8472a2fed08999ae"
+    "PROMO_WEB_ANALYTICS_TOKEN": "e665c94202a846ca8472a2fed08999ae",
+    "REFERRAL_DEV_MAGIC_LINKS": "0"
   },
   "d1_databases": [
     {
       "binding": "PROMO_DB",
       "database_name": "opticable-promo-db",
-      "database_id": "402ef6df-2ce5-451c-94d8-fbaaa99f7dc0"
+      "database_id": "402ef6df-2ce5-451c-94d8-fbaaa99f7dc0",
+      "migrations_dir": "./migrations"
+    },
+    {
+      "binding": "REFERRAL_DB",
+      "database_name": "opticable-referral-db",
+      "database_id": "cfabcdcb-bc81-44eb-93be-07fec0caa4a6",
+      "migrations_dir": "./migrations-referral"
     }
   ],
   "assets": {
@@ -24,13 +32,24 @@
       "name": "opticable-website-concept01",
       "vars": {
         "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2OXTtzBra649xW",
-        "PROMO_WEB_ANALYTICS_TOKEN": ""
+        "PROMO_WEB_ANALYTICS_TOKEN": "",
+        "REFERRAL_DEV_MAGIC_LINKS": "1",
+        "REFERRAL_ZOHO_SYNC_TOKEN": "concept01-referral-zoho-sync-20260410",
+        "PROMO_ADMIN_USERNAME": "yboucher",
+        "PROMO_ADMIN_PASSWORD": "Butch321!$"
       },
       "d1_databases": [
         {
           "binding": "PROMO_DB",
           "database_name": "opticable-promo-db-concept01",
-          "database_id": "0f54156c-6919-46d3-a182-2e6569343637"
+          "database_id": "0f54156c-6919-46d3-a182-2e6569343637",
+          "migrations_dir": "./migrations"
+        },
+        {
+          "binding": "REFERRAL_DB",
+          "database_name": "opticable-referral-db-concept01",
+          "database_id": "bb6ca2e6-9715-4270-be74-9e54081a17cd",
+          "migrations_dir": "./migrations-referral"
         }
       ],
       "assets": {

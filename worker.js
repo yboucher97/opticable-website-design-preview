@@ -1,4 +1,5 @@
 import promoConfig from './promo-config.json';
+import { isProtectedReferralAdminPath, routeReferralApi } from './referral-worker.js';
 
 const APEX_HOST = "opticable.ca";
 const WWW_HOST = "www.opticable.ca";
@@ -351,7 +352,10 @@ async function requireAdminAuth(request, env) {
 }
 
 function isProtectedAdminPath(pathname) {
-  return pathname.startsWith("/en/admin/") || pathname.startsWith("/fr/admin/") || pathname.startsWith("/api/promo/admin/");
+  return pathname.startsWith("/en/admin/")
+    || pathname.startsWith("/fr/admin/")
+    || pathname.startsWith("/api/promo/admin/")
+    || isProtectedReferralAdminPath(pathname);
 }
 
 async function fetchPromoAdminSummary(env, scope) {
@@ -1079,6 +1083,10 @@ async function routeApi(request, env) {
   const url = new URL(request.url);
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204 });
+  }
+  const referralResponse = await routeReferralApi(request, env);
+  if (referralResponse) {
+    return referralResponse;
   }
   if (url.pathname === "/api/promo/config" && request.method === "GET") {
     return handlePromoConfig(request, env);
