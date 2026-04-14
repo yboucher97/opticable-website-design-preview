@@ -33,10 +33,7 @@
       "vars": {
         "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2OXTtzBra649xW",
         "PROMO_WEB_ANALYTICS_TOKEN": "",
-        "REFERRAL_DEV_MAGIC_LINKS": "1",
-        "REFERRAL_ZOHO_SYNC_TOKEN": "concept01-referral-zoho-sync-20260410",
-        "PROMO_ADMIN_USERNAME": "yboucher",
-        "PROMO_ADMIN_PASSWORD": "Butch321!$"
+        "REFERRAL_DEV_MAGIC_LINKS": "1"
       },
       "d1_databases": [
         {

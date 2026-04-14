@@ -148,6 +148,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/contact/" />
   </url>
   <url>
+    <loc>https://opticable.ca/en/privacy/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/privacy/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/confidentialite/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/en/referral-program/</loc>
     <lastmod>2026-04-14</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/referral-program/" />
@@ -335,6 +342,13 @@
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/contact/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/contact/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/contact/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/confidentialite/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/privacy/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/confidentialite/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/programme-reference/</loc>

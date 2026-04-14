@@ -9326,6 +9326,7 @@ def sitemap_xml():
         'about',
         'faq',
         'contact',
+        'privacy',
         'referral-program',
         'referral-program-terms',
         'referral-partner-program',
@@ -11584,6 +11585,7 @@ def form_section(lang):
         f"f.style.height={iframe_height};"
         "f.style.width='100%';"
         "f.style.transition='all 0.5s ease';"
+        "f.setAttribute('allow','geolocation');"
         f"f.setAttribute('aria-label',{aria_label});"
         "mount.appendChild(f);"
         "window.addEventListener('message',function(event){"
