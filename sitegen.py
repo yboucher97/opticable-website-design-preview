@@ -9429,6 +9429,20 @@ def nav_dropdown(lang, key, current, child_keys, wide=False):
     )
 
 
+def nav_dropdown_links(label, href, current_active, items, wide=False):
+    current_attr = ' aria-current="page"' if current_active else ''
+    submenu_parts = []
+    for item in items:
+        child_attr = ' aria-current="page"' if item.get('current') else ''
+        submenu_parts.append(f'<a href="{item["href"]}"{child_attr}>{esc(item["label"])}</a>')
+    submenu = ''.join(submenu_parts)
+    submenu_class = 'nav-submenu nav-submenu-wide' if wide else 'nav-submenu'
+    return (
+        f'<div class="nav-item nav-item-has-children"><a class="nav-link" href="{href}"{current_attr}>'
+        f'{esc(label)}</a><div class="{submenu_class}">{submenu}</div></div>'
+    )
+
+
 def simple_nav_link(lang, key, current):
     current_attr = ' aria-current="page"' if current == key else ''
     return f'<a class="nav-link" href="{routes[lang][key]}"{current_attr}>{esc(label_for_key(lang, key))}</a>'
@@ -11365,10 +11379,36 @@ def header(lang, current, page_key, lang_switch_href=None):
     t = T[lang]
     alt = 'fr' if lang == 'en' else 'en'
     switch_href = lang_switch_href or routes[alt][page_key]
+    referral_program_keys = {'referral-program', 'referral-program-terms'}
+    referral_partner_keys = {'referral-partner-program', 'referral-partner-program-terms'}
+    referral_portal_keys = {'referral-portal', 'referral-access'}
+    referral_nav = nav_dropdown_links(
+        'Referrals & Partners' if lang == 'en' else 'Références et partenaires',
+        routes[lang]['referral-program'],
+        current in referral_program_keys or current in referral_partner_keys or current in referral_portal_keys,
+        (
+            {
+                'href': routes[lang]['referral-program'],
+                'label': 'Referral Program' if lang == 'en' else 'Programme de référence',
+                'current': current in referral_program_keys,
+            },
+            {
+                'href': routes[lang]['referral-partner-program'],
+                'label': 'Business Partners' if lang == 'en' else "Partenaires d'affaires",
+                'current': current in referral_partner_keys,
+            },
+            {
+                'href': routes[lang]['referral-portal'],
+                'label': 'Member Portal' if lang == 'en' else 'Espace membre',
+                'current': current in referral_portal_keys,
+            },
+        ),
+    )
     nav = [
         simple_nav_link(lang, 'home', current),
         nav_dropdown(lang, 'services', current, order, wide=True),
         nav_dropdown(lang, 'industries', current, ('case-studies',)),
+        referral_nav,
         simple_nav_link(lang, 'about', current),
         simple_nav_link(lang, 'faq', current),
         simple_nav_link(lang, 'blog', current),
