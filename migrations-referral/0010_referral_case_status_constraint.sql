@@ -35,10 +35,6 @@ CREATE TABLE referral_cases_new (
   void_reason TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  zoho_lead_id TEXT,
-  zoho_deal_id TEXT,
-  zoho_quote_id TEXT,
-  zoho_invoice_id TEXT,
   manual_reward_amount_cents INTEGER,
   manual_reward_note TEXT,
   FOREIGN KEY (account_id) REFERENCES referral_accounts(id) ON DELETE CASCADE,
@@ -80,10 +76,6 @@ INSERT INTO referral_cases_new (
   void_reason,
   created_at,
   updated_at,
-  zoho_lead_id,
-  zoho_deal_id,
-  zoho_quote_id,
-  zoho_invoice_id,
   manual_reward_amount_cents,
   manual_reward_note
 )
@@ -122,10 +114,6 @@ SELECT
   void_reason,
   created_at,
   updated_at,
-  zoho_lead_id,
-  zoho_deal_id,
-  zoho_quote_id,
-  zoho_invoice_id,
   manual_reward_amount_cents,
   manual_reward_note
 FROM referral_cases;

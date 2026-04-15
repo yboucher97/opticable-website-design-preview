@@ -3,7 +3,7 @@
     "en": {
       "label": "Referral Program",
       "title": "Referral Program | Opticable",
-      "desc": "Refer a qualifying Quebec project to Opticable. The referred client gets 5% off and you earn future Opticable credit after the project is completed and paid.",
+      "desc": "Refer a Quebec project to Opticable. The referred client gets 5% off and you earn Opticable credit after completion and payment.",
       "eyebrow": "Referral Program",
       "h1": "Refer a project and earn Opticable credit.",
       "intro": "This program is for clients, property managers, and business contacts who want to recommend Opticable. The referred client gets 5% off a qualifying new project, and you earn 5% in Opticable credit once that project is completed and paid.",
@@ -48,7 +48,7 @@
     "fr": {
       "label": "Programme de référence",
       "title": "Programme de référence | Opticable",
-      "desc": "Recommandez un projet admissible au Québec à Opticable. Le client référé obtient 5 % de rabais et vous gagnez un crédit Opticable après la réalisation et le paiement du projet.",
+      "desc": "Recommandez un projet au Québec. Le client référé obtient 5 % de rabais et vous gagnez un crédit Opticable après réalisation et paiement.",
       "eyebrow": "Programme de référence",
       "h1": "Recommandez un projet et obtenez un crédit Opticable.",
       "intro": "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable. Le client référé obtient 5 % de rabais sur un nouveau projet admissible, et vous recevez 5 % en crédit Opticable lorsque le projet est réalisé et payé.",
@@ -95,7 +95,7 @@
     "en": {
       "label": "Referral Partner Program",
       "title": "Referral Partner Program | Opticable",
-      "desc": "Apply to become an Opticable referral partner. Approved partners receive a unique code and earn fixed payouts when referred projects are completed and paid.",
+      "desc": "Apply to become an Opticable referral partner and earn fixed payouts on approved projects after completion and payment.",
       "eyebrow": "Referral Partner Program",
       "h1": "Become an Opticable referral partner.",
       "intro": "This program is for businesses and professionals who can refer multiple qualified projects. Applications are reviewed first, and the partner account is created only after approval.",
@@ -139,7 +139,7 @@
     "fr": {
       "label": "Programme de partenaires référents",
       "title": "Programme de partenaires référents | Opticable",
-      "desc": "Soumettez votre candidature pour devenir partenaire référent Opticable. Les partenaires approuvés reçoivent un code unique et gagnent des paiements fixes lorsque les projets référés sont réalisés et payés.",
+      "desc": "Devenez partenaire référent Opticable et gagnez un paiement fixe sur les projets approuvés après réalisation et paiement.",
       "eyebrow": "Programme de partenaires référents",
       "h1": "Devenez partenaire référent Opticable.",
       "intro": "Ce programme s'adresse aux entreprises et aux professionnels capables de recommander plusieurs projets qualifiés. Chaque demande est validée avant la création du compte partenaire.",

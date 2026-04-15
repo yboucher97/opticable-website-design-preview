@@ -48,7 +48,7 @@ const PROMO_TEXT = {
     requiredField: "Remplissez tous les champs requis.",
     requiredConsent: "Confirmez les cases obligatoires liées à l'admissibilité et au règlement.",
     invalidSkill: "La réponse à la question d'habileté est invalide.",
-    invalidTurnstile: "La verification de securite a echoue.",
+    invalidTurnstile: "La vérification de sécurité a échoué.",
     genericError: "La demande promo n'a pas pu être complétée.",
     unsubscribed: "Le consentement marketing a été retiré pour cette adresse courriel.",
   },

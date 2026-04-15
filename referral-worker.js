@@ -166,34 +166,6 @@ function parseLimit(value, fallback = 200, maximum = 500) {
   return Math.min(parsed, maximum);
 }
 
-function referralSyncToken(env) {
-  return safeTrim(env.REFERRAL_ZOHO_SYNC_TOKEN || "", 240);
-}
-
-function referralSyncAuthorized(request, env) {
-  const configured = referralSyncToken(env);
-  if (!configured) return previewLinksEnabled(env);
-  const authHeader = request.headers.get("Authorization") || "";
-  const bearer = authHeader.toLowerCase().startsWith("bearer ")
-    ? safeTrim(authHeader.slice(7), 240)
-    : "";
-  const headerToken = safeTrim(
-    request.headers.get("X-Referral-Sync-Token")
-      || request.headers.get("X-Opticable-Referral-Token")
-      || "",
-    240,
-  );
-  return bearer === configured || headerToken === configured;
-}
-
-function unauthorizedJsonResponse() {
-  return jsonResponse(
-    { ok: false, error: "Unauthorized." },
-    401,
-    { "WWW-Authenticate": "Bearer" },
-  );
-}
-
 function normalizeCaseStatusInput(value) {
   const normalized = safeTrim(String(value || ""), 80).toLowerCase().replace(/[\s-]+/g, "_");
   const mapping = {
@@ -235,16 +207,6 @@ function normalizeCaseStatusInput(value) {
     disqualified: "void",
   };
   return mapping[normalized] || "";
-}
-
-function extractZohoRefs(body) {
-  return {
-    zohoLeadId: bodyValue(body, ["zohoLeadId", "zoho_lead_id", "leadId", "lead_id", "crmLeadId", "crm_lead_id"], 120) || null,
-    zohoDealId: bodyValue(body, ["zohoDealId", "zoho_deal_id", "dealId", "deal_id", "crmDealId", "crm_deal_id"], 120) || null,
-    zohoQuoteId: bodyValue(body, ["zohoQuoteId", "zoho_quote_id", "quoteId", "quote_id", "estimateId", "estimate_id"], 120) || null,
-    zohoInvoiceId: bodyValue(body, ["zohoInvoiceId", "zoho_invoice_id", "invoiceId", "invoice_id"], 120) || null,
-    quoteReference: bodyValue(body, ["quoteReference", "quote_reference", "reference", "recordReference", "record_reference"], 120) || null,
-  };
 }
 
 function dbReady(env) {
@@ -1217,73 +1179,6 @@ async function findActiveCaseByAccountAndEmail(env, accountId, emailNormalized) 
   ).bind(accountId, emailNormalized).first();
 }
 
-async function findCaseByReferenceSet(env, refs = {}) {
-  const checks = [
-    ["zoho_invoice_id", refs.zohoInvoiceId],
-    ["zoho_quote_id", refs.zohoQuoteId],
-    ["zoho_deal_id", refs.zohoDealId],
-    ["zoho_lead_id", refs.zohoLeadId],
-    ["quote_reference", refs.quoteReference],
-  ];
-  for (const [column, value] of checks) {
-    if (!value) continue;
-    const match = await env.REFERRAL_DB.prepare(
-      `SELECT * FROM referral_cases WHERE ${column} = ?1 ORDER BY id DESC LIMIT 1`
-    ).bind(value).first();
-    if (match) return match;
-  }
-  return null;
-}
-
-async function updateReferralCaseReferences(env, caseId, payload, now) {
-  await env.REFERRAL_DB.prepare(
-    `UPDATE referral_cases
-     SET quote_reference = COALESCE(?1, quote_reference),
-         zoho_lead_id = COALESCE(?2, zoho_lead_id),
-         zoho_deal_id = COALESCE(?3, zoho_deal_id),
-         zoho_quote_id = COALESCE(?4, zoho_quote_id),
-         zoho_invoice_id = COALESCE(?5, zoho_invoice_id),
-         referred_name = COALESCE(?6, referred_name),
-         referred_phone = COALESCE(?7, referred_phone),
-         referred_company = COALESCE(?8, referred_company),
-         referred_company_normalized = COALESCE(?9, referred_company_normalized),
-         referred_project_notes = COALESCE(?10, referred_project_notes),
-         landing_path = COALESCE(?11, landing_path),
-         landing_url = COALESCE(?12, landing_url),
-         referrer_url = COALESCE(?13, referrer_url),
-         referrer_host = COALESCE(?14, referrer_host),
-         utm_source = COALESCE(?15, utm_source),
-         utm_medium = COALESCE(?16, utm_medium),
-         utm_campaign = COALESCE(?17, utm_campaign),
-         utm_content = COALESCE(?18, utm_content),
-         utm_term = COALESCE(?19, utm_term),
-         updated_at = ?20
-     WHERE id = ?21`
-  ).bind(
-    payload.quoteReference || null,
-    payload.zohoLeadId || null,
-    payload.zohoDealId || null,
-    payload.zohoQuoteId || null,
-    payload.zohoInvoiceId || null,
-    payload.referredName || null,
-    payload.referredPhone || null,
-    payload.referredCompany || null,
-    payload.referredCompanyNormalized || null,
-    payload.referredProjectNotes || null,
-    payload.landingPath || null,
-    payload.landingUrl || null,
-    payload.referrerUrl || null,
-    payload.referrerHost || null,
-    payload.utmSource || null,
-    payload.utmMedium || null,
-    payload.utmCampaign || null,
-    payload.utmContent || null,
-    payload.utmTerm || null,
-    now,
-    caseId,
-  ).run();
-}
-
 async function findActiveCreditCode(env, creditCode) {
   return env.REFERRAL_DB.prepare(
     `SELECT
@@ -1305,224 +1200,6 @@ async function findActiveCreditCode(env, creditCode) {
      WHERE codes.code = ?1 AND codes.is_active = 1
      LIMIT 1`
   ).bind(creditCode).first();
-}
-
-async function findCreditUseByReferenceSet(env, refs = {}) {
-  const checks = [
-    ["zoho_invoice_id", refs.zohoInvoiceId],
-    ["zoho_quote_id", refs.zohoQuoteId],
-    ["zoho_deal_id", refs.zohoDealId],
-    ["zoho_lead_id", refs.zohoLeadId],
-    ["quote_reference", refs.quoteReference],
-  ];
-  for (const [column, value] of checks) {
-    if (!value) continue;
-    const match = await env.REFERRAL_DB.prepare(
-      `SELECT * FROM referral_credit_uses WHERE ${column} = ?1 ORDER BY id DESC LIMIT 1`
-    ).bind(value).first();
-    if (match) return match;
-  }
-  return null;
-}
-
-async function findOpenCreditUseByAccountAndEmail(env, accountId, emailNormalized) {
-  return env.REFERRAL_DB.prepare(
-    `SELECT *
-     FROM referral_credit_uses
-     WHERE account_id = ?1
-       AND contact_email_normalized = ?2
-       AND status IN ('reserved', 'applied')
-     ORDER BY id DESC
-     LIMIT 1`
-  ).bind(accountId, emailNormalized).first();
-}
-
-async function updateCreditUseReferences(env, creditUseId, payload, now) {
-  await env.REFERRAL_DB.prepare(
-    `UPDATE referral_credit_uses
-     SET quote_reference = COALESCE(?1, quote_reference),
-         zoho_lead_id = COALESCE(?2, zoho_lead_id),
-         zoho_deal_id = COALESCE(?3, zoho_deal_id),
-         zoho_quote_id = COALESCE(?4, zoho_quote_id),
-         zoho_invoice_id = COALESCE(?5, zoho_invoice_id),
-         contact_name = COALESCE(?6, contact_name),
-         contact_company = COALESCE(?7, contact_company),
-         contact_company_normalized = COALESCE(?8, contact_company_normalized),
-         note = COALESCE(?9, note),
-         updated_at = ?10
-     WHERE id = ?11`
-  ).bind(
-    payload.quoteReference || null,
-    payload.zohoLeadId || null,
-    payload.zohoDealId || null,
-    payload.zohoQuoteId || null,
-    payload.zohoInvoiceId || null,
-    payload.contactName || null,
-    payload.contactCompany || null,
-    payload.contactCompanyNormalized || null,
-    payload.note || null,
-    now,
-    creditUseId,
-  ).run();
-}
-
-async function reserveCreditUse(env, input) {
-  const {
-    account,
-    creditCode,
-    creditCodeId,
-    amountCents,
-    locale,
-    contactName,
-    contactEmail,
-    contactEmailNormalized,
-    contactCompany,
-    contactCompanyNormalized,
-    refs,
-    note,
-    now,
-  } = input;
-  const existingByRefs = await findCreditUseByReferenceSet(env, refs);
-  const existing = existingByRefs || await findOpenCreditUseByAccountAndEmail(env, account.id, contactEmailNormalized);
-  const payload = {
-    quoteReference: refs.quoteReference,
-    zohoLeadId: refs.zohoLeadId,
-    zohoDealId: refs.zohoDealId,
-    zohoQuoteId: refs.zohoQuoteId,
-    zohoInvoiceId: refs.zohoInvoiceId,
-    contactName,
-    contactCompany,
-    contactCompanyNormalized,
-    note,
-  };
-  if (existing) {
-    const delta = amountCents - toNumber(existing.amount_cents);
-    if (delta > 0 && toNumber(account.wallet_balance_cents) < delta) {
-      throw new Error("Insufficient credit balance.");
-    }
-    if (delta !== 0) {
-      await adjustWalletBalance(env, account.id, -delta, now);
-    }
-    await env.REFERRAL_DB.prepare(
-      `UPDATE referral_credit_uses
-       SET credit_code_id = COALESCE(?1, credit_code_id),
-           credit_code = COALESCE(?2, credit_code),
-           amount_cents = ?3,
-           status = CASE WHEN status = 'released' THEN 'reserved' ELSE status END,
-           released_at = CASE WHEN status = 'released' THEN NULL ELSE released_at END,
-           updated_at = ?4
-       WHERE id = ?5`
-    ).bind(
-      creditCodeId || null,
-      creditCode || null,
-      amountCents,
-      now,
-      existing.id,
-    ).run();
-    await updateCreditUseReferences(env, existing.id, payload, now);
-    await recordAuditEvent(env, {
-      accountId: account.id,
-      actorType: "system",
-      actorLabel: "zoho-intake",
-      eventType: existingByRefs ? "credit_use_relinked" : "credit_use_updated",
-      metadataJson: { creditCode, amountCents, locale },
-      createdAt: now,
-    });
-    return { created: false, updated: true, creditUse: await env.REFERRAL_DB.prepare(`SELECT * FROM referral_credit_uses WHERE id = ?1 LIMIT 1`).bind(existing.id).first() };
-  }
-  if (toNumber(account.wallet_balance_cents) < amountCents) {
-    throw new Error("Insufficient credit balance.");
-  }
-  await adjustWalletBalance(env, account.id, -amountCents, now);
-  const insert = await env.REFERRAL_DB.prepare(
-    `INSERT INTO referral_credit_uses (
-      account_id, credit_code_id, credit_code, status, amount_cents, contact_name, contact_email, contact_email_normalized,
-      contact_company, contact_company_normalized, quote_reference, zoho_lead_id, zoho_deal_id, zoho_quote_id, zoho_invoice_id,
-      note, reserved_at, created_at, updated_at
-    ) VALUES (?1, ?2, ?3, 'reserved', ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?16, ?16)`
-  ).bind(
-    account.id,
-    creditCodeId || null,
-    creditCode,
-    amountCents,
-    contactName,
-    contactEmail,
-    contactEmailNormalized,
-    contactCompany || null,
-    contactCompanyNormalized || null,
-    refs.quoteReference || null,
-    refs.zohoLeadId || null,
-    refs.zohoDealId || null,
-    refs.zohoQuoteId || null,
-    refs.zohoInvoiceId || null,
-    note || null,
-    now,
-  ).run();
-  await recordAuditEvent(env, {
-    accountId: account.id,
-    actorType: "system",
-    actorLabel: "zoho-intake",
-    eventType: "credit_use_reserved",
-    metadataJson: { creditCode, amountCents, locale },
-    createdAt: now,
-  });
-  return {
-    created: true,
-    updated: false,
-    creditUse: await env.REFERRAL_DB.prepare(`SELECT * FROM referral_credit_uses WHERE id = ?1 LIMIT 1`).bind(insert.meta?.last_row_id || 0).first(),
-  };
-}
-
-async function syncCreditUseStatus(env, creditUse, nextStatus, refs, note, now) {
-  await updateCreditUseReferences(env, creditUse.id, {
-    quoteReference: refs.quoteReference,
-    zohoLeadId: refs.zohoLeadId,
-    zohoDealId: refs.zohoDealId,
-    zohoQuoteId: refs.zohoQuoteId,
-    zohoInvoiceId: refs.zohoInvoiceId,
-    note,
-  }, now);
-  if (nextStatus === "completed_paid") {
-    await env.REFERRAL_DB.prepare(
-      `UPDATE referral_credit_uses
-       SET status = CASE WHEN status = 'released' THEN status ELSE 'applied' END,
-           applied_at = CASE WHEN status = 'released' THEN applied_at ELSE COALESCE(applied_at, ?1) END,
-           updated_at = ?1
-       WHERE id = ?2`
-    ).bind(now, creditUse.id).run();
-    await recordAuditEvent(env, {
-      accountId: creditUse.account_id,
-      actorType: "system",
-      actorLabel: "zoho-status",
-      eventType: "credit_use_applied",
-      metadataJson: { creditUseId: creditUse.id, nextStatus },
-      createdAt: now,
-    });
-    return;
-  }
-  if (nextStatus === "void" && creditUse.status === "reserved") {
-    await adjustWalletBalance(env, creditUse.account_id, toNumber(creditUse.amount_cents), now);
-    await env.REFERRAL_DB.prepare(
-      `UPDATE referral_credit_uses
-       SET status = 'released',
-           released_at = COALESCE(released_at, ?1),
-           updated_at = ?1,
-           note = CASE
-             WHEN ?2 IS NULL OR ?2 = '' THEN note
-             WHEN note IS NULL OR note = '' THEN ?2
-             ELSE note || ' | ' || ?2
-           END
-       WHERE id = ?3`
-    ).bind(now, note || "released", creditUse.id).run();
-    await recordAuditEvent(env, {
-      accountId: creditUse.account_id,
-      actorType: "system",
-      actorLabel: "zoho-status",
-      eventType: "credit_use_released",
-      metadataJson: { creditUseId: creditUse.id, nextStatus },
-      createdAt: now,
-    });
-  }
 }
 
 async function upsertRewardForCompletedCase(env, caseRow, now) {
@@ -2090,7 +1767,7 @@ async function handleReferralPortal(request, env) {
     : [];
   const referrals = (await env.REFERRAL_DB.prepare(
     `SELECT id, status, created_at, completed_paid_at, quoted_subtotal_cents, reward_amount_cents, manual_reward_amount_cents, referred_discount_percent,
-            quote_reference, zoho_quote_id, zoho_invoice_id, referred_name, referred_company
+            quote_reference, referred_name, referred_company
      FROM referral_cases
      WHERE account_id = ?1
      ORDER BY created_at DESC
@@ -2177,310 +1854,9 @@ async function handleReferralPortal(request, env) {
       rewardAmountCad: fromCents(effectiveRewardAmountCents({ ...row, account_type: account.account_type })),
       referredDiscountPercent: toNumber(row.referred_discount_percent),
       quoteReference: row.quote_reference || "",
-      zohoQuoteId: row.zoho_quote_id || "",
-      zohoInvoiceId: row.zoho_invoice_id || "",
       referredName: row.referred_name || "",
       referredCompany: row.referred_company || "",
     })),
-  });
-}
-
-async function handleReferralZohoIntake(request, env) {
-  if (!dbReady(env)) {
-    return jsonResponse({ ok: false, error: TEXT.en.configUnavailable }, 503);
-  }
-  if (!referralSyncAuthorized(request, env)) {
-    return unauthorizedJsonResponse();
-  }
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: TEXT.en.invalidRequest }, 400);
-  }
-  const locale = normalizeLocale(bodyValue(body, ["locale", "language"], 20));
-  const messages = messageSet(locale);
-  const referralCode = bodyValue(body, ["referralCode", "referral_code", "code"], 40).toUpperCase();
-  if (!referralCode) {
-    return jsonResponse({ ok: true, ignored: true, reason: "missing_codes" });
-  }
-  const referredName = bodyValue(body, ["name", "fullName", "full_name"], 160);
-  const referredEmail = bodyValue(body, ["email", "emailAddress", "email_address"], 320);
-  const referredEmailNormalized = normalizeEmail(referredEmail);
-  const referredPhone = bodyValue(body, ["phone", "phoneNumber", "phone_number"], 64) || null;
-  const referredCompany = bodyValue(body, ["company", "companyName", "company_name", "organization"], 200);
-  const referredCompanyNormalized = referredCompany ? normalizeCompany(referredCompany) : null;
-  const referredProjectNotes = bodyValue(body, ["notes", "projectNote", "project_note", "description"], 1200) || null;
-  if (!referredName || !referredEmailNormalized || !isValidEmail(referredEmailNormalized) || !referredCompany) {
-    return jsonResponse({ ok: false, error: messages.requiredField }, 400);
-  }
-  const refs = extractZohoRefs(body);
-  const now = nowIso();
-  const result = { ok: true };
-  let referralCaseResponse = null;
-  const payload = {
-    quoteReference: refs.quoteReference,
-    zohoLeadId: refs.zohoLeadId,
-    zohoDealId: refs.zohoDealId,
-    zohoQuoteId: refs.zohoQuoteId,
-    zohoInvoiceId: refs.zohoInvoiceId,
-    referredName,
-    referredPhone,
-    referredCompany,
-    referredCompanyNormalized,
-    referredProjectNotes,
-    landingPath: bodyValue(body, ["landingPath", "landing_path"], 300) || null,
-    landingUrl: bodyValue(body, ["landingUrl", "landing_url"], 1000) || null,
-    referrerUrl: bodyValue(body, ["referrerUrl", "referrer_url"], 1000) || null,
-    referrerHost: bodyValue(body, ["referrerHost", "referrer_host"], 255) || null,
-    utmSource: bodyValue(body, ["utmSource", "utm_source"], 160) || null,
-    utmMedium: bodyValue(body, ["utmMedium", "utm_medium"], 160) || null,
-    utmCampaign: bodyValue(body, ["utmCampaign", "utm_campaign"], 160) || null,
-    utmContent: bodyValue(body, ["utmContent", "utm_content"], 160) || null,
-    utmTerm: bodyValue(body, ["utmTerm", "utm_term"], 160) || null,
-  };
-  if (referralCode) {
-    const codeRow = await env.REFERRAL_DB.prepare(
-      `SELECT
-         codes.id,
-         codes.code,
-         account.id AS account_id,
-         account.account_type,
-         account.status,
-         account.locale,
-         account.email_normalized,
-         account.company_normalized
-       FROM referral_codes AS codes
-       INNER JOIN referral_accounts AS account
-         ON account.id = codes.account_id
-       WHERE codes.code = ?1 AND codes.is_active = 1
-       LIMIT 1`
-    ).bind(referralCode).first();
-    if (!codeRow || codeRow.status !== "active") {
-      return jsonResponse({ ok: false, error: messages.invalidCode }, 404);
-    }
-    if (codeRow.email_normalized === referredEmailNormalized || (codeRow.company_normalized && codeRow.company_normalized === referredCompanyNormalized)) {
-      return jsonResponse({ ok: false, error: messages.selfReferral }, 409);
-    }
-    const existingByRefs = await findCaseByReferenceSet(env, refs);
-    if (existingByRefs) {
-      await updateReferralCaseReferences(env, existingByRefs.id, payload, now);
-      await recordAuditEvent(env, {
-        accountId: existingByRefs.account_id,
-        caseId: existingByRefs.id,
-        actorType: "system",
-        actorLabel: "zoho-intake",
-        eventType: "zoho_referral_case_updated",
-        metadataJson: { referralCode, mode: "reference_match" },
-        createdAt: now,
-      });
-      referralCaseResponse = { created: false, updated: true, caseId: existingByRefs.id, status: existingByRefs.status };
-    } else {
-      const duplicate = await findActiveCaseByAccountAndEmail(env, codeRow.account_id, referredEmailNormalized);
-      if (duplicate) {
-        await updateReferralCaseReferences(env, duplicate.id, payload, now);
-        await recordAuditEvent(env, {
-          accountId: duplicate.account_id,
-          caseId: duplicate.id,
-          actorType: "system",
-          actorLabel: "zoho-intake",
-          eventType: "zoho_referral_case_linked",
-          metadataJson: { referralCode, mode: "email_match" },
-          createdAt: now,
-        });
-        referralCaseResponse = { duplicate: true, created: false, caseId: duplicate.id, status: duplicate.status, message: messages.existingLead };
-      } else {
-        const referredDiscountPercent = codeRow.account_type === "client" ? referralConfig.clientProgram.discountPercent : 0;
-        const referredDiscountCapCents = codeRow.account_type === "client" ? clientDiscountCapCents() : 0;
-        const rewardPolicyType = codeRow.account_type === "client" ? "client_credit" : "partner_fixed";
-        const insert = await env.REFERRAL_DB.prepare(
-          `INSERT INTO referral_cases (
-            account_id, referral_code_id, referral_code, account_type, status, locale, referred_name, referred_email,
-            referred_email_normalized, referred_phone, referred_company, referred_company_normalized, referred_project_notes,
-            landing_path, landing_url, referrer_url, referrer_host, utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-            referred_discount_percent, referred_discount_cap_cents, reward_policy_type, quote_reference, zoho_lead_id, zoho_deal_id,
-            zoho_quote_id, zoho_invoice_id, created_at, updated_at
-          ) VALUES (?1, ?2, ?3, ?4, 'new', ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18, ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26, ?27, ?28, ?29, ?30, ?31)`
-        ).bind(
-          codeRow.account_id,
-          codeRow.id,
-          referralCode,
-          codeRow.account_type,
-          locale,
-          referredName,
-          referredEmail,
-          referredEmailNormalized,
-          referredPhone,
-          referredCompany,
-          referredCompanyNormalized,
-          referredProjectNotes,
-          payload.landingPath,
-          payload.landingUrl,
-          payload.referrerUrl,
-          payload.referrerHost,
-          payload.utmSource,
-          payload.utmMedium,
-          payload.utmCampaign,
-          payload.utmContent,
-          payload.utmTerm,
-          referredDiscountPercent,
-          referredDiscountCapCents,
-          rewardPolicyType,
-          payload.quoteReference,
-          payload.zohoLeadId,
-          payload.zohoDealId,
-          payload.zohoQuoteId,
-          payload.zohoInvoiceId,
-          now,
-          now,
-        ).run();
-        await recordAuditEvent(env, {
-          accountId: codeRow.account_id,
-          caseId: insert.meta?.last_row_id || null,
-          actorType: "system",
-          actorLabel: "zoho-intake",
-          eventType: "zoho_referral_case_created",
-          metadataJson: { referralCode, accountType: codeRow.account_type },
-          createdAt: now,
-        });
-        referralCaseResponse = {
-          created: true,
-          caseId: insert.meta?.last_row_id || null,
-          accountType: codeRow.account_type,
-          referralCode,
-          referredDiscountPercent,
-          referredDiscountCapCad: referredDiscountCapCents ? fromCents(referredDiscountCapCents) : "",
-        };
-      }
-    }
-    result.referralCase = referralCaseResponse;
-  }
-  return jsonResponse(result);
-}
-
-async function handleReferralZohoStatus(request, env) {
-  if (!dbReady(env)) {
-    return jsonResponse({ ok: false, error: TEXT.en.configUnavailable }, 503);
-  }
-  if (!referralSyncAuthorized(request, env)) {
-    return unauthorizedJsonResponse();
-  }
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: TEXT.en.invalidRequest }, 400);
-  }
-  const locale = normalizeLocale(bodyValue(body, ["locale", "language"], 20));
-  const caseId = Number.parseInt(bodyValue(body, ["caseId", "case_id"], 32), 10);
-  const referralCode = bodyValue(body, ["referralCode", "referral_code", "code"], 40).toUpperCase();
-  const referredEmailNormalized = normalizeEmail(bodyValue(body, ["email", "referredEmail", "referred_email", "emailAddress", "email_address"], 320));
-  const refs = extractZohoRefs(body);
-  const requestedStatus = normalizeCaseStatusInput(
-    bodyValue(body, ["status", "stage", "dealStage", "deal_stage", "invoiceStatus", "invoice_status"], 80)
-  );
-  if (!requestedStatus || !referralConfig.cases.allStatuses.includes(requestedStatus)) {
-    return jsonResponse({ ok: false, error: "A valid referral case status is required." }, 400);
-  }
-  let caseRow = Number.isFinite(caseId) && caseId > 0 ? await loadCaseById(env, caseId) : null;
-  if (!caseRow) {
-    caseRow = await findCaseByReferenceSet(env, refs);
-  }
-  if (!caseRow && referralCode && referredEmailNormalized) {
-    const codeRow = await env.REFERRAL_DB.prepare(
-      `SELECT account.id AS account_id
-       FROM referral_codes AS codes
-       INNER JOIN referral_accounts AS account
-         ON account.id = codes.account_id
-       WHERE codes.code = ?1 AND codes.is_active = 1
-       LIMIT 1`
-    ).bind(referralCode).first();
-    if (codeRow) {
-      caseRow = await findActiveCaseByAccountAndEmail(env, codeRow.account_id, referredEmailNormalized);
-    }
-  }
-  if (!caseRow) {
-    return jsonResponse({ ok: false, error: "No referral record was found for the supplied Zoho references." }, 404);
-  }
-  const now = nowIso();
-  const subtotalRaw = bodyValue(body, ["quotedSubtotalCad", "quoted_subtotal_cad", "subtotalCad", "subtotal_cad", "quotedSubtotal", "quoted_subtotal"], 80);
-  const subtotalCents = subtotalRaw
-    ? toCents(subtotalRaw)
-    : (caseRow ? caseRow.quoted_subtotal_cents : null);
-  if (caseRow && requestedStatus === "completed_paid" && (!Number.isFinite(subtotalCents) || subtotalCents <= 0)) {
-    return jsonResponse({ ok: false, error: "A paid referral needs a valid subtotal." }, 400);
-  }
-  const payload = {
-    quoteReference: refs.quoteReference,
-    zohoLeadId: refs.zohoLeadId,
-    zohoDealId: refs.zohoDealId,
-    zohoQuoteId: refs.zohoQuoteId,
-    zohoInvoiceId: refs.zohoInvoiceId,
-    referredName: bodyValue(body, ["name", "fullName", "full_name"], 160) || null,
-    referredPhone: bodyValue(body, ["phone", "phoneNumber", "phone_number"], 64) || null,
-    referredCompany: bodyValue(body, ["company", "companyName", "company_name", "organization"], 200) || null,
-    referredCompanyNormalized: bodyValue(body, ["company", "companyName", "company_name", "organization"], 200)
-      ? normalizeCompany(bodyValue(body, ["company", "companyName", "company_name", "organization"], 200))
-      : null,
-    referredProjectNotes: bodyValue(body, ["notes", "projectNote", "project_note", "description"], 1200) || null,
-    landingPath: null,
-    landingUrl: null,
-    referrerUrl: null,
-    referrerHost: null,
-    utmSource: null,
-    utmMedium: null,
-    utmCampaign: null,
-    utmContent: null,
-    utmTerm: null,
-  };
-  let updatedReferralCase = null;
-  if (caseRow) {
-    await updateReferralCaseReferences(env, caseRow.id, payload, now);
-    await env.REFERRAL_DB.prepare(
-      `UPDATE referral_cases
-       SET status = ?1,
-           quote_reference = COALESCE(?2, quote_reference),
-           quoted_subtotal_cents = ?3,
-           void_reason = CASE WHEN ?1 = 'void' THEN COALESCE(?4, void_reason) ELSE void_reason END,
-           completed_paid_at = CASE WHEN ?1 = 'completed_paid' THEN COALESCE(completed_paid_at, ?5) ELSE completed_paid_at END,
-           updated_at = ?5
-       WHERE id = ?6`
-    ).bind(
-      requestedStatus,
-      refs.quoteReference || null,
-      subtotalCents,
-      bodyValue(body, ["voidReason", "void_reason", "note"], 500) || null,
-      now,
-      caseRow.id,
-    ).run();
-    updatedReferralCase = await loadCaseById(env, caseRow.id);
-    await syncRewardForCaseLifecycle(
-      env,
-      updatedReferralCase,
-      now,
-      requestedStatus === "void"
-        ? (bodyValue(body, ["voidReason", "void_reason", "note"], 500) || "voided")
-        : "zoho_status_changed"
-    );
-    await recordAuditEvent(env, {
-      accountId: updatedReferralCase.account_id,
-      caseId: updatedReferralCase.id,
-      actorType: "system",
-      actorLabel: "zoho-status",
-      eventType: "zoho_referral_status_synced",
-      metadataJson: {
-        previousStatus: caseRow.status,
-        nextStatus: requestedStatus,
-        quoteReference: refs.quoteReference || "",
-        zohoInvoiceId: refs.zohoInvoiceId || "",
-        quotedSubtotalCents: subtotalCents,
-      },
-      createdAt: now,
-    });
-  }
-  return jsonResponse({
-    ok: true,
-    referralCase: updatedReferralCase,
   });
 }
 
@@ -2639,7 +2015,7 @@ async function handleReferralAdminCases(request, env) {
     `SELECT
        cases.id, cases.account_id, account.name AS account_name, account.email AS account_email, cases.account_type,
        cases.referral_code, cases.status, cases.locale, cases.referred_name, cases.referred_email, cases.referred_phone,
-       cases.referred_company, cases.quote_reference, cases.zoho_lead_id, cases.zoho_deal_id, cases.zoho_quote_id, cases.zoho_invoice_id,
+       cases.referred_company, cases.quote_reference,
        cases.referred_discount_percent, cases.quoted_subtotal_cents,
        cases.reward_amount_cents, cases.created_at, cases.completed_paid_at, rewards.status AS reward_status, rewards.reward_type
      FROM referral_cases AS cases
@@ -3714,9 +3090,9 @@ async function handleReferralAdminExport(request, env) {
        ORDER BY created_at DESC, id DESC`
     ).all()).results || [];
   } else {
-    headings = ["id", "account_id", "referral_code", "account_type", "status", "locale", "referred_name", "referred_email", "referred_phone", "referred_company", "quote_reference", "zoho_lead_id", "zoho_deal_id", "zoho_quote_id", "zoho_invoice_id", "referred_discount_percent", "quoted_subtotal_cents", "reward_policy_type", "reward_amount_cents", "created_at", "completed_paid_at"];
+    headings = ["id", "account_id", "referral_code", "account_type", "status", "locale", "referred_name", "referred_email", "referred_phone", "referred_company", "quote_reference", "referred_discount_percent", "quoted_subtotal_cents", "reward_policy_type", "reward_amount_cents", "created_at", "completed_paid_at"];
     rows = (await env.REFERRAL_DB.prepare(
-      `SELECT id, account_id, referral_code, account_type, status, locale, referred_name, referred_email, referred_phone, referred_company, quote_reference, zoho_lead_id, zoho_deal_id, zoho_quote_id, zoho_invoice_id, referred_discount_percent, quoted_subtotal_cents, reward_policy_type, reward_amount_cents, created_at, completed_paid_at
+      `SELECT id, account_id, referral_code, account_type, status, locale, referred_name, referred_email, referred_phone, referred_company, quote_reference, referred_discount_percent, quoted_subtotal_cents, reward_policy_type, reward_amount_cents, created_at, completed_paid_at
        FROM referral_cases
        ORDER BY created_at DESC, id DESC`
     ).all()).results || [];
@@ -3751,8 +3127,6 @@ export async function routeReferralApi(request, env) {
   if (pathname === "/api/referrals/auth/logout" && request.method === "GET") return handleReferralLogout(request, env);
   if (pathname === "/api/referrals/auth/password" && request.method === "POST") return handleReferralPasswordUpdate(request, env);
   if (pathname === "/api/referrals/portal" && request.method === "GET") return handleReferralPortal(request, env);
-  if (pathname === "/api/referrals/zoho/intake" && request.method === "POST") return handleReferralZohoIntake(request, env);
-  if (pathname === "/api/referrals/zoho/status" && request.method === "POST") return handleReferralZohoStatus(request, env);
   if (pathname === "/api/referrals/admin/summary" && request.method === "GET") return handleReferralAdminSummary(request, env);
   if (pathname === "/api/referrals/admin/applications" && request.method === "GET") return handleReferralAdminApplications(request, env);
   if (pathname === "/api/referrals/admin/accounts" && request.method === "GET") return handleReferralAdminAccounts(request, env);

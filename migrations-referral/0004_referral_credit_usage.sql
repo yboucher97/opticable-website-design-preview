@@ -24,10 +24,6 @@ CREATE TABLE IF NOT EXISTS referral_credit_uses (
   contact_company TEXT,
   contact_company_normalized TEXT,
   quote_reference TEXT,
-  zoho_lead_id TEXT,
-  zoho_deal_id TEXT,
-  zoho_quote_id TEXT,
-  zoho_invoice_id TEXT,
   note TEXT,
   reserved_at TEXT NOT NULL,
   applied_at TEXT,
@@ -46,15 +42,3 @@ CREATE INDEX IF NOT EXISTS referral_credit_uses_email_idx
 
 CREATE INDEX IF NOT EXISTS referral_credit_uses_quote_ref_idx
   ON referral_credit_uses(quote_reference);
-
-CREATE INDEX IF NOT EXISTS referral_credit_uses_zoho_lead_idx
-  ON referral_credit_uses(zoho_lead_id);
-
-CREATE INDEX IF NOT EXISTS referral_credit_uses_zoho_deal_idx
-  ON referral_credit_uses(zoho_deal_id);
-
-CREATE INDEX IF NOT EXISTS referral_credit_uses_zoho_quote_idx
-  ON referral_credit_uses(zoho_quote_id);
-
-CREATE INDEX IF NOT EXISTS referral_credit_uses_zoho_invoice_idx
-  ON referral_credit_uses(zoho_invoice_id);

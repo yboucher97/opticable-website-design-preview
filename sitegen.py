@@ -27,7 +27,7 @@ DEPLOY_ROOT = root / DEPLOY_DIR_NAME
 DEPLOY_ASSET_ROOT = DEPLOY_ROOT / 'assets'
 LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
 LEGACY_ROOT_BUILD_FILES = ('index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'script.js')
-STATIC_ASSET_FILES = ('logo-mark.png', 'opticable-logo.png')
+STATIC_ASSET_FILES = ('logo-mark.png',)
 ROOT_GENERATED_ASSET_FILES = (
     'logo-ui.webp',
     'home-building.webp',
@@ -48,7 +48,6 @@ ASSET_VER = '20260414h'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
 RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
-LOGO_LOCKUP_URL = f'/assets/opticable-logo.png?v={ASSET_VER}'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_UI_WHITE_URL = f'/assets/logo-ui-white.webp?v={ASSET_VER}'
 LOGO_MARK_URL = f'/assets/logo-mark.png?v={ASSET_VER}'
@@ -102,8 +101,6 @@ OG_IMAGE_URL = f'/assets/og-image.png?v={ASSET_VER}'
 PROMO_SOCIAL_URL = f'/assets/promo-social.png?v={ASSET_VER}'
 OG_IMAGE_MIME_TYPE = 'image/png'
 BLOG_SOCIAL_IMAGE_DIR = DEPLOY_ASSET_ROOT / 'blog-social'
-LOGO_LOCKUP_WIDTH = 1600
-LOGO_LOCKUP_HEIGHT = 687
 LOGO_UI_WIDTH = 1200
 LOGO_UI_HEIGHT = 515
 FAVICON_32_SIZE = 32
@@ -248,15 +245,6 @@ HOME_IMAGE_EXPORTS = (
         'format': 'PNG',
     },
     {
-        'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
-        'target': DEPLOY_ASSET_ROOT / 'og-image.webp',
-        'resize': (720, 320),
-        'canvas': (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
-        'background': (13, 23, 18, 255),
-        'format': 'WEBP',
-        'quality': 92,
-    },
-    {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
         'target': DEPLOY_ASSET_ROOT / 'favicon-32.png',
         'resize': (FAVICON_32_SIZE, FAVICON_32_SIZE),
@@ -377,10 +365,6 @@ T = {
         'company': 'Opticable installs and manages commercial cabling, fiber, network infrastructure, security, access control, intercom, WiFi, and IP phone systems for businesses and managed properties.',
         'cta_kicker': 'Project Intake', 'cta_title': 'Need a low-voltage contractor for a commercial property, tenant fit-out, or infrastructure upgrade?', 'cta_copy': 'Use the contact page to send a bilingual quote request and explain the services, device counts, or building systems involved.',
         'footer': 'Opticable delivers organized low-voltage infrastructure for businesses, multi-tenant buildings, commercial properties, property managers, and developers.',
-        'placeholder': 'Placeholder business contact details are included below and should be replaced with live company information before launch.',
-        'form_note': 'Demo form only. Connect this form to your inbox, CRM, or form backend before launch.',
-        'success': 'Thanks, {name}. Your request is ready to be connected to a live inbox or CRM workflow.',
-        'success_generic': 'Your request is ready to be connected to a live inbox or CRM workflow.',
         'home_title': 'Low-Voltage Infrastructure Contractor for Commercial Properties | Opticable',
         'home_desc': 'Opticable provides structured cabling, fiber optic installation, network infrastructure, security camera systems, access control, intercom, commercial WiFi, and IP phone systems for commercial clients.',
         'home_kicker': 'Commercial Network and Building Systems',
@@ -402,7 +386,6 @@ T = {
         'about_values': [('Commercial positioning', 'The site speaks directly to commercial buyers, operators, landlords, and project teams.'), ('Low-voltage depth', 'Service pages explain how data, security, communication, and access systems relate to infrastructure.'), ('Practical content', 'Pages focus on scope, benefits, use cases, and industries served instead of generic marketing filler.'), ('Bilingual support', 'English and French pages support procurement, operations, and project communication needs.')],
         'contact_title': 'Contact Opticable | Request a Commercial Infrastructure Quote', 'contact_desc': 'Contact Opticable to discuss structured cabling, fiber optic installation, network infrastructure, security camera systems, access control, intercom, WiFi, or IP phone projects.',
         'contact_h1': 'Talk to Opticable about your next cabling, network, or building communication project.',
-        'contact_intro': 'The contact page is structured for real commercial lead capture. Replace the placeholder business details below and connect the form to your preferred inbox or CRM for production use.',
         'industries_title': 'Industries Served | Commercial Infrastructure by Opticable', 'industries_desc': 'Opticable supports businesses, multi-tenant buildings, property managers, commercial properties, contractors, and developers with low-voltage infrastructure services.',
         'industries_h1': 'Low-voltage infrastructure services for the teams that own, manage, build, and operate commercial spaces.',
         'industries_intro': 'Different client types need different outcomes: tenant turnover, project sequencing, scalable connectivity, clean room design, or better building security. Opticable is positioned around those practical requirements.',
@@ -414,7 +397,6 @@ T = {
         'form_options': {'property': ['Select one', 'Business office', 'Multi-tenant building', 'Commercial property', 'Retail or hospitality site', 'Industrial or warehouse site', 'Development or construction project'], 'timeline': ['Select one', 'Immediate need', 'Within 30 days', 'Within 1 to 3 months', 'Budgeting or planning phase']},
         'form_services': ['Structured cabling', 'Fiber optic installation', 'Network infrastructure', 'Security camera systems', 'Access control systems', 'Intercom systems', 'Commercial WiFi', 'IP phone systems'],
         'form_placeholder': 'Describe the property, project scope, devices, or network issues that need to be addressed.',
-        'contact_cards': [('General inquiries', 'info@opticable.example'), ('Project requests', 'quotes@opticable.example'), ('Office phone', '+1 (555) 010-0148'), ('Hours', 'Monday to Friday, 8:00 AM to 5:00 PM')],
         'process': [('Site review', 'Review pathways, rooms, risers, devices, and building constraints before work begins.'), ('Scope planning', 'Confirm cable counts, equipment locations, occupied-site constraints, and system integration requirements.'), ('Installation', 'Install, terminate, label, and organize infrastructure with clean work practices and coordinated sequencing.'), ('Turnover', 'Support testing, activation, and handoff so the installed systems stay easier to maintain after go-live.')],
         'clients': [('Businesses', 'Connectivity, security, and communication infrastructure for offices, retail, hospitality, and operational spaces.'), ('Multi-tenant buildings', 'Risers, suites, common areas, and tenant-facing systems in managed or mixed-use properties.'), ('Property managers', 'Repeatable infrastructure standards, building upgrades, and cleaner support across active assets.'), ('Developers and contractors', 'Low-voltage coordination for fit-outs, construction delivery, and project sequencing.')],
     },
@@ -425,10 +407,6 @@ T = {
         'company': 'Opticable installe et gere les infrastructures commerciales de cablage, fibre optique, reseau, securite, controle d acces, interphone, WiFi et telephonie IP pour les entreprises et les proprietes gerees.',
         'cta_kicker': 'Demande de projet', 'cta_title': 'Besoin d un entrepreneur basse tension pour une propriete commerciale, un amenagement locatif ou une mise a niveau d infrastructure?', 'cta_copy': 'Utilisez la page contact pour envoyer une demande de soumission bilingue et decrire les services, les quantites d appareils ou les systemes du batiment concernes.',
         'footer': 'Opticable livre des infrastructures basse tension ordonnees pour les entreprises, les immeubles multi-locatifs, les proprietes commerciales, les gestionnaires immobiliers et les promoteurs.',
-        'placeholder': 'Les coordonnees ci-dessous sont des exemples et doivent etre remplacees par les coordonnees reelles de l entreprise avant la mise en ligne.',
-        'form_note': 'Formulaire de demonstration seulement. Connectez ce formulaire a votre boite courriel, CRM ou service de formulaires avant la mise en ligne.',
-        'success': 'Merci, {name}. Votre demande est prete a etre reliee a une boite courriel ou a un CRM en production.',
-        'success_generic': 'Votre demande est prete a etre reliee a une boite courriel ou a un CRM en production.',
         'home_title': 'Entrepreneur en infrastructures basse tension pour immeubles commerciaux | Opticable',
         'home_desc': 'Opticable offre le cablage structure, la fibre optique, l infrastructure reseau, les cameras de securite, le controle d acces, l interphone, le WiFi commercial et la telephonie IP pour les clients commerciaux.',
         'home_kicker': 'Reseaux commerciaux et systemes de batiment',
@@ -450,7 +428,6 @@ T = {
         'about_values': [('Positionnement commercial', 'Le site parle directement aux acheteurs commerciaux, exploitants, proprietaires et equipes de projet.'), ('Profondeur basse tension', 'Les pages service expliquent comment les systemes de donnees, securite, communication et acces se rattachent a l infrastructure.'), ('Contenu pratique', 'Les pages mettent l accent sur la portee, les avantages, les cas d usage et les secteurs desservis.'), ('Soutien bilingue', 'Les pages en anglais et en francais appuient l approvisionnement, l exploitation et la coordination de projet.')],
         'contact_title': 'Contacter Opticable | Demande de soumission en infrastructure commerciale', 'contact_desc': 'Contactez Opticable pour discuter d un projet de cablage structure, fibre optique, infrastructure reseau, cameras de securite, controle d acces, interphone, WiFi ou telephonie IP.',
         'contact_h1': 'Parlez a Opticable de votre prochain projet de cablage, de reseau ou de communication du batiment.',
-        'contact_intro': 'La page contact est structuree pour de vraies demandes commerciales. Remplacez les coordonnees exemple ci-dessous et reliez le formulaire a votre boite courriel ou a votre CRM avant la mise en ligne.',
         'industries_title': 'Secteurs desservis | Infrastructures commerciales par Opticable', 'industries_desc': 'Opticable accompagne les entreprises, les immeubles multi-locatifs, les gestionnaires immobiliers, les proprietes commerciales, les entrepreneurs et les promoteurs avec des services basse tension.',
         'industries_h1': 'Des services d infrastructures basse tension pour les equipes qui possedent, gerent, construisent et exploitent les espaces commerciaux.',
         'industries_intro': 'Chaque type de client recherche un resultat different : rotation de locataires, sequence de travaux, connectivite evolutive, salles techniques plus propres ou meilleure securite du batiment. Opticable est positionne autour de ces besoins concrets.',
@@ -462,7 +439,6 @@ T = {
         'form_options': {'property': ['Selectionnez', 'Bureau d entreprise', 'Immeuble multi-locatif', 'Propriete commerciale', 'Site de commerce ou d hotellerie', 'Site industriel ou entrepot', 'Projet de developpement ou de construction'], 'timeline': ['Selectionnez', 'Besoin immediat', 'Dans les 30 jours', 'Dans 1 a 3 mois', 'Phase de budget ou de planification']},
         'form_services': ['Cablage structure', 'Installation de fibre optique', 'Infrastructure reseau', 'Systemes de cameras de securite', 'Systemes de controle d acces', 'Systemes d interphone', 'WiFi commercial', 'Systemes de telephonie IP'],
         'form_placeholder': 'Decrivez la propriete, la portee des travaux, les appareils ou les problemes reseau a corriger.',
-        'contact_cards': [('Renseignements generaux', 'info@opticable.example'), ('Demandes de projet', 'soumissions@opticable.example'), ('Telephone du bureau', '+1 (555) 010-0148'), ('Heures', 'Du lundi au vendredi, de 8 h a 17 h')],
         'process': [('Visite du site', 'Analyser les chemins, les salles, les colonnes montantes, les appareils et les contraintes du batiment avant les travaux.'), ('Planification', 'Valider les quantites de cables, l implantation des equipements, les contraintes d occupation et les besoins d integration.'), ('Installation', 'Installer, terminer, reperer et organiser l infrastructure avec des pratiques propres et une bonne coordination.'), ('Remise', 'Soutenir les essais, l activation et la remise afin que les systemes restent plus simples a entretenir apres la mise en service.')],
         'clients': [('Entreprises', 'Infrastructure de connectivite, securite et communication pour bureaux, commerces, hotellerie et espaces operationnels.'), ('Immeubles multi-locatifs', 'Colonnes montantes, suites, aires communes et systemes relies aux locataires dans des proprietes gerees ou mixtes.'), ('Gestionnaires immobiliers', 'Standards repetables, mises a niveau et meilleur soutien sur des actifs occupes.'), ('Promoteurs et entrepreneurs', 'Coordination basse tension pour amenagements, construction et sequence de livraison.')],
     },
@@ -643,10 +619,6 @@ T['fr'].update({
     ],
     'thanks_return_home': "Retour à l'accueil",
     'thanks_view_services': 'Voir les services',
-    'placeholder': "Coordonnées pour les demandes générales, les soumissions et les visites des lieux.",
-    'form_note': "Formulaire de démonstration. Reliez-le à une boîte courriel, à un CRM ou à votre outil de formulaires avant la mise en ligne.",
-    'success': "Merci, {name}. Votre demande peut maintenant être acheminée vers une boîte courriel ou un CRM en production.",
-    'success_generic': "Votre demande peut maintenant être acheminée vers une boîte courriel ou un CRM en production.",
     'home_title': "Caméras, accès, WiFi et réseau commercial | Opticable",
     'home_desc': "Opticable installe caméras, accès, intercom, WiFi commercial et réseau pour immeubles commerciaux au Québec.",
     'home_kicker': 'Technologie commerciale et systèmes du bâtiment',
@@ -4969,8 +4941,6 @@ function initReferralPortal() {
     };
     const caseReference = (item) => {
       if (item.quoteReference) return item.quoteReference;
-      if (item.zohoQuoteId) return `${lang === 'fr' ? 'Soum.' : 'Quote'} ${item.zohoQuoteId}`;
-      if (item.zohoInvoiceId) return `${lang === 'fr' ? 'Fact.' : 'Invoice'} ${item.zohoInvoiceId}`;
       if (item.referredCompany) return item.referredCompany;
       if (item.referredName) return item.referredName;
       return '—';
@@ -5754,7 +5724,7 @@ function initReferralAdmin() {
             row.appendChild(promoAdminTableCell(item.id));
             row.appendChild(promoAdminTableCell(referralLabel(labels.caseStatuses, item.status, item.status || '—')));
             row.appendChild(promoAdminTableCell([
-              item.quote_reference || item.zoho_quote_id || item.zoho_invoice_id || '—',
+              item.quote_reference || '—',
               item.referred_name || '—',
               item.referred_company || '—',
             ].join(' · ')));

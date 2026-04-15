@@ -979,8 +979,6 @@ function initReferralPortal() {
     };
     const caseReference = (item) => {
       if (item.quoteReference) return item.quoteReference;
-      if (item.zohoQuoteId) return `${lang === 'fr' ? 'Soum.' : 'Quote'} ${item.zohoQuoteId}`;
-      if (item.zohoInvoiceId) return `${lang === 'fr' ? 'Fact.' : 'Invoice'} ${item.zohoInvoiceId}`;
       if (item.referredCompany) return item.referredCompany;
       if (item.referredName) return item.referredName;
       return '—';
@@ -1764,7 +1762,7 @@ function initReferralAdmin() {
             row.appendChild(promoAdminTableCell(item.id));
             row.appendChild(promoAdminTableCell(referralLabel(labels.caseStatuses, item.status, item.status || '—')));
             row.appendChild(promoAdminTableCell([
-              item.quote_reference || item.zoho_quote_id || item.zoho_invoice_id || '—',
+              item.quote_reference || '—',
               item.referred_name || '—',
               item.referred_company || '—',
             ].join(' · ')));
