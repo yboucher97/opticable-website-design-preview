@@ -1,0 +1,10 @@
+from decision_pages_a import DECISION_ARTICLES_A
+from decision_pages_b import DECISION_ARTICLES_B
+from industry_pages import INDUSTRY_DETAIL_PAGES
+from landing_pages import CAMPAIGN_LANDING_PAGES, GUIDE_INDEX_PAGE
+
+
+DECISION_ARTICLES = {}
+DECISION_ARTICLES.update(DECISION_ARTICLES_A)
+DECISION_ARTICLES.update(DECISION_ARTICLES_B)
+
