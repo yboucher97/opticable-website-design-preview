@@ -58,6 +58,8 @@ SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
 WEBMANIFEST_URL = '/site.webmanifest'
 GOOGLE_ANALYTICS_TAG_ID = 'G-GYLGWDS464'
 GOOGLE_ADS_TAG_ID = 'AW-18043353221'
+GOOGLE_ADS_PROMO_CONVERSION_SEND_TO = f'{GOOGLE_ADS_TAG_ID}/d5WVCLvr0JgcEIXx3ptD'
+GOOGLE_ADS_QUOTE_CONVERSION_SEND_TO = os.environ.get('OPTICABLE_GOOGLE_ADS_QUOTE_CONVERSION_SEND_TO', '').strip()
 GOOGLE_TAG_SNIPPET = (
     f'<script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_ANALYTICS_TAG_ID}"></script>'
     '<script>\n'
@@ -4451,7 +4453,7 @@ async function initPromoForms() {
               promoCode: entry.promoCode || '',
               locale: lang,
               duplicate: Boolean(result.duplicate),
-              googleAdsSendTo: result.duplicate ? '' : 'AW-18043353221/d5WVCLvr0JgcEIXx3ptD',
+              googleAdsSendTo: result.duplicate ? '' : __GOOGLE_ADS_PROMO_CONVERSION_SEND_TO__,
             }
           );
           if (resultPanel) {
@@ -11229,6 +11231,33 @@ def social_meta_values(lang, key, title, desc, canonical_url, article_meta=None,
     return meta
 
 
+def quote_lead_tracking_snippet(lang):
+    payload = {
+        'event_category': 'quote',
+        'event_label': 'zoho_quote_redirect',
+        'lead_source': 'zoho_quote_form',
+        'quote_locale': lang,
+    }
+    payload_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
+    ads_conversion = ''
+    if GOOGLE_ADS_QUOTE_CONVERSION_SEND_TO:
+        ads_conversion = (
+            f"window.gtag('event','conversion',{{send_to:"
+            f"{json.dumps(GOOGLE_ADS_QUOTE_CONVERSION_SEND_TO)}}});"
+        )
+    return (
+        '<script>'
+        '(function(){'
+        f'var payload={payload_json};'
+        "if(Array.isArray(window.dataLayer)){window.dataLayer.push(Object.assign({event:'quote_request_submitted'},payload));}"
+        "if(typeof window.gtag==='function'){window.gtag('event','generate_lead',payload);"
+        f'{ads_conversion}'
+        '}'
+        '})();'
+        '</script>'
+    )
+
+
 def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None, article_meta=None, page_image_url=None, page_image_alt=''):
     page_url = page_url or absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
@@ -11791,6 +11820,7 @@ reset_deploy_dir()
 copy_static_assets()
 export_home_images()
 export_blog_social_images()
+js = js.replace('__GOOGLE_ADS_PROMO_CONVERSION_SEND_TO__', json.dumps(GOOGLE_ADS_PROMO_CONVERSION_SEND_TO))
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(css.strip() + '\n', encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site.js').write_text(js.strip() + '\n', encoding='utf-8')
 
@@ -11965,6 +11995,7 @@ for lang in ('en', 'fr'):
             f'<div class="two-col"><div class="contact-panel"><p class="eyebrow">{esc(t["thanks"])}</p><h2>{esc(t["thanks_panel_title"])}</h2><p>{esc(t["thanks_panel_copy"])}</p><ul class="check-list">{thanks_steps_html}</ul></div><div class="contact-panel"><p class="eyebrow">{esc(t["contact"])}</p><h2>{esc(t["footer_contact_title"])}</h2><div class="detail-list">{details}</div></div></div>',
             'thanks-section',
         )
+        + quote_lead_tracking_snippet(lang)
     )
     write_url(routes[lang]['thanks'], page(lang, 'thanks', 'contact', t['thanks_title'], t['thanks_desc'], thanks_body, breadcrumb_items=thanks_breadcrumbs, robots='noindex, nofollow'))
 

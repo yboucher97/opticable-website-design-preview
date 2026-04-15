@@ -489,7 +489,7 @@ async function initPromoForms() {
               promoCode: entry.promoCode || '',
               locale: lang,
               duplicate: Boolean(result.duplicate),
-              googleAdsSendTo: result.duplicate ? '' : 'AW-18043353221/d5WVCLvr0JgcEIXx3ptD',
+              googleAdsSendTo: result.duplicate ? '' : "AW-18043353221/d5WVCLvr0JgcEIXx3ptD",
             }
           );
           if (resultPanel) {
