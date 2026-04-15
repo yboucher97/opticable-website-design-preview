@@ -5018,7 +5018,7 @@ function initReferralPortal() {
       } else {
         shell.querySelector('[data-referral-stat-primary]').textContent = referralCurrency(payload.account.walletBalanceCad);
         shell.querySelector('[data-referral-stat-secondary]').textContent = referralCurrency(payload.account.totalEarnedCad);
-        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency('1500.00');
+        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency('1000.00');
       }
       shell.querySelector('[data-referral-password-title]').textContent = payload.account.hasPassword
         ? (copy.passwordPanel?.changeTitle || '')
@@ -5095,7 +5095,7 @@ function initReferralPortal() {
         ]);
         shell.querySelector('[data-referral-credit-panel-code]').textContent = payload.account.currentCreditCode || '—';
         shell.querySelector('[data-referral-credit-panel-balance]').textContent = referralCurrency(payload.account.walletBalanceCad);
-        shell.querySelector('[data-referral-credit-panel-cap]').textContent = referralCurrency('1500.00');
+        shell.querySelector('[data-referral-credit-panel-cap]').textContent = referralCurrency('1000.00');
         const creditInstruction = shell.querySelector('[data-referral-credit-panel-instruction]');
         if (creditInstruction) {
           creditInstruction.textContent = (copy.creditPanel && copy.creditPanel.manualCopy) || '';
@@ -9823,6 +9823,16 @@ def referral_program_copy(lang, program_key):
             copy['terms_sections'] = [
                 *copy['terms_sections'],
                 ("Code membre et utilisation du crédit", "Le portail client affiche un code membre réservé au titulaire du compte. Pour appliquer un crédit, le titulaire doit communiquer avec Opticable. Après validation, Opticable déduit le montant approuvé du solde disponible."),
+                ("Sous-total admissible", "Les rabais et crédits sont calculés seulement sur le sous-total admissible avant taxes approuvé par Opticable. Les taxes, permis, frais de livraison, frais de financement, appels d'urgence, services récurrents, soutien, maintenance, garanties, travaux déjà escomptés et éléments refacturés au coût peuvent être exclus."),
+                ("Code au premier contact", "Le code de référence doit être fourni lors de la première demande de soumission ou du premier échange commercial. Un code ne peut pas être appliqué rétroactivement à une demande déjà connue, déjà ouverte, déjà soumissionnée, déjà signée ou déjà en cours."),
+                ("Un seul code par projet", "Un seul code de référence, partenaire, promo ou crédit membre peut être appliqué à un même projet, sauf approbation écrite d'Opticable."),
+                ("Définition de projet réalisé et payé", "Un projet est considéré réalisé et payé seulement lorsque les travaux sont substantiellement terminés, que la facture est émise, que la facture est payée en totalité et qu'aucun solde, différend, remboursement, annulation, rétrofacturation ou retenue n'est ouvert."),
+                ("Période de retenue", "Opticable peut appliquer une période de retenue allant jusqu'à 30 jours après le paiement complet avant de rendre un crédit utilisable, afin de protéger le programme contre les remboursements, différends, annulations ou ajustements de projet."),
+                ("Aucune valeur monétaire", "Les crédits client n'ont aucune valeur monétaire, ne sont pas transférables, ne peuvent pas être échangés contre de l'argent et ne peuvent pas servir à payer les taxes."),
+                ("Protection contre les abus", "Opticable peut refuser, suspendre, renverser ou annuler un crédit en cas de doublon, fausse information, auto-référence, abus entre entreprises liées, conflit d'intérêts, sollicitation trompeuse, pourriel ou tentative de manipulation du programme."),
+                ("Décision finale", "Opticable conserve la discrétion finale pour déterminer l'admissibilité, le sous-total admissible, les exclusions, les doublons, les montants de crédit et le respect des règles du programme."),
+                ("Modification du programme", "Opticable peut modifier, suspendre ou terminer le programme en tout temps. Les crédits gagnés de bonne foi demeurent admissibles selon les règles applicables, mais peuvent être refusés ou renversés en cas d'erreur, non-paiement, remboursement, fraude ou abus."),
+                ("Droit applicable", "Le programme est régi par les lois applicables du Québec et du Canada."),
             ]
         else:
             copy['faqs'] = [
@@ -9832,6 +9842,16 @@ def referral_program_copy(lang, program_key):
             copy['terms_sections'] = [
                 *copy['terms_sections'],
                 ("Member code and credit use", "The client portal shows a member-only code reserved for the account holder. To apply credit, the account holder must contact Opticable. After validation, Opticable deducts the approved amount from the available balance."),
+                ("Eligible subtotal", "Discounts and credits are calculated only on the eligible pre-tax subtotal approved by Opticable. Taxes, permits, shipping, financing fees, emergency calls, recurring services, support, maintenance, warranty work, already-discounted work, and pass-through items may be excluded."),
+                ("Code on first contact", "The referral code must be provided during the first quote request or first sales conversation. A code cannot be applied retroactively to a request already known, already open, already quoted, already signed, or already in progress."),
+                ("One code per project", "Only one referral, partner, promo, or member credit code may be applied to the same project unless Opticable approves otherwise in writing."),
+                ("Completed and paid definition", "A project is considered completed and paid only when the work is substantially completed, the invoice is issued, the invoice is fully paid, and there is no open balance, dispute, refund, cancellation, chargeback, or holdback."),
+                ("Hold period", "Opticable may apply a hold period of up to 30 days after full payment before making credit usable, to protect the program against refunds, disputes, cancellations, or project adjustments."),
+                ("No cash value", "Client credits have no cash value, are not transferable, cannot be exchanged for money, and cannot be used to pay taxes."),
+                ("Abuse protection", "Opticable may refuse, pause, reverse, or void a credit in cases of duplication, false information, self-referrals, same-company abuse, conflicts of interest, misleading solicitation, spam, or attempts to manipulate the program."),
+                ("Final decision", "Opticable has final discretion to determine eligibility, eligible subtotal, exclusions, duplicate leads, credit amounts, and whether the program rules were respected."),
+                ("Program changes", "Opticable may modify, pause, or end the program at any time. Credits earned in good faith remain eligible under the applicable rules, but may still be refused or reversed for error, non-payment, refund, fraud, or abuse."),
+                ("Governing law", "The program is governed by the applicable laws of Quebec and Canada."),
             ]
     else:
         if lang == 'fr':
@@ -9867,6 +9887,22 @@ def referral_program_copy(lang, program_key):
             copy['terms_sections'] = [
                 *copy['terms_sections'],
                 ("Règlement des commissions", "Les commissions ne sont pas retirées automatiquement dans le portail. Le partenaire doit communiquer avec Opticable pour demander le règlement, puis Opticable confirme le transfert et met le dossier à jour."),
+                ("Sous-total admissible", "Les commissions sont calculées seulement sur le sous-total admissible avant taxes approuvé par Opticable. Les taxes, permis, frais de livraison, frais de financement, appels d'urgence, services récurrents, soutien, maintenance, garanties, travaux déjà escomptés et éléments refacturés au coût peuvent être exclus."),
+                ("Code au premier contact", "Le code partenaire doit être fourni lors de la première demande de soumission ou du premier échange commercial. Un code ne peut pas être appliqué rétroactivement à une demande déjà connue, déjà ouverte, déjà soumissionnée, déjà signée ou déjà en cours."),
+                ("Un seul code par projet", "Un seul code de référence, partenaire, promo ou crédit membre peut être appliqué à un même projet, sauf approbation écrite d'Opticable."),
+                ("Statut indépendant", "Le partenaire demeure indépendant. Il n'est pas un employé, agent, mandataire, courtier, représentant légal ou associé d'Opticable."),
+                ("Aucune autorité d'engager Opticable", "Le partenaire ne peut pas promettre de prix, rabais, délais, disponibilités, garanties, spécifications techniques ou conditions contractuelles au nom d'Opticable."),
+                ("Conformité et conflits d'intérêts", "Le partenaire doit confirmer qu'il est autorisé à recevoir une commission de référence et doit divulguer toute restriction d'employeur, règle d'approvisionnement, règle de copropriété ou de gestion, situation publique ou conflit d'intérêts pouvant interdire ou limiter le paiement."),
+                ("Facturation, taxes et renseignements de paiement", "Le partenaire est responsable de ses taxes, déclarations, factures et obligations d'affaires. Opticable peut exiger le nom légal, le nom d'entreprise, l'adresse, les numéros de taxes, une facture, un reçu ou une confirmation de paiement avant d'émettre un règlement."),
+                ("Appels d'offres et dossiers contrôlés", "Les appels d'offres publics, processus d'approvisionnement formels, dossiers gouvernementaux et situations de soumission contrôlée sont exclus, sauf si la compensation est clairement permise, divulguée et approuvée."),
+                ("Signature d'une entente", "Opticable peut exiger une entente partenaire signée électroniquement avant l'activation du compte, l'utilisation du code ou le versement d'une commission."),
+                ("Définition de projet réalisé et payé", "Un projet est considéré réalisé et payé seulement lorsque les travaux sont substantiellement terminés, que la facture est émise, que la facture est payée en totalité et qu'aucun solde, différend, remboursement, annulation, rétrofacturation ou retenue n'est ouvert."),
+                ("Période de retenue", "Opticable peut appliquer une période de retenue allant jusqu'à 30 jours après le paiement complet avant de régler une commission, afin de protéger le programme contre les remboursements, différends, annulations ou ajustements de projet."),
+                ("Confidentialité et portail", "Le portail peut afficher les statuts, sous-totaux, codes et montants de commission liés au partenaire, mais Opticable n'est pas tenue de divulguer les détails privés complets du client ou du projet référé."),
+                ("Protection contre les abus", "Opticable peut refuser, suspendre, renverser ou annuler une commission en cas de doublon, fausse information, auto-référence, abus entre entreprises liées, conflit d'intérêts, sollicitation trompeuse, pourriel, usage non autorisé de la marque ou tentative de manipulation du programme."),
+                ("Décision finale", "Opticable conserve la discrétion finale pour déterminer l'admissibilité, le sous-total admissible, les exclusions, les doublons, les montants de commission et le respect des règles du programme."),
+                ("Modification du programme", "Opticable peut modifier, suspendre ou terminer le programme en tout temps. Les commissions gagnées de bonne foi demeurent admissibles selon les règles applicables, mais peuvent être refusées ou renversées en cas d'erreur, non-paiement, remboursement, fraude ou abus."),
+                ("Droit applicable", "Le programme est régi par les lois applicables du Québec et du Canada."),
             ]
         else:
             copy['faqs'] = [
@@ -9876,6 +9912,22 @@ def referral_program_copy(lang, program_key):
             copy['terms_sections'] = [
                 *copy['terms_sections'],
                 ("Commission settlement", "Commissions are not withdrawn automatically from the portal. The partner must contact Opticable to request settlement, then Opticable confirms the transfer and updates the portal."),
+                ("Eligible subtotal", "Commissions are calculated only on the eligible pre-tax subtotal approved by Opticable. Taxes, permits, shipping, financing fees, emergency calls, recurring services, support, maintenance, warranty work, already-discounted work, and pass-through items may be excluded."),
+                ("Code on first contact", "The partner code must be provided during the first quote request or first sales conversation. A code cannot be applied retroactively to a request already known, already open, already quoted, already signed, or already in progress."),
+                ("One code per project", "Only one referral, partner, promo, or member credit code may be applied to the same project unless Opticable approves otherwise in writing."),
+                ("Independent status", "The partner remains independent. The partner is not an employee, agent, mandatary, broker, legal representative, or legal partner of Opticable."),
+                ("No authority to bind Opticable", "The partner cannot promise pricing, discounts, timelines, availability, warranties, technical specifications, or contract terms on behalf of Opticable."),
+                ("Compliance and conflicts of interest", "The partner must confirm they are allowed to receive referral compensation and must disclose any employer restriction, procurement rule, condominium or management rule, public-sector situation, or conflict of interest that could prohibit or limit payment."),
+                ("Invoices, taxes, and payment details", "The partner is responsible for its own taxes, declarations, invoices, and business obligations. Opticable may require legal name, business name, address, tax numbers, invoice, receipt, or payment confirmation before issuing settlement."),
+                ("Tenders and controlled files", "Public tenders, formal procurement processes, government files, and controlled bidding situations are excluded unless compensation is clearly allowed, disclosed, and approved."),
+                ("Signed agreement", "Opticable may require an electronically signed partner agreement before account activation, code use, or commission payment."),
+                ("Completed and paid definition", "A project is considered completed and paid only when the work is substantially completed, the invoice is issued, the invoice is fully paid, and there is no open balance, dispute, refund, cancellation, chargeback, or holdback."),
+                ("Hold period", "Opticable may apply a hold period of up to 30 days after full payment before settling a commission, to protect the program against refunds, disputes, cancellations, or project adjustments."),
+                ("Confidentiality and portal", "The portal may show statuses, subtotals, codes, and commission amounts linked to the partner, but Opticable does not need to disclose complete private client or project details for the referred file."),
+                ("Abuse protection", "Opticable may refuse, pause, reverse, or void a commission in cases of duplication, false information, self-referrals, same-company abuse, conflicts of interest, misleading solicitation, spam, unauthorized brand use, or attempts to manipulate the program."),
+                ("Final decision", "Opticable has final discretion to determine eligibility, eligible subtotal, exclusions, duplicate leads, commission amounts, and whether the program rules were respected."),
+                ("Program changes", "Opticable may modify, pause, or end the program at any time. Commissions earned in good faith remain eligible under the applicable rules, but may still be refused or reversed for error, non-payment, refund, fraud, or abuse."),
+                ("Governing law", "The program is governed by the applicable laws of Quebec and Canada."),
             ]
     return copy
 
@@ -10277,7 +10329,7 @@ def referral_portal_shell(lang):
             'client': {
                 'bannerEyebrow': 'Referral Program' if lang == 'en' else 'Programme de référence',
                 'bannerTitle': 'Track your Opticable credit clearly.' if lang == 'en' else 'Suivez votre crédit Opticable clairement.',
-                'bannerCopy': 'This portal shows the referrals tied to your code, the eligible subtotals, and the balance you can apply later with Opticable. A maximum of 1 500 $ can be applied to one quote or project.' if lang == 'en' else 'Ce portail affiche les références liées à votre code, les sous-totaux admissibles et le solde que vous pourrez appliquer plus tard avec Opticable. Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet.',
+                'bannerCopy': 'This portal shows the referrals tied to your code, the eligible subtotals, and the balance you can apply later with Opticable. A project must reach CAD 5,000 before taxes to earn credit, and a maximum of CAD 1,000 can be applied to one quote or project.' if lang == 'en' else 'Ce portail affiche les références liées à votre code, les sous-totaux admissibles et le solde que vous pourrez appliquer plus tard avec Opticable. Un projet doit atteindre 5 000 $ avant taxes pour générer un crédit, et un maximum de 1 000 $ peut être appliqué à une même soumission ou à un même projet.',
                 'stats': {
                     'total': 'Linked cases' if lang == 'en' else 'Dossiers liés',
                     'open': 'Active cases' if lang == 'en' else 'Dossiers en cours',
@@ -10293,7 +10345,7 @@ def referral_portal_shell(lang):
                     'Available credit is the amount you can still ask Opticable to apply on a future quote or project.' if lang == 'en' else 'Le crédit disponible correspond au montant que vous pouvez encore demander à Opticable d’appliquer sur une future soumission ou un futur projet.',
                     'Use the member code shown in this portal only when speaking directly with Opticable. It is not a public referral code.' if lang == 'en' else 'Utilisez le code membre affiché dans ce portail uniquement lors d’un échange direct avec Opticable. Ce n’est pas un code public de référence.',
                     'The share link opens the quote page, but the referred contact must still enter your referral code on the first quote request.' if lang == 'en' else 'Le lien de partage ouvre la page de soumission, mais le contact référé doit tout de même entrer votre code de référence lors de la première demande.',
-                    'A maximum of 1 500 $ can be applied to one quote or project even if your balance is higher.' if lang == 'en' else 'Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé.',
+                    'A project must reach CAD 5,000 before taxes to earn credit, and a maximum of CAD 1,000 can be applied to one quote or project even if your balance is higher.' if lang == 'en' else 'Un projet doit atteindre 5 000 $ avant taxes pour générer un crédit, et un maximum de 1 000 $ peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé.',
                 ],
                 'referralsTitle': 'Linked cases' if lang == 'en' else 'Dossiers liés à votre code',
                 'referralsIntro': 'Each line below corresponds to a quote or project tied to your public referral code.' if lang == 'en' else 'Chaque ligne ci-dessous correspond à une soumission ou à un projet rattaché à votre code de référence public.',
@@ -10388,7 +10440,7 @@ def referral_portal_shell(lang):
         f'<div class="detail-item"><strong>{esc(payload["portal"]["contactEmail"])}</strong><p data-referral-portal-email>—</p></div>'
         f'</div>'
         f'<div class="contact-panel referral-portal-help"><h2 data-referral-help-title>—</h2><ul class="check-list referral-help-list" data-referral-help-list></ul></div>'
-        f'<div class="contact-panel referral-credit-panel" data-referral-credit-panel hidden><p class="eyebrow">{esc(payload["creditPanel"]["eyebrow"])}</p><h2>{esc(payload["creditPanel"]["title"])}</h2><p>{esc(payload["creditPanel"]["intro"])}</p><div class="promo-admin-meta referral-credit-meta"><div class="detail-item"><strong>{esc(payload["creditPanel"]["selectedCodeLabel"])}</strong><p class="promo-admin-code" data-referral-credit-panel-code>—</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["availableLabel"])}</strong><p data-referral-credit-panel-balance>0.00</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["capLabel"])}</strong><p data-referral-credit-panel-cap>1500.00</p></div></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["manualTitle"])}</strong><p data-referral-credit-panel-instruction>{esc(payload["creditPanel"]["manualCopy"])}</p></div></div>'
+        f'<div class="contact-panel referral-credit-panel" data-referral-credit-panel hidden><p class="eyebrow">{esc(payload["creditPanel"]["eyebrow"])}</p><h2>{esc(payload["creditPanel"]["title"])}</h2><p>{esc(payload["creditPanel"]["intro"])}</p><div class="promo-admin-meta referral-credit-meta"><div class="detail-item"><strong>{esc(payload["creditPanel"]["selectedCodeLabel"])}</strong><p class="promo-admin-code" data-referral-credit-panel-code>—</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["availableLabel"])}</strong><p data-referral-credit-panel-balance>0.00</p></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["capLabel"])}</strong><p data-referral-credit-panel-cap>1000.00</p></div></div><div class="detail-item"><strong>{esc(payload["creditPanel"]["manualTitle"])}</strong><p data-referral-credit-panel-instruction>{esc(payload["creditPanel"]["manualCopy"])}</p></div></div>'
         f'<div class="two-col referral-portal-grids"><div class="contact-panel"><h2 data-referral-portal-referrals-title>—</h2><p class="form-note referral-section-intro" data-referral-portal-referrals-intro>—</p><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table referral-portal-cases-table"><thead><tr><th>{esc(payload["tables"]["case"])}</th><th>{esc(payload["tables"]["reference"])}</th><th>{esc(payload["tables"]["status"])}</th><th>{esc(payload["tables"]["created"])}</th><th>{esc(payload["tables"]["subtotal"])}</th><th data-referral-portal-amount-label>{esc(payload["tables"]["amount"])}</th></tr></thead><tbody data-referral-portal-referrals></tbody></table></div></div><div class="contact-panel"><h2 data-referral-portal-rewards-title>—</h2><p class="form-note referral-section-intro" data-referral-portal-rewards-intro>—</p><div class="promo-admin-table-shell"><table class="promo-admin-table referral-mini-table referral-portal-rewards-table"><thead><tr><th>ID</th><th>{esc(payload["tables"]["status"])}</th><th>{esc(payload["tables"]["amount"])}</th><th>{esc(payload["tables"]["created"])}</th><th>{esc(payload["tables"]["note"])}</th></tr></thead><tbody data-referral-portal-rewards></tbody></table></div></div></div>'
         f'<div class="contact-panel referral-portal-security"><p class="eyebrow">{esc(payload["passwordPanel"]["eyebrow"])}</p><h2 data-referral-password-title>—</h2><p data-referral-password-intro>—</p><form class="referral-password-form" data-referral-password-form novalidate><div class="input-grid referral-password-grid"><label class="field" data-referral-password-current-wrap hidden><span>{esc(payload["passwordPanel"]["currentLabel"])}</span><input name="current_password" type="password" autocomplete="current-password" /></label><label class="field"><span>{esc(payload["passwordPanel"]["newLabel"])}</span><input name="new_password" type="password" autocomplete="new-password" minlength="10" required /></label><label class="field"><span>{esc(payload["passwordPanel"]["confirmLabel"])}</span><input name="confirm_password" type="password" autocomplete="new-password" minlength="10" required /></label></div><button class="button button-primary" type="submit" data-referral-password-submit>{esc(payload["passwordPanel"]["createButton"])}</button></form><div class="promo-inline-status" data-referral-password-status hidden></div><div class="promo-inline-error" data-referral-password-error hidden></div></div>'
         f'</div></div>'

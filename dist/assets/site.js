@@ -1051,7 +1051,7 @@ function initReferralPortal() {
       } else {
         shell.querySelector('[data-referral-stat-primary]').textContent = referralCurrency(payload.account.walletBalanceCad);
         shell.querySelector('[data-referral-stat-secondary]').textContent = referralCurrency(payload.account.totalEarnedCad);
-        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency('1500.00');
+        shell.querySelector('[data-referral-stat-tertiary]').textContent = referralCurrency('1000.00');
       }
       shell.querySelector('[data-referral-password-title]').textContent = payload.account.hasPassword
         ? (copy.passwordPanel?.changeTitle || '')
@@ -1128,7 +1128,7 @@ function initReferralPortal() {
         ]);
         shell.querySelector('[data-referral-credit-panel-code]').textContent = payload.account.currentCreditCode || '—';
         shell.querySelector('[data-referral-credit-panel-balance]').textContent = referralCurrency(payload.account.walletBalanceCad);
-        shell.querySelector('[data-referral-credit-panel-cap]').textContent = referralCurrency('1500.00');
+        shell.querySelector('[data-referral-credit-panel-cap]').textContent = referralCurrency('1000.00');
         const creditInstruction = shell.querySelector('[data-referral-credit-panel-instruction]');
         if (creditInstruction) {
           creditInstruction.textContent = (copy.creditPanel && copy.creditPanel.manualCopy) || '';

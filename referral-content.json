@@ -3,17 +3,18 @@
     "en": {
       "label": "Referral Program",
       "title": "Referral Program | Opticable",
-      "desc": "Refer a Quebec project to Opticable. The referred client gets 5% off and you earn Opticable credit after completion and payment.",
+      "desc": "Refer an eligible Quebec project to Opticable. The referred client gets 5% off and you earn 3% in Opticable credit after completion and payment.",
       "eyebrow": "Referral Program",
       "h1": "Refer a project and earn Opticable credit.",
-      "intro": "This program is for clients, property managers, and business contacts who want to recommend Opticable. The referred client gets 5% off a qualifying new project, and you earn 5% in Opticable credit once that project is completed and paid.",
+      "intro": "This program is for clients, property managers, and business contacts who want to recommend Opticable. The referred client gets 5% off a qualifying new project of at least CAD 5,000, and you earn 3% in Opticable credit once that project is completed and paid.",
       "comparison_title": "This program is best if...",
       "comparison_copy": "You want a simple referral setup with future Opticable credit instead of a commercial payout.",
       "comparison_points": [
-        "A referred client gets 5% off, up to CAD 1,500 per quote",
-        "You earn 5% in Opticable credit, up to CAD 1,500 per completed project",
+        "A referred client gets 5% off, up to CAD 1,000 per quote",
+        "You earn 3% in Opticable credit, up to CAD 1,000 per completed project",
         "Credits accumulate in one balance for future Opticable work",
-        "A maximum of CAD 1,500 in credit can be applied to one quote or project"
+        "The eligible project subtotal must be at least CAD 5,000 before taxes",
+        "A maximum of CAD 1,000 in credit can be applied to one quote or project"
       ],
       "steps_title": "How it works",
       "steps_intro": "The process stays intentionally simple. Share your code, the new contact uses it on the first quote request, and the reward is issued only after the project is completed and paid.",
@@ -26,10 +27,11 @@
       "faq_intro": "Quick answers before you join.",
       "faqs": [
         ["Who should use this version?", "Clients, property managers, and business contacts who want a simple refer-and-earn setup."],
-        ["What does the referred client get?", "A 5% discount on a qualifying pre-tax subtotal, capped at CAD 1,500 per quote."],
-        ["What do I get?", "A 5% Opticable credit on the same qualifying subtotal, capped at CAD 1,500 per completed project."],
+        ["What does the referred client get?", "A 5% discount on a qualifying pre-tax subtotal, capped at CAD 1,000 per quote."],
+        ["What do I get?", "A 3% Opticable credit on the same qualifying subtotal, capped at CAD 1,000 per completed project."],
         ["Can credits stack?", "Yes. Eligible completed referrals accumulate in one credit balance."],
-        ["How much can I apply to one quote?", "A maximum of CAD 1,500 in accumulated credit can be applied to one quote or project, even if your balance is higher."],
+        ["Is there a minimum project size?", "Yes. The eligible pre-tax project subtotal must be at least CAD 5,000."],
+        ["How much can I apply to one quote?", "A maximum of CAD 1,000 in accumulated credit can be applied to one quote or project, even if your balance is higher."],
         ["When is the credit earned?", "Only after the referred project is completed and fully paid."]
       ],
       "form_title": "Join the Referral Program",
@@ -38,27 +40,29 @@
       "terms_intro": "These rules stay short and practical. They explain eligibility, the reward, and the main exclusions.",
       "terms_sections": [
         ["Eligibility", "This program is for clients, property managers, and contacts referring a new qualifying Quebec project to Opticable."],
-        ["Client discount", "The referred client gets 5% off the qualifying pre-tax subtotal, capped at CAD 1,500 per quote."],
-        ["Referrer reward", "The referrer earns 5% in Opticable credit on the same qualifying subtotal, capped at CAD 1,500 per completed project."],
+        ["Minimum subtotal", "The eligible pre-tax project subtotal must be at least CAD 5,000 before any referral credit or reward can be earned."],
+        ["Client discount", "The referred client gets 5% off the qualifying pre-tax subtotal, capped at CAD 1,000 per quote."],
+        ["Referrer reward", "The referrer earns 3% in Opticable credit on the same qualifying subtotal, capped at CAD 1,000 per completed project."],
         ["When credit is earned", "Credit is issued only after the referred project is completed and fully paid."],
         ["Exclusions", "Self-referrals, same-company abuse, existing requests already open with Opticable, taxes, recurring services, support calls, already-signed work, and already-discounted scopes are excluded."],
-        ["Credit use", "Credits are non-cash and non-transferable. A maximum of CAD 1,500 can be applied to one quote or project."]
+        ["Credit use", "Credits are non-cash and non-transferable. A maximum of CAD 1,000 can be applied to one quote or project."]
       ]
     },
     "fr": {
       "label": "Programme de référence",
       "title": "Programme de référence | Opticable",
-      "desc": "Recommandez un projet au Québec. Le client référé obtient 5 % de rabais et vous gagnez un crédit Opticable après réalisation et paiement.",
+      "desc": "Recommandez un projet admissible au Québec. Le client référé obtient 5 % de rabais et vous gagnez 3 % en crédit Opticable après réalisation et paiement.",
       "eyebrow": "Programme de référence",
       "h1": "Recommandez un projet et obtenez un crédit Opticable.",
-      "intro": "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable. Le client référé obtient 5 % de rabais sur un nouveau projet admissible, et vous recevez 5 % en crédit Opticable lorsque le projet est réalisé et payé.",
+      "intro": "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable. Le client référé obtient 5 % de rabais sur un nouveau projet admissible d'au moins 5 000 $, et vous recevez 3 % en crédit Opticable lorsque le projet est réalisé et payé.",
       "comparison_title": "Ce programme est pour vous si...",
       "comparison_copy": "Vous souhaitez recommander Opticable et accumuler un crédit applicable à un futur projet.",
       "comparison_points": [
-        "Le client référé obtient 5 % de rabais, jusqu'à 1 500 $ par soumission",
-        "Vous recevez 5 % en crédit Opticable, jusqu'à 1 500 $ par projet réalisé",
+        "Le client référé obtient 5 % de rabais, jusqu'à 1 000 $ par soumission",
+        "Vous recevez 3 % en crédit Opticable, jusqu'à 1 000 $ par projet réalisé",
         "Les crédits s'accumulent dans un seul solde pour de futurs travaux Opticable",
-        "Un maximum de 1 500 $ en crédit peut être appliqué à une même soumission ou à un même projet"
+        "Le sous-total admissible du projet doit être d'au moins 5 000 $ avant taxes",
+        "Un maximum de 1 000 $ en crédit peut être appliqué à une même soumission ou à un même projet"
       ],
       "steps_title": "Comment ça fonctionne",
       "steps_intro": "Le fonctionnement reste volontairement simple. Vous partagez votre code, le nouveau contact l'utilise lors de la première demande de soumission, puis la récompense est émise seulement après la réalisation et le paiement.",
@@ -71,10 +75,11 @@
       "faq_intro": "Réponses rapides avant de vous inscrire.",
       "faqs": [
         ["À qui s'adresse ce programme ?", "Aux clients, aux gestionnaires et aux contacts d'affaires qui souhaitent recommander Opticable."],
-        ["Que reçoit le client référé ?", "Un rabais de 5 % sur le sous-total admissible avant taxes, jusqu'à 1 500 $ par soumission."],
-        ["Que reçois-je ?", "Un crédit Opticable de 5 % sur le même sous-total admissible, jusqu'à 1 500 $ par projet réalisé."],
+        ["Que reçoit le client référé ?", "Un rabais de 5 % sur le sous-total admissible avant taxes, jusqu'à 1 000 $ par soumission."],
+        ["Que reçois-je ?", "Un crédit Opticable de 3 % sur le même sous-total admissible, jusqu'à 1 000 $ par projet réalisé."],
         ["Les crédits s'additionnent-ils ?", "Oui. Les références admissibles réalisées s'accumulent dans un seul solde."],
-        ["Combien puis-je appliquer sur une même soumission ?", "Un maximum de 1 500 $ en crédit peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé."],
+        ["Y a-t-il un minimum de projet ?", "Oui. Le sous-total admissible avant taxes doit être d'au moins 5 000 $."],
+        ["Combien puis-je appliquer sur une même soumission ?", "Un maximum de 1 000 $ en crédit peut être appliqué à une même soumission ou à un même projet, même si votre solde est plus élevé."],
         ["Quand le crédit est-il gagné ?", "Seulement après la réalisation et le paiement complet du projet référé."]
       ],
       "form_title": "Joindre le programme de référence",
@@ -83,11 +88,12 @@
       "terms_intro": "Ces règles restent courtes et concrètes. Elles expliquent l'admissibilité, la récompense et les principales exclusions.",
       "terms_sections": [
         ["Admissibilité", "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts qui réfèrent un nouveau projet admissible au Québec à Opticable."],
-        ["Rabais du client référé", "Le client référé obtient 5 % de rabais sur le sous-total admissible avant taxes, jusqu'à 1 500 $ par soumission."],
-        ["Récompense du référent", "Le référent gagne 5 % en crédit Opticable sur le même sous-total admissible, jusqu'à 1 500 $ par projet réalisé."],
+        ["Sous-total minimum", "Le sous-total admissible du projet doit être d'au moins 5 000 $ avant taxes pour donner droit à un rabais ou à une récompense."],
+        ["Rabais du client référé", "Le client référé obtient 5 % de rabais sur le sous-total admissible avant taxes, jusqu'à 1 000 $ par soumission."],
+        ["Récompense du référent", "Le référent gagne 3 % en crédit Opticable sur le même sous-total admissible, jusqu'à 1 000 $ par projet réalisé."],
         ["Quand le crédit est émis", "Le crédit est émis seulement après la réalisation et le paiement complet du projet référé."],
         ["Exclusions", "Les auto-références, les abus entre entreprises liées, les demandes déjà ouvertes chez Opticable, les taxes, les services récurrents, les appels de soutien, les travaux déjà signés et les travaux déjà escomptés sont exclus."],
-        ["Utilisation du crédit", "Les crédits sont non monétaires et non transférables. Un maximum de 1 500 $ peut être appliqué à une même soumission ou à un même projet."]
+        ["Utilisation du crédit", "Les crédits sont non monétaires et non transférables. Un maximum de 1 000 $ peut être appliqué à une même soumission ou à un même projet."]
       ]
     }
   },
@@ -119,7 +125,7 @@
       "faqs": [
         ["Who should use this version?", "IT providers, trades, consultants, property contacts, and businesses sending repeat referrals."],
         ["What does the referred client get?", "This program does not promise an automatic discount to the referred client."],
-        ["What do I get?", "A fixed payout after completion and payment: CAD 250 below 10,000, CAD 500 from 10,000 to 24,999.99, and CAD 1,000 from 25,000 and up."],
+        ["What do I get?", "A fixed payout after completion and payment: CAD 150 from 5,000 to 9,999.99, CAD 400 from 10,000 to 24,999.99, CAD 750 from 25,000 to 49,999.99, and CAD 1,250 from 50,000 and up."],
         ["When is the payout earned?", "Only after the referred project is completed and fully paid."],
         ["Do I get a portal?", "Yes, but only after the application is approved and the partner account is created."]
       ],
@@ -131,7 +137,8 @@
         ["Eligibility", "This program is for businesses and professionals referring new Quebec projects to Opticable."],
         ["Approval", "Every partner request is validated before the partner account is created."],
         ["Client offer", "This program does not promise an automatic discount to the referred client."],
-        ["Partner payout", "Completed and paid projects earn a fixed payout based on project size: CAD 250 below 10,000, CAD 500 from 10,000 to 24,999.99, and CAD 1,000 at 25,000 and up."],
+        ["Minimum subtotal", "The eligible pre-tax project subtotal must be at least CAD 5,000 before a partner payout can be earned."],
+        ["Partner payout", "Completed and paid projects earn a fixed payout based on project size: CAD 150 from 5,000 to 9,999.99, CAD 400 from 10,000 to 24,999.99, CAD 750 from 25,000 to 49,999.99, and CAD 1,250 at 50,000 and up."],
         ["When payout is earned", "Payout is earned only after the referred project is completed and fully paid."],
         ["Exclusions", "Self-referrals, same-company abuse, existing requests already open with Opticable, taxes, recurring services, support calls, already-signed work, and already-discounted scopes are excluded."]
       ]
@@ -163,7 +170,7 @@
       "faqs": [
         ["À qui s'adresse ce programme ?", "Aux fournisseurs TI, aux corps de métier, aux consultants, aux contacts immobiliers et aux entreprises qui envoient des références récurrentes."],
         ["Que reçoit le client référé ?", "Ce programme ne promet pas automatiquement un rabais au client référé."],
-        ["Que reçois-je ?", "Un paiement fixe après réalisation et paiement : 250 $ sous 10 000 $, 500 $ de 10 000 $ à 24 999,99 $ et 1 000 $ à partir de 25 000 $."],
+        ["Que reçois-je ?", "Un paiement fixe après réalisation et paiement : 150 $ de 5 000 $ à 9 999,99 $, 400 $ de 10 000 $ à 24 999,99 $, 750 $ de 25 000 $ à 49 999,99 $ et 1 250 $ à partir de 50 000 $."],
         ["Quand le paiement est-il gagné ?", "Seulement après la réalisation et le paiement complet du projet référé."],
         ["Ai-je accès à un portail ?", "Oui, après l'approbation de la demande et la création du compte partenaire par Opticable."]
       ],
@@ -175,7 +182,8 @@
         ["Admissibilité", "Ce programme est destiné aux entreprises et aux professionnels qui réfèrent de nouveaux projets au Québec à Opticable."],
         ["Approbation", "Chaque demande partenaire est validée avant la création du compte partenaire."],
         ["Offre au client", "Ce programme ne promet pas automatiquement un rabais au client référé."],
-        ["Paiement du partenaire", "Les projets réalisés et payés donnent droit à un paiement fixe selon la taille du projet : 250 $ sous 10 000 $, 500 $ de 10 000 $ à 24 999,99 $ et 1 000 $ à 25 000 $ et plus."],
+        ["Sous-total minimum", "Le sous-total admissible du projet doit être d'au moins 5 000 $ avant taxes pour donner droit à un paiement partenaire."],
+        ["Paiement du partenaire", "Les projets réalisés et payés donnent droit à un paiement fixe selon la taille du projet : 150 $ de 5 000 $ à 9 999,99 $, 400 $ de 10 000 $ à 24 999,99 $, 750 $ de 25 000 $ à 49 999,99 $ et 1 250 $ à 50 000 $ et plus."],
         ["Quand le paiement est gagné", "Le paiement est gagné seulement après la réalisation et le paiement complet du projet référé."],
         ["Exclusions", "Les auto-références, les abus entre entreprises liées, les demandes déjà ouvertes chez Opticable, les taxes, les services récurrents, les appels de soutien, les travaux déjà signés et les travaux déjà escomptés sont exclus."]
       ]

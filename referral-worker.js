@@ -828,11 +828,16 @@ function clientDiscountCapCents() {
   return Math.round(referralConfig.clientProgram.discountCapCad * 100);
 }
 
+function clientMinimumSubtotalCents() {
+  return Math.round(Number(referralConfig.clientProgram.minimumSubtotalCad || 0) * 100);
+}
+
 function clientRewardCapCents() {
   return Math.round(referralConfig.clientProgram.creditCapCad * 100);
 }
 
 function clientRewardCents(subtotalCents) {
+  if (subtotalCents < clientMinimumSubtotalCents()) return 0;
   return Math.min(
     Math.round(subtotalCents * (referralConfig.clientProgram.creditPercent / 100)),
     clientRewardCapCents(),
@@ -845,6 +850,8 @@ function clientCreditUseCapCents() {
 
 function partnerRewardCents(subtotalCents) {
   const subtotalCad = subtotalCents / 100;
+  const minimumEligible = Number(referralConfig.partnerProgram.minimumSubtotalCad || 0);
+  if (subtotalCad < minimumEligible) return 0;
   for (const tier of referralConfig.partnerProgram.payoutTiersCad || []) {
     const minimum = Number(tier.minSubtotalCad || 0);
     const maximum = tier.maxSubtotalCad == null ? Number.POSITIVE_INFINITY : Number(tier.maxSubtotalCad);
@@ -1028,7 +1035,7 @@ async function syncRewardForCaseLifecycle(env, caseRow, now, reason = "status_ch
     }
   }
 
-  if (!existing && targetStatus !== "void") {
+  if (!existing && targetStatus !== "void" && amountCents > 0) {
     const insert = await env.REFERRAL_DB.prepare(
       `INSERT INTO referral_rewards (
         account_id, referral_case_id, reward_type, status, amount_cents, note, created_at, earned_at, settled_at, updated_at
@@ -1064,6 +1071,17 @@ async function syncRewardForCaseLifecycle(env, caseRow, now, reason = "status_ch
       metadataJson: { rewardType, amountCents, nextStatus: targetStatus },
       createdAt: now,
     });
+    await syncStoredAccountBalance(env, caseRow.account_id, now);
+    return;
+  }
+
+  if (!existing && targetStatus !== "void" && amountCents <= 0) {
+    await env.REFERRAL_DB.prepare(
+      `UPDATE referral_cases
+       SET reward_amount_cents = ?1,
+           updated_at = ?2
+       WHERE id = ?3`
+    ).bind(0, now, caseRow.id).run();
     await syncStoredAccountBalance(env, caseRow.account_id, now);
     return;
   }
@@ -1365,7 +1383,13 @@ async function createOrReuseAccount(request, env, body) {
     actorType: "public",
     actorLabel: "apply-form",
     eventType: accountType === "partner" ? "partner_application_created" : "client_account_created",
-    metadataJson: { locale, status },
+    metadataJson: {
+      locale,
+      status,
+      rulesAttestation: true,
+      termsVersion: referralConfig.termsVersion,
+      privacyVersion: referralConfig.privacyVersion,
+    },
     createdAt: now,
   });
   return { duplicate: false, account: await loadAccountById(env, accountId) };
@@ -1438,6 +1462,9 @@ async function createPartnerApplication(request, env, body) {
       applicationId,
       email,
       company,
+      rulesAttestation: true,
+      termsVersion: referralConfig.termsVersion,
+      privacyVersion: referralConfig.privacyVersion,
       emailProvider: emailResult.provider,
       emailProviderMessageId: emailResult.messageId || null,
     },

@@ -1,36 +1,43 @@
 {
-  "version": "2026-04-10",
+  "version": "2026-04-15",
   "sponsor": {
     "brandName": "Opticable",
     "legalName": "9453-4757 Quebec Inc."
   },
-  "termsVersion": "2026-04-10",
+  "termsVersion": "2026-04-15",
   "privacyVersion": "2026-04-10",
   "timezone": "America/Toronto",
   "loginLinkExpiryMinutes": 30,
   "sessionDurationDays": 30,
   "clientProgram": {
+    "minimumSubtotalCad": 5000,
     "discountPercent": 5,
-    "discountCapCad": 1500,
-    "creditPercent": 5,
-    "creditCapCad": 1500
+    "discountCapCad": 1000,
+    "creditPercent": 3,
+    "creditCapCad": 1000
   },
   "partnerProgram": {
+    "minimumSubtotalCad": 5000,
     "payoutTiersCad": [
       {
-        "minSubtotalCad": 0,
+        "minSubtotalCad": 5000,
         "maxSubtotalCad": 9999.99,
-        "payoutCad": 250
+        "payoutCad": 150
       },
       {
         "minSubtotalCad": 10000,
         "maxSubtotalCad": 24999.99,
-        "payoutCad": 500
+        "payoutCad": 400
       },
       {
         "minSubtotalCad": 25000,
+        "maxSubtotalCad": 49999.99,
+        "payoutCad": 750
+      },
+      {
+        "minSubtotalCad": 50000,
         "maxSubtotalCad": null,
-        "payoutCad": 1000
+        "payoutCad": 1250
       }
     ]
   },
