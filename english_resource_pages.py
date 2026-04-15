@@ -856,3 +856,7 @@ INDUSTRY_DETAIL_PAGES_EN = {
         "cta_label": "Request a quote",
     },
 }
+
+for _collection in (EN_GUIDE_ARTICLES, EN_DECISION_ARTICLES):
+    for _item in _collection.values():
+        _item["author"] = "Opticable Team"

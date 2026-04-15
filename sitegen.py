@@ -1979,10 +1979,10 @@ T['en'].update({
     'service_area_title': 'Service area',
     'service_area_intro': 'Opticable serves commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
     'service_area_regions': ['Montreal', 'Laval', 'Longueuil', 'South Shore', 'North Shore', 'Laurentians', 'And across Quebec'],
-    'industries_title': 'Clients and project types we serve | Opticable',
-    'industries_desc': 'Opticable installs and manages security, WiFi, and cabling for businesses, property managers, and multi-tenant buildings. Montreal and across Quebec.',
-    'industries_h1': 'The teams that manage, build, and operate commercial buildings',
-    'industries_intro': 'Opticable works in occupied buildings, active construction sites, and properties already in operation. Our clients are the people who need the systems to work without unpleasant surprises.',
+    'industries_title': 'Clients, Buildings and Project Types We Serve | Opticable',
+    'industries_desc': 'Opticable installs and manages security, WiFi, and cabling for occupied buildings, new buildings, new projects, businesses, and property teams across Quebec.',
+    'industries_h1': 'The teams that manage, build, renovate, and operate commercial buildings',
+    'industries_intro': 'Opticable works in occupied buildings, new buildings, renovations, active construction sites, and properties already in operation. Our clients are the people who need the systems to work without unpleasant surprises.',
     'faq_title': 'Frequently asked questions about our services | Opticable',
     'faq_desc': 'Answers to common questions about installing and managing cameras, access control, WiFi, intercom, and cabling for commercial buildings in Quebec.',
     'faq_h1': 'Do you have questions about our services or a project?',
@@ -1990,12 +1990,12 @@ T['en'].update({
     'faq_panel_title': 'Frequently asked questions',
     'faq_panel_copy': 'Useful answers about quotes, installation, technical support, and the systems we manage after commissioning.',
     'clients_title': 'Solutions shaped for real site conditions',
-    'clients_intro': 'We work in occupied buildings, mixed-use sites, and environments where continuity of operations matters.',
+    'clients_intro': 'We work in occupied buildings, new buildings, new projects, mixed-use sites, and environments where continuity of operations matters.',
     'clients': [
         ('Businesses, offices, and retail spaces', 'Security, WiFi, connectivity, and entry systems for operations that need to stay stable every day.'),
         ('Multi-tenant buildings', 'Intercom, access control, cameras, WiFi, and cabling for common spaces, lobbies, and occupied environments.'),
         ('Commercial multi-tenant properties', 'Building systems planned for shared spaces, technical rooms, and day-to-day operations.'),
-        ('Property managers and developers', 'One partner for upgrades, multi-building standardization, and site coordination.'),
+        ('Property managers and developers', 'One partner for upgrades, new building projects, multi-building standardization, and site coordination.'),
     ],
     'process_title': 'Our installation method',
     'process_intro': 'A well-delivered project starts with proper preparation.',
@@ -2899,7 +2899,7 @@ EN_CLIENTELE_SECTIONS = [
 
 EN_CLIENTELE_CTA = {
     'title': 'Do you have a project type that is not listed here?',
-    'copy': 'We also work in hospitality, institutional environments, and industrial sites. Tell us about your building.',
+    'copy': 'We also work in hospitality, institutional environments, industrial sites, new construction, and new projects. Tell us about your building or project.',
     'label': 'Contact us',
 }
 
@@ -13118,7 +13118,18 @@ for lang in ('en', 'fr'):
                 'hero-band page-hero-band',
                 'layout-shell page-hero',
             )
-            + industry_detail_cards_section(lang, {'eyebrow': 'Clientèle', 'title': 'Pages par type d’immeuble', 'intro': 'Choisissez le contexte qui ressemble le plus à votre bâtiment pour voir les systèmes et contraintes qui reviennent souvent.', 'label': 'Voir cette clientèle', 'cta_href': '', 'cta_label': ''}, INDUSTRY_DETAIL_KEYS)
+            + industry_detail_cards_section(
+                lang,
+                {
+                    'eyebrow': 'Clientèle' if lang == 'fr' else 'Who we serve',
+                    'title': 'Pages par type d’immeuble' if lang == 'fr' else 'Pages by building and project type',
+                    'intro': 'Choisissez le contexte qui ressemble le plus à votre bâtiment pour voir les systèmes et contraintes qui reviennent souvent.' if lang == 'fr' else 'Choose the context closest to your occupied building, new building, renovation, or active project.',
+                    'label': 'Voir cette clientèle' if lang == 'fr' else 'View this type',
+                    'cta_href': '',
+                    'cta_label': '',
+                },
+                INDUSTRY_DETAIL_KEYS,
+            )
             + client_sections_html
             + case_preview
             + inline_cta_band(custom_clientele_cta['title'], custom_clientele_cta['copy'], routes[lang]['contact'], custom_clientele_cta['label'])
