@@ -9,7 +9,15 @@ import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 from PIL import Image, ImageDraw, ImageFont, ImageOps, UnidentifiedImageError
 from guide_pages import GUIDE_ARTICLES
-from resource_pages import DECISION_ARTICLES, INDUSTRY_DETAIL_PAGES, CAMPAIGN_LANDING_PAGES, GUIDE_INDEX_PAGE
+from resource_pages import (
+    CAMPAIGN_LANDING_PAGES,
+    CAMPAIGN_LANDING_PAGES_EN,
+    DECISION_ARTICLES,
+    GUIDE_INDEX_PAGE,
+    GUIDE_INDEX_PAGE_EN,
+    INDUSTRY_DETAIL_PAGES,
+    INDUSTRY_DETAIL_PAGES_EN,
+)
 
 root = Path(__file__).resolve().parent
 DEFAULT_SITE_URL = 'https://opticable.ca'
@@ -611,6 +619,18 @@ GUIDE_ARTICLE_DATA = normalize_article_collection(GUIDE_ARTICLES)
 GUIDE_ARTICLE_KEYS = tuple(GUIDE_ARTICLE_DATA.keys())
 DECISION_ARTICLE_DATA = normalize_article_collection(DECISION_ARTICLES)
 DECISION_ARTICLE_KEYS = tuple(DECISION_ARTICLE_DATA.keys())
+GUIDE_INDEX_PAGES = {
+    'en': GUIDE_INDEX_PAGE_EN,
+    'fr': GUIDE_INDEX_PAGE,
+}
+INDUSTRY_DETAIL_PAGES_BY_LANG = {
+    'en': INDUSTRY_DETAIL_PAGES_EN,
+    'fr': INDUSTRY_DETAIL_PAGES,
+}
+CAMPAIGN_LANDING_PAGES_BY_LANG = {
+    'en': CAMPAIGN_LANDING_PAGES_EN,
+    'fr': CAMPAIGN_LANDING_PAGES,
+}
 RESOURCE_ARTICLE_KEYS = (
     'camera-system-pricing-commercial-building',
     'access-control-pricing-commercial-building',
@@ -730,6 +750,40 @@ FR_GUIDE_SECTION_COPY = {
         'cta_href_key': 'guides',
         'cta_label': 'Voir tous les guides',
     },
+}
+EN_GUIDE_SECTION_COPY = {
+    'home': {
+        'eyebrow': 'Guides and decisions',
+        'title': 'Helpful pages before requesting a quote',
+        'intro': 'Practical answers to clarify budget, system choice, and the right next step.',
+        'cta_href_key': 'guides',
+        'cta_label': 'View all guides',
+    },
+    'contact': {
+        'eyebrow': 'Helpful pages',
+        'title': 'Want to clarify the project before sending the form?',
+        'intro': 'These pages answer the questions that come up most often before a quote request.',
+        'cta_href_key': 'guides',
+        'cta_label': 'View all guides',
+    },
+    'faq': {
+        'eyebrow': 'Detailed guides',
+        'title': 'Need more than a short answer?',
+        'intro': 'Use these reference pages when you need to compare options, frame a budget, or prepare an occupied site.',
+        'cta_href_key': 'guides',
+        'cta_label': 'View all guides',
+    },
+    'blog': {
+        'eyebrow': 'Decision pages',
+        'title': 'Compare, budget, and prepare the right scope',
+        'intro': 'In addition to blog articles, these pages answer the most common buying and planning questions.',
+        'cta_href_key': 'guides',
+        'cta_label': 'View all guides',
+    },
+}
+GUIDE_SECTION_COPY = {
+    'en': EN_GUIDE_SECTION_COPY,
+    'fr': FR_GUIDE_SECTION_COPY,
 }
 FR_SERVICE_GUIDE_KEYS = {
     'security-camera-systems': ('camera-system-pricing-commercial-building', 'analog-cctv-to-ip-migration'),
@@ -2537,7 +2591,7 @@ services['access-control-systems']['fr'].update({
 })
 services['commercial-wifi-installation']['fr'].update({
     'name': 'WiFi commercial',
-    'title': 'Installation WiFi commercial pour bureaux et immeubles | Opticable',
+    'title': 'Installation WiFi commercial pour immeubles | Opticable',
     'desc': 'Conception, installation, gestion et maintenance de WiFi commercial pour bureaux et immeubles. Montréal, Laval, Longueuil et partout au Québec.',
     'hero': 'WiFi commercial pour bureaux, immeubles et espaces partagés',
     'intro': "Opticable conçoit, installe et assure la gestion des réseaux WiFi professionnels pour les immeubles commerciaux et multilocatifs. Signal stable, couverture bien dimensionnée et infrastructure câblée qui supporte les bornes, sans angle mort, sans surcharge, avec un soutien technique disponible.",
@@ -2999,6 +3053,23 @@ BLOG_PAGE['en'] = {
 }
 
 BLOG_HUB_PAGE = {
+    'en': {
+        'title': 'Blog, Guides and Articles | Opticable',
+        'desc': 'Guides, comparisons, pricing pages, and articles for planning camera, access control, intercom, WiFi, and cabling projects.',
+        'eyebrow': 'Opticable resources',
+        'h1': 'Guides and articles to plan your project',
+        'intro': 'Use this page to choose the right type of content for your need. Guides help with decisions, budgets, and preparation. Articles explain field issues, technical choices, and best practices.',
+        'chooser_title': 'Choose the right resource',
+        'chooser_intro': 'Start with the section that best matches your current step.',
+        'chooser_cards': [
+            ('Guides', 'Compare options, frame a budget, choose a system, or prepare a quote request.', '/en/guides/', 'View guides'),
+            ('Articles', 'Understand field issues, installation logic, and technical best practices.', '/en/blog/articles/', 'View articles'),
+        ],
+        'guides_title': 'Guides to review before requesting a quote',
+        'guides_intro': 'Decision, pricing, comparison, and project-preparation pages.',
+        'articles_title': 'Recent articles',
+        'articles_intro': 'Explanatory content about systems, common issues, and practical next steps.',
+    },
     'fr': {
         'title': 'Blogue, guides et articles | Opticable',
         'desc': "Guides, comparatifs, pages de prix et articles pour mieux planifier un projet de caméras, contrôle d'accès, intercom, WiFi et câblage commercial.",
@@ -3019,6 +3090,13 @@ BLOG_HUB_PAGE = {
 }
 
 BLOG_ARTICLES_PAGE = {
+    'en': {
+        'title': 'Blog Articles | Opticable',
+        'desc': 'Practical articles about cameras, access control, intercom, commercial WiFi, cabling, and network infrastructure.',
+        'eyebrow': 'Articles',
+        'h1': 'Opticable blog articles',
+        'intro': 'Practical articles to understand field issues, technical choices, and installation best practices in commercial buildings.',
+    },
     'fr': {
         'title': 'Articles du blogue | Opticable',
         'desc': "Articles pratiques sur les caméras, le contrôle d'accès, l'intercom, le WiFi commercial, le câblage et l'infrastructure réseau.",
@@ -3217,7 +3295,7 @@ BLOG_ARTICLES = {
         },
         'fr': {
             'path': '/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/',
-            'title': 'Pourquoi monter la puissance du WiFi empire les choses | Opticable',
+            'title': 'Pourquoi plus de puissance WiFi empire les choses | Opticable',
             'desc': "Pourquoi augmenter la puissance d'une borne WiFi règle rarement les problèmes de couverture, d'interférences et de performance dans un immeuble commercial.",
             'eyebrow': 'WiFi commercial',
             'headline': "Monter la puissance du WiFi, c'est souvent aggraver le problème.",
@@ -4176,12 +4254,16 @@ for key in order:
     routes['en'][key] = f"/en/services/{services[key]['en']['slug']}/"
     routes['fr'][key] = f"/fr/services/{services[key]['fr']['slug']}/"
 
+routes['en']['articles'] = '/en/blog/articles/'
 routes['fr']['articles'] = '/fr/blogue/articles/'
-routes['fr']['guides'] = GUIDE_INDEX_PAGE['path']
-for key, page_data in INDUSTRY_DETAIL_PAGES.items():
-    routes['fr'][key] = page_data['path']
-for key, page_data in CAMPAIGN_LANDING_PAGES.items():
-    routes['fr'][key] = page_data['path']
+for lang, guide_index_page in GUIDE_INDEX_PAGES.items():
+    routes[lang]['guides'] = guide_index_page['path']
+for lang, detail_pages in INDUSTRY_DETAIL_PAGES_BY_LANG.items():
+    for key, page_data in detail_pages.items():
+        routes[lang][key] = page_data['path']
+for lang, landing_pages in CAMPAIGN_LANDING_PAGES_BY_LANG.items():
+    for key, page_data in landing_pages.items():
+        routes[lang][key] = page_data['path']
 
 css = '''
 :root{--bg:#eef3ef;--surface:rgba(255,255,255,.94);--surface-soft:#f7faf7;--line:#d6e1d9;--line-strong:#b9cbbf;--text:#142019;--muted:#5d6d63;--primary:#2f8a58;--primary-dark:#1f6640;--primary-soft:#e2f0e7;--shadow:0 18px 48px rgba(20,35,27,.08);--radius:28px;--max:1200px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Segoe UI Variable Text","Aptos","Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(47,138,88,.12),transparent 24%),linear-gradient(180deg,#f4f7f3 0%,var(--bg) 40%,#edf2ec 100%)}body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(21,54,40,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(21,54,40,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,rgba(0,0,0,.4),transparent 92%);pointer-events:none}img{display:block;max-width:100%}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}.skip-link{position:absolute;top:-48px;left:18px;z-index:100;padding:12px 16px;border-radius:999px;background:#153628;color:#fff}.skip-link:focus{top:16px}.site-shell,.gateway-shell{width:min(calc(100% - 40px),var(--max));margin:0 auto}.site-shell{padding:24px 0 64px}.gateway-shell{min-height:100vh;display:grid;align-items:center;padding:40px 0}.site-header{position:sticky;top:16px;z-index:40;margin-bottom:28px}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;border:1px solid rgba(255,255,255,.92);border-radius:999px;background:rgba(255,255,255,.88);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.brand,.footer-brand,.gateway-brand{display:inline-flex;align-items:center;gap:14px;min-width:0}.brand{flex-shrink:0}.brand img{width:clamp(74px,5.4vw,96px);height:auto;transform:translateY(-5px)}.footer-brand img{width:clamp(86px,6vw,108px);height:auto;transform:translateY(-4px)}.gateway-brand img{width:min(190px,100%);height:auto;transform:translateY(-8px)}.brand-copy{display:grid;gap:4px}.brand-copy strong,.eyebrow,.timeline-step span,.chip{letter-spacing:.16em;text-transform:uppercase}.brand-copy strong{font-size:.96rem}.brand-copy small{color:var(--muted);font-size:.84rem}.nav-toggle{display:none;align-items:center;justify-content:center;min-height:46px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700}.site-nav{display:flex;flex-wrap:wrap;gap:18px}.site-nav a,.footer-links a,.footer-services a,.text-link{color:var(--muted);transition:color .16s ease}.site-nav a:hover,.site-nav a:focus-visible,.site-nav a[aria-current="page"],.footer-links a:hover,.footer-links a:focus-visible,.footer-services a:hover,.footer-services a:focus-visible,.text-link:hover,.text-link:focus-visible{color:var(--primary-dark)}.header-actions{display:flex;align-items:center;gap:12px}.lang-switch,.button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:700}.lang-switch{min-width:52px;min-height:46px;padding:0 14px;border:1px solid var(--line-strong);background:#fff}.button{min-height:50px;padding:0 22px;border:1px solid transparent;transition:transform .16s ease,background-color .16s ease,border-color .16s ease}.button:hover,.button:focus-visible{transform:translateY(-1px)}.button-primary{background:linear-gradient(135deg,var(--primary) 0%,#44a86e 100%);color:#fff}.button-primary:hover,.button-primary:focus-visible{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%)}.button-secondary{background:#fff;border-color:var(--line-strong);color:var(--text)}main section+section{margin-top:28px}.hero,.page-hero,.cta-band,.contact-layout,.gateway-panel,.two-col{display:grid;gap:24px}.hero,.page-hero,.cta-band,.contact-layout,.gateway-panel,.two-col{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.hero-copy,.hero-panel,.page-hero-copy,.page-hero-panel,.card,.cta-band,.contact-panel,.form-panel,.gateway-panel,.faq-item,.timeline-step{border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}.hero-copy,.hero-panel,.page-hero-copy,.page-hero-panel,.contact-panel,.form-panel,.cta-band,.gateway-panel{padding:34px;border-radius:var(--radius)}.hero-copy h1,.page-hero-copy h1,.section-heading h2,.cta-band h2,.gateway-panel h1{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;font-weight:760;line-height:1.03;letter-spacing:-.03em}.hero-copy h1{max-width:12ch;font-size:clamp(2.3rem,4.4vw,4.4rem)}.page-hero-copy h1,.section-heading h2,.cta-band h2,.gateway-panel h1{font-size:clamp(2rem,3.4vw,3.35rem)}.hero-copy>p:not(.eyebrow),.page-hero-copy>p:not(.eyebrow),.section-heading p,.contact-panel p,.gateway-panel p,.footer-note{color:var(--muted);line-height:1.72;font-size:1.02rem}.eyebrow{margin:0 0 14px;color:var(--primary-dark);font-size:.8rem;font-weight:700}.service-detail-panel{display:grid;align-content:start;gap:20px}.service-apply-panel{display:grid;align-content:start;gap:24px}.service-detail-panel .eyebrow,.service-detail-panel h2,.service-apply-panel .eyebrow,.service-apply-panel h2{margin:0}.hero-actions,.page-hero-actions,.cta-actions,.form-footer{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.hero-actions,.page-hero-actions{margin-top:28px}.hero-points,.check-list,.footer-links,.footer-services{margin:0;padding:0;list-style:none}.hero-points,.check-list{display:grid;gap:10px}.hero-points li,.check-list li{position:relative;padding-left:22px;color:var(--muted);line-height:1.62}.hero-points li::before,.check-list li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--primary)}
@@ -9543,10 +9625,13 @@ def sitemap_xml():
         'case-studies',
         *CASE_STUDY_ORDER,
         'blog',
+        'articles',
+        'guides',
         'about',
         'faq',
         'contact',
         'privacy',
+        *INDUSTRY_DETAIL_KEYS,
         'referral-program',
         'referral-program-terms',
         'referral-partner-program',
@@ -9586,18 +9671,21 @@ def sitemap_xml():
             if default_article_path:
                 lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(absolute_url(default_article_path))}" />')
             lines.append('  </url>')
-    for key in ('articles', 'guides', *INDUSTRY_DETAIL_KEYS):
-        page_url = absolute_url(routes['fr'][key])
-        lines.append('  <url>')
-        lines.append(f'    <loc>{esc(page_url)}</loc>')
-        lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
-        lines.append('  </url>')
-    for article in [*guide_articles_for_lang('fr'), *decision_articles_for_lang('fr')]:
-        page_url = absolute_url(article['path'])
-        lines.append('  <url>')
-        lines.append(f'    <loc>{esc(page_url)}</loc>')
-        lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
-        lines.append('  </url>')
+    for lang in ('en', 'fr'):
+        for article in [*guide_articles_for_lang(lang), *decision_articles_for_lang(lang)]:
+            page_url = absolute_url(article['path'])
+            article_paths = resource_article_paths(article['key'])
+            lines.append('  <url>')
+            lines.append(f'    <loc>{esc(page_url)}</loc>')
+            lines.append(f'    <lastmod>{GENERATED_PAGE_LASTMODS.get(page_url, PREVIOUS_SITEMAP_LASTMODS.get(page_url, BUILD_DATE))}</lastmod>')
+            if article_paths.get('en'):
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("en")}" href="{esc(absolute_url(article_paths["en"]))}" />')
+            if article_paths.get('fr'):
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="{language_tag("fr")}" href="{esc(absolute_url(article_paths["fr"]))}" />')
+            default_article_path = article_paths.get('fr') or article_paths.get('en')
+            if default_article_path:
+                lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(absolute_url(default_article_path))}" />')
+            lines.append('  </url>')
     lines.append('</urlset>')
     return '\n'.join(lines) + '\n'
 
@@ -9678,9 +9766,7 @@ def nav_dropdown_links(label, href, current_active, items, wide=False):
 
 
 def blog_nav_item(lang, current):
-    if lang == 'fr':
-        return nav_dropdown(lang, 'blog', current, ('articles', 'guides'))
-    return simple_nav_link(lang, 'blog', current)
+    return nav_dropdown(lang, 'blog', current, ('articles', 'guides'))
 
 def simple_nav_link(lang, key, current):
     current_attr = ' aria-current="page"' if current == key else ''
@@ -11232,6 +11318,15 @@ def blog_article_paths(article_key):
     }
 
 
+def resource_article_paths(article_key):
+    entry = GUIDE_ARTICLE_DATA.get(article_key) or DECISION_ARTICLE_DATA.get(article_key) or {}
+    return {
+        localized_lang: localized['path']
+        for localized_lang in ('en', 'fr')
+        if (localized := entry.get(localized_lang)) and localized.get('path')
+    }
+
+
 def schema_author_entity(name):
     normalized = name.casefold()
     if 'opticable' in normalized or 'team' in normalized or 'équipe' in normalized or 'equipe' in normalized:
@@ -11363,12 +11458,15 @@ def guide_cards_section(lang, section_copy, article_keys):
     )
 
 
+def industry_detail_pages_for_lang(lang):
+    return INDUSTRY_DETAIL_PAGES_BY_LANG.get(lang, {})
+
+
 def industry_detail_cards_section(lang, section_copy, page_keys):
-    if lang != 'fr':
-        return ''
+    detail_pages = industry_detail_pages_for_lang(lang)
     cards = []
     for key in page_keys:
-        page_data = INDUSTRY_DETAIL_PAGES.get(key)
+        page_data = detail_pages.get(key)
         if not page_data:
             continue
         cards.append(
@@ -11417,38 +11515,54 @@ def service_case_study_section(lang, service_key):
 
 
 def service_guide_section(lang, service_key):
-    if lang != 'fr':
-        return ''
     guide_keys = FR_SERVICE_GUIDE_KEYS.get(service_key, ())
     if not guide_keys:
         return ''
     primary_service_name = services[service_key][lang]['name']
-    section_copy = {
-        'eyebrow': 'Guide utile',
-        'title': f'Pages utiles avant votre demande sur {primary_service_name.lower()}',
-        'intro': "Ces pages répondent aux questions qui reviennent le plus souvent avant une visite de site ou une soumission.",
-        'cta_href_key': 'guides',
-        'cta_label': 'Voir tous les guides',
-    }
+    if lang == 'fr':
+        section_copy = {
+            'eyebrow': 'Guide utile',
+            'title': f'Pages utiles avant votre demande sur {primary_service_name.lower()}',
+            'intro': "Ces pages répondent aux questions qui reviennent le plus souvent avant une visite de site ou une soumission.",
+            'cta_href_key': 'guides',
+            'cta_label': 'Voir tous les guides',
+        }
+    else:
+        section_copy = {
+            'eyebrow': 'Useful guides',
+            'title': f'Helpful pages before your {primary_service_name.lower()} request',
+            'intro': 'These pages answer common planning, pricing, and decision questions before a site visit or quote.',
+            'cta_href_key': 'guides',
+            'cta_label': 'View all guides',
+        }
     return guide_cards_section(lang, section_copy, guide_keys)
 
 
 def service_industry_section(lang, service_key):
-    if lang != 'fr':
-        return ''
     page_keys = FR_SERVICE_INDUSTRY_KEYS.get(service_key, ())
     if not page_keys:
         return ''
-    return industry_detail_cards_section(
-        lang,
-        {
+    if lang == 'fr':
+        section_copy = {
             'eyebrow': 'Types d’immeubles',
             'title': 'Où ce service revient le plus souvent',
             'intro': "Ces pages montrent dans quels types d'immeubles ce service revient le plus souvent et comment il s'intègre au projet.",
             'label': 'Voir cette clientèle',
             'cta_href': routes[lang]['industries'],
             'cta_label': 'Voir toute la clientèle',
-        },
+        }
+    else:
+        section_copy = {
+            'eyebrow': 'Building types',
+            'title': 'Where this service is most often used',
+            'intro': 'These pages show the building types where this service is commonly part of the project.',
+            'label': 'View this industry',
+            'cta_href': routes[lang]['industries'],
+            'cta_label': 'View all industries',
+        }
+    return industry_detail_cards_section(
+        lang,
+        section_copy,
         page_keys,
     )
 
@@ -11752,6 +11866,26 @@ def resource_service_cards_section(lang, title, intro, service_keys):
 def render_industry_detail_page(page_data, lang):
     hub_label = T[lang]['industries']
     hub_href = routes[lang]['industries']
+    if lang == 'fr':
+        guide_copy = {
+            'eyebrow': 'Guides',
+            'title': 'Pages utiles pour ce type de bâtiment',
+            'intro': 'Des pages utiles pour cadrer les budgets, les choix techniques et la prochaine étape.',
+            'cta_href_key': 'guides',
+            'cta_label': 'Voir tous les guides',
+        }
+        service_title = "Services les plus liés à ce type de projet"
+        service_intro = "Les services qui reviennent le plus souvent dans ce type d'immeuble."
+    else:
+        guide_copy = {
+            'eyebrow': 'Guides',
+            'title': 'Helpful pages for this type of building',
+            'intro': 'Useful pages to frame budgets, technical choices, and the next step.',
+            'cta_href_key': 'guides',
+            'cta_label': 'View all guides',
+        }
+        service_title = 'Services most often connected to this project type'
+        service_intro = 'The services that come up most often in this type of building.'
     breadcrumbs = [
         (T[lang]['home'], routes[lang]['home']),
         (hub_label, hub_href),
@@ -11759,13 +11893,7 @@ def render_industry_detail_page(page_data, lang):
     ]
     guide_section = guide_cards_section(
         lang,
-        {
-            'eyebrow': 'Guides',
-            'title': 'Pages utiles pour ce type de bâtiment',
-            'intro': 'Des pages utiles pour cadrer les budgets, les choix techniques et la prochaine étape.',
-            'cta_href_key': 'guides',
-            'cta_label': 'Voir tous les guides',
-        },
+        guide_copy,
         page_data.get('guide_keys', ()),
     )
     body = (
@@ -11778,7 +11906,7 @@ def render_industry_detail_page(page_data, lang):
             'layout-shell page-hero',
         )
         + ''.join(render_custom_content_section(section) for section in page_data['sections'])
-        + resource_service_cards_section(lang, "Services les plus liés à ce type de projet", "Les services qui reviennent le plus souvent dans ce type d'immeuble.", page_data['service_keys'])
+        + resource_service_cards_section(lang, service_title, service_intro, page_data['service_keys'])
         + guide_section
         + inline_cta_band(page_data['cta_title'], page_data['cta_copy'], routes[lang]['contact'], page_data['cta_label'])
     )
@@ -11787,16 +11915,21 @@ def render_industry_detail_page(page_data, lang):
 
 def render_campaign_landing_page(page_data, lang):
     service_href = routes[lang][page_data['service_key']]
+    service_label = 'Voir le service' if lang == 'fr' else 'View service'
+    scope_eyebrow = 'Portée' if lang == 'fr' else 'Scope'
+    scope_title = "Ce type de demande comprend souvent" if lang == 'fr' else 'This type of request often includes'
+    benefit_eyebrow = 'Pourquoi Opticable' if lang == 'fr' else 'Why Opticable'
+    benefit_title = "Ce qu'on apporte dans ce type de mandat" if lang == 'fr' else 'What we bring to this type of project'
     body = (
         band_section(
             f'<div class="page-hero-copy"><p class="eyebrow">{esc(page_data["eyebrow"])}</p><h1>{esc(page_data["headline"])}</h1><p>{esc(page_data["intro"])}</p>'
-            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(page_data["cta_label"])}</a><a class="button button-secondary" href="{service_href}">Voir le service</a></div></div>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(page_data["cta_label"])}</a><a class="button button-secondary" href="{service_href}">{esc(service_label)}</a></div></div>'
             f'<aside class="page-hero-panel"><p class="eyebrow">{esc(page_data["eyebrow"])}</p><h2>{esc(page_data["panel_title"])}</h2><p>{esc(page_data["panel_copy"])}</p></aside>',
             'hero-band page-hero-band',
             'layout-shell page-hero',
         )
-        + render_custom_content_section({'eyebrow': 'Portée', 'title': "Ce type de demande comprend souvent", 'items': page_data['items']})
-        + render_custom_content_section({'eyebrow': 'Pourquoi Opticable', 'title': "Ce qu'on apporte dans ce type de mandat", 'cards': page_data['benefits']})
+        + render_custom_content_section({'eyebrow': scope_eyebrow, 'title': scope_title, 'items': page_data['items']})
+        + render_custom_content_section({'eyebrow': benefit_eyebrow, 'title': benefit_title, 'cards': page_data['benefits']})
         + inline_cta_band(page_data['cta_title'], page_data['cta_copy'], routes[lang]['contact'], page_data['cta_label'])
     )
     return body
@@ -12109,8 +12242,7 @@ def image_lightbox(lang):
 def footer(lang):
     t = T[lang]
     quick_keys = ['home', 'services', 'industries', 'case-studies', 'blog']
-    if lang == 'fr':
-        quick_keys.extend(('articles', 'guides'))
+    quick_keys.extend(('articles', 'guides'))
     quick_keys.extend(['about', 'faq', 'contact', 'privacy'])
     quick = ''.join(
         f'<li><a href="{routes[lang][k]}">{esc(label_for_key(lang, k))}</a></li>'
@@ -12506,7 +12638,7 @@ for lang in ('en', 'fr'):
     secondary_cards = service_cards(lang, t['service_label'], secondary_order)
     details = ''.join(detail_item_html(a, b) for a, b in t['contact_cards'])
     contact_page_details = contact_sidebar_details_html(lang)
-    blog_guides_html = guide_cards_section(lang, FR_GUIDE_SECTION_COPY['blog'], FR_BLOG_RESOURCE_KEYS) if lang == 'fr' else ''
+    blog_guides_html = guide_cards_section(lang, GUIDE_SECTION_COPY[lang]['blog'], FR_BLOG_RESOURCE_KEYS)
     if lang == 'fr':
         privacy_cards = [
             *t['privacy_cards'],
@@ -12552,8 +12684,8 @@ for lang in ('en', 'fr'):
         )
         + (service_divisions_section(lang) if lang != 'fr' else '')
         + home_featured_services_section(lang)
-        + (industry_detail_cards_section(lang, {'eyebrow': 'Clientèle', 'title': 'Types d’immeubles servis', 'intro': 'Des pages plus précises selon le type de bâtiment, les contraintes et les systèmes souvent liés.', 'label': 'Voir cette clientèle', 'cta_href': routes[lang]['industries'], 'cta_label': 'Voir toute la clientèle'}, INDUSTRY_DETAIL_KEYS) if lang == 'fr' else '')
-        + (guide_cards_section(lang, FR_GUIDE_SECTION_COPY['home'], FR_HOME_RESOURCE_KEYS) if lang == 'fr' else '')
+        + industry_detail_cards_section(lang, {'eyebrow': 'Clientèle' if lang == 'fr' else 'Industries', 'title': 'Types d’immeubles servis' if lang == 'fr' else 'Building types we serve', 'intro': 'Des pages plus précises selon le type de bâtiment, les contraintes et les systèmes souvent liés.' if lang == 'fr' else 'More specific pages by building type, site constraints, and commonly connected systems.', 'label': 'Voir cette clientèle' if lang == 'fr' else 'View this industry', 'cta_href': routes[lang]['industries'], 'cta_label': 'Voir toute la clientèle' if lang == 'fr' else 'View all industries'}, INDUSTRY_DETAIL_KEYS)
+        + guide_cards_section(lang, GUIDE_SECTION_COPY[lang]['home'], FR_HOME_RESOURCE_KEYS)
         + promo_cta_band(lang)
         + partner_brands_section(lang)
         + band_section(
@@ -12647,7 +12779,7 @@ for lang in ('en', 'fr'):
             'section-shell contact-shell',
         )
         + (''.join(render_custom_content_section(section) for section in FR_CONTACT_EXTRA_SECTIONS) if lang == 'fr' else '')
-        + (guide_cards_section(lang, FR_GUIDE_SECTION_COPY['contact'], FR_CONTACT_RESOURCE_KEYS) if lang == 'fr' else '')
+        + guide_cards_section(lang, GUIDE_SECTION_COPY[lang]['contact'], FR_CONTACT_RESOURCE_KEYS)
         + coverage_section(lang)
         + cta(lang)
     )
@@ -13065,15 +13197,17 @@ for lang in ('en', 'fr'):
             'layout-shell page-hero',
         )
         + faq_sections(lang)
-        + (guide_cards_section(lang, FR_GUIDE_SECTION_COPY['faq'], FR_FAQ_RESOURCE_KEYS) if lang == 'fr' else '')
+        + guide_cards_section(lang, GUIDE_SECTION_COPY[lang]['faq'], FR_FAQ_RESOURCE_KEYS)
         + (inline_cta_band(custom_faq_cta['title'], custom_faq_cta['copy'], routes[lang]['contact'], custom_faq_cta['label']) if custom_faq_cta else cta(lang))
     )
     write_url(routes[lang]['faq'], page(lang, 'faq', 'faq', t['faq_title'], t['faq_desc'], faq_body, faq_items=flat_faq_items(lang), breadcrumb_items=faq_breadcrumbs))
 
     blog_data = BLOG_PAGE[lang]
     blog_breadcrumbs = [(t['home'], routes[lang]['home']), (t['blog'], routes[lang]['blog'])]
-    if lang == 'fr':
-        blog_hub_data = BLOG_HUB_PAGE['fr']
+    if lang in BLOG_HUB_PAGE:
+        blog_hub_data = BLOG_HUB_PAGE[lang]
+        shortcut_label = 'Raccourcis' if lang == 'fr' else 'Shortcuts'
+        all_articles_label = 'Voir tous les articles' if lang == 'fr' else 'View all articles'
         chooser_cards = ''.join(
             card(title, copy, href, label)
             for title, copy, href, label in blog_hub_data['chooser_cards']
@@ -13089,13 +13223,13 @@ for lang in ('en', 'fr'):
                 'layout-shell page-hero',
             )
             + band_section(
-                f'{section_heading_html("Raccourcis", blog_hub_data["chooser_title"], blog_hub_data["chooser_intro"])}<div class="grid-2">{chooser_cards}</div>',
+                f'{section_heading_html(shortcut_label, blog_hub_data["chooser_title"], blog_hub_data["chooser_intro"])}<div class="grid-2">{chooser_cards}</div>',
                 'content-section',
             )
             + blog_guides_html
             + band_section(
                 f'<div class="section-heading"><p class="eyebrow">{esc(t["articles"])}</p><h2>{esc(blog_hub_data["articles_title"])}</h2><p>{esc(blog_hub_data["articles_intro"])}</p></div>'
-                f'{latest_articles_html}<div class="cta-actions"><a class="button button-secondary" href="{routes[lang]["articles"]}">Voir tous les articles</a></div>',
+                f'{latest_articles_html}<div class="cta-actions"><a class="button button-secondary" href="{routes[lang]["articles"]}">{esc(all_articles_label)}</a></div>',
                 'blog-listing-section',
             )
             + promo_cta_band(lang)
@@ -13106,7 +13240,7 @@ for lang in ('en', 'fr'):
             page(lang, 'blog', 'blog', blog_hub_data['title'], blog_hub_data['desc'], blog_body, breadcrumb_items=blog_breadcrumbs),
         )
 
-        articles_data = BLOG_ARTICLES_PAGE['fr']
+        articles_data = BLOG_ARTICLES_PAGE[lang]
         articles_breadcrumbs = [(t['home'], routes[lang]['home']), (t['blog'], routes[lang]['blog']), (t['articles'], routes[lang]['articles'])]
         articles_body = (
             breadcrumb_nav(articles_breadcrumbs)
@@ -13132,9 +13266,10 @@ for lang in ('en', 'fr'):
                 articles_data['desc'],
                 articles_body,
                 breadcrumb_items=articles_breadcrumbs,
-                include_alternates=False,
+                include_alternates=True,
                 canonical_path=routes[lang]['articles'],
-                lang_switch_href=routes['en']['blog'],
+                alternate_paths={'en': routes['en']['articles'], 'fr': routes['fr']['articles']},
+                lang_switch_href=routes['fr' if lang == 'en' else 'en']['articles'],
             ),
         )
     else:
@@ -13179,24 +13314,29 @@ for lang in ('en', 'fr'):
                 preload_image_url=article.get('hero_image'),
             ),
         )
-    if lang == 'fr':
+    if lang in GUIDE_INDEX_PAGES:
+        guide_index_page = GUIDE_INDEX_PAGES[lang]
         guide_cards = render_resource_cards_for_keys(lang, RESOURCE_ARTICLE_KEYS)
+        guide_listing_title = guide_index_page.get('listing_title', 'Guides')
+        guide_listing_intro = guide_index_page.get('listing_intro', '')
+        guide_cta_title = guide_index_page.get('cta_title', "Vous voulez valider votre projet avec nous ?" if lang == 'fr' else 'Want to validate your project with us?')
+        guide_cta_copy = guide_index_page.get('cta_copy', "Décrivez votre bâtiment, les systèmes visés et les contraintes du site. On vous dira quoi confirmer avant la soumission." if lang == 'fr' else 'Describe the building, systems, and site constraints. We will help confirm what to check before the quote.')
         guides_breadcrumbs = [(t['home'], routes[lang]['home']), ('Guides', routes[lang]['guides'])]
         guides_body = (
             breadcrumb_nav(guides_breadcrumbs)
             + band_section(
-                f'<div class="page-hero-copy"><p class="eyebrow">{esc(GUIDE_INDEX_PAGE["eyebrow"])}</p><h1>{esc(GUIDE_INDEX_PAGE["headline"])}</h1><p>{esc(GUIDE_INDEX_PAGE["intro"])}</p>'
+                f'<div class="page-hero-copy"><p class="eyebrow">{esc(guide_index_page["eyebrow"])}</p><h1>{esc(guide_index_page["headline"])}</h1><p>{esc(guide_index_page["intro"])}</p>'
                 f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(t["quote"])}</a><a class="button button-secondary" href="{routes[lang]["services"]}">{esc(t["services"])}</a></div></div>'
-                f'<aside class="page-hero-panel"><p class="eyebrow">Guides</p><h2>{esc(GUIDE_INDEX_PAGE["panel_title"])}</h2><p>{esc(GUIDE_INDEX_PAGE["panel_copy"])}</p></aside>',
+                f'<aside class="page-hero-panel"><p class="eyebrow">Guides</p><h2>{esc(guide_index_page["panel_title"])}</h2><p>{esc(guide_index_page["panel_copy"])}</p></aside>',
                 'hero-band page-hero-band',
                 'layout-shell page-hero',
             )
             + band_section(
-                f'<div class="section-heading"><p class="eyebrow">Guides</p><h2>Guides, comparatifs et pages de décision</h2><p>Des ressources pratiques pour cadrer un budget, comparer des options et préparer la bonne prochaine étape selon le type de projet.</p></div>'
+                f'<div class="section-heading"><p class="eyebrow">Guides</p><h2>{esc(guide_listing_title)}</h2><p>{esc(guide_listing_intro)}</p></div>'
                 f'{guide_cards}',
                 'blog-listing-section',
             )
-            + inline_cta_band("Vous voulez valider votre projet avec nous ?", "Décrivez votre bâtiment, les systèmes visés et les contraintes du site. On vous dira quoi confirmer avant la soumission.", routes[lang]['contact'], t['quote'])
+            + inline_cta_band(guide_cta_title, guide_cta_copy, routes[lang]['contact'], t['quote'])
         )
         write_url(
             routes[lang]['guides'],
@@ -13204,18 +13344,21 @@ for lang in ('en', 'fr'):
                 lang,
                 'guides',
                 'guides',
-                GUIDE_INDEX_PAGE['title'],
-                GUIDE_INDEX_PAGE['desc'],
+                guide_index_page['title'],
+                guide_index_page['desc'],
                 guides_body,
                 breadcrumb_items=guides_breadcrumbs,
-                include_alternates=False,
+                include_alternates=True,
                 canonical_path=routes[lang]['guides'],
-                lang_switch_href=routes['en']['blog'],
+                alternate_paths={'en': routes['en']['guides'], 'fr': routes['fr']['guides']},
+                lang_switch_href=routes['fr' if lang == 'en' else 'en']['guides'],
             ),
         )
         for article in [*guide_articles_for_lang(lang), *decision_articles_for_lang(lang)]:
             article_breadcrumbs, article_body = render_standalone_article_page(article, lang, 'Guides', routes[lang]['guides'])
             article_meta = blog_article_seo_data(article, lang)
+            article_paths = resource_article_paths(article['key'])
+            article_has_pair = bool(article_paths.get('en') and article_paths.get('fr'))
             write_url(
                 article['path'],
                 page(
@@ -13228,15 +13371,16 @@ for lang in ('en', 'fr'):
                     faq_items=article.get('faq_items'),
                     breadcrumb_items=article_breadcrumbs,
                     canonical_path=article['path'],
-                    include_alternates=False,
+                    include_alternates=article_has_pair,
                     resource_key='blog',
                     schema_page_url=absolute_url(article['path']),
-                    lang_switch_href=routes['en']['blog'],
+                    alternate_paths=article_paths if article_has_pair else None,
+                    lang_switch_href=article_paths.get('fr' if lang == 'en' else 'en') if article_has_pair else routes['fr' if lang == 'en' else 'en']['guides'],
                     article_meta=article_meta,
                     preload_image_url=article.get('hero_image'),
                 ),
             )
-        for key, detail_page in INDUSTRY_DETAIL_PAGES.items():
+        for key, detail_page in industry_detail_pages_for_lang(lang).items():
             industry_breadcrumbs, industry_body = render_industry_detail_page(detail_page, lang)
             write_url(
                 detail_page['path'],
@@ -13250,11 +13394,15 @@ for lang in ('en', 'fr'):
                     faq_items=detail_page.get('faq_items'),
                     breadcrumb_items=industry_breadcrumbs,
                     canonical_path=detail_page['path'],
-                    include_alternates=False,
-                    lang_switch_href=routes['en']['industries'],
+                    include_alternates=True,
+                    alternate_paths={
+                        'en': INDUSTRY_DETAIL_PAGES_BY_LANG['en'][key]['path'],
+                        'fr': INDUSTRY_DETAIL_PAGES_BY_LANG['fr'][key]['path'],
+                    },
+                    lang_switch_href=INDUSTRY_DETAIL_PAGES_BY_LANG['fr' if lang == 'en' else 'en'][key]['path'],
                 ),
             )
-        for key, landing_page in CAMPAIGN_LANDING_PAGES.items():
+        for key, landing_page in CAMPAIGN_LANDING_PAGES_BY_LANG[lang].items():
             landing_body = render_campaign_landing_page(landing_page, lang)
             write_url(
                 landing_page['path'],
@@ -13266,9 +13414,13 @@ for lang in ('en', 'fr'):
                     landing_page['desc'],
                     landing_body,
                     canonical_path=landing_page['path'],
-                    include_alternates=False,
+                    include_alternates=True,
+                    alternate_paths={
+                        'en': CAMPAIGN_LANDING_PAGES_BY_LANG['en'][key]['path'],
+                        'fr': CAMPAIGN_LANDING_PAGES_BY_LANG['fr'][key]['path'],
+                    },
                     robots='noindex, nofollow',
-                    lang_switch_href=routes['en']['contact'],
+                    lang_switch_href=CAMPAIGN_LANDING_PAGES_BY_LANG['fr' if lang == 'en' else 'en'][key]['path'],
                 ),
             )
 

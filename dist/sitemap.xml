@@ -127,6 +127,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/" />
   </url>
   <url>
+    <loc>https://opticable.ca/en/blog/articles/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/articles/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/articles/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/articles/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/guides/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/guides/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/en/about/</loc>
     <lastmod>2026-04-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/about/" />
@@ -153,6 +167,34 @@
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/privacy/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/confidentialite/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/industries/office-buildings/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/office-buildings/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/immeuble-de-bureaux/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/immeuble-de-bureaux/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/industries/multi-tenant-buildings/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/multi-tenant-buildings/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/immeuble-multilocatif/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/immeuble-multilocatif/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/industries/retail-and-sales-floor/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/retail-and-sales-floor/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/industries/warehouses-and-industrial-sites/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/warehouses-and-industrial-sites/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/entrepot-et-industriel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/entrepot-et-industriel/" />
   </url>
   <url>
     <loc>https://opticable.ca/en/referral-program/</loc>
@@ -323,6 +365,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/" />
   </url>
   <url>
+    <loc>https://opticable.ca/fr/blogue/articles/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/blog/articles/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/blogue/articles/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/articles/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/guides/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/guides/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/guides/" />
+  </url>
+  <url>
     <loc>https://opticable.ca/fr/a-propos/</loc>
     <lastmod>2026-04-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/about/" />
@@ -349,6 +405,34 @@
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/privacy/" />
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/confidentialite/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/confidentialite/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/clientele/immeuble-de-bureaux/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/office-buildings/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/immeuble-de-bureaux/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/immeuble-de-bureaux/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/clientele/immeuble-multilocatif/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/multi-tenant-buildings/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/immeuble-multilocatif/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/immeuble-multilocatif/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/retail-and-sales-floor/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/fr/clientele/entrepot-et-industriel/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/industries/warehouses-and-industrial-sites/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/clientele/entrepot-et-industriel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/clientele/entrepot-et-industriel/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/programme-reference/</loc>
@@ -435,71 +519,157 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/blogue/pourquoi-le-cablage-structure-change-tout/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/blogue/articles/</loc>
+    <loc>https://opticable.ca/en/guides/technology-retrofit-occupied-building/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/technology-retrofit-occupied-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/mise-a-niveau-technologique-immeuble-occupe/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/mise-a-niveau-technologique-immeuble-occupe/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/guides/</loc>
+    <loc>https://opticable.ca/en/guides/cat6a-or-fiber-commercial-building/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/cat6a-or-fiber-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/cat6a-ou-fibre-pour-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/cat6a-ou-fibre-pour-immeuble-commercial/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/clientele/immeuble-de-bureaux/</loc>
+    <loc>https://opticable.ca/en/guides/commercial-wifi-audit-checklist/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/commercial-wifi-audit-checklist/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/checklist-audit-wifi-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/checklist-audit-wifi-commercial/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/clientele/immeuble-multilocatif/</loc>
+    <loc>https://opticable.ca/en/guides/camera-system-pricing-commercial-building/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/camera-system-pricing-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-systeme-cameras-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-systeme-cameras-immeuble-commercial/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/clientele/commerce-et-vente-au-detail/</loc>
+    <loc>https://opticable.ca/en/guides/access-control-vs-intercom/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/access-control-vs-intercom/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/controle-acces-vs-intercom/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/controle-acces-vs-intercom/" />
   </url>
   <url>
-    <loc>https://opticable.ca/fr/clientele/entrepot-et-industriel/</loc>
+    <loc>https://opticable.ca/en/guides/network-room-rack-cleanup/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/network-room-rack-cleanup/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/remise-en-ordre-local-reseau-et-rack/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/remise-en-ordre-local-reseau-et-rack/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/analog-cctv-to-ip-migration/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/analog-cctv-to-ip-migration/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/migration-cameras-analogiques-vers-ip/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/migration-cameras-analogiques-vers-ip/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/structured-cabling-pricing-office-retail/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/structured-cabling-pricing-office-retail/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-cablage-structure-bureau-commerce/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-cablage-structure-bureau-commerce/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/intercom-audio-or-video-commercial-building/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/intercom-audio-or-video-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/intercom-audio-ou-video-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/intercom-audio-ou-video-immeuble-commercial/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/intercom-pricing-multi-tenant-building/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/intercom-pricing-multi-tenant-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-intercom-immeuble-multilocatif/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-intercom-immeuble-multilocatif/" />
+  </url>
+  <url>
+    <loc>https://opticable.ca/en/guides/access-control-pricing-commercial-building/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/access-control-pricing-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-controle-acces-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-controle-acces-immeuble-commercial/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/mise-a-niveau-technologique-immeuble-occupe/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/technology-retrofit-occupied-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/mise-a-niveau-technologique-immeuble-occupe/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/mise-a-niveau-technologique-immeuble-occupe/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/cat6a-ou-fibre-pour-immeuble-commercial/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/cat6a-or-fiber-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/cat6a-ou-fibre-pour-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/cat6a-ou-fibre-pour-immeuble-commercial/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/checklist-audit-wifi-commercial/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/commercial-wifi-audit-checklist/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/checklist-audit-wifi-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/checklist-audit-wifi-commercial/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/prix-systeme-cameras-immeuble-commercial/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/camera-system-pricing-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-systeme-cameras-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-systeme-cameras-immeuble-commercial/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/controle-acces-vs-intercom/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/access-control-vs-intercom/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/controle-acces-vs-intercom/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/controle-acces-vs-intercom/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/remise-en-ordre-local-reseau-et-rack/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/network-room-rack-cleanup/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/remise-en-ordre-local-reseau-et-rack/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/remise-en-ordre-local-reseau-et-rack/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/migration-cameras-analogiques-vers-ip/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/analog-cctv-to-ip-migration/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/migration-cameras-analogiques-vers-ip/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/migration-cameras-analogiques-vers-ip/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/prix-cablage-structure-bureau-commerce/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/structured-cabling-pricing-office-retail/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-cablage-structure-bureau-commerce/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-cablage-structure-bureau-commerce/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/intercom-audio-ou-video-immeuble-commercial/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/intercom-audio-or-video-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/intercom-audio-ou-video-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/intercom-audio-ou-video-immeuble-commercial/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/prix-intercom-immeuble-multilocatif/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/intercom-pricing-multi-tenant-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-intercom-immeuble-multilocatif/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-intercom-immeuble-multilocatif/" />
   </url>
   <url>
     <loc>https://opticable.ca/fr/prix-controle-acces-immeuble-commercial/</loc>
     <lastmod>2026-04-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://opticable.ca/en/guides/access-control-pricing-commercial-building/" />
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://opticable.ca/fr/prix-controle-acces-immeuble-commercial/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://opticable.ca/fr/prix-controle-acces-immeuble-commercial/" />
   </url>
 </urlset>

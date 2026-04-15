@@ -429,3 +429,8 @@ GUIDE_ARTICLES = {
         },
     },
 }
+
+from english_resource_pages import EN_GUIDE_ARTICLES
+
+for _key, _article in EN_GUIDE_ARTICLES.items():
+    GUIDE_ARTICLES.setdefault(_key, {}).update({"en": _article})
