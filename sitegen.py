@@ -399,12 +399,12 @@ T = {
         'faq_title': 'Commercial Infrastructure FAQ | Opticable', 'faq_desc': 'Read answers to common questions about structured cabling, fiber optic installation, security camera systems, access control, intercom, WiFi, and network infrastructure.',
         'faq_h1': 'Answers to common questions about commercial cabling and low-voltage infrastructure work.',
         'faq_intro': 'This FAQ helps buyers understand scope, occupied-site work, planning expectations, and the details that speed up quoting and project coordination.',
-        'contact_info_title': 'Contact information', 'form_title': 'Request pricing or a site walk',
+        'contact_info_title': 'Contact information', 'form_title': 'Request pricing or a site visit',
         'form_labels': {'name': 'Contact name', 'company': 'Company', 'email': 'Email', 'phone': 'Phone', 'property': 'Property type', 'timeline': 'Timeline', 'services': 'Needed services', 'notes': 'Project notes'},
         'form_options': {'property': ['Select one', 'Business office', 'Multi-tenant building', 'Commercial property', 'Retail or hospitality site', 'Industrial or warehouse site', 'Development or construction project'], 'timeline': ['Select one', 'Immediate need', 'Within 30 days', 'Within 1 to 3 months', 'Budgeting or planning phase']},
         'form_services': ['Structured cabling', 'Fiber optic installation', 'Network infrastructure', 'Security camera systems', 'Access control systems', 'Intercom systems', 'Commercial WiFi', 'IP phone systems'],
         'form_placeholder': 'Describe the property, project scope, devices, or network issues that need to be addressed.',
-        'process': [('Site review', 'Review pathways, rooms, risers, devices, and building constraints before work begins.'), ('Scope planning', 'Confirm cable counts, equipment locations, occupied-site constraints, and system integration requirements.'), ('Installation', 'Install, terminate, label, and organize infrastructure with clean work practices and coordinated sequencing.'), ('Turnover', 'Support testing, activation, and handoff so the installed systems stay easier to maintain after go-live.')],
+        'process': [('Site review', 'Review pathways, rooms, risers, devices, and building constraints before work begins.'), ('Scope planning', 'Confirm cable counts, equipment locations, occupied-site constraints, and system integration requirements.'), ('Installation', 'Install, terminate, label, and organize infrastructure with clean work practices and coordinated sequencing.'), ('Turnover', 'Support testing, activation, and handoff so the installed systems stay easier to maintain after commissioning.')],
         'clients': [('Businesses', 'Connectivity, security, and communication infrastructure for offices, retail, hospitality, and operational spaces.'), ('Multi-tenant buildings', 'Risers, suites, common areas, and tenant-facing systems in managed or mixed-use properties.'), ('Property managers', 'Repeatable infrastructure standards, building upgrades, and cleaner support across active assets.'), ('Developers and contractors', 'Low-voltage coordination for fit-outs, construction delivery, and project sequencing.')],
     },
     'fr': {
@@ -459,7 +459,7 @@ T['en'].update({
     'footer': 'Opticable serves businesses and managed properties across Quebec, including Montreal, Laval, Longueuil, the South Shore, the North Shore, and the Laurentians.',
     'privacy': 'Privacy',
     'privacy_title': 'Privacy and Cookies | Opticable',
-    'privacy_desc': 'How Opticable handles personal information submitted through the website, the Zoho quote form, and supporting technologies such as cookies and local browser storage.',
+    'privacy_desc': 'How Opticable handles website, quote form, cookie, and browser-storage data.',
     'privacy_h1': 'Privacy, cookies, and third-party services.',
     'privacy_intro': 'This page explains what the website may process, when third-party tools are loaded, and how you can limit or withdraw consent.',
     'privacy_cards_title': 'How the website handles data',
@@ -486,7 +486,7 @@ T['en'].update({
     'thanks': 'Thank you',
     'thanks_title': 'Thank You | Quote Request Received | Opticable',
     'thanks_desc': 'Thank you for your quote request. Opticable will review the information submitted and follow up to discuss your project needs.',
-    'thanks_h1': 'Thank you. Your quote request has been sent.',
+    'thanks_h1': 'We received your quote request.',
     'thanks_intro': 'We received your request and will review the details provided for your camera, access control, intercom, WiFi, cabling, fiber, or network project.',
     'thanks_panel_title': 'What happens next',
     'thanks_panel_copy': 'Our team reviews the project scope, property type, and timeline before following up by email or phone.',
@@ -524,7 +524,7 @@ T['en'].update({
     'extra_intro': 'Additional infrastructure services often delivered in the same project.',
     'about_title': 'About Opticable | Commercial Technology Systems Specialist',
     'about_desc': 'Learn how Opticable supports commercial properties, property managers, developers, and businesses with security, access, WiFi, cabling, and network infrastructure services.',
-    'about_h1': 'A commercial technology systems specialist for managed properties and business environments.',
+    'about_h1': 'A commercial building technology specialist for managed properties and business environments.',
     'about_intro': 'Opticable works on the systems commercial properties rely on every day: security, entry, wireless, cabling, and network infrastructure.',
     'about_story': 'The company coordinates connected systems so projects stay cleaner and easier to support.',
     'about_section_title': 'How we work',
@@ -1130,7 +1130,7 @@ industry_cards['fr'] = [
     ('Promoteurs et entrepreneurs', "Coordination technologique pour la sécurité, le sans-fil, le câblage et la livraison des travaux."),
 ]
 
-services['structured-cabling']['en']['intro'] = 'Opticable installs the physical cabling foundation behind business connectivity, security devices, wireless coverage, and tenant technology systems. Structured cabling scopes can include Ethernet cable installation, coaxial cable installation, pathway organization, terminations, and labeling that makes future support easier.'
+services['structured-cabling']['en']['intro'] = 'Opticable installs the physical cabling foundation behind business connectivity, security devices, wireless coverage, and tenant infrastructure systems. Structured cabling scopes can include Ethernet cable installation, coaxial cable installation, pathway organization, terminations, and labeling that makes future support easier.'
 services['structured-cabling']['fr'].update({
     'name': 'Câblage structuré',
     'title': 'Installation de câblage structuré pour immeubles commerciaux | Opticable',
@@ -1301,7 +1301,7 @@ T['en'].update({
         ('Technical expertise', 'We plan infrastructure with a practical understanding of connectivity, security, deployment, and long-term support.'),
         ('Tailored solutions', 'Each project is adapted to the site, operational requirements, and growth plans of the client.'),
         ('Installation quality', 'Clean execution, organized cabling, and dependable system turnover remain part of the deliverable.'),
-        ('Service and support', 'We stay focused on clear communication, reliable follow-up, and systems that remain easier to manage after install.'),
+        ('Service and support', 'We stay focused on clear communication, reliable follow-up, and systems that remain easier to manage after installation.'),
     ],
     'services_title': 'Business Technology Services | Opticable',
     'services_desc': 'Opticable provides structured cabling, professional WiFi, IT solutions, camera surveillance, access control, intercom, fiber optic, and IP phone services for business environments.',
@@ -1336,7 +1336,7 @@ T['en'].update({
     'contact_desc': 'Talk to Opticable about structured cabling, professional WiFi, IT solutions, surveillance, intercom, and access control for your business.',
     'contact_h1': 'Let us talk about your technology project.',
     'contact_intro': 'Want to improve your network infrastructure, deploy business WiFi, install surveillance, or modernize your technology environment? Opticable is ready to support the next step.',
-    'contact_panel_copy': 'Share the site type, your goals, and the systems involved. We can help define the right technical scope for a business-ready deployment.',
+    'contact_panel_copy': 'Share the site type, your goals, and the systems involved. We can help define the right technical scope for a reliable deployment.',
     'process_title': 'Project process',
     'process_intro': 'A strong technology project starts with the right planning, then moves through clean delivery and practical follow-up.',
     'process': [
@@ -1639,7 +1639,7 @@ T['en'].update({
         ('Site reading', 'We assess pathways, rooms, doors, coverage constraints, and building realities before proposing the right system mix.'),
         ('Multi-system coordination', 'Cabling, wireless, surveillance, access, and IT support are presented as connected layers, not isolated trades.'),
         ('Installation discipline', 'We emphasize cleaner room layouts, sharper detailing, and a stronger final presentation.'),
-        ('Operational follow-through', 'The goal is not just installation, but a site that stays easier to support and evolve after go-live.'),
+        ('Operational follow-through', 'The goal is not just installation, but a site that stays easier to support and evolve after commissioning.'),
     ],
     'services_h1': 'One partner to connect, structure, and secure your environment.',
     'services_intro': 'Opticable organizes its services around clear capability areas while staying focused on business technology infrastructure.',
@@ -1869,13 +1869,13 @@ T['en'].update({
     'tagline': 'Commercial technology and building systems',
     'quote': 'Request a quote',
     'all_services': 'View all services',
-    'company': 'Opticable designs, installs, and manages technology systems for commercial buildings, with long-term support after commissioning.',
-    'footer': 'Opticable installs and manages technology systems for commercial buildings in Montreal, Laval, Longueuil, the South Shore, the North Shore, the Laurentians, and across Quebec.',
+    'company': 'Opticable designs, installs, and manages building technology for commercial properties, with long-term support after commissioning.',
+    'footer': 'Opticable installs and supports cameras, access, WiFi, intercom, cabling, and network infrastructure for commercial buildings in Montreal, Laval, Longueuil, and across Quebec.',
     'home_title': 'Commercial Cameras, Access, WiFi and Cabling | Opticable',
-    'home_desc': 'Opticable installs and manages cameras, access control, intercom, WiFi, and structured cabling for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
+    'home_desc': 'Opticable installs cameras, access control, intercom, WiFi, and cabling for commercial buildings in Montreal, Laval, Longueuil, and across Quebec.',
     'home_kicker': 'Commercial technology and building systems',
     'home_h1': 'Commercial cabling, access control, WiFi, surveillance, and intercom for better-managed buildings',
-    'home_intro': 'Opticable designs, installs, and manages technology systems for commercial and multi-tenant buildings across Quebec. One partner for security, entry, WiFi, intercom, and network infrastructure, from installation through ongoing support.',
+    'home_intro': 'Opticable designs, installs, and manages security, access, WiFi, intercom, and network infrastructure for commercial and multi-tenant buildings across Quebec.',
     'home_points': [
         'IP cameras for entries, parking areas, and common spaces',
         'Access control and intercom for doors, lobbies, and visitors',
@@ -1884,7 +1884,7 @@ T['en'].update({
     ],
     'focus_chips': ['Installation + support', 'Unified ecosystem', 'Occupied buildings', 'Multi-building portfolios'],
     'featured_title': 'Our services, installation, support, and infrastructure',
-    'featured_intro': 'We install, integrate, and manage technology systems for commercial buildings. One partner, from the first cable run through ongoing support.',
+    'featured_intro': 'We install, integrate, and manage building systems for commercial properties. One partner, from the first cable run through ongoing support.',
     'trust_title': 'Why choose Opticable',
     'home_trust_intro': 'We do not just hand over equipment. We organize systems that are easier to operate, built to last, and easier to expand without starting over.',
     'trust': [
@@ -1894,7 +1894,7 @@ T['en'].update({
     ],
     'services_title': 'Technology services for commercial buildings | Opticable',
     'services_desc': 'Installation and support for cameras, access control, WiFi, intercom, structured cabling, fiber, and network infrastructure for commercial buildings in Quebec.',
-    'services_h1': 'Installation and support for building technology systems',
+    'services_h1': 'Installation and support for building systems',
     'services_intro': 'Opticable offers two complementary sides: system installation and ongoing support after commissioning. We do not just deliver equipment; we also help manage, maintain, and expand it.',
     'priority_title': 'Core services',
     'priority_intro': 'The systems people rely on every day: security, entry, front-door communication, WiFi, and network IT support.',
@@ -2365,7 +2365,7 @@ home_visuals['en'] = {
     'title': 'Systems installed in real operating environments',
     'top_title': 'Commercial and multi-tenant buildings',
     'top_copy': 'Security, entry systems, and connectivity coordinated from the start for buildings that need to operate every day.',
-    'top_alt': 'Commercial property representing coordinated building technology systems',
+    'top_alt': 'Commercial property representing coordinated security and connectivity systems',
     'main_title': 'Network racks, structured cabling, and technical rooms',
     'main_copy': 'Infrastructure that is organized, documented, and ready for future additions.',
     'main_alt': 'Structured rack and building technology environment with organized infrastructure',
@@ -2450,7 +2450,7 @@ services['structured-cabling']['en'].update({
 })
 services['fiber-optic-installation']['en'].update({
     'name': 'Fiber optic',
-    'title': 'Fiber optic installation for commercial buildings | Opticable',
+    'title': 'Fiber Optic for Commercial Buildings | Opticable',
     'desc': 'Fiber optic links, risers, and service extensions for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Fiber optic installation for commercial buildings and multi-storey sites',
     'intro': 'Opticable installs fiber optic links that serve as the backbone of your network infrastructure. Risers between floors, service extensions, and high-capacity links for buildings where copper is no longer enough.',
@@ -2461,9 +2461,9 @@ services['network-infrastructure']['en'].update({
     'name': 'Network infrastructure',
     'title': 'Network infrastructure for commercial buildings | Opticable',
     'desc': 'Installation of racks, patch panels, and technical rooms for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
-    'hero': 'Network infrastructure for commercial buildings, including racks, technical rooms, and internet-entry organization',
-    'intro': 'Opticable installs and organizes the network infrastructure of commercial buildings: racks, patch panels, internet-entry management, and cleanup of existing technical rooms. Well-structured infrastructure is what keeps your systems reliable and easier to maintain.',
-    'summary': 'Racks, patch panels, technical rooms, internet-entry management, and network support for environments that are easier to operate.',
+    'hero': 'Network infrastructure for commercial buildings, including racks, technical rooms, and internet handoff organization',
+    'intro': 'Opticable installs and organizes the network infrastructure of commercial buildings: racks, patch panels, internet handoff management, and cleanup of existing technical rooms. Well-structured infrastructure is what keeps your systems reliable and easier to maintain.',
+    'summary': 'Racks, patch panels, technical rooms, internet handoff management, and network support for environments that are easier to operate.',
     'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems'],
 })
 services['ip-phone-systems']['en'].update({
@@ -2838,7 +2838,7 @@ EN_CLIENTELE_SECTIONS = [
     },
     {
         'title': 'Developers and general contractors',
-        'copy': 'You are building or renovating a property and need the technology systems coordinated with the other trades, without delays.',
+        'copy': 'You are building or renovating a property and need the building systems coordinated with the other trades, without delays.',
         'items': ['Coordination with electricians and other trades', 'Structured cabling aligned with construction phases', 'Cameras, access control, and intercom delivered on schedule', 'Complete documentation at handoff'],
     },
 ]
@@ -2859,7 +2859,7 @@ EN_SERVICE_PAGE_CONTENT = {
     'security-camera-systems': {
         'sections': [
             {'eyebrow': 'Security cameras', 'title': 'What we install and manage', 'items': ['IP and PoE cameras for interior and exterior areas', 'NVR recorders with continuous or motion-based recording', 'Remote viewing from a computer, tablet, or phone', 'Exterior cameras for parking areas, delivery entries, and perimeters', 'Interior cameras for common spaces, lobbies, corridors, and operating areas', 'Management, updates, equipment replacement, and technical support']},
-            {'eyebrow': 'Unified ecosystem', 'title': 'Unified ecosystem for cameras, intercom, and access control', 'paragraphs': ['Your cameras can belong to the same ecosystem as the intercom and access control system, with one management platform to monitor, manage entry, and communicate at the door. One partner, one coherent installation.']},
+            {'eyebrow': 'Unified ecosystem', 'title': 'Unified ecosystem for cameras, intercom, and access control', 'paragraphs': ['Your cameras can belong to the same ecosystem as the intercom and access control system, with one management platform to monitor, manage entry, and communicate at the door. One partner, one coordinated installation.']},
             {'eyebrow': 'Buildings', 'title': 'Where these systems fit', 'items': ['Office buildings and commercial towers', 'Multi-tenant buildings and controlled-entry residences', 'Retail spaces, boutiques, and point-of-sale environments', 'Warehouses and industrial sites', 'Hotels and commercial hospitality properties']},
             {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Area review: entries, blind spots, risk zones, and installation constraints.', '02 - Clear proposal: number of cameras, hardware, resolution, storage, and cabling detailed in the quote.', '03 - Coordinated installation: structured cabling, clean mounting, NVR configuration, and testing of every camera.', '04 - Handover and support: documented system, basic training, and availability for ongoing management.']},
         ],
@@ -2914,7 +2914,7 @@ EN_SERVICE_PAGE_CONTENT = {
         'sections': [
             {'eyebrow': 'Network infrastructure', 'title': 'What we install and organize', 'items': ['Open or closed racks and cabinets based on the equipment and service-access needs', 'Patch panels that keep incoming cabling organized and clearly labeled', 'Vertical and horizontal cable management for racks that stay readable and expandable', 'Clean routing of Bell, Videotron, Rogers, or other internet entries', 'Cleanup of existing technical rooms to make them more functional without rebuilding everything']},
             {'eyebrow': 'Value', 'title': 'Why an organized network room matters', 'paragraphs': ['A chaotic room costs time every time someone intervenes and makes changes risky. A well-structured room costs less to maintain over time and is much easier to expand.']},
-            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Room review: available space, installed equipment, existing internet entries, and future needs.', '02 - Organization plan: rack layout, patch panels, internet-entry routing, and documentation before the work starts.', '03 - Installation or reorganization: rack assembly, panel cabling, and full identification.', '04 - Documentation handoff: port maps, equipment list, internet entries, and pathways.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Room review: available space, installed equipment, existing internet handoffs, and future needs.', '02 - Organization plan: rack layout, patch panels, internet handoff routing, and documentation before the work starts.', '03 - Installation or reorganization: rack assembly, panel cabling, and full identification.', '04 - Documentation handoff: port maps, equipment list, internet handoffs, and pathways.']},
         ],
         'cta': 'Does your network room need attention? Tell us what is in place today and what needs to improve.',
     },
@@ -2960,7 +2960,7 @@ PARTNER_BRANDS_COPY = {
 
 BLOG_PAGE = {
     'en': {
-        'title': 'Blog — Commercial technology and building systems | Opticable',
+        'title': 'Commercial Building Technology Blog | Opticable',
         'desc': 'Advice, guides, and resources about security systems, commercial WiFi, cabling, and network infrastructure for Quebec commercial properties — by Opticable.',
         'eyebrow': 'Resources and guidance',
         'h1': 'Opticable blog — Technology for commercial properties',
@@ -2986,7 +2986,7 @@ BLOG_PAGE = {
 }
 
 BLOG_PAGE['en'] = {
-    'title': 'Blog — Commercial technology and building systems | Opticable',
+    'title': 'Commercial Building Technology Blog | Opticable',
     'desc': 'Advice, guides, and resources about security systems, commercial WiFi, cabling, and network infrastructure for commercial buildings in Quebec — by Opticable.',
     'eyebrow': 'Resources and guidance',
     'h1': 'Opticable blog — Technology for commercial buildings',
@@ -3075,7 +3075,7 @@ BLOG_ARTICLES = {
         'related_articles': ('ip-cameras-network-upgrade', 'structured-cabling-foundation'),
         'en': {
             'path': '/en/blog/why-more-wifi-power-makes-things-worse/',
-            'title': 'Why Turning Up WiFi Power Usually Makes Things Worse | Opticable',
+            'title': 'Why More WiFi Power Makes Things Worse | Opticable',
             'desc': 'Why increasing WiFi access point power rarely fixes coverage, interference, or performance problems in a commercial building.',
             'eyebrow': 'Commercial WiFi',
             'headline': 'Turning up WiFi power usually makes the problem worse.',
@@ -3367,7 +3367,7 @@ BLOG_ARTICLES = {
         'en': {
             'path': '/en/blog/ip-cameras-network-upgrade/',
             'author': 'Opticable Team',
-            'title': 'IP Cameras: Why Your Surveillance Network Needs an Upgrade | Opticable',
+            'title': 'IP Camera Network Upgrade Guide | Opticable',
             'desc': 'Why older CCTV and DVR systems reach their limits quickly, and what an upgrade to IP cameras with a cloud-ready NVR platform actually changes.',
             'eyebrow': 'IP Security',
             'headline': 'Are your security cameras keeping up with your network?',
@@ -3488,7 +3488,7 @@ BLOG_ARTICLES = {
                     'eyebrow': 'Opticable',
                     'title': 'The right network, the right team',
                     'paragraphs': [
-                        'Opticable installs IP camera systems the same way we deploy network infrastructure: methodically, with validation, and with a focus on making the finished system supportable after go-live.',
+                        'Opticable installs IP camera systems the same way we deploy network infrastructure: methodically, with validation, and with a focus on making the finished system supportable after commissioning.',
                         'We start with the existing infrastructure: switches, cabling, uplinks, available bandwidth, coverage zones, retention needs, and access requirements. The goal is not to sell boxes. The goal is to deliver a coherent system that actually fits the way your site operates.',
                     ],
                     'cards': [
