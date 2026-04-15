@@ -8,7 +8,7 @@ DECISION_ARTICLES_A = {
         "related_articles": ("access-control-vs-intercom", "camera-system-pricing-commercial-building"),
         "fr": {
             "path": "/fr/prix-controle-acces-immeuble-commercial/",
-            "title": "Prix d'un système de contrôle d'accès pour immeuble commercial | Opticable",
+            "title": "Prix du contrôle d'accès commercial | Opticable",
             "desc": "Combien prévoir pour un système de contrôle d'accès commercial, ce qui fait varier la soumission et comment demander un prix réaliste.",
             "eyebrow": "Guide de prix",
             "headline": "Combien coûte un système de contrôle d'accès pour un immeuble commercial ?",

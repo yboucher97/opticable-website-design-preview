@@ -129,7 +129,7 @@ INDUSTRY_DETAIL_PAGES = {
     },
     "industry-retail-and-sales-floor": {
         "path": "/fr/clientele/commerce-et-vente-au-detail/",
-        "title": "Systèmes technologiques pour commerces et vente au détail | Opticable",
+        "title": "Technologie pour commerces et détail | Opticable",
         "desc": "Caméras, WiFi, contrôle d'accès et câblage pour commerces, boutiques et espaces de vente.",
         "eyebrow": "Clientèle",
         "headline": "Technologie pour commerces et espaces de vente",
@@ -193,7 +193,7 @@ INDUSTRY_DETAIL_PAGES = {
     },
     "industry-warehouse-and-industrial": {
         "path": "/fr/clientele/entrepot-et-industriel/",
-        "title": "Systèmes technologiques pour entrepôts et sites industriels | Opticable",
+        "title": "Technologie pour entrepôts industriels | Opticable",
         "desc": "Caméras, contrôle d'accès, WiFi, fibre et infrastructure réseau pour entrepôts et sites industriels légers.",
         "eyebrow": "Clientèle",
         "headline": "Technologie pour entrepôts et sites industriels",
