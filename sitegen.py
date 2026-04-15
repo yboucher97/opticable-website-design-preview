@@ -1880,10 +1880,10 @@ T['fr'].update({
     'service_area_title': 'Zone de service',
     'service_area_intro': "Opticable dessert les immeubles commerciaux à Montréal, Laval, Longueuil, sur la Rive-Sud, la Rive-Nord, dans les Laurentides et partout au Québec.",
     'service_area_regions': ['Montréal', 'Laval', 'Longueuil', 'Rive-Sud', 'Rive-Nord', 'Laurentides', 'Et partout au Québec'],
-    'industries_title': 'Clients et types de projets desservis | Opticable',
-    'industries_desc': "Opticable installe et gère sécurité, WiFi et câblage pour entreprises, gestionnaires immobiliers et immeubles multilocatifs. Montréal et partout au Québec.",
-    'industries_h1': "Les équipes qui gèrent, construisent et exploitent des immeubles commerciaux",
-    'industries_intro': "Opticable intervient dans des bâtiments occupés, des chantiers actifs et des immeubles en exploitation. Nos clients sont ceux qui ont besoin que les systèmes fonctionnent, sans mauvaises surprises.",
+    'industries_title': 'Clients, bâtiments et types de projets desservis | Opticable',
+    'industries_desc': "Opticable installe et gère sécurité, WiFi et câblage pour bâtiments occupés, bâtiments neufs, nouveaux projets, entreprises et équipes immobilières au Québec.",
+    'industries_h1': "Les équipes qui gèrent, construisent, rénovent et exploitent des bâtiments commerciaux",
+    'industries_intro': "Opticable intervient dans les bâtiments occupés, les bâtiments neufs, les rénovations, les nouveaux projets, les chantiers actifs et les immeubles déjà en exploitation. Si votre contexte n'est pas listé, décrivez-nous le projet: on vous dira clairement si on peut vous aider.",
     'faq_title': 'Questions fréquentes sur nos services | Opticable',
     'faq_desc': "Réponses aux questions sur l'installation et la gestion de caméras, contrôle d'accès, WiFi et câblage pour immeubles commerciaux au Québec.",
     'faq_h1': 'Vous avez des questions sur nos services ou sur un projet ?',
@@ -1891,12 +1891,12 @@ T['fr'].update({
     'faq_panel_title': 'Questions fréquentes',
     'faq_panel_copy': "Réponses utiles sur les soumissions, l'installation, le soutien technique et les systèmes qu'on gère après la mise en service.",
     'clients_title': 'Des solutions adaptées aux réalités du terrain',
-    'clients_intro': "Nous intervenons dans des bâtiments occupés, des sites multi-usages et des environnements où la continuité des opérations est essentielle.",
+    'clients_intro': "Nous intervenons dans des bâtiments occupés, des bâtiments neufs, des nouveaux projets, des sites multi-usages et des environnements où la continuité des opérations est essentielle.",
     'clients': [
         ('Entreprises, bureaux et commerces', "Sécurité, WiFi, connectivité et systèmes d'entrée pour des opérations qui doivent rester stables au quotidien."),
         ('Immeubles multilocatifs', "Intercoms, accès, caméras, WiFi et câblage pour les aires communes, les halls et les environnements occupés."),
         ('Immeubles commerciaux à locataires multiples', "Systèmes du bâtiment pensés pour les espaces partagés, les locaux techniques et l'exploitation courante."),
-        ('Gestionnaires immobiliers et promoteurs', 'Interlocuteur unique pour les mises à niveau, la standardisation multi-immeubles et la coordination de chantier.'),
+        ('Gestionnaires immobiliers, promoteurs et entrepreneurs', 'Interlocuteur unique pour les mises à niveau, les bâtiments neufs, les nouveaux projets, la standardisation multi-immeubles et la coordination de chantier.'),
     ],
     'process_title': "Notre méthode d'installation",
     'process_intro': "Un projet bien livré commence par une bonne préparation.",
@@ -2733,15 +2733,15 @@ FR_CLIENTELE_SECTIONS = [
         'items': ['Mises à niveau dans des immeubles en service', 'Standardisation sur un portefeuille', 'Interventions planifiées', 'Interlocuteur unique pour plusieurs projets'],
     },
     {
-        'title': 'Promoteurs et entrepreneurs généraux en construction',
-        'copy': "Vous construisez ou rénovez un bâtiment et avez besoin que les systèmes technologiques soient coordonnés avec les autres corps de métier, sans retard.",
-        'items': ['Coordination avec les électriciens et autres corps de métier', 'Câblage structuré selon les phases de construction', "Caméras, contrôle d'accès et intercom livrés à temps", 'Documentation complète à la livraison'],
+        'title': 'Bâtiments neufs, rénovations et chantiers actifs',
+        'copy': "Vous construisez, rénovez, aménagez ou livrez un nouveau projet et vous avez besoin que les systèmes technologiques soient coordonnés avec les autres corps de métier, sans retard.",
+        'items': ['Coordination avec les électriciens, entrepreneurs et autres corps de métier', 'Câblage structuré selon les phases de construction ou de rénovation', "Caméras, contrôle d'accès, intercom, WiFi et réseau livrés selon l'échéancier", 'Documentation complète à la livraison ou à la mise en service'],
     },
 ]
 
 FR_CLIENTELE_CTA = {
     'title': "Votre type de projet n'est pas listé ici ?",
-    'copy': "On intervient aussi en hôtellerie, institutionnel et sites industriels. Décrivez-nous votre bâtiment.",
+    'copy': "On peut aussi évaluer les commerces, hôtels, institutions, entrepôts, sites industriels, sites temporaires, chantiers, nouveaux bâtiments et projets spéciaux. Décrivez-nous votre bâtiment ou votre projet.",
     'label': 'Nous contacter',
 }
 
@@ -13122,8 +13122,8 @@ for lang in ('en', 'fr'):
                 lang,
                 {
                     'eyebrow': 'Clientèle' if lang == 'fr' else 'Who we serve',
-                    'title': 'Pages par type d’immeuble' if lang == 'fr' else 'Pages by building and project type',
-                    'intro': 'Choisissez le contexte qui ressemble le plus à votre bâtiment pour voir les systèmes et contraintes qui reviennent souvent.' if lang == 'fr' else 'Choose the context closest to your occupied building, new building, renovation, or active project.',
+                    'title': 'Pages par type de bâtiment ou de projet' if lang == 'fr' else 'Pages by building and project type',
+                    'intro': 'Choisissez le contexte qui ressemble le plus à votre bâtiment occupé, bâtiment neuf, rénovation, chantier actif ou projet à venir.' if lang == 'fr' else 'Choose the context closest to your occupied building, new building, renovation, or active project.',
                     'label': 'Voir cette clientèle' if lang == 'fr' else 'View this type',
                     'cta_href': '',
                     'cta_label': '',
