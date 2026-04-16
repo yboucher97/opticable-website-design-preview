@@ -14271,8 +14271,8 @@ not_found_body = (
 )
 not_found_html = page(
     'fr',
-    'home',
-    'home',
+    '404',
+    '',
     'Page introuvable | Opticable',
     "La page demandée est introuvable. Retournez à l’accueil, aux services ou à la page contact d’Opticable.",
     not_found_body,
@@ -14280,6 +14280,7 @@ not_found_html = page(
     canonical_path='/404.html',
     include_alternates=False,
     resource_key='404',
+    lang_switch_href=routes['en']['home'],
 )
 
 if FORCE_NOINDEX:
