@@ -25,12 +25,12 @@ CAMPAIGN_LANDING_PAGES = {
         "service_key": "access-control-systems",
     },
     "lp-multitenant-intercom": {
-        "path": "/fr/lp/intercom-immeuble-multilocatif/",
-        "title": "Intercom pour immeuble multilocatif | Opticable",
-        "desc": "Soumission pour intercom audio ou vidéo dans un immeuble multilocatif, avec ouverture de porte et logique visiteurs.",
+        "path": "/fr/lp/intercom-immeuble-multilogement/",
+        "title": "Intercom pour immeuble multilogement | Opticable",
+        "desc": "Soumission pour intercom audio ou vidéo dans un immeuble multilogement, avec ouverture de porte et logique visiteurs.",
         "eyebrow": "Intercom",
-        "headline": "Intercom audio ou vidéo pour immeuble multilocatif",
-        "intro": "Vous voulez moderniser l'entrée d'un immeuble multilocatif ? On installe des intercoms pensés pour les visiteurs, les entrées principales, les aires communes et la gestion à distance du bâtiment.",
+        "headline": "Intercom audio ou vidéo pour immeuble multilogement",
+        "intro": "Vous voulez moderniser l'entrée d'un immeuble multilogement ? On installe des intercoms pensés pour les visiteurs, les entrées principales, les aires communes et la gestion à distance du bâtiment.",
         "panel_title": "Portées fréquentes",
         "panel_copy": "Remplacement d'un vieux panneau, ajout d'un intercom vidéo ou intégration avec l'ouverture de porte et le contrôle d'accès.",
         "items": [

@@ -42,7 +42,7 @@ DECISION_ARTICLES_A = {
                         "rows": (
                             ("Porte simple", "1 porte, lecteur, gâche ou serrure, programmation de base", "2 500 $ à 5 500 $", "Commerce, bureau ou porte arrière avec besoin simple"),
                             ("Petit système", "2 à 4 portes avec gestion centralisée", "6 000 $ à 12 000 $", "Hall d'entrée, zones restreintes et circulation interne"),
-                            ("Portée plus complète", "4 portes et plus, horaires, intégrations et visiteurs", "12 000 $ à 20 000 $ +", "Immeuble commercial, multilocatif ou site multi-zones"),
+                            ("Portée plus complète", "4 portes et plus, horaires, intégrations et visiteurs", "12 000 $ à 20 000 $ +", "Immeuble commercial, multilogement ou site multi-zones"),
                         ),
                     },
                 },
@@ -142,8 +142,19 @@ DECISION_ARTICLES_A = {
                         ("Ouverture de porte", "Déverrouillage, gâche, serrure ou intégration avec l'accès changent la quincaillerie et le câblage."),
                         ("Câblage existant", "Un ancien système ou un câblage à reprendre peut faire varier la portée plus que le panneau lui-même."),
                         ("Mode de réponse", "Poste intérieur, téléphone mobile ou logique mixte changent le type de système proposé."),
+                        ("Base réseau et distribution", "Quand le local réseau, le PoE, le commutateur ou les câbles entre étages doivent être repris, la soumission augmente vite."),
                         ("Bâtiment occupé", "Travaux dans un hall actif, coordination avec les occupants et accès limités font bouger la main-d'oeuvre."),
                     ],
+                },
+                {
+                    "eyebrow": "Réseau et câblage",
+                    "title": "L'intercom dépend souvent de la base réseau du bâtiment",
+                    "paragraphs": [
+                        "Dans un immeuble multilogement, un intercom vidéo ou connecté ne s'arrête pas au panneau d'entrée. Il faut parfois reprendre l'alimentation, le câblage, le point de raccordement, le commutateur PoE ou la distribution entre l'entrée et le local réseau principal.",
+                        "Plus le bâtiment a d'entrées, d'étages ou de logique d'ouverture à distance, plus il faut valider la base réseau, le câblage entre étages et la place disponible dans le local technique avant de parler d'un vrai prix.",
+                    ],
+                    "callout_label": "À retenir",
+                    "callout": "Un bon prix d'intercom tient compte du panneau d'entrée, mais aussi de la base réseau et du câblage qui permettent au système de fonctionner proprement.",
                 },
                 {
                     "eyebrow": "Préparation",
@@ -153,6 +164,7 @@ DECISION_ARTICLES_A = {
                         ("Quel type d'occupants ?", "Locataires, copropriétaires, bureaux, commerces ou usage mixte."),
                         ("Faut-il seulement parler ou aussi déverrouiller ?", "La logique d'ouverture change tout dans la portée."),
                         ("Le système doit-il travailler avec l'accès ?", "Si oui, il faut le dire dès le départ pour cadrer le bon scénario."),
+                        ("Le câblage et le local réseau sont-ils déjà prêts ?", "Un ancien intercom, un rack encombré ou des câbles à reprendre font souvent varier la soumission."),
                     ],
                     "quote": "Dans un immeuble multilogement, un intercom utile est celui qui suit la vraie logique d'entrée du bâtiment.",
                 },
@@ -227,7 +239,7 @@ DECISION_ARTICLES_A = {
                     "title": "Les cas les plus fréquents",
                     "cards": [
                         ("Audio", "Petite entrée, faible volume de visiteurs, besoin fonctionnel et budget serré."),
-                        ("Vidéo", "Hall principal, visiteurs fréquents, immeuble multilocatif ou besoin de mieux filtrer."),
+                        ("Vidéo", "Hall principal, visiteurs fréquents, immeuble multilogement ou besoin de mieux filtrer."),
                         ("Vidéo + accès", "Immeuble qui veut gérer visiteurs, résidents ou employés dans une logique plus unifiée."),
                     ],
                 },

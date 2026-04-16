@@ -8,7 +8,7 @@ GUIDE_ARTICLES = {
         "related_articles": ("ip-cameras-network-upgrade", "structured-cabling-foundation"),
         "fr": {
             "path": "/fr/prix-systeme-cameras-immeuble-commercial/",
-            "title": "Prix d'un système de caméras pour immeuble commercial | Opticable",
+            "title": "Prix caméras pour immeuble commercial | Opticable",
             "desc": "Combien prévoir pour un système de caméras dans un immeuble commercial, ce qui fait varier la soumission et comment obtenir un prix réaliste.",
             "eyebrow": "Guide d'achat",
             "headline": "Combien coûte un système de caméras pour un immeuble commercial ?",
@@ -41,7 +41,7 @@ GUIDE_ARTICLES = {
                         "rows": (
                             ("Portée simple", "4 à 6 caméras, entrée et aire commune", "3 500 $ à 7 500 $", "Petit immeuble, commerce ou bureau avec peu de zones à couvrir"),
                             ("Portée intermédiaire", "8 à 16 caméras, intérieur + extérieur", "8 000 $ à 15 000 $", "Immeuble avec plusieurs accès, stationnement ou zones sensibles"),
-                            ("Portée étendue", "16 caméras et plus, stockage plus lourd", "15 000 $ à 25 000 $ +", "Site plus complexe, multi-locatif ou plusieurs secteurs à surveiller"),
+                            ("Portée étendue", "16 caméras et plus, stockage plus lourd", "15 000 $ à 25 000 $ +", "Site plus complexe, multilogement ou plusieurs secteurs à surveiller"),
                         ),
                     },
                 },
@@ -55,6 +55,7 @@ GUIDE_ARTICLES = {
                         ("Zones extérieures", "Le stationnement, les entrées extérieures et les intempéries exigent souvent des boîtiers, supports et protections adaptés."),
                         ("Accès au bâtiment", "Les travaux de soir, en site occupé ou coordonnés avec des locataires demandent plus de planification."),
                         ("Intégration", "Si la surveillance doit s'aligner avec les accès, l'intercom ou le réseau existant, la portée technique augmente."),
+                        ("Base réseau du bâtiment", "Si le local réseau, les commutateurs, les patch panels ou la distribution entre étages doivent être repris, la portée grimpe vite."),
                     ],
                 },
                 {
@@ -95,7 +96,7 @@ GUIDE_ARTICLES = {
         "fr": {
             "path": "/fr/controle-acces-vs-intercom/",
             "title": "Contrôle d'accès vs intercom | Opticable",
-            "desc": "Comment choisir entre un intercom, un contrôle d'accès ou les deux pour un immeuble commercial ou multilocatif.",
+            "desc": "Comment choisir entre un intercom, un contrôle d'accès ou les deux pour un immeuble commercial ou multilogement.",
             "eyebrow": "Guide de décision",
             "headline": "Contrôle d'accès vs intercom : lequel faut-il installer ?",
             "intro": "Réponse courte : un intercom sert surtout à parler avec un visiteur et à le valider à l'entrée. Un système de contrôle d'accès sert à gérer qui entre, quand et avec quels droits. Dans beaucoup d'immeubles commerciaux, les deux doivent travailler ensemble : intercom pour les visiteurs, contrôle d'accès pour les occupants, les employés et les fournisseurs autorisés.",
@@ -139,7 +140,7 @@ GUIDE_ARTICLES = {
                     "cards": [
                         ("Intercom seul", "Petit site avec une seule entrée visiteur, peu d'usagers réguliers et sans besoin d'un historique d'accès détaillé."),
                         ("Contrôle d'accès seul", "Bureaux, locaux techniques, zones restreintes ou portes employées où les usagers sont déjà connus et autorisés."),
-                        ("Intercom + accès", "Immeuble multilocatif, entrée principale, hall, livraisons, visiteurs et occupants réguliers sur la même porte ou sur le même site."),
+                        ("Intercom + accès", "Immeuble multilogement, entrée principale, hall, livraisons, visiteurs et occupants réguliers sur la même porte ou sur le même site."),
                     ],
                 },
                 {
@@ -351,7 +352,7 @@ GUIDE_ARTICLES = {
         "fr": {
             "path": "/fr/mise-a-niveau-technologique-immeuble-occupe/",
             "title": "Mise à niveau technologique dans un immeuble occupé | Opticable",
-            "desc": "Comment planifier une mise à niveau technologique dans un immeuble commercial ou multilocatif occupé sans nuire aux opérations.",
+            "desc": "Comment planifier une mise à niveau technologique dans un immeuble commercial ou multilogement occupé sans nuire aux opérations.",
             "eyebrow": "Projet en site occupé",
             "headline": "Comment planifier une mise à niveau technologique dans un immeuble occupé",
             "intro": "Réponse courte : une mise à niveau technologique en immeuble occupé se planifie par phases, avec une visite de site sérieuse, des fenêtres d'intervention claires, un plan de communication et des cheminements validés avant le départ. Ce qui crée les retards n'est pas le matériel : ce sont les accès, les heures permises, les occupants, les plafonds fermés et l'absence de séquence claire entre les corps de métier.",
@@ -404,7 +405,7 @@ GUIDE_ARTICLES = {
                     "eyebrow": "Préparation",
                     "title": "Comment accélérer une demande de soumission",
                     "steps": [
-                        ("Donner le type d'immeuble et son occupation", "Bureaux, multilocatif, commerce, site mixte ou portefeuille géré."),
+                        ("Donner le type d'immeuble et son occupation", "Bureaux, multilogement, commerce, site mixte ou portefeuille géré."),
                         ("Nommer les systèmes visés", "Caméras, contrôle d'accès, intercom, WiFi, câblage, backbone ou mise à niveau réseau."),
                         ("Indiquer les contraintes", "Horaires permis, zones sensibles, exigences de sécurité, bruit ou accès limités."),
                         ("Dire comment vous voulez phaser", "Par étage, par entrée, par aile, par lots ou par fenêtres hors heures."),

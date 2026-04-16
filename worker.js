@@ -32,6 +32,9 @@ const LEGACY_REDIRECTS = new Map([
   ["/fr/prix-intercom-immeuble-multilocatif", "/fr/prix-intercom-immeuble-multilogement/"],
   ["/fr/prix-intercom-immeuble-multilocatif/", "/fr/prix-intercom-immeuble-multilogement/"],
   ["/fr/prix-intercom-immeuble-multilocatif/index.html", "/fr/prix-intercom-immeuble-multilogement/"],
+  ["/fr/lp/intercom-immeuble-multilocatif", "/fr/lp/intercom-immeuble-multilogement/"],
+  ["/fr/lp/intercom-immeuble-multilocatif/", "/fr/lp/intercom-immeuble-multilogement/"],
+  ["/fr/lp/intercom-immeuble-multilocatif/index.html", "/fr/lp/intercom-immeuble-multilogement/"],
 ]);
 
 const PROMO_TEXT = {

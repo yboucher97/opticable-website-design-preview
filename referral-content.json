@@ -37,6 +37,7 @@
       "form_title": "Join the Referral Program",
       "form_intro": "Create your referral account and we will open your portal with a secure sign-in link.",
       "terms_title": "Referral Program terms",
+      "terms_desc": "Referral Program rules covering eligibility, the 5% client discount, the 3% Opticable credit, minimum subtotal, and exclusions.",
       "terms_intro": "These rules stay short and practical. They explain eligibility, the reward, and the main exclusions.",
       "terms_sections": [
         ["Eligibility", "This program is for clients, property managers, and contacts referring a new qualifying Quebec project to Opticable."],
@@ -85,6 +86,7 @@
       "form_title": "Joindre le programme de référence",
       "form_intro": "Créez votre compte et activez votre accès permanent au portail.",
       "terms_title": "Conditions du programme de référence",
+      "terms_desc": "Règles du programme de référence Opticable : admissibilité, rabais client de 5 %, crédit de 3 %, sous-total minimum et exclusions.",
       "terms_intro": "Ces règles restent courtes et concrètes. Elles expliquent l'admissibilité, la récompense et les principales exclusions.",
       "terms_sections": [
         ["Admissibilité", "Ce programme s'adresse aux clients, aux gestionnaires et aux contacts qui réfèrent un nouveau projet admissible au Québec à Opticable."],
@@ -132,6 +134,7 @@
       "form_title": "Apply as a Referral Partner",
       "form_intro": "Submit your business details for review. Opticable validates the request first, then creates the partner account if approved.",
       "terms_title": "Referral Partner terms",
+      "terms_desc": "Referral Partner Program rules covering approval, minimum subtotal, fixed payout tiers, and the main exclusions.",
       "terms_intro": "The partner program stays simple, but it is more structured than the client referral program because approvals and payouts are involved.",
       "terms_sections": [
         ["Eligibility", "This program is for businesses and professionals referring new Quebec projects to Opticable."],
@@ -177,6 +180,7 @@
       "form_title": "Soumettre une demande partenaire",
       "form_intro": "Transmettez les coordonnées de votre entreprise pour révision. Opticable valide d'abord la demande, puis crée le compte partenaire si elle est approuvée.",
       "terms_title": "Conditions du programme de partenaires référents",
+      "terms_desc": "Règles du programme de partenaires référents Opticable : approbation, sous-total minimum, paliers de commission fixes et exclusions.",
       "terms_intro": "Le programme partenaires reste simple, mais il est plus structuré que le programme de référence puisqu'il comprend une approbation et des paiements.",
       "terms_sections": [
         ["Admissibilité", "Ce programme est destiné aux entreprises et aux professionnels qui réfèrent de nouveaux projets au Québec à Opticable."],
