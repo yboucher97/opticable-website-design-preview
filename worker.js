@@ -1130,6 +1130,11 @@ export default {
     const redirectUrl = new URL(url);
     let shouldRedirect = false;
 
+    if (redirectUrl.protocol !== "https:") {
+      redirectUrl.protocol = "https:";
+      shouldRedirect = true;
+    }
+
     if (redirectUrl.hostname === WWW_HOST) {
       redirectUrl.hostname = APEX_HOST;
       shouldRedirect = true;
