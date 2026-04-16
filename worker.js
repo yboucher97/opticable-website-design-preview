@@ -23,6 +23,15 @@ const LEGACY_REDIRECTS = new Map([
   ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
   ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
   ["/fr/blogue/pourquoi-monter-la-puissance-du-wifi-empire-les-choses/index.html", "/fr/blogue/pourquoi-plus-de-puissance-wifi-aggrave-le-probleme/"],
+  ["/fr/etudes-de-cas/immeuble-multilocatif", "/fr/etudes-de-cas/immeuble-multilogement/"],
+  ["/fr/etudes-de-cas/immeuble-multilocatif/", "/fr/etudes-de-cas/immeuble-multilogement/"],
+  ["/fr/etudes-de-cas/immeuble-multilocatif/index.html", "/fr/etudes-de-cas/immeuble-multilogement/"],
+  ["/fr/clientele/immeuble-multilocatif", "/fr/clientele/immeuble-multilogement/"],
+  ["/fr/clientele/immeuble-multilocatif/", "/fr/clientele/immeuble-multilogement/"],
+  ["/fr/clientele/immeuble-multilocatif/index.html", "/fr/clientele/immeuble-multilogement/"],
+  ["/fr/prix-intercom-immeuble-multilocatif", "/fr/prix-intercom-immeuble-multilogement/"],
+  ["/fr/prix-intercom-immeuble-multilocatif/", "/fr/prix-intercom-immeuble-multilogement/"],
+  ["/fr/prix-intercom-immeuble-multilocatif/index.html", "/fr/prix-intercom-immeuble-multilogement/"],
 ]);
 
 const PROMO_TEXT = {

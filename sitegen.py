@@ -435,7 +435,7 @@ T = {
         'services_h1': 'Des services d infrastructure commerciale concus pour la fiabilite, une livraison ordonnee et un soutien a long terme plus simple.',
         'services_intro': 'Opticable prend en charge la basse tension derriere la connectivite d affaires, la communication du batiment et les systemes relies aux locataires. Chaque page service vise une intention de recherche commerciale precise et explique ou le travail s insere dans un plan d infrastructure plus vaste.',
         'extra_title': 'Capacites additionnelles integrees aux projets',
-'extras': [('Installation de cables Ethernet', 'Cablage cuivre pour postes de travail, bornes WiFi, cameras, telephones et appareils d affaires.'), ('Installation de cables coaxiaux', 'Backbone coaxial et liaisons specialisees coordonnes avec le cablage structure et les handoffs fournisseur.'), ('Installation de baies serveurs', 'Implantation des baies, gestion du cablage, raccordement et remise en ordre des salles MDF et IDF.'), ('Deploiement d infrastructures internet', 'Extensions de demarcation, routage des handoffs et soutien de commutation pour les espaces commerciaux neufs ou renoves.'), ('Lignes telephoniques VoIP', 'Connectivite voix et infrastructure des postes alignees sur le cablage structure et le reseau.')],
+'extras': [('Installation de cables Ethernet', 'Cablage cuivre pour postes de travail, points d acces WiFi, cameras, telephones et appareils d affaires.'), ('Installation de cables coaxiaux', 'Backbone coaxial et liaisons specialisees coordonnes avec le cablage structure et les handoffs fournisseur.'), ('Installation de baies serveurs', 'Implantation des baies, gestion du cablage, raccordement et remise en ordre du local reseau principal et des points de distribution.'), ('Deploiement d infrastructures internet', 'Extensions de demarcation, routage des handoffs et soutien de commutation pour les espaces commerciaux neufs ou renoves.'), ('Lignes telephoniques VoIP', 'Connectivite voix et infrastructure des postes alignees sur le cablage structure et le reseau.')],
         'about_title': 'A propos d Opticable | Specialiste des infrastructures commerciales basse tension', 'about_desc': 'Decouvrez comment Opticable accompagne les proprietes commerciales, les gestionnaires immobiliers, les promoteurs et les exploitants avec des services d infrastructure basse tension.',
         'about_h1': 'Un specialiste des infrastructures basse tension axe sur les proprietes commerciales et les environnements immobiliers geres.',
         'about_intro': 'Opticable est positionne comme un entrepreneur qui comprend comment le cablage, les salles reseau, la securite, l acces, l interphone, le sans-fil et les systemes de communication d affaires se rejoignent au niveau du batiment.',
@@ -646,6 +646,501 @@ RESOURCE_ARTICLE_KEYS = (
 )
 INDUSTRY_DETAIL_KEYS = tuple(INDUSTRY_DETAIL_PAGES.keys())
 CAMPAIGN_LANDING_KEYS = tuple(CAMPAIGN_LANDING_PAGES.keys())
+MULTIFAMILY_CLUSTER_PAGES = {
+    'multifamily-network-infrastructure': {
+        'path': '/fr/infrastructure-wifi-immeuble-multilogement/',
+        'title': 'WiFi et réseau pour immeubles multilogements | Opticable',
+        'desc': "Câblage, fibre, points d’accès WiFi, locaux réseau, caméras et contrôle d’accès pour immeubles multilogements au Québec.",
+        'eyebrow': 'Immeubles multilogements',
+        'headline': 'Infrastructure WiFi et réseau pour immeubles multilogements',
+        'intro': "Un bon WiFi dans un immeuble multilogement commence rarement par le choix d'un point d'accès. Il commence par une base réseau claire: câblage, fibre, commutateurs, alimentation PoE, arrivées Internet, locaux réseau et chemins propres entre les étages.",
+        'panel_title': 'La base avant le WiFi',
+        'panel_copy': "Quand la base est bien pensée, le WiFi, les caméras, l'intercom, le contrôle d'accès et les autres systèmes du bâtiment restent plus stables, plus simples à faire évoluer et plus cohérents à gérer.",
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'structured-cabling', 'fiber-optic-installation'),
+        'guide_keys': ('commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building', 'network-room-rack-cleanup', 'technology-retrofit-occupied-building'),
+        'related_keys': ('multifamily-network-10-25', 'multifamily-network-25-100', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Base réseau',
+                'title': "La base avant les points d'accès WiFi",
+                'paragraphs': [
+                    "Dans un immeuble multilogement, la qualité du WiFi dépend d'abord de la base filaire qui l'alimente. Si le câblage, le PoE, les commutateurs, les arrivées Internet et les locaux réseau sont improvisés, ajouter des points d'accès ne règle qu'une partie du problème.",
+                    "Cette base sert ensuite à relier les points d'accès WiFi, les caméras, l'intercom, le contrôle d'accès, les équipements des aires communes, les locaux administratifs et les besoins futurs du bâtiment.",
+                ],
+            },
+            {
+                'eyebrow': 'Immeuble connecté',
+                'title': "Ce que l'infrastructure doit pouvoir relier",
+                'cards': [
+                    ("Points d'accès WiFi et antennes WiFi", "Une couverture cohérente dans les halls, corridors, aires communes, bureaux de gestion et zones techniques."),
+                    ("Caméras, intercom et accès", "Des systèmes d'entrée et de sécurité qui partagent une base réseau propre au lieu d'être ajoutés au hasard."),
+                    ("Suites, services et espaces communs", "Des liaisons stables pour les zones partagées, les locaux techniques et les besoins de l'exploitation."),
+                    ("Croissance future", "Une structure qui permet d'ajouter des équipements, des étages ou de nouvelles zones sans tout reprendre."),
+                ],
+            },
+            {
+                'eyebrow': 'Avant la soumission',
+                'title': "Ce qu'on valide avant de recommander l'architecture",
+                'items': [
+                    "Le nombre d'unités, d'étages et d'entrées à desservir",
+                    "Le statut du bâtiment: existant, occupé, en rénovation ou en nouveau projet",
+                    "L'emplacement du local réseau principal et la place disponible pour l'équipement",
+                    "Le besoin de petits locaux réseau d'étage ou d'armoires techniques secondaires",
+                    "Les chemins de câbles entre étages et les zones communes à couvrir",
+                    "Les arrivées fournisseurs, les contraintes du site et les zones où le WiFi est déjà faible",
+                ],
+            },
+            {
+                'eyebrow': 'Langage simple',
+                'title': "Local réseau principal, local d'étage et câbles entre étages: qu'est-ce que ça veut dire ?",
+                'paragraphs': [
+                    "Le local réseau principal est l'endroit où arrivent souvent les services, le cœur de la commutation et le rack principal du bâtiment. Dans les immeubles plus grands, on ajoute ensuite de petits locaux réseau d'étage ou des armoires techniques plus près des zones à desservir.",
+                    "Les câbles entre étages relient ce local principal aux autres niveaux. C'est cette colonne vertébrale qui permet ensuite de distribuer proprement le WiFi, les caméras, l'intercom, le contrôle d'accès et les autres technologies du bâtiment.",
+                ],
+            },
+        ],
+        'faq_items': [
+            ("Est-ce qu'un bon WiFi dépend surtout du point d'accès choisi ?", "Non. Le point d'accès compte, mais la qualité du WiFi dépend aussi du câblage, du PoE, des commutateurs, du positionnement, des matériaux du bâtiment et de l'organisation du réseau."),
+            ("Faut-il toujours de la fibre dans un immeuble multilogement ?", "Pas toujours partout, mais elle devient souvent logique pour relier les étages, les zones éloignées ou plusieurs locaux réseau sans subir les limites du cuivre."),
+            ("À quoi sert un local réseau d'étage ?", "À rapprocher la distribution réseau des zones desservies quand un seul local principal ne suffit plus. Cela réduit les longueurs de câble et simplifie l'évolution du bâtiment."),
+            ("Est-ce pertinent pour un immeuble existant ?", "Oui. Cette logique s'applique autant à un bâtiment occupé qu'à un projet neuf. La différence est surtout dans la façon de phaser les travaux."),
+        ],
+        'cta_title': "Planifier l'infrastructure de votre immeuble multilogement",
+        'cta_copy': "Décrivez le nombre d'unités, les étages, les aires communes et les systèmes à relier. On vous aidera à cadrer une base réseau cohérente avant le reste.",
+        'cta_label': 'Obtenir une soumission',
+    },
+    'multifamily-network-10-25': {
+        'path': '/fr/infrastructure-wifi-10-25-unites/',
+        'title': 'WiFi et réseau pour immeubles de 10 à 25 unités | Opticable',
+        'desc': "Infrastructure WiFi, câblage, fibre et locaux réseau pour immeubles de 10 à 25 unités au Québec.",
+        'eyebrow': 'Immeubles de 10 à 25 unités',
+        'headline': 'WiFi et réseau pour immeubles de 10 à 25 unités',
+        'intro': "Dans un immeuble de 10 à 25 unités, l'objectif n'est pas de surconstruire. Il faut surtout une base simple, propre et claire pour relier l'entrée, les aires communes, le WiFi, les caméras et les autres systèmes sans créer un casse-tête pour la suite.",
+        'panel_title': 'Ce qui compte le plus',
+        'panel_copy': "Un local réseau principal lisible, de bons chemins de câbles, des points d'accès WiFi bien placés et une portée réaliste pour les zones communes.",
+        'service_keys': ('commercial-wifi-installation', 'structured-cabling', 'network-infrastructure', 'intercom-systems'),
+        'guide_keys': ('intercom-pricing-multi-tenant-building', 'commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-25-100', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Profil type',
+                'title': "Ce qu'on voit souvent à cette taille",
+                'paragraphs': [
+                    "Un seul local réseau principal peut suffire, parfois avec une petite armoire secondaire si certaines zones sont trop loin. L'erreur fréquente est de laisser chaque ajout se brancher sur l'existant sans logique globale.",
+                    "Même à petite ou moyenne échelle, le bâtiment doit pouvoir supporter proprement l'intercom, le contrôle d'accès, les caméras, le WiFi des aires communes et les besoins futurs.",
+                ],
+            },
+            {
+                'eyebrow': 'Portées fréquentes',
+                'title': "Ce qu'on installe le plus souvent",
+                'items': [
+                    "Intercom ou intercom vidéo à l'entrée principale",
+                    "Contrôle d'accès pour l'entrée, le garage ou les locaux communs",
+                    "Caméras dans le hall, les corridors, le stationnement et les points sensibles",
+                    "Points d'accès WiFi dans les aires communes, corridors ou salle partagée",
+                    "Remise en ordre du local réseau et ajout de quelques liens structurés",
+                ],
+            },
+            {
+                'eyebrow': 'Avant de chiffrer',
+                'title': "Ce qu'il faut confirmer avant une soumission utile",
+                'items': [
+                    "Le nombre d'étages et la distance réelle entre les zones à relier",
+                    "L'emplacement du local réseau principal et la place disponible dans le rack",
+                    "Les zones communes où le WiFi doit être fiable dès le départ",
+                    "Les accès à sécuriser, les visiteurs à gérer et les besoins des résidents",
+                    "Le statut du bâtiment: existant, occupé, en rénovation ou neuf",
+                ],
+            },
+            {
+                'eyebrow': 'Qualité du WiFi',
+                'title': "À cette échelle, un bon WiFi reste d'abord une question de base réseau",
+                'paragraphs': [
+                    "Un petit immeuble n'a pas besoin d'une architecture lourde, mais il a besoin d'un réseau propre. Des points d'accès mal placés ou mal alimentés donnent vite un WiFi inégal, même quand le matériel est correct.",
+                    "Une base bien organisée rend aussi beaucoup plus simple l'ajout futur de caméras, d'accès, d'une nouvelle zone commune ou d'un autre étage de service.",
+                ],
+            },
+        ],
+        'faq_items': [
+            ("Est-ce qu'un seul local réseau suffit toujours ?", "Pas toujours. Cela dépend surtout du nombre d'étages, des distances et des zones à desservir. Parfois une petite armoire secondaire évite beaucoup de compromis."),
+            ("Faut-il prévoir la fibre à cette taille ?", "Pas dans tous les cas, mais elle peut devenir logique si les longueurs montent vite ou si certaines zones sont éloignées."),
+            ("Le WiFi commun peut-il être ajouté plus tard ?", "Oui, mais il vaut mieux prévoir dès maintenant le câblage, le PoE et les emplacements des points d'accès pour éviter des reprises plus coûteuses."),
+        ],
+        'cta_title': "Vous planifiez un immeuble de 10 à 25 unités ?",
+        'cta_copy': "Parlez-nous du nombre d'étages, des zones communes et des systèmes à relier. On vous aidera à garder l'infrastructure simple et durable.",
+        'cta_label': 'Demander une soumission',
+    },
+    'multifamily-network-25-100': {
+        'path': '/fr/infrastructure-wifi-25-100-unites/',
+        'title': 'Réseau pour immeubles de 25 à 100 unités | Opticable',
+        'desc': "Infrastructure réseau, WiFi, fibre et locaux techniques pour immeubles de 25 à 100 unités au Québec.",
+        'eyebrow': 'Immeubles de 25 à 100 unités',
+        'headline': 'Infrastructure réseau pour immeubles de 25 à 100 unités',
+        'intro': "Entre 25 et 100 unités, l'infrastructure doit déjà gérer plus de densité, plus d'étages, plus de zones communes et plus de systèmes. Le WiFi devient seulement une couche parmi d'autres sur une base réseau qui doit être claire et évolutive.",
+        'panel_title': 'Ce qui change à cette taille',
+        'panel_copy': "On voit plus souvent un local réseau principal, des armoires ou locaux d'étage, des liens entre niveaux et une vraie logique de distribution entre les zones du bâtiment.",
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'structured-cabling', 'fiber-optic-installation'),
+        'guide_keys': ('commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building', 'technology-retrofit-occupied-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-10-25', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Structure',
+                'title': "Ce qui devient important quand l'immeuble prend de l'ampleur",
+                'paragraphs': [
+                    "Un seul local réseau central devient souvent insuffisant pour tout desservir proprement. À cette taille, on planifie plus souvent un local principal et un ou plusieurs points de redistribution plus près des étages ou des zones communes.",
+                    "Cette structure sert à maintenir des longueurs de câble réalistes, à mieux distribuer le PoE et à garder une logique claire quand on ajoute du WiFi, des caméras, de l'intercom ou du contrôle d'accès.",
+                ],
+            },
+            {
+                'eyebrow': 'Portées fréquentes',
+                'title': "Ce qu'on prépare souvent dans ce type d'immeuble",
+                'cards': [
+                    ("WiFi des aires communes", "Plusieurs points d'accès WiFi coordonnés selon les étages, les corridors, les halls, les salles partagées et la densité réelle."),
+                    ("Liens entre étages", "Câblage cuivre ou fibre pour relier le local principal aux étages et éviter de tirer chaque service au hasard."),
+                    ("Sécurité intégrée", "Caméras, intercom et contrôle d'accès qui utilisent une base réseau cohérente au lieu d'îlots séparés."),
+                    ("Évolutivité", "Une structure qui laisse de la marge pour plus d'unités, plus d'équipements ou de nouvelles zones."),
+                ],
+            },
+            {
+                'eyebrow': 'Avant la soumission',
+                'title': "Les points à confirmer avant de choisir l'architecture",
+                'items': [
+                    "Le nombre réel d'étages, d'entrées, de zones communes et de stationnements",
+                    "Les longueurs probables entre le local principal et les zones de distribution",
+                    "La place disponible pour des armoires techniques ou petits locaux réseau d'étage",
+                    "Le besoin de fibre ou de liens montants pour soutenir la distribution",
+                    "Les systèmes qui doivent partager la même base: WiFi, caméras, intercom, accès et autres technologies",
+                ],
+            },
+            {
+                'eyebrow': 'WiFi et qualité',
+                'title': "À cette taille, le WiFi doit suivre la structure du bâtiment",
+                'paragraphs': [
+                    "Le WiFi performant ne vient pas seulement du nombre de points d'accès. Il dépend aussi des chemins de câbles, de la qualité du PoE, de la capacité des commutateurs et de la façon dont les étages sont raccordés.",
+                    "Plus l'immeuble grandit, plus le WiFi doit être traité comme un système qui s'appuie sur une vraie infrastructure, pas comme une couche ajoutée à la fin.",
+                ],
+            },
+        ],
+        'faq_items': [
+            ("Faut-il prévoir des armoires ou locaux d'étage ?", "Souvent oui. Cela dépend des distances, du nombre d'étages et des zones à couvrir, mais c'est fréquent à cette taille."),
+            ("La fibre est-elle plus probable dans un immeuble de 25 à 100 unités ?", "Oui. Dès que les longueurs augmentent ou que plusieurs niveaux doivent être reliés proprement, la fibre devient souvent la meilleure base."),
+            ("Peut-on faire ça par phases dans un immeuble occupé ?", "Oui. C'est même souvent la bonne approche quand il faut limiter les interruptions pour les occupants et la gestion."),
+        ],
+        'cta_title': "Vous avez un immeuble de 25 à 100 unités à équiper ?",
+        'cta_copy': "Décrivez le nombre d'étages, les zones communes, les accès et l'état actuel du réseau. On vous aidera à cadrer la bonne base technique.",
+        'cta_label': 'Obtenir une soumission',
+    },
+    'multifamily-network-100-plus': {
+        'path': '/fr/infrastructure-wifi-100-unites-et-plus/',
+        'title': 'WiFi et réseau pour immeubles de 100 unités et plus | Opticable',
+        'desc': "WiFi, câblage, fibre, locaux réseau et systèmes connectés pour immeubles de 100 unités et plus au Québec.",
+        'eyebrow': 'Immeubles de 100 unités et plus',
+        'headline': 'WiFi et infrastructure pour immeubles de 100 unités et plus',
+        'intro': "À partir de 100 unités, on ne parle plus seulement d'ajouter du WiFi ou quelques systèmes. On parle d'une architecture de bâtiment: locaux réseau, liens entre étages, capacité, segmentation, équipements communs et planification de croissance.",
+        'panel_title': "Ce qu'il faut penser plus tôt",
+        'panel_copy': "Plus le bâtiment est grand, plus il faut clarifier tôt le local principal, les distributions d'étage, la fibre, les aires communes, les accès et la logique d'exploitation.",
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'fiber-optic-installation', 'access-control-systems'),
+        'guide_keys': ('technology-retrofit-occupied-building', 'network-room-rack-cleanup', 'cat6a-or-fiber-commercial-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-10-25', 'multifamily-network-25-100'),
+        'sections': [
+            {
+                'eyebrow': 'Échelle',
+                'title': "Quand l'immeuble devient une vraie architecture réseau",
+                'paragraphs': [
+                    "À cette taille, il faut penser capacité, maintenance, documentation, redondance pratique, phases de travaux et coordination entre plusieurs zones du bâtiment. Le WiFi, les caméras, l'accès et l'intercom s'appuient tous sur cette même base.",
+                    "Un seul choix improvisé au départ peut compliquer des dizaines d'ajouts par la suite. Il vaut mieux clarifier la structure générale avant de multiplier les équipements.",
+                ],
+            },
+            {
+                'eyebrow': 'À prévoir tôt',
+                'title': "Ce qu'il faut cadrer dès le départ",
+                'cards': [
+                    ("Local réseau principal", "Le cœur du bâtiment, là où la capacité, la commutation et les arrivées doivent rester lisibles."),
+                    ("Locaux ou armoires d'étage", "Des points de redistribution pour éviter des longueurs excessives et simplifier la maintenance."),
+                    ("Liens fibre et câbles entre étages", "La colonne vertébrale qui relie proprement les niveaux, les ailes et les zones éloignées."),
+                    ("Aires communes et sécurité", "WiFi, caméras, intercom, accès, stationnement et équipements du bâtiment planifiés comme un ensemble."),
+                ],
+            },
+            {
+                'eyebrow': 'Erreurs fréquentes',
+                'title': "Ce qui coûte cher quand on le repousse trop tard",
+                'items': [
+                    "Ajouter des points d'accès WiFi sans avoir validé les liens, le PoE et la distribution d'étage",
+                    "Laisser plusieurs systèmes partager un local réseau déjà saturé ou mal documenté",
+                    "Reporter la fibre ou les liaisons montantes alors que la distance et la capacité l'exigent déjà",
+                    "Multiplier les ajouts par phases sans architecture commune pour les aires communes et les accès",
+                    "Sous-estimer la documentation nécessaire pour la maintenance future",
+                ],
+            },
+            {
+                'eyebrow': 'Nouveau projet ou remise à niveau',
+                'title': "Ce qu'on regarde dans un nouveau bâtiment ou une modernisation majeure",
+                'paragraphs': [
+                    "Dans un nouveau projet, on veut profiter des bonnes phases pour positionner les locaux, les chemins de câbles, les arrivées et les réserves futures. Dans un immeuble existant, on cherche plutôt la meilleure façon de moderniser sans perturber inutilement l'exploitation.",
+                    "Dans les deux cas, l'objectif reste le même: une base réseau stable qui rend l'immeuble plus connecté, plus simple à gérer et plus prêt pour les technologies à venir.",
+                ],
+            },
+        ],
+        'faq_items': [
+            ("Faut-il penser l'infrastructure par phases ?", "Oui. À cette taille, une approche par phases est souvent la plus réaliste, mais elle doit suivre une architecture commune dès le départ."),
+            ("Est-ce que tous les systèmes peuvent partager la même base réseau ?", "Oui, si elle est bien planifiée. C'est justement ce qui rend l'exploitation plus claire et évite les ajouts incohérents."),
+            ("Pourquoi la documentation devient-elle si importante ?", "Parce qu'un grand immeuble évolue constamment. Sans repérage clair, chaque ajout ou dépannage devient plus long, plus risqué et plus coûteux."),
+        ],
+        'cta_title': "Vous planifiez un immeuble de 100 unités et plus ?",
+        'cta_copy': "Parlez-nous du nombre d'étages, des zones communes, des accès et des systèmes à coordonner. On vous aidera à structurer l'architecture avant les ajouts dispersés.",
+        'cta_label': 'Parler du projet',
+    },
+}
+MULTIFAMILY_CLUSTER_PAGES_EN = {
+    'multifamily-network-infrastructure': {
+        'path': '/en/multifamily-wifi-network-infrastructure/',
+        'title': 'Multifamily WiFi and Network Infrastructure | Opticable',
+        'desc': 'Cabling, fiber, WiFi access points, network rooms, cameras, and access systems for multifamily buildings in Quebec.',
+        'eyebrow': 'Multifamily buildings',
+        'headline': 'WiFi and network infrastructure for multifamily buildings',
+        'intro': "Good WiFi in a multifamily building rarely starts with the access point model alone. It starts with a clear network foundation: cabling, fiber, switches, PoE, internet handoffs, network rooms, and clean links between floors.",
+        'panel_title': 'The foundation before WiFi',
+        'panel_copy': 'When that foundation is planned properly, WiFi, cameras, intercom, access control, and the other building systems stay more stable, easier to expand, and simpler to manage together.',
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'structured-cabling', 'fiber-optic-installation'),
+        'guide_keys': ('commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building', 'network-room-rack-cleanup', 'technology-retrofit-occupied-building'),
+        'related_keys': ('multifamily-network-10-25', 'multifamily-network-25-100', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Network foundation',
+                'title': 'The base before the WiFi access points',
+                'paragraphs': [
+                    'In a multifamily building, WiFi quality depends first on the wired base that feeds it. If the cabling, PoE, switches, internet handoffs, and network rooms are improvised, adding access points only fixes part of the problem.',
+                    'That same base also supports WiFi access points, cameras, intercom, access control, common-area equipment, management spaces, and future building technology needs.',
+                ],
+            },
+            {
+                'eyebrow': 'Connected building',
+                'title': 'What the infrastructure needs to connect',
+                'cards': [
+                    ('WiFi access points and antennas', 'Consistent coverage across lobbies, corridors, common spaces, management areas, and technical zones.'),
+                    ('Cameras, intercom, and access', 'Entry and security systems that share a clean network base instead of being added piecemeal.'),
+                    ('Suites, services, and common spaces', 'Stable links for shared areas, technical rooms, and the building operations behind them.'),
+                    ('Future growth', 'A structure that leaves room for more equipment, more floors, or new shared areas without starting over.'),
+                ],
+            },
+            {
+                'eyebrow': 'Before the quote',
+                'title': 'What we confirm before recommending the architecture',
+                'items': [
+                    'The number of units, floors, and entries that need to be served',
+                    'Whether the building is existing, occupied, under renovation, or a new project',
+                    'Where the main network room is and how much room is available there',
+                    'Whether floor-level closets or secondary technical cabinets are needed',
+                    'The cable paths between floors and the common spaces that need reliable coverage',
+                    'Provider handoffs, site constraints, and the zones where WiFi is already weak',
+                ],
+            },
+            {
+                'eyebrow': 'Plain language',
+                'title': 'What do main network room, floor closet, and floor-to-floor cabling actually mean?',
+                'paragraphs': [
+                    'The main network room is usually where the building handoffs arrive, where the core switching lives, and where the main rack is organized. In larger buildings, smaller floor closets or secondary technical cabinets are added closer to the spaces being served.',
+                    'The cables between floors link that main room to the other levels. That backbone is what lets WiFi, cameras, intercom, access control, and other building systems be distributed cleanly instead of one by one without structure.',
+                ],
+            },
+        ],
+        'faq_items': [
+            ('Does good WiFi depend mostly on the access point model?', 'No. The access point matters, but WiFi quality also depends on cabling, PoE, switching, placement, building materials, and how the network is organized.'),
+            ('Do multifamily buildings always need fiber?', 'Not everywhere, but fiber often becomes logical for links between floors, distant areas, or multiple network rooms where copper limits become a problem.'),
+            ('Why add a floor-level network closet?', 'To bring distribution closer to the served areas when one main room is no longer enough. That keeps cable runs more realistic and future changes easier.'),
+            ('Is this relevant for an existing building too?', 'Yes. The same logic applies to occupied buildings and new projects. The main difference is how the work gets phased.'),
+        ],
+        'cta_title': 'Plan the network foundation of your multifamily building',
+        'cta_copy': 'Tell us how many units, floors, common spaces, and systems need to connect. We will help frame a coherent network base before the add-ons pile up.',
+        'cta_label': 'Request a quote',
+    },
+    'multifamily-network-10-25': {
+        'path': '/en/wifi-network-infrastructure-10-25-units/',
+        'title': 'WiFi and Network Infrastructure for 10 to 25 Units | Opticable',
+        'desc': 'WiFi infrastructure, cabling, fiber, and network rooms for 10 to 25 unit multifamily buildings in Quebec.',
+        'eyebrow': '10 to 25 units',
+        'headline': 'WiFi and network infrastructure for 10 to 25 units',
+        'intro': 'In a 10 to 25 unit building, the goal is not to overbuild. The goal is to create a simple, clean foundation that can support the entry, common-area WiFi, cameras, and the other connected systems without becoming messy later.',
+        'panel_title': 'What matters most',
+        'panel_copy': 'A readable main network room, clean cable paths, well-placed WiFi access points, and a realistic scope for the common areas.',
+        'service_keys': ('commercial-wifi-installation', 'structured-cabling', 'network-infrastructure', 'intercom-systems'),
+        'guide_keys': ('intercom-pricing-multi-tenant-building', 'commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-25-100', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Typical profile',
+                'title': 'What we often see at this size',
+                'paragraphs': [
+                    'One main network room can often be enough, sometimes with a small secondary cabinet if a few areas are too far away. A common mistake is letting each new system attach itself to whatever already exists with no overall logic.',
+                    'Even at this scale, the building still needs a clean base for intercom, access control, cameras, common-area WiFi, and future additions.',
+                ],
+            },
+            {
+                'eyebrow': 'Typical scopes',
+                'title': 'What gets installed most often',
+                'items': [
+                    'Intercom or video intercom at the main entry',
+                    'Access control for the entry, garage, or shared rooms',
+                    'Cameras in the lobby, corridors, parking, and sensitive areas',
+                    'WiFi access points in common spaces, corridors, or shared rooms',
+                    'Network-room cleanup and a few structured links where needed',
+                ],
+            },
+            {
+                'eyebrow': 'Before pricing',
+                'title': 'What should be confirmed before a useful quote',
+                'items': [
+                    'The number of floors and the real distance between the areas to connect',
+                    'Where the main network room sits and how much rack space is available',
+                    'Which common spaces need reliable WiFi from the start',
+                    'Which entries need to be secured and how visitors are handled',
+                    'Whether the building is existing, occupied, under renovation, or new',
+                ],
+            },
+            {
+                'eyebrow': 'WiFi quality',
+                'title': 'At this size, good WiFi is still mostly a network-foundation issue',
+                'paragraphs': [
+                    'A smaller building does not need heavy architecture, but it still needs clean infrastructure. Poorly placed or poorly powered access points create uneven WiFi even when the hardware itself is fine.',
+                    'A clean base also makes future cameras, access control, new common areas, or added building systems much easier to support.',
+                ],
+            },
+        ],
+        'faq_items': [
+            ('Is one network room always enough?', 'Not always. It depends on the number of floors, the cable lengths, and the spaces that need to be served. Sometimes a small secondary cabinet avoids a lot of compromise.'),
+            ('Should fiber be considered at this size?', 'Not in every case, but it can become logical when distances rise quickly or some zones are too far away for a clean copper-only layout.'),
+            ('Can the common-area WiFi be added later?', 'Yes, but it is better to plan the cabling, PoE, and access-point locations now so later work does not cost more than it should.'),
+        ],
+        'cta_title': 'Planning a 10 to 25 unit building?',
+        'cta_copy': 'Tell us about the floor count, common areas, and connected systems. We will help keep the infrastructure simple and durable.',
+        'cta_label': 'Request a quote',
+    },
+    'multifamily-network-25-100': {
+        'path': '/en/wifi-network-infrastructure-25-100-units/',
+        'title': 'Network Infrastructure for 25 to 100 Units | Opticable',
+        'desc': 'Network infrastructure, WiFi, fiber, and technical rooms for 25 to 100 unit multifamily buildings in Quebec.',
+        'eyebrow': '25 to 100 units',
+        'headline': 'Network infrastructure for 25 to 100 units',
+        'intro': 'Between 25 and 100 units, the infrastructure already has to manage more density, more floors, more common spaces, and more systems. WiFi becomes one layer on top of a network foundation that needs to stay clear and expandable.',
+        'panel_title': 'What changes at this size',
+        'panel_copy': 'A main network room, floor cabinets or closets, cleaner vertical links, and a real distribution logic between the building zones become much more common.',
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'structured-cabling', 'fiber-optic-installation'),
+        'guide_keys': ('commercial-wifi-audit-checklist', 'cat6a-or-fiber-commercial-building', 'technology-retrofit-occupied-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-10-25', 'multifamily-network-100-plus'),
+        'sections': [
+            {
+                'eyebrow': 'Structure',
+                'title': 'What becomes important as the building grows',
+                'paragraphs': [
+                    'One central room is often no longer enough to serve everything cleanly. At this size, a main network room plus one or more floor-level distribution points becomes much more common.',
+                    'That structure keeps cable lengths more realistic, distributes PoE more cleanly, and makes it easier to support WiFi, cameras, intercom, and access control without patchwork additions.',
+                ],
+            },
+            {
+                'eyebrow': 'Typical scopes',
+                'title': 'What we usually prepare in buildings of this size',
+                'cards': [
+                    ('Common-area WiFi', 'Multiple WiFi access points coordinated across floors, corridors, lobbies, shared rooms, and the real density of use.'),
+                    ('Floor-to-floor links', 'Copper or fiber links between the main room and the served levels, instead of pulling every system ad hoc.'),
+                    ('Integrated security systems', 'Cameras, intercom, and access control that share a coherent network base instead of separate islands.'),
+                    ('Future growth', 'A structure that leaves room for more units, more equipment, and additional building zones.'),
+                ],
+            },
+            {
+                'eyebrow': 'Before the quote',
+                'title': 'What should be confirmed before choosing the architecture',
+                'items': [
+                    'The real number of floors, entries, common spaces, and parking zones',
+                    'The likely distances between the main room and the distribution points',
+                    'How much room exists for floor cabinets or small technical rooms',
+                    'Whether fiber or stronger vertical links are needed for the distribution',
+                    'Which systems must share the same base: WiFi, cameras, intercom, access, and the other connected layers',
+                ],
+            },
+            {
+                'eyebrow': 'WiFi quality',
+                'title': 'At this scale, WiFi has to follow the building structure',
+                'paragraphs': [
+                    'Good WiFi does not come only from the number of access points. It also depends on cable paths, PoE quality, switch capacity, and how the floors are tied back into the network.',
+                    'The larger the building gets, the more WiFi needs to be treated as one system riding on proper infrastructure, not as an afterthought added at the end.',
+                ],
+            },
+        ],
+        'faq_items': [
+            ('Do floor closets or cabinets become more likely?', 'Yes. Once distances, floor count, and common-space coverage increase, they often become the cleanest way to distribute the network.'),
+            ('Is fiber more likely in a 25 to 100 unit building?', 'Yes. As the runs get longer and more levels need to be tied together cleanly, fiber often becomes the right backbone.'),
+            ('Can this be phased in an occupied building?', 'Yes. That is often the right approach when management and occupants need disruption kept under control.'),
+        ],
+        'cta_title': 'Do you need to equip a 25 to 100 unit building?',
+        'cta_copy': 'Tell us the floor count, common spaces, access points, and current network state. We will help frame the right technical base.',
+        'cta_label': 'Request a quote',
+    },
+    'multifamily-network-100-plus': {
+        'path': '/en/wifi-network-infrastructure-100-plus-units/',
+        'title': 'WiFi and Infrastructure for 100+ Unit Buildings | Opticable',
+        'desc': 'WiFi, cabling, fiber, network rooms, and connected systems for 100+ unit multifamily buildings in Quebec.',
+        'eyebrow': '100+ units',
+        'headline': 'WiFi and infrastructure for 100+ unit buildings',
+        'intro': 'Once a building reaches 100 units or more, the conversation is no longer only about adding WiFi or a few systems. It becomes a building architecture question: network rooms, floor distribution, capacity, segmentation, common-area equipment, and future growth.',
+        'panel_title': 'What needs to be settled earlier',
+        'panel_copy': 'The larger the building, the earlier the main room, floor distribution, fiber, common areas, entry systems, and operating logic need to be made clear.',
+        'service_keys': ('commercial-wifi-installation', 'network-infrastructure', 'fiber-optic-installation', 'access-control-systems'),
+        'guide_keys': ('technology-retrofit-occupied-building', 'network-room-rack-cleanup', 'cat6a-or-fiber-commercial-building'),
+        'related_keys': ('multifamily-network-infrastructure', 'multifamily-network-10-25', 'multifamily-network-25-100'),
+        'sections': [
+            {
+                'eyebrow': 'Scale',
+                'title': 'When the building becomes a real network architecture',
+                'paragraphs': [
+                    'At this size, capacity, maintenance, documentation, phased work, and coordination between many building zones all matter. WiFi, cameras, access control, and intercom all depend on the same base.',
+                    'One improvised decision early on can complicate dozens of future additions. It is better to clarify the overall structure before equipment begins multiplying.',
+                ],
+            },
+            {
+                'eyebrow': 'Plan early',
+                'title': 'What should be defined upfront',
+                'cards': [
+                    ('Main network room', 'The building core where capacity, switching, and handoffs need to stay readable.'),
+                    ('Floor closets or cabinets', 'Distribution points that keep cable runs realistic and make support easier later.'),
+                    ('Fiber and floor-to-floor cabling', 'The backbone that ties levels, wings, and distant areas together cleanly.'),
+                    ('Common areas and security', 'WiFi, cameras, intercom, access, parking, and building systems planned as one environment.'),
+                ],
+            },
+            {
+                'eyebrow': 'Common mistakes',
+                'title': 'What becomes expensive when it gets pushed too late',
+                'items': [
+                    'Adding WiFi access points before validating the links, PoE, and floor distribution',
+                    'Letting many systems share a network room that is already saturated or poorly documented',
+                    'Postponing fiber or vertical links when distance and capacity already demand them',
+                    'Rolling out separate phases with no common architecture for common areas and access points',
+                    'Underestimating the documentation needed for future support and change',
+                ],
+            },
+            {
+                'eyebrow': 'New build or major retrofit',
+                'title': 'What we look at in new construction or large upgrades',
+                'paragraphs': [
+                    'In a new project, the goal is to use the right construction phases to position rooms, pathways, handoffs, and future reserves. In an existing building, the goal is to modernize without disrupting operations more than necessary.',
+                    'In both cases, the objective stays the same: a stable network base that makes the building more connected, easier to manage, and ready for the next technology layer.',
+                ],
+            },
+        ],
+        'faq_items': [
+            ('Should the infrastructure be phased?', 'Yes. At this size, phasing is often the most realistic approach, but the phases should still follow one common architecture from the start.'),
+            ('Can all systems share the same network foundation?', 'Yes, if it is planned properly. That is exactly what keeps operations clearer and prevents disconnected add-ons.'),
+            ('Why does documentation matter more at this scale?', 'Because a large building keeps changing. Without clear labeling and structure, every addition or troubleshooting visit takes longer and costs more.'),
+        ],
+        'cta_title': 'Planning a 100+ unit building?',
+        'cta_copy': 'Tell us about the floors, common spaces, access systems, and technologies that need to connect. We will help structure the architecture before fragmented additions take over.',
+        'cta_label': 'Discuss the project',
+    },
+}
+MULTIFAMILY_CLUSTER_PAGES_BY_LANG = {
+    'en': MULTIFAMILY_CLUSTER_PAGES_EN,
+    'fr': MULTIFAMILY_CLUSTER_PAGES,
+}
+MULTIFAMILY_CLUSTER_KEYS = tuple(MULTIFAMILY_CLUSTER_PAGES.keys())
 FR_HOME_RESOURCE_KEYS = (
     'camera-system-pricing-commercial-building',
     'access-control-pricing-commercial-building',
@@ -689,7 +1184,7 @@ FR_HOME_EXTRA_SECTIONS = [
             "Ajout ou remplacement de caméras aux entrées, dans les corridors, le stationnement et les aires communes",
             "Mise à niveau du contrôle d'accès d'un hall, d'une porte arrière, d'un local technique ou d'une zone restreinte",
             "Installation d'un intercom à l'entrée principale d'un immeuble ou d'un espace partagé",
-            'Audit WiFi et ajout ou repositionnement de bornes dans un bâtiment occupé',
+            "Audit WiFi et ajout ou repositionnement de points d'accès dans un bâtiment occupé",
             'Remise en ordre du câblage, du rack ou du local réseau avant une expansion',
             "Lien principal en Cat6A ou en fibre pour relier des étages, des suites ou des zones techniques",
             'Mise à niveau technologique par phases pour limiter les interruptions',
@@ -705,7 +1200,7 @@ FR_CONTACT_EXTRA_SECTIONS = [
             "Le type d'immeuble et son niveau d'occupation",
             "Les systèmes concernés : caméras, contrôle d'accès, intercom, WiFi, câblage, fibre ou local réseau",
             "Les zones à traiter : entrées, corridors, stationnement, suites, quai, salle technique ou aire commune",
-            "Le nombre approximatif de portes, de caméras, de bornes WiFi ou de prises réseau à ajouter",
+            "Le nombre approximatif de portes, de caméras, de points d'accès WiFi ou de prises réseau à ajouter",
             "Les contraintes : horaires permis, accès limités, travaux hors heures ou coordination avec d'autres métiers",
             "L'échéancier : besoin immédiat, budget en préparation ou projet à phaser",
         ],
@@ -799,13 +1294,19 @@ FR_SERVICE_GUIDE_KEYS = {
 FR_SERVICE_INDUSTRY_KEYS = {
     'security-camera-systems': ('industry-office-building', 'industry-multi-tenant-building', 'industry-retail-and-sales-floor'),
     'access-control-systems': ('industry-office-building', 'industry-multi-tenant-building', 'industry-retail-and-sales-floor'),
-    'commercial-wifi-installation': ('industry-office-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
-    'structured-cabling': ('industry-office-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
+    'commercial-wifi-installation': ('industry-office-building', 'industry-multi-tenant-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
+    'structured-cabling': ('industry-office-building', 'industry-multi-tenant-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
     'intercom-systems': ('industry-multi-tenant-building', 'industry-office-building'),
-    'network-infrastructure': ('industry-office-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
+    'network-infrastructure': ('industry-office-building', 'industry-multi-tenant-building', 'industry-retail-and-sales-floor', 'industry-warehouse-and-industrial'),
     'fiber-optic-installation': ('industry-office-building', 'industry-multi-tenant-building', 'industry-warehouse-and-industrial'),
     'it-services-and-support': ('industry-office-building', 'industry-retail-and-sales-floor'),
     'ip-phone-systems': ('industry-office-building', 'industry-retail-and-sales-floor'),
+}
+MULTIFAMILY_CLUSTER_SERVICE_KEYS = {
+    'commercial-wifi-installation': MULTIFAMILY_CLUSTER_KEYS,
+    'structured-cabling': MULTIFAMILY_CLUSTER_KEYS,
+    'network-infrastructure': MULTIFAMILY_CLUSTER_KEYS,
+    'fiber-optic-installation': MULTIFAMILY_CLUSTER_KEYS,
 }
 FR_SERVICE_CASE_STUDY_KEYS = {
     'security-camera-systems': ('case-office-building', 'case-retail-space'),
@@ -1017,7 +1518,7 @@ faq_groups = {
     'fr': [
         ('WiFi', 'Couverture, déploiement et soutien des réseaux sans fil selon le type de site.', [
             ('Faites-vous le WiFi seulement pour des bureaux ?', "Non. Nous faisons aussi le WiFi pour les commerces, les aires communes, les événements, les multi-logements, les copropriétés, les chantiers de construction et les sites industriels."),
-            ("Faites-vous la vente, la gestion, la maintenance, l'installation et le câblage WiFi ?", "Oui. Le service peut inclure la vente d'équipement, le câblage des bornes, l'installation, la planification de couverture, la gestion et la maintenance continue du réseau sans fil."),
+            ("Faites-vous la vente, la gestion, la maintenance, l'installation et le câblage WiFi ?", "Oui. Le service peut inclure la vente d'équipement, le câblage des points d'accès, l'installation, la planification de couverture, la gestion et la maintenance continue du réseau sans fil."),
             ('Pouvez-vous créer plusieurs réseaux WiFi sécurisés pour des usages différents ?', "Oui. Nous pouvons créer plusieurs réseaux sécurisés et segmentés selon les usages: locataires, personnel, visiteurs, opérations, caméras, points de vente, aires communes, événements ou autres besoins précis du bâtiment."),
             ('Pouvez-vous séparer un WiFi invité du réseau des locataires ou des opérations ?', "Oui. Le WiFi invité peut être isolé du trafic des locataires, des bureaux, de la gestion, des caméras et des opérations grâce à des réseaux distincts et des règles de segmentation adaptées."),
             ('Pouvez-vous planifier le WiFi pour les aires communes, l’extérieur ou les zones difficiles ?', "Oui. Le WiFi peut être planifié pour les halls, corridors, terrasses, cours, salles communes et autres espaces où la qualité de couverture et l’expérience utilisateur comptent."),
@@ -1049,7 +1550,7 @@ faq_groups = {
         ('Câblage structuré', "La base physique qui soutient le WiFi, les caméras, la téléphonie et les autres systèmes.", [
             ('Que comprend habituellement un projet de câblage structuré ?', "La plupart des projets incluent les cheminements, le câble cuivre ou coaxial, les terminaisons, le repérage, les panneaux de raccordement, les essais et la remise en ordre de l’installation."),
             ('Le câblage doit-il être évalué avant un projet WiFi, caméras ou téléphonie ?', "Souvent oui. Vérifier le câblage existant permet de voir ce qui peut être réutilisé, ce qui doit être remplacé et comment éviter des problèmes ou des coûts imprévus plus tard."),
-            ('À quoi servent généralement les câbles cuivre Cat5e et Cat6 ?', "Les câbles cuivre Cat5e et Cat6 servent surtout à relier les postes de travail, téléphones IP, bornes WiFi, caméras, équipements de contrôle d'accès et autres appareils réseau qui ont besoin d'une connexion Ethernet fiable dans l'immeuble."),
+            ('À quoi servent généralement les câbles cuivre Cat5e et Cat6 ?', "Les câbles cuivre Cat5e et Cat6 servent surtout à relier les postes de travail, téléphones IP, points d'accès WiFi, caméras, équipements de contrôle d'accès et autres appareils réseau qui ont besoin d'une connexion Ethernet fiable dans l'immeuble."),
             ('À quoi sert généralement la fibre optique ?', "La fibre sert surtout aux liaisons principales, aux longues distances, aux colonnes montantes entre étages et aux liens à plus haute capacité entre les suites, les locaux techniques et les équipements majeurs."),
             ('À quoi sert généralement le coaxial ?', "Le coaxial reste utile pour certains services Internet, certaines distributions spécialisées et certains équipements ou environnements où l'on ne remplace pas tout par du cuivre Ethernet."),
             ('Peut-on réidentifier, tester ou remettre en ordre un câblage existant au lieu de tout remplacer ?', "Oui. Dans plusieurs projets, une partie du travail consiste à retracer, réidentifier, tester et réorganiser le câblage existant pour conserver ce qui est encore bon lorsque c’est pertinent."),
@@ -1134,7 +1635,7 @@ service_panel_visuals = {
 services = {
     'structured-cabling': {
         'en': {'slug': 'structured-cabling', 'name': 'Structured Cabling', 'title': 'Structured Cabling Installation for Commercial Properties | Opticable', 'desc': 'Structured cabling installation for offices, multi-tenant buildings, and commercial properties, including Ethernet, coaxial, labeling, and pathway work.', 'hero': 'Structured cabling installation for offices, buildings, and commercial properties.', 'intro': 'Opticable installs the physical cabling foundation behind business connectivity, tenant systems, and low-voltage devices. Structured cabling scopes can include Ethernet cable installation, coaxial cable installation, pathway organization, terminations, and labeling that makes future support easier.', 'summary': 'Copper, Ethernet, coaxial, labeling, patching, and clean cable organization for commercial spaces.', 'includes': ['Cat5e, Cat6, and Cat6A runs for workstations, WiFi access points, cameras, phones, and business devices', 'Coaxial cabling for broadband handoffs, specialty distribution, and related commercial equipment', 'Patch panels, terminations, pathway hardware, labeling, testing, and cleanup of disorganized legacy cable'], 'benefits': ['Cleaner cable plants and easier service access', 'Faster troubleshooting after turnover', 'Better room for expansion, moves, and added devices'], 'cases': ['Tenant improvements and office expansions', 'Retail and hospitality connectivity upgrades', 'Legacy cleanup before wireless or security deployment'], 'industries': ['Business offices', 'Multi-tenant buildings', 'Retail and mixed-use properties'], 'related': ['network-infrastructure', 'fiber-optic-installation', 'commercial-wifi-installation']},
-'fr': {'slug': 'cablage-structure', 'name': 'Cablage structure', 'title': 'Installation de cablage structure pour proprietes commerciales | Opticable', 'desc': 'Installation de cablage structure pour bureaux, immeubles multi-locatifs et proprietes commerciales, incluant Ethernet, coaxial, reperage et cheminements.', 'hero': 'Installation de cablage structure pour bureaux, immeubles et proprietes commerciales.', 'intro': 'Opticable installe la fondation physique derriere la connectivite d affaires, les systemes des locataires et les appareils basse tension. La portee peut inclure l installation de cables Ethernet, le cablage coaxial, l organisation des chemins, les terminaisons et le reperage qui facilitent le soutien futur.', 'summary': 'Cuivre, Ethernet, coaxial, reperage, raccordement et organisation propre du cablage pour les espaces commerciaux.', 'includes': ['Parcours Cat5e, Cat6 et Cat6A pour postes, bornes WiFi, cameras, telephones et appareils d affaires', 'Cablage coaxial pour handoffs internet, distribution specialisee et equipements commerciaux relies', 'Panneaux de raccordement, terminaisons, accessoires de cheminement, reperage, essais et nettoyage des vieux cablages'], 'benefits': ['Infrastructure plus propre et plus facile a servir', 'Depannage plus rapide apres la remise', 'Plus de marge pour les ajouts, deplacements et nouveaux appareils'], 'cases': ['Amenagements locatifs et agrandissements de bureaux', 'Mises a niveau de connectivite pour commerces et hotellerie', 'Nettoyage avant le deploiement du WiFi ou de la securite'], 'industries': ['Bureaux d entreprise', 'Immeubles multi-locatifs', 'Proprietes de commerce et a usage mixte'], 'related': ['network-infrastructure', 'fiber-optic-installation', 'commercial-wifi-installation']},
+'fr': {'slug': 'cablage-structure', 'name': 'Cablage structure', 'title': 'Installation de cablage structure pour proprietes commerciales | Opticable', 'desc': 'Installation de cablage structure pour bureaux, immeubles multi-locatifs et proprietes commerciales, incluant Ethernet, coaxial, reperage et cheminements.', 'hero': 'Installation de cablage structure pour bureaux, immeubles et proprietes commerciales.', 'intro': 'Opticable installe la fondation physique derriere la connectivite d affaires, les systemes des locataires et les appareils basse tension. La portee peut inclure l installation de cables Ethernet, le cablage coaxial, l organisation des chemins, les terminaisons et le reperage qui facilitent le soutien futur.', 'summary': 'Cuivre, Ethernet, coaxial, reperage, raccordement et organisation propre du cablage pour les espaces commerciaux.', 'includes': ['Parcours Cat5e, Cat6 et Cat6A pour postes, points d acces WiFi, cameras, telephones et appareils d affaires', 'Cablage coaxial pour handoffs internet, distribution specialisee et equipements commerciaux relies', 'Panneaux de raccordement, terminaisons, accessoires de cheminement, reperage, essais et nettoyage des vieux cablages'], 'benefits': ['Infrastructure plus propre et plus facile a servir', 'Depannage plus rapide apres la remise', 'Plus de marge pour les ajouts, deplacements et nouveaux appareils'], 'cases': ['Amenagements locatifs et agrandissements de bureaux', 'Mises a niveau de connectivite pour commerces et hotellerie', 'Nettoyage avant le deploiement du WiFi ou de la securite'], 'industries': ['Bureaux d entreprise', 'Immeubles multi-locatifs', 'Proprietes de commerce et a usage mixte'], 'related': ['network-infrastructure', 'fiber-optic-installation', 'commercial-wifi-installation']},
     },
     'fiber-optic-installation': {
         'en': {'slug': 'fiber-optic-installation', 'name': 'Fiber Optic Installation', 'title': 'Fiber Optic Cable Installation for Commercial Buildings | Opticable', 'desc': 'Fiber optic cable installation for commercial buildings, backbones, risers, internet handoffs, and high-capacity connectivity.', 'hero': 'Fiber optic cabling for backbone capacity, risers, and business-grade connectivity.', 'intro': 'Opticable installs fiber optic cabling for commercial environments that need reliable backbone distribution, ISP handoff extensions, or higher-capacity links between floors, suites, and network rooms.', 'summary': 'Fiber backbones, risers, handoff extensions, and high-capacity links for commercial properties.', 'includes': ['Fiber backbone cabling between MDF, IDF, suites, and major equipment locations', 'Provider handoff extensions and demarc-to-network-room routing', 'Fiber terminations, patching, pathway organization, and rack-side coordination'], 'benefits': ['Higher-capacity distribution for future growth', 'Dependable long-distance links inside larger properties', 'Better coordination with racks, switching, and room design'], 'cases': ['Multi-floor office and mixed-use properties', 'Internet service handoff extensions to network rooms', 'Backbone refreshes during tenant or landlord improvements'], 'industries': ['Commercial office buildings', 'Multi-tenant properties', 'Industrial and warehouse sites'], 'related': ['network-infrastructure', 'structured-cabling', 'security-camera-systems']},
@@ -1162,7 +1663,7 @@ services = {
     },
     'commercial-wifi-installation': {
         'en': {'slug': 'commercial-wifi-installation', 'name': 'Commercial WiFi Installation', 'title': 'Commercial WiFi Installation and Access Point Cabling | Opticable', 'desc': 'Commercial WiFi installation including access point cabling, coverage planning, switching support, and wireless infrastructure for business properties.', 'hero': 'Commercial WiFi installation with the cabling and infrastructure wireless networks depend on.', 'intro': 'Opticable helps commercial clients deploy the physical infrastructure behind wireless networks, including access point cabling, mounting support, switching coordination, and coverage planning for active business environments.', 'summary': 'Wireless access point cabling, coverage planning, switching coordination, and infrastructure for business WiFi.', 'includes': ['Cabling for wireless access points in offices, common areas, retail spaces, and larger commercial footprints', 'Coverage-oriented placement coordination tied to building layout and device density', 'Switching, patching, and rack-side support for wireless infrastructure'], 'benefits': ['More dependable wireless coverage', 'Better integration with the network core', 'Room for future device density and added coverage'], 'cases': ['Office WiFi refreshes and tenant expansions', 'Retail guest and staff wireless improvements', 'Wireless rollouts tied to structured cabling or room upgrades'], 'industries': ['Office environments', 'Retail and hospitality', 'Commercial and multi-tenant properties'], 'related': ['structured-cabling', 'network-infrastructure', 'ip-phone-systems']},
-'fr': {'slug': 'installation-wifi-commercial', 'name': 'WiFi commercial', 'title': 'Installation de WiFi commercial et cablage de bornes | Opticable', 'desc': 'Installation de WiFi commercial incluant le cablage des bornes, la planification de couverture, le soutien a la commutation et l infrastructure sans fil pour proprietes d affaires.', 'hero': 'Installation de WiFi commercial avec le cablage et l infrastructure dont les reseaux sans fil ont besoin.', 'intro': 'Opticable aide les clients commerciaux a deployer l infrastructure physique derriere les reseaux sans fil, incluant le cablage des bornes WiFi, le soutien au montage, la coordination des commutateurs et la planification de couverture pour des environnements actifs.', 'summary': 'Cablage des bornes, planification de couverture, coordination des commutateurs et infrastructure pour le WiFi d affaires.', 'includes': ['Cablage pour bornes sans fil dans les bureaux, aires communes, commerces et grandes superficies commerciales', 'Coordination des emplacements selon la couverture requise, l amenagement du batiment et la densite des appareils', 'Commutation, raccordement et soutien cote baie pour l infrastructure sans fil'], 'benefits': ['Couverture sans fil plus fiable', 'Meilleure integration au coeur reseau', 'Plus de place pour la densite future et les ajouts de couverture'], 'cases': ['Refresh WiFi de bureaux et expansions de locataires', 'Amelioration de la couverture sans fil pour clients et employes', 'Mises en service sans fil liees au cablage structure ou a des upgrades de salles reseau'], 'industries': ['Environnements de bureaux', 'Commerce et hotellerie', 'Proprietes commerciales et multi-locatives'], 'related': ['structured-cabling', 'network-infrastructure', 'ip-phone-systems']},
+'fr': {'slug': 'installation-wifi-commercial', 'name': 'WiFi commercial', 'title': 'Installation de WiFi commercial et cablage de points d acces | Opticable', 'desc': 'Installation de WiFi commercial incluant le cablage des points d acces, la planification de couverture, le soutien a la commutation et l infrastructure sans fil pour proprietes d affaires.', 'hero': 'Installation de WiFi commercial avec le cablage et l infrastructure dont les reseaux sans fil ont besoin.', 'intro': 'Opticable aide les clients commerciaux a deployer l infrastructure physique derriere les reseaux sans fil, incluant le cablage des points d acces WiFi, le soutien au montage, la coordination des commutateurs et la planification de couverture pour des environnements actifs.', 'summary': 'Cablage des points d acces, planification de couverture, coordination des commutateurs et infrastructure pour le WiFi d affaires.', 'includes': ['Cablage pour points d acces sans fil dans les bureaux, aires communes, commerces et grandes superficies commerciales', 'Coordination des emplacements selon la couverture requise, l amenagement du batiment et la densite des appareils', 'Commutation, raccordement et soutien cote baie pour l infrastructure sans fil'], 'benefits': ['Couverture sans fil plus fiable', 'Meilleure integration au coeur reseau', 'Plus de place pour la densite future et les ajouts de couverture'], 'cases': ['Refresh WiFi de bureaux et expansions de locataires', 'Amelioration de la couverture sans fil pour clients et employes', 'Mises en service sans fil liees au cablage structure ou a des upgrades de salles reseau'], 'industries': ['Environnements de bureaux', 'Commerce et hotellerie', 'Proprietes commerciales et multi-locatives'], 'related': ['structured-cabling', 'network-infrastructure', 'ip-phone-systems']},
     },
     'ip-phone-systems': {
         'en': {'slug': 'ip-phone-systems', 'name': 'IP Phone Systems', 'title': 'IP Phone Systems and VoIP Phone Line Infrastructure | Opticable', 'desc': 'Commercial IP phone system installation and VoIP phone line infrastructure for offices, multi-tenant buildings, and business communication environments.', 'hero': 'IP phone systems and VoIP phone line infrastructure for business communication environments.', 'intro': 'Opticable supports the cabling, device connectivity, and network infrastructure required for commercial IP phone systems and VoIP phone line deployment. Phone infrastructure is planned with structured cabling, switching, and room layouts so it stays easier to support after activation.', 'summary': 'Business phone infrastructure, handset connectivity, VoIP-ready cabling, and network support for office communication.', 'includes': ['Cabling and connectivity for IP handsets, conference phones, and related devices', 'VoIP phone line infrastructure aligned with switching and broader network requirements', 'Phone system changes during office expansions, moves, and room reconfiguration'], 'benefits': ['Dependable phone connectivity', 'Cleaner office deployment for reception, desks, and meeting rooms', 'Simpler future adds, moves, and handset changes'], 'cases': ['Office relocations and workstation reconfiguration', 'Reception and front-desk communication upgrades', 'VoIP migrations requiring updated switching and room organization'], 'industries': ['Business offices', 'Professional services firms', 'Multi-tenant commercial suites'], 'related': ['network-infrastructure', 'structured-cabling', 'commercial-wifi-installation']},
@@ -1291,7 +1792,7 @@ services['commercial-wifi-installation']['fr'].update({
     'hero': "WiFi pour bureaux, commerces, aires communes, événements, multi-logements, copropriétés, chantiers de construction et usines.",
     'intro': "Opticable fait la vente, la gestion, la maintenance, l'installation et le câblage de réseaux WiFi pour plus que les bureaux classiques. Le service peut couvrir les aires communes, les événements, les commerces, les multi-logements, les copropriétés, les bureaux, les usines, les chantiers de construction et d'autres sites qui ont besoin d'une couverture sans fil stable et bien soutenue.",
     'summary': "Vente, gestion, maintenance, installation et câblage WiFi pour bâtiments, espaces communs, événements, chantiers et sites actifs.",
-    'includes': ["Vente, installation et câblage de points d'accès WiFi pour bureaux, commerces, aires communes, multi-logements, copropriétés, chantiers de construction, usines et espaces événementiels", "Planification de couverture, positionnement des bornes et conception du sans-fil selon l'aménagement, la densité et les usages réels", "Commutateurs, raccordements, soutien au rack et coordination réseau pour l'infrastructure sans fil", "Gestion et maintenance de réseaux WiFi qui doivent rester fiables au quotidien"],
+    'includes': ["Vente, installation et câblage de points d'accès WiFi pour bureaux, commerces, aires communes, multi-logements, copropriétés, chantiers de construction, usines et espaces événementiels", "Planification de couverture, positionnement des points d'accès et conception du sans-fil selon l'aménagement, la densité et les usages réels", "Commutateurs, raccordements, soutien au rack et coordination réseau pour l'infrastructure sans fil", "Gestion et maintenance de réseaux WiFi qui doivent rester fiables au quotidien"],
     'benefits': ['Couverture sans fil plus fiable dans plusieurs types de sites et d’espaces partagés', 'Meilleure intégration entre le WiFi, le câblage structuré et le cœur du réseau', "Plus de souplesse pour l'entretien, les changements et l'expansion de la couverture dans le temps"],
     'cases': ['Déploiement ou modernisation du WiFi dans les bureaux et espaces administratifs', 'Amélioration du WiFi pour commerces, hôtellerie et espaces clients', 'WiFi dans les aires communes d’immeubles gérés, multi-logements et copropriétés', 'WiFi pour événements, installations temporaires et besoins ponctuels', 'WiFi pour chantiers de construction et connectivité temporaire de projet', 'Couverture sans fil pour usines, entrepôts et environnements industriels'],
     'industries': ['Bureaux et propriétés commerciales', 'Commerce et hôtellerie', 'Aires communes et espaces partagés', 'Multi-logements, copropriétés et immeubles multilocatifs', 'Chantiers de construction et espaces de projet temporaires', 'Usines, entrepôts et sites industriels', 'Événements et déploiements temporaires'],
@@ -1553,10 +2054,10 @@ services['commercial-wifi-installation']['fr'].update({
     'desc': "Analyse, planification, installation et optimisation de réseaux Wi-Fi professionnels pour bureaux, commerces, entrepôts et immeubles multilocatifs.",
     'hero': 'Un Wi-Fi professionnel pensé pour la performance, la couverture et la sécurité au quotidien.',
     'intro': "Un réseau Wi-Fi performant est essentiel à la productivité des entreprises modernes. Opticable conçoit et déploie des réseaux Wi-Fi professionnels adaptés aux bureaux, commerces, entrepôts, espaces publics et immeubles multilocatifs.",
-    'summary': 'Analyse de couverture, installation de bornes, optimisation sans fil et support pour réseaux Wi-Fi professionnels.',
+    'summary': "Analyse de couverture, installation de points d'accès, optimisation sans fil et support pour réseaux Wi-Fi professionnels.",
     'includes': [
         'Analyse et planification de la couverture Wi-Fi pour bureaux, commerces, entrepôts et immeubles multilocatifs',
-        "Installation de bornes professionnelles avec coordination des switches, du montage et des contrôleurs",
+        "Installation de points d'accès professionnels avec coordination des switches, du montage et des contrôleurs",
         'Optimisation, sécurisation des réseaux sans fil et support après installation pour une meilleure performance',
     ],
 })
@@ -1668,7 +2169,7 @@ HOME_FEATURED_SERVICES = {
     ],
     'fr': [
         {'key': 'structured-cabling', 'badge': 'LAN', 'title': 'Cablage structure', 'copy': 'Cat5e, Cat6, Cat6A, fibre optique, patch panels, racks reseau et certification pour une base reseau fiable.'},
-        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'Wi-Fi professionnel', 'copy': 'Analyse de couverture, installation de bornes, configuration des controleurs et optimisation pour bureaux, commerces, entrepots et immeubles multi-logements.'},
+        {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'Wi-Fi professionnel', 'copy': "Analyse de couverture, installation de points d'accès, configuration des controleurs et optimisation pour bureaux, commerces, entrepots et immeubles multi-logements."},
         {'key': 'network-infrastructure', 'badge': 'IT', 'title': 'Solutions informatiques', 'copy': 'Serveurs, postes de travail, equipements reseau, soutien operationnel et infrastructure IT adaptee aux entreprises en croissance.'},
         {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Surveillance par camera', 'copy': 'Systemes de videosurveillance modernes pour proteger les batiments, les equipes et les operations avec un acces fiable aux images.'},
         {'key': 'access-control-systems', 'badge': 'ENTRY', 'title': "Intercom et controle d'acces", 'copy': 'Intercoms audio-video, lecteurs, gestion des portes et integration des entrees securisees pour les environnements professionnels.'},
@@ -2395,7 +2896,7 @@ SERVICE_CARD_META['ip-phone-systems']['fr'] = {'badge': 'VOIP', 'eyebrow': 'Voix
 HOME_FEATURED_SERVICES['fr'] = [
     {'key': 'security-camera-systems', 'badge': 'CCTV', 'title': 'Caméras de sécurité', 'copy': "Installation, configuration, visionnement à distance et soutien des caméras IP pour entrées, stationnements et aires communes."},
     {'key': 'access-control-systems', 'badge': 'ACCESS', 'title': "Contrôle d'accès", 'copy': "Lecteurs, serrures, panneaux et câblage de porte pour mieux gérer les entrées, les halls et les zones restreintes."},
-    {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'WiFi commercial', 'copy': "Planification de couverture, bornes professionnelles, maintenance et soutien pour bureaux, commerces et espaces partagés."},
+    {'key': 'commercial-wifi-installation', 'badge': 'WIFI', 'title': 'WiFi commercial', 'copy': "Planification de couverture, points d'accès professionnels, maintenance et soutien pour bureaux, commerces et espaces partagés."},
     {'key': 'intercom-systems', 'badge': 'INTERCOM', 'title': 'Intercom', 'copy': "Intercom audio ou vidéo pour halls, portails et accès visiteurs, avec intégration au contrôle d'accès et au réseau."},
     {'key': 'managed-it-services', 'badge': 'IT', 'title': 'Services informatiques', 'copy': "Gestion de parc, soutien réseau, maintenance et support technique pour vos environnements après l'installation."},
     {'key': 'ip-phone-systems', 'badge': 'VOIP', 'title': 'Téléphonie IP', 'copy': "Lignes SIP, postes IP, numéros d'affaires et câblage prêt pour la VoIP pour vos bureaux et espaces de travail."},
@@ -2480,8 +2981,8 @@ services['commercial-wifi-installation']['en'].update({
     'title': 'Commercial WiFi for Offices and Buildings | Opticable',
     'desc': 'Design, installation, management, and maintenance of commercial WiFi for offices and buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Commercial WiFi for offices, buildings, and shared spaces',
-    'intro': 'Opticable designs, installs, and manages professional WiFi networks for commercial and multi-tenant buildings. Stable signal, properly sized coverage, and the wired infrastructure needed behind the access points, without dead zones or overload, with technical support available.',
-    'summary': 'Coverage planning, professional access points, maintenance, and support for wireless networks in commercial buildings.',
+    'intro': 'Opticable designs and installs the building-side WiFi infrastructure that commercial and multi-tenant properties depend on. Access-point placement, coverage logic, cabling, PoE, switching, and the network foundation behind the wireless layer are planned together so the signal stays useful in real building conditions.',
+    'summary': 'WiFi quality, access points, coverage planning, cabling, and network foundations for commercial buildings.',
     'related': ['structured-cabling', 'network-infrastructure', 'access-control-systems'],
 })
 services['intercom-systems']['en'].update({
@@ -2498,8 +2999,8 @@ services['structured-cabling']['en'].update({
     'title': 'Structured cabling for commercial buildings | Opticable',
     'desc': 'Installation of Cat 6, Cat 6A, coaxial, and fiber-ready structured cabling for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Structured cabling for commercial buildings and business environments',
-    'intro': 'Opticable installs the structured cabling that supports your security, wireless, network, and communication systems. A clean, well-organized, documented installation that makes maintenance and future additions easier.',
-    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, testing, and documentation for a clean, durable network foundation.',
+    'intro': 'Opticable installs the structured cabling that supports WiFi access points, cameras, access control, intercom, telephony, and the rest of the building network. The goal is a clean, organized, documented foundation that stays easier to support and expand.',
+    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, testing, and documentation for a clean building network base.',
     'related': ['fiber-optic-installation', 'network-infrastructure', 'commercial-wifi-installation'],
 })
 services['fiber-optic-installation']['en'].update({
@@ -2507,8 +3008,8 @@ services['fiber-optic-installation']['en'].update({
     'title': 'Fiber Optic for Commercial Buildings | Opticable',
     'desc': 'Fiber optic links, risers, and service extensions for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Fiber optic installation for commercial buildings and multi-storey sites',
-    'intro': 'Opticable installs fiber optic links that serve as the backbone of your network infrastructure. Risers between floors, service extensions, and high-capacity links for buildings where copper is no longer enough.',
-    'summary': 'Backbone links, risers, service extensions, and high-capacity fiber runs for commercial buildings.',
+    'intro': 'Opticable installs fiber optic links that tie together the main network room, floor-level cabinets, and the distant parts of a building when copper alone is no longer the cleanest answer. That backbone supports WiFi, security, access, and the rest of the building network.',
+    'summary': 'Backbone links between floors, network rooms, and distant zones when capacity or distance outgrows copper.',
     'related': ['structured-cabling', 'network-infrastructure', 'security-camera-systems'],
 })
 services['network-infrastructure']['en'].update({
@@ -2516,8 +3017,8 @@ services['network-infrastructure']['en'].update({
     'title': 'Network infrastructure for commercial buildings | Opticable',
     'desc': 'Installation of racks, patch panels, and technical rooms for commercial buildings. Montreal, Laval, Longueuil, and across Quebec.',
     'hero': 'Network infrastructure for commercial buildings, including racks, technical rooms, and internet handoff organization',
-    'intro': 'Opticable installs and organizes the network infrastructure of commercial buildings: racks, patch panels, internet handoff management, and cleanup of existing technical rooms. Well-structured infrastructure is what keeps your systems reliable and easier to maintain.',
-    'summary': 'Racks, patch panels, technical rooms, internet handoff management, and network support for environments that are easier to operate.',
+    'intro': 'Opticable installs and organizes the network infrastructure of commercial buildings: the main network room, floor-level cabinets when needed, rack organization, patch panels, internet handoffs, and cleanup of existing technical rooms. This is the base that keeps WiFi and the other building systems coherent.',
+    'summary': 'Main network rooms, racks, patch panels, handoffs, and clean distribution for building systems that are easier to operate.',
     'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems'],
 })
 services['ip-phone-systems']['en'].update({
@@ -2594,8 +3095,8 @@ services['commercial-wifi-installation']['fr'].update({
     'title': 'Installation WiFi commercial pour immeubles | Opticable',
     'desc': 'Conception, installation, gestion et maintenance de WiFi commercial pour bureaux et immeubles. Montréal, Laval, Longueuil et partout au Québec.',
     'hero': 'WiFi commercial pour bureaux, immeubles et espaces partagés',
-    'intro': "Opticable conçoit, installe et assure la gestion des réseaux WiFi professionnels pour les immeubles commerciaux et multilocatifs. Signal stable, couverture bien dimensionnée et infrastructure câblée qui supporte les bornes, sans angle mort, sans surcharge, avec un soutien technique disponible.",
-    'summary': 'Planification de couverture, bornes d’accès professionnelles, maintenance et soutien pour les réseaux sans fil des immeubles commerciaux.',
+    'intro': "Opticable conçoit et installe l'infrastructure WiFi côté bâtiment dont les immeubles commerciaux et multilocatifs ont besoin. Emplacement des points d'accès, logique de couverture, câblage, PoE, commutation et base réseau sont pensés ensemble pour que le WiFi reste utile dans les vraies conditions du site.",
+    'summary': 'Qualité du WiFi, points d’accès, couverture, câblage et base réseau pour les immeubles commerciaux.',
     'related': ['structured-cabling', 'network-infrastructure', 'access-control-systems'],
 })
 services['intercom-systems']['fr'].update({
@@ -2612,8 +3113,8 @@ services['structured-cabling']['fr'].update({
     'title': 'Câblage structuré pour immeubles commerciaux | Opticable',
     'desc': 'Installation de câblage structuré Cat 6, Cat 6A, coaxial et fibre optique pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
     'hero': "Câblage structuré pour immeubles commerciaux et environnements d'affaires",
-    'intro': "Opticable installe le câblage structuré qui supporte vos systèmes de sécurité, de sans-fil, de réseau et de communication. Une installation propre, bien organisée et documentée, qui simplifie l'entretien et les ajouts futurs.",
-    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, tests et documentation pour une base réseau propre et durable.',
+    'intro': "Opticable installe le câblage structuré qui supporte les points d'accès WiFi, les caméras, le contrôle d'accès, l'intercom, la téléphonie et le reste du réseau du bâtiment. L'objectif est une base propre, organisée et documentée qui reste plus simple à soutenir et à faire évoluer.",
+    'summary': 'Cat 5e, Cat 6, Cat 6A, coaxial, patch panels, tests et documentation pour une base réseau de bâtiment propre.',
     'related': ['fiber-optic-installation', 'network-infrastructure', 'commercial-wifi-installation'],
 })
 services['fiber-optic-installation']['fr'].update({
@@ -2621,17 +3122,17 @@ services['fiber-optic-installation']['fr'].update({
     'title': 'Fibre optique pour immeubles commerciaux | Opticable',
     'desc': 'Liaisons fibre optique, colonnes montantes et prolongements de service pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
     'hero': 'Installation de fibre optique pour immeubles commerciaux et sites multi-étages',
-    'intro': "Opticable installe les liaisons en fibre optique qui servent de colonne vertébrale à votre infrastructure réseau. Backbone entre étages, prolongements de service et liaisons haute capacité, pour les bâtiments où le cuivre ne suffit plus.",
-    'summary': 'Backbone, colonnes montantes, prolongements de service et liaisons haute capacité pour immeubles commerciaux.',
+    'intro': "Opticable installe les liaisons en fibre optique qui relient le local réseau principal, les petits locaux réseau d'étage et les zones plus éloignées quand le cuivre seul n'est plus la meilleure option. Cette base sert ensuite au WiFi, à la sécurité, aux accès et au reste du réseau du bâtiment.",
+    'summary': 'Liaisons de backbone entre étages, locaux réseau et zones éloignées quand la distance ou la capacité dépassent le cuivre.',
     'related': ['structured-cabling', 'network-infrastructure', 'security-camera-systems'],
 })
 services['network-infrastructure']['fr'].update({
     'name': 'Infrastructure réseau',
     'title': 'Infrastructure réseau pour immeubles commerciaux | Opticable',
     'desc': 'Installation de racks, patch panels et locaux techniques pour immeubles commerciaux. Montréal, Laval, Longueuil et partout au Québec.',
-    'hero': 'Infrastructure réseau pour immeubles commerciaux — racks, locaux techniques et organisation des arrivées',
-    'intro': "Opticable installe et organise l'infrastructure réseau des immeubles commerciaux: racks, patch panels, gestion des arrivées Internet et remise en ordre des locaux techniques existants. Une infrastructure bien structurée, c'est ce qui rend vos systèmes fiables et plus faciles à maintenir.",
-    'summary': 'Racks, patch panels, locaux techniques, gestion des arrivées Internet et soutien réseau pour des environnements plus simples à exploiter.',
+    'hero': 'Infrastructure réseau pour immeubles commerciaux - racks, locaux techniques et organisation des arrivées',
+    'intro': "Opticable installe et organise l'infrastructure réseau des immeubles commerciaux: local réseau principal, armoires ou points de redistribution quand il en faut, racks, patch panels, arrivées Internet et remise en ordre des locaux techniques existants. C'est cette base qui garde le WiFi et les autres systèmes cohérents.",
+    'summary': 'Local réseau principal, racks, patch panels, arrivées et distribution propre pour des systèmes de bâtiment plus simples à exploiter.',
     'related': ['structured-cabling', 'fiber-optic-installation', 'ip-phone-systems'],
 })
 services['ip-phone-systems']['fr'].update({
@@ -2772,10 +3273,10 @@ FR_SERVICE_PAGE_CONTENT = {
     },
     'commercial-wifi-installation': {
         'sections': [
-            {'eyebrow': 'WiFi commercial', 'title': "Ce qu'on installe et gère", 'items': ["Bornes d'accès WiFi professionnelles alimentées en PoE", 'Câblage de soutien Cat 6 ou Cat 6A depuis le local réseau', 'Planification de couverture selon murs, matériaux, zones d’usage et bande passante', 'Gestion et maintenance: surveillance, mises à jour et ajout de couverture', 'Services informatiques réseau et administration du sans-fil', 'Soutien après installation pour les ajustements, incidents et besoins d’évolution']},
-            {'eyebrow': 'Infrastructure', 'title': "Un WiFi bien installé, c'est d'abord un bon câblage", 'paragraphs': ["La majorité des problèmes de WiFi viennent de l'infrastructure câblée derrière les bornes. On s'occupe des deux — câblage structuré et WiFi — pour un résultat stable sur le long terme."]},
-            {'eyebrow': 'Espaces', 'title': "Pour quels types d'espaces", 'items': ['Bureaux à aire ouverte et espaces de travail partagés', 'Immeubles multilocatifs — aires communes et couloirs', 'Commerces, restaurants et espaces clients', 'Chantiers de construction actifs', 'Salles de conférence et espaces événementiels', 'Entrepôts et sites industriels']},
-            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Analyse du site: superficie, matériaux, nombre d’utilisateurs et usages prévus.', '02 — Plan de couverture: emplacement des bornes, matériel recommandé et câblage nécessaire.', '03 — Installation et câblage: tirage des câbles, fixation des bornes, configuration réseau et tests de signal.', '04 — Validation, remise et soutien: couverture vérifiée, configuration documentée et gestion continue disponible.']},
+            {'eyebrow': 'WiFi commercial', 'title': "Ce qu'on installe et gère", 'items': ["Points d'accès WiFi professionnels alimentés en PoE", 'Câblage Cat 6 ou Cat 6A depuis le local réseau principal ou l’armoire la plus proche', 'Planification de couverture selon murs, matériaux, densité d’usagers et zones réelles d’usage', 'Commutation, raccordement et soutien des points d’accès en lien avec la base réseau du bâtiment', 'Soutien après installation pour les ajustements, incidents et besoins d’évolution', 'Gestion du sans-fil lorsque le projet inclut un suivi continu']},
+            {'eyebrow': 'Fondation', 'title': "Un bon WiFi commence par la base réseau derrière lui", 'paragraphs': ["La majorité des problèmes de WiFi commencent derrière le point d’accès: câblage faible, PoE inégal, capacité limitée des commutateurs, local réseau mal organisé ou emplacements irréalistes. On planifie la couche WiFi avec la base réseau du bâtiment pour un résultat qui tient dans le temps."]},
+            {'eyebrow': 'Espaces', 'title': "Pour quels types d'espaces", 'items': ['Bureaux à aire ouverte et espaces de travail partagés', 'Immeubles multilocatifs - aires communes et couloirs', 'Commerces, restaurants et espaces clients', 'Chantiers de construction actifs', 'Salles de conférence et espaces événementiels', 'Entrepôts et sites industriels']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 - Analyse du site: superficie, matériaux, nombre d’utilisateurs et vraie structure du bâtiment.', '02 - Plan de couverture: emplacement des points d’accès, matériel recommandé, câblage requis et bon raccordement au local réseau ou au point de redistribution.', '03 - Installation et câblage: tirage des câbles, fixation des points d’accès, configuration réseau et tests de signal.', '04 - Validation, remise et soutien: couverture vérifiée, configuration documentée et recommandations claires si le bâtiment évolue.']},
         ],
         'cta': "Vous avez des zones sans signal ou un réseau qui ne suffit plus ? Décrivez-nous votre espace et vos besoins.",
     },
@@ -2790,27 +3291,29 @@ FR_SERVICE_PAGE_CONTENT = {
     },
     'structured-cabling': {
         'sections': [
-            {'eyebrow': 'Câblage structuré', 'title': "Ce qu'on installe", 'items': ['Câblage cuivre Cat 5e, Cat 6 et Cat 6A pour postes, bornes WiFi, caméras IP, lecteurs et équipements réseau', 'Câblage coaxial pour caméras analogiques, antennes et distributions de signal existantes', 'Fibre optique sur courte distance pour relier locaux réseau, étages ou zones éloignées', 'Patch panels pour des arrivées de câbles organisées, identifiées et évolutives']},
-            {'eyebrow': 'Usage concret', 'title': 'Ce que ça supporte concrètement', 'items': ['Bornes WiFi alimentées en PoE via Cat 6', 'Caméras IP raccordées à l’enregistreur NVR', "Lecteurs de contrôle d'accès câblés au panneau de contrôle", 'Postes de téléphonie IP et équipements de bureau', 'Équipements réseau dans le local technique']},
+            {'eyebrow': 'Câblage structuré', 'title': "Ce qu'on installe", 'items': ['Câblage cuivre Cat 5e, Cat 6 et Cat 6A pour postes, points d’accès WiFi, caméras IP, lecteurs et équipements réseau', 'Câblage coaxial pour caméras analogiques, antennes et distributions de signal existantes', 'Fibre optique sur courte distance pour relier locaux réseau, étages ou zones éloignées', 'Patch panels pour des arrivées de câbles organisées, identifiées et évolutives']},
+            {'eyebrow': 'Usage concret', 'title': 'Ce que ça supporte concrètement', 'items': ['Points d’accès WiFi alimentés en PoE via Cat 6', 'Caméras IP raccordées à l’enregistreur NVR', "Lecteurs de contrôle d'accès câblés au panneau de contrôle", 'Postes de téléphonie IP et équipements de bureau', 'Équipements réseau dans le local technique']},
+            {'eyebrow': 'Langage simple', 'title': "À quoi servent le local principal, le local d'étage et les câbles entre étages ?", 'paragraphs': ["Le local réseau principal regroupe souvent le rack principal, la commutation et les arrivées. Le local d'étage ou la petite armoire technique sert de point de redistribution plus près des zones à desservir. Les câbles entre étages relient ces points entre eux pour éviter une distribution improvisée." ]},
             {'eyebrow': 'Qualité', 'title': "Une installation propre, ça veut dire quoi ?", 'paragraphs': ["Câbles identifiés aux deux extrémités, cheminements bien fixés, patch panels organisés et local réseau que n'importe quel technicien peut comprendre sans tout redécouvrir."]},
-            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Relevé du site: zones à câbler, cheminements possibles et contraintes du bâtiment.', '02 — Plan de câblage: nombre de points, longueurs, type de câble et organisation du local réseau.', '03 — Installation structurée: tirage, connexion aux patch panels et identification complète de chaque point.', '04 — Test et certification: chaque point est testé et la documentation des points est remise.']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 - Relevé du site: zones à câbler, cheminements possibles et contraintes du bâtiment.', '02 - Plan de câblage: nombre de points, longueurs, type de câble et organisation du local réseau.', '03 - Installation structurée: tirage, connexion aux patch panels et identification complète de chaque point.', '04 - Test et certification: chaque point est testé et la documentation des points est remise.']},
         ],
         'cta': "Vous avez un projet de câblage ou un réseau à organiser ? Dites-nous la superficie, le nombre de points et le type de bâtiment.",
     },
     'fiber-optic-installation': {
         'sections': [
-            {'eyebrow': 'Fibre optique', 'title': "Ce qu'on installe", 'items': ['Colonnes montantes et backbone vertical entre les locaux réseau de chaque étage', 'Liaisons longue portée entre bâtiments, ailes ou locaux techniques distants', 'Prolongements de service vers une nouvelle zone, un nouvel étage ou un nouvel équipement', 'Fibre monomode ou multimode selon la distance et la bande passante', 'Raccordements, connecteurs LC, SC ou MPO et organisation dans les boîtiers']},
+            {'eyebrow': 'Fibre optique', 'title': "Ce qu'on installe", 'items': ['Liaisons fibre entre le local réseau principal et les armoires ou locaux d’étage', 'Liaisons longue portée entre bâtiments, ailes ou locaux techniques distants', 'Prolongements de service vers une nouvelle zone, un nouvel étage ou un nouvel équipement', 'Fibre monomode ou multimode selon la distance et la bande passante', 'Raccordements, connecteurs LC, SC ou MPO et organisation dans les boîtiers']},
             {'eyebrow': 'Usage', 'title': 'Quand la fibre est nécessaire', 'items': ['Bâtiments de plusieurs étages avec un local réseau par niveau', 'Distances supérieures à 90 mètres entre équipements', 'Liaisons entre bâtiments sur un même site', 'Besoins de bande passante élevée pour caméras et réseau principal', 'Infrastructure existante à prolonger ou remplacer']},
-            {'eyebrow': 'Coordination', 'title': 'Coordonné avec le câblage structuré', 'paragraphs': ['La fibre constitue le backbone — le cuivre prend le relais pour les derniers mètres. On installe les deux en coordination pour une infrastructure cohérente du local technique jusqu’au point final.']},
-            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ["01 — Analyse de l'infrastructure: points à relier, distances, cheminements et équipements aux deux extrémités.", '02 — Recommandation technique: type de fibre, nombre de brins et type de connecteurs.', '03 — Installation et soudure: passage de la fibre dans les cheminements existants ou nouveaux et connexion des extrémités.', '04 — Test et certification: chaque liaison est testée en atténuation et documentée.']},
+            {'eyebrow': 'Coordination', 'title': 'Coordonné avec le câblage structuré', 'paragraphs': ['La fibre sert de colonne vertébrale entre le local principal, les points de redistribution et les zones éloignées. Le cuivre prend ensuite le relais pour les derniers mètres jusqu’aux appareils. On installe les deux ensemble pour garder un chemin cohérent du local technique jusqu’au point final.']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ["01 - Analyse de l'infrastructure: points à relier, distances, cheminements et équipements aux deux extrémités.", '02 - Recommandation technique: type de fibre, nombre de brins et type de connecteurs.', '03 - Installation et soudure: passage de la fibre dans les cheminements existants ou nouveaux et connexion des extrémités.', '04 - Test et certification: chaque liaison est testée en atténuation et documentée.']},
         ],
         'cta': "Vous avez besoin d'une liaison fibre entre étages ou entre bâtiments ? Décrivez-nous le projet.",
     },
     'network-infrastructure': {
         'sections': [
             {'eyebrow': 'Infrastructure réseau', 'title': "Ce qu'on installe et organise", 'items': ['Racks et armoires ouverts ou fermés selon les équipements et les besoins d’accès', 'Patch panels pour organiser les arrivées de câbles avec une identification claire', 'Gestion verticale et horizontale des câbles pour des racks lisibles et évolutifs', 'Routage propre des arrivées Internet Bell, Vidéotron, Rogers ou autres', "Remise en ordre de l'existant pour rendre un local technique plus fonctionnel sans tout reconstruire"]},
+            {'eyebrow': 'Fondation', 'title': 'La base avant le WiFi et les systèmes connectés', 'paragraphs': ["Le local réseau principal est souvent le point de départ du bâtiment. Dans les immeubles plus grands, on ajoute aussi des armoires ou petits locaux d'étage plus près des zones desservies. C'est cette structure qui garde le WiFi, les caméras, l'intercom, le contrôle d'accès et les autres systèmes plus faciles à coordonner."]},
             {'eyebrow': 'Valeur', 'title': 'Pourquoi un local réseau bien organisé, ça compte', 'paragraphs': ['Un local chaotique coûte du temps à chaque intervention et rend les modifications risquées. Un local bien structuré est moins cher à entretenir sur le long terme et beaucoup plus simple à faire évoluer.']},
-            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 — Évaluation du local: espace disponible, équipements en place, arrivées existantes et besoins futurs.', '02 — Plan d’organisation: disposition des racks, patch panels, gestion des arrivées et documentation avant les travaux.', '03 — Installation ou réorganisation: montage des racks, câblage des panneaux et identification complète.', '04 — Documentation remise: relevé des ports, équipements, arrivées et cheminements.']},
+            {'eyebrow': 'Déroulement', 'title': 'Comment ça se passe', 'items': ['01 - Évaluation du local: espace disponible, équipements en place, arrivées existantes et besoins futurs.', '02 - Plan d’organisation: disposition des racks, patch panels, gestion des arrivées et documentation avant les travaux.', '03 - Installation ou réorganisation: montage des racks, câblage des panneaux et identification complète.', '04 - Documentation remise: relevé des ports, équipements, arrivées et cheminements.']},
         ],
         'cta': "Votre local réseau a besoin d'attention ? Dites-nous l'état actuel et vos besoins.",
     },
@@ -2930,10 +3433,10 @@ EN_SERVICE_PAGE_CONTENT = {
     },
     'commercial-wifi-installation': {
         'sections': [
-            {'eyebrow': 'Commercial WiFi', 'title': 'What we install and manage', 'items': ['Professional WiFi access points powered by PoE', 'Cat 6 or Cat 6A support cabling from the network room', 'Coverage planning based on walls, materials, usage zones, and bandwidth needs', 'Management and maintenance: monitoring, updates, and coverage expansion', 'Network IT services and wireless administration', 'Post-installation support for adjustments, incidents, and future changes']},
-            {'eyebrow': 'Infrastructure', 'title': 'Good WiFi starts with good cabling', 'paragraphs': ['Most WiFi problems come from the wired infrastructure behind the access points. We handle both the structured cabling and the WiFi layer so the result stays stable over time.']},
+            {'eyebrow': 'Commercial WiFi', 'title': 'What we install and manage', 'items': ['Professional WiFi access points powered by PoE', 'Cat 6 or Cat 6A support cabling from the main network room or the nearest floor cabinet', 'Coverage planning based on walls, materials, user density, and the actual usage zones', 'Switching, patching, and access-point support tied to the building network foundation', 'Post-installation support for adjustments, incidents, and future growth', 'Wireless management when the project scope includes ongoing follow-up']},
+            {'eyebrow': 'Foundation', 'title': 'Good WiFi starts with the network foundation behind it', 'paragraphs': ['Most WiFi problems start behind the access point: weak cabling, inconsistent PoE, limited switch capacity, poor room organization, or unrealistic placement. We plan the WiFi layer together with the building network foundation so the result stays usable over time.']},
             {'eyebrow': 'Spaces', 'title': 'Where it fits', 'items': ['Open offices and shared workspaces', 'Multi-tenant buildings with common areas and corridors', 'Retail spaces, restaurants, and customer-facing areas', 'Active construction sites', 'Conference rooms and event spaces', 'Warehouses and industrial sites']},
-            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Site analysis: square footage, materials, expected users, and actual usage.', '02 - Coverage plan: access-point locations, recommended hardware, and required cabling.', '03 - Installation and cabling: cable pulls, access-point mounting, network configuration, and signal testing.', '04 - Validation, handoff, and support: verified coverage, documented configuration, and ongoing management if needed.']},
+            {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Site analysis: square footage, materials, expected users, and the actual building layout.', '02 - Coverage plan: access-point locations, recommended hardware, required cabling, and the right network-room or floor-cabinet tie-in.', '03 - Installation and cabling: cable pulls, access-point mounting, network configuration, and signal testing.', '04 - Validation, handoff, and support: verified coverage, documented configuration, and the next-step recommendations if the building grows.']},
         ],
         'cta': 'Do you have dead zones or a wireless network that no longer keeps up? Tell us about the space and what it needs to support.',
     },
@@ -2950,6 +3453,7 @@ EN_SERVICE_PAGE_CONTENT = {
         'sections': [
             {'eyebrow': 'Structured cabling', 'title': 'What we install', 'items': ['Cat 5e, Cat 6, and Cat 6A copper cabling for workstations, WiFi access points, IP cameras, readers, and network equipment', 'Coaxial cabling for analog cameras, antennas, and existing signal distribution systems', 'Short-distance fiber optic links for connecting network rooms, floors, or remote zones', 'Patch panels for cable arrivals that stay organized, labeled, and ready for future growth']},
             {'eyebrow': 'Practical use', 'title': 'What it supports in practice', 'items': ['PoE WiFi access points over Cat 6', 'IP cameras connected back to the NVR', 'Access-control readers wired to the control panel', 'IP phone handsets and office devices', 'Network equipment in the technical room']},
+            {'eyebrow': 'Plain language', 'title': 'What the main room, floor closet, and between-floor cabling do', 'paragraphs': ['The main network room is where the core equipment and handoffs usually live. A floor closet or secondary cabinet is a smaller distribution point closer to the spaces being served. The cabling between floors links those points together so devices do not all have to run back in an improvised way.']},
             {'eyebrow': 'Quality', 'title': 'What a clean installation actually means', 'paragraphs': ['Cables labeled at both ends, pathways secured properly, organized patch panels, and a network room that any technician can understand without rediscovering everything from scratch.']},
             {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Site survey: areas to cable, available pathways, and building constraints.', '02 - Cabling plan: number of points, run lengths, cable type, and network-room organization.', '03 - Structured installation: cable pulling, patch-panel termination, and full identification of every point.', '04 - Testing and certification: every point is tested and the point list is handed over.']},
         ],
@@ -2957,9 +3461,9 @@ EN_SERVICE_PAGE_CONTENT = {
     },
     'fiber-optic-installation': {
         'sections': [
-            {'eyebrow': 'Fiber optic', 'title': 'What we install', 'items': ['Risers and vertical backbones between the network rooms on each floor', 'Long-distance links between buildings, wings, or remote technical rooms', 'Service extensions to a new area, a new floor, or new equipment', 'Single-mode or multi-mode fiber depending on distance and bandwidth needs', 'Terminations, LC, SC, or MPO connectors, and organized fiber enclosures']},
+            {'eyebrow': 'Fiber optic', 'title': 'What we install', 'items': ['Fiber links between the main network room and floor-level closets or cabinets', 'Long-distance links between buildings, wings, or remote technical rooms', 'Service extensions to a new area, a new floor, or new equipment', 'Single-mode or multi-mode fiber depending on distance and bandwidth needs', 'Terminations, LC, SC, or MPO connectors, and organized fiber enclosures']},
             {'eyebrow': 'Use cases', 'title': 'When fiber is needed', 'items': ['Multi-storey buildings with one network room per level', 'Runs longer than 90 meters between equipment', 'Links between buildings on the same property', 'High-bandwidth needs for cameras and the core network', 'Existing infrastructure that needs to be extended or replaced']},
-            {'eyebrow': 'Coordination', 'title': 'Coordinated with structured cabling', 'paragraphs': ['Fiber acts as the backbone and copper takes over for the last meters. We install both in coordination so the infrastructure stays coherent from the technical room all the way to the final device.']},
+            {'eyebrow': 'Coordination', 'title': 'Coordinated with structured cabling', 'paragraphs': ['Fiber acts as the backbone between the main room, floor closets, and distant zones. Copper then takes over for the last meters to the devices. We install both together so the path stays coherent from the room to the final endpoint.']},
             {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Infrastructure review: points to connect, distances, pathways, and equipment at both ends.', '02 - Technical recommendation: fiber type, strand count, and connector type.', '03 - Installation and splicing: fiber run through existing or new pathways and clean termination at both ends.', '04 - Testing and certification: every link is attenuation-tested and documented.']},
         ],
         'cta': 'Do you need a fiber link between floors or between buildings? Describe the project and we will point you in the right direction.',
@@ -2967,6 +3471,7 @@ EN_SERVICE_PAGE_CONTENT = {
     'network-infrastructure': {
         'sections': [
             {'eyebrow': 'Network infrastructure', 'title': 'What we install and organize', 'items': ['Open or closed racks and cabinets based on the equipment and service-access needs', 'Patch panels that keep incoming cabling organized and clearly labeled', 'Vertical and horizontal cable management for racks that stay readable and expandable', 'Clean routing of Bell, Videotron, Rogers, or other internet entries', 'Cleanup of existing technical rooms to make them more functional without rebuilding everything']},
+            {'eyebrow': 'Foundation', 'title': 'The base before WiFi and the connected building systems', 'paragraphs': ['The main network room is where the building usually starts. In larger properties, floor closets or secondary cabinets are added closer to the served spaces. That structure is what keeps WiFi, cameras, intercom, access control, and future systems easier to coordinate.']},
             {'eyebrow': 'Value', 'title': 'Why an organized network room matters', 'paragraphs': ['A chaotic room costs time every time someone intervenes and makes changes risky. A well-structured room costs less to maintain over time and is much easier to expand.']},
             {'eyebrow': 'Process', 'title': 'How the work is handled', 'items': ['01 - Room review: available space, installed equipment, existing internet handoffs, and future needs.', '02 - Organization plan: rack layout, patch panels, internet handoff routing, and documentation before the work starts.', '03 - Installation or reorganization: rack assembly, panel cabling, and full identification.', '04 - Documentation handoff: port maps, equipment list, internet handoffs, and pathways.']},
         ],
@@ -4030,10 +4535,10 @@ CASE_STUDIES = {
             'h1': 'Case studies — How we approach different project types',
             'intro': 'These representative project scenarios show how we approach different building types and operating conditions. Every site is different, but the examples reflect how we scope and coordinate systems in the field.',
             'card_copy': {
-                'case-office-building': 'Office building with MikroTik routing, Omada WiFi and switching, and a UniFi management stack for cameras and access.',
-                'case-multitenant-building': 'Multi-tenant residential property with UniFi Access, UniFi cameras, and Omada WiFi in common areas.',
-                'case-retail-space': 'Retail space with a unified UniFi security platform, Omada WiFi, and MikroTik routing.',
-                'case-construction-site': 'Construction project coordinated in phases around MikroTik routing, Omada switching, and a unified UniFi security stack.',
+                'case-office-building': 'Office building with routing, switching, WiFi access points, cameras, and access control coordinated together.',
+                'case-multitenant-building': 'Multi-tenant residential property with video intercom, cameras, WiFi access points, and controlled entry in common areas.',
+                'case-retail-space': 'Retail space with cameras, access control, WiFi access points, and routing coordinated together.',
+                'case-construction-site': 'Construction project coordinated in phases around cabling, switching, WiFi access points, cameras, and access systems.',
             },
         },
         'items': {
@@ -4044,9 +4549,9 @@ CASE_STUDIES = {
                 'h1': 'Typical project — Commercial office building',
                 'context': 'Three-storey office building with about 25 workstations, two main entries, indoor and outdoor parking, and a basement server room.',
                 'challenges': ['Access control at the main entry and restricted areas such as the server room and archives', 'Stable WiFi coverage for offices and the conference room', 'Camera coverage at entries, parking areas, and main corridors', 'Disorganized legacy cabling in the network room'],
-                'work': ['Installation of UniFi Access on four doors with badge readers and centralized management', 'Deployment of eight TP-Link Omada access points with Omada switching and dedicated Cat 6 cabling', 'Installation of 12 UniFi cameras with remote viewing and management from the same platform as access control', 'MikroTik router deployment and full cleanup of the network room with rack, patch panels, and identification of all points', 'Installation of 25 new network drops for workstations'],
-                'result': 'The building is fully cabled, secured, and connected through a single operational stack. The property manager supervises cameras and access from one management platform, and the network room is documented and organized.',
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'work': ['Installation of access control on four doors with badge readers and centralized management', 'Deployment of eight WiFi access points with managed switches and dedicated Cat 6 cabling', 'Installation of 12 IP cameras with remote viewing and coordinated management with the access system', 'Router deployment and full cleanup of the network room with rack, patch panels, and identification of all points', 'Installation of 25 new network drops for workstations'],
+                'result': 'The building is fully cabled, secured, and connected through one coordinated operating environment. The property manager supervises cameras and access from a single workflow, and the network room is documented and organized.',
+                'systems': 'Router · Managed switches · WiFi access points · IP cameras · Access control',
                 'cta_title': 'Does this project look like yours?',
                 'cta_copy': 'Tell us about your building.',
             },
@@ -4057,9 +4562,9 @@ CASE_STUDIES = {
                 'h1': 'Typical project — Multi-tenant residential building',
                 'context': '24-unit building across four storeys with two secure entries, indoor parking, a laundry room, and a shared room on the ground floor.',
                 'challenges': ['Main entry without a working intercom', 'No cameras in common areas', 'No WiFi in corridors and shared spaces', 'Unstructured suite cabling'],
-                'work': ['Installation of a UniFi Access video intercom at the main entry with centralized access-control integration', 'Installation of 10 UniFi cameras in corridors, entries, and parking areas', 'Deployment of TP-Link Omada access points and Omada switches in corridors and common areas', 'MikroTik router deployment, Cat 6 cabling in shared areas, and organization of the network room'],
-                'result': 'The property manager controls entry remotely, reviews cameras from a phone, and manages the intercom and access rights from the same UniFi platform. Residents benefit from WiFi coverage in shared spaces.',
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'work': ['Installation of a video intercom at the main entry with full integration to the access-control system', 'Installation of 10 IP cameras in corridors, entries, and parking areas', 'Deployment of WiFi access points and managed switches in corridors and common areas', 'Router deployment, Cat 6 cabling in shared areas, and organization of the network room'],
+                'result': 'The property manager controls entry remotely, reviews cameras from a phone, and manages the intercom and access rights from one coordinated workflow. Residents benefit from reliable WiFi coverage in shared spaces.',
+                'systems': 'Router · Managed switches · WiFi access points · IP cameras · Video intercom · Access control',
                 'cta_title': 'Do you manage a multi-tenant building?',
                 'cta_copy': 'Let’s discuss your project.',
             },
@@ -4070,9 +4575,9 @@ CASE_STUDIES = {
                 'h1': 'Typical project — Retail and point-of-sale environment',
                 'context': 'Retail store across two levels with a sales floor, rear warehouse, management office, and outdoor parking.',
                 'challenges': ['No surveillance of the cash area and site entries', 'Unstable WiFi for payment terminals and staff', 'Uncontrolled access to the warehouse', 'Remote viewing needed for the owner'],
-                'work': ['Installation of eight UniFi cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with three TP-Link Omada access points and Omada switches, with separate SSIDs for customers and payment terminals', 'Installation of a UniFi Access reader on the warehouse door', 'MikroTik router deployment and remote viewing setup on the owner’s mobile phone'],
+                'work': ['Installation of eight IP cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with three WiFi access points and managed switches, with separate SSIDs for customers and payment terminals', 'Installation of an access-control reader on the warehouse door', 'Router deployment and remote viewing setup on the owner’s mobile phone'],
                 'result': 'The owner supervises the store remotely, the WiFi remains stable for operations, and the warehouse stays restricted to authorized staff through the same access and camera management stack.',
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'systems': 'Router · Managed switches · WiFi access points · IP cameras · Access control',
                 'cta_title': 'Do you need to secure a retail space?',
                 'cta_copy': 'Tell us what you need.',
             },
@@ -4083,9 +4588,9 @@ CASE_STUDIES = {
                 'h1': 'Typical project — Technology coordination on an active site',
                 'context': 'Six-storey commercial building under construction with a general contractor, three delivery phases, and one technical room per floor.',
                 'challenges': ['Structured cabling must be installed before walls are closed', 'Coordination with electricians for pathways', 'Technical rooms must be organized early in the build', 'Security systems and WiFi must be ready at handover'],
-                'work': ['Cat 6A cabling pulled through all suites before wall closure — Phase 1', 'MikroTik routing, Omada switching, and rack and patch-panel installation in six technical rooms — Phase 2', 'Deployment of UniFi cameras, UniFi Access, and TP-Link Omada WiFi aligned with final delivery — Phase 3', 'Complete documentation delivered to the general contractor and owner'],
+                'work': ['Cat 6A cabling pulled through all suites before wall closure — Phase 1', 'Deployment of routing, managed switches, racks, and patch panels in six technical rooms — Phase 2', 'Deployment of IP cameras, access control, and WiFi access points aligned with final delivery — Phase 3', 'Complete documentation delivered to the general contractor and owner'],
                 'result': 'The technology scope is delivered in line with the construction schedule. No delays are caused by building systems, and the documentation package is clean at handover.',
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'systems': 'Routing · Managed switches · WiFi access points · IP cameras · Access control',
                 'cta_title': 'Are you building or renovating a property?',
                 'cta_copy': 'Coordinate the systems now.',
             },
@@ -4094,14 +4599,14 @@ CASE_STUDIES = {
     'fr': {
         'parent': {
             'title': 'Études de cas — Projets types | Opticable',
-            'desc': 'Découvrez comment Opticable intervient dans les immeubles de bureaux, commerces, multilocatifs et chantiers de construction au Québec.',
+            'desc': 'Découvrez comment Opticable intervient dans les immeubles de bureaux, commerces, multilogements, immeubles multilocatifs et chantiers de construction au Québec.',
             'h1': 'Études de cas — Comment on intervient selon le projet',
             'intro': "Voici des exemples de projets types représentatifs de nos interventions. Chaque bâtiment est différent — ces scénarios illustrent notre approche et les systèmes qu'on déploie selon le contexte.",
             'card_copy': {
-                'case-office-building': 'Immeuble de bureaux avec routeur MikroTik, WiFi et commutateurs Omada, et gestion unifiée UniFi pour caméras et accès.',
-                'case-multitenant-building': 'Immeuble multilocatif avec UniFi Access, caméras UniFi et WiFi Omada dans les aires communes.',
-                'case-retail-space': 'Commerce avec plateforme de sécurité UniFi, WiFi Omada et routage MikroTik.',
-                'case-construction-site': 'Chantier coordonné en phases autour de MikroTik, Omada et d’une pile de sécurité UniFi unifiée.',
+                'case-office-building': 'Immeuble de bureaux avec routage, commutation, points d’accès WiFi, caméras et contrôle d’accès coordonnés ensemble.',
+                'case-multitenant-building': 'Immeuble multilogement avec intercom vidéo, caméras, points d’accès WiFi et accès contrôlés dans les aires communes.',
+                'case-retail-space': 'Commerce avec caméras, contrôle d’accès, points d’accès WiFi et routage coordonnés ensemble.',
+                'case-construction-site': 'Chantier coordonné en phases autour du câblage, de la commutation, du WiFi, des caméras et des accès.',
             },
         },
         'items': {
@@ -4112,23 +4617,23 @@ CASE_STUDIES = {
                 'h1': 'Projet type — Immeuble de bureaux commercial',
                 'context': 'Immeuble de bureaux de 3 étages, environ 25 postes de travail, 2 entrées principales, stationnement extérieur et intérieur, salle de serveurs au sous-sol.',
                 'challenges': ["Contrôle d'accès à l'entrée principale et aux zones restreintes (salle de serveurs, archives)", 'Couverture WiFi stable pour tous les bureaux et la salle de conférence', 'Caméras sur les entrées, le stationnement et les couloirs principaux', 'Câblage existant désorganisé dans le local réseau'],
-                'work': ["Installation de UniFi Access sur 4 portes avec lecteurs de badge et gestion centralisée", 'Déploiement de 8 bornes TP-Link Omada avec commutateurs Omada et câblage Cat 6 dédié', 'Installation de 12 caméras UniFi avec visionnement à distance et gestion depuis la même plateforme que les accès', 'Déploiement du routeur MikroTik et remise en ordre complète du local réseau : rack, patch panels, identification de tous les points', 'Câblage de 25 nouveaux points réseau pour les postes de travail'],
-                'result': "Un bâtiment entièrement câblé, sécurisé et connecté, géré depuis une seule interface pour les caméras et les accès. Le gestionnaire supervise le site à distance et le local réseau est documenté et propre.",
-                'systems': "MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access",
+                'work': ["Installation d'un contrôle d'accès sur 4 portes avec lecteurs de badge et gestion centralisée", 'Déploiement de 8 points d’accès WiFi avec commutateurs gérés et câblage Cat 6 dédié', 'Installation de 12 caméras IP avec visionnement à distance et gestion coordonnée avec les accès', 'Déploiement du routeur et remise en ordre complète du local réseau : rack, patch panels, identification de tous les points', 'Câblage de 25 nouveaux points réseau pour les postes de travail'],
+                'result': "Un bâtiment entièrement câblé, sécurisé et connecté, géré dans une même logique opérationnelle pour les caméras et les accès. Le gestionnaire supervise le site à distance et le local réseau est documenté et propre.",
+                'systems': "Routeur · Commutateurs gérés · Points d'accès WiFi · Caméras IP · Contrôle d'accès",
                 'cta_title': 'Ce projet ressemble au vôtre ?',
                 'cta_copy': 'Décrivez-nous votre bâtiment.',
             },
             'case-multitenant-building': {
-                'nav': 'Immeuble multilocatif',
-                'title': 'Étude de cas — Immeuble multilocatif | Opticable',
-                'desc': "Comment Opticable installe intercom, caméras, WiFi et câblage dans un immeuble multilocatif au Québec.",
-                'h1': 'Projet type — Immeuble multilocatif résidentiel',
+                'nav': 'Immeuble multilogement',
+                'title': 'Étude de cas — Immeuble multilogement | Opticable',
+                'desc': "Comment Opticable installe intercom, caméras, WiFi et câblage dans un immeuble multilogement au Québec.",
+                'h1': 'Projet type — Immeuble multilogement résidentiel',
                 'context': 'Immeuble de 24 unités, 4 étages, 2 entrées sécurisées, stationnement intérieur, buanderie et salle commune au rez-de-chaussée.',
                 'challenges': ["Entrée principale sans intercom fonctionnel", 'Aucune caméra dans les aires communes', 'WiFi inexistant dans les corridors et espaces communs', 'Câblage des suites non structuré'],
-                'work': ["Installation d'un intercom vidéo UniFi Access à l'entrée principale avec intégration complète au contrôle d'accès", 'Installation de 10 caméras UniFi dans les corridors, entrées et stationnement', 'Déploiement de bornes TP-Link Omada et de commutateurs Omada dans les corridors et espaces communs', 'Déploiement du routeur MikroTik, câblage Cat 6 dans les aires communes et organisation du local réseau'],
-                'result': "Le gestionnaire contrôle l'accès à distance, visualise les caméras depuis son téléphone et gère l'intercom et les accès depuis la même plateforme UniFi. Les résidents bénéficient du WiFi dans tous les espaces communs.",
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
-                'cta_title': 'Vous gérez un immeuble multilocatif ?',
+                'work': ["Installation d'un intercom vidéo à l'entrée principale avec intégration complète au contrôle d'accès", 'Installation de 10 caméras IP dans les corridors, entrées et stationnement', 'Déploiement de points d’accès WiFi et de commutateurs gérés dans les corridors et espaces communs', 'Déploiement du routeur, câblage Cat 6 dans les aires communes et organisation du local réseau'],
+                'result': "Le gestionnaire contrôle l'accès à distance, visualise les caméras depuis son téléphone et gère l'intercom et les accès dans une même logique. Les résidents bénéficient d'une couverture WiFi fiable dans tous les espaces communs.",
+                'systems': "Routeur · Commutateurs gérés · Points d'accès WiFi · Caméras IP · Intercom vidéo · Contrôle d'accès",
+                'cta_title': 'Vous gérez un immeuble multilogement ?',
                 'cta_copy': 'Parlons de votre projet.',
             },
             'case-retail-space': {
@@ -4138,9 +4643,9 @@ CASE_STUDIES = {
                 'h1': 'Projet type — Commerce et espace de vente au détail',
                 'context': "Commerce de détail sur 2 niveaux, zone de vente, entrepôt à l'arrière, bureau de gestion et stationnement extérieur.",
                 'challenges': ["Aucune surveillance de la zone de caisse et des entrées/sorties", 'WiFi instable pour les terminaux de paiement et les employés', "Accès à l'entrepôt non contrôlé", 'Besoin de visionnement à distance pour le propriétaire'],
-                'work': ["Installation de 8 caméras UniFi couvrant la zone de vente, la caisse, l'entrepôt et le stationnement", 'Remplacement du WiFi par 3 bornes TP-Link Omada avec commutateurs Omada et SSID séparé pour les clients et les terminaux', "Installation d'un lecteur UniFi Access sur la porte de l'entrepôt", 'Déploiement du routeur MikroTik et configuration du visionnement à distance sur téléphone mobile pour le propriétaire'],
+                'work': ["Installation de 8 caméras IP couvrant la zone de vente, la caisse, l'entrepôt et le stationnement", 'Remplacement du WiFi par 3 points d’accès WiFi avec commutateurs gérés et SSID séparé pour les clients et les terminaux', "Installation d'un lecteur de contrôle d'accès sur la porte de l'entrepôt", 'Déploiement du routeur et configuration du visionnement à distance sur téléphone mobile pour le propriétaire'],
                 'result': "Le propriétaire surveille son commerce à distance, le WiFi est stable pour les opérations et l'entrepôt est accessible uniquement au personnel autorisé via la même pile de gestion que les caméras.",
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'systems': "Routeur · Commutateurs gérés · Points d'accès WiFi · Caméras IP · Contrôle d'accès",
                 'cta_title': 'Vous avez un commerce à sécuriser ?',
                 'cta_copy': 'Décrivez-nous vos besoins.',
             },
@@ -4151,9 +4656,9 @@ CASE_STUDIES = {
                 'h1': 'Projet type — Coordination technologique sur chantier',
                 'context': 'Immeuble commercial de 6 étages en construction, entrepreneur général, livraison en 3 phases, local technique par étage.',
                 'challenges': ['Câblage structuré à installer avant la fermeture des cloisons', 'Coordination avec les électriciens pour les cheminements', 'Locaux techniques à organiser dès la structure', 'Systèmes de sécurité et WiFi à livrer à la remise des clés'],
-                'work': ['Tirage du câblage Cat 6A dans toutes les suites avant la fermeture des murs — Phase 1', 'Déploiement du routage MikroTik, des commutateurs Omada, des racks et patch panels dans les 6 locaux techniques — Phase 2', 'Déploiement des caméras UniFi, de UniFi Access et du WiFi TP-Link Omada coordonné avec la livraison — Phase 3', "Documentation complète remise à l'entrepreneur général et au propriétaire"],
+                'work': ['Tirage du câblage Cat 6A dans toutes les suites avant la fermeture des murs — Phase 1', 'Déploiement du routage, des commutateurs gérés, des racks et patch panels dans les 6 locaux techniques — Phase 2', "Déploiement des caméras IP, du contrôle d'accès et des points d’accès WiFi coordonné avec la livraison — Phase 3", "Documentation complète remise à l'entrepreneur général et au propriétaire"],
                 'result': 'Livraison technologique complète alignée sur le calendrier de construction. Aucun retard lié aux systèmes. Documentation propre remise à la livraison finale.',
-                'systems': 'MikroTik (routeur) · TP-Link Omada (WiFi et commutateurs) · UniFi Cameras · UniFi Access',
+                'systems': "Routage · Commutateurs gérés · Points d'accès WiFi · Caméras IP · Contrôle d'accès",
                 'cta_title': 'Vous construisez ou rénovez un bâtiment ?',
                 'cta_copy': 'Coordonnons les systèmes dès maintenant.',
             },
@@ -4168,10 +4673,10 @@ CASE_STUDIES['en'] = {
         'h1': 'Case studies — How we approach different project types',
         'intro': 'Here are representative example projects. Every building is different, but these scenarios illustrate our approach and the systems we deploy based on the context.',
         'card_copy': {
-            'case-office-building': 'Office building with MikroTik routing, Omada WiFi and switching, and a unified UniFi stack for cameras and access.',
-            'case-multitenant-building': 'Multi-tenant property with UniFi Access, UniFi cameras, and Omada WiFi in the common areas.',
-            'case-retail-space': 'Retail space with a unified UniFi security platform, Omada WiFi, and MikroTik routing.',
-            'case-construction-site': 'Construction site coordinated in phases around MikroTik, Omada, and a unified UniFi security stack.',
+            'case-office-building': 'Office building with routing, switching, WiFi access points, cameras, and access control coordinated together.',
+            'case-multitenant-building': 'Multi-tenant property with video intercom, cameras, WiFi access points, and controlled entry in common areas.',
+            'case-retail-space': 'Retail space with cameras, access control, WiFi access points, and routing coordinated together.',
+            'case-construction-site': 'Construction site coordinated in phases around cabling, switching, WiFi access points, cameras, and access systems.',
         },
     },
     'items': {
@@ -4182,9 +4687,9 @@ CASE_STUDIES['en'] = {
             'h1': 'Typical project — Commercial office building',
             'context': 'Three-storey office building with about 25 workstations, two main entries, outdoor and indoor parking, and a server room in the basement.',
             'challenges': ['Access control at the main entry and restricted areas such as the server room and archives', 'Stable WiFi coverage for all offices and the conference room', 'Cameras covering the entries, parking, and main corridors', 'Disorganized legacy cabling in the network room'],
-            'work': ['Installation of UniFi Access on 4 doors with badge readers and centralized management', 'Deployment of 8 TP-Link Omada access points with Omada switching and dedicated Cat 6 cabling', 'Installation of 12 UniFi cameras with remote viewing and management from the same platform as access control', 'Deployment of a MikroTik router and complete organization of the network room, including rack, patch panels, and full point identification', 'Installation of 25 new network drops for workstations'],
-            'result': 'A building that is fully cabled, secured, and connected, managed from one interface for cameras and access. The property manager supervises the site remotely and the network room is documented and clean.',
-            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'work': ['Installation of access control on 4 doors with badge readers and centralized management', 'Deployment of 8 WiFi access points with managed switches and dedicated Cat 6 cabling', 'Installation of 12 IP cameras with remote viewing and coordinated management with the access system', 'Deployment of a router and complete organization of the network room, including rack, patch panels, and full point identification', 'Installation of 25 new network drops for workstations'],
+            'result': 'A building that is fully cabled, secured, and connected, managed from one coordinated operating environment for cameras and access. The property manager supervises the site remotely and the network room is documented and clean.',
+            'systems': 'Router · Managed switches · WiFi access points · IP cameras · Access control',
             'cta_title': 'Does this project look like yours?',
             'cta_copy': 'Tell us about your building.',
         },
@@ -4195,9 +4700,9 @@ CASE_STUDIES['en'] = {
             'h1': 'Typical project — Multi-tenant residential building',
             'context': '24-unit building across 4 storeys with 2 secured entries, indoor parking, a laundry room, and a shared room on the ground floor.',
             'challenges': ['Main entry without a working intercom', 'No cameras in the common areas', 'No WiFi in corridors and shared spaces', 'Unstructured suite cabling'],
-            'work': ['Installation of a UniFi Access video intercom at the main entry with full access-control integration', 'Installation of 10 UniFi cameras in corridors, entries, and parking areas', 'Deployment of TP-Link Omada access points and Omada switches in corridors and common areas', 'Deployment of a MikroTik router, Cat 6 cabling in the common areas, and organization of the network room'],
-            'result': 'The manager controls entry remotely, views the cameras from a phone, and manages the intercom and access rights from the same UniFi platform. Residents benefit from WiFi in all shared spaces.',
-            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'work': ['Installation of a video intercom at the main entry with full access-control integration', 'Installation of 10 IP cameras in corridors, entries, and parking areas', 'Deployment of WiFi access points and managed switches in corridors and common areas', 'Deployment of a router, Cat 6 cabling in the common areas, and organization of the network room'],
+            'result': 'The manager controls entry remotely, views the cameras from a phone, and manages the intercom and access rights from one coordinated workflow. Residents benefit from reliable WiFi in all shared spaces.',
+            'systems': 'Router · Managed switches · WiFi access points · IP cameras · Video intercom · Access control',
             'cta_title': 'Do you manage a multi-tenant building?',
             'cta_copy': 'Let’s discuss your project.',
         },
@@ -4208,9 +4713,9 @@ CASE_STUDIES['en'] = {
             'h1': 'Typical project — Retail and point-of-sale environment',
             'context': 'Retail space across 2 levels, with a sales floor, rear warehouse, management office, and outdoor parking.',
             'challenges': ['No surveillance over the cash area and entries', 'Unstable WiFi for payment terminals and staff', 'Uncontrolled access to the warehouse', 'Remote viewing required for the owner'],
-            'work': ['Installation of 8 UniFi cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with 3 TP-Link Omada access points and Omada switches, with separate SSIDs for customers and payment terminals', 'Installation of a UniFi Access reader on the warehouse door', 'Deployment of a MikroTik router and setup of remote viewing on the owner mobile phone'],
+            'work': ['Installation of 8 IP cameras covering the sales floor, cash area, warehouse, and parking', 'Replacement of the WiFi with 3 WiFi access points and managed switches, with separate SSIDs for customers and payment terminals', 'Installation of an access-control reader on the warehouse door', 'Deployment of a router and setup of remote viewing on the owner mobile phone'],
             'result': 'The owner monitors the store remotely, the WiFi stays stable for operations, and the warehouse remains restricted to authorized staff through the same management stack used for the cameras.',
-            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'systems': 'Router · Managed switches · WiFi access points · IP cameras · Access control',
             'cta_title': 'Do you have a retail space to secure?',
             'cta_copy': 'Tell us what you need.',
         },
@@ -4221,9 +4726,9 @@ CASE_STUDIES['en'] = {
             'h1': 'Typical project — Technology coordination on a job site',
             'context': 'Six-storey commercial building under construction, one general contractor, delivery in 3 phases, and one technical room per floor.',
             'challenges': ['Structured cabling must be installed before the walls are closed', 'Coordination with electricians for pathways', 'Technical rooms need to be organized from the structural phase', 'Security systems and WiFi must be ready at handoff'],
-            'work': ['Cat 6A cabling pulled through all suites before wall closure - Phase 1', 'Deployment of MikroTik routing, Omada switches, racks, and patch panels in the 6 technical rooms - Phase 2', 'Deployment of UniFi cameras, UniFi Access, and TP-Link Omada WiFi coordinated with final delivery - Phase 3', 'Complete documentation delivered to the general contractor and the owner'],
+            'work': ['Cat 6A cabling pulled through all suites before wall closure - Phase 1', 'Deployment of routing, managed switches, racks, and patch panels in the 6 technical rooms - Phase 2', 'Deployment of IP cameras, access control, and WiFi access points coordinated with final delivery - Phase 3', 'Complete documentation delivered to the general contractor and the owner'],
             'result': 'Full technology delivery aligned with the construction schedule. No delays caused by the systems, and clean documentation handed over at final delivery.',
-            'systems': 'MikroTik (router) · TP-Link Omada (WiFi and switches) · UniFi Cameras · UniFi Access',
+            'systems': 'Routing · Managed switches · WiFi access points · IP cameras · Access control',
             'cta_title': 'Are you building or renovating a property?',
             'cta_copy': 'Let’s coordinate the systems now.',
         },
@@ -4247,7 +4752,7 @@ order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
 base_routes = {
     'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'referral-program': '/en/referral-program/', 'referral-program-terms': '/en/referral-program/terms/', 'referral-partner-program': '/en/referral-partner-program/', 'referral-partner-program-terms': '/en/referral-partner-program/terms/', 'referral-portal': '/en/referral-portal/', 'referral-access': '/en/referral-portal/access/', 'referral-admin': '/en/admin/referrals/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
-    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'referral-program': '/fr/programme-reference/', 'referral-program-terms': '/fr/programme-reference/reglement/', 'referral-partner-program': '/fr/programme-partenaires-referents/', 'referral-partner-program-terms': '/fr/programme-partenaires-referents/reglement/', 'referral-portal': '/fr/portail-references/', 'referral-access': '/fr/portail-references/acces/', 'referral-admin': '/fr/admin/references/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilocatif/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
+    'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'referral-program': '/fr/programme-reference/', 'referral-program-terms': '/fr/programme-reference/reglement/', 'referral-partner-program': '/fr/programme-partenaires-referents/', 'referral-partner-program-terms': '/fr/programme-partenaires-referents/reglement/', 'referral-portal': '/fr/portail-references/', 'referral-access': '/fr/portail-references/acces/', 'referral-admin': '/fr/admin/references/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilogement/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
 }
 routes = {k: dict(v) for k, v in base_routes.items()}
 for key in order:
@@ -4260,6 +4765,9 @@ for lang, guide_index_page in GUIDE_INDEX_PAGES.items():
     routes[lang]['guides'] = guide_index_page['path']
 for lang, detail_pages in INDUSTRY_DETAIL_PAGES_BY_LANG.items():
     for key, page_data in detail_pages.items():
+        routes[lang][key] = page_data['path']
+for lang, cluster_pages in MULTIFAMILY_CLUSTER_PAGES_BY_LANG.items():
+    for key, page_data in cluster_pages.items():
         routes[lang][key] = page_data['path']
 for lang, landing_pages in CAMPAIGN_LANDING_PAGES_BY_LANG.items():
     for key, page_data in landing_pages.items():
@@ -9632,6 +10140,7 @@ def sitemap_xml():
         'contact',
         'privacy',
         *INDUSTRY_DETAIL_KEYS,
+        *MULTIFAMILY_CLUSTER_KEYS,
         'referral-program',
         'referral-program-terms',
         'referral-partner-program',
@@ -11490,6 +11999,79 @@ def industry_detail_cards_section(lang, section_copy, page_keys):
     )
 
 
+def multifamily_cluster_pages_for_lang(lang):
+    return MULTIFAMILY_CLUSTER_PAGES_BY_LANG.get(lang, {})
+
+
+def multifamily_cluster_cards_section(lang, section_copy, page_keys):
+    cluster_pages = multifamily_cluster_pages_for_lang(lang)
+    cards = []
+    for key in page_keys:
+        page_data = cluster_pages.get(key)
+        if not page_data:
+            continue
+        cards.append(
+            card(
+                page_data['headline'],
+                page_data.get('panel_copy', page_data['intro']),
+                page_data['path'],
+                section_copy.get('label', 'Voir cette page' if lang == 'fr' else 'View this page'),
+            )
+        )
+    if not cards:
+        return ''
+    grid_class = 'grid-2' if len(cards) == 2 else 'grid-4' if len(cards) == 4 else 'grid-3'
+    cta_html = ''
+    if section_copy.get('cta_href') and section_copy.get('cta_label'):
+        cta_html = f'<div class="cta-actions"><a class="button button-secondary" href="{section_copy["cta_href"]}">{esc(section_copy["cta_label"])}</a></div>'
+    return band_section(
+        f'{section_heading_html(section_copy["eyebrow"], section_copy["title"], section_copy["intro"])}'
+        f'<div class="{grid_class}">{"".join(cards)}</div>{cta_html}',
+        'content-section',
+    )
+
+
+def industry_multifamily_cluster_section(lang, page_key):
+    if page_key != 'industry-multi-tenant-building':
+        return ''
+    if lang == 'fr':
+        section_copy = {
+            'eyebrow': 'Réseau et WiFi',
+            'title': "Explorer l'infrastructure multilogement selon la taille du projet",
+            'intro': "Ces pages détaillent ce qui change entre un petit immeuble, un immeuble intermédiaire et une plus grande architecture multilogement.",
+            'label': 'Voir cette page',
+        }
+    else:
+        section_copy = {
+            'eyebrow': 'WiFi and network',
+            'title': 'Explore the multifamily infrastructure by building size',
+            'intro': 'These pages explain what changes between smaller buildings, mid-size properties, and larger multifamily environments.',
+            'label': 'View this page',
+        }
+    return multifamily_cluster_cards_section(lang, section_copy, MULTIFAMILY_CLUSTER_KEYS)
+
+
+def service_multifamily_cluster_section(lang, service_key):
+    page_keys = MULTIFAMILY_CLUSTER_SERVICE_KEYS.get(service_key, ())
+    if not page_keys:
+        return ''
+    if lang == 'fr':
+        section_copy = {
+            'eyebrow': 'Immeubles multilogements',
+            'title': 'Pages liées au WiFi et à la base réseau des immeubles multilogements',
+            'intro': "Ces pages expliquent comment ce service s'intègre dans un immeuble multilogement selon la taille du bâtiment.",
+            'label': 'Voir cette page',
+        }
+    else:
+        section_copy = {
+            'eyebrow': 'Multifamily buildings',
+            'title': 'Pages tied to multifamily WiFi and network foundations',
+            'intro': 'These pages show how this service fits multifamily buildings at different building sizes.',
+            'label': 'View this page',
+        }
+    return multifamily_cluster_cards_section(lang, section_copy, page_keys)
+
+
 def case_study_cards_subset(lang, case_keys):
     parent = CASE_STUDIES[lang]['parent']
     return ''.join(
@@ -11863,7 +12445,7 @@ def resource_service_cards_section(lang, title, intro, service_keys):
     )
 
 
-def render_industry_detail_page(page_data, lang):
+def render_industry_detail_page(page_key, page_data, lang):
     hub_label = T[lang]['industries']
     hub_href = routes[lang]['industries']
     if lang == 'fr':
@@ -11906,8 +12488,78 @@ def render_industry_detail_page(page_data, lang):
             'layout-shell page-hero',
         )
         + ''.join(render_custom_content_section(section) for section in page_data['sections'])
+        + industry_multifamily_cluster_section(lang, page_key)
         + resource_service_cards_section(lang, service_title, service_intro, page_data['service_keys'])
         + guide_section
+        + inline_cta_band(page_data['cta_title'], page_data['cta_copy'], routes[lang]['contact'], page_data['cta_label'])
+    )
+    return breadcrumbs, body
+
+
+def render_multifamily_cluster_page(page_key, page_data, lang):
+    hub_page = INDUSTRY_DETAIL_PAGES_BY_LANG[lang]['industry-multi-tenant-building']
+    hub_label = hub_page['headline']
+    hub_href = hub_page['path']
+    if lang == 'fr':
+        guide_copy = {
+            'eyebrow': 'Guides',
+            'title': "Pages utiles avant de choisir l'architecture",
+            'intro': "Des guides pour cadrer le WiFi, le câblage, la fibre et les choix de base avant la soumission.",
+            'cta_href_key': 'guides',
+            'cta_label': 'Voir tous les guides',
+        }
+        service_title = 'Services liés à cette architecture'
+        service_intro = "Les services qui reviennent le plus souvent quand on structure l'infrastructure d'un immeuble multilogement."
+        related_copy = {
+            'eyebrow': 'Comparer',
+            'title': "Comparer selon la taille de l'immeuble",
+            'intro': "Les besoins changent avec le nombre d'unités, les étages, les zones communes et la complexité des systèmes à relier.",
+            'label': 'Voir cette page',
+            'cta_href': hub_href,
+            'cta_label': 'Voir la page multilogement',
+        }
+    else:
+        guide_copy = {
+            'eyebrow': 'Guides',
+            'title': 'Helpful pages before choosing the architecture',
+            'intro': 'Guides that help frame WiFi, cabling, fiber, and the core decisions before the quote stage.',
+            'cta_href_key': 'guides',
+            'cta_label': 'View all guides',
+        }
+        service_title = 'Services tied to this architecture'
+        service_intro = 'The services that most often come up when a multifamily building network foundation is being structured.'
+        related_copy = {
+            'eyebrow': 'Compare',
+            'title': 'Compare by building size',
+            'intro': 'Needs change with the number of units, the floor count, the common spaces, and the system complexity.',
+            'label': 'View this page',
+            'cta_href': hub_href,
+            'cta_label': 'View the multifamily hub',
+        }
+    breadcrumbs = [
+        (T[lang]['home'], routes[lang]['home']),
+        (T[lang]['industries'], routes[lang]['industries']),
+        (hub_label, hub_href),
+        (page_data['headline'], page_data['path']),
+    ]
+    guide_section = guide_cards_section(lang, guide_copy, page_data.get('guide_keys', ()))
+    related_keys = tuple(key for key in page_data.get('related_keys', ()) if key != page_key)
+    related_section = multifamily_cluster_cards_section(lang, related_copy, related_keys) if related_keys else ''
+    article_like = {'faq_items': page_data.get('faq_items', ())}
+    body = (
+        breadcrumb_nav(breadcrumbs)
+        + band_section(
+            f'<div class="page-hero-copy"><p class="eyebrow">{esc(page_data["eyebrow"])}</p><h1>{esc(page_data["headline"])}</h1><p>{esc(page_data["intro"])}</p>'
+            f'<div class="page-hero-actions"><a class="button button-primary" href="{routes[lang]["contact"]}">{esc(T[lang]["quote"])}</a><a class="button button-secondary" href="{hub_href}">{esc(hub_label)}</a></div></div>'
+            f'<aside class="page-hero-panel"><p class="eyebrow">{esc(hub_label)}</p><h2>{esc(page_data["panel_title"])}</h2><p>{esc(page_data["panel_copy"])}</p></aside>',
+            'hero-band page-hero-band',
+            'layout-shell page-hero',
+        )
+        + ''.join(render_custom_content_section(section) for section in page_data['sections'])
+        + related_section
+        + resource_service_cards_section(lang, service_title, service_intro, page_data.get('service_keys', ()))
+        + guide_section
+        + render_blog_article_faq(article_like, lang)
         + inline_cta_band(page_data['cta_title'], page_data['cta_copy'], routes[lang]['contact'], page_data['cta_label'])
     )
     return breadcrumbs, body
@@ -13219,6 +13871,20 @@ for lang in ('en', 'fr'):
         blog_hub_data = BLOG_HUB_PAGE[lang]
         shortcut_label = 'Raccourcis' if lang == 'fr' else 'Shortcuts'
         all_articles_label = 'Voir tous les articles' if lang == 'fr' else 'View all articles'
+        if lang == 'fr':
+            blog_multifamily_copy = {
+                'eyebrow': 'Immeubles multilogements',
+                'title': 'WiFi et base réseau pour immeubles multilogements',
+                'intro': "Des pages plus ciblées pour comprendre ce qui change selon la taille de l'immeuble.",
+                'label': 'Voir cette page',
+            }
+        else:
+            blog_multifamily_copy = {
+                'eyebrow': 'Multifamily buildings',
+                'title': 'WiFi and network foundations for multifamily buildings',
+                'intro': 'Targeted pages that explain what changes as the building size grows.',
+                'label': 'View this page',
+            }
         chooser_cards = ''.join(
             card(title, copy, href, label)
             for title, copy, href, label in blog_hub_data['chooser_cards']
@@ -13238,6 +13904,7 @@ for lang in ('en', 'fr'):
                 'content-section',
             )
             + blog_guides_html
+            + multifamily_cluster_cards_section(lang, blog_multifamily_copy, MULTIFAMILY_CLUSTER_KEYS)
             + band_section(
                 f'<div class="section-heading"><p class="eyebrow">{esc(t["articles"])}</p><h2>{esc(blog_hub_data["articles_title"])}</h2><p>{esc(blog_hub_data["articles_intro"])}</p></div>'
                 f'{latest_articles_html}<div class="cta-actions"><a class="button button-secondary" href="{routes[lang]["articles"]}">{esc(all_articles_label)}</a></div>',
@@ -13328,6 +13995,20 @@ for lang in ('en', 'fr'):
     if lang in GUIDE_INDEX_PAGES:
         guide_index_page = GUIDE_INDEX_PAGES[lang]
         guide_cards = render_resource_cards_for_keys(lang, RESOURCE_ARTICLE_KEYS)
+        if lang == 'fr':
+            guide_multifamily_copy = {
+                'eyebrow': 'Immeubles multilogements',
+                'title': 'WiFi et réseau pour immeubles multilogements',
+                'intro': "Des pages dédiées pour comprendre la base réseau selon la taille de l'immeuble.",
+                'label': 'Voir cette page',
+            }
+        else:
+            guide_multifamily_copy = {
+                'eyebrow': 'Multifamily buildings',
+                'title': 'WiFi and network pages for multifamily buildings',
+                'intro': 'Dedicated pages that explain the network foundation by building size.',
+                'label': 'View this page',
+            }
         guide_listing_title = guide_index_page.get('listing_title', 'Guides')
         guide_listing_intro = guide_index_page.get('listing_intro', '')
         guide_cta_title = guide_index_page.get('cta_title', "Vous voulez valider votre projet avec nous ?" if lang == 'fr' else 'Want to validate your project with us?')
@@ -13347,6 +14028,7 @@ for lang in ('en', 'fr'):
                 f'{guide_cards}',
                 'blog-listing-section',
             )
+            + multifamily_cluster_cards_section(lang, guide_multifamily_copy, MULTIFAMILY_CLUSTER_KEYS)
             + inline_cta_band(guide_cta_title, guide_cta_copy, routes[lang]['contact'], t['quote'])
         )
         write_url(
@@ -13392,7 +14074,7 @@ for lang in ('en', 'fr'):
                 ),
             )
         for key, detail_page in industry_detail_pages_for_lang(lang).items():
-            industry_breadcrumbs, industry_body = render_industry_detail_page(detail_page, lang)
+            industry_breadcrumbs, industry_body = render_industry_detail_page(key, detail_page, lang)
             write_url(
                 detail_page['path'],
                 page(
@@ -13411,6 +14093,28 @@ for lang in ('en', 'fr'):
                         'fr': INDUSTRY_DETAIL_PAGES_BY_LANG['fr'][key]['path'],
                     },
                     lang_switch_href=INDUSTRY_DETAIL_PAGES_BY_LANG['fr' if lang == 'en' else 'en'][key]['path'],
+                ),
+            )
+        for key, cluster_page in multifamily_cluster_pages_for_lang(lang).items():
+            cluster_breadcrumbs, cluster_body = render_multifamily_cluster_page(key, cluster_page, lang)
+            write_url(
+                cluster_page['path'],
+                page(
+                    lang,
+                    key,
+                    'industries',
+                    cluster_page['title'],
+                    cluster_page['desc'],
+                    cluster_body,
+                    faq_items=cluster_page.get('faq_items'),
+                    breadcrumb_items=cluster_breadcrumbs,
+                    canonical_path=cluster_page['path'],
+                    include_alternates=True,
+                    alternate_paths={
+                        'en': MULTIFAMILY_CLUSTER_PAGES_BY_LANG['en'][key]['path'],
+                        'fr': MULTIFAMILY_CLUSTER_PAGES_BY_LANG['fr'][key]['path'],
+                    },
+                    lang_switch_href=MULTIFAMILY_CLUSTER_PAGES_BY_LANG['fr' if lang == 'en' else 'en'][key]['path'],
                 ),
             )
         for key, landing_page in CAMPAIGN_LANDING_PAGES_BY_LANG[lang].items():
@@ -13453,6 +14157,7 @@ for lang in ('en', 'fr'):
                 )
                 + service_sections_html
                 + service_industry_section(lang, key)
+                + service_multifamily_cluster_section(lang, key)
                 + service_case_study_section(lang, key)
                 + service_guide_section(lang, key)
                 + inline_cta_band(custom_service_page_content[key]['cta'], t['service_area_intro'], routes[lang]['contact'], t['quote'])
@@ -13478,6 +14183,7 @@ for lang in ('en', 'fr'):
                     'service-cases-section',
                 )
                 + service_industry_section(lang, key)
+                + service_multifamily_cluster_section(lang, key)
                 + service_case_study_section(lang, key)
                 + service_guide_section(lang, key)
                 + promo_cta_band(lang)

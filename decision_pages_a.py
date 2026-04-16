@@ -94,14 +94,14 @@ DECISION_ARTICLES_A = {
         "related_services": ("intercom-systems", "access-control-systems", "structured-cabling"),
         "related_articles": ("access-control-vs-intercom",),
         "fr": {
-            "path": "/fr/prix-intercom-immeuble-multilocatif/",
-            "title": "Prix d'un intercom pour immeuble multilocatif | Opticable",
-            "desc": "Combien prévoir pour un intercom audio ou vidéo dans un immeuble multilocatif et ce qui change vraiment la soumission.",
+            "path": "/fr/prix-intercom-immeuble-multilogement/",
+            "title": "Prix d'un intercom pour immeuble multilogement | Opticable",
+            "desc": "Combien prévoir pour un intercom audio ou vidéo dans un immeuble multilogement et ce qui change vraiment la soumission.",
             "eyebrow": "Guide de prix",
-            "headline": "Combien coûte un intercom pour un immeuble multilocatif ?",
+            "headline": "Combien coûte un intercom pour un immeuble multilogement ?",
             "intro": "Réponse courte : un intercom simple pour une entrée principale peut souvent commencer autour de 3 000 $ à 6 000 $. Un système vidéo plus complet, avec ouverture de porte, gestion plus propre des visiteurs, plusieurs entrées ou intégration au contrôle d'accès, monte souvent entre 7 000 $ et 18 000 $ et plus. Le vrai prix dépend du nombre d'entrées, du type de communication voulu, du câblage à reprendre et du niveau d'intégration.",
             "excerpt": "Le prix d'un intercom dépend surtout du type d'entrée, du nombre d'entrées, du câblage et du niveau d'intégration avec l'accès.",
-            "tags": ["Intercom", "Immeuble multilocatif", "Soumission"],
+            "tags": ["Intercom", "Immeuble multilogement", "Soumission"],
             "primary_service": "intercom-systems",
             "related_resources": ("intercom-audio-or-video-commercial-building", "access-control-pricing-commercial-building"),
             "summary": [
@@ -115,7 +115,7 @@ DECISION_ARTICLES_A = {
                     "title": "Ce qu'on paie vraiment dans un projet d'intercom",
                     "paragraphs": [
                         "Un intercom n'est pas seulement un panneau d'entrée. Il faut considérer l'appel, la communication, l'ouverture de porte, l'alimentation, le câblage, le raccordement réseau si requis et la remise en service complète.",
-                        "Dans un immeuble multilocatif, le prix varie vite si l'entrée doit gérer plusieurs occupants, des visiteurs, une ouverture à distance ou plusieurs points d'accès.",
+                        "Dans un immeuble multilogement, le prix varie vite si l'entrée doit gérer plusieurs occupants, des visiteurs, une ouverture à distance ou plusieurs points d'accès.",
                     ],
                     "callout_label": "Raccourci utile",
                     "callout": "Plus il y a d'entrées, de locataires et de fonctions d'ouverture, plus la soumission se rapproche d'un vrai système d'entrée et pas juste d'un poste d'appel.",
@@ -124,7 +124,7 @@ DECISION_ARTICLES_A = {
                     "eyebrow": "Budgets types",
                     "title": "Ordres de grandeur fréquents",
                     "table": {
-                        "caption": "Budgets indicatifs pour un intercom multilocatif",
+                        "caption": "Budgets indicatifs pour un intercom multilogement",
                         "columns": ("Projet", "Portée typique", "Budget indicatif", "Quand ça s'applique"),
                         "rows": (
                             ("Audio simple", "1 entrée, appel de base, ouverture de porte", "3 000 $ à 6 000 $", "Petit immeuble ou besoin fonctionnel sans vidéo"),
@@ -154,7 +154,7 @@ DECISION_ARTICLES_A = {
                         ("Faut-il seulement parler ou aussi déverrouiller ?", "La logique d'ouverture change tout dans la portée."),
                         ("Le système doit-il travailler avec l'accès ?", "Si oui, il faut le dire dès le départ pour cadrer le bon scénario."),
                     ],
-                    "quote": "Dans un immeuble multilocatif, un intercom utile est celui qui suit la vraie logique d'entrée du bâtiment.",
+                    "quote": "Dans un immeuble multilogement, un intercom utile est celui qui suit la vraie logique d'entrée du bâtiment.",
                 },
             ],
             "faq_items": [
