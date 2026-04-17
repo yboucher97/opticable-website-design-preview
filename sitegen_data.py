@@ -4990,6 +4990,7 @@ HOME_SERVICE_STYLE_PAGE_KEYS = {'home', 'services', 'about', 'industries'} | set
 ARTICLE_STYLE_PAGE_KEYS = (
     ARTICLE_PAGE_KEYS
     | {'home', 'contact', 'faq', 'guides'}
+    | set(order)
     | set(INDUSTRY_DETAIL_KEYS)
     | set(MULTIFAMILY_CLUSTER_KEYS)
 )

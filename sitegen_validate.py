@@ -12,6 +12,17 @@ SKIPPED_PATH_PREFIXES = (
     "/api/",
 )
 
+ARTICLE_STYLE_MARKERS = (
+    "blog-grid",
+    "blog-card",
+    "blog-article-card",
+    "blog-related-articles-section",
+    "blog-related-services-section",
+    "blog-summary-section",
+    "blog-article-shell",
+)
+ARTICLE_STYLE_HREF_FRAGMENT = "styles-articles.css"
+
 
 def absolute_url_for_path(path):
     if path == "/":
@@ -68,6 +79,7 @@ class BuildHtmlParser(HTMLParser):
         self.robots = ""
         self.canonical = ""
         self.references = []
+        self.stylesheets = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -91,6 +103,8 @@ class BuildHtmlParser(HTMLParser):
             href = attrs.get("href", "").strip()
             if "canonical" in rel_values and href:
                 self.canonical = href
+            if "stylesheet" in rel_values and href:
+                self.stylesheets.append(href)
             if href:
                 self.references.append(href)
         elif lowered_tag in {"a", "script", "img", "iframe", "source"}:
@@ -160,6 +174,7 @@ def _validate_page(path, issues):
     if not file_path.exists():
         issues.append(f"{path}: generated file is missing")
         return
+    html = file_path.read_text(encoding="utf-8")
     parser = parse_html(file_path)
     if not parser.title:
         issues.append(f"{path}: missing <title>")
@@ -176,6 +191,10 @@ def _validate_page(path, issues):
         issues.append(f"{path}: preview build is missing noindex robots")
     if not FORCE_NOINDEX and "noindex" in parser.robots.lower():
         issues.append(f"{path}: indexable build unexpectedly contains noindex")
+    if any(marker in html for marker in ARTICLE_STYLE_MARKERS) and not any(
+        ARTICLE_STYLE_HREF_FRAGMENT in stylesheet for stylesheet in parser.stylesheets
+    ):
+        issues.append(f"{path}: article-style markup is present but styles-articles.css is missing")
     _validate_references(path, parser, issues)
 
 
