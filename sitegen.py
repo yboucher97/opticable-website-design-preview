@@ -55,11 +55,14 @@ ROOT_GENERATED_ASSET_FILES = (
     'styles.css',
     'styles-promo-referral.css',
     'styles-admin-panels.css',
+    'styles-articles.css',
     'styles-referral-public.css',
     'styles-referral-portal.css',
     'styles-referral-admin.css',
     'site.js',
-    'site-promo.js',
+    'site-promo-public.js',
+    'site-promo-unsubscribe.js',
+    'site-promo-admin.js',
     'site-referral-public.js',
     'site-referral-portal.js',
     'site-referral-admin.js',
@@ -78,11 +81,14 @@ APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
 PROMO_REFERRAL_STYLES_URL = f'/assets/styles-promo-referral.css?v={ASSET_VER}'
 ADMIN_PANEL_STYLES_URL = f'/assets/styles-admin-panels.css?v={ASSET_VER}'
+ARTICLE_STYLES_URL = f'/assets/styles-articles.css?v={ASSET_VER}'
 REFERRAL_PUBLIC_STYLES_URL = f'/assets/styles-referral-public.css?v={ASSET_VER}'
 REFERRAL_PORTAL_STYLES_URL = f'/assets/styles-referral-portal.css?v={ASSET_VER}'
 REFERRAL_ADMIN_STYLES_URL = f'/assets/styles-referral-admin.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
-PROMO_SCRIPT_URL = f'/assets/site-promo.js?v={ASSET_VER}'
+PROMO_PUBLIC_SCRIPT_URL = f'/assets/site-promo-public.js?v={ASSET_VER}'
+PROMO_UNSUBSCRIBE_SCRIPT_URL = f'/assets/site-promo-unsubscribe.js?v={ASSET_VER}'
+PROMO_ADMIN_SCRIPT_URL = f'/assets/site-promo-admin.js?v={ASSET_VER}'
 REFERRAL_PUBLIC_SCRIPT_URL = f'/assets/site-referral-public.js?v={ASSET_VER}'
 REFERRAL_PORTAL_SCRIPT_URL = f'/assets/site-referral-portal.js?v={ASSET_VER}'
 REFERRAL_ADMIN_SCRIPT_URL = f'/assets/site-referral-admin.js?v={ASSET_VER}'
@@ -748,6 +754,7 @@ GUIDE_ARTICLE_DATA = normalize_article_collection(GUIDE_ARTICLES)
 GUIDE_ARTICLE_KEYS = tuple(GUIDE_ARTICLE_DATA.keys())
 DECISION_ARTICLE_DATA = normalize_article_collection(DECISION_ARTICLES)
 DECISION_ARTICLE_KEYS = tuple(DECISION_ARTICLE_DATA.keys())
+ARTICLE_PAGE_KEYS = {'blog', 'articles', *GUIDE_ARTICLE_KEYS, *DECISION_ARTICLE_KEYS}
 GUIDE_INDEX_PAGES = {
     'en': GUIDE_INDEX_PAGE_EN,
     'fr': GUIDE_INDEX_PAGE,
@@ -4649,6 +4656,8 @@ BLOG_ARTICLES = {
         },
     },
 }
+
+ARTICLE_PAGE_KEYS |= set(BLOG_ARTICLES.keys())
 
 CASE_STUDY_ORDER = (
     'case-office-building',
@@ -13138,6 +13147,8 @@ def icon_link_tags():
 
 def stylesheet_link_tags(page_key):
     tags = [f'<link rel="stylesheet" href="{STYLES_URL}" />']
+    if page_key in ARTICLE_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{ARTICLE_STYLES_URL}" />')
     if page_key in PROMO_PAGE_KEYS or page_key in REFERRAL_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{PROMO_REFERRAL_STYLES_URL}" />')
     if page_key == 'promo-admin' or page_key in REFERRAL_PORTAL_PAGE_KEYS or page_key in REFERRAL_ADMIN_PAGE_KEYS:
@@ -13153,8 +13164,12 @@ def stylesheet_link_tags(page_key):
 
 def script_tags(page_key):
     tags = [f'<script src="{SCRIPT_URL}" defer></script>']
-    if page_key in PROMO_PAGE_KEYS:
-        tags.append(f'<script src="{PROMO_SCRIPT_URL}" defer></script>')
+    if page_key == 'promo':
+        tags.append(f'<script src="{PROMO_PUBLIC_SCRIPT_URL}" defer></script>')
+    if page_key == 'promo-unsubscribe':
+        tags.append(f'<script src="{PROMO_UNSUBSCRIBE_SCRIPT_URL}" defer></script>')
+    if page_key == 'promo-admin':
+        tags.append(f'<script src="{PROMO_ADMIN_SCRIPT_URL}" defer></script>')
     if page_key in REFERRAL_PUBLIC_PAGE_KEYS:
         tags.append(f'<script src="{REFERRAL_PUBLIC_SCRIPT_URL}" defer></script>')
     if page_key in REFERRAL_PORTAL_PAGE_KEYS:
@@ -13511,6 +13526,46 @@ css_split_index = css.find(css_split_marker)
 if css_split_index < 0:
     raise RuntimeError('Could not split promo/referral CSS bundle')
 base_css = css[:css_split_index].strip() + '\n'
+article_css_marker = '.blog-grid{'
+article_css_end_marker = '.case-study-systems{'
+article_css_index = base_css.find(article_css_marker)
+article_css_end_index = base_css.find(article_css_end_marker, article_css_index)
+if article_css_index < 0 or article_css_end_index < 0:
+    raise RuntimeError('Could not split article CSS bundle')
+article_css = base_css[article_css_index:article_css_end_index].strip() + '\n'
+article_css += '''
+@media (max-width:1180px){
+  .blog-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .blog-grid-single .blog-article-card,
+  .blog-article-hero,
+  .blog-section-intro.blog-section-intro-split{
+    grid-template-columns:1fr;
+  }
+  .blog-summary-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .blog-summary-section,
+  .blog-article-section,
+  .blog-article-cta{
+    padding:18px;
+  }
+}
+@media (max-width:740px){
+  .blog-grid{
+    grid-template-columns:1fr;
+  }
+  .blog-card-meta,
+  .blog-article-readout{
+    grid-template-columns:1fr;
+  }
+  .blog-table{
+    min-width:640px;
+  }
+}
+'''.strip() + '\n'
+base_css = (base_css[:article_css_index] + base_css[article_css_end_index:]).strip() + '\n'
 interactive_css = css[css_split_index:]
 referral_admin_utility_marker = '.promo-admin-toolbar{'
 referral_public_css_marker = '.referral-program-page{'
@@ -13537,16 +13592,28 @@ referral_portal_css = referral_private_css.strip() + '\n'
 referral_admin_css = referral_admin_only_css.strip() + '\n'
 
 promo_helper_marker = 'function promoPayloadCopy(node, selector) {'
-promo_section_marker = "  const promoRoots = document.querySelectorAll('[data-promo-root]');"
+promo_public_marker = 'async function initPromoForms() {'
+promo_unsubscribe_marker = 'function initPromoUnsubscribe() {'
+promo_admin_helper_marker = 'function promoAdminAttribution(entry, copy) {'
 referral_section_marker = 'function referralCurrency(value) {'
 helper_index = js.find(promo_helper_marker)
-promo_index = js.find(promo_section_marker, helper_index)
-referral_index = js.find(referral_section_marker, promo_index)
-if helper_index < 0 or promo_index < 0 or referral_index < 0:
+promo_public_index = js.find(promo_public_marker, helper_index)
+promo_unsubscribe_index = js.find(promo_unsubscribe_marker, promo_public_index)
+promo_admin_helper_index = js.find(promo_admin_helper_marker, promo_unsubscribe_index)
+referral_index = js.find(referral_section_marker, promo_admin_helper_index)
+if (
+    helper_index < 0
+    or promo_public_index < 0
+    or promo_unsubscribe_index < 0
+    or promo_admin_helper_index < 0
+    or referral_index < 0
+):
     raise RuntimeError('Could not split JavaScript bundles')
 base_js = js[:helper_index].strip() + '\n'
-shared_promo_helper_js = js[helper_index:promo_index]
-promo_js = (shared_promo_helper_js + js[promo_index:referral_index]).strip() + '\n'
+shared_promo_helper_js = js[helper_index:promo_public_index]
+promo_public_block = js[promo_public_index:promo_unsubscribe_index]
+promo_unsubscribe_block = js[promo_unsubscribe_index:promo_admin_helper_index]
+promo_admin_block = js[promo_admin_helper_index:referral_index]
 referral_all_js = js[referral_index:]
 referral_apply_marker = 'function initReferralApplyForms() {'
 referral_portal_marker = 'function initReferralPortal() {'
@@ -13575,7 +13642,10 @@ for init_call in (
     'initSiteConfig();',
 ):
     base_js = base_js.replace(init_call + '\n', '')
-    promo_js = promo_js.replace(init_call + '\n', '')
+    shared_promo_helper_js = shared_promo_helper_js.replace(init_call + '\n', '')
+    promo_public_block = promo_public_block.replace(init_call + '\n', '')
+    promo_unsubscribe_block = promo_unsubscribe_block.replace(init_call + '\n', '')
+    promo_admin_block = promo_admin_block.replace(init_call + '\n', '')
     referral_helper_js = referral_helper_js.replace(init_call + '\n', '')
     referral_public_block = referral_public_block.replace(init_call + '\n', '')
     referral_portal_block = referral_portal_block.replace(init_call + '\n', '')
@@ -13583,7 +13653,9 @@ for init_call in (
     site_config_js = site_config_js.replace(init_call + '\n', '')
 
 base_js = base_js.strip() + '\n' + site_config_js.strip() + '\ninitSiteConfig();\n'
-promo_js = promo_js.strip() + '\ninitPromoForms();\ninitPromoUnsubscribe();\ninitPromoAdmin();\n'
+promo_public_js = shared_promo_helper_js.strip() + '\n' + promo_public_block.strip() + '\ninitPromoForms();\n'
+promo_unsubscribe_js = shared_promo_helper_js.strip() + '\n' + promo_unsubscribe_block.strip() + '\ninitPromoUnsubscribe();\n'
+promo_admin_js = shared_promo_helper_js.strip() + '\n' + promo_admin_block.strip() + '\ninitPromoAdmin();\n'
 referral_public_js = referral_helper_js.strip() + '\n' + referral_public_block.strip() + '\ninitReferralApplyForms();\n'
 referral_portal_js = referral_helper_js.strip() + '\n' + referral_portal_block.strip() + '\ninitReferralPortal();\ninitReferralAccess();\n'
 referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.strip() + '\ninitReferralAdmin();\n'
@@ -13591,11 +13663,14 @@ referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.str
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-promo-referral.css').write_text(promo_referral_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-admin-panels.css').write_text(admin_panel_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-articles.css').write_text(article_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-referral-public.css').write_text(referral_public_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-referral-portal.css').write_text(referral_portal_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-referral-admin.css').write_text(referral_admin_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site.js').write_text(base_js, encoding='utf-8')
-(DEPLOY_ASSET_ROOT / 'site-promo.js').write_text(promo_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-promo-public.js').write_text(promo_public_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-promo-unsubscribe.js').write_text(promo_unsubscribe_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-promo-admin.js').write_text(promo_admin_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-public.js').write_text(referral_public_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-portal.js').write_text(referral_portal_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-admin.js').write_text(referral_admin_js, encoding='utf-8')
