@@ -56,7 +56,9 @@ ROOT_GENERATED_ASSET_FILES = (
     'styles-promo-referral.css',
     'site.js',
     'site-promo.js',
-    'site-referral.js',
+    'site-referral-public.js',
+    'site-referral-portal.js',
+    'site-referral-admin.js',
 )
 ASSET_VER = '20260414h'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
@@ -73,7 +75,9 @@ STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
 PROMO_REFERRAL_STYLES_URL = f'/assets/styles-promo-referral.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
 PROMO_SCRIPT_URL = f'/assets/site-promo.js?v={ASSET_VER}'
-REFERRAL_SCRIPT_URL = f'/assets/site-referral.js?v={ASSET_VER}'
+REFERRAL_PUBLIC_SCRIPT_URL = f'/assets/site-referral-public.js?v={ASSET_VER}'
+REFERRAL_PORTAL_SCRIPT_URL = f'/assets/site-referral-portal.js?v={ASSET_VER}'
+REFERRAL_ADMIN_SCRIPT_URL = f'/assets/site-referral-admin.js?v={ASSET_VER}'
 WEBMANIFEST_URL = '/site.webmanifest'
 GOOGLE_ANALYTICS_TAG_ID = 'G-ZEQXVSZWRL'
 GOOGLE_ADS_TAG_ID = 'AW-18043353221'
@@ -337,15 +341,20 @@ RESPONSIVE_IMAGE_SOURCES = {
 }
 
 PROMO_PAGE_KEYS = {'promo', 'promo-rules', 'promo-unsubscribe', 'promo-admin'}
-REFERRAL_PAGE_KEYS = {
+REFERRAL_PUBLIC_PAGE_KEYS = {
     'referral-program',
     'referral-program-terms',
     'referral-partner-program',
     'referral-partner-program-terms',
+}
+REFERRAL_PORTAL_PAGE_KEYS = {
     'referral-portal',
     'referral-access',
+}
+REFERRAL_ADMIN_PAGE_KEYS = {
     'referral-admin',
 }
+REFERRAL_PAGE_KEYS = REFERRAL_PUBLIC_PAGE_KEYS | REFERRAL_PORTAL_PAGE_KEYS | REFERRAL_ADMIN_PAGE_KEYS
 
 HOME_IMAGE_EXPORTS = (
     {
@@ -13130,8 +13139,12 @@ def script_tags(page_key):
     tags = [f'<script src="{SCRIPT_URL}" defer></script>']
     if page_key in PROMO_PAGE_KEYS:
         tags.append(f'<script src="{PROMO_SCRIPT_URL}" defer></script>')
-    if page_key in REFERRAL_PAGE_KEYS:
-        tags.append(f'<script src="{REFERRAL_SCRIPT_URL}" defer></script>')
+    if page_key in REFERRAL_PUBLIC_PAGE_KEYS:
+        tags.append(f'<script src="{REFERRAL_PUBLIC_SCRIPT_URL}" defer></script>')
+    if page_key in REFERRAL_PORTAL_PAGE_KEYS:
+        tags.append(f'<script src="{REFERRAL_PORTAL_SCRIPT_URL}" defer></script>')
+    if page_key in REFERRAL_ADMIN_PAGE_KEYS:
+        tags.append(f'<script src="{REFERRAL_ADMIN_SCRIPT_URL}" defer></script>')
     return ''.join(tags)
 
 
@@ -13486,7 +13499,7 @@ promo_referral_css = css[css_split_index:].strip() + '\n'
 
 promo_helper_marker = 'function promoPayloadCopy(node, selector) {'
 promo_section_marker = "  const promoRoots = document.querySelectorAll('[data-promo-root]');"
-referral_section_marker = "  document.querySelectorAll('[data-referral-apply]').forEach((shell) => {"
+referral_section_marker = 'function referralCurrency(value) {'
 helper_index = js.find(promo_helper_marker)
 promo_index = js.find(promo_section_marker, helper_index)
 referral_index = js.find(referral_section_marker, promo_index)
@@ -13495,13 +13508,54 @@ if helper_index < 0 or promo_index < 0 or referral_index < 0:
 base_js = js[:helper_index].strip() + '\n'
 shared_promo_helper_js = js[helper_index:promo_index]
 promo_js = (shared_promo_helper_js + js[promo_index:referral_index]).strip() + '\n'
-referral_js = (shared_promo_helper_js + js[referral_index:]).strip() + '\n'
+referral_all_js = js[referral_index:]
+referral_apply_marker = 'function initReferralApplyForms() {'
+referral_portal_marker = 'function initReferralPortal() {'
+referral_admin_marker = 'function initReferralAdmin() {'
+site_config_marker = 'async function initSiteConfig() {'
+apply_index = referral_all_js.find(referral_apply_marker)
+portal_index = referral_all_js.find(referral_portal_marker, apply_index)
+admin_index = referral_all_js.find(referral_admin_marker, portal_index)
+site_config_index = referral_all_js.find(site_config_marker, admin_index)
+if apply_index < 0 or portal_index < 0 or admin_index < 0 or site_config_index < 0:
+    raise RuntimeError('Could not split referral JavaScript bundles')
+referral_helper_js = referral_all_js[:apply_index]
+referral_public_block = referral_all_js[apply_index:portal_index]
+referral_portal_block = referral_all_js[portal_index:admin_index]
+referral_admin_block = referral_all_js[admin_index:site_config_index]
+site_config_js = referral_all_js[site_config_index:]
+
+for init_call in (
+    'initPromoForms();',
+    'initPromoUnsubscribe();',
+    'initPromoAdmin();',
+    'initReferralApplyForms();',
+    'initReferralPortal();',
+    'initReferralAccess();',
+    'initReferralAdmin();',
+    'initSiteConfig();',
+):
+    base_js = base_js.replace(init_call + '\n', '')
+    promo_js = promo_js.replace(init_call + '\n', '')
+    referral_helper_js = referral_helper_js.replace(init_call + '\n', '')
+    referral_public_block = referral_public_block.replace(init_call + '\n', '')
+    referral_portal_block = referral_portal_block.replace(init_call + '\n', '')
+    referral_admin_block = referral_admin_block.replace(init_call + '\n', '')
+    site_config_js = site_config_js.replace(init_call + '\n', '')
+
+base_js = base_js.strip() + '\n' + site_config_js.strip() + '\ninitSiteConfig();\n'
+promo_js = promo_js.strip() + '\ninitPromoForms();\ninitPromoUnsubscribe();\ninitPromoAdmin();\n'
+referral_public_js = referral_helper_js.strip() + '\n' + referral_public_block.strip() + '\ninitReferralApplyForms();\n'
+referral_portal_js = referral_helper_js.strip() + '\n' + referral_portal_block.strip() + '\ninitReferralPortal();\ninitReferralAccess();\n'
+referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.strip() + '\ninitReferralAdmin();\n'
 
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-promo-referral.css').write_text(promo_referral_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site.js').write_text(base_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-promo.js').write_text(promo_js, encoding='utf-8')
-(DEPLOY_ASSET_ROOT / 'site-referral.js').write_text(referral_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-referral-public.js').write_text(referral_public_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-referral-portal.js').write_text(referral_portal_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-referral-admin.js').write_text(referral_admin_js, encoding='utf-8')
 
 for lang in ('en', 'fr'):
     t = T[lang]

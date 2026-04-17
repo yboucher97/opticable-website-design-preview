@@ -632,31 +632,6 @@ function initPromoAdmin() {
     loadEntries();
   });
 }
-function referralCurrency(value) {
-  if (value == null || value === '') return '—';
-  return `${value} CAD`;
-}
-function referralDate(value, lang) {
-  return promoDateLabel(value, lang) || '—';
-}
-function referralDateTime(value, lang) {
-  if (!value) return '—';
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return referralDate(value, lang);
-  try {
-    return new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-CA', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    }).format(date);
-  } catch {
-    return referralDate(value, lang);
-  }
-}
-function referralLabel(group, key, fallback = '—') {
-  if (!group || !Object.prototype.hasOwnProperty.call(group, key)) return fallback;
-  return group[key];
-}
-function initReferralApplyForms() {
+initPromoForms();
+initPromoUnsubscribe();
+initPromoAdmin();

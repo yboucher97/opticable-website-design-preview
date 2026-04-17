@@ -161,3 +161,19 @@ function promoEntryActive(entry) {
   if (!entry || !entry.promoExpiresAt) return false;
   return new Date(entry.promoExpiresAt).getTime() > Date.now();
 }
+async function initSiteConfig() {
+  try {
+    const response = await fetch('/api/site-config', { headers: { Accept: 'application/json' } });
+    const config = await response.json();
+    if (!config || !config.analyticsToken || document.querySelector('script[data-cf-beacon-script]')) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    script.dataset.cfBeaconScript = 'true';
+    script.setAttribute('data-cf-beacon', JSON.stringify({ token: config.analyticsToken }));
+    document.head.appendChild(script);
+  } catch (error) {}
+}
+initSiteConfig();
