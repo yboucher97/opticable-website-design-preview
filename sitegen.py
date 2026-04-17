@@ -4985,6 +4985,12 @@ secondary_order = [
 order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
 HOME_SERVICE_STYLE_PAGE_KEYS = {'home', 'services', 'about', 'industries'} | set(order) | set(INDUSTRY_DETAIL_KEYS)
+ARTICLE_STYLE_PAGE_KEYS = (
+    ARTICLE_PAGE_KEYS
+    | {'home', 'contact', 'faq', 'guides'}
+    | set(INDUSTRY_DETAIL_KEYS)
+    | set(MULTIFAMILY_CLUSTER_KEYS)
+)
 base_routes = {
     'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'referral-program': '/en/referral-program/', 'referral-program-terms': '/en/referral-program/terms/', 'referral-partner-program': '/en/referral-partner-program/', 'referral-partner-program-terms': '/en/referral-partner-program/terms/', 'referral-portal': '/en/referral-portal/', 'referral-access': '/en/referral-portal/access/', 'referral-admin': '/en/admin/referrals/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
     'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'referral-program': '/fr/programme-reference/', 'referral-program-terms': '/fr/programme-reference/reglement/', 'referral-partner-program': '/fr/programme-partenaires-referents/', 'referral-partner-program-terms': '/fr/programme-partenaires-referents/reglement/', 'referral-portal': '/fr/portail-references/', 'referral-access': '/fr/portail-references/acces/', 'referral-admin': '/fr/admin/references/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilogement/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
@@ -13308,7 +13314,7 @@ def stylesheet_link_tags(page_key):
     tags = [f'<link rel="stylesheet" href="{STYLES_URL}" />']
     if page_key in HOME_SERVICE_STYLE_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{HOME_SERVICE_STYLES_URL}" />')
-    if page_key in ARTICLE_PAGE_KEYS:
+    if page_key in ARTICLE_STYLE_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{ARTICLE_STYLES_URL}" />')
     if page_key in PROMO_PAGE_KEYS or page_key in REFERRAL_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{PROMO_REFERRAL_STYLES_URL}" />')
