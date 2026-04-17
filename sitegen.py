@@ -492,6 +492,7 @@ HOME_IMAGE_EXPORTS = (
         'canvas': (OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT),
         'background': (13, 23, 18, 255),
         'format': 'PNG',
+        'png_colors': 96,
     },
     {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
@@ -499,6 +500,7 @@ HOME_IMAGE_EXPORTS = (
         'resize': (FAVICON_32_SIZE, FAVICON_32_SIZE),
         'canvas': (FAVICON_32_SIZE, FAVICON_32_SIZE),
         'format': 'PNG',
+        'png_colors': 16,
     },
     {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
@@ -506,6 +508,7 @@ HOME_IMAGE_EXPORTS = (
         'resize': (APPLE_TOUCH_ICON_SIZE, APPLE_TOUCH_ICON_SIZE),
         'canvas': (APPLE_TOUCH_ICON_SIZE, APPLE_TOUCH_ICON_SIZE),
         'format': 'PNG',
+        'png_colors': 32,
     },
     {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
@@ -513,6 +516,7 @@ HOME_IMAGE_EXPORTS = (
         'resize': (FAVICON_192_SIZE, FAVICON_192_SIZE),
         'canvas': (FAVICON_192_SIZE, FAVICON_192_SIZE),
         'format': 'PNG',
+        'png_colors': 48,
     },
     {
         'source': SOURCE_ASSET_ROOT / 'logo-mark.png',
@@ -520,6 +524,7 @@ HOME_IMAGE_EXPORTS = (
         'resize': (FAVICON_512_SIZE, FAVICON_512_SIZE),
         'canvas': (FAVICON_512_SIZE, FAVICON_512_SIZE),
         'format': 'PNG',
+        'png_colors': 64,
     },
     {
         'source': PRODUCTION_HOME_ROOT / 'home-building.png',
@@ -597,6 +602,7 @@ HOME_IMAGE_EXPORTS = (
         'resize': (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
         'canvas': (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
         'format': 'PNG',
+        'png_colors': 128,
     },
     *RESPONSIVE_IMAGE_EXPORTS,
 )
@@ -10029,11 +10035,11 @@ def parse_image_position(position):
 
 
 def blog_social_image_url(article_key, lang):
-    return f'/assets/blog-social/{article_key}-{lang}.png?v={ASSET_VER}'
+    return f'/assets/blog-social/{article_key}-{lang}.jpg?v={ASSET_VER}'
 
 
 def blog_social_image_path(article_key, lang):
-    return BLOG_SOCIAL_IMAGE_DIR / f'{article_key}-{lang}.png'
+    return BLOG_SOCIAL_IMAGE_DIR / f'{article_key}-{lang}.jpg'
 
 
 def export_blog_social_image(article_key, lang, article):
@@ -10109,7 +10115,7 @@ def export_blog_social_image(article_key, lang, article):
 
     image = Image.alpha_composite(canvas, overlay)
     target.parent.mkdir(parents=True, exist_ok=True)
-    image.save(target, format='PNG', optimize=True)
+    image.convert('RGB').save(target, format='JPEG', quality=84, optimize=True, progressive=True)
     IMAGE_DIMENSIONS_BY_URL[blog_social_image_url(article_key, lang)] = (BLOG_SOCIAL_IMAGE_WIDTH, BLOG_SOCIAL_IMAGE_HEIGHT)
 
 
@@ -10159,6 +10165,9 @@ def export_image_variant(spec):
                 image = image.convert('RGB')
             save_kwargs = {'format': 'JPEG', 'quality': spec['quality'], 'optimize': True, 'progressive': True}
         elif spec['format'] == 'PNG':
+            png_colors = spec.get('png_colors')
+            if png_colors:
+                image = image.quantize(colors=png_colors)
             save_kwargs = {'format': 'PNG', 'optimize': True}
         elif spec['format'] == 'AVIF':
             if image.mode not in ('RGB', 'RGBA'):
@@ -10311,6 +10320,17 @@ def blog_card_image_url(src):
         ABOUT_PANEL_URL: responsive_variant_url('about-panel', 800),
     }
     return overrides.get(src, RESPONSIVE_IMAGE_DEFAULT_SRC.get(src, src))
+
+
+def blog_hero_image_url(src):
+    overrides = {
+        SERVICE_CABLING_URL: responsive_variant_url('service-cabling', 960),
+        SERVICE_INFRASTRUCTURE_URL: responsive_variant_url('service-infrastructure', 960),
+        SERVICE_ACCESS_URL: responsive_variant_url('service-access', 960),
+        SERVICE_WIFI_URL: responsive_variant_url('service-wifi', 768),
+        ABOUT_PANEL_URL: responsive_variant_url('about-panel', 800),
+    }
+    return overrides.get(src, src)
 
 
 def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption='', sizes=''):
@@ -12723,7 +12743,7 @@ def render_blog_article_page(article, lang):
     hero_style = ''
     if article.get('hero_image'):
         hero_style = (
-            f' style="--blog-hero-image:url({esc(article["hero_image"])});'
+            f' style="--blog-hero-image:url({esc(blog_hero_image_url(article["hero_image"]))});'
             f'--blog-hero-position:{esc(article.get("hero_image_position", "center center"))};"'
         )
     meta_panel = (
@@ -12767,7 +12787,7 @@ def render_standalone_article_page(article, lang, hub_label, hub_href):
     hero_style = ''
     if article.get('hero_image'):
         hero_style = (
-            f' style="--blog-hero-image:url({esc(article["hero_image"])});'
+            f' style="--blog-hero-image:url({esc(blog_hero_image_url(article["hero_image"]))});'
             f'--blog-hero-position:{esc(article.get("hero_image_position", "center center"))};"'
         )
     meta_panel = (
@@ -14811,7 +14831,7 @@ for lang in ('en', 'fr'):
                 alternate_paths=article_paths if article_has_pair else None,
                 lang_switch_href=article_paths.get('fr' if lang == 'en' else 'en'),
                 article_meta=article_meta,
-                preload_image_url=article.get('hero_image'),
+                preload_image_url=blog_hero_image_url(article.get('hero_image')) if article.get('hero_image') else None,
             ),
         )
     if lang in GUIDE_INDEX_PAGES:
@@ -14892,7 +14912,7 @@ for lang in ('en', 'fr'):
                     alternate_paths=article_paths if article_has_pair else None,
                     lang_switch_href=article_paths.get('fr' if lang == 'en' else 'en') if article_has_pair else routes['fr' if lang == 'en' else 'en']['guides'],
                     article_meta=article_meta,
-                    preload_image_url=article.get('hero_image'),
+                    preload_image_url=blog_hero_image_url(article.get('hero_image')) if article.get('hero_image') else None,
                 ),
             )
         for key, detail_page in industry_detail_pages_for_lang(lang).items():
