@@ -3109,7 +3109,7 @@ def header(lang, current, page_key, lang_switch_href=None):
 
 def footer_contact_items(lang):
     return ''.join(
-        f'<li><strong>{esc(label)}</strong><span>{contact_value_html(label, value)}</span></li>'
+        f'<li class="footer-contact-item"><strong>{esc(label)}</strong><span>{contact_value_html(label, value)}</span></li>'
         for label, value in T[lang]['contact_cards']
     )
 
@@ -3150,7 +3150,13 @@ def footer(lang):
     social_items = footer_social_links(lang)
     legal = f'<p class="footer-legal">{esc(LEGAL_BUSINESS_NAME)}<br />{esc(RBQ_LICENSE_LABEL)}</p>'
     return (
-        f'<footer class="site-footer"><div class="footer-shell"><div class="footer-grid"><div><div class="footer-brand">{logo_img("footer")}</div><p class="footer-note">{esc(t["footer"])}</p>{legal}</div><div><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div><div><p class="footer-title">{esc(t["follow_us"])}</p><div class="footer-socials">{social_items}</div></div><div><p class="footer-title">{esc(t["menu"])}</p><ul class="footer-links">{quick}</ul></div><div><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div></div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></div></footer>'
+        f'<footer class="site-footer"><div class="footer-shell"><div class="footer-grid">'
+        f'<div class="footer-column footer-column-brand"><div class="footer-brand">{logo_img("footer")}</div><div class="footer-brand-copy"><p class="footer-note">{esc(t["footer"])}</p>{legal}</div></div>'
+        f'<div class="footer-column footer-column-contact"><p class="footer-title">{esc(t["footer_contact_title"])}</p><ul class="footer-contact-list">{contact_items}</ul></div>'
+        f'<div class="footer-column footer-column-social"><p class="footer-title">{esc(t["follow_us"])}</p><div class="footer-socials">{social_items}</div></div>'
+        f'<div class="footer-column footer-column-menu"><p class="footer-title">{esc(t["menu"])}</p><ul class="footer-links">{quick}</ul></div>'
+        f'<div class="footer-column footer-column-services"><p class="footer-title">{esc(t["services"])}</p><ul class="footer-services">{feat}</ul></div>'
+        f'</div><div class="footer-bottom">&copy; <span data-year></span> Opticable.</div></div></footer>'
     )
 
 
