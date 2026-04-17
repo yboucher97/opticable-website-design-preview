@@ -295,22 +295,41 @@ def responsive_export_specs(source, name, base_width, base_height, widths, quali
 
 
 RESPONSIVE_IMAGE_EXPORTS = (
+    *responsive_export_specs(PRODUCTION_BRAND_ROOT / 'logo-ui-source.png', 'logo-ui', LOGO_UI_WIDTH, LOGO_UI_HEIGHT, (240, 400, 640), 74),
+    *responsive_export_specs(PRODUCTION_BRAND_ROOT / 'logo-ui-source.png', 'logo-ui', LOGO_UI_WIDTH, LOGO_UI_HEIGHT, (240, 400, 640), 52, image_format='AVIF'),
+    *responsive_export_specs(PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png', 'logo-ui-white', LOGO_UI_WIDTH, LOGO_UI_HEIGHT, (240, 400, 640), 74),
+    *responsive_export_specs(PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png', 'logo-ui-white', LOGO_UI_WIDTH, LOGO_UI_HEIGHT, (240, 400, 640), 52, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 74),
     *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 56, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 74),
     *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 56, image_format='AVIF'),
-    *responsive_export_specs(PRODUCTION_ABOUT_ROOT / 'about-panel.png', 'about-panel', ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT, (480, 800), 90),
+    *responsive_export_specs(PRODUCTION_ABOUT_ROOT / 'about-panel.png', 'about-panel', ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT, (480, 800), 76),
+    *responsive_export_specs(PRODUCTION_ABOUT_ROOT / 'about-panel.png', 'about-panel', ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT, (480, 800), 56, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'intercom.webp', 'service-intercom', SERVICE_INTERCOM_WIDTH, SERVICE_INTERCOM_HEIGHT, (480, 720), 88),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 78),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 58, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 78),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 58, image_format='AVIF'),
-    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'access-control.png', 'service-access', SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT, (640, 960), 88),
-    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png', 'service-wifi', SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT, (480, 768), 88),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'access-control.png', 'service-access', SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT, (640, 960), 78),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'access-control.png', 'service-access', SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT, (640, 960), 56, image_format='AVIF'),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png', 'service-wifi', SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT, (480, 768), 78),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png', 'service-wifi', SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT, (480, 768), 56, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'ip-phone.png', 'service-voip', SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT, (640, 960), 88),
 )
 
 RESPONSIVE_IMAGE_SOURCES = {
+    LOGO_UI_URL: [
+        (responsive_variant_url('logo-ui', 240), 240),
+        (responsive_variant_url('logo-ui', 400), 400),
+        (responsive_variant_url('logo-ui', 640), 640),
+        (LOGO_UI_URL, LOGO_UI_WIDTH),
+    ],
+    LOGO_UI_WHITE_URL: [
+        (responsive_variant_url('logo-ui-white', 240), 240),
+        (responsive_variant_url('logo-ui-white', 400), 400),
+        (responsive_variant_url('logo-ui-white', 640), 640),
+        (LOGO_UI_WHITE_URL, LOGO_UI_WIDTH),
+    ],
     HOME_BUILDING_URL: [
         (responsive_variant_url('home-building', 640), 640),
         (responsive_variant_url('home-building', 960), 960),
@@ -362,11 +381,31 @@ RESPONSIVE_IMAGE_SOURCES = {
 }
 
 RESPONSIVE_IMAGE_FORMAT_SOURCES = {
+    LOGO_UI_URL: {
+        'image/avif': [
+            (responsive_variant_url('logo-ui', 240, 'avif'), 240),
+            (responsive_variant_url('logo-ui', 400, 'avif'), 400),
+            (responsive_variant_url('logo-ui', 640, 'avif'), 640),
+        ],
+    },
+    LOGO_UI_WHITE_URL: {
+        'image/avif': [
+            (responsive_variant_url('logo-ui-white', 240, 'avif'), 240),
+            (responsive_variant_url('logo-ui-white', 400, 'avif'), 400),
+            (responsive_variant_url('logo-ui-white', 640, 'avif'), 640),
+        ],
+    },
     HOME_BUILDING_URL: {
         'image/avif': [
             (responsive_variant_url('home-building', 640, 'avif'), 640),
             (responsive_variant_url('home-building', 960, 'avif'), 960),
             (responsive_variant_url('home-building', 1400, 'avif'), 1400),
+        ],
+    },
+    ABOUT_PANEL_URL: {
+        'image/avif': [
+            (responsive_variant_url('about-panel', 480, 'avif'), 480),
+            (responsive_variant_url('about-panel', 800, 'avif'), 800),
         ],
     },
     HOME_RACK_URL: {
@@ -389,13 +428,30 @@ RESPONSIVE_IMAGE_FORMAT_SOURCES = {
             (responsive_variant_url('service-infrastructure', 1400, 'avif'), 1400),
         ],
     },
+    SERVICE_ACCESS_URL: {
+        'image/avif': [
+            (responsive_variant_url('service-access', 640, 'avif'), 640),
+            (responsive_variant_url('service-access', 960, 'avif'), 960),
+        ],
+    },
+    SERVICE_WIFI_URL: {
+        'image/avif': [
+            (responsive_variant_url('service-wifi', 480, 'avif'), 480),
+            (responsive_variant_url('service-wifi', 768, 'avif'), 768),
+        ],
+    },
 }
 
 RESPONSIVE_IMAGE_DEFAULT_SRC = {
+    LOGO_UI_URL: responsive_variant_url('logo-ui', 400),
+    LOGO_UI_WHITE_URL: responsive_variant_url('logo-ui-white', 400),
     HOME_BUILDING_URL: responsive_variant_url('home-building', 1400),
+    ABOUT_PANEL_URL: responsive_variant_url('about-panel', 800),
     HOME_RACK_URL: responsive_variant_url('home-rack', 1400),
     SERVICE_CABLING_URL: responsive_variant_url('service-cabling', 960),
     SERVICE_INFRASTRUCTURE_URL: responsive_variant_url('service-infrastructure', 1400),
+    SERVICE_ACCESS_URL: responsive_variant_url('service-access', 960),
+    SERVICE_WIFI_URL: responsive_variant_url('service-wifi', 768),
 }
 
 PROMO_PAGE_KEYS = {'promo', 'promo-rules', 'promo-unsubscribe', 'promo-admin'}
@@ -420,14 +476,14 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'logo-ui.webp',
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
-        'quality': 90,
+        'quality': 76,
     },
     {
         'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
         'target': DEPLOY_ASSET_ROOT / 'logo-ui-white.webp',
         'resize': (LOGO_UI_WIDTH, LOGO_UI_HEIGHT),
         'format': 'WEBP',
-        'quality': 90,
+        'quality': 76,
     },
     {
         'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source-white-text.png',
@@ -484,7 +540,7 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'about-panel.webp',
         'resize': (ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT),
         'format': 'WEBP',
-        'quality': 92,
+        'quality': 80,
     },
     {
         'source': PRODUCTION_SERVICE_ROOT / 'intercom.webp',
@@ -519,14 +575,14 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'service-access.webp',
         'resize': (SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT),
         'format': 'WEBP',
-        'quality': 90,
+        'quality': 80,
     },
     {
         'source': PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png',
         'target': DEPLOY_ASSET_ROOT / 'service-wifi.webp',
         'resize': (SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT),
         'format': 'WEBP',
-        'quality': 90,
+        'quality': 80,
     },
     {
         'source': PRODUCTION_SERVICE_ROOT / 'ip-phone.png',
@@ -10215,18 +10271,46 @@ def default_route(page_key):
 
 def logo_img(context):
     src = LOGO_UI_WHITE_URL if context in {'header', 'footer', 'gateway'} else LOGO_UI_URL
+    display_src = RESPONSIVE_IMAGE_DEFAULT_SRC.get(src, src)
+    display_sizes = '(min-width: 1200px) 240px, (min-width: 768px) 200px, 160px'
     attrs = [
-        f'src="{src}"',
+        f'src="{display_src}"',
         'alt="Opticable logo"',
         f'width="{LOGO_UI_WIDTH}"',
         f'height="{LOGO_UI_HEIGHT}"',
         'decoding="async"',
     ]
+    responsive_sources = RESPONSIVE_IMAGE_SOURCES.get(src, [])
+    if responsive_sources:
+        srcset_value = ', '.join(f'{url} {variant_width}w' for url, variant_width in responsive_sources)
+        attrs.append(f'srcset="{esc(srcset_value)}"')
+        attrs.append(f'sizes="{display_sizes}"')
     if context == 'footer':
         attrs.append('loading="lazy"')
     else:
         attrs.append('loading="eager"')
-    return f'<img {" ".join(attrs)} />'
+    img_html = f'<img {" ".join(attrs)} />'
+    picture_sources = RESPONSIVE_IMAGE_FORMAT_SOURCES.get(src, {})
+    if picture_sources:
+        source_tags = []
+        for mime_type, variants in picture_sources.items():
+            srcset_value = ', '.join(f'{url} {variant_width}w' for url, variant_width in variants)
+            source_tags.append(
+                f'<source type="{mime_type}" srcset="{esc(srcset_value)}" sizes="{esc(display_sizes)}" />'
+            )
+        return f'<picture>{"".join(source_tags)}{img_html}</picture>'
+    return img_html
+
+
+def blog_card_image_url(src):
+    overrides = {
+        SERVICE_CABLING_URL: responsive_variant_url('service-cabling', 640),
+        SERVICE_INFRASTRUCTURE_URL: responsive_variant_url('service-infrastructure', 640),
+        SERVICE_ACCESS_URL: responsive_variant_url('service-access', 640),
+        SERVICE_WIFI_URL: responsive_variant_url('service-wifi', 768),
+        ABOUT_PANEL_URL: responsive_variant_url('about-panel', 800),
+    }
+    return overrides.get(src, RESPONSIVE_IMAGE_DEFAULT_SRC.get(src, src))
 
 
 def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption='', sizes=''):
@@ -12173,7 +12257,7 @@ def render_blog_article_card(article, lang):
     main_style = ''
     if article.get('hero_image'):
         main_style = (
-            f' style="--blog-card-image:url({esc(article["hero_image"])});'
+            f' style="--blog-card-image:url({esc(blog_card_image_url(article["hero_image"]))});'
             f'--blog-card-image-position:{esc(article.get("hero_image_position", "center center"))};"'
         )
     return (
