@@ -1,24 +1,25 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "opticable-website",
+  "name": "opticable-website-performance-preview",
   "main": "./worker.js",
   "compatibility_date": "2026-03-14",
   "vars": {
     "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2RkCsNJ9_amJwl",
     "PROMO_WEB_ANALYTICS_TOKEN": "e665c94202a846ca8472a2fed08999ae",
-    "REFERRAL_DEV_MAGIC_LINKS": "0"
+    "REFERRAL_DEV_MAGIC_LINKS": "0",
+    "PREVIEW_MODE": "1"
   },
   "d1_databases": [
     {
       "binding": "PROMO_DB",
-      "database_name": "opticable-promo-db",
-      "database_id": "402ef6df-2ce5-451c-94d8-fbaaa99f7dc0",
+      "database_name": "opticable-promo-db-performance-preview",
+      "database_id": "2ec18104-982e-4ede-9aaa-25e7c0da6ac4",
       "migrations_dir": "./migrations"
     },
     {
       "binding": "REFERRAL_DB",
-      "database_name": "opticable-referral-db",
-      "database_id": "cfabcdcb-bc81-44eb-93be-07fec0caa4a6",
+      "database_name": "opticable-referral-db-performance-preview",
+      "database_id": "a586106f-3088-45fb-8766-5190b5eb7199",
       "migrations_dir": "./migrations-referral"
     }
   ],

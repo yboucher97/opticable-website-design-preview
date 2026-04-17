@@ -5,8 +5,9 @@ const APEX_HOST = "opticable.ca";
 const WWW_HOST = "www.opticable.ca";
 const HSTS_VALUE = "max-age=31536000; includeSubDomains; preload";
 const LONG_CACHE = "public, max-age=31536000, immutable";
-const HTML_CACHE = "public, max-age=0, must-revalidate";
+const HTML_CACHE = "public, max-age=300, s-maxage=86400, stale-while-revalidate=604800";
 const API_CACHE = "no-store";
+const PREVIEW_X_ROBOTS = "noindex, nofollow, noarchive";
 const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const PROMO_STORAGE_KEY = "opticable-promo-entry";
 const TURNSTILE_ACTION = "promo-entry";
@@ -82,12 +83,19 @@ function cacheControlForPath(pathname) {
   return HTML_CACHE;
 }
 
-function withResponseHeaders(response, pathname) {
+function isPreviewMode(env) {
+  return ["1", "true", "yes", "on"].includes(String(env.PREVIEW_MODE || "").trim().toLowerCase());
+}
+
+function withResponseHeaders(response, pathname, env) {
   const headers = new Headers(response.headers);
   headers.set("Strict-Transport-Security", HSTS_VALUE);
   headers.set("X-Content-Type-Options", "nosniff");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   headers.set("Cache-Control", cacheControlForPath(pathname));
+  if (isPreviewMode(env) && (headers.get("Content-Type") || "").includes("text/html")) {
+    headers.set("X-Robots-Tag", PREVIEW_X_ROBOTS);
+  }
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
@@ -1153,16 +1161,28 @@ export default {
       return Response.redirect(redirectUrl.toString(), 301);
     }
 
-    if (isProtectedAdminPath(url.pathname)) {
+    if (!isPreviewMode(env) && isProtectedAdminPath(url.pathname)) {
       const authResponse = await requireAdminAuth(request, env);
       if (authResponse) {
-        return withResponseHeaders(authResponse, url.pathname);
+        return withResponseHeaders(authResponse, url.pathname, env);
       }
     }
 
     if (url.pathname.startsWith("/api/")) {
+      if (isPreviewMode(env)) {
+        return withResponseHeaders(
+          jsonResponse(
+            {
+              error: "Preview APIs are disabled on this isolated performance preview worker.",
+            },
+            503,
+          ),
+          url.pathname,
+          env,
+        );
+      }
       const apiResponse = await routeApi(request, env);
-      return withResponseHeaders(apiResponse, url.pathname);
+      return withResponseHeaders(apiResponse, url.pathname, env);
     }
 
     let response = await env.ASSETS.fetch(request);
@@ -1180,6 +1200,6 @@ export default {
       }
     }
 
-    return withResponseHeaders(response, url.pathname);
+    return withResponseHeaders(response, url.pathname, env);
   },
 };

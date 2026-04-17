@@ -20,11 +20,12 @@ from resource_pages import (
 )
 
 root = Path(__file__).resolve().parent
-DEFAULT_SITE_URL = 'https://opticable.ca'
+DEFAULT_SITE_URL = 'https://opticable-website-performance-preview.yboucher.workers.dev'
 SITE_URL = os.environ.get('OPTICABLE_SITE_URL', DEFAULT_SITE_URL).rstrip('/')
 DEPLOY_DIR_NAME = os.environ.get('OPTICABLE_DEPLOY_DIR', 'dist').strip() or 'dist'
-SITE_ENV = os.environ.get('OPTICABLE_SITE_ENV', 'production').strip().lower() or 'production'
-FORCE_NOINDEX = os.environ.get('OPTICABLE_FORCE_NOINDEX', '').strip().lower() in {'1', 'true', 'yes', 'on'}
+SITE_ENV = os.environ.get('OPTICABLE_SITE_ENV', 'preview').strip().lower() or 'preview'
+FORCE_NOINDEX = os.environ.get('OPTICABLE_FORCE_NOINDEX', '1' if SITE_ENV != 'production' else '').strip().lower() in {'1', 'true', 'yes', 'on'}
+TRACKING_ENABLED = os.environ.get('OPTICABLE_ENABLE_TRACKING', '1' if SITE_ENV == 'production' else '0').strip().lower() in {'1', 'true', 'yes', 'on'}
 SOURCE_ASSET_ROOT = root / 'assets'
 IMAGE_ROOT = root / 'Images'
 PRODUCTION_IMAGE_ROOT = IMAGE_ROOT / 'production'
@@ -52,7 +53,10 @@ ROOT_GENERATED_ASSET_FILES = (
     'service-wifi.webp',
     'service-voip.webp',
     'styles.css',
+    'styles-promo-referral.css',
     'site.js',
+    'site-promo.js',
+    'site-referral.js',
 )
 ASSET_VER = '20260414h'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
@@ -62,9 +66,14 @@ LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_UI_WHITE_URL = f'/assets/logo-ui-white.webp?v={ASSET_VER}'
 LOGO_MARK_URL = f'/assets/logo-mark.png?v={ASSET_VER}'
 FAVICON_32_URL = f'/assets/favicon-32.png?v={ASSET_VER}'
+FAVICON_192_URL = f'/assets/favicon-192.png?v={ASSET_VER}'
+FAVICON_512_URL = f'/assets/favicon-512.png?v={ASSET_VER}'
 APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
+PROMO_REFERRAL_STYLES_URL = f'/assets/styles-promo-referral.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
+PROMO_SCRIPT_URL = f'/assets/site-promo.js?v={ASSET_VER}'
+REFERRAL_SCRIPT_URL = f'/assets/site-referral.js?v={ASSET_VER}'
 WEBMANIFEST_URL = '/site.webmanifest'
 GOOGLE_ANALYTICS_TAG_ID = 'G-ZEQXVSZWRL'
 GOOGLE_ADS_TAG_ID = 'AW-18043353221'
@@ -74,16 +83,20 @@ GOOGLE_ADS_QUOTE_CONVERSION_SEND_TO = os.environ.get(
     f'{GOOGLE_ADS_TAG_ID}/-jhJCNG-xJgcEIXx3ptD',
 ).strip()
 GOOGLE_TAG_SNIPPET = (
-    f'<script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_ANALYTICS_TAG_ID}"></script>'
-    '<script>\n'
-    '  window.dataLayer = window.dataLayer || [];\n'
-    '  function gtag(){dataLayer.push(arguments);}\n'
-    "  gtag('js', new Date());\n\n"
-    '  // Google Analytics 4\n'
-    f"  gtag('config', '{GOOGLE_ANALYTICS_TAG_ID}');\n\n"
-    '  // Google Ads\n'
-    f"  gtag('config', '{GOOGLE_ADS_TAG_ID}');\n"
-    '</script>'
+    (
+        f'<script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_ANALYTICS_TAG_ID}"></script>'
+        '<script>\n'
+        '  window.dataLayer = window.dataLayer || [];\n'
+        '  function gtag(){dataLayer.push(arguments);}\n'
+        "  gtag('js', new Date());\n\n"
+        '  // Google Analytics 4\n'
+        f"  gtag('config', '{GOOGLE_ANALYTICS_TAG_ID}');\n\n"
+        '  // Google Ads\n'
+        f"  gtag('config', '{GOOGLE_ADS_TAG_ID}');\n"
+        '</script>'
+    )
+    if TRACKING_ENABLED
+    else ''
 )
 PROMO_CONFIG = json.loads((root / 'promo-config.json').read_text(encoding='utf-8'))
 REFERRAL_CONFIG = json.loads((root / 'referral-config.json').read_text(encoding='utf-8'))
@@ -236,6 +249,104 @@ SOCIAL_LINKS = (
 SOCIAL_PROFILE_URLS = [item['href'] for item in SOCIAL_LINKS]
 
 IMAGE_RESAMPLING = getattr(Image, 'Resampling', Image)
+
+
+def responsive_variant_url(name, width, ext='webp'):
+    return f'/assets/{name}-{width}.{ext}?v={ASSET_VER}'
+
+
+def proportional_height(width, base_width, base_height):
+    return max(1, round(base_height * (width / base_width)))
+
+
+def responsive_export_specs(source, name, base_width, base_height, widths, quality, image_format='WEBP'):
+    ext = image_format.lower()
+    specs = []
+    for width in widths:
+        specs.append({
+            'source': source,
+            'target': DEPLOY_ASSET_ROOT / f'{name}-{width}.{ext}',
+            'resize': (width, proportional_height(width, base_width, base_height)),
+            'format': image_format,
+            'quality': quality,
+        })
+    return tuple(specs)
+
+
+RESPONSIVE_IMAGE_EXPORTS = (
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 82),
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 82),
+    *responsive_export_specs(PRODUCTION_ABOUT_ROOT / 'about-panel.png', 'about-panel', ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT, (480, 800), 90),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'intercom.webp', 'service-intercom', SERVICE_INTERCOM_WIDTH, SERVICE_INTERCOM_HEIGHT, (480, 720), 88),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 88),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 90),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'access-control.png', 'service-access', SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT, (640, 960), 88),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png', 'service-wifi', SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT, (480, 768), 88),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'ip-phone.png', 'service-voip', SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT, (640, 960), 88),
+)
+
+RESPONSIVE_IMAGE_SOURCES = {
+    HOME_BUILDING_URL: [
+        (responsive_variant_url('home-building', 640), 640),
+        (responsive_variant_url('home-building', 960), 960),
+        (responsive_variant_url('home-building', 1400), 1400),
+        (HOME_BUILDING_URL, HOME_BUILDING_WIDTH),
+    ],
+    HOME_RACK_URL: [
+        (responsive_variant_url('home-rack', 640), 640),
+        (responsive_variant_url('home-rack', 960), 960),
+        (responsive_variant_url('home-rack', 1400), 1400),
+        (HOME_RACK_URL, HOME_RACK_WIDTH),
+    ],
+    ABOUT_PANEL_URL: [
+        (responsive_variant_url('about-panel', 480), 480),
+        (responsive_variant_url('about-panel', 800), 800),
+        (ABOUT_PANEL_URL, ABOUT_PANEL_WIDTH),
+    ],
+    SERVICE_INTERCOM_URL: [
+        (responsive_variant_url('service-intercom', 480), 480),
+        (responsive_variant_url('service-intercom', 720), 720),
+        (SERVICE_INTERCOM_URL, SERVICE_INTERCOM_WIDTH),
+    ],
+    SERVICE_CABLING_URL: [
+        (responsive_variant_url('service-cabling', 640), 640),
+        (responsive_variant_url('service-cabling', 960), 960),
+        (SERVICE_CABLING_URL, SERVICE_CABLING_WIDTH),
+    ],
+    SERVICE_INFRASTRUCTURE_URL: [
+        (responsive_variant_url('service-infrastructure', 640), 640),
+        (responsive_variant_url('service-infrastructure', 960), 960),
+        (responsive_variant_url('service-infrastructure', 1400), 1400),
+        (SERVICE_INFRASTRUCTURE_URL, SERVICE_INFRASTRUCTURE_WIDTH),
+    ],
+    SERVICE_ACCESS_URL: [
+        (responsive_variant_url('service-access', 640), 640),
+        (responsive_variant_url('service-access', 960), 960),
+        (SERVICE_ACCESS_URL, SERVICE_ACCESS_WIDTH),
+    ],
+    SERVICE_WIFI_URL: [
+        (responsive_variant_url('service-wifi', 480), 480),
+        (responsive_variant_url('service-wifi', 768), 768),
+        (SERVICE_WIFI_URL, SERVICE_WIFI_WIDTH),
+    ],
+    SERVICE_VOIP_URL: [
+        (responsive_variant_url('service-voip', 640), 640),
+        (responsive_variant_url('service-voip', 960), 960),
+        (SERVICE_VOIP_URL, SERVICE_VOIP_WIDTH),
+    ],
+}
+
+PROMO_PAGE_KEYS = {'promo', 'promo-rules', 'promo-unsubscribe', 'promo-admin'}
+REFERRAL_PAGE_KEYS = {
+    'referral-program',
+    'referral-program-terms',
+    'referral-partner-program',
+    'referral-partner-program-terms',
+    'referral-portal',
+    'referral-access',
+    'referral-admin',
+}
+
 HOME_IMAGE_EXPORTS = (
     {
         'source': PRODUCTION_BRAND_ROOT / 'logo-ui-source.png',
@@ -364,6 +475,7 @@ HOME_IMAGE_EXPORTS = (
         'canvas': (PROMO_SOCIAL_WIDTH, PROMO_SOCIAL_HEIGHT),
         'format': 'PNG',
     },
+    *RESPONSIVE_IMAGE_EXPORTS,
 )
 RUNTIME_ASSET_COPIES = (
     {
@@ -9976,9 +10088,9 @@ def absolute_url(path):
 
 
 def effective_robots_value(robots):
-    if not FORCE_NOINDEX or robots.startswith('noindex'):
+    if not FORCE_NOINDEX:
         return robots
-    return 'noindex, nofollow'
+    return 'noindex, nofollow, noarchive'
 
 
 def promo_publicly_indexable():
@@ -10042,7 +10154,7 @@ def logo_img(context):
     return f'<img {" ".join(attrs)} />'
 
 
-def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption=''):
+def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption='', sizes=''):
     attrs = [
         f'src="{src}"',
         f'alt="{esc(alt)}"',
@@ -10050,6 +10162,11 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
         f'height="{height}"',
         'decoding="async"',
     ]
+    responsive_sources = RESPONSIVE_IMAGE_SOURCES.get(src, [])
+    if responsive_sources:
+        srcset_value = ', '.join(f'{url} {variant_width}w' for url, variant_width in responsive_sources)
+        attrs.append(f'srcset="{esc(srcset_value)}"')
+        attrs.append(f'sizes="{esc(sizes or "(min-width: 1024px) 44vw, 100vw")}"')
     if cls:
         attrs.append(f'class="{cls}"')
     if eager:
@@ -10080,7 +10197,14 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
 def resource_hints(page_key, preload_image_url=None):
     hints = []
     if page_key == 'home':
-        hints.append(f'<link rel="preload" as="image" href="{HOME_RACK_URL}" />')
+        home_rack_srcset = ', '.join(f'{url} {variant_width}w' for url, variant_width in RESPONSIVE_IMAGE_SOURCES.get(HOME_RACK_URL, []))
+        if home_rack_srcset:
+            hints.append(
+                f'<link rel="preload" as="image" href="{HOME_RACK_URL}" '
+                f'imagesrcset="{esc(home_rack_srcset)}" imagesizes="(min-width: 1024px) 44vw, 100vw" />'
+            )
+        else:
+            hints.append(f'<link rel="preload" as="image" href="{HOME_RACK_URL}" />')
     if page_key == 'contact':
         hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
         hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
@@ -11620,6 +11744,7 @@ def service_panel_media(key, lang):
         zoomable=True,
         lang=lang,
         caption=visual['caption'],
+        sizes='(min-width: 1100px) 40vw, 100vw',
     )
     return f'<figure class="service-panel-visual"><div class="service-panel-frame">{image}</div></figure>'
 
@@ -11645,6 +11770,7 @@ def about_panel_media(lang):
         zoomable=True,
         lang=lang,
         caption=visual['caption'],
+        sizes='(min-width: 1100px) 36vw, 100vw',
     )
     return f'<figure class="about-panel-visual"><div class="about-panel-frame">{image}</div></figure>'
 
@@ -11685,9 +11811,9 @@ def home_visual_panel(lang):
         f'<aside class="hero-panel hero-media-panel"><p class="eyebrow">{esc(visual["eyebrow"])}</p>'
         f'{title_html}'
         f'<div class="hero-media-stack">'
-        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_BUILDING_URL, visual["top_alt"], HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, "hero-media-main-image", zoomable=True, lang=lang, caption=visual["top_title"])}</div>'
+        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_BUILDING_URL, visual["top_alt"], HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, "hero-media-main-image", zoomable=True, lang=lang, caption=visual["top_title"], sizes="(min-width: 1100px) 42vw, 100vw")}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["top_title"])}</strong><span>{esc(visual["top_copy"])}</span></figcaption></figure>'
-        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, high_priority=True, zoomable=True, lang=lang, caption=visual["main_title"])}</div>'
+        f'<figure class="hero-media-main"><div class="hero-media-frame">{content_img(HOME_RACK_URL, visual["main_alt"], HOME_RACK_WIDTH, HOME_RACK_HEIGHT, "hero-media-main-image", eager=True, high_priority=True, zoomable=True, lang=lang, caption=visual["main_title"], sizes="(min-width: 1100px) 42vw, 100vw")}</div>'
         f'<figcaption class="hero-media-caption"><strong>{esc(visual["main_title"])}</strong><span>{esc(visual["main_copy"])}</span></figcaption></figure>'
         f'</div>{hero_signal_grid(lang)}</aside>'
     )
@@ -12985,15 +13111,28 @@ def cta(lang):
 
 def icon_link_tags():
     return (
-        f'<link rel="icon" type="image/png" href="{LOGO_MARK_URL}" />'
         f'<link rel="icon" type="image/png" sizes="32x32" href="{FAVICON_32_URL}" />'
+        f'<link rel="icon" type="image/png" sizes="192x192" href="{FAVICON_192_URL}" />'
+        f'<link rel="icon" type="image/png" sizes="512x512" href="{FAVICON_512_URL}" />'
         f'<link rel="apple-touch-icon" sizes="180x180" href="{APPLE_TOUCH_ICON_URL}" />'
         f'<link rel="manifest" href="{WEBMANIFEST_URL}" />'
     )
 
 
-def stylesheet_link_tags():
-    return f'<link rel="stylesheet" href="{STYLES_URL}" />'
+def stylesheet_link_tags(page_key):
+    tags = [f'<link rel="stylesheet" href="{STYLES_URL}" />']
+    if page_key in PROMO_PAGE_KEYS or page_key in REFERRAL_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{PROMO_REFERRAL_STYLES_URL}" />')
+    return ''.join(tags)
+
+
+def script_tags(page_key):
+    tags = [f'<script src="{SCRIPT_URL}" defer></script>']
+    if page_key in PROMO_PAGE_KEYS:
+        tags.append(f'<script src="{PROMO_SCRIPT_URL}" defer></script>')
+    if page_key in REFERRAL_PAGE_KEYS:
+        tags.append(f'<script src="{REFERRAL_SCRIPT_URL}" defer></script>')
+    return ''.join(tags)
 
 
 def page(lang, key, current, title, desc, body, faq_items=None, service_name=None, breadcrumb_items=None, robots='index, follow, max-image-preview:large', canonical_path=None, include_alternates=True, resource_key=None, schema_page_url=None, alternate_paths=None, lang_switch_href=None, article_meta=None, preload_image_url=None, social_image_url=None, social_image_alt=''):
@@ -13029,7 +13168,7 @@ def page(lang, key, current, title, desc, body, faq_items=None, service_name=Non
             article_meta_tags += f'<meta property="article:section" content="{esc(article_meta["section"])}" />'
         article_meta_tags += ''.join(f'<meta property="article:tag" content="{esc(tag)}" />' for tag in article_meta['tags'])
     body_class = f'lang-{lang} page-{key}'
-    return f'<!doctype html><html lang="{language_tag(lang)}"><head>{GOOGLE_TAG_SNIPPET}<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots_value)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags()}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta, page_image_url=social_image_url, page_image_alt=social_image_alt)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}<script src="{SCRIPT_URL}" defer></script></body></html>'
+    return f'<!doctype html><html lang="{language_tag(lang)}"><head>{GOOGLE_TAG_SNIPPET}<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>{esc(title)}</title><meta name="description" content="{esc(desc)}" /><meta name="robots" content="{esc(robots_value)}" /><meta name="theme-color" content="#153628" />{icon_link_tags()}<link rel="canonical" href="{canonical_url}" />{alternate_tags}<meta property="og:type" content="{esc(social_meta["og_type"])}" /><meta property="og:site_name" content="Opticable" /><meta property="og:locale" content="{t["locale"]}" />{og_locale_alternates}<meta property="og:title" content="{esc(social_meta["og_title"])}" /><meta property="og:description" content="{esc(social_meta["og_description"])}" /><meta property="og:url" content="{esc(social_meta["og_url"])}" /><meta property="og:image" content="{social_meta["og_image"]}" /><meta property="og:image:type" content="{esc(social_meta["og_image_type"])}" /><meta property="og:image:alt" content="{esc(social_meta["og_image_alt"])}" /><meta property="og:image:width" content="{social_meta["og_image_width"]}" /><meta property="og:image:height" content="{social_meta["og_image_height"]}" /><meta name="twitter:card" content="{esc(social_meta["twitter_card"])}" /><meta name="twitter:title" content="{esc(social_meta["twitter_title"])}" /><meta name="twitter:description" content="{esc(social_meta["twitter_description"])}" /><meta name="twitter:image" content="{social_meta["og_image"]}" /><meta name="twitter:image:alt" content="{esc(social_meta["og_image_alt"])}" />{article_meta_tags}{resource_hints(resource_key or key, preload_image_url=preload_image_url)}{stylesheet_link_tags(key)}<script type="application/ld+json">{schema(lang, key, title, desc, faq_items, service_name, breadcrumb_items, page_url=schema_page_url or canonical_url, article_meta=article_meta, page_image_url=social_image_url, page_image_alt=social_image_alt)}</script></head><body class="{body_class}"><a class="skip-link" href="#content">{esc(t["skip"])}</a><div class="site-shell">{header(lang, current, key, lang_switch_href)}{cookie_banner(lang)}<main id="content">{body}</main>{footer(lang)}</div>{image_lightbox(lang)}{script_tags(key)}</body></html>'
 def clients_section(lang):
     return f'<div class="grid-4">{"".join(card(title, text) for title, text in T[lang]["clients"])}</div>'
 
@@ -13338,8 +13477,31 @@ copy_static_assets()
 export_home_images()
 export_blog_social_images()
 js = js.replace('__GOOGLE_ADS_PROMO_CONVERSION_SEND_TO__', json.dumps(GOOGLE_ADS_PROMO_CONVERSION_SEND_TO))
-(DEPLOY_ASSET_ROOT / 'styles.css').write_text(css.strip() + '\n', encoding='utf-8')
-(DEPLOY_ASSET_ROOT / 'site.js').write_text(js.strip() + '\n', encoding='utf-8')
+css_split_marker = '.promo-hero-grid,.promo-services-grid,.promo-related-grid,.promo-result-grid{display:grid;gap:18px}'
+css_split_index = css.find(css_split_marker)
+if css_split_index < 0:
+    raise RuntimeError('Could not split promo/referral CSS bundle')
+base_css = css[:css_split_index].strip() + '\n'
+promo_referral_css = css[css_split_index:].strip() + '\n'
+
+promo_helper_marker = 'function promoPayloadCopy(node, selector) {'
+promo_section_marker = "  const promoRoots = document.querySelectorAll('[data-promo-root]');"
+referral_section_marker = "  document.querySelectorAll('[data-referral-apply]').forEach((shell) => {"
+helper_index = js.find(promo_helper_marker)
+promo_index = js.find(promo_section_marker, helper_index)
+referral_index = js.find(referral_section_marker, promo_index)
+if helper_index < 0 or promo_index < 0 or referral_index < 0:
+    raise RuntimeError('Could not split JavaScript bundles')
+base_js = js[:helper_index].strip() + '\n'
+shared_promo_helper_js = js[helper_index:promo_index]
+promo_js = (shared_promo_helper_js + js[promo_index:referral_index]).strip() + '\n'
+referral_js = (shared_promo_helper_js + js[referral_index:]).strip() + '\n'
+
+(DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-promo-referral.css').write_text(promo_referral_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site.js').write_text(base_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-promo.js').write_text(promo_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-referral.js').write_text(referral_js, encoding='utf-8')
 
 for lang in ('en', 'fr'):
     t = T[lang]
