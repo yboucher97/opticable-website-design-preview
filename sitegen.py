@@ -75,6 +75,7 @@ RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_UI_WHITE_URL = f'/assets/logo-ui-white.webp?v={ASSET_VER}'
+LOGO_UI_SCHEMA_URL = f'/assets/logo-ui-640.webp?v={ASSET_VER}'
 FAVICON_32_URL = f'/assets/favicon-32.png?v={ASSET_VER}'
 FAVICON_192_URL = f'/assets/favicon-192.png?v={ASSET_VER}'
 FAVICON_512_URL = f'/assets/favicon-512.png?v={ASSET_VER}'
@@ -322,61 +323,50 @@ RESPONSIVE_IMAGE_SOURCES = {
         (responsive_variant_url('logo-ui', 240), 240),
         (responsive_variant_url('logo-ui', 400), 400),
         (responsive_variant_url('logo-ui', 640), 640),
-        (LOGO_UI_URL, LOGO_UI_WIDTH),
     ],
     LOGO_UI_WHITE_URL: [
         (responsive_variant_url('logo-ui-white', 240), 240),
         (responsive_variant_url('logo-ui-white', 400), 400),
         (responsive_variant_url('logo-ui-white', 640), 640),
-        (LOGO_UI_WHITE_URL, LOGO_UI_WIDTH),
     ],
     HOME_BUILDING_URL: [
         (responsive_variant_url('home-building', 640), 640),
         (responsive_variant_url('home-building', 960), 960),
         (responsive_variant_url('home-building', 1400), 1400),
-        (HOME_BUILDING_URL, HOME_BUILDING_WIDTH),
     ],
     HOME_RACK_URL: [
         (responsive_variant_url('home-rack', 640), 640),
         (responsive_variant_url('home-rack', 960), 960),
         (responsive_variant_url('home-rack', 1400), 1400),
-        (HOME_RACK_URL, HOME_RACK_WIDTH),
     ],
     ABOUT_PANEL_URL: [
         (responsive_variant_url('about-panel', 480), 480),
         (responsive_variant_url('about-panel', 800), 800),
-        (ABOUT_PANEL_URL, ABOUT_PANEL_WIDTH),
     ],
     SERVICE_INTERCOM_URL: [
         (responsive_variant_url('service-intercom', 480), 480),
         (responsive_variant_url('service-intercom', 720), 720),
-        (SERVICE_INTERCOM_URL, SERVICE_INTERCOM_WIDTH),
     ],
     SERVICE_CABLING_URL: [
         (responsive_variant_url('service-cabling', 640), 640),
         (responsive_variant_url('service-cabling', 960), 960),
-        (SERVICE_CABLING_URL, SERVICE_CABLING_WIDTH),
     ],
     SERVICE_INFRASTRUCTURE_URL: [
         (responsive_variant_url('service-infrastructure', 640), 640),
         (responsive_variant_url('service-infrastructure', 960), 960),
         (responsive_variant_url('service-infrastructure', 1400), 1400),
-        (SERVICE_INFRASTRUCTURE_URL, SERVICE_INFRASTRUCTURE_WIDTH),
     ],
     SERVICE_ACCESS_URL: [
         (responsive_variant_url('service-access', 640), 640),
         (responsive_variant_url('service-access', 960), 960),
-        (SERVICE_ACCESS_URL, SERVICE_ACCESS_WIDTH),
     ],
     SERVICE_WIFI_URL: [
         (responsive_variant_url('service-wifi', 480), 480),
         (responsive_variant_url('service-wifi', 768), 768),
-        (SERVICE_WIFI_URL, SERVICE_WIFI_WIDTH),
     ],
     SERVICE_VOIP_URL: [
         (responsive_variant_url('service-voip', 640), 640),
         (responsive_variant_url('service-voip', 960), 960),
-        (SERVICE_VOIP_URL, SERVICE_VOIP_WIDTH),
     ],
 }
 
@@ -10115,7 +10105,7 @@ def export_blog_social_image(article_key, lang, article):
 
     image = Image.alpha_composite(canvas, overlay)
     target.parent.mkdir(parents=True, exist_ok=True)
-    image.convert('RGB').save(target, format='JPEG', quality=84, optimize=True, progressive=True)
+    image.convert('RGB').save(target, format='JPEG', quality=80, optimize=True, progressive=True)
     IMAGE_DIMENSIONS_BY_URL[blog_social_image_url(article_key, lang)] = (BLOG_SOCIAL_IMAGE_WIDTH, BLOG_SOCIAL_IMAGE_HEIGHT)
 
 
@@ -13091,13 +13081,14 @@ def quote_lead_tracking_snippet(lang):
 def schema(lang, page_key, title, desc, faq_items=None, service_name=None, breadcrumb_items=None, page_url=None, article_meta=None, page_image_url=None, page_image_alt=''):
     page_url = page_url or absolute_url(routes[lang][page_key])
     catalog = offer_catalog_schema(lang)
+    schema_logo_width, schema_logo_height = image_dimensions_for_url(LOGO_UI_SCHEMA_URL)
     business = {
         '@type': 'LocalBusiness',
         '@id': BUSINESS_ID,
         'name': 'Opticable',
         'legalName': LEGAL_BUSINESS_NAME,
         'url': absolute_url(default_route('home')),
-        'logo': absolute_url(LOGO_UI_URL),
+        'logo': absolute_url(LOGO_UI_SCHEMA_URL),
         'image': absolute_url(OG_IMAGE_URL),
         'description': SCHEMA_BUSINESS_DESCRIPTION[lang],
         'serviceType': [services[k][lang]['name'] for k in order],
@@ -13185,9 +13176,9 @@ def schema(lang, page_key, title, desc, faq_items=None, service_name=None, bread
                 'name': 'Opticable',
                 'logo': {
                     '@type': 'ImageObject',
-                    'url': absolute_url(LOGO_UI_URL),
-                    'width': LOGO_UI_WIDTH,
-                    'height': LOGO_UI_HEIGHT,
+                    'url': absolute_url(LOGO_UI_SCHEMA_URL),
+                    'width': schema_logo_width,
+                    'height': schema_logo_height,
                 },
             },
             'datePublished': article_meta['published_iso'],
