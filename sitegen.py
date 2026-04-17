@@ -295,12 +295,16 @@ def responsive_export_specs(source, name, base_width, base_height, widths, quali
 
 
 RESPONSIVE_IMAGE_EXPORTS = (
-    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 82),
-    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 82),
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 74),
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'home-building.png', 'home-building', HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT, (640, 960, 1400), 56, image_format='AVIF'),
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 74),
+    *responsive_export_specs(PRODUCTION_HOME_ROOT / 'network-rack.png', 'home-rack', HOME_RACK_WIDTH, HOME_RACK_HEIGHT, (640, 960, 1400), 56, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_ABOUT_ROOT / 'about-panel.png', 'about-panel', ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT, (480, 800), 90),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'intercom.webp', 'service-intercom', SERVICE_INTERCOM_WIDTH, SERVICE_INTERCOM_HEIGHT, (480, 720), 88),
-    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 88),
-    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 90),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 78),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'structured-cabling.png', 'service-cabling', SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT, (640, 960), 58, image_format='AVIF'),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 78),
+    *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'network-infrastructure.png', 'service-infrastructure', SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT, (640, 960, 1400), 58, image_format='AVIF'),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'access-control.png', 'service-access', SERVICE_ACCESS_WIDTH, SERVICE_ACCESS_HEIGHT, (640, 960), 88),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'commercial-wifi.png', 'service-wifi', SERVICE_WIFI_WIDTH, SERVICE_WIFI_HEIGHT, (480, 768), 88),
     *responsive_export_specs(PRODUCTION_SERVICE_ROOT / 'ip-phone.png', 'service-voip', SERVICE_VOIP_WIDTH, SERVICE_VOIP_HEIGHT, (640, 960), 88),
@@ -355,6 +359,43 @@ RESPONSIVE_IMAGE_SOURCES = {
         (responsive_variant_url('service-voip', 960), 960),
         (SERVICE_VOIP_URL, SERVICE_VOIP_WIDTH),
     ],
+}
+
+RESPONSIVE_IMAGE_FORMAT_SOURCES = {
+    HOME_BUILDING_URL: {
+        'image/avif': [
+            (responsive_variant_url('home-building', 640, 'avif'), 640),
+            (responsive_variant_url('home-building', 960, 'avif'), 960),
+            (responsive_variant_url('home-building', 1400, 'avif'), 1400),
+        ],
+    },
+    HOME_RACK_URL: {
+        'image/avif': [
+            (responsive_variant_url('home-rack', 640, 'avif'), 640),
+            (responsive_variant_url('home-rack', 960, 'avif'), 960),
+            (responsive_variant_url('home-rack', 1400, 'avif'), 1400),
+        ],
+    },
+    SERVICE_CABLING_URL: {
+        'image/avif': [
+            (responsive_variant_url('service-cabling', 640, 'avif'), 640),
+            (responsive_variant_url('service-cabling', 960, 'avif'), 960),
+        ],
+    },
+    SERVICE_INFRASTRUCTURE_URL: {
+        'image/avif': [
+            (responsive_variant_url('service-infrastructure', 640, 'avif'), 640),
+            (responsive_variant_url('service-infrastructure', 960, 'avif'), 960),
+            (responsive_variant_url('service-infrastructure', 1400, 'avif'), 1400),
+        ],
+    },
+}
+
+RESPONSIVE_IMAGE_DEFAULT_SRC = {
+    HOME_BUILDING_URL: responsive_variant_url('home-building', 1400),
+    HOME_RACK_URL: responsive_variant_url('home-rack', 1400),
+    SERVICE_CABLING_URL: responsive_variant_url('service-cabling', 960),
+    SERVICE_INFRASTRUCTURE_URL: responsive_variant_url('service-infrastructure', 1400),
 }
 
 PROMO_PAGE_KEYS = {'promo', 'promo-rules', 'promo-unsubscribe', 'promo-admin'}
@@ -429,14 +470,14 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'home-building.webp',
         'resize': (HOME_BUILDING_WIDTH, HOME_BUILDING_HEIGHT),
         'format': 'WEBP',
-        'quality': 84,
+        'quality': 76,
     },
     {
         'source': PRODUCTION_HOME_ROOT / 'network-rack.png',
         'target': DEPLOY_ASSET_ROOT / 'home-rack.webp',
         'resize': (HOME_RACK_WIDTH, HOME_RACK_HEIGHT),
         'format': 'WEBP',
-        'quality': 84,
+        'quality': 76,
     },
     {
         'source': PRODUCTION_ABOUT_ROOT / 'about-panel.png',
@@ -457,7 +498,7 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'service-cabling.webp',
         'resize': (SERVICE_CABLING_WIDTH, SERVICE_CABLING_HEIGHT),
         'format': 'WEBP',
-        'quality': 90,
+        'quality': 80,
     },
     {
         'source': PRODUCTION_SERVICE_ROOT / 'fiber-optic.jpg',
@@ -471,7 +512,7 @@ HOME_IMAGE_EXPORTS = (
         'target': DEPLOY_ASSET_ROOT / 'service-infrastructure.webp',
         'resize': (SERVICE_INFRASTRUCTURE_WIDTH, SERVICE_INFRASTRUCTURE_HEIGHT),
         'format': 'WEBP',
-        'quality': 92,
+        'quality': 80,
     },
     {
         'source': PRODUCTION_SERVICE_ROOT / 'access-control.png',
@@ -10063,6 +10104,10 @@ def export_image_variant(spec):
             save_kwargs = {'format': 'JPEG', 'quality': spec['quality'], 'optimize': True, 'progressive': True}
         elif spec['format'] == 'PNG':
             save_kwargs = {'format': 'PNG', 'optimize': True}
+        elif spec['format'] == 'AVIF':
+            if image.mode not in ('RGB', 'RGBA'):
+                image = image.convert('RGBA')
+            save_kwargs = {'format': 'AVIF', 'quality': spec['quality'], 'speed': 6}
         else:
             save_kwargs = {'format': 'WEBP', 'quality': spec['quality'], 'method': 6}
         spec['target'].parent.mkdir(parents=True, exist_ok=True)
@@ -10185,8 +10230,10 @@ def logo_img(context):
 
 
 def content_img(src, alt, width, height, cls='', eager=False, high_priority=False, zoomable=False, lang='en', caption='', sizes=''):
+    display_src = RESPONSIVE_IMAGE_DEFAULT_SRC.get(src, src)
+    display_sizes = sizes or "(min-width: 1024px) 44vw, 100vw"
     attrs = [
-        f'src="{src}"',
+        f'src="{display_src}"',
         f'alt="{esc(alt)}"',
         f'width="{width}"',
         f'height="{height}"',
@@ -10196,7 +10243,7 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
     if responsive_sources:
         srcset_value = ', '.join(f'{url} {variant_width}w' for url, variant_width in responsive_sources)
         attrs.append(f'srcset="{esc(srcset_value)}"')
-        attrs.append(f'sizes="{esc(sizes or "(min-width: 1024px) 44vw, 100vw")}"')
+        attrs.append(f'sizes="{esc(display_sizes)}"')
     if cls:
         attrs.append(f'class="{cls}"')
     if eager:
@@ -10206,6 +10253,15 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
     if high_priority:
         attrs.append('fetchpriority="high"')
     img_html = f'<img {" ".join(attrs)} />'
+    picture_sources = RESPONSIVE_IMAGE_FORMAT_SOURCES.get(src, {})
+    if picture_sources:
+        source_tags = []
+        for mime_type, variants in picture_sources.items():
+            srcset_value = ', '.join(f'{url} {variant_width}w' for url, variant_width in variants)
+            source_tags.append(
+                f'<source type="{mime_type}" srcset="{esc(srcset_value)}" sizes="{esc(display_sizes)}" />'
+            )
+        img_html = f'<picture>{"".join(source_tags)}{img_html}</picture>'
     if not zoomable:
         return img_html
     ui = LIGHTBOX_UI.get(lang, LIGHTBOX_UI['en'])
@@ -10227,14 +10283,18 @@ def content_img(src, alt, width, height, cls='', eager=False, high_priority=Fals
 def resource_hints(page_key, preload_image_url=None):
     hints = []
     if page_key == 'home':
-        home_rack_srcset = ', '.join(f'{url} {variant_width}w' for url, variant_width in RESPONSIVE_IMAGE_SOURCES.get(HOME_RACK_URL, []))
+        home_rack_avif_sources = RESPONSIVE_IMAGE_FORMAT_SOURCES.get(HOME_RACK_URL, {}).get('image/avif', [])
+        home_rack_sources = home_rack_avif_sources or RESPONSIVE_IMAGE_SOURCES.get(HOME_RACK_URL, [])
+        home_rack_srcset = ', '.join(f'{url} {variant_width}w' for url, variant_width in home_rack_sources)
+        home_rack_preload = home_rack_sources[-1][0] if home_rack_sources else RESPONSIVE_IMAGE_DEFAULT_SRC.get(HOME_RACK_URL, HOME_RACK_URL)
+        preload_type_attr = ' type="image/avif"' if home_rack_avif_sources else ''
         if home_rack_srcset:
             hints.append(
-                f'<link rel="preload" as="image" href="{HOME_RACK_URL}" '
+                f'<link rel="preload" as="image" href="{home_rack_preload}"{preload_type_attr} '
                 f'imagesrcset="{esc(home_rack_srcset)}" imagesizes="(min-width: 1024px) 44vw, 100vw" />'
             )
         else:
-            hints.append(f'<link rel="preload" as="image" href="{HOME_RACK_URL}" />')
+            hints.append(f'<link rel="preload" as="image" href="{home_rack_preload}"{preload_type_attr} />')
     if page_key == 'contact':
         hints.append('<link rel="preconnect" href="https://forms.zohopublic.com" crossorigin />')
         hints.append('<link rel="dns-prefetch" href="//forms.zohopublic.com" />')
