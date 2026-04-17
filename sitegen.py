@@ -66,6 +66,7 @@ ROOT_GENERATED_ASSET_FILES = (
     'site-referral-public.js',
     'site-referral-portal.js',
     'site-referral-admin.js',
+    'site-referral-admin-detail.js',
 )
 ASSET_VER = '20260414h'
 LEGAL_BUSINESS_NAME = '9453-4757 Québec Inc.'
@@ -92,6 +93,7 @@ PROMO_ADMIN_SCRIPT_URL = f'/assets/site-promo-admin.js?v={ASSET_VER}'
 REFERRAL_PUBLIC_SCRIPT_URL = f'/assets/site-referral-public.js?v={ASSET_VER}'
 REFERRAL_PORTAL_SCRIPT_URL = f'/assets/site-referral-portal.js?v={ASSET_VER}'
 REFERRAL_ADMIN_SCRIPT_URL = f'/assets/site-referral-admin.js?v={ASSET_VER}'
+REFERRAL_ADMIN_DETAIL_SCRIPT_URL = f'/assets/site-referral-admin-detail.js?v={ASSET_VER}'
 WEBMANIFEST_URL = '/site.webmanifest'
 GOOGLE_ANALYTICS_TAG_ID = 'G-ZEQXVSZWRL'
 GOOGLE_ADS_TAG_ID = 'AW-18043353221'
@@ -11695,7 +11697,7 @@ def referral_admin_shell(lang):
         'Chaque ligne peut être exportée séparément, réinitialisée ou supprimée.'
     )
     return (
-        f'<div class="form-panel referral-admin-shell" data-referral-admin data-lang="{lang}" data-summary-url="/api/referrals/admin/summary" data-applications-url="/api/referrals/admin/applications" data-accounts-url="/api/referrals/admin/accounts" data-cases-url="/api/referrals/admin/cases" data-rewards-url="/api/referrals/admin/rewards" data-account-status-url="/api/referrals/admin/account-status" data-account-balance-adjust-url="/api/referrals/admin/account-balance-adjust" data-case-create-url="/api/referrals/admin/referral-create" data-case-update-url="/api/referrals/admin/referral-update" data-case-reward-adjust-url="/api/referrals/admin/referral-reward-adjust" data-case-status-url="/api/referrals/admin/referral-status" data-case-delete-url="/api/referrals/admin/referral-delete" data-reward-settle-url="/api/referrals/admin/reward-settle" data-export-url="/api/referrals/admin/export.csv" data-account-create-url="/api/referrals/admin/account-create" data-account-reset-access-url="/api/referrals/admin/account-reset-access" data-account-delete-url="/api/referrals/admin/account-delete" data-application-status-url="/api/referrals/admin/application-status" data-application-delete-url="/api/referrals/admin/application-delete" data-account-export-url="/api/referrals/admin/account-export" data-account-detail-url="/api/referrals/admin/account-export">'
+        f'<div class="form-panel referral-admin-shell" data-referral-admin data-lang="{lang}" data-summary-url="/api/referrals/admin/summary" data-applications-url="/api/referrals/admin/applications" data-accounts-url="/api/referrals/admin/accounts" data-cases-url="/api/referrals/admin/cases" data-rewards-url="/api/referrals/admin/rewards" data-account-status-url="/api/referrals/admin/account-status" data-account-balance-adjust-url="/api/referrals/admin/account-balance-adjust" data-case-create-url="/api/referrals/admin/referral-create" data-case-update-url="/api/referrals/admin/referral-update" data-case-reward-adjust-url="/api/referrals/admin/referral-reward-adjust" data-case-status-url="/api/referrals/admin/referral-status" data-case-delete-url="/api/referrals/admin/referral-delete" data-reward-settle-url="/api/referrals/admin/reward-settle" data-export-url="/api/referrals/admin/export.csv" data-account-create-url="/api/referrals/admin/account-create" data-account-reset-access-url="/api/referrals/admin/account-reset-access" data-account-delete-url="/api/referrals/admin/account-delete" data-application-status-url="/api/referrals/admin/application-status" data-application-delete-url="/api/referrals/admin/application-delete" data-account-export-url="/api/referrals/admin/account-export" data-account-detail-url="/api/referrals/admin/account-export" data-referral-admin-detail-script="{REFERRAL_ADMIN_DETAIL_SCRIPT_URL}">'
         f'<script type="application/json" data-referral-admin-copy>{json.dumps(payload, ensure_ascii=False)}</script>'
         f'<div class="promo-admin-toolbar"><div class="promo-admin-actions"><button class="button button-secondary" type="button" data-referral-admin-refresh>{esc(payload["actions"]["refresh"])}</button><a class="button button-secondary" data-referral-export-accounts href="/api/referrals/admin/export.csv?kind=accounts">{esc(payload["actions"]["exportAccounts"])}</a><a class="button button-secondary" data-referral-export-cases href="/api/referrals/admin/export.csv?kind=cases">{esc(payload["actions"]["exportCases"])}</a><a class="button button-secondary" data-referral-export-rewards href="/api/referrals/admin/export.csv?kind=rewards">{esc(payload["actions"]["exportRewards"])}</a></div></div>'
         f'<div class="promo-inline-status" data-referral-admin-status hidden></div><div class="promo-inline-error" data-referral-admin-error hidden></div>'
@@ -13652,6 +13654,251 @@ for init_call in (
     referral_admin_block = referral_admin_block.replace(init_call + '\n', '')
     site_config_js = site_config_js.replace(init_call + '\n', '')
 
+admin_detail_state_marker = (
+    "    let selectedAccountId = null;\n"
+    "    let selectedAccount = null;\n"
+    "    let selectedCaseId = null;\n"
+)
+admin_detail_logic_start_marker = '    const resetCaseForm = () => {'
+admin_detail_logic_end_marker = '    const loadAll = async () => {'
+admin_detail_listener_start_marker = '    if (detailExportButton) {'
+admin_detail_listener_end_marker = "    createForm.addEventListener('submit', async (event) => {"
+admin_detail_state_index = referral_admin_block.find(admin_detail_state_marker)
+admin_detail_logic_start_index = referral_admin_block.find(admin_detail_logic_start_marker)
+admin_detail_logic_end_index = referral_admin_block.find(admin_detail_logic_end_marker, admin_detail_logic_start_index)
+admin_detail_listener_start_index = referral_admin_block.find(admin_detail_listener_start_marker, admin_detail_logic_end_index)
+admin_detail_listener_end_index = referral_admin_block.find(admin_detail_listener_end_marker, admin_detail_listener_start_index)
+if (
+    admin_detail_state_index < 0
+    or admin_detail_logic_start_index < 0
+    or admin_detail_logic_end_index < 0
+    or admin_detail_listener_start_index < 0
+    or admin_detail_listener_end_index < 0
+):
+    raise RuntimeError('Could not split referral admin detail JavaScript bundle')
+admin_detail_logic_block = referral_admin_block[admin_detail_logic_start_index:admin_detail_logic_end_index]
+admin_detail_listener_block = referral_admin_block[admin_detail_listener_start_index:admin_detail_listener_end_index]
+for source, placeholder in (
+    ('selectedAccountId', '__REFERRAL_ADMIN_SELECTED_ACCOUNT_ID__'),
+    ('selectedCaseId', '__REFERRAL_ADMIN_SELECTED_CASE_ID__'),
+    ('selectedAccount', '__REFERRAL_ADMIN_SELECTED_ACCOUNT__'),
+):
+    admin_detail_logic_block = admin_detail_logic_block.replace(source, placeholder)
+    admin_detail_listener_block = admin_detail_listener_block.replace(source, placeholder)
+for placeholder, target in (
+    ('__REFERRAL_ADMIN_SELECTED_ACCOUNT_ID__', 'state.selectedAccountId'),
+    ('__REFERRAL_ADMIN_SELECTED_CASE_ID__', 'state.selectedCaseId'),
+    ('__REFERRAL_ADMIN_SELECTED_ACCOUNT__', 'state.selectedAccount'),
+):
+    admin_detail_logic_block = admin_detail_logic_block.replace(placeholder, target)
+    admin_detail_listener_block = admin_detail_listener_block.replace(placeholder, target)
+referral_admin_detail_js = (
+    "window.createReferralAdminDetailTools = function createReferralAdminDetailTools(config) {\n"
+    "  const {\n"
+    "    copy,\n"
+    "    lang,\n"
+    "    labels,\n"
+    "    state,\n"
+    "    detailEmpty,\n"
+    "    detailWrap,\n"
+    "    detailName,\n"
+    "    detailMeta,\n"
+    "    detailProgram,\n"
+    "    detailStatus,\n"
+    "    detailEmail,\n"
+    "    detailPhone,\n"
+    "    detailCompany,\n"
+    "    detailWebsite,\n"
+    "    detailShareCode,\n"
+    "    detailCreditCode,\n"
+    "    detailBalance,\n"
+    "    detailEarned,\n"
+    "    detailCreated,\n"
+    "    detailLogin,\n"
+    "    detailNotes,\n"
+    "    detailCasesBody,\n"
+    "    detailRewardsBody,\n"
+    "    detailAuditBody,\n"
+    "    detailExportButton,\n"
+    "    detailResetButton,\n"
+    "    detailDeleteButton,\n"
+    "    detailCaseForm,\n"
+    "    detailCaseSubmit,\n"
+    "    detailCaseCancel,\n"
+    "    detailCaseState,\n"
+    "    setStatus,\n"
+    "    setError,\n"
+    "    clearMessages,\n"
+    "    resetAccountAccess,\n"
+    "    deleteAccount,\n"
+    "    createManualCase,\n"
+    "    updateManualCase,\n"
+    "    adjustCaseReward,\n"
+    "    deleteCase,\n"
+    "    downloadAccount,\n"
+    "    fetchAccountDetail,\n"
+    "    actionStack,\n"
+    "    makeButton,\n"
+    "    programLabel,\n"
+    "    parseMetadata,\n"
+    "    auditNote,\n"
+    "    loadAll,\n"
+    "  } = config;\n"
+    "  const setDetailEmptyState = (message) => {\n"
+    "    state.selectedAccount = null;\n"
+    "    state.selectedCaseId = null;\n"
+    "    if (detailEmpty) {\n"
+    "      detailEmpty.textContent = message || copy.messages?.detailEmpty || '';\n"
+    "      detailEmpty.hidden = false;\n"
+    "    }\n"
+    "    if (detailWrap) detailWrap.hidden = true;\n"
+    "  };\n"
+    f"{admin_detail_logic_block}"
+    f"{admin_detail_listener_block}"
+    "  return { beginCaseEdit, openAccountDetail, resetCaseForm, renderAccountDetail, setDetailEmptyState };\n"
+    "};\n"
+)
+referral_admin_loader_js = (
+    "    const loadAdminDetailScript = (src) => new Promise((resolve, reject) => {\n"
+    "      const existing = document.querySelector(`[data-referral-admin-detail-src=\"${src}\"]`);\n"
+    "      const handleLoad = () => resolve();\n"
+    "      const handleError = () => reject(new Error(copy.genericError || ''));\n"
+    "      if (existing) {\n"
+    "        if (existing.dataset.loaded === 'true') {\n"
+    "          resolve();\n"
+    "          return;\n"
+    "        }\n"
+    "        existing.addEventListener('load', handleLoad, { once: true });\n"
+    "        existing.addEventListener('error', handleError, { once: true });\n"
+    "        return;\n"
+    "      }\n"
+    "      const script = document.createElement('script');\n"
+    "      script.src = src;\n"
+    "      script.defer = true;\n"
+    "      script.dataset.referralAdminDetailSrc = src;\n"
+    "      script.addEventListener('load', () => {\n"
+    "        script.dataset.loaded = 'true';\n"
+    "        resolve();\n"
+    "      }, { once: true });\n"
+    "      script.addEventListener('error', handleError, { once: true });\n"
+    "      document.head.appendChild(script);\n"
+    "    });\n"
+    "    const ensureReferralAdminDetailTools = async () => {\n"
+    "      if (referralAdminDetailTools) return referralAdminDetailTools;\n"
+    "      if (!referralAdminDetailToolsPromise) {\n"
+    "        referralAdminDetailToolsPromise = (async () => {\n"
+    "          const scriptUrl = shell.dataset.referralAdminDetailScript || '';\n"
+    "          if (!scriptUrl) {\n"
+    "            throw new Error(copy.genericError || '');\n"
+    "          }\n"
+    "          if (typeof window.createReferralAdminDetailTools !== 'function') {\n"
+    "            await loadAdminDetailScript(scriptUrl);\n"
+    "          }\n"
+    "          if (typeof window.createReferralAdminDetailTools !== 'function') {\n"
+    "            throw new Error(copy.genericError || '');\n"
+    "          }\n"
+    "          referralAdminDetailTools = window.createReferralAdminDetailTools({\n"
+    "            copy,\n"
+    "            lang,\n"
+    "            labels,\n"
+    "            state: {\n"
+    "              get selectedAccountId() { return selectedAccountId; },\n"
+    "              set selectedAccountId(value) { selectedAccountId = value; },\n"
+    "              get selectedAccount() { return selectedAccount; },\n"
+    "              set selectedAccount(value) { selectedAccount = value; },\n"
+    "              get selectedCaseId() { return selectedCaseId; },\n"
+    "              set selectedCaseId(value) { selectedCaseId = value; },\n"
+    "            },\n"
+    "            detailEmpty,\n"
+    "            detailWrap,\n"
+    "            detailName,\n"
+    "            detailMeta,\n"
+    "            detailProgram,\n"
+    "            detailStatus,\n"
+    "            detailEmail,\n"
+    "            detailPhone,\n"
+    "            detailCompany,\n"
+    "            detailWebsite,\n"
+    "            detailShareCode,\n"
+    "            detailCreditCode,\n"
+    "            detailBalance,\n"
+    "            detailEarned,\n"
+    "            detailCreated,\n"
+    "            detailLogin,\n"
+    "            detailNotes,\n"
+    "            detailCasesBody,\n"
+    "            detailRewardsBody,\n"
+    "            detailAuditBody,\n"
+    "            detailExportButton,\n"
+    "            detailResetButton,\n"
+    "            detailDeleteButton,\n"
+    "            detailCaseForm,\n"
+    "            detailCaseSubmit,\n"
+    "            detailCaseCancel,\n"
+    "            detailCaseState,\n"
+    "            setStatus,\n"
+    "            setError,\n"
+    "            clearMessages,\n"
+    "            resetAccountAccess,\n"
+    "            deleteAccount,\n"
+    "            createManualCase,\n"
+    "            updateManualCase,\n"
+    "            adjustCaseReward,\n"
+    "            deleteCase,\n"
+    "            downloadAccount,\n"
+    "            fetchAccountDetail,\n"
+    "            actionStack,\n"
+    "            makeButton,\n"
+    "            programLabel,\n"
+    "            parseMetadata,\n"
+    "            auditNote,\n"
+    "            loadAll: async () => loadAll(),\n"
+    "          });\n"
+    "          return referralAdminDetailTools;\n"
+    "        })().catch((error) => {\n"
+    "          referralAdminDetailToolsPromise = null;\n"
+    "          throw error;\n"
+    "        });\n"
+    "      }\n"
+    "      return referralAdminDetailToolsPromise;\n"
+    "    };\n"
+    "    const openAccountDetail = async (accountId) => {\n"
+    "      try {\n"
+    "        const tools = await ensureReferralAdminDetailTools();\n"
+    "        return await tools.openAccountDetail(accountId);\n"
+    "      } catch (error) {\n"
+    "        setError(error.message || copy.genericError || '');\n"
+    "        setStatus('');\n"
+    "        return null;\n"
+    "      }\n"
+    "    };\n"
+)
+referral_admin_block = (
+    referral_admin_block[:admin_detail_logic_start_index]
+    + referral_admin_loader_js
+    + referral_admin_block[admin_detail_logic_end_index:admin_detail_listener_start_index]
+    + referral_admin_block[admin_detail_listener_end_index:]
+)
+referral_admin_block = referral_admin_block.replace(
+    admin_detail_state_marker,
+    admin_detail_state_marker
+    + "    let referralAdminDetailTools = null;\n"
+    + "    let referralAdminDetailToolsPromise = null;\n",
+    1,
+)
+referral_admin_block = referral_admin_block.replace(
+    "            const payload = await openAccountDetail(item.account_id);\n"
+    "            const match = (payload?.referralCases || []).find((entry) => Number(entry.id) === Number(item.id));\n"
+    "            if (match) beginCaseEdit(match);\n",
+    "            const payload = await openAccountDetail(item.account_id);\n"
+    "            const match = (payload?.referralCases || []).find((entry) => Number(entry.id) === Number(item.id));\n"
+    "            if (match) {\n"
+    "              const detailTools = await ensureReferralAdminDetailTools();\n"
+    "              detailTools.beginCaseEdit(match);\n"
+    "            }\n",
+    1,
+)
+
 base_js = base_js.strip() + '\n' + site_config_js.strip() + '\ninitSiteConfig();\n'
 promo_public_js = shared_promo_helper_js.strip() + '\n' + promo_public_block.strip() + '\ninitPromoForms();\n'
 promo_unsubscribe_js = shared_promo_helper_js.strip() + '\n' + promo_unsubscribe_block.strip() + '\ninitPromoUnsubscribe();\n'
@@ -13674,6 +13921,7 @@ referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.str
 (DEPLOY_ASSET_ROOT / 'site-referral-public.js').write_text(referral_public_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-portal.js').write_text(referral_portal_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-admin.js').write_text(referral_admin_js, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'site-referral-admin-detail.js').write_text(referral_admin_detail_js, encoding='utf-8')
 
 for lang in ('en', 'fr'):
     t = T[lang]
