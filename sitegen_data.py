@@ -22,7 +22,7 @@ from resource_pages import (
 )
 
 root = Path(__file__).resolve().parent
-DEFAULT_SITE_URL = 'https://opticable-website-performance-preview.yboucher.workers.dev'
+DEFAULT_SITE_URL = 'https://opticable-website-design-preview.yboucher.workers.dev'
 SITE_URL = os.environ.get('OPTICABLE_SITE_URL', DEFAULT_SITE_URL).rstrip('/')
 DEPLOY_DIR_NAME = os.environ.get('OPTICABLE_DEPLOY_DIR', 'dist').strip() or 'dist'
 SITE_ENV = os.environ.get('OPTICABLE_SITE_ENV', 'preview').strip().lower() or 'preview'

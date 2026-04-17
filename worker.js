@@ -1173,7 +1173,7 @@ export default {
         return withResponseHeaders(
           jsonResponse(
             {
-              error: "Preview APIs are disabled on this isolated performance preview worker.",
+              error: "Preview APIs are disabled on this isolated design preview worker.",
             },
             503,
           ),

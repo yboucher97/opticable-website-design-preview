@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "opticable-website-performance-preview",
+  "name": "opticable-website-design-preview",
   "main": "./worker.js",
   "compatibility_date": "2026-03-14",
   "vars": {
@@ -12,14 +12,14 @@
   "d1_databases": [
     {
       "binding": "PROMO_DB",
-      "database_name": "opticable-promo-db-performance-preview",
-      "database_id": "2ec18104-982e-4ede-9aaa-25e7c0da6ac4",
+      "database_name": "opticable-promo-db-design-preview",
+      "database_id": "5c30faa5-d96e-4cad-8580-e6a1dd300f49",
       "migrations_dir": "./migrations"
     },
     {
       "binding": "REFERRAL_DB",
-      "database_name": "opticable-referral-db-performance-preview",
-      "database_id": "a586106f-3088-45fb-8766-5190b5eb7199",
+      "database_name": "opticable-referral-db-design-preview",
+      "database_id": "8c7163b2-fecf-4ef7-80f7-b3d7c961250d",
       "migrations_dir": "./migrations-referral"
     }
   ],
