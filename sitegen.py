@@ -3452,8 +3452,8 @@ css += '''
 .referral-nav-card:hover,.referral-nav-card:focus-visible{border-color:rgba(47,138,88,.32);box-shadow:0 20px 38px rgba(10,31,23,.10)}
 .referral-nav-card.is-current{background:linear-gradient(135deg,rgba(21,54,40,.98),rgba(32,78,57,.96));border-color:rgba(21,54,40,.96);color:#fff}
 .referral-nav-card.is-current strong,.referral-nav-card.is-current span{color:#fff}
-.referral-steps-section .timeline{grid-template-columns:repeat(4,minmax(0,1fr))}
-.referral-steps-section .timeline-step{min-width:0;border:1px solid rgba(255,255,255,.12)!important;border-radius:24px;background:linear-gradient(180deg,#122018,#1b2c22)!important;color:#f6fbf8!important;box-shadow:0 18px 34px rgba(10,31,23,.16)!important}
+.referral-steps-section .timeline{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:8px}
+.referral-steps-section .timeline-step{min-width:0;padding:28px 24px;border:1px solid rgba(255,255,255,.12)!important;border-radius:24px;background:linear-gradient(180deg,#122018,#1b2c22)!important;color:#f6fbf8!important;box-shadow:0 18px 34px rgba(10,31,23,.16)!important}
 .referral-steps-section .timeline-step span,.referral-steps-section .timeline-step h3{color:#f6fbf8!important;white-space:normal;overflow-wrap:anywhere}
 .referral-steps-section .timeline-step p{color:rgba(241,247,243,.9)!important;white-space:normal;overflow-wrap:anywhere}
 .referral-program-page .referral-program-visual,.referral-program-page .referral-program-compare{border:1px solid rgba(21,54,40,.10)}
@@ -3546,6 +3546,7 @@ css += '''
 .referral-admin-table input,.referral-admin-table select{width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:14px;background:#fff}
 @media (max-width:920px){
   .referral-nav,.referral-steps-section .timeline,.referral-portal-stats,.referral-portal-meta-grid,.referral-credit-meta,.referral-password-grid,.referral-admin-form-grid,.referral-admin-filters,.referral-admin-detail-grid{grid-template-columns:1fr}
+  .referral-steps-section .timeline{gap:16px}
   .referral-share-item{grid-column:auto}
   .referral-share-row{grid-template-columns:1fr}
 }

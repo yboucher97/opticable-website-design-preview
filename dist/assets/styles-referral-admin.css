@@ -10,6 +10,7 @@
 .referral-admin-table input,.referral-admin-table select{width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:14px;background:#fff}
 @media (max-width:920px){
   .referral-nav,.referral-steps-section .timeline,.referral-portal-stats,.referral-portal-meta-grid,.referral-credit-meta,.referral-password-grid,.referral-admin-form-grid,.referral-admin-filters,.referral-admin-detail-grid{grid-template-columns:1fr}
+  .referral-steps-section .timeline{gap:16px}
   .referral-share-item{grid-column:auto}
   .referral-share-row{grid-template-columns:1fr}
 }
