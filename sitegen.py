@@ -38,7 +38,7 @@ DEPLOY_ROOT = root / DEPLOY_DIR_NAME
 DEPLOY_ASSET_ROOT = DEPLOY_ROOT / 'assets'
 LEGACY_ROOT_BUILD_DIRS = ('en', 'fr')
 LEGACY_ROOT_BUILD_FILES = ('index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'script.js')
-STATIC_ASSET_FILES = ('logo-mark.png',)
+STATIC_ASSET_FILES = ()
 ROOT_GENERATED_ASSET_FILES = (
     'logo-ui.webp',
     'home-building.webp',
@@ -53,6 +53,7 @@ ROOT_GENERATED_ASSET_FILES = (
     'service-wifi.webp',
     'service-voip.webp',
     'styles.css',
+    'styles-home-services.css',
     'styles-promo-referral.css',
     'styles-admin-panels.css',
     'styles-articles.css',
@@ -74,12 +75,12 @@ RBQ_LICENSE_LABEL = 'Licence RBQ : 5864-1648-01'
 RBQ_LICENSE_NUMBER = '5864-1648-01'
 LOGO_UI_URL = f'/assets/logo-ui.webp?v={ASSET_VER}'
 LOGO_UI_WHITE_URL = f'/assets/logo-ui-white.webp?v={ASSET_VER}'
-LOGO_MARK_URL = f'/assets/logo-mark.png?v={ASSET_VER}'
 FAVICON_32_URL = f'/assets/favicon-32.png?v={ASSET_VER}'
 FAVICON_192_URL = f'/assets/favicon-192.png?v={ASSET_VER}'
 FAVICON_512_URL = f'/assets/favicon-512.png?v={ASSET_VER}'
 APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
+HOME_SERVICE_STYLES_URL = f'/assets/styles-home-services.css?v={ASSET_VER}'
 PROMO_REFERRAL_STYLES_URL = f'/assets/styles-promo-referral.css?v={ASSET_VER}'
 ADMIN_PANEL_STYLES_URL = f'/assets/styles-admin-panels.css?v={ASSET_VER}'
 ARTICLE_STYLES_URL = f'/assets/styles-articles.css?v={ASSET_VER}'
@@ -4890,6 +4891,7 @@ secondary_order = [
 ]
 order = primary_order + secondary_order
 services_page_chip_keys = tuple(primary_order)
+HOME_SERVICE_STYLE_PAGE_KEYS = {'home', 'services', 'about', 'industries'} | set(order) | set(INDUSTRY_DETAIL_KEYS)
 base_routes = {
     'en': {'home': '/en/', 'services': '/en/services/', 'industries': '/en/industries/', 'case-studies': '/en/case-studies/', 'blog': '/en/blog/', 'about': '/en/about/', 'faq': '/en/faq/', 'contact': '/en/contact/', 'privacy': '/en/privacy/', 'promo': '/en/promo/', 'promo-rules': '/en/promo-rules/', 'promo-unsubscribe': '/en/promo/unsubscribe/', 'promo-admin': '/en/admin/promo/', 'referral-program': '/en/referral-program/', 'referral-program-terms': '/en/referral-program/terms/', 'referral-partner-program': '/en/referral-partner-program/', 'referral-partner-program-terms': '/en/referral-partner-program/terms/', 'referral-portal': '/en/referral-portal/', 'referral-access': '/en/referral-portal/access/', 'referral-admin': '/en/admin/referrals/', 'thanks': '/en/thank-you/', 'case-office-building': '/en/case-studies/office-building/', 'case-multitenant-building': '/en/case-studies/multi-tenant-building/', 'case-retail-space': '/en/case-studies/retail-and-sales-floor/', 'case-construction-site': '/en/case-studies/construction-site/'},
     'fr': {'home': '/', 'services': '/fr/services/', 'industries': '/fr/clientele/', 'case-studies': '/fr/etudes-de-cas/', 'blog': '/fr/blogue/', 'about': '/fr/a-propos/', 'faq': '/fr/faq/', 'contact': '/fr/contact/', 'privacy': '/fr/confidentialite/', 'promo': '/fr/promo/', 'promo-rules': '/fr/reglement-promo/', 'promo-unsubscribe': '/fr/promo/desabonnement/', 'promo-admin': '/fr/admin/promo/', 'referral-program': '/fr/programme-reference/', 'referral-program-terms': '/fr/programme-reference/reglement/', 'referral-partner-program': '/fr/programme-partenaires-referents/', 'referral-partner-program-terms': '/fr/programme-partenaires-referents/reglement/', 'referral-portal': '/fr/portail-references/', 'referral-access': '/fr/portail-references/acces/', 'referral-admin': '/fr/admin/references/', 'thanks': '/fr/merci/', 'case-office-building': '/fr/etudes-de-cas/immeuble-de-bureaux/', 'case-multitenant-building': '/fr/etudes-de-cas/immeuble-multilogement/', 'case-retail-space': '/fr/etudes-de-cas/commerce-espace-de-vente/', 'case-construction-site': '/fr/etudes-de-cas/chantier-de-construction/'},
@@ -13149,6 +13151,8 @@ def icon_link_tags():
 
 def stylesheet_link_tags(page_key):
     tags = [f'<link rel="stylesheet" href="{STYLES_URL}" />']
+    if page_key in HOME_SERVICE_STYLE_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{HOME_SERVICE_STYLES_URL}" />')
     if page_key in ARTICLE_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{ARTICLE_STYLES_URL}" />')
     if page_key in PROMO_PAGE_KEYS or page_key in REFERRAL_PAGE_KEYS:
@@ -13568,6 +13572,31 @@ article_css += '''
 }
 '''.strip() + '\n'
 base_css = (base_css[:article_css_index] + base_css[article_css_end_index:]).strip() + '\n'
+home_service_css_blocks = []
+for start_marker, end_marker, error_text in (
+    (
+        '.hero-media-panel{',
+        '.hero-copy h1,.page-hero-copy h1,.section-heading h2,.cta-band h2,.gateway-panel h1,.hero-panel h2,.page-hero-panel h2{',
+        'Could not split home/service visual CSS bundle',
+    ),
+    (
+        '.hero-media-panel{',
+        '.feature-card,.service-card,.card,.contact-panel,.form-panel,.faq-item{',
+        'Could not split home/service division CSS bundle',
+    ),
+    (
+        '.hero-media-panel{',
+        '.timeline{',
+        'Could not split home/service rich card CSS bundle',
+    ),
+):
+    start_index = base_css.find(start_marker)
+    end_index = base_css.find(end_marker, start_index)
+    if start_index < 0 or end_index < 0:
+        raise RuntimeError(error_text)
+    home_service_css_blocks.append(base_css[start_index:end_index].strip())
+    base_css = (base_css[:start_index] + base_css[end_index:]).strip() + '\n'
+home_service_css = '\n'.join(block for block in home_service_css_blocks if block) + '\n'
 interactive_css = css[css_split_index:]
 referral_admin_utility_marker = '.promo-admin-toolbar{'
 referral_public_css_marker = '.referral-program-page{'
@@ -13908,6 +13937,7 @@ referral_portal_js = referral_helper_js.strip() + '\n' + referral_portal_block.s
 referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.strip() + '\ninitReferralAdmin();\n'
 
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-home-services.css').write_text(home_service_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-promo-referral.css').write_text(promo_referral_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-admin-panels.css').write_text(admin_panel_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-articles.css').write_text(article_css, encoding='utf-8')
