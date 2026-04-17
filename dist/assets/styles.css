@@ -873,34 +873,6 @@ main section::before{
   width:min(100%,1400px);
   margin:0 auto;
 }
-@supports selector(:has(*)){
-  .section-shell:not(.blog-article-shell):has(> .section-heading){
-    display:grid;
-    grid-template-columns:minmax(220px,.62fr) minmax(0,1.38fr);
-    gap:clamp(24px,3.6vw,58px);
-    align-items:start;
-  }
-  .section-shell:not(.blog-article-shell):has(> .section-heading) > *{
-    grid-column:2;
-    min-width:0;
-  }
-  .section-shell:not(.blog-article-shell):has(> .section-heading) > .section-heading{
-    grid-column:1;
-    position:sticky;
-    top:104px;
-    align-self:start;
-    margin-bottom:0;
-  }
-  @media (max-width:980px){
-    .section-shell:not(.blog-article-shell):has(> .section-heading){
-      display:block;
-    }
-    .section-shell:not(.blog-article-shell):has(> .section-heading) > .section-heading{
-      position:static;
-      margin-bottom:28px;
-    }
-  }
-}
 .breadcrumb{
   width:min(100%,1400px);
   margin:0 auto;
@@ -994,22 +966,11 @@ main section::before{
 }
 .section-heading{
   display:grid;
-  gap:14px;
+  gap:12px;
   margin-bottom:28px;
-  align-content:start;
-  padding-top:18px;
-  border-top:3px solid rgba(88,223,132,.7);
 }
 .section-heading p{
-  max-width:34ch;
-  color:#415247;
-  font-size:1rem;
-  line-height:1.74;
-}
-.section-heading h2{
-  max-width:11ch;
-  font-size:clamp(2.1rem,3vw,3.2rem);
-  line-height:.98;
+  max-width:72ch;
 }
 .feature-card h3,.service-card h3,.card h3,.contact-panel h2,.detail-item strong,.faq-item summary{
   color:#132019;
@@ -1031,28 +992,6 @@ main section::before{
 }
 .hero-actions,.page-hero-actions,.cta-actions{
   gap:12px;
-}
-.cta-band{
-  grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);
-  gap:32px;
-  align-items:stretch;
-  padding:40px;
-}
-.cta-band > :first-child{
-  display:grid;
-  align-content:start;
-  gap:14px;
-}
-.cta-band .cta-actions{
-  display:grid;
-  align-content:end;
-  gap:14px;
-  padding:22px 0 0 28px;
-  border-left:1px solid rgba(255,255,255,.14);
-}
-.cta-band .cta-actions .button{
-  width:100%;
-  justify-content:center;
 }
 .hero-focus-cloud{
   display:grid;
@@ -1172,17 +1111,6 @@ main section::before{
 }
 .feature-card,.service-card,.card,.contact-panel,.form-panel{
   background:#f8fbf8;
-}
-.form-panel{
-  position:relative;
-  overflow:hidden;
-}
-.form-panel::before{
-  content:"";
-  position:absolute;
-  inset:0 0 auto 0;
-  height:5px;
-  background:linear-gradient(90deg,#2f8a58 0%,#7ad296 56%,rgba(122,210,150,0) 100%);
 }
 .feature-card,.service-card{
   min-height:100%;
@@ -1322,10 +1250,10 @@ main section::before{
 }
 .page-contact .contact-form-column{
   display:grid;
-  gap:28px;
+  gap:24px;
 }
 .page-contact .contact-sidebar .contact-detail-card{
-  padding:20px 20px 22px;
+  padding:18px 18px 20px;
   min-height:100%;
   border-radius:16px;
   position:relative;
@@ -1334,14 +1262,11 @@ main section::before{
   display:block;
   margin-bottom:10px;
   white-space:normal;
-  font-size:1.02rem;
-  line-height:1.14;
+  line-height:1.18;
 }
 .page-contact .contact-sidebar .contact-detail-card p,
 .page-contact .contact-sidebar .contact-detail-card a{
   max-width:none;
-  font-size:1.01rem;
-  line-height:1.72;
 }
 .page-contact .contact-sidebar .contact-detail-card-direct{
   border:1px solid rgba(12,20,15,.08);
