@@ -54,6 +54,10 @@ ROOT_GENERATED_ASSET_FILES = (
     'service-voip.webp',
     'styles.css',
     'styles-promo-referral.css',
+    'styles-admin-panels.css',
+    'styles-referral-public.css',
+    'styles-referral-portal.css',
+    'styles-referral-admin.css',
     'site.js',
     'site-promo.js',
     'site-referral-public.js',
@@ -73,6 +77,10 @@ FAVICON_512_URL = f'/assets/favicon-512.png?v={ASSET_VER}'
 APPLE_TOUCH_ICON_URL = f'/assets/apple-touch-icon.png?v={ASSET_VER}'
 STYLES_URL = f'/assets/styles.css?v={ASSET_VER}'
 PROMO_REFERRAL_STYLES_URL = f'/assets/styles-promo-referral.css?v={ASSET_VER}'
+ADMIN_PANEL_STYLES_URL = f'/assets/styles-admin-panels.css?v={ASSET_VER}'
+REFERRAL_PUBLIC_STYLES_URL = f'/assets/styles-referral-public.css?v={ASSET_VER}'
+REFERRAL_PORTAL_STYLES_URL = f'/assets/styles-referral-portal.css?v={ASSET_VER}'
+REFERRAL_ADMIN_STYLES_URL = f'/assets/styles-referral-admin.css?v={ASSET_VER}'
 SCRIPT_URL = f'/assets/site.js?v={ASSET_VER}'
 PROMO_SCRIPT_URL = f'/assets/site-promo.js?v={ASSET_VER}'
 REFERRAL_PUBLIC_SCRIPT_URL = f'/assets/site-referral-public.js?v={ASSET_VER}'
@@ -13132,6 +13140,14 @@ def stylesheet_link_tags(page_key):
     tags = [f'<link rel="stylesheet" href="{STYLES_URL}" />']
     if page_key in PROMO_PAGE_KEYS or page_key in REFERRAL_PAGE_KEYS:
         tags.append(f'<link rel="stylesheet" href="{PROMO_REFERRAL_STYLES_URL}" />')
+    if page_key == 'promo-admin' or page_key in REFERRAL_PORTAL_PAGE_KEYS or page_key in REFERRAL_ADMIN_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{ADMIN_PANEL_STYLES_URL}" />')
+    if page_key in REFERRAL_PUBLIC_PAGE_KEYS or page_key in REFERRAL_PORTAL_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{REFERRAL_PUBLIC_STYLES_URL}" />')
+    if page_key in REFERRAL_PORTAL_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{REFERRAL_PORTAL_STYLES_URL}" />')
+    if page_key in REFERRAL_ADMIN_PAGE_KEYS:
+        tags.append(f'<link rel="stylesheet" href="{REFERRAL_ADMIN_STYLES_URL}" />')
     return ''.join(tags)
 
 
@@ -13495,7 +13511,30 @@ css_split_index = css.find(css_split_marker)
 if css_split_index < 0:
     raise RuntimeError('Could not split promo/referral CSS bundle')
 base_css = css[:css_split_index].strip() + '\n'
-promo_referral_css = css[css_split_index:].strip() + '\n'
+interactive_css = css[css_split_index:]
+referral_admin_utility_marker = '.promo-admin-toolbar{'
+referral_public_css_marker = '.referral-program-page{'
+referral_private_css_marker = '.referral-portal-shell,.referral-admin-shell{'
+referral_admin_css_marker = '.referral-admin-table{'
+admin_utility_index = interactive_css.find(referral_admin_utility_marker)
+referral_public_css_index = interactive_css.find(referral_public_css_marker, admin_utility_index)
+referral_private_css_index = interactive_css.find(referral_private_css_marker, referral_public_css_index)
+referral_admin_css_index = interactive_css.find(referral_admin_css_marker, referral_private_css_index)
+if (
+    admin_utility_index < 0
+    or referral_public_css_index < 0
+    or referral_private_css_index < 0
+    or referral_admin_css_index < 0
+):
+    raise RuntimeError('Could not split promo/referral CSS bundle into page-group styles')
+promo_referral_css = interactive_css[:admin_utility_index].strip() + '\n'
+referral_admin_utility_css = interactive_css[admin_utility_index:referral_public_css_index]
+referral_public_css = interactive_css[referral_public_css_index:referral_private_css_index].strip() + '\n'
+referral_private_css = interactive_css[referral_private_css_index:referral_admin_css_index]
+referral_admin_only_css = interactive_css[referral_admin_css_index:]
+admin_panel_css = referral_admin_utility_css.strip() + '\n'
+referral_portal_css = referral_private_css.strip() + '\n'
+referral_admin_css = referral_admin_only_css.strip() + '\n'
 
 promo_helper_marker = 'function promoPayloadCopy(node, selector) {'
 promo_section_marker = "  const promoRoots = document.querySelectorAll('[data-promo-root]');"
@@ -13551,6 +13590,10 @@ referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.str
 
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-promo-referral.css').write_text(promo_referral_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-admin-panels.css').write_text(admin_panel_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-referral-public.css').write_text(referral_public_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-referral-portal.css').write_text(referral_portal_css, encoding='utf-8')
+(DEPLOY_ASSET_ROOT / 'styles-referral-admin.css').write_text(referral_admin_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site.js').write_text(base_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-promo.js').write_text(promo_js, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'site-referral-public.js').write_text(referral_public_js, encoding='utf-8')

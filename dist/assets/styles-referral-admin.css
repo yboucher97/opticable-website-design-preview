@@ -1,0 +1,15 @@
+.referral-admin-table{min-width:1320px}
+.referral-portal-cases-table th:nth-child(3),.referral-portal-cases-table td:nth-child(3){min-width:170px}
+.referral-admin-cases-table th:nth-child(4),.referral-admin-cases-table td:nth-child(4){min-width:170px}
+.referral-detail-cases-table th:nth-child(2),.referral-detail-cases-table td:nth-child(2){min-width:170px}
+.referral-portal-grids .contact-panel,.referral-admin-detail-panel .contact-panel,.referral-admin-shell > .contact-panel{overflow:hidden}
+.referral-mini-table th,.referral-admin-table th{white-space:nowrap}
+.referral-mini-table td,.referral-admin-table td{white-space:nowrap}
+.referral-mini-table td .form-note,.referral-admin-table td .form-note{white-space:normal;min-width:220px}
+.referral-mini-table td p,.referral-admin-table td p{margin:0}
+.referral-admin-table input,.referral-admin-table select{width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:14px;background:#fff}
+@media (max-width:920px){
+  .referral-nav,.referral-steps-section .timeline,.referral-portal-stats,.referral-portal-meta-grid,.referral-credit-meta,.referral-password-grid,.referral-admin-form-grid,.referral-admin-filters,.referral-admin-detail-grid{grid-template-columns:1fr}
+  .referral-share-item{grid-column:auto}
+  .referral-share-row{grid-template-columns:1fr}
+}

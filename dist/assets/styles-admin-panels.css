@@ -1,0 +1,33 @@
+.promo-admin-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+.promo-admin-scope{display:flex;flex-wrap:wrap;gap:10px}
+.promo-admin-scope .button[aria-pressed="true"]{background:var(--primary-dark);border-color:var(--primary-dark);color:#fff}
+.promo-admin-actions{display:flex;flex-wrap:wrap;gap:10px}
+.promo-admin-summary,.promo-admin-meta{display:grid;gap:18px}
+.promo-admin-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+.promo-admin-meta{grid-template-columns:repeat(3,minmax(0,1fr))}
+.promo-admin-meta .detail-item p,.promo-admin-summary .detail-item p{margin:0;line-height:1.4;color:var(--text)}
+.promo-admin-select-all{display:inline-flex;align-items:center;gap:10px;font-weight:700}
+.promo-admin-select-all input,.promo-admin-table tbody input[type="checkbox"]{width:18px;height:18px;accent-color:var(--primary)}
+.promo-admin-table-shell{overflow:auto;border:1px solid var(--line);border-radius:24px;background:#fff}
+.promo-admin-table{width:100%;min-width:1180px;border-collapse:collapse}
+.promo-admin-table th,.promo-admin-table td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.promo-admin-table thead th{position:sticky;top:0;background:var(--surface-soft);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-dark);z-index:1}
+.promo-admin-table tbody tr:nth-child(even){background:rgba(247,250,247,.6)}
+.promo-admin-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.promo-admin-empty{padding:20px 22px;border:1px dashed var(--line-strong);border-radius:20px;background:var(--surface-soft);color:var(--muted)}
+.promo-admin-actions .is-disabled{pointer-events:none;opacity:.6}
+@media (max-width:920px){
+  .promo-hero-grid,.promo-how-section .timeline,.promo-result-grid,.promo-rules-summary-section .grid-2,.promo-rules-section .grid-2,.promo-services-grid,.promo-related-grid,.promo-admin-summary,.promo-admin-meta{grid-template-columns:1fr}
+  .promo-reminder-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .promo-result-dialog{padding:24px 20px}
+  .promo-result-code-row{grid-template-columns:1fr}
+  .promo-result-code-actions{display:grid;grid-template-columns:1fr}
+  .promo-copy-button,.promo-save-button{width:100%}
+  .promo-reminder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promo-reminder-grid .detail-item:nth-child(2){grid-column:1/-1}
+  .promo-admin-toolbar,.promo-admin-actions,.promo-admin-scope{display:grid;grid-template-columns:1fr}
+}
+
+.referral-checklist{margin-top:4px}

@@ -1,0 +1,60 @@
+.referral-portal-shell,.referral-admin-shell{display:grid;gap:20px}
+.referral-apply-shell,.referral-portal-shell,.referral-admin-shell{background:#fff;color:var(--text)}
+.referral-apply-shell h2,.referral-portal-shell h2,.referral-admin-shell h2,.referral-access-shell h2,.referral-access-shell h3{color:var(--text)}
+.referral-apply-shell p,.referral-portal-shell p,.referral-admin-shell p,.referral-access-shell p{color:inherit}
+.referral-portal-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
+.referral-portal-copy{display:grid;gap:6px}
+.referral-portal-copy h2{margin:0;font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif}
+.referral-portal-copy p{margin:0;color:var(--muted)}
+.referral-auth-grid,.referral-admin-grids,.referral-portal-grids{display:grid;gap:20px}
+.referral-auth-card,.referral-program-banner,.referral-portal-help,.referral-portal-security{display:grid;gap:12px}
+.referral-program-banner{border:1px solid rgba(21,54,40,.10);background:linear-gradient(135deg,#173826,#254f39);color:#f5fbf7}
+.referral-program-banner p{color:rgba(245,251,247,.92)!important}
+.referral-program-banner .eyebrow{color:#bfe5cb}
+.referral-program-banner h2{color:#fff!important}
+.referral-portal-shell.is-client .referral-program-banner{background:linear-gradient(135deg,#173826,#2b6c49)}
+.referral-portal-shell.is-partner .referral-program-banner{background:linear-gradient(135deg,#16263d,#264c7b)}
+.referral-portal-shell.is-partner .referral-program-banner .eyebrow{color:#c4dbff}
+.referral-portal-shell.is-partner .detail-item{border-color:rgba(38,76,123,.22)}
+.referral-portal-shell.is-partner .detail-item strong{color:#16365b}
+.referral-portal-shell.is-client .detail-item strong{color:#1f6640}
+.referral-portal-stats{grid-template-columns:repeat(6,minmax(0,1fr))}
+.referral-portal-meta-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-portal-grids{grid-template-columns:1fr}
+.referral-portal-stats .detail-item,.referral-portal-meta-grid .detail-item,.referral-credit-meta .detail-item{min-width:0}
+.referral-portal-stats .detail-item strong,.referral-portal-meta-grid .detail-item strong,.referral-credit-meta .detail-item strong{line-height:1.35;overflow-wrap:anywhere}
+.referral-summary-note,.referral-section-intro{margin:0}
+.referral-share-item{grid-column:span 2}
+.referral-portal-help{display:grid;gap:12px}
+.referral-help-list{display:grid;gap:10px}
+.referral-credit-panel{display:grid;gap:16px}
+.referral-credit-meta{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-credit-grid{grid-template-columns:minmax(0,280px)}
+.referral-share-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.referral-share-link{display:block;min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.referral-copy-button{min-width:112px}
+.referral-inline-note{display:block;margin-top:8px;color:var(--muted);font-size:.92rem}
+.referral-password-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-admin-form-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.referral-status-field{grid-column:span 2}
+.referral-status-field select,.referral-status-filter-field select{min-width:220px}
+.referral-admin-checkbox{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface-soft);font-weight:600}
+.referral-admin-checkbox input{width:18px;height:18px;accent-color:var(--primary);margin-top:2px}
+.referral-admin-action-stack,.referral-admin-code-stack{display:grid;gap:8px}
+.referral-admin-action-stack .button{width:100%}
+.referral-admin-view-button{padding:0;border:0;background:none;color:var(--primary-dark);font-weight:700;text-align:left}
+.referral-admin-view-button:hover,.referral-admin-view-button:focus-visible{text-decoration:underline}
+.referral-admin-code-stack .promo-admin-code{margin:0}
+.referral-admin-filters{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:18px}
+.referral-admin-detail-panel{display:grid;gap:18px}
+.referral-admin-detail-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
+.referral-admin-detail-header h3{margin:0}
+.referral-admin-detail-header p{margin:0;color:var(--muted)}
+.referral-admin-section-header{display:grid;gap:6px}
+.referral-admin-section-header h3,.referral-admin-section-header p{margin:0}
+.referral-admin-section-header p{color:var(--muted)}
+.referral-admin-projects-panel{display:grid;gap:18px}
+.referral-admin-detail-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.referral-admin-detail-tables{align-items:start}
+.referral-admin-grids{grid-template-columns:1fr}
+.referral-mini-table,
