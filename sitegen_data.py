@@ -5416,6 +5416,13 @@ async function initPromoForms() {
     if (skillTokenField) {
       skillTokenField.value = config.challenge.token || '';
     }
+    if (config.previewBypassTurnstile) {
+      turnstileMount.hidden = true;
+      turnstileToken = 'preview-bypass';
+      submit.disabled = false;
+      showStatus('');
+      continue;
+    }
     try {
       const turnstile = await loadPromoTurnstileScript();
       widgetId = turnstile.render(turnstileMount, {
@@ -6095,7 +6102,8 @@ function initReferralPortal() {
         status.hidden = true;
         errorNode.hidden = true;
         const response = await fetch(portalUrl, { headers: { Accept: 'application/json' } });
-        if (response.status === 401) {
+        const payload = await response.json();
+        if (response.status === 401 || payload.authRequired) {
           showAuth(true);
           if (authMessage()) {
             status.hidden = true;
@@ -6107,7 +6115,6 @@ function initReferralPortal() {
           }
           return;
         }
-        const payload = await response.json();
         if (!response.ok || !payload.ok) {
           throw new Error(payload.error || copy.genericError || '');
         }
@@ -6322,11 +6329,11 @@ function initReferralAccess() {
       setInlineMessage(errorNode, '');
       try {
         const response = await fetch(portalUrl, { headers: { Accept: 'application/json' } });
-        if (response.status === 401) {
+        const payload = await response.json();
+        if (response.status === 401 || payload.authRequired) {
           showRequest(authMessage() || copy.notReady || '', Boolean(authMessage()));
           return;
         }
-        const payload = await response.json();
         if (!response.ok || !payload.ok) {
           throw new Error(payload.error || copy.genericError || '');
         }
@@ -6395,7 +6402,11 @@ function initReferralAccess() {
         setInlineMessage(passwordError, error.message || copy.genericError || '');
       }
     });
-    loadAccessState();
+    if (authState || query.searchParams.get('reset') === 'ready') {
+      loadAccessState();
+    } else {
+      showRequest(copy.notReady || '', false);
+    }
   });
 }
 function initReferralAdmin() {

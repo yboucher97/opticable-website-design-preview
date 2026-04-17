@@ -302,7 +302,12 @@ function partnerApplicationEmailCopy(locale, application) {
 }
 
 function sessionSecret(env) {
-  return env.REFERRAL_SESSION_SECRET || env.PROMO_SIGNING_SECRET || env.PROMO_TURNSTILE_SECRET || "";
+  return env.REFERRAL_SESSION_SECRET
+    || env.PROMO_SIGNING_SECRET
+    || env.PROMO_TURNSTILE_SECRET
+    || (["1", "true", "yes", "on"].includes(String(env.PREVIEW_MODE || "").trim().toLowerCase())
+      ? "design-preview-referral-session-secret"
+      : "");
 }
 
 async function hashPayload(value) {
@@ -1763,7 +1768,7 @@ async function handleReferralPortal(request, env) {
   const session = await readPortalSession(request, env);
   let account = await loadPortalAccount(request, env);
   if (!account) {
-    return jsonResponse({ ok: false, error: TEXT.en.authRequired }, 401, { "Set-Cookie": clearSessionCookieHeader() });
+    return jsonResponse({ ok: false, authRequired: true, error: TEXT.en.authRequired }, 200, { "Set-Cookie": clearSessionCookieHeader() });
   }
   account = await ensureAccountCodesIfActive(env, account, nowIso());
   const stats = await env.REFERRAL_DB.prepare(

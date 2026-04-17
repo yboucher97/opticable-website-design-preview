@@ -3963,9 +3963,9 @@ base_js = base_js.strip() + '\n' + site_config_js.strip() + '\ninitSiteConfig();
 promo_public_js = shared_promo_helper_js.strip() + '\n' + promo_public_block.strip() + '\ninitPromoForms();\n'
 promo_unsubscribe_js = shared_promo_helper_js.strip() + '\n' + promo_unsubscribe_block.strip() + '\ninitPromoUnsubscribe();\n'
 promo_admin_js = shared_promo_helper_js.strip() + '\n' + promo_admin_block.strip() + '\ninitPromoAdmin();\n'
-referral_public_js = referral_helper_js.strip() + '\n' + referral_public_block.strip() + '\ninitReferralApplyForms();\n'
-referral_portal_js = referral_helper_js.strip() + '\n' + referral_portal_block.strip() + '\ninitReferralPortal();\ninitReferralAccess();\n'
-referral_admin_js = referral_helper_js.strip() + '\n' + referral_admin_block.strip() + '\ninitReferralAdmin();\n'
+referral_public_js = shared_promo_helper_js.strip() + '\n' + referral_helper_js.strip() + '\n' + referral_public_block.strip() + '\ninitReferralApplyForms();\n'
+referral_portal_js = shared_promo_helper_js.strip() + '\n' + referral_helper_js.strip() + '\n' + referral_portal_block.strip() + '\ninitReferralPortal();\ninitReferralAccess();\n'
+referral_admin_js = shared_promo_helper_js.strip() + '\n' + referral_helper_js.strip() + '\n' + referral_admin_block.strip() + '\ninitReferralAdmin();\n'
 
 (DEPLOY_ASSET_ROOT / 'styles.css').write_text(base_css, encoding='utf-8')
 (DEPLOY_ASSET_ROOT / 'styles-home-services.css').write_text(home_service_css, encoding='utf-8')

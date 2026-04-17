@@ -7,8 +7,10 @@
   "vars": {
     "PROMO_TURNSTILE_SITE_KEY": "0x4AAAAAAC2RkCsNJ9_amJwl",
     "PROMO_WEB_ANALYTICS_TOKEN": "e665c94202a846ca8472a2fed08999ae",
-    "REFERRAL_DEV_MAGIC_LINKS": "0",
-    "PREVIEW_MODE": "1"
+    "REFERRAL_DEV_MAGIC_LINKS": "1",
+    "PREVIEW_MODE": "1",
+    "PREVIEW_DISABLE_APIS": "0",
+    "PREVIEW_BYPASS_TURNSTILE": "1"
   },
   "d1_databases": [
     {

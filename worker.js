@@ -87,6 +87,14 @@ function isPreviewMode(env) {
   return ["1", "true", "yes", "on"].includes(String(env.PREVIEW_MODE || "").trim().toLowerCase());
 }
 
+function previewApisDisabled(env) {
+  return ["1", "true", "yes", "on"].includes(String(env.PREVIEW_DISABLE_APIS || "").trim().toLowerCase());
+}
+
+function previewTurnstileBypassEnabled(env) {
+  return isPreviewMode(env) && ["1", "true", "yes", "on"].includes(String(env.PREVIEW_BYPASS_TURNSTILE || "").trim().toLowerCase());
+}
+
 function withResponseHeaders(response, pathname, env) {
   const headers = new Headers(response.headers);
   headers.set("Strict-Transport-Security", HSTS_VALUE);
@@ -124,8 +132,12 @@ function campaignWindowOpen(now = new Date()) {
   return now >= new Date(promoConfig.startAt) && now <= new Date(promoConfig.endAt);
 }
 
+function promoSigningSecret(env) {
+  return env.PROMO_SIGNING_SECRET || env.PROMO_TURNSTILE_SECRET || (previewTurnstileBypassEnabled(env) ? "design-preview-skill-secret" : "");
+}
+
 function hasPromoEnv(env) {
-  return Boolean(env.PROMO_DB && env.PROMO_TURNSTILE_SITE_KEY && env.PROMO_TURNSTILE_SECRET);
+  return Boolean(env.PROMO_DB && env.PROMO_TURNSTILE_SITE_KEY && (env.PROMO_TURNSTILE_SECRET || previewTurnstileBypassEnabled(env)));
 }
 
 function safeTrim(value, max = 500) {
@@ -176,7 +188,7 @@ async function signHmac(secret, data) {
 }
 
 async function createSkillChallenge(env, locale) {
-  const secret = env.PROMO_SIGNING_SECRET || env.PROMO_TURNSTILE_SECRET;
+  const secret = promoSigningSecret(env);
   if (!secret) {
     return null;
   }
@@ -198,7 +210,7 @@ async function createSkillChallenge(env, locale) {
 }
 
 async function verifySkillChallenge(env, token, answer, locale) {
-  const secret = env.PROMO_SIGNING_SECRET || env.PROMO_TURNSTILE_SECRET;
+  const secret = promoSigningSecret(env);
   if (!secret || !token) {
     return { ok: false };
   }
@@ -230,6 +242,9 @@ async function verifySkillChallenge(env, token, answer, locale) {
 }
 
 async function verifyTurnstile(request, env, responseToken) {
+  if (previewTurnstileBypassEnabled(env)) {
+    return { success: true };
+  }
   if (!env.PROMO_TURNSTILE_SECRET) {
     return { success: false };
   }
@@ -682,6 +697,7 @@ async function handlePromoConfig(request, env) {
   return jsonResponse({
     ok: true,
     available: hasPromoEnv(env) && campaignWindowOpen() && Boolean(challenge),
+    previewBypassTurnstile: previewTurnstileBypassEnabled(env),
     campaignId: promoConfig.campaignId,
     campaignName: promoConfig.campaignName[locale],
     startsAt: promoConfig.startAt,
@@ -924,7 +940,7 @@ async function handlePromoUnsubscribe(request, env) {
 async function handleSiteConfig(_request, env) {
   return jsonResponse({
     ok: true,
-    analyticsToken: env.PROMO_WEB_ANALYTICS_TOKEN || "",
+    analyticsToken: isPreviewMode(env) ? "" : (env.PROMO_WEB_ANALYTICS_TOKEN || ""),
     promoStorageKey: PROMO_STORAGE_KEY,
   });
 }
@@ -1169,7 +1185,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/")) {
-      if (isPreviewMode(env)) {
+      if (isPreviewMode(env) && previewApisDisabled(env)) {
         return withResponseHeaders(
           jsonResponse(
             {

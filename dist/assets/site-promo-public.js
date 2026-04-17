@@ -227,6 +227,13 @@ async function initPromoForms() {
     if (skillTokenField) {
       skillTokenField.value = config.challenge.token || '';
     }
+    if (config.previewBypassTurnstile) {
+      turnstileMount.hidden = true;
+      turnstileToken = 'preview-bypass';
+      submit.disabled = false;
+      showStatus('');
+      continue;
+    }
     try {
       const turnstile = await loadPromoTurnstileScript();
       widgetId = turnstile.render(turnstileMount, {
