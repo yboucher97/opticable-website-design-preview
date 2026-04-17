@@ -609,7 +609,7 @@ T = {
     'en': {
         'lang': 'en', 'locale': 'en_CA', 'switch': 'FR', 'skip': 'Skip to content', 'menu': 'Menu',
         'home': 'Home', 'services': 'Services', 'industries': 'Industries', 'about': 'About', 'faq': 'FAQ', 'contact': 'Contact',
-        'tagline': 'Low-voltage infrastructure specialist', 'quote': 'Request a quote', 'all_services': 'View all services',
+        'tagline': 'Low-voltage infrastructure specialist', 'quote': 'Request a quote', 'all_services': 'Explore services',
         'company': 'Opticable installs and manages commercial cabling, fiber, network infrastructure, security, access control, intercom, WiFi, and IP phone systems for businesses and managed properties.',
         'cta_kicker': 'Project Intake', 'cta_title': 'Need a low-voltage contractor for a commercial property, tenant fit-out, or infrastructure upgrade?', 'cta_copy': 'Use the contact page to send a bilingual quote request and explain the services, device counts, or building systems involved.',
         'footer': 'Opticable delivers organized low-voltage infrastructure for businesses, multi-tenant buildings, commercial properties, property managers, and developers.',
@@ -651,7 +651,7 @@ T = {
     'fr': {
         'lang': 'fr', 'locale': 'fr_CA', 'switch': 'EN', 'skip': 'Aller au contenu', 'menu': 'Menu',
         'home': 'Accueil', 'services': 'Services', 'industries': 'Secteurs', 'about': 'A propos', 'faq': 'FAQ', 'contact': 'Contact',
-        'tagline': 'Specialiste des infrastructures basse tension', 'quote': 'Demander une soumission', 'all_services': 'Voir tous les services',
+        'tagline': 'Specialiste des infrastructures basse tension', 'quote': 'Demander une soumission', 'all_services': 'Explorer les services',
         'company': 'Opticable installe et gere les infrastructures commerciales de cablage, fibre optique, reseau, securite, controle d acces, interphone, WiFi et telephonie IP pour les entreprises et les proprietes gerees.',
         'cta_kicker': 'Demande de projet', 'cta_title': 'Besoin d un entrepreneur basse tension pour une propriete commerciale, un amenagement locatif ou une mise a niveau d infrastructure?', 'cta_copy': 'Utilisez la page contact pour envoyer une demande de soumission bilingue et decrire les services, les quantites d appareils ou les systemes du batiment concernes.',
         'footer': 'Opticable livre des infrastructures basse tension ordonnees pour les entreprises, les immeubles multilogements, les proprietes commerciales, les gestionnaires immobiliers et les promoteurs.',
@@ -3759,8 +3759,8 @@ BLOG_PAGE = {
         'h1': 'Opticable blog — Technology for commercial properties',
         'intro': 'Practical articles about cameras, access control, commercial WiFi, cabling, and network infrastructure for property managers, contractors, and building owners.',
         'empty': 'The first articles are coming soon. In the meantime, review our service pages or contact us directly with your technical questions.',
-        'primary_cta': 'View our services',
-        'secondary_cta': 'Contact us',
+        'primary_cta': 'Explore services',
+        'secondary_cta': 'Request a quote',
         'listing_title': 'Articles',
         'listing_intro': 'This layout is ready for article cards with title, date, excerpt, and link.',
     },
@@ -3771,8 +3771,8 @@ BLOG_PAGE = {
         'h1': 'Blogue Opticable — Technologie pour immeubles commerciaux',
         'intro': "Des articles pratiques sur les caméras, le contrôle d'accès, le WiFi commercial, le câblage et l'infrastructure réseau pour les gestionnaires, entrepreneurs et propriétaires d'immeubles.",
         'empty': "Les premiers articles arrivent bientôt. En attendant, consultez nos pages de services ou contactez-nous directement pour vos questions techniques.",
-        'primary_cta': 'Voir nos services',
-        'secondary_cta': 'Nous contacter',
+        'primary_cta': 'Explorer les services',
+        'secondary_cta': 'Demander une soumission',
         'listing_title': 'Articles',
         'listing_intro': 'Des ressources pratiques sur le WiFi, le câblage, la sécurité et les systèmes techniques de bâtiment.',
     },
@@ -3785,8 +3785,8 @@ BLOG_PAGE['en'] = {
     'h1': 'Opticable blog — Technology for commercial buildings',
     'intro': 'Practical articles about cameras, access control, commercial WiFi, cabling, and network infrastructure for property managers, contractors, and building owners.',
     'empty': 'The first articles are coming soon. In the meantime, review our service pages or contact us directly with your technical questions.',
-    'primary_cta': 'View our services',
-    'secondary_cta': 'Contact us',
+    'primary_cta': 'Explore services',
+    'secondary_cta': 'Request a quote',
     'listing_title': 'Articles',
     'listing_intro': 'Practical resources about WiFi, cabling, security, and supporting building infrastructure.',
 }
@@ -8095,8 +8095,19 @@ main section+section{
   --primary-soft:#e5f9ea;
   --shadow:0 28px 80px rgba(8,18,12,.08);
   --radius:32px;
+  --display-family:"Aptos Display","Segoe UI Variable Display","Segoe UI",sans-serif;
+  --body-family:"Aptos","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --copy-max:66ch;
+  --copy-loose:1.84;
 }
 body{
+  font-family:var(--body-family);
+  font-size:17px;
+  line-height:1.66;
+  letter-spacing:.002em;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  font-kerning:normal;
   background:
     radial-gradient(circle at 10% 0%,rgba(77,220,122,.16),transparent 24%),
     radial-gradient(circle at 100% 14%,rgba(13,27,19,.08),transparent 22%),
@@ -8122,6 +8133,8 @@ body::before{
 }
 .site-nav a,.footer-links a,.footer-services a,.footer-contact-list a,.text-link{
   color:rgba(235,242,236,.72);
+  font-size:.97rem;
+  letter-spacing:.01em;
 }
 .site-nav a:hover,.site-nav a:focus-visible,.site-nav a[aria-current="page"],.footer-links a:hover,.footer-links a:focus-visible,.footer-services a:hover,.footer-services a:focus-visible,.text-link:hover,.text-link:focus-visible,.footer-contact-list a:hover,.footer-contact-list a:focus-visible{
   color:#9bffb9;
@@ -8136,10 +8149,13 @@ body::before{
   padding:0 24px;
   border-radius:18px;
   font-weight:800;
+  letter-spacing:.01em;
+  gap:10px;
 }
 .button-primary{
   background:linear-gradient(135deg,#5ce482 0%,#31ba61 100%);
   color:#09110c;
+  border-color:rgba(13,27,19,.06);
   box-shadow:0 14px 34px rgba(77,220,122,.28);
 }
 .button-primary:hover,.button-primary:focus-visible{
@@ -8165,15 +8181,30 @@ body::before{
   color:#f5fbf7;
   font-size:clamp(2.2rem,4vw,4.15rem);
   line-height:1;
+  text-wrap:balance;
 }
 .page-hero-copy h1{
   font-size:clamp(1.95rem,3vw,3rem);
 }
 .hero-copy>p:not(.eyebrow),.page-hero-copy>p:not(.eyebrow),.cta-band p{
   color:rgba(233,241,236,.78);
+  max-width:60ch;
+  font-size:clamp(1.05rem,1.12vw,1.2rem);
+  line-height:var(--copy-loose);
 }
 .hero-copy .eyebrow,.page-hero-copy .eyebrow,.cta-band .eyebrow,.division-card .eyebrow,.contact-sidebar .eyebrow{
   color:#8dffb0;
+}
+.hero-actions .button-primary,.page-hero-actions .button-primary,.cta-actions .button-primary{
+  padding-inline:28px;
+}
+.hero-actions .button-primary::after,.page-hero-actions .button-primary::after,.cta-actions .button-primary::after{
+  content:"->";
+  font-size:.95rem;
+  line-height:1;
+}
+.hero-actions .button-secondary,.page-hero-actions .button-secondary,.cta-actions .button-secondary{
+  background:rgba(255,255,255,.02);
 }
 .hero-focus-cloud{
   display:flex;
@@ -8650,13 +8681,20 @@ main section::before{
   margin-bottom:28px;
 }
 .section-heading p{
-  max-width:72ch;
+  max-width:var(--copy-max);
+  font-size:1.04rem;
+  line-height:1.78;
 }
 .feature-card h3,.service-card h3,.card h3,.contact-panel h2,.detail-item strong,.faq-item summary{
   color:#132019;
+  font-family:var(--display-family);
+  font-weight:720;
+  letter-spacing:-.018em;
+  text-wrap:balance;
 }
 .feature-card p,.service-card p,.card p,.faq-item p,.detail-item p,.detail-item a,.contact-panel:not(.contact-sidebar) p,.contact-panel:not(.contact-sidebar) .text-link,.form-note{
   color:#344439;
+  line-height:1.76;
 }
 .trust-section .section-heading p,.featured-section .section-heading p,.priority-section .section-heading p,.support-section .section-heading p,.extra-section .section-heading p,.about-values-section .section-heading p,.clients-section .section-heading p,.coverage-section .section-heading p,.service-overview-section .section-heading p,.service-cases-section .section-heading p,.carousel-section .section-heading p,.faq-section .section-heading p,.privacy-section .section-heading p,.privacy-choices-section .section-heading p,.industries-section .section-heading p,.thanks-section .section-heading p{
   color:var(--muted);
@@ -9351,7 +9389,8 @@ css += '''
 }
 .blog-grid-single .blog-article-card{
   grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);
-  padding:30px;
+  gap:32px;
+  padding:34px;
 }
 .blog-article-card-main,
 .blog-article-card-side{
@@ -9360,8 +9399,11 @@ css += '''
   gap:16px;
 }
 .blog-grid-single .blog-article-card-main h3{
-  font-size:clamp(1.5rem,2vw,2rem);
-  line-height:1.16;
+  font-family:var(--display-family);
+  font-size:clamp(1.62rem,2.05vw,2.14rem);
+  line-height:1.12;
+  letter-spacing:-.022em;
+  text-wrap:balance;
 }
 .blog-article-card-main{
   position:relative;
@@ -9420,7 +9462,7 @@ css += '''
   color:var(--primary-dark);
   font-size:.8rem;
   font-weight:800;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   text-transform:uppercase;
 }
 .blog-card-surface-link::after{
@@ -9458,7 +9500,7 @@ css += '''
 .blog-meta-item span{
   color:var(--muted);
   font-size:.96rem;
-  line-height:1.38;
+  line-height:1.5;
 }
 .blog-card-link{
   width:100%;
@@ -9516,17 +9558,19 @@ css += '''
 }
 .blog-article-hero{
   grid-template-columns:minmax(0,1.34fr) minmax(320px,.66fr);
-  gap:24px;
+  gap:28px;
   align-items:stretch;
 }
 .blog-article-hero .page-hero-copy h1{
-  max-width:15ch;
-  font-size:clamp(2.05rem,3.2vw,3.1rem);
+  max-width:13ch;
+  font-size:clamp(2.18rem,3.35vw,3.35rem);
+  line-height:1.02;
 }
 .blog-article-hero .page-hero-copy > p:not(.eyebrow){
   max-width:58ch;
-  font-size:1.08rem;
-  padding-left:18px;
+  font-size:1.12rem;
+  line-height:1.86;
+  padding-left:20px;
   border-left:3px solid rgba(122,210,150,.58);
   color:rgba(245,251,247,.84);
 }
@@ -9562,7 +9606,7 @@ css += '''
 .blog-summary-section,
 .blog-article-section,
 .blog-article-cta{
-  padding:18px 22px;
+  padding:24px 28px;
 }
 .blog-summary-section+.blog-article-section,
 .blog-article-section+.blog-article-section,
@@ -9575,17 +9619,21 @@ css += '''
 }
 .blog-summary-card h3{
   margin:0;
-  font-size:1.22rem;
-  line-height:1.16;
+  font-family:var(--display-family);
+  font-size:1.24rem;
+  font-weight:720;
+  line-height:1.14;
+  letter-spacing:-.018em;
+  text-wrap:balance;
 }
 .blog-summary-card p:last-child{
   margin:0;
 }
 .blog-section-stack{
   display:grid;
-  gap:14px;
+  gap:18px;
   position:relative;
-  padding-top:18px;
+  padding-top:22px;
 }
 .blog-section-stack::before{
   content:"";
@@ -9597,8 +9645,8 @@ css += '''
   background:linear-gradient(90deg,rgba(12,20,15,.18),rgba(12,20,15,.06));
 }
 .blog-section-stack .section-heading{
-  gap:8px;
-  margin-bottom:8px;
+  gap:10px;
+  margin-bottom:10px;
 }
 .blog-section-intro{
   display:grid;
@@ -9614,15 +9662,31 @@ css += '''
 }
 .blog-prose-panel{
   display:grid;
-  gap:14px;
-  padding:22px 24px;
+  gap:18px;
+  padding:28px 30px;
 }
 .blog-prose-panel p{
   margin:0;
-  max-width:78ch;
-  color:var(--muted);
-  font-size:1.03rem;
+  max-width:72ch;
+  color:#314036;
+  font-size:1.075rem;
+  line-height:1.9;
+}
+.blog-prose-panel ul,
+.blog-prose-panel ol,
+.blog-subsection ul,
+.blog-subsection ol{
+  display:grid;
+  gap:10px;
+  margin:0;
+  padding-left:1.2rem;
+  color:#314036;
+  font-size:1.02rem;
   line-height:1.78;
+}
+.blog-prose-panel li,
+.blog-subsection li{
+  max-width:70ch;
 }
 .blog-subsection-stack,
 .blog-comparison-list,
@@ -9647,7 +9711,11 @@ css += '''
 }
 .blog-table-head h3{
   margin:0;
-  font-size:1.24rem;
+  font-family:var(--display-family);
+  font-size:1.26rem;
+  font-weight:720;
+  letter-spacing:-.018em;
+  text-wrap:balance;
 }
 .blog-table-head p{
   margin:10px 0 0;
@@ -9665,7 +9733,7 @@ css += '''
 }
 .blog-table th,
 .blog-table td{
-  padding:18px 20px;
+  padding:20px 22px;
   border-right:1px solid rgba(12,20,15,.08);
   border-bottom:1px solid rgba(12,20,15,.08);
   text-align:left;
@@ -9696,7 +9764,7 @@ css += '''
 .blog-table tbody td{
   color:var(--muted);
   background:#fbfdfb;
-  line-height:1.55;
+  line-height:1.66;
 }
 .blog-pill{
   display:inline-flex;
@@ -9756,7 +9824,11 @@ css += '''
 .blog-subsection h3,
 .blog-step-card h3{
   margin:0;
-  font-size:1.22rem;
+  font-family:var(--display-family);
+  font-size:1.24rem;
+  font-weight:720;
+  letter-spacing:-.018em;
+  text-wrap:balance;
 }
 .blog-compare-card .grid-2{
   gap:0;
@@ -9782,7 +9854,8 @@ css += '''
 .blog-step-card p{
   margin:0;
   color:var(--muted);
-  line-height:1.72;
+  font-size:1.02rem;
+  line-height:1.78;
 }
 .blog-compare-side:first-child{
   background:rgba(239,68,68,.05);
@@ -9829,8 +9902,8 @@ css += '''
 .blog-callout p{
   margin:0;
   color:var(--text);
-  font-size:1.06rem;
-  line-height:1.7;
+  font-size:1.1rem;
+  line-height:1.76;
 }
 .blog-quote{
   padding:22px 0;
@@ -9844,11 +9917,11 @@ css += '''
 .blog-quote p{
   margin:0;
   color:#153628;
-  font-family:"Segoe UI Variable Display","Aptos Display","Segoe UI",sans-serif;
-  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-family:var(--display-family);
+  font-size:clamp(1.52rem,2.5vw,2.08rem);
   font-weight:760;
-  line-height:1.18;
-  letter-spacing:-.02em;
+  line-height:1.22;
+  letter-spacing:-.024em;
   text-align:center;
 }
 .case-study-systems{
