@@ -13,6 +13,7 @@ from sitegen_media import (
     remove_legacy_root_build,
     reset_deploy_dir,
 )
+from sitegen_validate import validate_build
 
 def normalize_output_content(content):
     return content.strip() + '\n'
@@ -4928,3 +4929,4 @@ else:
 (DEPLOY_ROOT / 'site.webmanifest').write_text(webmanifest_json(), encoding='utf-8')
 (DEPLOY_ROOT / 'ads.txt').write_text('# Opticable does not authorize any third-party digital sellers.\n', encoding='utf-8')
 (DEPLOY_ROOT / '404.html').write_text(not_found_html.strip() + '\n', encoding='utf-8')
+validate_build()
