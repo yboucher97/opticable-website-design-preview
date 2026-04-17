@@ -9042,8 +9042,8 @@ main section::before{
 .footer-grid{
   grid-template-columns:minmax(220px,1.05fr) minmax(320px,1.3fr) minmax(160px,.78fr) minmax(170px,.88fr) minmax(220px,1.02fr);
   align-items:start;
-  gap:34px 40px;
-  padding:56px 0 28px;
+  gap:24px 28px;
+  padding:40px 0 18px;
   border:0;
   border-radius:0;
   background:transparent;
@@ -9055,11 +9055,11 @@ main section::before{
 .footer-column-brand{
   display:grid;
   align-content:start;
-  gap:18px;
+  gap:12px;
 }
 .footer-brand-copy{
   display:grid;
-  gap:18px;
+  gap:12px;
 }
 .footer-grid,.footer-bottom{
   color:rgba(235,242,237,.72);
@@ -9071,7 +9071,7 @@ main section::before{
   transform:none;
 }
 .footer-title{
-  margin:0 0 16px;
+  margin:0 0 10px;
   font-size:.78rem;
   font-weight:800;
   letter-spacing:.18em;
@@ -9080,19 +9080,19 @@ main section::before{
   margin:0;
   max-width:34ch;
   color:rgba(235,242,237,.78);
-  font-size:.98rem;
-  line-height:1.78;
+  font-size:.95rem;
+  line-height:1.62;
 }
 .footer-legal{
   margin:0;
-  padding-top:18px;
+  padding-top:12px;
   border-top:1px solid rgba(255,255,255,.1);
   color:rgba(235,242,237,.64);
-  line-height:1.7;
+  line-height:1.56;
 }
 .footer-bottom{
   margin-top:0;
-  padding:20px 0 44px;
+  padding:16px 0 28px;
   border-top:1px solid rgba(255,255,255,.08);
   color:rgba(235,242,237,.62);
   font-size:.92rem;
@@ -9264,7 +9264,7 @@ css += '''
 @media (max-width:1180px){
   .footer-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:28px 32px;
+    gap:20px 24px;
   }
   .footer-column-brand,
   .footer-column-contact{
@@ -9281,7 +9281,7 @@ css += '''
 .footer-contact-list li{
   display:grid;
   gap:8px;
-  padding:14px 0;
+  padding:10px 0;
   border-top:1px solid rgba(255,255,255,.08);
 }
 .footer-contact-list li:first-child{
@@ -9302,12 +9302,12 @@ css += '''
 }
 .footer-socials{
   display:grid;
-  gap:6px;
+  gap:3px;
 }
 .footer-links,
 .footer-services{
   display:grid;
-  gap:4px;
+  gap:2px;
 }
 .footer-contact-list a,
 .footer-links a,
@@ -9317,8 +9317,8 @@ css += '''
   align-items:center;
   width:100%;
   min-height:0;
-  padding:7px 0;
-  line-height:1.5;
+  padding:4px 0;
+  line-height:1.42;
 }
 .social-link{
   gap:10px;
@@ -9921,13 +9921,13 @@ css += '''
   }
   .footer-grid{
     grid-template-columns:1fr;
-    gap:22px;
+    gap:16px;
   }
   .footer-contact-list,
   .footer-links,
   .footer-services,
   .footer-socials{
-    gap:8px;
+    gap:6px;
   }
   .footer-shell{
     padding:0 18px;
